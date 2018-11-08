@@ -15,10 +15,8 @@ const styles = props => {
         cf6_image: {
             width: '100%',
             maxHeight: '255px !important',
-
             transition: 'background-image 1s ease-in-out',
             backgroundImage: 'url(' + props + ')',
-
             '&:hover': {
                 backgroundImage: 'url(' + props.src + ')',
             }

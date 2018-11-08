@@ -1,10 +1,10 @@
 import React from 'react';
-import {Divider, Grid, Toolbar, Typography} from '@material-ui/core';
+import {Divider, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
-import Comment from '../Widget/Comment'
+import CommentDescription from './CommentDescription'
 
 const styles = theme => {
     console.log(theme)
@@ -13,9 +13,9 @@ const styles = theme => {
             productCategory: {
                 backgroundColor: theme.palette.background.paper
             },
-            toolBar:{
-                backgroundColor:''
-            }
+            toolBar: {
+                backgroundColor: ''
+            },
         })
 
 }
@@ -72,25 +72,9 @@ class ResponsiveDialog extends React.Component {
 
                 </Grid>
                 <Divider/>
-                <Grid item xs={10} spacing={16} className={classes.toolBar}>
-                    <Toolbar>
-                        <Grid container>
-                            <Grid item >
-<Typography variant={'title'}> description</Typography>
-                            </Grid>
-                            <Grid item >
-                                <Typography  variant={'title'}> comment</Typography>
+                <Grid item xs={10} container >
 
-                            </Grid>
-                        </Grid>
-                    </Toolbar>
-                    <Grid item xs={5}>
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                    </Grid>
+                    <CommentDescription/>
                 </Grid>
 
             </Grid>
