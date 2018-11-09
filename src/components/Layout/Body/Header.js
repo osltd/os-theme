@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
-
+import withWidth,{isWidthUp} from '@material-ui/core/withWidth';
+import {Link} from 'react-router-dom'
 const styles = theme => ({
 
     root: {
@@ -33,12 +34,16 @@ class Header extends React.Component {
     }
 
     render() {
-        const {classes, title, route} = this.props;
-        return (
-            <Grid container className={classes.root} alignItems={'center'} justify={'space-between'}>
-                <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
+        const {classes, title, route,width} = this.props;
+            return <Grid container className={classes.root} alignItems={'center'} justify={'space-between'}>
+                <Grid item>
+                <Typography variant={'display1'}
+                            className={classes.title} color={'primary'}>{title}</Typography>
+                </Grid>
+                <Grid >
                 <Typography variant={'title'}   className={classes.route} color={'secondary'}>{route}</Typography>
-            </Grid>);
+                </Grid>
+            </Grid>
     }
 }
 

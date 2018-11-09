@@ -1,10 +1,11 @@
 import React from 'react';
-import {Divider, Grid, Typography} from '@material-ui/core';
+import {Divider, Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
-import CommentDescription from './CommentDescription'
+import CommentDescription from './Comment&Description/Overview'
+import Detail from './Detail'
 
 const styles = theme => {
     console.log(theme)
@@ -46,33 +47,16 @@ class ResponsiveDialog extends React.Component {
                 <Grid item xs={10} container alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={7}>
-                        <Typography
-
-                            variant={'title'}>
-                            Kaoreet lobortis sagittis
-
-                        </Typography>
-                        <Typography>
-                            $122.00
-                        </Typography>
-                        <Typography variant={'subheading'}>
-                            In Stock SKU MH03</Typography>
-                        <Typography variant={'body1'}>
-                            Lorem ipsum dolore sieded amet, consectetured adipisicing elite. Accusantium animi,
-                            aspernature assumenda commodi cumque dicta distinctio doloremque dolores eius esse eveniet
-                            ex exercitationem fugiat harum ipsa iste libero neque nulla omnis praesentium, quae, quia
-                            sapiente sequi sint sit unde vitae?
-                        </Typography>
-
+                        <Detail/>
                     </Grid>
+
                     <Grid item xs={5}>
-                        <SingleItemImgWall
-                        />
+                        <SingleItemImgWall/>
                     </Grid>
 
                 </Grid>
-                <Divider/>
-                <Grid item xs={10} container >
+
+                <Grid item xs={10} container>
 
                     <CommentDescription/>
                 </Grid>

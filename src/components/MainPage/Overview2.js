@@ -13,8 +13,6 @@ const styles = theme =>
     console.log(theme)
     return (
 
-
-
         {
             productCategory: {
                 backgroundColor: theme.palette.background.paper

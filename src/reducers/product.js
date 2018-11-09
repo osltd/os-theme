@@ -1,4 +1,4 @@
-import {EDIT_PRODUCT_VIEW_MODE} from "../constants/actionType";
+import {EDIT_PRODUCT_DETAIL, EDIT_PRODUCT_VIEW_MODE} from "../constants/actionType";
 
 
 const defaultState = {
@@ -173,10 +173,14 @@ const defaultState = {
         },
     ],
     viewMode: 'form',
-
+    detail: {
+        section: 'Comments',
+    }
 };
 
 export default (state = defaultState, action) => {
+    let detail = Object.assign({}, state.detail)
+
     switch (action.type) {
         case EDIT_PRODUCT_VIEW_MODE:
 
@@ -184,6 +188,17 @@ export default (state = defaultState, action) => {
                 ...state,
                 viewMode: action.payload,
             }
+        case EDIT_PRODUCT_DETAIL: {
+            detail[action.payload.key] = action.payload.value
+
+            return {
+                ...state,
+                detail: detail
+
+            }
+
+        }
+
         default:
             return state
     }

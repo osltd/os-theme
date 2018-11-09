@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import {Grid, Input} from '@material-ui/core';
+import {BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
 import {withStyles} from '@material-ui/core/styles';
 import PopUp from '../Widget/PopUp'
 import SearchIcon from '@material-ui/icons/Search';
 import DropDownList from '../Widget/DropDownList'
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import classNames from "classnames";
+import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     grow: {
         flexGrow: 1,
+    },
+    root: {
+        backgroundColor: 'white',
     },
     appBar: {
         backgroundColor: 'white',
@@ -19,6 +25,11 @@ const styles = theme => ({
 
         width: '100%',
         padding: '20px 20px',
+    },
+    icon: {
+        color: theme.palette.primary.main,
+        textDecoration: 'none',
+        fontSize: '30px',
     },
     menuButton: {
         marginLeft: -12,
@@ -73,78 +84,109 @@ const styles = theme => ({
     },
 });
 
-function SearchAppBar(props) {
-    const {classes} = props;
-    return (
-        <AppBar position="fixed" className={classes.appBar}>
-            <Grid container  justify={'space-between'}>
-                <Grid item sm={2}>
-                    <Button
 
-                        icon={'icon-home'}
-                        link={'/'}
-                        value={'main'}
-                    />
-                </Grid>
-                <Grid item sm={4} spacing={'16'} container alignItems={'center'} justify={'center'}>
-                    <Grid item>
-                        <Button
-                            icon2={'icon-circle-down'}
+class Header extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: 'recents',
+        };
+    }
 
-                            link={'/shop/111'}
-                            value={'single product'}
-                        />
+
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
+
+    render() {
+        const {classes, width} = this.props;
+        const {value} = this.state
+        if (isWidthUp('sm', width)) {
+
+            return (
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Grid container justify={'space-between'}>
+                        <Grid item sm={2}>
+                            <Button
+
+                                icon={'icon-home'}
+                                link={'/'}
+                                value={'main'}
+                            />
+                        </Grid>
+                        <Grid item sm={4} spacing={'16'} container alignItems={'center'} justify={'center'}>
+                            <Grid item>
+                                <Button
+                                    icon2={'icon-circle-down'}
+
+                                    link={'/shop/111'}
+                                    value={'single product'}
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    icon={'icon-gift'}
+                                    icon2={'icon-circle-down'}
+                                    link={'/shop'}
+                                    value={'shop'}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid item sm={2}>
+                            <div className={classes.grow}/>
+                            <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <SearchIcon/>
+                                </div>
+                                <Input
+                                    placeholder="Search…"
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                />
+                            </div>
+                        </Grid>
+                        <Grid item sm={2}>
+                            <PopUp
+                                dropDown={<DropDownList
+                                    data={['ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg',]}
+                                />
+                                }
+                                parent={<Button
+                                    icon={'icon-cart'}
+                                    value={'shopping cart'}
+                                />}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item >
-                        <Button
-                            icon={'icon-gift'}
-                            icon2={'icon-circle-down'}
-                            link={'/shop'}
-                            value={'shop'}
+                </AppBar>)
+
+        }
+        return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
+
+            <BottomNavigationAction label="Home" value="Home"
+                                    onClick={() =>    this.props.history.push('/')}
+
+                                    icon={<span className={classNames('icon-home', classes.icon)}/>}/>
+
+            <BottomNavigationAction label="Shops" value="Shops"
+                                    onClick={() =>   this.props.history.push('/shop')}
+
+                                    icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
+
+            <BottomNavigationAction label="Product" value="Product"
+                                    onClick={() =>    this.props.history.push('/shop/1')}
+                                    icon={<span className={classNames(classes.icon, 'icon-stack')}/>}/>
+
+        </BottomNavigation>
 
 
-                        />
-                    </Grid>
-                </Grid>
-                <Grid item sm={2}>
-                    <div className={classes.grow}/>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <Input
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                        />
-                    </div>
-                </Grid>
-                <Grid item sm={2}>
-                   <PopUp
-                       dropDown={<DropDownList
-                       data={['ggg','ggg','ggg','ggg','ggg','ggg','ggg','ggg',]}
-
-                       />
-                       }
-                       parent={<Button
-
-
-                       icon={'icon-cart'}
-                       value={'shopping cart'}
-
-                   />}
-
-                   />
-                </Grid>
-            </Grid>
-        </AppBar>
-    );
+    }
 }
 
-SearchAppBar.propTypes = {
+Header.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(SearchAppBar);
+export default withRouter(withWidth()(withStyles(styles)(Header)))

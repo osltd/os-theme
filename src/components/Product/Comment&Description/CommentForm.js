@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import {TextField,Grid} from '@material-ui/core';
-import InputBar from '../Widget/InputBar'
-import Button from '../Widget/Button'
+import InputBar from '../../Widget/InputBar'
+import Button from '../../Widget/Button'
 const styles = theme => ({
 
 });
@@ -70,7 +70,7 @@ class OutlinedTextFields extends React.Component {
                 <Grid item >
                     <Button
                     value={'submit'}
-
+border
 
                     />
                 </Grid>

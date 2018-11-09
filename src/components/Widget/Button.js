@@ -1,27 +1,30 @@
 import React from 'react';
-import {Grid,Typography} from '@material-ui/core'
+import {Grid, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom'
-
+import classesNames from 'classnames'
 
 const styles = theme => ({
     root: {
         textDecoration: 'none',
-        color:theme.palette.primary.main,
-
+        padding: '3px',
+        color: theme.palette.primary.main,
+        cursor: 'pointer',
     },
     title: {
         fontWeight: 'lighter',
 
     },
-    btnText: {
-            
+    btnText: {},
+    border: {
+        border: '1px solid ' + theme.palette.primary.main,
+        borderRadius: '5px',
+
     },
     icon: {
         marginRight: '5px',
-        '&:before': {
-        }
+        '&:before': {}
     }
 });
 
@@ -47,8 +50,7 @@ class CustomButton extends React.Component {
     render() {
         const {
 
-            classes, link, onClick, value, icon2, icon
-
+            classes, link, onClick, value, icon2, icon, border
 
 
         } = this.props;
@@ -61,7 +63,7 @@ class CustomButton extends React.Component {
                 component={link ? Link : 'span'}
                 to={link ? link : '#'}
                 alignItems={'center'}
-                className={classes.root}
+                className={classesNames(classes.root, border ? classes.border : null,)}
                 onClick={onClick}
             >
                 {icon && <span className={classes.icon + ' ' + icon}/>}
