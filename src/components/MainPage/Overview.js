@@ -7,13 +7,10 @@ import {connect} from 'react-redux'
 import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
-const styles = theme =>
-{
+
+const styles = theme => {
     console.log(theme)
     return (
-
-
-
         {
             productCategory: {
                 backgroundColor: theme.palette.background.paper
@@ -39,7 +36,7 @@ class ResponsiveDialog extends React.Component {
         const {classes} = this.props
         return (
             <Grid container alignItems={'flex-start'} justify={'center'}>
-                <Grid item xs={12} style={ {marginTop:'-10px'}}>
+                <Grid item xs={12} style={{marginTop: '-10px'}}>
                     <Carousel data={this.props.feeds}/>
                 </Grid>
 
@@ -59,13 +56,13 @@ class ResponsiveDialog extends React.Component {
                     </Typography>
                 </Grid>
 
-                <Grid item  xs={10} >
+                <Grid item xs={10}>
                     <MultiRows
                         data={this.props.products}
                     />
                 </Grid>
 
-                <Grid item container alignItems={'center'}   justify={'center'} className={classes.productCategory}>
+                <Grid item container alignItems={'center'} justify={'center'} className={classes.productCategory}>
                     <Grid item lg={10} xs={12} container justify={'center'}>
                         <Typography variant={'display2'}>
                             PRODUCT CATEGORIES
@@ -76,7 +73,7 @@ class ResponsiveDialog extends React.Component {
                             right now.
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} md={10} lg={10} >
+                    <Grid item xs={12} md={10} lg={10}>
                         <CategoryOverviewBox
                             category={this.props.category}
                         />
@@ -84,7 +81,7 @@ class ResponsiveDialog extends React.Component {
 
                 </Grid>
 
-                <Grid item  xs={9}>
+                <Grid item xs={9}>
                     <MultiItems
                         data={this.props.products}
                     />

@@ -12,10 +12,10 @@ const styles = theme => ({
         minWidth: 480,
         width: '100%',
     },
-    items:{
+    items: {
 
         textDecoration: 'none',
-        color:theme.palette.primary.main,
+        color: theme.palette.primary.main,
 
     },
     image: {
@@ -96,7 +96,7 @@ class ButtonBases extends React.Component {
                 {category.map(image => (
                     <Grid item sm={10} md={6} lg={4}
                           container
-                          component={ Link}
+                          component={Link}
                           to={'/shop'}
                           className={classes.items}
 
@@ -112,13 +112,13 @@ class ButtonBases extends React.Component {
                                 margin: '5px',
                             }}
                         >
-          <Grid
+                            <Grid
 
-              className={classes.imageSrc}
-              style={{
-                  backgroundImage: `url(${image.img})`,
-              }}
-          />
+                                className={classes.imageSrc}
+                                style={{
+                                    backgroundImage: `url(${image.img})`,
+                                }}
+                            />
                             <span className={classes.imageBackdrop}/>
                             <span className={classes.imageButton}>
             <Typography

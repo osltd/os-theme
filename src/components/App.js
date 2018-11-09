@@ -7,6 +7,7 @@ import mainPage2 from './MainPage/Overview2'
 import Header from './Layout/Header'
 import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
+import Feed from './Feed/Overview'
 import Product from './Product/Overview'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -27,7 +28,9 @@ class App extends React.Component {
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/2'} component={mainPage2}/>
                             <Route exact path={'/shop'} component={Shop}/>
+                            <Route exact path={'/feed'} component={Feed}/>
                             <Route exact path={'/shop/:id'} component={Product}/>
+
                             </div>
                             <Footer/>
                         </ErrorBoundary>

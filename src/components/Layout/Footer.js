@@ -9,7 +9,7 @@ const styles = theme => ({
     root: {
         width: '100%',
         padding: '0 100px 20px 100px',
-        marginTop:'30px',
+        marginTop: '30px',
         backgroundColor: 'black',
         color: 'white',
     }
@@ -17,11 +17,6 @@ const styles = theme => ({
 
 
 class Footer extends React.Component {
-
-
-    componentDidMount() {
-    }
-
     render() {
         const {classes} = this.props;
         return (

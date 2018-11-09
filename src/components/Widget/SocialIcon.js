@@ -6,12 +6,13 @@ import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
-        padding:'9px',
+        padding:'12px',
         border: '1px solid ' + theme.palette.secondary.main,
         margin: '3px',
         borderRadius: '5px',
         cursor: 'pointer',
         display: 'inline-block',
+        fontSize:'24px',
     },
     reddit: {
 

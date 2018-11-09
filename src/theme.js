@@ -43,6 +43,7 @@ const theme = createMuiTheme({
 
             main: '#2979ff'
         },
+
         warning: {
             main: '#ffa000',
         },

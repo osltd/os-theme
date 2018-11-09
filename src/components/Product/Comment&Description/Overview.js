@@ -6,9 +6,11 @@ import Comment from './Comment'
 import NavBar from './NavBar'
 import CommentForm from './CommentForm'
 import Description from './Description'
+import RatingBar from './RatingBar'
+
 const styles = theme => ({
     root: {
-        border: ''
+        border: '1px solid ' + theme.palette.secondary.dark,
     },
     body: {
 
@@ -38,17 +40,16 @@ class Overview extends React.Component {
                     <NavBar/>
                 </Grid>
                 <Grid item md={7} xs={12} className={classes.body}>
-                    {this.props.section==='Comments'?
-                    <Fragment>
-
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                        <Comment/>
-                        <CommentForm/>
-                    </Fragment>:<Description/>
-
+                    {this.props.section === 'Comments' ?
+                        <Fragment>
+                            <RatingBar/>
+                            <Comment/>
+                            <Comment/>
+                            <Comment/>
+                            <Comment/>
+                            <Comment/>
+                            <CommentForm/>
+                        </Fragment> : <Description/>
 
 
                     }

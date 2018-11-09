@@ -41,7 +41,7 @@ class WhiteDropDown extends React.Component {
                 <Typography variant={'body1'} >
                     (5)
                 </Typography>
-                <Typography variant={'body2'}>
+                <Typography variant={'body1'}>
                     enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia res eos qui ratione
                     voluptatem sequi Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
                     adipisci veli

@@ -6,10 +6,10 @@ import ListItem from '@material-ui/core/ListItem';
 const styles = theme => ({
     root: {
         overflow: 'auto',
-        maxHeight:'700px',
-        padding:'40px',
+        maxHeight:'500px',
     }, img: {
         width: '100%',
+        padding:'20px',
     }
 });
 

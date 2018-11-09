@@ -22,7 +22,6 @@ const styles = theme => ({
     appBar: {
         backgroundColor: 'white',
         color: 'black',
-
         width: '100%',
         padding: '20px 20px',
     },
@@ -131,6 +130,14 @@ class Header extends React.Component {
                                     value={'shop'}
                                 />
                             </Grid>
+                            <Grid item>
+                                <Button
+                                    icon={'icon-books'}
+                                    icon2={'icon-circle-down'}
+                                    link={'/feed'}
+                                    value={'feed'}
+                                />
+                            </Grid>
                         </Grid>
                         <Grid item sm={2}>
                             <div className={classes.grow}/>
@@ -166,17 +173,17 @@ class Header extends React.Component {
         return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
 
             <BottomNavigationAction label="Home" value="Home"
-                                    onClick={() =>    this.props.history.push('/')}
+                                    onClick={() => this.props.history.push('/')}
 
                                     icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
             <BottomNavigationAction label="Shops" value="Shops"
-                                    onClick={() =>   this.props.history.push('/shop')}
+                                    onClick={() => this.props.history.push('/shop')}
 
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
             <BottomNavigationAction label="Product" value="Product"
-                                    onClick={() =>    this.props.history.push('/shop/1')}
+                                    onClick={() => this.props.history.push('/shop/1')}
                                     icon={<span className={classNames(classes.icon, 'icon-stack')}/>}/>
 
         </BottomNavigation>
