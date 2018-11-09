@@ -81,22 +81,18 @@ class ResponsiveDialog extends React.Component {
                                 <Grid item>
                                     <span
                                         onClick={() => this.props.changeViewMode('form')}
-
                                         className={classNames(classes.icon, 'icon-table')}/>
                                     <span
                                         onClick={() => this.props.changeViewMode('list')}
-
                                         className={classNames('icon-list', classes.icon)}/>
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'body2'}>
                                         Items 1 - 9 of 17
-
                                     </Typography>
                                 </Grid>
                                 <Grid item container alignItems={'center'} xs={4}>
                                     <Grid item>
-
                                         <Typography variant={'body2'}>
                                             sort by
                                         </Typography>
@@ -104,8 +100,6 @@ class ResponsiveDialog extends React.Component {
                                     <Grid item xs={8}>
                                         <WhiteDropDown
                                             options={[
-
-
                                                 {label: 'Name A-Z', onClick: () => console.log('Name A-Z')}, {
                                                     label: 'Name Z-A', onClick: () => console.log('Name A-Z'),
 
@@ -117,8 +111,6 @@ class ResponsiveDialog extends React.Component {
 
                                                 }
                                             ]}
-
-
                                         />
                                     </Grid>
                                 </Grid>

@@ -20,7 +20,7 @@ class Footer extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container justify={'space-between'} spacing={16} className={classes.root}>
+            <Grid container justify={'space-between'} className={classes.root}>
                 <Grid item container lg={12} direction={'column'} alignItems={'center'} justify={'center'}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>

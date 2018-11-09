@@ -8,8 +8,8 @@ const styles = theme => ({
         overflow: 'auto',
         maxHeight:'500px',
     }, img: {
-        width: '100%',
-        padding:'20px',
+        maxWidth:'200px',
+
     }
 });
 

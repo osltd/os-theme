@@ -37,7 +37,7 @@ class ResponsiveDialog extends React.Component {
     render() {
         const {classes} = this.props
         return (
-            <Grid container alignItems={'center'} spacing={16} justify={'center'}>
+            <Grid container alignItems={'center'}  justify={'center'}>
                 <Grid item xs={12}>
                     <Header
                         title={'SINGLE PRODUCT'}

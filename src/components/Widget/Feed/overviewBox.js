@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-
+import Header from '../../Layout/Body/Header'
 const styles = props => {
     console.log(props)
     return ({
@@ -63,24 +63,16 @@ class ResponsiveDialog extends React.Component {
     };
 
     render() {
-        const {classes, src, name, category, regPrice, promotePrice} = this.props;
+        const {classes, src,subTitle,title} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>
+                <Header
+                    title={'BLOG'} route={'HOME/BLOG'}
+                />
                 <img src={src} className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{category}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{name}</Typography>
-                {
-                    promotePrice ?
-                        <Grid item container direction={'row'}>
-
-                            <Typography component={'del'} variant={'subheading'}
-                                        className={classes.oldPrice}>$ {regPrice}</Typography>
-                            <Typography variant={'subheading'} className={classes.price}>${promotePrice}</Typography>
-                        </Grid>
-                        : <Typography variant={'subheading'} className={classes.price}>$ {regPrice}</Typography>
-
-                }
+                <Typography variant={'headline'} color={'primary'}>{title}</Typography>
+                <Typography variant={'title'} color={'secondary'}>{subTitle}{subTitle}{subTitle}{subTitle}</Typography>
 
             </Grid>
         );
