@@ -1,4 +1,5 @@
 export const refactorTextLength = content => (typeof content === 'string') ? content.length > 15 ? content.slice(0, 15).concat('...') : content : ''
+export const refactorParaLength = content => (typeof content === 'string') ? content.length > 45 ? content.slice(0, 45).concat('...') : content : ''
 
 
 export const formatMoney = (n, c = 2, d = '.', t = ',') => {

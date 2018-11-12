@@ -6,7 +6,7 @@ import SocialIcon from '../Widget/SocialIcon'
 import {CirclePicker} from 'react-color';
 import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
-
+import NotFound from '../Layout/NotFound'
 const styles = theme => {
     console.log(theme)
     return (
@@ -42,8 +42,9 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
 
     render() {
-        const {classes,name,regPrice, promotePrice} = this.props
-        return (
+        const {classes,name,regPrice, promotePrice,description} = this.props
+            return (
+
             <Grid container direction={'column'} spacing={40}>
                 <Grid item container spacing={16}>
                     <Grid item>
@@ -69,10 +70,7 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
                     <Grid item>
                         <Typography variant={'body1'}>
-                            Lorem ipsum dolore sieded amet, consectetured adipisicing elite. Accusantium animi,
-                            aspernature assumenda commodi cumque dicta distinctio doloremque dolores eius esse eveniet
-                            ex exercitationem fugiat harum ipsa iste libero neque nulla omnis praesentium, quae, quia
-                            sapiente sequi sint sit unde vitae?
+                            {description}
                         </Typography>
                     </Grid>
                     <Grid item>
@@ -134,6 +132,7 @@ class ResponsiveDialog extends React.Component {
 
 
         );
+
     }
 }
 

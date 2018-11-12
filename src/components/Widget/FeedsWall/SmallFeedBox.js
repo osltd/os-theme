@@ -7,7 +7,6 @@ import {Grid} from '@material-ui/core';
 const styles = theme => ({
     root: {
         border:'10px solid white',
-        height: '200px',
 
         backgroundColor:'#FAFAFA'
     },

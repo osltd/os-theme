@@ -1,6 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
+import {formatMoney} from "../../../api/ApiUtils";
 
 const styles = props => {
     console.log(props)
@@ -79,10 +80,10 @@ class ResponsiveDialog extends React.Component {
                         <Grid item container direction={'row'}>
 
                             <Typography component={'del'} variant={'subheading'}
-                                        className={classes.oldPrice}>$ {regPrice}</Typography>
-                            <Typography variant={'subheading'} className={classes.price}>${promotePrice}</Typography>
+                                        className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
+                            <Typography variant={'subheading'} className={classes.price}>${formatMoney(promotePrice)}</Typography>
                         </Grid>
-                        : <Typography variant={'subheading'} className={classes.price}>$ {regPrice}</Typography>
+                        : <Typography variant={'subheading'} className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
                 }
                 </Grid>

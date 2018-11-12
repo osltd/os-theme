@@ -6,6 +6,9 @@ import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
+import agent from "../../agent";
+import {INIT_FEEDS} from "../../constants/actionType";
+import {refactorParaLength} from "../../api/ApiUtils";
 
 const styles = theme => {
     console.log(theme)
@@ -29,10 +32,13 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+
+}
 )
 
 class ResponsiveDialog extends React.Component {
+
 
     render() {
         const {classes} = this.props
@@ -60,16 +66,15 @@ class ResponsiveDialog extends React.Component {
                         <SearchBar/>
                     </Grid>
                     <Grid item container md={9} xs={12}>
-                        {this.props.feeds.map((n, i) =>
-                            <Grid item xs={6} key={i}>
+                        {this.props.feeds && this.props.feeds.map((n, i) =>
+                            <Grid item sm={6} xs={12} key={i}>
                                 <FeedOverviewBox
-                                    src={n.src}
-                                    subTitle={n.subTitle}
-                                    title={n.title}
-                                    author={n.author}
+                                    src={n.sections && n.sections.find(section=>!!section.medias[0])?n.sections.find(section=>section.medias[0]).medias[0].url:
+                                        'https://www.freeiconspng.com/uploads/no-image-icon-4.png'  }                                  subTitle={refactorParaLength(n.sections[0].description)}
+                                    title={n.sections[0].title}
+                                    author={n.authors[0].name.first +' '+  n.authors[0].name.last}
                                     postDate={n.postDate}
-
-                                    comments={n.comments.length?n.comments.length:0}
+                                    comments={0}
                                 />
                             </Grid>)}
                     </Grid>

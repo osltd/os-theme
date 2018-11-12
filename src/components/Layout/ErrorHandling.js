@@ -24,9 +24,8 @@ class Shield extends React.Component {
             // Some error was thrown. Let's display something helpful to the user
             return (
                 <div>
-                    <h5>Sorry. More than five characters!</h5>
                     <details style={{whiteSpace: 'pre-wrap'}}>
-                        {this.state.info.componentStack}
+                        {this.state.error}
                     </details>
                 </div>
             );

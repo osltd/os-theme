@@ -20,22 +20,14 @@ class Description extends React.Component {
 
     render() {
         const {
-            classes, icon, value,
-            icon2, label,
-            labelExtra, options,
-            selectedValue
+            content
         } = this.props;
 
 
         return (
             <Grid container>
                 <Typography variant={'body2'}>
-                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia res eos qui ratione
-                    voluptatem sequi Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                    adipisci veli enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia res
-                    eos qui ratione
-                    voluptatem sequi Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                    adipisci veli
+                    {content}
                 </Typography>
             </Grid>
         )

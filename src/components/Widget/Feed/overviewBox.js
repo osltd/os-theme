@@ -7,16 +7,18 @@ import Button from '../Button'
 const styles = theme => ({
 
     root: {
+        maxHeight:'540px',
+        minHeight:'540px',
         border: '1px solid ' + theme.palette.secondary.light,
+        overflow:'auto',
     },
 
     img: {
         width: '100%',
-        maxHeight: '255px !important',
+        height: '255px !important',
     },
     content: {
         padding: '10px',
-
     },
 
 })
@@ -63,15 +65,13 @@ class ResponsiveDialog extends React.Component {
 
         return (
             <Grid container className={classes.root} direction={'column'}>
-
-                <img src={src} className={classes.img}/>
+<Grid item>
+    <img src={src} className={classes.img}/></Grid>
                 <Grid item direction={'column'} spacing={8} container md={11} className={classes.content}>
                     <Grid item>
                         <Typography variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>
                     <Grid item>
-
-
                         <Typography variant={'caption'}>
                             {'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                     </Grid>

@@ -66,6 +66,7 @@ class MultipleRows extends Component {
                 {
                     data.map((n, i) =>
                         <ProductOverviewBox
+                            id={n.id}
                             key={i}
                             name={refactorTextLength(n.name)}
                             src={n.photos[0].url}
@@ -82,6 +83,8 @@ class MultipleRows extends Component {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
+                        id={n.id}
+
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
@@ -97,6 +100,8 @@ class MultipleRows extends Component {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
+                        id={n.id}
+
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
@@ -112,6 +117,8 @@ class MultipleRows extends Component {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
+                        id={n.id}
+
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
@@ -127,6 +134,8 @@ class MultipleRows extends Component {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
+                        id={n.id}
+
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}

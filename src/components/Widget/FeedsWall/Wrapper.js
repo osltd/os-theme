@@ -34,7 +34,7 @@ class FeedsWall extends React.Component {
         const {classes, data,} = this.props;
         console.log(data)
         return (data.length)? <Grid container alignItems={'stretch'} className={classes.root}>
-                <Grid item lg={6}>
+                <Grid item md={6}>
                     <BigFeedBox
                         backgroundImg={data[0].sections[0].medias[0].url}
                         title={'hot trends'}
@@ -53,7 +53,8 @@ class FeedsWall extends React.Component {
                         </Typography>
                             <Typography
                                 variant={'body2'}
-                            >                                The Sk8-Hi MTE revamps
+                            >
+                                The Sk8-Hi MTE revamps
 
                                 the legendary Vans high to
                             </Typography>
@@ -61,7 +62,7 @@ class FeedsWall extends React.Component {
 
                     />
                 </Grid>
-                <Grid item lg={6}>
+                <Grid item md={6}>
                     <SmallFeedBox
                         right={<img
                             style={{width: '100%', height: '180px'}}

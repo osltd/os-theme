@@ -20,11 +20,12 @@ const styles = theme => ({
             color: '#ff8c39',
         },
         '&:hover': {
+            backgroundColor:
+                '#ff8c39',
+
             '&:before': {
 
                 color: 'white',
-                backgroundColor:
-                    '#ff8c39',
             }
 
         }
@@ -35,11 +36,12 @@ const styles = theme => ({
             color: '#ff342f',
         },
         '&:hover': {
+            backgroundColor:
+                '#ff342f',
             '&:before': {
 
                 color: 'white',
-                backgroundColor:
-                    '#ff342f'
+
             }
         }
 
@@ -49,9 +51,10 @@ const styles = theme => ({
             color: '#3c16ff',
         },
         '&:hover': {
+            backgroundColor: '#3c16ff'
+,
             '&:before': {
                 color: 'white',
-                backgroundColor: '#3c16ff'
             }
         }
     }
@@ -61,10 +64,10 @@ const styles = theme => ({
 
         },
         '&:hover': {
+            backgroundColor: '#5567ff',
             '&:before': {
 
                 color: 'white',
-                backgroundColor: '#5567ff'
             }
         }
 

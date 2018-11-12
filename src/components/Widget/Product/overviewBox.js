@@ -2,6 +2,7 @@ import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney} from "../../../api/ApiUtils";
+import {withRouter} from "react-router-dom";
 
 const styles = props => {
     console.log(props)
@@ -14,6 +15,7 @@ const styles = props => {
             maxHeight: '255px !important',
         },
         cf6_image: {
+            cursor:'pointer',
             width: '100%',
             maxHeight: '255px !important',
 
@@ -64,11 +66,15 @@ class ResponsiveDialog extends React.Component {
     };
 
     render() {
-        const {classes, src, name, category, regPrice, promotePrice} = this.props;
+        const {classes, src, name,id, category, regPrice, promotePrice} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>
-                <img src={src} className={classes.cf6_image}/>
+                <img src={src}
+
+                     onClick={() => this.props.history.push('/shop/'+id)}
+
+                     className={classes.cf6_image}/>
                 <Typography variant={'headline'} color={'primary'}>{category}</Typography>
                 <Typography variant={'title'} color={'secondary'}>{name}</Typography>
                 {
@@ -90,4 +96,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default withStyles(styles)(ResponsiveDialog)
+export default withRouter(withStyles(styles)(ResponsiveDialog))

@@ -6,8 +6,8 @@ import Header from '../Layout/Body/Header'
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
-import {refactorTextLength} from "../../api/ApiUtils";
-
+import {refactorTextLength} from "../../api/ApiUtils"
+import NotFound from '../Layout/NotFound'
 const styles = theme => {
     return (
         {
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
-});
+})
 
 
 const mapDispatchToProps = dispatch => ({}
@@ -40,10 +40,8 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const {classes} = this.props
-        console.log(this.props.match.params.id)
         if (this.hasValidProduct()) {
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
-            console.log(product)
             return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
@@ -55,6 +53,7 @@ class ResponsiveDialog extends React.Component {
 
                     <Grid item xs={7}>
                         <Detail
+                            description={product.description}
                         name={refactorTextLength(product.name)}
                         regPrice={product.variants[0]?product.variants[0].price:'not a reg price'}
 
@@ -70,14 +69,23 @@ class ResponsiveDialog extends React.Component {
 
                 <Grid item xs={10} container>
 
-                    <CommentDescription/>
+                    <CommentDescription
+                    content={product.description}
+                    />
                 </Grid>
             </Grid>
         }
 
         else {
-            return <div>dont have such products
-            </div>
+            return  <NotFound
+            msg={"product doesn't exist"}
+
+
+            />
+
+
+
+
         }
     }
 
