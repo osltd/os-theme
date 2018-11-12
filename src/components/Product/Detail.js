@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
 import {CirclePicker} from 'react-color';
 import Counter from '../Widget/Counter'
+import {formatMoney} from "../../api/ApiUtils";
 
 const styles = theme => {
     console.log(theme)
@@ -41,20 +42,23 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
 
     render() {
-        const {classes} = this.props
+        const {classes,name,regPrice, promotePrice} = this.props
         return (
             <Grid container direction={'column'} spacing={40}>
                 <Grid item container spacing={16}>
                     <Grid item>
                         <Typography
-
-                            variant={'display2'}>
-                            Kaoreet lobortis sagittis
+                            variant={'display2'}>{name}
                         </Typography>
                     </Grid>
                     <Grid item container direction={'row'}>
-                        <Typography variant={'headline'} className={classes.price}>$122.00</Typography>
-                        <Typography component={'del'} variant={'subheading'} color={'secondary'}>$ 203.00</Typography>
+                        {promotePrice?<Fragment>
+                            <Typography variant={'headline'} className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
+                            <Typography component={'del'} variant={'subheading'} color={'secondary'}>$ {formatMoney(regPrice)}</Typography>
+
+                        </Fragment>:
+                            <Typography variant={'headline'} className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+                        }
                     </Grid>
                     <Grid item container direction={'row'} alignItems={'flex-end'}>
                         <Typography variant={'subheading'} className={classes.statusLabel}>

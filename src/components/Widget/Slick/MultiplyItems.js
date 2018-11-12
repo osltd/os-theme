@@ -6,6 +6,7 @@ import {Grid} from '@material-ui/core'
 import ProductOverviewBox from '../Product/overviewBox'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
+import {formatMoney, refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
@@ -60,10 +61,10 @@ class MultipleItems extends Component {
                     data.map((n, i) =>
                         <ProductOverviewBox
                             key={i}
-                            name={n.name}
-                            src={n.src}
-                            category={n.category}
-                            regPrice={n.regPrice}
+                            name={refactorTextLength(n.name)}
+                            src={n.photos[0].url}
+                            category={n.tags}
+                            regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
                             promotePrice={n.promotePrice}
 
                         />

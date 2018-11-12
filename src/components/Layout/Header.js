@@ -118,7 +118,7 @@ class Header extends React.Component {
                                 <Button
                                     icon2={'icon-circle-down'}
 
-                                    link={'/shop/111'}
+                                    link={'/shop/17'}
                                     value={'single product'}
                                 />
                             </Grid>
@@ -183,7 +183,7 @@ class Header extends React.Component {
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
             <BottomNavigationAction label="Product" value="Product"
-                                    onClick={() => this.props.history.push('/shop/1')}
+                                    onClick={() => this.props.history.push('/shop/17')}
                                     icon={<span className={classNames(classes.icon, 'icon-stack')}/>}/>
 
         </BottomNavigation>

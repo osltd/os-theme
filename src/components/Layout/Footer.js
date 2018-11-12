@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from 'react'
 import {Grid, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
-import SearchBar from '../Widget/SearchBar'
+import SearchBar from '../Widget/SearchBar/email'
 import FooterList from '../Widget/FooterList'
 
 const styles = theme => ({

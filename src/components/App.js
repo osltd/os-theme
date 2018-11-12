@@ -12,9 +12,38 @@ import Product from './Product/Overview'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
+import {connect} from "react-redux";
+import{INIT_FEEDS,INIT_PRODUCTS} from "../constants/actionType";
+import agent from '../agent'
+
+const mapStateToProps = state => ({
+});
+
+
+const mapDispatchToProps = dispatch => ({
+initApp:async ()=>{
+    dispatch(
+        {
+            type:INIT_PRODUCTS,
+            payload: await agent.Products.initProducts(),
+        }
+    )
+    dispatch(
+        {
+            type:INIT_FEEDS,
+            payload: await agent.Feeds.initFeeds(),
+        }
+    )
+
+}
+
+    }
+)
+
 class App extends React.Component {
 
     componentDidMount() {
+        this.props.initApp()
     }
 
     render() {
@@ -43,4 +72,4 @@ class App extends React.Component {
 }
 
 
-export default (App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

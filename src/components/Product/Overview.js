@@ -6,9 +6,9 @@ import Header from '../Layout/Body/Header'
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
+import {refactorTextLength} from "../../api/ApiUtils";
 
 const styles = theme => {
-    console.log(theme)
     return (
         {
             productCategory: {
@@ -33,21 +33,33 @@ const mapDispatchToProps = dispatch => ({}
 )
 
 class ResponsiveDialog extends React.Component {
+    componentDidMount() {
+    }
+
+    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
 
     render() {
         const {classes} = this.props
-        return (
-            <Grid container alignItems={'center'}  justify={'center'}>
+        console.log(this.props.match.params.id)
+        if (this.hasValidProduct()) {
+            const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+            console.log(product)
+            return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
-                        title={'SINGLE PRODUCT'}
+                        title={refactorTextLength(product.name)}
                         route={'HOME/SHOP/SINGLE PRODUCT'}
                     />
                 </Grid>
                 <Grid item xs={10} container alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={7}>
-                        <Detail/>
+                        <Detail
+                        name={refactorTextLength(product.name)}
+                        regPrice={product.variants[0]?product.variants[0].price:'not a reg price'}
+
+
+                        />
                     </Grid>
 
                     <Grid item xs={5}>
@@ -60,11 +72,16 @@ class ResponsiveDialog extends React.Component {
 
                     <CommentDescription/>
                 </Grid>
-
             </Grid>
+        }
 
-        );
+        else {
+            return <div>dont have such products
+            </div>
+        }
     }
+
+
 }
 
 

@@ -37,7 +37,6 @@ class MultipleItems extends Component {
                 {
                     data.map((n, i) =>
                         <div key={i}>
-
                             <Grid container alignItems={'center'} style={{
                                 backgroundImage: 'url("' + n.src + '")',
                             }} className={classes.img}>

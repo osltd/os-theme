@@ -122,10 +122,10 @@ class ResponsiveDialog extends React.Component {
                             /> :<Grid className={classes.listMode}>
                                 {this.props.products.map((n, i) => (<ProductOverviewListForm
                                     key={i}
-                                    src={n.src}
+                                    src={n.photos[0].url}
                                     name={n.name}
                                     category={n.category}
-                                    regPrice={n.regPrice}
+                                    regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
                                     promotePrice={n.promotePrice}
                                     description={n.description}
 

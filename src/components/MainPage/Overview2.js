@@ -10,7 +10,6 @@ import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 
 const styles = theme =>
 {
-    console.log(theme)
     return (
 
         {

@@ -1,38 +1,25 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import Header from '../../Layout/Body/Header'
-const styles = props => {
-    console.log(props)
-    return ({
-        root: {
-            padding: '0 10px 0 10px',
-        },
-        img: {
-            width: '100%',
-            maxHeight: '255px !important',
-        },
-        cf6_image: {
-            width: '100%',
-            maxHeight: '255px !important',
+import moment from 'moment'
+import {withStyles} from "@material-ui/core/styles/index";
+import Button from '../Button'
 
-            transition: 'background-image 1s ease-in-out',
-            backgroundImage: 'url(' + props + ')',
+const styles = theme => ({
 
-            '&:hover': {
-                backgroundImage: 'url(' + props.src + ')',
-            }
-        },
+    root: {
+        border: '1px solid ' + theme.palette.secondary.light,
+    },
 
-        oldPrice: {},
-        price: {
-            fontWeight: '900',
-        }
+    img: {
+        width: '100%',
+        maxHeight: '255px !important',
+    },
+    content: {
+        padding: '10px',
 
-    })
+    },
 
-
-}
+})
 
 
 class ResponsiveDialog extends React.Component {
@@ -63,16 +50,47 @@ class ResponsiveDialog extends React.Component {
     };
 
     render() {
-        const {classes, src,subTitle,title} = this.props;
+        const {
+            classes,
+            src,
+            subTitle,
+            title,
+
+            author,
+            postDate,
+            comments,
+        } = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>
-                <Header
-                    title={'BLOG'} route={'HOME/BLOG'}
-                />
-                <img src={src} className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{title}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{subTitle}{subTitle}{subTitle}{subTitle}</Typography>
+
+                <img src={src} className={classes.img}/>
+                <Grid item direction={'column'} spacing={8} container md={11} className={classes.content}>
+                    <Grid item>
+                        <Typography variant={'headline'} color={'primary'}>{title}</Typography>
+                    </Grid>
+                    <Grid item>
+
+
+                        <Typography variant={'caption'}>
+                            {'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
+                    </Grid>
+                    <Grid item>
+
+                        <Typography variant={'body1'}
+                                    color={'secondary'}>{subTitle}{subTitle}{subTitle}{subTitle}</Typography>
+                    </Grid>
+                    <Grid item>
+
+                        <Button
+                            link={'/feed/1'}
+                            value={'Continue Reading'}
+
+                        />
+
+                    </Grid>
+
+                </Grid>
 
             </Grid>
         );

@@ -10,20 +10,14 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
-    margin: {
-        margin: theme.spacing.unit,
-    },
     textField: {
-        border: '1px solid white',
-        color: 'white',
+        border: '1px solid ' + theme.palette.primary.dark,
         borderRadius: '5px',
-        padding: '5px',
-        flexBasis: 200,
+        padding:'5px 0px',
     }, icon: {
-
+        padding: '2px',
         '&:before': {
-            fontSize:'30px',
-            color: 'white',
+            fontSize: '30px',
         }
     }
 })
@@ -46,14 +40,15 @@ class OutlinedInputAdornments extends React.Component {
         const {classes} = this.props;
 
         return <Input
-            className={classNames(classes.margin, classes.textField)}
+            fullWidth={true}
+            className={classNames(classes.textField,)}
             variant={'filled'}
-            placeholder={'enter email address'}
+            placeholder={'type keyword'}
             value={this.state.weight}
             onChange={this.handleChange('weight')}
             disableUnderline={true}
-            endAdornment={<span className={classNames(classes.icon, 'icon-envelop')}/>
-            }
+            endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
+
 
         />
     }

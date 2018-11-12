@@ -23,19 +23,19 @@ class AppendDots extends Component {
 
             customPaging: i => (
                 <div
-                    onClick={e=>console.log('gggg')}
+                    onClick={e => console.log('gggg')}
                     style={{
                         width: "30px",
                         color: "black",
                         border: "1px black solid",
-                        margin:'10px',
-                        cursor:'pointer',
+                        margin: '10px',
+                        cursor: 'pointer',
                     }}
 
                 >
                     {i + 1}
                 </div>
-            ),      responsive: [
+            ), responsive: [
                 {
                     breakpoint: 1024,
                     settings: {
@@ -72,16 +72,40 @@ class AppendDots extends Component {
                         data.map((n, i) =>
                             <ProductOverviewBox
                                 name={n.name}
-                                src={n.src}
+                                src={n.photos[0].url}
                                 category={n.category}
-                                regPrice={n.regPrice}
+                                regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                                 promotePrice={n.promotePrice}
                                 key={i}
 
 
                             />
-                        )
-                    }
+                        )}{
+                    data.map((n, i) =>
+                        <ProductOverviewBox
+                            name={n.name}
+                            src={n.photos[0].url}
+                            category={n.category}
+                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                            promotePrice={n.promotePrice}
+                            key={i}
+
+
+                        />
+                    )}{
+                    data.map((n, i) =>
+                        <ProductOverviewBox
+                            name={n.name}
+                            src={n.photos[0].url}
+                            category={n.category}
+                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                            promotePrice={n.promotePrice}
+                            key={i}
+
+
+                        />
+                    )
+                }
 
                 </Slider>
             </div>

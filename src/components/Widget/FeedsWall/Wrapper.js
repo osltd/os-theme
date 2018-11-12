@@ -32,20 +32,18 @@ class FeedsWall extends React.Component {
 
     render() {
         const {classes, data,} = this.props;
-
-        return (
-
-            <Grid container alignItems={'stretch'} className={classes.root}>
+        console.log(data)
+        return (data.length)? <Grid container alignItems={'stretch'} className={classes.root}>
                 <Grid item lg={6}>
                     <BigFeedBox
-                        backgroundImg={data[2].src}
+                        backgroundImg={data[0].sections[0].medias[0].url}
                         title={'hot trends'}
 
                     />
                     <SmallFeedBox
                         left={<img
                             style={{width: '100%', height: '180px'}}
-                            src={data[0].src}
+                            src={data[1].sections[0].medias[0].url}
                         />}
                         right={<Fragment>
                             <Typography
@@ -67,7 +65,7 @@ class FeedsWall extends React.Component {
                     <SmallFeedBox
                         right={<img
                             style={{width: '100%', height: '180px'}}
-                            src={data[1].src}
+                            src={data[2].sections[0].medias[0].url}
                         />}
                         left={<Fragment>
                             <Typography
@@ -88,13 +86,13 @@ class FeedsWall extends React.Component {
                         title={
                             "men's fleece"
                         }
-                        backgroundImg={data[3].src}
+                        backgroundImg={data[2].sections[0].medias[0].url}
 
                     />
                 </Grid>
-            </Grid>
-        )
-    }
+            </Grid>:null}
+
+
 }
 
 FeedsWall.propTypes = {

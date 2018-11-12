@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
+import {formatMoney, refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => (
     {
@@ -21,6 +22,7 @@ const style = theme => (
 
 class MultipleRows extends Component {
     render() {
+        //should be slide to show 4 rows should be 2
         const settings = {
             dots: true,
             infinite: true,
@@ -64,18 +66,79 @@ class MultipleRows extends Component {
                 {
                     data.map((n, i) =>
                         <ProductOverviewBox
-                            name={n.name}
-                            src={n.src}
-                            category={n.category}
-                            regPrice={n.regPrice}
-                            promotePrice={n.promotePrice}
                             key={i}
+                            name={refactorTextLength(n.name)}
+                            src={n.photos[0].url}
+                            category={n.tags}
+                            regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                            promotePrice={n.promotePrice}
+
+
 
 
                         />
                     )
-                }
+                }  {
+                data.map((n, i) =>
+                    <ProductOverviewBox
+                        key={i}
+                        name={refactorTextLength(n.name)}
+                        src={n.photos[0].url}
+                        category={n.tags}
+                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        promotePrice={n.promotePrice}
 
+
+
+
+                    />
+                )
+            }  {
+                data.map((n, i) =>
+                    <ProductOverviewBox
+                        key={i}
+                        name={refactorTextLength(n.name)}
+                        src={n.photos[0].url}
+                        category={n.tags}
+                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        promotePrice={n.promotePrice}
+
+
+
+
+                    />
+                )
+            }  {
+                data.map((n, i) =>
+                    <ProductOverviewBox
+                        key={i}
+                        name={refactorTextLength(n.name)}
+                        src={n.photos[0].url}
+                        category={n.tags}
+                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        promotePrice={n.promotePrice}
+
+
+
+
+                    />
+                )
+            }  {
+                data.map((n, i) =>
+                    <ProductOverviewBox
+                        key={i}
+                        name={refactorTextLength(n.name)}
+                        src={n.photos[0].url}
+                        category={n.tags}
+                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        promotePrice={n.promotePrice}
+
+
+
+
+                    />
+                )
+            }
             </Slider>
         );
     }
