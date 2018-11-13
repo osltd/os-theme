@@ -1,7 +1,6 @@
 import React from 'react';
-import {Grid, Toolbar, Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import List from '../Widget/List'
-import SlickWithPagination from '../Widget/Slick/WithPagination'
 import Header from '../Layout/Body/Header'
 import classNames from 'classnames';
 import {connect} from 'react-redux'
@@ -9,6 +8,8 @@ import {EDIT_PRODUCT_VIEW_MODE} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/WhiteDropDown'
 import ProductOverviewListForm from '../Widget/Product/overviewList'
+import {arrayToPagination, refactorTextLength} from "../../api/ApiUtils";
+import ProductOverviewBox from '../Widget/Product/overviewBox'
 
 const styles = theme => ({
     productCategory: {
@@ -76,59 +77,94 @@ class ResponsiveDialog extends React.Component {
                         />
                     </Grid>
                     <Grid item sm={12} lg={9}>
-                        <Toolbar>
-                            <Grid container alignItems={'center'} justify={'space-between'} className={classes.toolBar}>
+                        <Grid item container xs={12} alignItems={'center'} className={classes.toolBar}>
+                            <Grid item xs={4}>
+                                <span
+                                    onClick={() => this.props.changeViewMode('form')}
+                                    className={classNames(classes.icon, 'icon-table')}/>
+                                <span
+                                    onClick={() => this.props.changeViewMode('list')}
+                                    className={classNames('icon-list', classes.icon)}/>
+                            </Grid>
+                            <Grid item xs={4} container alignItems={'center'} direction={'row'}>
                                 <Grid item>
-                                    <span
-                                        onClick={() => this.props.changeViewMode('form')}
-                                        className={classNames(classes.icon, 'icon-table')}/>
-                                    <span
-                                        onClick={() => this.props.changeViewMode('list')}
-                                        className={classNames('icon-list', classes.icon)}/>
+                                    <Typography variant={'body2'}>
+                                        Items
+                                    </Typography>
+
+                                </Grid>
+                                <Grid item>
+
+                                {
+                                    this.props.products.length>0 &&  <WhiteDropDown
+                                        options={
+                                            arrayToPagination(this.props.products,cd=>console.log(cd))}
+                                    />
+                                }
+
+
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'body2'}>
-                                        Items 1 - 9 of 17
+                                        of {this.props.products.length}
                                     </Typography>
                                 </Grid>
-                                <Grid item container alignItems={'center'} xs={4}>
-                                    <Grid item>
-                                        <Typography variant={'body2'}>
-                                            sort by
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={8}>
-                                        <WhiteDropDown
-                                            options={[
-                                                {label: 'Name A-Z', onClick: () => console.log('Name A-Z')}, {
-                                                    label: 'Name Z-A', onClick: () => console.log('Name A-Z'),
+                            </Grid>
+                            <Grid item container xs={4} alignItems={'center'} direction={'row'}>
 
-                                                }, {
-                                                    label: 'Price Low to High', onClick: () => console.log('Name A-Z'),
+                                <Grid item>
+                                    <Typography variant={'body2'}>
+                                        sort by
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <WhiteDropDown
+                                        options={[
+                                            {label: 'Name A-Z', onClick: () => console.log('Name A-Z')}, {
+                                                label: 'Name Z-A', onClick: () => console.log('Name A-Z'),
 
-                                                }, {
-                                                    label: 'Price High to Low', onClick: () => console.log('Name A-Z'),
+                                            }, {
+                                                label: 'Price Low to High', onClick: () => console.log('Name A-Z'),
 
-                                                }
-                                            ]}
-                                        />
-                                    </Grid>
+                                            }, {
+                                                label: 'Price High to Low', onClick: () => console.log('Name A-Z'),
+                                            }
+                                        ]}
+                                    />
                                 </Grid>
                             </Grid>
-                        </Toolbar>
+                        </Grid>
                         {this.props.viewMode === 'form' ?
-                            <SlickWithPagination
-                                data={this.props.products}
-                            /> : <Grid className={classes.listMode}>
+                            <Grid item container>
+
+                                {this.props.products.map((n, i) =>
+                                    <Grid item xs={3}>
+                                        <ProductOverviewBox
+                                            name={refactorTextLength(n.name)}
+                                            id={n.id}
+
+                                            src={n.photos[0].url}
+                                            category={n.category}
+                                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                                            promotePrice={n.promotePrice}
+                                            key={i}
+
+
+                                        />
+                                    </Grid>
+                                )}
+
+                            </Grid>
+                            : <Grid className={classes.listMode}>
                                 {this.props.products.map((n, i) => (<ProductOverviewListForm
                                     key={i}
                                     src={n.photos[0].url}
-                                    name={n.name}
+                                    name={refactorTextLength(n.name)}
                                     category={n.category}
                                     regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                                     promotePrice={n.promotePrice}
                                     description={n.description}
-
+                                    id={n.id}
                                 />))}
                             </Grid>
                         }
@@ -139,6 +175,5 @@ class ResponsiveDialog extends React.Component {
         );
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))

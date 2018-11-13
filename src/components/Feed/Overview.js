@@ -30,7 +30,9 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+
+    }
 )
 
 class ResponsiveDialog extends React.Component {

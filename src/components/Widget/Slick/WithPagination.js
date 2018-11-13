@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Slider from 'react-slick';
 import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
+import {refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
@@ -71,9 +72,9 @@ class AppendDots extends Component {
                     {
                         data.map((n, i) =>
                             <ProductOverviewBox
+                                name={refactorTextLength(n.name)}
                                 id={n.id}
 
-                                name={n.name}
                                 src={n.photos[0].url}
                                 category={n.category}
                                 regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
@@ -82,10 +83,11 @@ class AppendDots extends Component {
 
 
                             />
-                        )}{
+                        )
+                    }{
                     data.map((n, i) =>
                         <ProductOverviewBox
-                            name={n.name}
+                            name={refactorTextLength(n.name)}
                             id={n.id}
 
                             src={n.photos[0].url}
@@ -96,10 +98,11 @@ class AppendDots extends Component {
 
 
                         />
-                    )}{
+                    )
+                }{
                     data.map((n, i) =>
                         <ProductOverviewBox
-                            name={n.name}
+                            name={refactorTextLength(n.name)}
                             id={n.id}
 
                             src={n.photos[0].url}

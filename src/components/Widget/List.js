@@ -59,8 +59,7 @@ class SelectedListItem extends React.Component {
                         <ListItem
                             button
                             className={classNames(classes.listItem, (this.state.selectedIndex === i) ? classes.selected : null)}
-                            onClick={event => this.handleListItemClick(event, i)}
-                        >
+                            onClick={event => this.handleListItemClick(event, i)}>
                             <ListItemText primary={n}/>
                         </ListItem>
                     )}

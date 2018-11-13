@@ -2,27 +2,25 @@ import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney} from "../../../api/ApiUtils";
+import {withRouter} from "react-router-dom";
 
-const styles = props => {
-    console.log(props)
+
+const styles = theme => {
     return ({
+        name: {
+            color:theme.palette.secondary.dark,
+            cursor:'pointer',
+            '&:hover':{
+                color:theme.palette.primary.dark,
+            }
+        },
         root: {
             padding: '0 10px 0 10px',
         },
-        img: {
-            width: '100%',
-            maxHeight: '255px !important',
-        },
         cf6_image: {
+            cursor:'pointer',
             width: '100%',
             maxHeight: '255px !important',
-
-            transition: 'background-image 1s ease-in-out',
-            backgroundImage: 'url(' + props + ')',
-
-            '&:hover': {
-                backgroundImage: 'url(' + props.src + ')',
-            }
         },
 
         oldPrice: {},
@@ -62,16 +60,25 @@ class ResponsiveDialog extends React.Component {
     }
 
     render() {
-        const {classes, src, name, category, regPrice, promotePrice, description} = this.props;
+        const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;
 
         return (
             <Grid container spacing={16} alignItems={'center'} className={classes.root}>
                 <Grid item xs={3}>
-                    <img src={src} className={classes.cf6_image}/>
+                    <img src={src}
+
+                         onClick={() => this.props.history.push('/shop/' + id)}
+
+                         className={classes.cf6_image}/>
                 </Grid>
                 <Grid item xs={9}>
                     <Typography variant={'headline'} color={'primary'}>{category}</Typography>
-                    <Typography variant={'title'} color={'secondary'}>{name}</Typography>
+                    <Typography variant={'title'}
+                                onClick={() => this.props.history.push('/shop/' + id)}
+
+
+                                className={classes.name}
+                                >{name}</Typography>
                     <Typography variant={'caption'}>{description}</Typography>
                     {
                         promotePrice ?
@@ -94,4 +101,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default withStyles(styles)(ResponsiveDialog)
+export default withRouter(withStyles(styles)(ResponsiveDialog))

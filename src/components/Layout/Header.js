@@ -173,7 +173,6 @@ class Header extends React.Component {
 
             <BottomNavigationAction label="Home" value="Home"
                                     onClick={() => this.props.history.push('/')}
-
                                     icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
             <BottomNavigationAction label="Shops" value="Shops"
@@ -184,7 +183,6 @@ class Header extends React.Component {
             <BottomNavigationAction label="Product" value="Product"
                                     onClick={() => this.props.history.push('/shop/17')}
                                     icon={<span className={classNames(classes.icon, 'icon-stack')}/>}/>
-
         </BottomNavigation>
 
 

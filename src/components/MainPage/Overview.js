@@ -43,6 +43,7 @@ class ResponsiveDialog extends React.Component {
                                 {this.props.feeds
                                     .filter(n => (n.sections && n.sections[0].medias[0]))
                                     .map(n => ({
+                                        link: '/feed/'+n.id,
                                         url: n.sections[0].medias[0].url,
                                         title: n.sections[0].title,
                                     }))

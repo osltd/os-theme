@@ -6,6 +6,7 @@ import ProductOverviewBox from '../Product/overviewBox'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {refactorTextLength} from "../../../api/ApiUtils";
+import {withRouter} from "react-router-dom";
 
 const style = theme => ({
     root: {
@@ -61,7 +62,6 @@ class MultipleItems extends Component {
                         <ProductOverviewBox
                             key={i}
                             id={n.id}
-
                             name={refactorTextLength(n.name)}
                             src={n.photos[0].url}
                             category={n.tags}

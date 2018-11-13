@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
+import {withRouter} from 'react-router-dom'
 
 const style = theme => ({
     root: {
@@ -37,7 +38,6 @@ class SimpleSlider extends React.Component {
     render() {
         let settings = {
             dots: true,
-            fade: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -52,21 +52,27 @@ class SimpleSlider extends React.Component {
         return (
             data[0] ?
                 <Slider {...settings} className={classes.root}>
+
                     {
 
-                        data.map((n, i) => {
-                                return <div key={i}>
+                        data.map((n, i) => (<div key={i}>
 
-                                    <Grid container alignItems={'center'} style={{
-                                        backgroundImage: 'url("' + n.url + '")',
-                                    }} className={classes.img}>
+                                    <Grid container
+                                          alignItems={'center'}
+                                          style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
+                                              backgroundImage: 'url("' + n.url + '")',
+
+                                          })}
+                                          onClick={() => n.link ? this.props.history.push(n.link) : null}
+
+                                          className={classes.img}>
                                         {n.title && <Grid item lg={4}>
                                             <Typography variant="display4" className={classes.title}
                                                         gutterBottom> {n.title}</Typography>
                                         </Grid>}
                                     </Grid>
                                 </div>
-                            }
+                            )
                         )
                     }
 
@@ -75,4 +81,4 @@ class SimpleSlider extends React.Component {
     }
 }
 
-export default withStyles(style)(SimpleSlider)
+export default withRouter(withStyles(style)(SimpleSlider))

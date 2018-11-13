@@ -1,9 +1,22 @@
-import {EDIT_PRODUCT_DETAIL, EDIT_PRODUCT_VIEW_MODE, INIT_PRODUCTS} from "../constants/actionType";
+import {
+    EDIT_PRODUCT_DETAIL,
+    EDIT_PRODUCT_VIEW_MODE,
+    FEED_EDIT_SORT,
+    INIT_PRODUCTS,
+    PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT
+} from "../constants/actionType";
 
 
 const defaultState = {
     products: [],
     viewMode: 'form',
+    filter:{
+
+    },
+    sort:{
+
+    }
+    ,
     detail: {
         section: 'Comments',
     }
@@ -34,6 +47,26 @@ export default (state = defaultState, action) => {
 
             }
 
+        }
+        case PRODUCT_EDIT_FILTER: {
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    [action.payload.key]: action.payload.value,
+
+                }
+            }
+        }
+        case PRODUCT_EDIT_SORT: {
+            return {
+                ...state,
+                sort: {
+                    ...state.sort,
+                    [action.payload.key]: action.payload.value,
+
+                }
+            }
         }
 
         default:

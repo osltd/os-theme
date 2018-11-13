@@ -18,7 +18,6 @@ const styles = theme => ({
         height: '255px !important',
     },
     content: {
-        padding: '10px',
     },
 
 })
@@ -61,10 +60,10 @@ class ResponsiveDialog extends React.Component {
         } = this.props;
         console.log(this.props)
         return (
-            <Grid container className={classes.root} direction={'column'}>
-                <Grid item>
+            <Grid container className={classes.root} alignItems={'center'} direction={'column'}>
+                <Grid item xs={12}>
                     <img src={src} className={classes.img}/></Grid>
-                <Grid item direction={'column'} spacing={8} container md={11} className={classes.content}>
+                <Grid item direction={'column'} container xs={12} md={11} className={classes.content}>
                     <Grid item>
                         <Typography variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>

@@ -63,7 +63,12 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
 
                     <Grid item xs={5}>
-                        <SingleItemImgWall/>
+                        <SingleItemImgWall
+                            data={product.photos.map(n => ({
+                                src: n.url,
+                            }))}
+
+                        />
                     </Grid>
 
                 </Grid>

@@ -8,7 +8,7 @@ const styles = theme => ({
         overflow: 'auto',
         maxHeight: '500px',
     }, img: {
-        maxWidth: '200px',
+        width:'100%',
 
     }
 });
@@ -18,8 +18,8 @@ function ListItemLink(props) {
 }
 
 function SimpleList(props) {
-    const {classes} = props;
-    const data = [
+    const {classes,data} = props;
+    const gg = [
         {
 
             src: 'https://d29u17ylf1ylz9.cloudfront.net/thebell-v2/thebell/assets/img/products/home-two/product-2.jpg',
@@ -181,21 +181,18 @@ function SimpleList(props) {
             regPrice: '50',
             promotePrice: '40',
             description: ' There is a person who is the hero of every BBQ or family cookout and that is the Grill Master. We always looked up to our Mom or Dad as they tended the grill and looked forward to the day when we could be in charge of charring the meatstuff and searing delicious slices of fresh pineapple. Now that we\'re adults, it\'s finally our turn and technology has smiled upon us, giving us a tool that is destined to impress.',
-
             SKU: 'KU MH03',
             status: 'in stock',
             size: '5',
             color: 'red,yellow,green',
-
         },
     ]
+
     return (
         <div className={classes.root}>
             {
-                data.map((n, i) => <img className={classes.img} src={n.src}/>)
+                data.map((n, i) => <img key={i} className={classes.img} src={n.src}/>)
             }
-
-
         </div>
     );
 }

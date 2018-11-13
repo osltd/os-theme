@@ -4,38 +4,29 @@ import {Grid, Typography} from '@material-ui/core';
 import {formatMoney} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
-const styles = props => {
-    console.log(props)
-    return ({
-        root: {
-            padding: '0 10px 0 10px',
-        },
-        img: {
-            width: '100%',
-            maxHeight: '255px !important',
-        },
-        cf6_image: {
-            cursor: 'pointer',
-            width: '100%',
-            maxHeight: '255px !important',
-
-            transition: 'background-image 1s ease-in-out',
-            backgroundImage: 'url(' + props + ')',
-
-            '&:hover': {
-                backgroundImage: 'url(' + props.src + ')',
-            }
-        },
-
-        oldPrice: {},
-        price: {
-            fontWeight: '900',
+const styles = theme => ({
+    name: {
+        color: theme.palette.secondary.dark,
+        cursor: 'pointer',
+        '&:hover': {
+            color: theme.palette.primary.dark,
         }
+    },
+    root: {
+        padding: '0 10px 0 10px',
+    },
+    cf6_image: {
+        cursor: 'pointer',
+        width: '100%',
+        maxHeight: '255px !important',
+    },
 
-    })
+    oldPrice: {},
+    price: {
+        fontWeight: '900',
+    }
 
-
-}
+})
 
 
 class ResponsiveDialog extends React.Component {
@@ -74,11 +65,14 @@ class ResponsiveDialog extends React.Component {
 
                      className={classes.cf6_image}/>
                 <Typography variant={'headline'} color={'primary'}>{category}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{name}</Typography>
+                <Typography variant={'title'}
+                            onClick={() => this.props.history.push('/shop/' + id)}
+                            className={classes.name}
+
+                >{name}</Typography>
                 {
                     (promotePrice) ?
                         <Grid item container direction={'row'}>
-
                             <Typography component={'del'} variant={'subheading'}
                                         className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
                             <Typography variant={'subheading'}
