@@ -15,7 +15,7 @@ const styles = props => {
             maxHeight: '255px !important',
         },
         cf6_image: {
-            cursor:'pointer',
+            cursor: 'pointer',
             width: '100%',
             maxHeight: '255px !important',
 
@@ -40,6 +40,21 @@ const styles = props => {
 
 class ResponsiveDialog extends React.Component {
 
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    })
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
+
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -48,31 +63,14 @@ class ResponsiveDialog extends React.Component {
         }
     }
 
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
-
     render() {
-        const {classes, src, name,id, category, regPrice, promotePrice} = this.props;
+        const {classes, src, name, id, category, regPrice, promotePrice} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>
                 <img src={src}
 
-                     onClick={() => this.props.history.push('/shop/'+id)}
+                     onClick={() => this.props.history.push('/shop/' + id)}
 
                      className={classes.cf6_image}/>
                 <Typography variant={'headline'} color={'primary'}>{category}</Typography>
@@ -83,9 +81,11 @@ class ResponsiveDialog extends React.Component {
 
                             <Typography component={'del'} variant={'subheading'}
                                         className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                            <Typography variant={'subheading'} className={classes.price}>${formatMoney(promotePrice)}</Typography>
+                            <Typography variant={'subheading'}
+                                        className={classes.price}>${formatMoney(promotePrice)}</Typography>
                         </Grid>
-                        : <Typography variant={'subheading'} className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+                        : <Typography variant={'subheading'}
+                                      className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
                 }
 

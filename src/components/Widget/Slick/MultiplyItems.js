@@ -2,11 +2,10 @@ import React, {Component} from "react";
 import Slider from 'react-slick';
 
 import {withStyles} from '@material-ui/core/styles';
-import {Grid} from '@material-ui/core'
 import ProductOverviewBox from '../Product/overviewBox'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
-import {formatMoney, refactorTextLength} from "../../../api/ApiUtils";
+import {refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
@@ -21,7 +20,7 @@ class MultipleItems extends Component {
             dots: true,
             infinite: true,
             speed: 500,
-            slidesToShow: this.props.slidesToShow?this.props.slidesToShow:3,
+            slidesToShow: this.props.slidesToShow ? this.props.slidesToShow : 3,
             slidesToScroll: 3,
 
             nextArrow: <NextArrow/>,
@@ -66,11 +65,10 @@ class MultipleItems extends Component {
                             name={refactorTextLength(n.name)}
                             src={n.photos[0].url}
                             category={n.tags}
-                            regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                             promotePrice={n.promotePrice}
 
                         />
-
                     )
                 }
             </Slider>

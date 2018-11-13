@@ -7,10 +7,10 @@ import Button from '../Button'
 const styles = theme => ({
 
     root: {
-        maxHeight:'540px',
-        minHeight:'540px',
+        maxHeight: '540px',
+        minHeight: '540px',
         border: '1px solid ' + theme.palette.secondary.light,
-        overflow:'auto',
+        overflow: 'auto',
     },
 
     img: {
@@ -26,6 +26,21 @@ const styles = theme => ({
 
 class ResponsiveDialog extends React.Component {
 
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    })
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
+
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -34,39 +49,21 @@ class ResponsiveDialog extends React.Component {
         }
     }
 
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
-
     render() {
         const {
             classes,
             src,
             subTitle,
             title,
-
-            author,
+            id, author,
             postDate,
             comments,
         } = this.props;
-
+        console.log(this.props)
         return (
             <Grid container className={classes.root} direction={'column'}>
-<Grid item>
-    <img src={src} className={classes.img}/></Grid>
+                <Grid item>
+                    <img src={src} className={classes.img}/></Grid>
                 <Grid item direction={'column'} spacing={8} container md={11} className={classes.content}>
                     <Grid item>
                         <Typography variant={'headline'} color={'primary'}>{title}</Typography>
@@ -83,7 +80,7 @@ class ResponsiveDialog extends React.Component {
                     <Grid item>
 
                         <Button
-                            link={'/feed/1'}
+                            link={'/feed/' + id}
                             value={'Continue Reading'}
 
                         />

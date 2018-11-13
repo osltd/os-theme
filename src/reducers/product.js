@@ -1,10 +1,8 @@
-import {EDIT_PRODUCT_DETAIL, EDIT_PRODUCT_VIEW_MODE,INIT_PRODUCTS} from "../constants/actionType";
+import {EDIT_PRODUCT_DETAIL, EDIT_PRODUCT_VIEW_MODE, INIT_PRODUCTS} from "../constants/actionType";
 
 
 const defaultState = {
-    products: [
-
-    ],
+    products: [],
     viewMode: 'form',
     detail: {
         section: 'Comments',
@@ -16,7 +14,7 @@ export default (state = defaultState, action) => {
 
     switch (action.type) {
         case INIT_PRODUCTS:
-            return{
+            return {
                 ...state,
                 products: action.payload,
             }

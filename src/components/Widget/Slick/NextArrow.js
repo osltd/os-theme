@@ -7,9 +7,9 @@ const style = theme => ({
             fontSize: '40px',
             position: 'absolute',
             top: '50%',
-            cursor:'pointer',
+            cursor: 'pointer',
             right: '-40px',
-            color:'#0f090a',
+            color: '#0f090a',
 
 
         }

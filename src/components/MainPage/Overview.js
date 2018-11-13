@@ -35,10 +35,19 @@ class ResponsiveDialog extends React.Component {
     render() {
         const {classes} = this.props
         return (
-            (this.props.feeds && this.props.products ) ?
+            (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
                     <Grid item xs={12} style={{marginTop: '-10px'}}>
-                        <Carousel data={this.props.feeds.filter(n => (n.sections && n.sections[0].medias[0]))}/>
+                        <Carousel
+                            data=
+                                {this.props.feeds
+                                    .filter(n => (n.sections && n.sections[0].medias[0]))
+                                    .map(n => ({
+                                        url: n.sections[0].medias[0].url,
+                                        title: n.sections[0].title,
+                                    }))
+
+                                }/>
                     </Grid>
 
                     <Grid item xs={12}>

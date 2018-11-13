@@ -38,7 +38,7 @@ class WhiteDropDown extends React.Component {
                 <span className={classNames('icon-star-full', classes.star)}/>
                 <span className={classNames('icon-star-full', classes.star)}/>
                 <span className={classNames('icon-star-full', classes.star)}/>
-                <Typography variant={'body1'} >
+                <Typography variant={'body1'}>
                     (5)
                 </Typography>
                 <Typography variant={'body1'}>

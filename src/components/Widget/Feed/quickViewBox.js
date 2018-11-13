@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import Header from '../../Layout/Body/Header'
+
 const styles = props => {
     console.log(props)
     return ({
@@ -37,6 +37,21 @@ const styles = props => {
 
 class ResponsiveDialog extends React.Component {
 
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    })
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
+
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -45,25 +60,8 @@ class ResponsiveDialog extends React.Component {
         }
     }
 
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
-
     render() {
-        const {classes, src,subTitle,title} = this.props;
+        const {classes, src, subTitle, title} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>

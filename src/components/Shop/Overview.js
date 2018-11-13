@@ -25,8 +25,8 @@ const styles = theme => ({
         alignItems: 'center',
         border: '1px solid black',
 
-    },listMode:{
-        padding:'20px',
+    }, listMode: {
+        padding: '20px',
     }
 })
 
@@ -119,13 +119,13 @@ class ResponsiveDialog extends React.Component {
                         {this.props.viewMode === 'form' ?
                             <SlickWithPagination
                                 data={this.props.products}
-                            /> :<Grid className={classes.listMode}>
+                            /> : <Grid className={classes.listMode}>
                                 {this.props.products.map((n, i) => (<ProductOverviewListForm
                                     key={i}
                                     src={n.photos[0].url}
                                     name={n.name}
                                     category={n.category}
-                                    regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                                    regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                                     promotePrice={n.promotePrice}
                                     description={n.description}
 

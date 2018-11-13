@@ -33,65 +33,66 @@ class FeedsWall extends React.Component {
     render() {
         const {classes, data,} = this.props;
         console.log(data)
-        return (data.length)? <Grid container alignItems={'stretch'} className={classes.root}>
-                <Grid item md={6}>
-                    <BigFeedBox
-                        backgroundImg={data[0].sections[0].medias[0].url}
-                        title={'hot trends'}
+        return (data.length) ? <Grid container alignItems={'stretch'} className={classes.root}>
+            <Grid item md={6}>
+                <BigFeedBox
+                    backgroundImg={data[0].sections[0].medias[0].url}
+                    title={'hot trends'}
 
-                    />
-                    <SmallFeedBox
-                        left={<img
-                            style={{width: '100%', height: '180px'}}
-                            src={data[1].sections[0].medias[0].url}
-                        />}
-                        right={<Fragment>
-                            <Typography
+                />
+                <SmallFeedBox
+                    left={<img
+                        style={{width: '100%', height: '180px'}}
+                        src={data[1].sections[0].medias[0].url}
+                    />}
+                    right={<Fragment>
+                        <Typography
                             variant={'subheading'}
                         >
                             NEW FROM VANS
                         </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >
-                                The Sk8-Hi MTE revamps
+                        <Typography
+                            variant={'body2'}
+                        >
+                            The Sk8-Hi MTE revamps
 
-                                the legendary Vans high to
-                            </Typography>
-                        </Fragment>}
+                            the legendary Vans high to
+                        </Typography>
+                    </Fragment>}
 
-                    />
-                </Grid>
-                <Grid item md={6}>
-                    <SmallFeedBox
-                        right={<img
-                            style={{width: '100%', height: '180px'}}
-                            src={data[2].sections[0].medias[0].url}
-                        />}
-                        left={<Fragment>
-                            <Typography
-                                variant={'subheading'}
-                            >
-                                NEW FROM VANS
-                            </Typography>
-                            <Typography
-                                variant={'body2'}
-                            >                                The Sk8-Hi MTE revamps
+                />
+            </Grid>
+            <Grid item md={6}>
+                <SmallFeedBox
+                    right={<img
+                        style={{width: '100%', height: '180px'}}
+                        src={data[2].sections[0].medias[0].url}
+                    />}
+                    left={<Fragment>
+                        <Typography
+                            variant={'subheading'}
+                        >
+                            NEW FROM VANS
+                        </Typography>
+                        <Typography
+                            variant={'body2'}
+                        > The Sk8-Hi MTE revamps
 
-                                the legendary Vans high to
-                            </Typography>
-                        </Fragment>}
+                            the legendary Vans high to
+                        </Typography>
+                    </Fragment>}
 
-                    />
-                    <BigFeedBox
-                        title={
-                            "men's fleece"
-                        }
-                        backgroundImg={data[2].sections[0].medias[0].url}
+                />
+                <BigFeedBox
+                    title={
+                        "men's fleece"
+                    }
+                    backgroundImg={data[2].sections[0].medias[0].url}
 
-                    />
-                </Grid>
-            </Grid>:null}
+                />
+            </Grid>
+        </Grid> : null
+    }
 
 
 }

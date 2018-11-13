@@ -4,9 +4,8 @@ import {withStyles} from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
+import classNames from 'classnames'
 
 const styles = theme => ({
     root: {
@@ -16,6 +15,13 @@ const styles = theme => ({
     },
     listItem: {
         borderBottom: '1px solid black',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.light,
+
+        }
+    },
+    selected: {
+        backgroundColor: theme.palette.secondary.light,
     }
 });
 const dummyData = ['DECOR & FURNITURE (19)',
@@ -31,6 +37,7 @@ class SelectedListItem extends React.Component {
     };
 
     handleListItemClick = (event, index) => {
+        console.log(index)
         this.setState({selectedIndex: index});
     };
 
@@ -51,9 +58,8 @@ class SelectedListItem extends React.Component {
                     {dummyData.map((n, i) =>
                         <ListItem
                             button
-                            className={classes.listItem}
-                            selected={this.state.selectedIndex === 0}
-                            onClick={event => this.handleListItemClick(event, 0)}
+                            className={classNames(classes.listItem, (this.state.selectedIndex === i) ? classes.selected : null)}
+                            onClick={event => this.handleListItemClick(event, i)}
                         >
                             <ListItemText primary={n}/>
                         </ListItem>

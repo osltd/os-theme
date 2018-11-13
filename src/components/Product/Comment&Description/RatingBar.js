@@ -5,6 +5,7 @@ import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
 import {connect} from "react-redux";
 import {Grid} from '@material-ui/core'
 import classNames from 'classnames'
+
 const styles = theme => (
     {
         root: {}, icon: {
@@ -35,10 +36,12 @@ const mapDispatchToProps = dispatch => ({
 
 class RatingBar extends React.Component {
 
-    getStar = star => Array(Math.floor(star)).fill('star').map((n, i) => <span className={classNames(this.props.classes.icon,'icon-star-full')}/>)
-    getHalfStar = star => !!(star % 1) ? <span className={classNames(this.props.classes.icon,'icon-star-half')}/> : null
+    getStar = star => Array(Math.floor(star)).fill('star').map((n, i) => <span
+        className={classNames(this.props.classes.icon, 'icon-star-full')}/>)
+    getHalfStar = star => !!(star % 1) ?
+        <span className={classNames(this.props.classes.icon, 'icon-star-half')}/> : null
     getEmptyStar = star => Array(5 - Math.floor(star) - (!!(star % 1) ? 1 : 0)).fill('star').map((n, i) => <span
-        className={classNames(this.props.classes.icon,'icon-star-empty')}/>)
+        className={classNames(this.props.classes.icon, 'icon-star-empty')}/>)
 
 
     render() {

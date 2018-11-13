@@ -14,29 +14,28 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
 import {connect} from "react-redux";
-import{INIT_FEEDS,INIT_PRODUCTS} from "../constants/actionType";
+import {INIT_FEEDS, INIT_PRODUCTS} from "../constants/actionType";
 import agent from '../agent'
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-initApp:async ()=>{
-    dispatch(
-        {
-            type:INIT_PRODUCTS,
-            payload: await agent.Products.initProducts(),
-        }
-    )
-    dispatch(
-        {
-            type:INIT_FEEDS,
-            payload: await agent.Feeds.initFeeds(),
-        }
-    )
+        initApp: async () => {
+            dispatch(
+                {
+                    type: INIT_PRODUCTS,
+                    payload: await agent.Products.initProducts(),
+                }
+            )
+            dispatch(
+                {
+                    type: INIT_FEEDS,
+                    payload: await agent.Feeds.initFeeds(),
+                }
+            )
 
-}
+        }
 
     }
 )
@@ -54,13 +53,13 @@ class App extends React.Component {
                     <ScrollToTop>
                         <ErrorBoundary>
                             <Header/>
-                            <div style={ {paddingTop:'64px'}}>
-                            <Route exact path={'/'} component={mainPage}/>
-                            <Route exact path={'/2'} component={mainPage2}/>
-                            <Route exact path={'/shop'} component={Shop}/>
-                            <Route exact path={'/feed'} component={Feed}/>
-                            <Route exact path={'/feed/:id'} component={FeedDetail}/>
-                            <Route exact path={'/shop/:id'} component={Product}/>
+                            <div style={{paddingTop: '64px'}}>
+                                <Route exact path={'/'} component={mainPage}/>
+                                <Route exact path={'/2'} component={mainPage2}/>
+                                <Route exact path={'/shop'} component={Shop}/>
+                                <Route exact path={'/feed'} component={Feed}/>
+                                <Route exact path={'/feed/:id'} component={FeedDetail}/>
+                                <Route exact path={'/shop/:id'} component={Product}/>
                             </div>
                             <Footer/>
                         </ErrorBoundary>

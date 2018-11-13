@@ -8,8 +8,7 @@ import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 
-const styles = theme =>
-{
+const styles = theme => {
     return (
 
         {
@@ -37,7 +36,7 @@ class ResponsiveDialog extends React.Component {
         const {classes} = this.props
         return (
             <Grid container alignItems={'flex-start'} justify={'center'}>
-                <Grid item sm={12} style={ {marginTop:'-10px'}}>
+                <Grid item sm={12} style={{marginTop: '-10px'}}>
                     <Carousel data={this.props.feeds}/>
                 </Grid>
                 <Grid item lg={12}>
@@ -63,7 +62,7 @@ class ResponsiveDialog extends React.Component {
                     </Typography>
                 </Grid>
 
-                <Grid item lg={10} >
+                <Grid item lg={10}>
                     <MultiRows
                         data={this.props.products}
                     />
@@ -87,7 +86,6 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
 
                 </Grid>
-
 
 
             </Grid>

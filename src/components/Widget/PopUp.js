@@ -11,8 +11,8 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 4,
 
     },
-    button:{
-        cursor:'pointer'
+    button: {
+        cursor: 'pointer'
     },
     anchor: {
         backgroundColor: green[500],

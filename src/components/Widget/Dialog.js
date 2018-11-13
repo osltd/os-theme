@@ -3,6 +3,14 @@ import {Dialog} from '@material-ui/core';
 
 class ResponsiveDialog extends React.Component {
 
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
+
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
@@ -10,15 +18,6 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
 
     render() {
         const {fullScreen, child, title} = this.props;

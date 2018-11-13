@@ -85,17 +85,16 @@ const styles = theme => ({
 
 
 class Header extends React.Component {
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
+
     constructor(props) {
         super(props)
         this.state = {
             value: 'recents',
         };
     }
-
-
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
 
     render() {
         const {classes, width} = this.props;

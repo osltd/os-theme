@@ -8,6 +8,7 @@ import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
 import {refactorTextLength} from "../../api/ApiUtils"
 import NotFound from '../Layout/NotFound'
+
 const styles = theme => {
     return (
         {
@@ -33,10 +34,10 @@ const mapDispatchToProps = dispatch => ({}
 )
 
 class ResponsiveDialog extends React.Component {
+    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+
     componentDidMount() {
     }
-
-    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
 
     render() {
         const {classes} = this.props
@@ -54,8 +55,8 @@ class ResponsiveDialog extends React.Component {
                     <Grid item xs={7}>
                         <Detail
                             description={product.description}
-                        name={refactorTextLength(product.name)}
-                        regPrice={product.variants[0]?product.variants[0].price:'not a reg price'}
+                            name={refactorTextLength(product.name)}
+                            regPrice={product.variants[0] ? product.variants[0].price : 'not a reg price'}
 
 
                         />
@@ -70,20 +71,18 @@ class ResponsiveDialog extends React.Component {
                 <Grid item xs={10} container>
 
                     <CommentDescription
-                    content={product.description}
+                        content={product.description}
                     />
                 </Grid>
             </Grid>
         }
 
         else {
-            return  <NotFound
-            msg={"product doesn't exist"}
+            return <NotFound
+                msg={"product doesn't exist"}
 
 
             />
-
-
 
 
         }

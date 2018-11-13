@@ -35,14 +35,6 @@ const styles = props => {
 
 class ResponsiveDialog extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
-
     styles = theme => ({
         content: {
             "padding": this.props.padding,
@@ -50,6 +42,14 @@ class ResponsiveDialog extends React.Component {
             "background-color": this.props.backgroundColor
         }
     })
+
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+        this.state = {
+            open: false,
+        }
+    }
 
     render() {
         const {classes, src, name, category, regPrice, promotePrice} = this.props;

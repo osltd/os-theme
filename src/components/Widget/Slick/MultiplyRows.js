@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
-import {formatMoney, refactorTextLength} from "../../../api/ApiUtils";
+import {refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => (
     {
@@ -71,15 +71,13 @@ class MultipleRows extends Component {
                             name={refactorTextLength(n.name)}
                             src={n.photos[0].url}
                             category={n.tags}
-                            regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                             promotePrice={n.promotePrice}
-
-
 
 
                         />
                     )
-                }  {
+                } {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
@@ -88,15 +86,13 @@ class MultipleRows extends Component {
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
-                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                         promotePrice={n.promotePrice}
-
-
 
 
                     />
                 )
-            }  {
+            } {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
@@ -105,15 +101,13 @@ class MultipleRows extends Component {
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
-                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                         promotePrice={n.promotePrice}
-
-
 
 
                     />
                 )
-            }  {
+            } {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
@@ -122,15 +116,13 @@ class MultipleRows extends Component {
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
-                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                         promotePrice={n.promotePrice}
-
-
 
 
                     />
                 )
-            }  {
+            } {
                 data.map((n, i) =>
                     <ProductOverviewBox
                         key={i}
@@ -139,10 +131,8 @@ class MultipleRows extends Component {
                         name={refactorTextLength(n.name)}
                         src={n.photos[0].url}
                         category={n.tags}
-                        regPrice={n.variants[0]?n.variants[0].price:'not a reg price'}
+                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                         promotePrice={n.promotePrice}
-
-
 
 
                     />

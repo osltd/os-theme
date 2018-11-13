@@ -14,7 +14,7 @@ const styles = theme => ({
 
 class NotFound extends React.Component {
     render() {
-        const {classes,msg} = this.props;
+        const {classes, msg} = this.props;
         return (
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
                 <Typography variant={'subheading'}>

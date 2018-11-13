@@ -1,18 +1,16 @@
 import React, {Fragment} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
-import {ListItem,Typography} from '@material-ui/core';
+import {ListItem, Typography} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 const styles = theme => ({
-    root: {
-    },
+    root: {},
     title: {
         fontWeight: 'lighter',
     },
-    btnText: {
-    },
+    btnText: {},
     icon: {
         marginRight: '5px',
     }
@@ -47,10 +45,12 @@ class WhiteDropDown extends React.Component {
     }
 
     render() {
-        const {classes, icon, value,
+        const {
+            classes, icon, value,
             icon2, label,
             labelExtra, options,
-            selectedValue} = this.props;
+            selectedValue
+        } = this.props;
         const {anchorEl} = this.state;
 
 
@@ -62,7 +62,7 @@ class WhiteDropDown extends React.Component {
                 >
                     <span className={classes.icon + ' ' + icon}/>
                     <Typography variant={'body2'}>
-                    {label}{labelExtra}
+                        {label}{labelExtra}
                     </Typography>
                     <Typography variant={'body2'}>
                         {selectedValue ? selectedValue : options[this.state.selectedIndex].label}

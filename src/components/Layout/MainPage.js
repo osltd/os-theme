@@ -4,10 +4,8 @@ import {Grid,} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
-  root:{}
+    root: {}
 });
-
-
 
 
 class FeedsOverview extends React.Component {

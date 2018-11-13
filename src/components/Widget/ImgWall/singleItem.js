@@ -6,9 +6,9 @@ import ListItem from '@material-ui/core/ListItem';
 const styles = theme => ({
     root: {
         overflow: 'auto',
-        maxHeight:'500px',
+        maxHeight: '500px',
     }, img: {
-        maxWidth:'200px',
+        maxWidth: '200px',
 
     }
 });

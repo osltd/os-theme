@@ -42,14 +42,13 @@ class SimpleSlider extends React.Component {
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
-            autoplay: false,
-            autoplaySpeed: 50,
+            autoplay: true,
+            autoplaySpeed: 5000,
 
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
         const {data, classes} = this.props
-        console.log('gg')
         return (
             data[0] ?
                 <Slider {...settings} className={classes.root}>
@@ -59,12 +58,12 @@ class SimpleSlider extends React.Component {
                                 return <div key={i}>
 
                                     <Grid container alignItems={'center'} style={{
-                                        backgroundImage: 'url("' + n.sections[0].medias[0].url + '")',
+                                        backgroundImage: 'url("' + n.url + '")',
                                     }} className={classes.img}>
-                                        <Grid item lg={4}>
+                                        {n.title && <Grid item lg={4}>
                                             <Typography variant="display4" className={classes.title}
-                                                        gutterBottom> {n.sections[0].title}</Typography>
-                                        </Grid>
+                                                        gutterBottom> {n.title}</Typography>
+                                        </Grid>}
                                     </Grid>
                                 </div>
                             }

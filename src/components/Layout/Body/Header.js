@@ -3,24 +3,23 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
-import withWidth,{isWidthUp} from '@material-ui/core/withWidth';
-import {Link} from 'react-router-dom'
+
 const styles = theme => ({
 
     root: {
-        marginBottom:'50px',
-        padding:'60px 200px',
+        marginBottom: '50px',
+        padding: '60px 200px',
         height: '100px',
         width: '100%',
-        background:'#f7f7f7',
+        background: '#f7f7f7',
     },
-    title:{
-        textTransform:'uppercase',
-fontWeight:'700',
+    title: {
+        textTransform: 'uppercase',
+        fontWeight: '700',
     }
     ,
-    route:{
-        textTransform:'uppercase',
+    route: {
+        textTransform: 'uppercase',
 
     }
 
@@ -34,16 +33,16 @@ class Header extends React.Component {
     }
 
     render() {
-        const {classes, title, route,width} = this.props;
-            return <Grid container className={classes.root} alignItems={'center'} justify={'space-between'}>
-                <Grid item>
+        const {classes, title, route} = this.props;
+        return <Grid container className={classes.root} alignItems={'center'} justify={'space-between'}>
+            <Grid item>
                 <Typography variant={'display1'}
                             className={classes.title} color={'primary'}>{title}</Typography>
-                </Grid>
-                <Grid >
-                <Typography variant={'title'}   className={classes.route} color={'secondary'}>{route}</Typography>
-                </Grid>
             </Grid>
+            <Grid>
+                <Typography variant={'title'} className={classes.route} color={'secondary'}>{route}</Typography>
+            </Grid>
+        </Grid>
     }
 }
 

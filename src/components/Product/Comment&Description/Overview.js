@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({}
 class Overview extends React.Component {
 
     render() {
-        const {classes,content} = this.props
+        const {classes, content} = this.props
         return (
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
@@ -51,7 +51,7 @@ class Overview extends React.Component {
                             <CommentForm/>
                         </Fragment> : <Description
 
-content={content}
+                            content={content}
 
                         />
 

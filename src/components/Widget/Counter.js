@@ -7,15 +7,15 @@ const styles = theme => {
     return ({
         root: {},
         operator: {
-            padding:'10px',
+            padding: '10px',
             cursor: 'pointer',
             border: '1px solid ' + theme.palette.secondary.light,
 
-        MozUserSelect: '-moz-none',
-    KhtmlUserSelect: 'none',
-    WebkitUserSelect: 'none',
-    OUserSelect: 'none',
-    userSelect: 'none',
+            MozUserSelect: '-moz-none',
+            KhtmlUserSelect: 'none',
+            WebkitUserSelect: 'none',
+            OUserSelect: 'none',
+            userSelect: 'none',
 
         }
     });
@@ -47,24 +47,24 @@ class Counter extends React.Component {
                     <Typography variant={'title'}
                                 className={classes.operator}
 
-                    onClick={() => this.handleChange(number > 0 ? (number - 1) : 0)}>-
-                </Typography>
-            </Grid>
-        <Grid item>
-            <Typography variant={'title'} className={classes.operator}
-            >
-                {number}
-            </Typography>
-        </Grid>
-        <Grid item>
-            <Typography variant={'title'}
-                        className={classes.operator}
+                                onClick={() => this.handleChange(number > 0 ? (number - 1) : 0)}>-
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={'title'} className={classes.operator}
+                    >
+                        {number}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={'title'}
+                                className={classes.operator}
 
-                        onClick={() => this.handleChange(number + 1)}>+
-            </Typography>
-        </Grid>
-    </Grid>
-    )
+                                onClick={() => this.handleChange(number + 1)}>+
+                    </Typography>
+                </Grid>
+            </Grid>
+        )
     }
 }
 

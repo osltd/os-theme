@@ -22,7 +22,7 @@ const styles = theme => ({
     }, icon: {
 
         '&:before': {
-            fontSize:'30px',
+            fontSize: '30px',
             color: 'white',
         }
     }

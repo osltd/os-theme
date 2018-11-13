@@ -1,13 +1,11 @@
 import React from 'react';
-import {Grid,Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
-import agent from "../../agent";
-import {INIT_FEEDS} from "../../constants/actionType";
 import {refactorParaLength} from "../../api/ApiUtils";
 
 const styles = theme => {
@@ -32,9 +30,7 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({
-
-}
+const mapDispatchToProps = dispatch => ({}
 )
 
 class ResponsiveDialog extends React.Component {
@@ -44,13 +40,13 @@ class ResponsiveDialog extends React.Component {
         const {classes} = this.props
         return (
 
-            <Grid container justify={'center'} >
+            <Grid container justify={'center'}>
                 <Grid item xs={12}>
                     <Header
                         title={'BLOG'} route={'HOME/BLOG'}
                     />
                 </Grid>
-                <Grid item container lg={10 } spacing={16}>
+                <Grid item container lg={10} spacing={16}>
                     <Grid item md={3} xs={12}>
                         <List
                             data={this.props.feeds}
@@ -69,10 +65,13 @@ class ResponsiveDialog extends React.Component {
                         {this.props.feeds && this.props.feeds.map((n, i) =>
                             <Grid item sm={6} xs={12} key={i}>
                                 <FeedOverviewBox
-                                    src={n.sections && n.sections.find(section=>!!section.medias[0])?n.sections.find(section=>section.medias[0]).medias[0].url:
-                                        'https://www.freeiconspng.com/uploads/no-image-icon-4.png'  }                                  subTitle={refactorParaLength(n.sections[0].description)}
+                                    id={n.id}
+
+                                    src={n.sections && n.sections.find(section => !!section.medias[0]) ? n.sections.find(section => section.medias[0]).medias[0].url :
+                                        'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
+                                    subTitle={refactorParaLength(n.sections[0].description)}
                                     title={n.sections[0].title}
-                                    author={n.authors[0].name.first +' '+  n.authors[0].name.last}
+                                    author={n.authors[0].name.first + ' ' + n.authors[0].name.last}
                                     postDate={n.postDate}
                                     comments={0}
                                 />

@@ -8,13 +8,13 @@ const styles = theme => ({
     root: {
         height: '400px',
         border: '10px solid white',
-backgroundSize:'cover',
-        backgroundPosition:'center',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         backgroundColor: '#d3dbe2'
     },
-    title:{
-        color:'white',
-        fontWeight:'900',
+    title: {
+        color: 'white',
+        fontWeight: '900',
     }
 });
 

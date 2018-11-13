@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Input,Grid,Typography} from '@material-ui/core';
+import {Grid, Input, Typography} from '@material-ui/core';
 
 const styles = theme => ({
     input: {
@@ -34,7 +34,7 @@ const currencies = [
 
 class OutlinedTextFields extends React.Component {
     state = {
-     name:'',
+        name: '',
     };
 
     handleChange = name => event => {
@@ -44,21 +44,20 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const {classes,placeholder,multiline,title} = this.props;
+        const {classes, placeholder, multiline, title} = this.props;
 
         return (<Grid container direction={'column'}>
                 <Typography variant={'subheading'}>{title}</Typography>
                 <Input
                     value={this.state.name}
                     className={classes.input}
-                    rows={multiline?5:1}
+                    rows={multiline ? 5 : 1}
                     onChange={this.handleChange('name')}
                     disableUnderline={true}
                     placeholder={placeholder}
                     multiline={!!multiline}
                 />
             </Grid>
-
 
 
         );

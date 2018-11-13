@@ -1,32 +1,26 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
-import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
-import List from '../Widget/List'
-import SearchBar from '../Widget/SearchBar/original'
-import {refactorParaLength} from "../../api/ApiUtils";
 import NotFound from '../Layout/NotFound'
-const styles = theme => {
-    console.log(theme)
-    return (
-        {
-            productCategory: {
-                backgroundColor: theme.palette.background.paper
-            },
-            toolBar: {
-                backgroundColor: ''
-            },
-        })
+import Slick from '../Widget/Slick/SingleItem'
+import moment from 'moment'
+import List from '../Widget/List'
 
-}
+const styles = theme => (
+    {
+        productCategory: {
+            backgroundColor: theme.palette.background.paper
+        },
+        toolBar: {
+            backgroundColor: ''
+        },
+    })
 
 
 const mapStateToProps = state => ({
-    products: state.product.products,
     feeds: state.feed.feeds,
-    category: state.category.category,
 });
 
 
@@ -39,53 +33,66 @@ class ResponsiveDialog extends React.Component {
 
     render() {
 
-        const {classes} = this.props
+        const {
+            classes
+
+
+        } = this.props
         if (this.hasValidFeed()) {
-
+            const feed = this.props.feeds.find(n => n.id.toString() === this.props.match.params.id)
             return (
+                <Grid container justify={'center'} className={classes.root}>
+                    <Header
+                        title={feed.sections[0].title}
+                        route={'/'}
 
-                <Grid container justify={'center'}>
-                    <Grid item xs={12}>
-                        <Header
-                            title={'BLOG'} route={'HOME/BLOG'}
-                        />
-                    </Grid>
-                    <Grid item container lg={10} spacing={16}>
-                        <Grid item md={3} xs={12}>
-                            <List
-                                data={this.props.feeds}
-                                title={'PRODUCT CATEGORIES'}
-                            />
-                            <Typography
-
-                                variant={'title'}
-
-                            >
-                                SEARCH
-                            </Typography>
-                            <SearchBar/>
+                    />
+                    <Grid item container spacing={16} xs={12} lg={10}>
+                        <Grid item xs={12} md={3}>
+                            <List/>
                         </Grid>
-                        <Grid item container md={9} xs={12}>
-                            {this.props.feeds && this.props.feeds.map((n, i) =>
-                                <Grid item sm={6} xs={12} key={i}>
-                                    <FeedOverviewBox
-                                        src={n.sections && n.sections.find(section => !!section.medias[0]) ? n.sections.find(section => section.medias[0]).medias[0].url :
-                                            'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
-                                        subTitle={refactorParaLength(n.sections[0].description)}
-                                        title={n.sections[0].title}
-                                        author={n.authors[0].name.first + ' ' + n.authors[0].name.last}
-                                        postDate={n.postDate}
-                                        comments={0}
-                                    />
-                                </Grid>)}
+                        <Grid item container xs={12} md={9}>
+                            <Grid item container direction={'row'} alignItems={'center'} spacing={16} xs={12}>
+                                <Grid item>
+                                    <span className={'icon-quill'}/>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant={'subheading'}>
+                                        {feed.authors[0].name.first + ' ' + feed.authors[0].name.last}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <span className={'icon-calendar'}/>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant={'subheading'}>
+                                        {moment(feed.time).format('MMM Do YYYY')}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                            {
+                                feed.sections.map((n, i) =>
+                                    <Fragment>
+                                        <Grid item xs={10} key={i}>
+                                            <Slick
+                                                data={feed.sections[i].medias.map(n => ({url: n.url,}))}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant={'body1'}>
+                                                {n.description}
+                                            </Typography>
+                                        </Grid>
+                                    </Fragment>
+                                )
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
-
             )
         } else {
             return <NotFound
-                msg={"product doesn't exist"}
+                msg={"article doesn't exist"}
 
 
             />

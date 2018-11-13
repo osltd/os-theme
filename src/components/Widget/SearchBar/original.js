@@ -13,7 +13,7 @@ const styles = theme => ({
     textField: {
         border: '1px solid ' + theme.palette.primary.dark,
         borderRadius: '5px',
-        padding:'5px 0px',
+        padding: '5px 0px',
     }, icon: {
         padding: '2px',
         '&:before': {

@@ -6,7 +6,7 @@ import SocialIcon from '../Widget/SocialIcon'
 import {CirclePicker} from 'react-color';
 import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
-import NotFound from '../Layout/NotFound'
+
 const styles = theme => {
     console.log(theme)
     return (
@@ -42,8 +42,8 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
 
     render() {
-        const {classes,name,regPrice, promotePrice,description} = this.props
-            return (
+        const {classes, name, regPrice, promotePrice, description} = this.props
+        return (
 
             <Grid container direction={'column'} spacing={40}>
                 <Grid item container spacing={16}>
@@ -53,12 +53,15 @@ class ResponsiveDialog extends React.Component {
                         </Typography>
                     </Grid>
                     <Grid item container direction={'row'}>
-                        {promotePrice?<Fragment>
-                            <Typography variant={'headline'} className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
-                            <Typography component={'del'} variant={'subheading'} color={'secondary'}>$ {formatMoney(regPrice)}</Typography>
+                        {promotePrice ? <Fragment>
+                                <Typography variant={'headline'}
+                                            className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
+                                <Typography component={'del'} variant={'subheading'}
+                                            color={'secondary'}>$ {formatMoney(regPrice)}</Typography>
 
-                        </Fragment>:
-                            <Typography variant={'headline'} className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+                            </Fragment> :
+                            <Typography variant={'headline'}
+                                        className={classes.price}>$ {formatMoney(regPrice)}</Typography>
                         }
                     </Grid>
                     <Grid item container direction={'row'} alignItems={'flex-end'}>

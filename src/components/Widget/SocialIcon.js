@@ -6,13 +6,13 @@ import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
-        padding:'12px',
+        padding: '12px',
         border: '1px solid ' + theme.palette.secondary.main,
         margin: '3px',
         borderRadius: '5px',
         cursor: 'pointer',
         display: 'inline-block',
-        fontSize:'24px',
+        fontSize: '24px',
     },
     reddit: {
 
@@ -52,7 +52,7 @@ const styles = theme => ({
         },
         '&:hover': {
             backgroundColor: '#3c16ff'
-,
+            ,
             '&:before': {
                 color: 'white',
             }
@@ -105,7 +105,7 @@ class OutlinedInputAdornments extends React.Component {
     render() {
         const {classes, type} = this.props;
 
-        return <div className={classNames( classes[type], classes.root,this.getIconType(type),)}/>
+        return <div className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
 
     }
 }

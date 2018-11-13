@@ -13,10 +13,10 @@ const styles = theme => ({
         maxHeight: '400px',
         maxWidth: '300px',
     },
-    binIcon:{
-        '&:before':{
-            color:'#ff8173',
-            float:'right',
+    binIcon: {
+        '&:before': {
+            color: '#ff8173',
+            float: 'right',
         }
 
     }
@@ -68,7 +68,7 @@ class DropDownList extends React.Component {
                                 <Typography variant={'caption'}>
                                     3 X $77.00
                                 </Typography>
-                                <span className={classes.binIcon + ' '+'icon-bin'} />
+                                <span className={classes.binIcon + ' ' + 'icon-bin'}/>
                             </Grid>
                         </Grid>
 

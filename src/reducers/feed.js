@@ -8,9 +8,8 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case INIT_FEEDS:
-        {
-            return{
+        case INIT_FEEDS: {
+            return {
                 ...state,
                 feeds: action.payload,
             }
