@@ -32,15 +32,18 @@ class FeedsWall extends React.Component {
 
     render() {
         const {classes, data,} = this.props;
-        console.log(data)
         return (data.length) ? <Grid container alignItems={'stretch'} className={classes.root}>
             <Grid item md={6}>
                 <BigFeedBox
+                    link={'/feed/'+data[0].id}
+
                     backgroundImg={data[0].sections[0].medias[0].url}
-                    title={'hot trends'}
+                    title={data[0].sections[0].title}
 
                 />
                 <SmallFeedBox
+                    link={'/feed/'+data[1].id}
+
                     left={<img
                         style={{width: '100%', height: '180px'}}
                         src={data[1].sections[0].medias[0].url}
@@ -49,44 +52,32 @@ class FeedsWall extends React.Component {
                         <Typography
                             variant={'subheading'}
                         >
-                            NEW FROM VANS
-                        </Typography>
-                        <Typography
-                            variant={'body2'}
-                        >
-                            The Sk8-Hi MTE revamps
+                            {data[1].sections[0].title}      </Typography>
 
-                            the legendary Vans high to
-                        </Typography>
                     </Fragment>}
 
                 />
             </Grid>
             <Grid item md={6}>
                 <SmallFeedBox
+                    link={'/feed/'+data[2].id}
+
                     right={<img
                         style={{width: '100%', height: '180px'}}
                         src={data[2].sections[0].medias[0].url}
                     />}
-                    left={<Fragment>
-                        <Typography
+                    left=
+                        {(<Typography
                             variant={'subheading'}
                         >
-                            NEW FROM VANS
-                        </Typography>
-                        <Typography
-                            variant={'body2'}
-                        > The Sk8-Hi MTE revamps
+                            {data[2].sections[0].title}          </Typography>)
 
-                            the legendary Vans high to
-                        </Typography>
-                    </Fragment>}
+                    }
 
                 />
                 <BigFeedBox
-                    title={
-                        "men's fleece"
-                    }
+                    link={'/feed/'+data[2].id}
+                    title=    {data[2].sections[0].title}
                     backgroundImg={data[2].sections[0].medias[0].url}
 
                 />

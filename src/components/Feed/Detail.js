@@ -7,6 +7,9 @@ import NotFound from '../Layout/NotFound'
 import Slick from '../Widget/Slick/SingleItem'
 import moment from 'moment'
 import List from '../Widget/List'
+import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
+import {FEED_EDIT_FILTER} from "../../constants/actionType";
+import {withRouter} from "react-router-dom";
 
 const styles = theme => (
     {
@@ -24,7 +27,17 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+    editFeedFilter: (key, value) => dispatch({
+        type: FEED_EDIT_FILTER,
+        payload: {
+            key: key,
+            value: value,
+        },
+    }),
+
+
+    }
 )
 
 class ResponsiveDialog extends React.Component {
@@ -43,13 +56,18 @@ class ResponsiveDialog extends React.Component {
             return (
                 <Grid container justify={'center'} className={classes.root}>
                     <Header
-                        title={feed.sections[0].title}
+                        title={refactorTextLength(feed.sections[0].title)}
                         route={'/'}
 
                     />
                     <Grid item container spacing={16} xs={12} lg={10}>
                         <Grid item xs={12} md={3}>
-                            <List/>
+                            <List
+                                data={getTagsCountsArray(this.props.feeds, (tag, number) => {
+                                    this.props.editFeedFilter('tag', tag)
+                                })}
+                                link={'/feed'}
+                                title={'FEED CATEGORIES'}/>
                         </Grid>
                         <Grid item container xs={12} md={9}>
                             <Grid item container direction={'row'} alignItems={'center'} spacing={16} xs={12}>

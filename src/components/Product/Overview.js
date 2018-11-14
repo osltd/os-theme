@@ -36,9 +36,6 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
 
-    componentDidMount() {
-    }
-
     render() {
         const {classes} = this.props
         if (this.hasValidProduct()) {
@@ -70,9 +67,7 @@ class ResponsiveDialog extends React.Component {
 
                         />
                     </Grid>
-
                 </Grid>
-
                 <Grid item xs={10} container>
 
                     <CommentDescription

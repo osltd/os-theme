@@ -2,9 +2,7 @@ import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 
-const styles = props => {
-    console.log(props)
-    return ({
+const styles = props => ({
         root: {
             padding: '0 10px 0 10px',
         },
@@ -30,7 +28,6 @@ const styles = props => {
     })
 
 
-}
 
 
 class ResponsiveDialog extends React.Component {

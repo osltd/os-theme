@@ -9,7 +9,6 @@ import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 
 const styles = theme => {
-    console.log(theme)
     return (
         {
             productCategory: {

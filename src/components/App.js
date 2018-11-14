@@ -16,6 +16,8 @@ import '../constants/icon/style.css'
 import {connect} from "react-redux";
 import {INIT_FEEDS, INIT_PRODUCTS} from "../constants/actionType";
 import agent from '../agent'
+import {isWidthUp} from "@material-ui/core/withWidth/index";
+import withWidth from "@material-ui/core/withWidth/index";
 
 const mapStateToProps = state => ({});
 
@@ -53,7 +55,8 @@ class App extends React.Component {
                     <ScrollToTop>
                         <ErrorBoundary>
                             <Header/>
-                            <div style={{paddingTop: '64px'}}>
+                            <div style={(isWidthUp('md', this.props.width)) ?
+                                {paddingTop: '64px'} : null}>
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/2'} component={mainPage2}/>
                                 <Route exact path={'/shop'} component={Shop}/>
@@ -72,4 +75,4 @@ class App extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(App))

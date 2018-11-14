@@ -60,11 +60,9 @@ class ResponsiveDialog extends React.Component {
         return (
             <Grid container className={classes.root} direction={'column'}>
                 <img src={src}
-
                      onClick={() => this.props.history.push('/shop/' + id)}
-
                      className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{category}</Typography>
+                <Typography variant={'headline'} color={'primary'}>{category && category.join(',')}</Typography>
                 <Typography variant={'title'}
                             onClick={() => this.props.history.push('/shop/' + id)}
                             className={classes.name}

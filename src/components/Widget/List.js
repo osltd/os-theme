@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import classNames from 'classnames'
+import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -22,6 +23,10 @@ const styles = theme => ({
     },
     selected: {
         backgroundColor: theme.palette.secondary.light,
+    },
+    list:{
+        maxHeight:'300px',
+        overflow:'auto',
     }
 });
 const dummyData = ['DECOR & FURNITURE (19)',
@@ -32,20 +37,18 @@ const dummyData = ['DECOR & FURNITURE (19)',
     'TOY, KIDS & BABY']
 
 class SelectedListItem extends React.Component {
-    state = {
-        selectedIndex: 1,
-    };
 
-    handleListItemClick = (event, index) => {
-        console.log(index)
-        this.setState({selectedIndex: index});
+    handleListItemClick = (event, index,cb) => {
+        cb()
+        if(this.props.link){
+            this.props.history.push(this.props.link)
+        }
     };
 
     render() {
-        const {classes, data, title} = this.props;
+        const {classes, data, title,selectedValue} = this.props;
 
-        return (
-            <Fragment>
+        return (data?  <Fragment>
                 <Typography
 
                     variant={'title'}
@@ -54,18 +57,23 @@ class SelectedListItem extends React.Component {
                     {title}
                 </Typography>
 
-                <List component="nav">
-                    {dummyData.map((n, i) =>
+                <List component="nav" className={classes.list}>
+
+                    {data.map((n, i) =>
                         <ListItem
+                            key={i}
                             button
-                            className={classNames(classes.listItem, (this.state.selectedIndex === i) ? classes.selected : null)}
-                            onClick={event => this.handleListItemClick(event, i)}>
-                            <ListItemText primary={n}/>
+                            className={classNames(classes.listItem, (selectedValue === n.value ||
+                                (selectedValue===null && i===0)
+                            ) ? classes.selected : null)}
+                            onClick={event => this.handleListItemClick(event, i,n.onClick)}>
+                            <ListItemText primary={n.label}
+                            />
                         </ListItem>
                     )}
 
                 </List>
-            </Fragment>
+            </Fragment>:null
 
         );
     }
@@ -75,4 +83,4 @@ SelectedListItem.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SelectedListItem);
+export default withRouter(withStyles(styles)(SelectedListItem))

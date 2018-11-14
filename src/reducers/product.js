@@ -1,20 +1,22 @@
 import {
     EDIT_PRODUCT_DETAIL,
     EDIT_PRODUCT_VIEW_MODE,
-    FEED_EDIT_SORT,
     INIT_PRODUCTS,
-    PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT
+    PRODUCT_EDIT_FILTER,
+    PRODUCT_EDIT_SORT
 } from "../constants/actionType";
 
 
 const defaultState = {
     products: [],
     viewMode: 'form',
-    filter:{
+    filter: {
 
+        tag:null,
     },
-    sort:{
-
+    sort: {
+        sortBy: null,
+        page: '1 - 3',
     }
     ,
     detail: {

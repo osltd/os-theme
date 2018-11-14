@@ -31,21 +31,17 @@ class OutlinedInputAdornments extends React.Component {
         showPassword: false,
     };
 
-    handleChange = prop => event => {
-        this.setState({[prop]: event.target.value});
-    };
-
 
     render() {
-        const {classes} = this.props;
+        const {classes,placeholder,value,onChange} = this.props;
 
         return <Input
             fullWidth={true}
             className={classNames(classes.textField,)}
             variant={'filled'}
-            placeholder={'type keyword'}
-            value={this.state.weight}
-            onChange={this.handleChange('weight')}
+            placeholder={placeholder}
+            value={value?value:''}
+            onChange={e=>onChange(e.target.value)}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
 

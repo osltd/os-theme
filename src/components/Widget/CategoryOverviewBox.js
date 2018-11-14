@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -93,11 +94,12 @@ class ButtonBases extends React.Component {
         return (
 
             <Grid container alignItems={'center'} spacing={16} justify={'center'} className={classes.root}>
-                {category.map(image => (
-                    <Grid item sm={10} md={6} lg={4}
+                {category.map((image,i) => (
+                    <Grid
+                        key={i}
+                        item sm={10} md={6} lg={4}
                           container
-                          component={Link}
-                          to={'/shop'}
+                        onClick={()=>this.props.history.push('/shop')}
                           className={classes.items}
 
                     >
@@ -123,7 +125,7 @@ class ButtonBases extends React.Component {
                             <span className={classes.imageButton}>
             <Typography
                 component="span"
-                variant="subtitle"
+                variant="subheading"
                 color="inherit"
                 className={classes.imageTitle}
             >
@@ -143,4 +145,4 @@ ButtonBases.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonBases);
+export default withRouter(withStyles(styles)(ButtonBases))

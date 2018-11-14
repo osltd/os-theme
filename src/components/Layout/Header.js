@@ -18,6 +18,7 @@ const styles = theme => ({
     },
     root: {
         backgroundColor: 'white',
+        borderBottom:'1px solid '+ theme.palette.secondary.light,
     },
     appBar: {
         backgroundColor: 'white',
@@ -99,12 +100,12 @@ class Header extends React.Component {
     render() {
         const {classes, width} = this.props;
         const {value} = this.state
-        if (isWidthUp('sm', width)) {
+        if (isWidthUp('md', width)) {
 
             return (
                 <AppBar position="fixed" className={classes.appBar}>
-                    <Grid container justify={'space-between'}>
-                        <Grid item sm={2}>
+                    <Grid container alignItems={'center'} justify={'space-between'}>
+                        <Grid item >
                             <Button
 
                                 icon={'icon-home'}
@@ -112,7 +113,6 @@ class Header extends React.Component {
                                 value={'main'}
                             />
                         </Grid>
-                        <Grid item sm={4} spacing={'16'} container alignItems={'center'} justify={'center'}>
                             <Grid item>
                                 <Button
                                     icon2={'icon-circle-down'}
@@ -137,7 +137,6 @@ class Header extends React.Component {
                                     value={'feed'}
                                 />
                             </Grid>
-                        </Grid>
                         <Grid item sm={2}>
                             <div className={classes.grow}/>
                             <div className={classes.search}>
@@ -180,9 +179,9 @@ class Header extends React.Component {
 
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
-            <BottomNavigationAction label="Product" value="Product"
-                                    onClick={() => this.props.history.push('/shop/17')}
-                                    icon={<span className={classNames(classes.icon, 'icon-stack')}/>}/>
+            <BottomNavigationAction label="Feed" value="Feed"
+                                    onClick={() => this.props.history.push('/feed')}
+                                    icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
         </BottomNavigation>
 
 

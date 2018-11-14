@@ -8,7 +8,6 @@ import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
 
 const styles = theme => {
-    console.log(theme)
     return (
         {
             productCategory: {

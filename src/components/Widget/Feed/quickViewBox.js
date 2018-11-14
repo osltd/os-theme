@@ -3,7 +3,6 @@ import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 
 const styles = props => {
-    console.log(props)
     return ({
         root: {
             padding: '0 10px 0 10px',
@@ -68,7 +67,7 @@ class ResponsiveDialog extends React.Component {
 
                 <img src={src} className={classes.cf6_image}/>
                 <Typography variant={'headline'} color={'primary'}>{title}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{subTitle}{subTitle}{subTitle}{subTitle}</Typography>
+                <Typography variant={'title'} color={'secondary'}>{subTitle}</Typography>
 
             </Grid>
         );

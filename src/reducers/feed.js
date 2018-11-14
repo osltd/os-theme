@@ -4,11 +4,11 @@ import {FEED_EDIT_FILTER, FEED_EDIT_SORT, INIT_FEEDS} from "../constants/actionT
 const defaultState = {
     feeds: null,
     filter: {
-        tags: [],
-
+        tag: null,
+        keyword: null,
     },
     sort: {
-        pages: 1,
+        pages: null,
         sortBy: null,
 
     }

@@ -6,10 +6,11 @@ import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
-import {refactorParaLength} from "../../api/ApiUtils";
+import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
+import {FEED_EDIT_FILTER} from "../../constants/actionType";
+import _ from 'lodash'
 
 const styles = theme => {
-    console.log(theme)
     return (
         {
             productCategory: {
@@ -24,22 +25,39 @@ const styles = theme => {
 
 
 const mapStateToProps = state => ({
-    products: state.product.products,
     feeds: state.feed.feeds,
-    category: state.category.category,
+    sort: state.feed.sort,
+    filter: state.feed.filter,
+
 });
 
 
 const mapDispatchToProps = dispatch => ({
+        editFeedFilter: (key, value) => dispatch({
+            type: FEED_EDIT_FILTER,
+            payload: {
+                key: key,
+                value: value,
+            },
+        }),
 
     }
 )
 
 class ResponsiveDialog extends React.Component {
 
+    sortData = () => (this.props.feeds) ?
+        Array.from(this.props.feeds).filter(n =>
+            (
+                ((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) &&
+                ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true)
+            )
+        ) : null
+
 
     render() {
         const {classes} = this.props
+        const feeds = this.sortData()
         return (
 
             <Grid container justify={'center'}>
@@ -51,26 +69,30 @@ class ResponsiveDialog extends React.Component {
                 <Grid item container lg={10} spacing={16}>
                     <Grid item md={3} xs={12}>
                         <List
-                            data={this.props.feeds}
-                            title={'PRODUCT CATEGORIES'}
-                        />
+                            data={getTagsCountsArray(this.props.feeds, (tag, number) => {
+                                this.props.editFeedFilter('tag', tag)
+                            })}
+                            selectedValue={this.props.filter.tag}
+                            title={'FEED CATEGORIES'}/>
                         <Typography
-
                             variant={'title'}
-
                         >
                             SEARCH
                         </Typography>
-                        <SearchBar/>
+                        <SearchBar
+                            value={this.props.filter.keyword}
+                            onChange={value => this.props.editFeedFilter('keyword', value)}
+                            placeholder={'type keywords'}
+                        />
                     </Grid>
-                    <Grid item container md={9} xs={12}>
-                        {this.props.feeds && this.props.feeds.map((n, i) =>
+                    <Grid item container md={9} spacing={32} xs={12}>
+                        {feeds && feeds.map((n, i) =>
                             <Grid item sm={6} xs={12} key={i}>
                                 <FeedOverviewBox
                                     id={n.id}
 
                                     src={n.sections && n.sections.find(section => !!section.medias[0]) ? n.sections.find(section => section.medias[0]).medias[0].url :
-                                        'https://www.freeiconspng.com/uploads/no-image-icon-4.png'}
+                                        'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
                                     subTitle={refactorParaLength(n.sections[0].description)}
                                     title={n.sections[0].title}
                                     author={n.authors[0].name.first + ' ' + n.authors[0].name.last}
