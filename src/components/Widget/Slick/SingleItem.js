@@ -23,7 +23,7 @@ const style = theme => ({
         color: 'white',
         fontSize: '40px',
         fontWeight: '900',
-        textAlign:'center',
+        textAlign: 'center',
 
     }, subTitle: {
 
@@ -60,10 +60,10 @@ class SimpleSlider extends React.Component {
 
                                     <Grid container
                                           alignItems={'center'}
-                                          justify={'center' }
+                                          justify={'center'}
                                           style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
                                               backgroundImage: 'url("' + n.url + '")',
-height:'100vh',
+                                              height: '100vh',
                                           })}
                                           onClick={() => n.link ? this.props.history.push(n.link) : null}
 

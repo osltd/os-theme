@@ -3,31 +3,29 @@ import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 
 const styles = props => ({
-        root: {
-            padding: '0 10px 0 10px',
-        },
-        img: {
-            width: '100%',
-            maxHeight: '255px !important',
-        },
-        cf6_image: {
-            width: '100%',
-            maxHeight: '255px !important',
-            transition: 'background-image 1s ease-in-out',
-            backgroundImage: 'url(' + props + ')',
-            '&:hover': {
-                backgroundImage: 'url(' + props.src + ')',
-            }
-        },
-
-        oldPrice: {},
-        price: {
-            fontWeight: '900',
+    root: {
+        padding: '0 10px 0 10px',
+    },
+    img: {
+        width: '100%',
+        maxHeight: '255px !important',
+    },
+    cf6_image: {
+        width: '100%',
+        maxHeight: '255px !important',
+        transition: 'background-image 1s ease-in-out',
+        backgroundImage: 'url(' + props + ')',
+        '&:hover': {
+            backgroundImage: 'url(' + props.src + ')',
         }
+    },
 
-    })
+    oldPrice: {},
+    price: {
+        fontWeight: '900',
+    }
 
-
+})
 
 
 class ResponsiveDialog extends React.Component {

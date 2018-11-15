@@ -4,14 +4,19 @@ import {Grid, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import SearchBar from '../Widget/SearchBar/email'
 import FooterList from '../Widget/FooterList'
+import Tag from '../Widget/Tags/Tag'
 
 const styles = theme => ({
     root: {
         width: '100%',
-        padding: '0 100px 20px 100px',
+        padding: '50px 100px 100px 100px',
         marginTop: '30px',
         backgroundColor: 'black',
         color: 'white',
+
+    },
+    emailBar:{
+        marginBottom:'30px',
     }
 });
 
@@ -20,15 +25,15 @@ class Footer extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container justify={'space-between'} className={classes.root}>
-                <Grid item container lg={12} direction={'column'} alignItems={'center'} justify={'center'}>
+            <Grid container justify={'space-between'} spacing={16} className={classes.root}>
+                <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar} alignItems={'center'} justify={'center'}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
+                        <Typography variant={'subheading'} color={'inherit'}>
                             NEWSLETTER
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'subheading'} color={'inherit'}>
+                        <Typography variant={'body1'} color={'inherit'}>
                             Be the first to hear about new styles and offers and see how you’ve helped.
                         </Typography>
                     </Grid>
@@ -36,46 +41,75 @@ class Footer extends React.Component {
                         <SearchBar/>
                     </Grid>
                 </Grid>
-                <Grid item sm={4}>
-                    <Typography variant={'display1'} color={'inherit'}>
+                <Grid item sm={3} container direction={'column'} spacing={8}>
+                    <Grid item>
+                        <Typography variant={'title'} color={'inherit'}>
 
-                        THE BELL</Typography>
-                    <Typography variant={'body2'} color={'inherit'}>
+                            THE BELL</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'caption'} color={'inherit'}>
 
-                        We are a team of designers and developers that create quality Wordpress, Magento, Prestashop,
-                        Opencarte themes and provided premium and dedicated support to our products.
+                            We are a team of designers and developers that create quality Wordpress, Magento,
+                            Prestashop,
+                            Opencarte themes and provided premium and dedicated support to our products.
 
-                        205 Arapahoe St, Schoenchen, KS 69696
-                    </Typography>
-                    <Typography variant={'title'} color={'inherit'}>
+                            205 Arapahoe St, Schoenchen, KS 69696
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'subheading'} color={'inherit'}>
 
-                        Email: your@example.com
-                    </Typography>
-                    <Typography variant={'title'} color={'inherit'}>
+                            Email: your@example.com
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'subheading'} color={'inherit'}>
 
-                        Phone: +1 123-456-6789
-                    </Typography>
+                            Phone: +1 123-456-6789
+                        </Typography>
+                    </Grid>
                 </Grid>
-                <Grid item>
+                <Grid item xs={3} container direction={'column'} spacing={8}>
+                    <Grid item >
                     <Typography variant={'title'} color={'inherit'}>
-
                         USEFUL LINKS</Typography>
-                    <FooterList/>
+                    </Grid>
+                    <Grid item >
+                        <FooterList/></Grid>
                 </Grid>
 
 
-                <Grid item>
-                    <Typography variant={'title'} color={'inherit'}>
-                        FIND US ON</Typography>
-                    <FooterList/>
+                <Grid item xs={3} container  direction={'column'} spacing={8}>
+                    <Grid item>
+                        <Typography variant={'title'} color={'inherit'}>
+                            FIND US ON</Typography>
+                    </Grid>
+                    <Grid item>
+                        <FooterList/>
+                    </Grid>
 
                 </Grid>
-                <Grid item>
-                    <Typography variant={'title'} color={'inherit'}>
+                <Grid item xs={3} container direction={'column'} spacing={8}>
+                    <Grid item>
+                        <Typography variant={'title'} color={'inherit'}>
 
-                        TAGS</Typography>
-                    <FooterList/>
+                            TAGS</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Tag
 
+                        value={'color'}
+                        />
+                        <Tag
+                            value={'gaming'}
+
+                        />
+                        <Tag
+                            value={'gaming'}
+
+                        />
+                    </Grid>
                 </Grid>
 
             </Grid>);

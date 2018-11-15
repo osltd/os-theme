@@ -33,15 +33,15 @@ class OutlinedInputAdornments extends React.Component {
 
 
     render() {
-        const {classes,placeholder,value,onChange} = this.props;
+        const {classes, placeholder, value, onChange} = this.props;
 
         return <Input
             fullWidth={true}
             className={classNames(classes.textField,)}
             variant={'filled'}
             placeholder={placeholder}
-            value={value?value:''}
-            onChange={e=>onChange(e.target.value)}
+            value={value ? value : ''}
+            onChange={e => onChange(e.target.value)}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
 

@@ -1,31 +1,33 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core'
+import {Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom'
-import classesNames from 'classnames'
+import classNames from 'classnames'
 
 const styles = theme => ({
     root: {
-        textDecoration: 'none',
-        padding: '3px',
-        color: theme.palette.primary.main,
-        cursor: 'pointer',
-        margin: '0 10px',
-    },
-    btnText: {
-        fontWeight: '500',
-        fontSize: '14px',
-        textTransform: 'uppercase',
-    },
-    border: {
-        border: '1px solid ' + theme.palette.primary.main,
-        borderRadius: '5px',
+        display:'inline-block',
+        borderRadius: 0,
+        padding: '10px',
+        margin: '5px',
+        fontWeight: 500,
 
-    },
-    icon: {
-        marginRight: '5px',
-        '&:before': {}
+        cursor: 'pointer',
+        color: theme.palette.primary.light,
+        background: theme.palette.secondary.light,
+
+        '&:hover': {
+            color: theme.palette.secondary.light,
+
+            background: theme.palette.primary.light,
+
+        }
+    }, selected: {
+        color: theme.palette.secondary.light,
+
+        background: theme.palette.primary.light,
+
+
     }
 });
 
@@ -50,25 +52,17 @@ class CustomButton extends React.Component {
 
     render() {
         const {
-
-            classes, link, onClick, value, icon2, icon, border
-
+            selected,
+            classes,
+            value
 
         } = this.props;
 
         return (
 
-            <Grid
-                container
+            <Typography variant={'subheading'}
+                        className={classNames(classes.root, selected ? classes.selected : null)}> {value}</Typography>
 
-                alignItems={'center'}
-                className={classesNames(classes.root, border ? classes.border : null,)}
-                onClick={onClick}
-            >
-                {
-
-                }
-            </Grid>
 
         )
     }

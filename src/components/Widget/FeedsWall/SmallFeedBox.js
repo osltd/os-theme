@@ -8,8 +8,8 @@ import {withRouter} from "react-router-dom";
 const styles = theme => ({
     root: {
         backgroundColor: '#FAFAFA',
-        cursor:'pointer',
-        marginBottom:'20px',
+        cursor: 'pointer',
+        marginBottom: '20px',
 
     },
 });
@@ -19,13 +19,13 @@ class FeedsWall extends React.Component {
 
 
     render() {
-        const {classes, left, right,link} = this.props;
+        const {classes, left, right, link} = this.props;
 
         return (
             <Grid container alignItems={'center'} className={classes.root}
 
 
-            onClick={()=>this.props.history.push(link)}
+                  onClick={() => this.props.history.push(link)}
             >
                 <Grid item container direction={'column'} justify={'flex-start'} alignItems={'center'} sm={5}>
                     {left}

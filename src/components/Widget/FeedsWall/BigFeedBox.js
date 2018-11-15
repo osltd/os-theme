@@ -11,16 +11,14 @@ const styles = theme => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: '#d3dbe2',
-        cursor:'pointer',
-        marginBottom:'20px',
+        cursor: 'pointer',
+        marginBottom: '20px',
     },
     title: {
         color: 'white',
         fontWeight: '900',
-        textAlign:'center',
-    },iAmDiv:{
-
-    }
+        textAlign: 'center',
+    }, iAmDiv: {}
 });
 
 
@@ -28,22 +26,22 @@ class FeedsWall extends React.Component {
 
 
     render() {
-        const {classes, title, backgroundImg,link} = this.props;
+        const {classes, title, backgroundImg, link} = this.props;
 
         return (
             <div className={classes.iAmDiv}>
-            <Grid container alignItems={'center'} justify={'center'} className={classes.root} style={{
-                backgroundImage: 'url("' + backgroundImg + '")',
+                <Grid container alignItems={'center'} justify={'center'} className={classes.root} style={{
+                    backgroundImage: 'url("' + backgroundImg + '")',
 
-            }}
+                }}
 
-                  onClick={()=>this.props.history.push(link)}
+                      onClick={() => this.props.history.push(link)}
 
-            >
-                <Typography variant={'display1'} className={classes.title}>
-                    {title}
-                </Typography>
-            </Grid>
+                >
+                    <Typography variant={'display1'} className={classes.title}>
+                        {title}
+                    </Typography>
+                </Grid>
             </div>
         )
     }

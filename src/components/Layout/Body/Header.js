@@ -10,7 +10,7 @@ const styles = theme => ({
 
     root: {
         marginBottom: '50px',
-        padding: '60px 200px',
+        padding: '30px 200px',
         height: '100px',
         width: '100%',
         background: '#f7f7f7',
@@ -46,12 +46,12 @@ class Header extends React.Component {
                      direction={'row'}
                      alignItems={'center'}
                      justify={'space-between'}
-                   >
-            <Grid item >
+        >
+            <Grid item>
                 <Typography variant={'display1'}
                             className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
-            <Grid item  xs={4} container >
+            <Grid item xs={4} container justify={'flex-end'}>
                 {routePath.map(
                     (n, i) =>
                         <Fragment>

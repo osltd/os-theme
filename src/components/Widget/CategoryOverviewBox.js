@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import {Link} from "react-router-dom";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
@@ -72,8 +71,8 @@ const styles = theme => ({
     },
     imageTitle: {
         fontWeight: 700,
-textTransform: 'uppercase',
-fontSize: '20PX',
+        textTransform: 'uppercase',
+        fontSize: '20PX',
         position: 'relative',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
     },
@@ -95,13 +94,13 @@ class ButtonBases extends React.Component {
         return (
 
             <Grid container alignItems={'center'} spacing={16} justify={'center'} className={classes.root}>
-                {category.map((image,i) => (
+                {category.map((image, i) => (
                     <Grid
                         key={i}
                         item sm={10} md={6} lg={4}
-                          container
-                        onClick={()=>this.props.history.push('/shop')}
-                          className={classes.items}
+                        container
+                        onClick={() => this.props.history.push('/shop')}
+                        className={classes.items}
 
                     >
                         <ButtonBase

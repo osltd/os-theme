@@ -3,7 +3,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 const style = theme => ({
     root: {
-        '&:hover':{
+        '&:hover': {
             '&:before': {
                 color: '#0f090a',
                 background: 'white',

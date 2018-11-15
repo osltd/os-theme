@@ -15,18 +15,23 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     listItem: {
-        borderBottom: '1px solid black',
-        '&:hover': {
-            backgroundColor: theme.palette.secondary.light,
-
+        borderBottom: '1px solid '+theme.palette.secondary.light,
+        '& > p':{
+            color:theme.palette.secondary.light,
+        }, '&:hover': {
+        '& > p':{
+           color:theme.palette.primary.dark,
         }
+        },
+
     },
     selected: {
-        backgroundColor: theme.palette.secondary.light,
-    },
-    list:{
-        maxHeight:'300px',
-        overflow:'auto',
+        '& > p':{
+            color:theme.palette.primary.dark,
+        }  },
+    list: {
+        maxHeight: '300px',
+        overflow: 'auto',
     }
 });
 const dummyData = ['DECOR & FURNITURE (19)',
@@ -38,17 +43,17 @@ const dummyData = ['DECOR & FURNITURE (19)',
 
 class SelectedListItem extends React.Component {
 
-    handleListItemClick = (event, index,cb) => {
+    handleListItemClick = (event, index, cb) => {
         cb()
-        if(this.props.link){
+        if (this.props.link) {
             this.props.history.push(this.props.link)
         }
     };
 
     render() {
-        const {classes, data, title,selectedValue} = this.props;
+        const {classes, data, title, selectedValue} = this.props;
 
-        return (data?  <Fragment>
+        return (data ? <Fragment>
                 <Typography
 
                     variant={'title'}
@@ -64,16 +69,17 @@ class SelectedListItem extends React.Component {
                             key={i}
                             button
                             className={classNames(classes.listItem, (selectedValue === n.value ||
-                                (selectedValue===null && i===0)
+                                (selectedValue === null && i === 0)
                             ) ? classes.selected : null)}
-                            onClick={event => this.handleListItemClick(event, i,n.onClick)}>
-                            <ListItemText primary={n.label}
-                            />
+                            onClick={event => this.handleListItemClick(event, i, n.onClick)}>
+                            <Typography
+
+                            >{n.label}</Typography>
                         </ListItem>
                     )}
 
                 </List>
-            </Fragment>:null
+            </Fragment> : null
 
         );
     }

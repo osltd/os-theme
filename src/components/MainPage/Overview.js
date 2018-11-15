@@ -14,18 +14,18 @@ const styles = theme => {
             productCategory: {
                 backgroundColor: theme.palette.background.paper
             },
-            text:{
-                textAlign:'center',
-                color:theme.palette.secondary.light,
-                marginBottom:'30px',
+            text: {
+                textAlign: 'center',
+                color: theme.palette.secondary.light,
+                marginBottom: '30px',
 
 
             },
-            title:{
-                marginTop:'50px',
-                fontWeight:'700',
-                color:theme.palette.primary.dark,
-                marginBottom:'20px',
+            title: {
+                marginTop: '50px',
+                fontWeight: '700',
+                color: theme.palette.primary.dark,
+                marginBottom: '20px',
             }
 
 
@@ -57,7 +57,7 @@ class ResponsiveDialog extends React.Component {
                                 {this.props.feeds
                                     .filter(n => (n.sections && n.sections[0].medias[0]))
                                     .map(n => ({
-                                        link: '/feed/'+n.id,
+                                        link: '/feed/' + n.id,
                                         url: n.sections[0].medias[0].url,
                                         title: n.sections[0].title,
                                     }))

@@ -5,33 +5,44 @@ import {formatMoney} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
 
-const styles = theme => {
-    return ({
-        name: {
-            color:theme.palette.secondary.dark,
-            cursor:'pointer',
-            '&:hover':{
-                color:theme.palette.primary.dark,
-            }
-        },
-        root: {
-            padding: '0 10px 0 10px',
-        },
-        cf6_image: {
-            cursor:'pointer',
-            width: '100%',
-            maxHeight: '255px !important',
-        },
+const styles = theme => ({
+    name: {
+        textTransform: 'uppercase',
+        fontSize: '17px',
+        color: theme.palette.secondary.dark,
+        cursor: 'pointer',
+        marginBottom: '15px',
 
-        oldPrice: {},
-        price: {
-            fontWeight: '900',
+        '&:hover': {
+            color: theme.palette.primary.dark,
         }
+    }, category: {
+        fontSize: '13px',
+        color: theme.palette.secondary.light,
+        marginTop: '15px',
+    },
 
-    })
+    root: {
+        padding: '10px',
+
+    },
+    img: {
+        cursor: 'pointer',
+        width: '100%',
+        maxHeight: '255px !important',
+    },
+
+    oldPrice: {},
+    price: {
+        color: '#333333',
+        fontFamily: 'arial',
+        lineHeight: 1,
+    }
+
+})
 
 
-}
+
 
 
 class ResponsiveDialog extends React.Component {
@@ -69,16 +80,20 @@ class ResponsiveDialog extends React.Component {
 
                          onClick={() => this.props.history.push('/shop/' + id)}
 
-                         className={classes.cf6_image}/>
+                         className={classes.img}/>
                 </Grid>
                 <Grid item xs={9}>
-                    <Typography variant={'headline'} color={'primary'}>{category}</Typography>
                     <Typography variant={'title'}
                                 onClick={() => this.props.history.push('/shop/' + id)}
-
-
                                 className={classes.name}
-                                >{name}</Typography>
+                    >{name}</Typography>
+                    {
+                        category && <Typography variant={'headline'}
+                                                className={classes.category}
+
+                                                color={'primary'}>{category && category.join(',')}</Typography>
+
+                    }
                     <Typography variant={'caption'}>{description}</Typography>
                     {
                         promotePrice ?

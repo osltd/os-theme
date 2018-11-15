@@ -14,15 +14,19 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     textField: {
-        border: '1px solid white',
         color: 'white',
-        borderRadius: '5px',
-        padding: '5px',
-        flexBasis: 200,
+/* border: 1px solid white; */
+padding: '10px 20px',
+width: '370px',
+flexBasis: '200px',
+borderRadius: '5px',
+background: '#000',
+        border:'1px solid '+theme.palette.secondary.light,
     }, icon: {
+        margin:'auto',
 
         '&:before': {
-            fontSize: '30px',
+            fontSize: '18px',
             color: 'white',
         }
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import {BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
+import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
 import {withStyles} from '@material-ui/core/styles';
@@ -11,14 +10,15 @@ import DropDownList from '../Widget/DropDownList'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {withRouter} from "react-router-dom";
+import Tag from '../Widget/Tags/Tag'
 
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
         '&:hover': {
-boxShadow:
-'2px 2px 0px 0px rgba(237,237,237,1)'
-},
+            boxShadow:
+                '2px 2px 0px 0px rgba(237,237,237,1)'
+        },
         width: '50px',
         height: '50px'
     },
@@ -91,6 +91,7 @@ boxShadow:
             },
         },
     },
+
 });
 
 

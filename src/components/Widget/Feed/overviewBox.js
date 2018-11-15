@@ -15,18 +15,17 @@ const styles = theme => ({
     },
 
     img: {
-        cursor:'pointer',
+        cursor: 'pointer',
         width: '100%',
         height: '255px !important',
     },
-    title:{
-        cursor:'pointer',
-        '&:hover':{
-            color:theme.palette.secondary.light,
+    title: {
+        cursor: 'pointer',
+        '&:hover': {
+            color: theme.palette.secondary.light,
         }
     },
-    content: {
-    },
+    content: {},
 
 })
 
@@ -70,13 +69,13 @@ class ResponsiveDialog extends React.Component {
             <Grid container className={classes.root} alignItems={'center'} direction={'column'}>
                 <Grid item xs={12}>
                     <img src={src}
-                         onClick={()=>this.props.history.push('/feed/'+id)}
+                         onClick={() => this.props.history.push('/feed/' + id)}
                          className={classes.img}/></Grid>
                 <Grid item direction={'column'} container xs={12} md={11} className={classes.content}>
                     <Grid item>
                         <Typography
                             className={classes.title}
-                            onClick={()=>this.props.history.push('/feed/'+id)}
+                            onClick={() => this.props.history.push('/feed/' + id)}
 
                             variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>

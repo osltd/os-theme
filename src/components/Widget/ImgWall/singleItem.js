@@ -8,7 +8,7 @@ const styles = theme => ({
         overflow: 'auto',
         maxHeight: '500px',
     }, img: {
-        width:'100%',
+        width: '100%',
 
     }
 });
@@ -18,7 +18,7 @@ function ListItemLink(props) {
 }
 
 function SimpleList(props) {
-    const {classes,data} = props;
+    const {classes, data} = props;
     const gg = [
         {
 

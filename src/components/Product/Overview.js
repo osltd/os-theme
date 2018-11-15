@@ -6,7 +6,7 @@ import Header from '../Layout/Body/Header'
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
-import {refactorTextLength} from "../../api/ApiUtils"
+import {getVariantOptions, refactorTextLength} from "../../api/ApiUtils"
 import NotFound from '../Layout/NotFound'
 
 const styles = theme => {
@@ -39,7 +39,11 @@ class ResponsiveDialog extends React.Component {
     render() {
         const {classes} = this.props
         if (this.hasValidProduct()) {
+
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+            const variantOptions= getVariantOptions(product.variants)
+
+
             return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
@@ -47,10 +51,12 @@ class ResponsiveDialog extends React.Component {
                         route={'HOME/SHOP/SINGLE PRODUCT'}
                     />
                 </Grid>
-                <Grid item xs={10} container alignItems={'flex-start'} justify={'center'}>
+                <Grid item xs={10} container spacing={16} alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={7}>
                         <Detail
+                            variantOptions={Object.values(variantOptions)}
+                            variantKeys={Object.keys(variantOptions)}
                             description={product.description}
                             name={refactorTextLength(product.name)}
                             regPrice={product.variants[0] ? product.variants[0].price : 'not a reg price'}

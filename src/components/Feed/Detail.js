@@ -9,7 +9,6 @@ import moment from 'moment'
 import List from '../Widget/List'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
-import {withRouter} from "react-router-dom";
 
 const styles = theme => (
     {
@@ -28,13 +27,13 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    editFeedFilter: (key, value) => dispatch({
-        type: FEED_EDIT_FILTER,
-        payload: {
-            key: key,
-            value: value,
-        },
-    }),
+        editFeedFilter: (key, value) => dispatch({
+            type: FEED_EDIT_FILTER,
+            payload: {
+                key: key,
+                value: value,
+            },
+        }),
 
 
     }

@@ -4,11 +4,10 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core';
 import BigFeedBox from './BigFeedBox'
 import SmallFeedBox from './SmallFeedBox'
-import {refactorTextLength, refactorTitle} from "../../../api/ApiUtils";
+import {refactorTitle} from "../../../api/ApiUtils";
 
 const styles = theme => ({
-    root: {
-    },
+    root: {},
     smallDiv: {
         height: '200px',
 
@@ -23,14 +22,14 @@ const styles = theme => ({
 
 
     },
-    left:{
-paddingRight:'10px',
-        paddingLeft:'20px',
+    left: {
+        paddingRight: '10px',
+        paddingLeft: '20px',
 
     },
-    right:{
-        paddingLeft:'10px',
-paddingRight:'20px',
+    right: {
+        paddingLeft: '10px',
+        paddingRight: '20px',
     }
 });
 
@@ -58,7 +57,7 @@ class FeedsWall extends React.Component {
                     />}
                     right={<Fragment>
                         <Typography
-style={{ padding:'0 20px'}}
+                            style={{padding: '0 20px'}}
                             variant={'subheading'}
                         >
                             {data[1].sections[0].title}      </Typography>
@@ -77,7 +76,7 @@ style={{ padding:'0 20px'}}
                     />}
                     left=
                         {(<Typography
-                            style={{ padding:'0 20px'}}
+                            style={{padding: '0 20px'}}
 
                             variant={'subheading'}
                         >

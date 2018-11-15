@@ -11,8 +11,7 @@ const defaultState = {
     products: [],
     viewMode: 'form',
     filter: {
-
-        tag:null,
+        tag: null,
     },
     sort: {
         sortBy: null,

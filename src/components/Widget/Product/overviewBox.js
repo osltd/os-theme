@@ -6,38 +6,38 @@ import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     name: {
-        textTransform:'uppercase',
-        fontSize:'17px',
+        textTransform: 'uppercase',
+        fontSize: '17px',
         color: theme.palette.secondary.dark,
         cursor: 'pointer',
-        marginBottom:'15px',
+        marginBottom: '15px',
 
         '&:hover': {
             color: theme.palette.primary.dark,
         }
-    },category:{
-     fontSize:'13px',
+    }, category: {
+        fontSize: '13px',
         color: theme.palette.secondary.light,
-        marginTop:'15px',
+        marginTop: '15px',
     },
 
     root: {
-        minHeight:'340px',
+        minHeight: '340px',
         padding: '10px 20px 20px',
-        borderRadius:'2px',
+        borderRadius: '2px',
 
     },
-    cf6_image: {
+    img: {
         cursor: 'pointer',
         width: '100%',
         maxHeight: '255px !important',
-       },
+    },
 
     oldPrice: {},
     price: {
         color: '#333333',
-        fontFamily:'arial',
-lineHeight: 1,
+        fontFamily: 'arial',
+        lineHeight: 1,
     }
 
 })
@@ -75,12 +75,12 @@ class ResponsiveDialog extends React.Component {
             <Grid container className={classes.root} direction={'column'}>
                 <img src={src}
                      onClick={() => this.props.history.push('/shop/' + id)}
-                     className={classes.cf6_image}/>
+                     className={classes.img}/>
                 {
-                    category   &&<Typography variant={'headline'}
-                                             className={classes.category}
+                    category && <Typography variant={'headline'}
+                                            className={classes.category}
 
-                                             color={'primary'}>{category && category.join(',')}</Typography>
+                                            color={'primary'}>{category && category.join(',')}</Typography>
 
                 }
                 <Typography variant={'title'}

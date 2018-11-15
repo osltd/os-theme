@@ -3,9 +3,10 @@ import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
-import {CirclePicker} from 'react-color';
+import ColorPick from '../Widget/ColorPicker'
 import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
+import Tag from '../Widget/Tags/Tag'
 
 const styles = theme => {
     return (
@@ -32,6 +33,7 @@ const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
+    draft:state.cart.variant,
 });
 
 
@@ -41,7 +43,7 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
 
     render() {
-        const {classes, name, regPrice, promotePrice, description} = this.props
+        const {classes, name, regPrice, promotePrice, description, variantKeys, variantOptions} = this.props
         return (
 
             <Grid container direction={'column'} spacing={40}>
@@ -76,12 +78,31 @@ class ResponsiveDialog extends React.Component {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'title'}>
-                            colors:
-                        </Typography>
-                        <CirclePicker
-                            colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5"]}
-                        />
+
+
+                        {
+                            variantKeys.map((n, i) =>
+
+                                <Fragment key={i}>
+                                    <Typography variant={'title'}>
+                                        {n}
+                                    </Typography>
+                                    {
+                                        (n === 'color') ?
+                                            <ColorPick
+                                                colors={variantOptions[i]}
+                                                onClick={color => console.log(color)}
+
+                                            /> :
+                                            variantOptions[i].map((options, k) => <Tag
+                                                    value={options}
+                                                />
+                                            )
+                                    }
+                                </Fragment>
+                            )
+                        }
+
                     </Grid>
 
                     <Grid item container direction={'row'} spacing={16}>
