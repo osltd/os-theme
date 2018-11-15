@@ -56,7 +56,7 @@ class App extends React.Component {
                         <ErrorBoundary>
                             <Header/>
                             <div style={(isWidthUp('md', this.props.width)) ?
-                                {paddingTop: '64px'} : null}>
+                                {paddingTop: '35px'} : null}>
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/2'} component={mainPage2}/>
                                 <Route exact path={'/shop'} component={Shop}/>

@@ -71,8 +71,9 @@ const styles = theme => ({
         transition: theme.transitions.create('opacity'),
     },
     imageTitle: {
-        fontSize: '27px',
-        weight: '400',
+        fontWeight: 700,
+textTransform: 'uppercase',
+fontSize: '20PX',
         position: 'relative',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
     },

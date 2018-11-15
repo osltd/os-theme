@@ -3,14 +3,24 @@ import {withStyles} from '@material-ui/core/styles';
 
 const style = theme => ({
     root: {
+        '&:hover':{
+            '&:before': {
+                color: '#0f090a',
+                background: 'white',
+
+            }
+        },
         '&:before': {
+            borderRadius: '4px',
+            padding: '5px',
             fontSize: '40px',
             position: 'absolute',
             top: '50%',
             cursor: 'pointer',
-            right: '-40px',
-            color: '#0f090a',
+            right: '0px',
 
+            background: '#0f090a',
+            color: 'white',
 
         }
 

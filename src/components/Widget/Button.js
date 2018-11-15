@@ -11,12 +11,13 @@ const styles = theme => ({
         padding: '3px',
         color: theme.palette.primary.main,
         cursor: 'pointer',
+        margin: '0 10px',
     },
-    title: {
-        fontWeight: 'lighter',
-
+    btnText: {
+        fontWeight: '500',
+        fontSize: '14px',
+        textTransform: 'uppercase',
     },
-    btnText: {},
     border: {
         border: '1px solid ' + theme.palette.primary.main,
         borderRadius: '5px',

@@ -6,24 +6,38 @@ import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     name: {
+        textTransform:'uppercase',
+        fontSize:'17px',
         color: theme.palette.secondary.dark,
         cursor: 'pointer',
+        marginBottom:'15px',
+
         '&:hover': {
             color: theme.palette.primary.dark,
         }
+    },category:{
+     fontSize:'13px',
+        color: theme.palette.secondary.light,
+        marginTop:'15px',
     },
+
     root: {
-        padding: '0 10px 0 10px',
+        minHeight:'340px',
+        padding: '10px 20px 20px',
+        borderRadius:'2px',
+
     },
     cf6_image: {
         cursor: 'pointer',
         width: '100%',
         maxHeight: '255px !important',
-    },
+       },
 
     oldPrice: {},
     price: {
-        fontWeight: '900',
+        color: '#333333',
+        fontFamily:'arial',
+lineHeight: 1,
     }
 
 })
@@ -62,7 +76,13 @@ class ResponsiveDialog extends React.Component {
                 <img src={src}
                      onClick={() => this.props.history.push('/shop/' + id)}
                      className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{category && category.join(',')}</Typography>
+                {
+                    category   &&<Typography variant={'headline'}
+                                             className={classes.category}
+
+                                             color={'primary'}>{category && category.join(',')}</Typography>
+
+                }
                 <Typography variant={'title'}
                             onClick={() => this.props.history.push('/shop/' + id)}
                             className={classes.name}
@@ -73,10 +93,10 @@ class ResponsiveDialog extends React.Component {
                         <Grid item container direction={'row'}>
                             <Typography component={'del'} variant={'subheading'}
                                         className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                            <Typography variant={'subheading'}
+                            <Typography variant={'Caption'}
                                         className={classes.price}>${formatMoney(promotePrice)}</Typography>
                         </Grid>
-                        : <Typography variant={'subheading'}
+                        : <Typography variant={'Caption'}
                                       className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
                 }

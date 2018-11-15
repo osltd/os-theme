@@ -8,7 +8,7 @@ import {withRouter} from 'react-router-dom'
 
 const style = theme => ({
     root: {
-        margin: '40px 0px',
+        margin: '40px',
         width: 'calc(100%-80px)',
     },
     img: {
@@ -23,7 +23,6 @@ const style = theme => ({
         color: 'white',
         fontSize: '40px',
         fontWeight: '900',
-        textAlign:'center',
 
     }, subTitle: {
 
@@ -60,10 +59,9 @@ class SimpleSlider extends React.Component {
 
                                     <Grid container
                                           alignItems={'center'}
-                                          justify={'center' }
                                           style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
                                               backgroundImage: 'url("' + n.url + '")',
-height:'100vh',
+
                                           })}
                                           onClick={() => n.link ? this.props.history.push(n.link) : null}
 

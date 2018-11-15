@@ -8,15 +8,18 @@ import {withRouter} from "react-router-dom";
 const styles = theme => ({
     root: {
         height: '400px',
-        border: '10px solid white',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: '#d3dbe2',
         cursor:'pointer',
+        marginBottom:'20px',
     },
     title: {
         color: 'white',
         fontWeight: '900',
+        textAlign:'center',
+    },iAmDiv:{
+
     }
 });
 
@@ -28,6 +31,7 @@ class FeedsWall extends React.Component {
         const {classes, title, backgroundImg,link} = this.props;
 
         return (
+            <div className={classes.iAmDiv}>
             <Grid container alignItems={'center'} justify={'center'} className={classes.root} style={{
                 backgroundImage: 'url("' + backgroundImg + '")',
 
@@ -40,6 +44,7 @@ class FeedsWall extends React.Component {
                     {title}
                 </Typography>
             </Grid>
+            </div>
         )
     }
 }

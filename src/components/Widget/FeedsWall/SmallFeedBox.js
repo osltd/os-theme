@@ -7,10 +7,9 @@ import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     root: {
-        border: '10px solid white',
-
         backgroundColor: '#FAFAFA',
         cursor:'pointer',
+        marginBottom:'20px',
 
     },
 });

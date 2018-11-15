@@ -13,18 +13,27 @@ import classNames from "classnames";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
+    logo: {
+        cursor: 'pointer',
+        '&:hover': {
+boxShadow:
+'2px 2px 0px 0px rgba(237,237,237,1)'
+},
+        width: '50px',
+        height: '50px'
+    },
     grow: {
         flexGrow: 1,
     },
     root: {
         backgroundColor: 'white',
-        borderBottom:'1px solid '+ theme.palette.secondary.light,
+        borderBottom: '1px solid ' + theme.palette.secondary.light,
     },
     appBar: {
         backgroundColor: 'white',
         color: 'black',
         width: '100%',
-        padding: '20px 20px',
+        padding: '10px',
     },
     icon: {
         color: theme.palette.primary.main,
@@ -105,26 +114,17 @@ class Header extends React.Component {
             return (
                 <AppBar position="fixed" className={classes.appBar}>
                     <Grid container alignItems={'center'} justify={'space-between'}>
-                        <Grid item >
-                            <Button
-
-                                icon={'icon-home'}
-                                link={'/'}
-                                value={'main'}
+                        <Grid item xs={2}>
+                            <img
+                                className={classes.logo}
+                                onClick={() => this.props.history.push('/')}
+                                src={'https://brandmark.io/logo-rank/random/pepsi.png'}
                             />
                         </Grid>
-                            <Grid item>
-                                <Button
-                                    icon2={'icon-circle-down'}
-
-                                    link={'/shop/17'}
-                                    value={'single product'}
-                                />
-                            </Grid>
+                        <Grid item xs={6} container>
                             <Grid item>
                                 <Button
                                     icon={'icon-gift'}
-                                    icon2={'icon-circle-down'}
                                     link={'/shop'}
                                     value={'shop'}
                                 />
@@ -132,38 +132,75 @@ class Header extends React.Component {
                             <Grid item>
                                 <Button
                                     icon={'icon-books'}
-                                    icon2={'icon-circle-down'}
                                     link={'/feed'}
                                     value={'feed'}
                                 />
                             </Grid>
-                        <Grid item sm={2}>
-                            <div className={classes.grow}/>
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon/>
-                                </div>
-                                <Input
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                />
-                            </div>
                         </Grid>
-                        <Grid item sm={2}>
-                            <PopUp
-                                dropDown={<DropDownList
-                                    data={['ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg',]}
-                                />
-                                }
-                                parent={<Button
-                                    icon={'icon-cart'}
-                                    value={'shopping cart'}
-                                />}
-                            />
-                        </Grid>
+                        {
+                            (isWidthUp('lg', width)) ?
+                                <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
+
+                                    <Grid item>
+                                        <div className={classes.grow}/>
+                                        <div className={classes.search}>
+                                            <div className={classes.searchIcon}>
+                                                <SearchIcon/>
+                                            </div>
+                                            <Input
+                                                placeholder="Search…"
+                                                classes={{
+                                                    root: classes.inputRoot,
+                                                    input: classes.inputInput,
+                                                }}
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item>
+                                        <PopUp
+                                            dropDown={<DropDownList
+                                                data={['ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg',]}
+                                            />
+                                            }
+                                            parent={<Button
+                                                icon={'icon-cart'}
+                                                value={'shopping cart'}
+                                            />}
+                                        />
+
+                                    </Grid>
+                                </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
+
+                                    <Grid item>
+                                        <div className={classes.grow}/>
+                                        <div className={classes.search}>
+                                            <div className={classes.searchIcon}>
+                                                <SearchIcon/>
+                                            </div>
+                                            <Input
+                                                placeholder="Search…"
+                                                classes={{
+                                                    root: classes.inputRoot,
+                                                    input: classes.inputInput,
+                                                }}
+                                            />
+                                        </div>
+                                    </Grid>
+                                    <Grid item>
+                                        <PopUp
+                                            dropDown={<DropDownList
+                                                data={['ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg',]}
+                                            />
+                                            }
+                                            parent={<Button
+                                                icon={'icon-cart'}
+                                            />}
+                                        />
+
+                                    </Grid>
+                                </Grid>
+                        }
+
                     </Grid>
                 </AppBar>)
 
