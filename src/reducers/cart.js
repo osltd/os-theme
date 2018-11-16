@@ -1,4 +1,10 @@
-import {CART_EDIT_VARIANT, CART_INIT_SHOPPING_CART,CART_OPERATE_SHOPPING_CART,CART_EMPTY_PRODUCT_VARIANT,CART_SAVE_PRODUCT_TO_CART} from "../constants/actionType";
+import {
+    CART_EDIT_VARIANT,
+    CART_EMPTY_PRODUCT_VARIANT,
+    CART_INIT_SHOPPING_CART,
+    CART_OPERATE_SHOPPING_CART,
+    CART_SAVE_PRODUCT_TO_CART
+} from "../constants/actionType";
 
 
 const defaultState = {
@@ -41,7 +47,7 @@ export default (state = defaultState, action) => {
                     }
                 )
             }
-            localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart))
+            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
 
             return {
                 ...state,
@@ -50,14 +56,14 @@ export default (state = defaultState, action) => {
         }
 
 
-        case CART_INIT_SHOPPING_CART:{
+        case CART_INIT_SHOPPING_CART: {
             return {
                 ...state,
-                shoppingCart:action.payload?action.payload:[]
+                shoppingCart: action.payload ? action.payload : []
             }
 
         }
-        case  CART_EMPTY_PRODUCT_VARIANT:{
+        case  CART_EMPTY_PRODUCT_VARIANT: {
 
             return {
                 ...state,
@@ -65,9 +71,15 @@ export default (state = defaultState, action) => {
             }
 
         }
-        case CART_OPERATE_SHOPPING_CART:{
+        case CART_OPERATE_SHOPPING_CART: {
+            let shoppingCart = Array.from(state.shoppingCart)
+            shoppingCart.splice(action.payload, 1)
+
+            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
+
             return {
                 ...state,
+                shoppingCart: shoppingCart,
 
             }
         }

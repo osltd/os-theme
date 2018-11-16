@@ -6,6 +6,7 @@ import {Grid, List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import LoadingPage from '../LoadingPage'
 import {refactorTextLength} from "../../../api/ApiUtils";
+import {connect} from "react-redux";
 
 const styles = theme => ({
     listItem: {
@@ -23,6 +24,14 @@ const styles = theme => ({
 
     }
 });
+
+const mapStateToProps = state => ({
+    shoppingCart: state.cart.shoppingCart,
+});
+
+
+const mapDispatchToProps = dispatch => ({}
+)
 
 class DropDownList extends React.Component {
     state = {
@@ -44,7 +53,7 @@ class DropDownList extends React.Component {
     }
 
     render() {
-        const {classes, data} = this.props;
+        const {classes, data,onDelete} = this.props;
 
         return (
             <List className={classes.root} component="nav">
@@ -72,7 +81,9 @@ class DropDownList extends React.Component {
                                     {n.number} X {n.product.variants.find(variant => variant.id === n.variantId).price
                                 }
                                 </Typography>
-                                <span className={classes.binIcon + ' ' + 'icon-bin'}/>
+                                <span
+                                    onClick={()=>onDelete(i)}
+                                    className={classes.binIcon + ' ' + 'icon-bin'}/>
                             </Grid>
                         </Grid>
 
@@ -88,4 +99,4 @@ DropDownList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DropDownList);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(DropDownList))

@@ -11,6 +11,7 @@ import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+import {CART_OPERATE_SHOPPING_CART} from "../../constants/actionType";
 
 const styles = theme => ({
     logo: {
@@ -100,7 +101,13 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+        editShoppingCart: (index) => dispatch({
+            type: CART_OPERATE_SHOPPING_CART,
+            payload: index,
+        })
+    }
+
 )
 
 class Header extends React.Component {
@@ -169,6 +176,7 @@ class Header extends React.Component {
                                         <PopUp
                                             dropDown={<DropDownList
                                                 data={this.props.shoppingCart}
+                                                onDelete={index=>this.props.editShoppingCart(index)}
                                             />
                                             }
                                             parent={<Button

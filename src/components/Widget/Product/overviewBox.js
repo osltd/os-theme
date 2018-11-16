@@ -53,11 +53,9 @@ class ResponsiveDialog extends React.Component {
             "background-color": this.props.backgroundColor
         }
     })
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
+    handleClickOpen = () => this.setState({open: true});
 
+    handleClose = () => {
         this.setState({open: false});
     };
 
