@@ -13,7 +13,6 @@ const styles = theme => ({
         marginTop: '30px',
         backgroundColor: 'black',
         color: 'white',
-
     },
     emailBar:{
         marginBottom:'30px',
@@ -76,10 +75,9 @@ class Footer extends React.Component {
                         USEFUL LINKS</Typography>
                     </Grid>
                     <Grid item >
-                        <FooterList/></Grid>
+                        <FooterList/>
+                    </Grid>
                 </Grid>
-
-
                 <Grid item xs={3} container  direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>

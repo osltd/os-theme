@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 export const refactorTextLength = content => (typeof content === 'string') ? content.length > 20 ? content.slice(0, 15).concat('...') : content : ''
-export const refactorParaLength = content => (typeof content === 'string') ? content.length > 45 ? content.slice(0, 45).concat('...') : content : ''
+export const refactorParaLength = (content,length=45) => (typeof content === 'string') ? content.length > length ? content.slice(0, length).concat('...') : content : ''
 export const refactorTitle = content => (typeof content === 'string') ? content.length > 22 ? content.slice(0, 22) : content : ''
 
 
@@ -115,6 +115,12 @@ export const getRoutePath = url => {
                 result.push({
                     label: n,
                     link: '/shop'
+                })
+                break
+            case n === 'checkout':
+                result.push({
+                    label: n,
+                    link: '/checkout'
                 })
                 break
             case !isNaN(n):

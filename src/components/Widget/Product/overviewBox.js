@@ -8,12 +8,13 @@ const styles = theme => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
-        color: theme.palette.secondary.dark,
         cursor: 'pointer',
         marginBottom: '15px',
+        color: theme.palette.primary.dark,
 
         '&:hover': {
-            color: theme.palette.primary.dark,
+            color: theme.palette.secondary.dark,
+
         }
     }, category: {
         fontSize: '13px',

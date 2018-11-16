@@ -6,11 +6,11 @@ import {fade} from '@material-ui/core/styles/colorManipulator';
 import {withStyles} from '@material-ui/core/styles';
 import PopUp from '../Widget/PopUp'
 import SearchIcon from '@material-ui/icons/Search';
-import DropDownList from '../Widget/DropDownList'
+import DropDownList from './Body/DropDownList'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {withRouter} from "react-router-dom";
-import Tag from '../Widget/Tags/Tag'
+import {connect} from "react-redux";
 
 const styles = theme => ({
     logo: {
@@ -95,6 +95,14 @@ const styles = theme => ({
 });
 
 
+const mapStateToProps = state => ({
+    shoppingCart: state.cart.shoppingCart,
+});
+
+
+const mapDispatchToProps = dispatch => ({}
+)
+
 class Header extends React.Component {
     handleChange = (event, value) => {
         this.setState({value});
@@ -160,7 +168,7 @@ class Header extends React.Component {
                                     <Grid item>
                                         <PopUp
                                             dropDown={<DropDownList
-                                                data={['ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggg',]}
+                                                data={this.props.shoppingCart}
                                             />
                                             }
                                             parent={<Button
@@ -170,7 +178,7 @@ class Header extends React.Component {
                                         />
 
                                     </Grid>
-                                </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
+                                </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'center'}>
 
                                     <Grid item>
                                         <div className={classes.grow}/>
@@ -220,6 +228,10 @@ class Header extends React.Component {
             <BottomNavigationAction label="Feed" value="Feed"
                                     onClick={() => this.props.history.push('/feed')}
                                     icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
+            <BottomNavigationAction label="Checkout" value="Checkout    "
+                                    onClick={() => this.props.history.push('/checkout')}
+                                    icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
+
         </BottomNavigation>
 
 
@@ -230,4 +242,4 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-export default withRouter(withWidth()(withStyles(styles)(Header)))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))

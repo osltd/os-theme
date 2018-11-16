@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
-
+import LoadingPage from '../Layout/LoadingPage'
 const styles = theme => {
     return (
         {
@@ -114,9 +114,7 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
 
 
-                </Grid> : <div>
-                    loading page
-                </div>
+                </Grid> :<LoadingPage/>
         );
     }
 }

@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom'
 import {Grid, List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
+import LoadingPage from '../LoadingPage'
+import {refactorTextLength} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     listItem: {
@@ -46,12 +48,12 @@ class DropDownList extends React.Component {
 
         return (
             <List className={classes.root} component="nav">
-                {data.map((n, i) =>
+                {console.log(data)}
+                {data.length > 0 ? data.map((n, i) =>
                     <ListItem
                         component={n.link ? Link : null}
                         to={n.link && n.link}
                         button key={i}
-
                         onClick={n.onClick}>
 
                         <Grid container spacing={16}>
@@ -59,14 +61,16 @@ class DropDownList extends React.Component {
                                 <img
 
                                     style={{width: '100%',}}
-                                    src={'https://d29u17ylf1ylz9.cloudfront.net/thebell-v2/thebell/assets/img/products/home-two/product-2.jpg'}/>
+                                    src={n.product.photos[0].url}
+/>
                             </Grid>
                             <Grid item sm={9}>
                                 <Typography variant={'body2'}>
-                                    SPRITE YOGA COMPANION
+                                    {refactorTextLength(n.product.name)}
                                 </Typography>
                                 <Typography variant={'caption'}>
-                                    3 X $77.00
+                                    {n.number} X {n.product.variants.find(variant => variant.id === n.variantId).price
+                                }
                                 </Typography>
                                 <span className={classes.binIcon + ' ' + 'icon-bin'}/>
                             </Grid>
@@ -74,7 +78,7 @@ class DropDownList extends React.Component {
 
 
                     </ListItem>
-                )}
+                ) : <LoadingPage/>}
             </List>
         )
     }

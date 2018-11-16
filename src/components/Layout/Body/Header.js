@@ -30,7 +30,6 @@ const styles = theme => ({
 
 });
 
-
 class Header extends React.Component {
 
 
@@ -56,14 +55,14 @@ class Header extends React.Component {
                     (n, i) =>
                         <Fragment>
                             <Grid item>
-                                <Typography variant={'title'}
+                                <Typography variant={'body2'}
                                             onClick={() => this.props.history.push(n.link)}
                                             className={classes.route} color={'secondary'}>{n.label}</Typography>
                             </Grid>
                             {i !== routePath.length - 1 &&
                             <Grid item>
 
-                                <Typography variant={'title'}
+                                <Typography variant={'body2'}
                                             onClick={() => this.props.history.push(n.link)}
                                             color={'secondary'}>/</Typography> </Grid>
                             }

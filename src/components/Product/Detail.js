@@ -7,6 +7,7 @@ import ColorPick from '../Widget/ColorPicker'
 import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
 import Tag from '../Widget/Tags/Tag'
+import {CART_EDIT_VARIANT,CART_INIT_SHOPPING_CART, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART} from "../../constants/actionType";
 
 const styles = theme => {
     return (
@@ -30,20 +31,100 @@ const styles = theme => {
 
 
 const mapStateToProps = state => ({
-    products: state.product.products,
-    feeds: state.feed.feeds,
-    category: state.category.category,
-    draft:state.cart.variant,
+    draft: state.cart.variant,
+    shoppingCart: state.cart.shoppingCart,
 });
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+        editCartVariant: (key, value) => dispatch(
+            {
+                type: CART_EDIT_VARIANT,
+                payload: {
+                    key: key,
+                    value: value,
+                }
+            }
+        ),
+        dispatchDraftToCart: (product, number, variantId) => dispatch({
+                type: CART_SAVE_PRODUCT_TO_CART,
+                payload: {
+                    product: product,
+                    number: number,
+                    variantId: variantId,
+                }
+            }
+        ),
+
+        emptyCartVariant:()=>dispatch({
+            type:CART_EMPTY_PRODUCT_VARIANT,
+        }),
+
+    }
 )
 
 class ResponsiveDialog extends React.Component {
 
+    componentDidMount(){
+        this.initVariant()
+
+    }
+    getVariant = (keyName, index, variantOptions, needRender = true) => {
+        let needInit = !(this.props.draft[keyName])
+        if (needInit||!needRender) this.props.editCartVariant(keyName, variantOptions[index][0])
+        return needRender ? (keyName === 'color') ?
+            <ColorPick
+                colors={variantOptions[index]}
+                onClick={color => this.props.editCartVariant(keyName, color)}
+                selectedColor={this.props.draft[keyName]}
+            /> :
+            variantOptions[index].map((options, k) => <Tag
+                    key={k}
+                    value={options}
+                    onClick={() => this.props.editCartVariant(keyName, options)}
+
+                    selected={(this.props.draft[keyName] === options)}
+
+                />
+            ) : null
+
+    }
+    saveDraftToCart = () => {
+
+        const {draft, product} = this.props
+        let key = Object.keys(draft)
+        let value = Object.values(draft)
+        let productCount = 1
+        let selectedDescription = []
+        key.map(
+            (keyName, index) => {
+                (keyName === 'number') ? productCount = parseInt(value[index]) : selectedDescription.push(
+                    keyName + ':' + value[index]
+                )
+
+            }
+        )
+        const isSelectedProduct = variants =>
+            (!selectedDescription.map(description => variants.description.split(',').includes(description)).includes(false))
+
+        let selectedVariantId = product.variants.find(n => isSelectedProduct(n)).id
+        this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
+        this.initVariant()
+
+    }
+    initVariant = () => {
+
+        const {variantKeys, variantOptions} = this.props
+        this.props.emptyCartVariant()
+        variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false))
+        this.props.editCartVariant('number', 1)
+    }
+
     render() {
-        const {classes, name, regPrice, promotePrice, description, variantKeys, variantOptions} = this.props
+
+        const {classes, name, regPrice, promotePrice,
+            description, variantKeys, variantOptions, product} = this.props
+
         return (
 
             <Grid container direction={'column'} spacing={40}>
@@ -87,18 +168,7 @@ class ResponsiveDialog extends React.Component {
                                     <Typography variant={'title'}>
                                         {n}
                                     </Typography>
-                                    {
-                                        (n === 'color') ?
-                                            <ColorPick
-                                                colors={variantOptions[i]}
-                                                onClick={color => console.log(color)}
-
-                                            /> :
-                                            variantOptions[i].map((options, k) => <Tag
-                                                    value={options}
-                                                />
-                                            )
-                                    }
+                                    {this.getVariant(n, i, variantOptions)}
                                 </Fragment>
                             )
                         }
@@ -107,10 +177,18 @@ class ResponsiveDialog extends React.Component {
 
                     <Grid item container direction={'row'} spacing={16}>
                         <Grid item>
-                            <Counter/></Grid>
+                            <Counter
+                                number={this.props.draft.number}
+                                onChange={number => this.props.editCartVariant('number', number)}
+                            />
+
+                        </Grid>
                         <Grid item>
 
-                            <Button variant="extendedFab" color={'secondary'}>
+                            <Button variant="extendedFab" color={'secondary'}
+                                    onClick={this.saveDraftToCart}
+                            >
+
                                 <span className={'icon-cart'}/>
                                 Add To Cart
                             </Button>

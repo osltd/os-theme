@@ -1,20 +1,10 @@
-import {
-    EDIT_PRODUCT_DETAIL,
-    EDIT_PRODUCT_VIEW_MODE,
-    INIT_PRODUCTS,
-    PRODUCT_EDIT_FILTER,
-    PRODUCT_EDIT_SORT
-} from "../constants/actionType";
+import {CART_EDIT_VARIANT, CART_INIT_SHOPPING_CART,CART_OPERATE_SHOPPING_CART,CART_EMPTY_PRODUCT_VARIANT,CART_SAVE_PRODUCT_TO_CART} from "../constants/actionType";
 
 
 const defaultState = {
-    products:[],
+    shoppingCart: [],
 
-    variant:{
-
-
-
-    },
+    variant: {},
 
 };
 
@@ -22,8 +12,65 @@ export default (state = defaultState, action) => {
     let detail = Object.assign({}, state.detail)
 
     switch (action.type) {
+        case CART_EDIT_VARIANT:
+            return {
+                ...state,
+                variant: {
+                    ...state.variant,
+                    [action.payload.key]: action.payload.value,
+                }
+            }
+        case CART_SAVE_PRODUCT_TO_CART: {
+            let shoppingCart = Array.from(state.shoppingCart)
+            let existedInCart = shoppingCart.find(n => {
+                    if (n.variantId === action.payload.variantId && n.product === action.payload.product) {
+                        n.number += action.payload.number
+                        return true
+                    }
+                    return false
+                }
+            )
+
+            if (!(existedInCart)) {
+                shoppingCart.push(
+                    {
+                        product: action.payload.product,
+                        number: action.payload.number,
+                        variantId: action.payload.variantId,
+
+                    }
+                )
+            }
+            localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart))
+
+            return {
+                ...state,
+                shoppingCart: shoppingCart,
+            }
+        }
 
 
+        case CART_INIT_SHOPPING_CART:{
+            return {
+                ...state,
+                shoppingCart:action.payload?action.payload:[]
+            }
+
+        }
+        case  CART_EMPTY_PRODUCT_VARIANT:{
+
+            return {
+                ...state,
+                variant: {},
+            }
+
+        }
+        case CART_OPERATE_SHOPPING_CART:{
+            return {
+                ...state,
+
+            }
+        }
         default:
             return state
     }

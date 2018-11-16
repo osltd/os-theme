@@ -16,6 +16,7 @@ const styles = theme => ({
     },
     listItem: {
         borderBottom: '1px solid '+theme.palette.secondary.light,
+        textTransform:'uppercase',
         '& > p':{
             color:theme.palette.secondary.light,
         }, '&:hover': {

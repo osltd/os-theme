@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Grid} from '@material-ui/core'
+import {Grid,Button} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -9,31 +9,34 @@ const styles = theme => ({
         padding: '5px 0px',
         display: 'inline-block',
     }, color: {
+        margin:'5px',
         cursor: 'pointer',
-        height: '30px',
-        width: '30px',
-        borderRadius: '20px',
-        margin: '10px'
     }
 })
 
-class BackArrow extends React.Component {
+class ColorPicker extends React.Component {
 
     render() {
-        const {classes, colors, selected, onClick} = this.props;
+        const {classes, colors, selectedColor, onClick} = this.props;
 
         return (
             <Grid container>
                 {
                     colors.map(
-                        (n, i) => <div
+                        (n, i) =>
+                        <Button variant="extendedFab"
+                                children={<span/>}
                             onClick={() => onClick(n)}
                             key={i} className={classes.color} style={
-                            selected ? {
+                            selectedColor === n ? {
+                                color:n,
                                 border: '5px solid ' + n,
+                                backgroundColor: 'white',
 
                             } : {
                                 backgroundColor: n,
+                                color:n,
+
                                 border: '5px solid ' + n,
 
                             }
@@ -48,8 +51,8 @@ class BackArrow extends React.Component {
     }
 }
 
-BackArrow.propTypes = {
+ColorPicker.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BackArrow);
+export default withStyles(styles)(ColorPicker);

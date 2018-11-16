@@ -30,7 +30,9 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps = dispatch => ({}
+const mapDispatchToProps = dispatch => ({
+
+    }
 )
 
 class ResponsiveDialog extends React.Component {
@@ -41,7 +43,7 @@ class ResponsiveDialog extends React.Component {
         if (this.hasValidProduct()) {
 
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
-            const variantOptions= getVariantOptions(product.variants)
+            const variantOptions = getVariantOptions(product.variants)
 
 
             return <Grid container alignItems={'center'} justify={'center'}>
@@ -60,7 +62,7 @@ class ResponsiveDialog extends React.Component {
                             description={product.description}
                             name={refactorTextLength(product.name)}
                             regPrice={product.variants[0] ? product.variants[0].price : 'not a reg price'}
-
+                            product={product}
 
                         />
                     </Grid>

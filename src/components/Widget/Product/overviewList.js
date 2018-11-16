@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney} from "../../../api/ApiUtils";
+import {formatMoney, refactorParaLength} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
 
@@ -9,12 +9,14 @@ const styles = theme => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
-        color: theme.palette.secondary.dark,
+        color: theme.palette.primary.dark,
+
         cursor: 'pointer',
         marginBottom: '15px',
 
         '&:hover': {
-            color: theme.palette.primary.dark,
+            color: theme.palette.secondary.dark,
+
         }
     }, category: {
         fontSize: '13px',
@@ -37,6 +39,12 @@ const styles = theme => ({
         color: '#333333',
         fontFamily: 'arial',
         lineHeight: 1,
+    },
+    description:{
+        lineHeight:'25px',
+        color:'#333',
+        fontSize:'15px',
+        marginBottom:'10px',
     }
 
 })
@@ -75,18 +83,14 @@ class ResponsiveDialog extends React.Component {
 
         return (
             <Grid container spacing={16} alignItems={'center'} className={classes.root}>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <img src={src}
 
                          onClick={() => this.props.history.push('/shop/' + id)}
 
                          className={classes.img}/>
                 </Grid>
-                <Grid item xs={9}>
-                    <Typography variant={'title'}
-                                onClick={() => this.props.history.push('/shop/' + id)}
-                                className={classes.name}
-                    >{name}</Typography>
+                <Grid item xs={8}>
                     {
                         category && <Typography variant={'headline'}
                                                 className={classes.category}
@@ -94,7 +98,12 @@ class ResponsiveDialog extends React.Component {
                                                 color={'primary'}>{category && category.join(',')}</Typography>
 
                     }
-                    <Typography variant={'caption'}>{description}</Typography>
+                    <Typography variant={'title'}
+                                onClick={() => this.props.history.push('/shop/' + id)}
+                                className={classes.name}
+                    >{name}</Typography>
+
+                    <Typography className={classes.description} variant={'caption'}>{refactorParaLength(description,200)}</Typography>
                     {
                         promotePrice ?
                             <Grid item container direction={'row'}>
