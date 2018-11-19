@@ -134,43 +134,7 @@ class OrderSummary extends React.Component {
                                 </TableRow>
                             );
                         })}
-                        <TableRow>
-
-                            <TableCell colSpan={2}>
-                                <Button
-                                    link={'#'}
-                                    value={'place order'}
-                                    icon={'icon-cart'}
-                                    border={true}
-
-                                />
-                            </TableCell>
-                        </TableRow>
-
-                        <TableRow>
-
-                            <TableCell colSpan={2}>
-                                <Button
-                                    link={'#'}
-                                    value={'place order'}
-                                    icon={'icon-cart'}
-                                    border={true}
-
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-
-                            <TableCell colSpan={2}>
-                                <Button
-                                    link={'#'}
-                                    value={'place order'}
-                                    icon={'icon-cart'}
-                                    border={true}
-
-                                />
-                            </TableCell>
-                        </TableRow> <TableRow>
+                    <TableRow>
 
                         <TableCell colSpan={2}>
                             <RadioList/>
@@ -181,6 +145,19 @@ class OrderSummary extends React.Component {
                             <Terms/>
                         </TableCell>
                     </TableRow>
+
+                        <TableRow>
+
+                            <TableCell colSpan={2}>
+                                <Button
+                                    link={'#'}
+                                    value={'place order'}
+                                    icon={'icon-cart'}
+                                    border={true}
+
+                                />
+                            </TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </Paper>
