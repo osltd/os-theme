@@ -7,11 +7,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import img from '../../constants/img/loadingImg.gif'
 import {formatMoney, refactorTitle} from "../../api/ApiUtils";
-import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
-import classNames from 'classnames'
+import RadioList from '../Widget/RadioList'
+import Button from '../Widget/Button'
+import Terms from '../Widget/Terms'
 import {
     CART_OPERATE_SHOPPING_CART,
     EDIT_PRODUCT_VIEW_MODE,
@@ -86,9 +86,10 @@ const mapDispatchToProps = dispatch => ({
     }
 )
 
-class ShoppingCartTable extends React.Component {
+class OrderSummary extends React.Component {
 
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
+
 
     render() {
         const {classes, shoppingCart} = this.props;
@@ -105,18 +106,7 @@ class ShoppingCartTable extends React.Component {
                             <TableCell
                                 className={classes.block}
                                 numeric>Product</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>Price</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>Quantity</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>Total</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>Remove</TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -126,51 +116,71 @@ class ShoppingCartTable extends React.Component {
                                     <TableCell
                                         className={classes.block}
                                     >
-
-                                        <img src={n.product.photos[0].url}
-                                             className={classes.img}
-                                        />
+                                        {refactorTitle(n.product.name)} X {n.number}
 
                                     </TableCell>
                                     <TableCell
                                         className={classes.block}
                                         numeric>
-                                        {refactorTitle(n.product.name)}
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.block}
-                                        numeric>{
-                                        '$ ' + formatMoney(
-                                            n.product.variants.find(variant => variant.id === n.variantId).price
-                                        )
-                                    }</TableCell>
-                                    <TableCell
-                                        className={classNames(classes.counter, classes.block)}
-                                        numeric>
-                                        <Counter
-                                            number={n.number}
-                                            onChange={k => this.props.editShoppingCart('count', {index: i, count: k})}
-                                        />
-                                    </TableCell>
-                                    <TableCell
-                                        className={classes.block}
+                                        {
+                                            '$ ' + formatMoney(
+                                                n.product.variants.find(variant => variant.id === n.variantId).price * n.number
+                                            )
 
-                                        numeric>{'$ ' +
-                                    formatMoney(this.getRowPrice(n))
-                                    }</TableCell>
-                                    <TableCell
-                                        className={classes.block}
-                                        numeric>   <span
-                                        onClick={() => this.props.editShoppingCart('remove', i)}
-                                        className={classes.binIcon + ' ' + 'icon-bin'}/></TableCell>
+
+                                        }
+                                    </TableCell>
+
                                 </TableRow>
                             );
                         })}
                         <TableRow>
-                            <TableCell colSpan={2}>Total</TableCell>
-                            <TableCell
-                                numeric>{formatMoney(shoppingCart.length > 0 && shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}</TableCell>
+
+                            <TableCell colSpan={2}>
+                                <Button
+                                    link={'#'}
+                                    value={'place order'}
+                                    icon={'icon-cart'}
+                                    border={true}
+
+                                />
+                            </TableCell>
                         </TableRow>
+
+                        <TableRow>
+
+                            <TableCell colSpan={2}>
+                                <Button
+                                    link={'#'}
+                                    value={'place order'}
+                                    icon={'icon-cart'}
+                                    border={true}
+
+                                />
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+
+                            <TableCell colSpan={2}>
+                                <Button
+                                    link={'#'}
+                                    value={'place order'}
+                                    icon={'icon-cart'}
+                                    border={true}
+
+                                />
+                            </TableCell>
+                        </TableRow> <TableRow>
+
+                        <TableCell colSpan={2}>
+                            <RadioList/>
+                        </TableCell>
+                    </TableRow> <TableRow>
+
+                        <TableCell colSpan={2}>
+                            <Terms/>
+                        </TableCell>
+                    </TableRow>
                     </TableBody>
                 </Table>
             </Paper>
@@ -178,8 +188,8 @@ class ShoppingCartTable extends React.Component {
     }
 }
 
-ShoppingCartTable.propTypes = {
+OrderSummary.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartTable))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(OrderSummary))

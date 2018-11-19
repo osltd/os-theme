@@ -17,11 +17,13 @@ const styles = theme => ({
         maxWidth: '300px',
     },
     binIcon: {
-        '&:before': {
-            color: '#ff8173',
-            float: 'right',
+        cursor: 'pointer',
+        float:'right',
+        '&:hover': {
+            '&:before': {
+                color: '#ff8173',
+            }
         }
-
     }
 });
 
@@ -53,7 +55,7 @@ class DropDownList extends React.Component {
     }
 
     render() {
-        const {classes, data,onDelete} = this.props;
+        const {classes, data, onDelete} = this.props;
 
         return (
             <List className={classes.root} component="nav">
@@ -68,10 +70,9 @@ class DropDownList extends React.Component {
                         <Grid container spacing={16}>
                             <Grid item sm={3}>
                                 <img
-
                                     style={{width: '100%',}}
                                     src={n.product.photos[0].url}
-/>
+                                />
                             </Grid>
                             <Grid item sm={9}>
                                 <Typography variant={'body2'}>
@@ -82,7 +83,7 @@ class DropDownList extends React.Component {
                                 }
                                 </Typography>
                                 <span
-                                    onClick={()=>onDelete(i)}
+                                    onClick={() => onDelete(i)}
                                     className={classes.binIcon + ' ' + 'icon-bin'}/>
                             </Grid>
                         </Grid>

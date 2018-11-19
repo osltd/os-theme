@@ -10,7 +10,9 @@ import WhiteDropDown from '../Widget/WhiteDropDown'
 import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {arrayToFilter, getTagsCountsArray, numberToPagination, refactorTextLength, sort_by} from "../../api/ApiUtils";
 import ProductOverviewBox from '../Widget/Product/overviewBox'
-
+import OrderSummary from './OrderSummary'
+import BillingDetails from './BillingDetails'
+import ShoppingCart from './CartTable'
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -32,10 +34,7 @@ const styles = theme => ({
 })
 
 const mapStateToProps = state => ({
-    products: state.product.products,
-    viewMode: state.product.viewMode,
-    sort: state.product.sort,
-    filter: state.product.filter,
+    shoppingCart:state.cart.shoppingCart,
 });
 
 
@@ -78,8 +77,23 @@ class ShopOverview extends React.Component {
                 <Grid item sm={12}>
                     <Header
                         title={'Checkout'}
-
                     />
+                </Grid>
+                <Grid item container spacing={32} md={10}>
+                    <Grid item >
+                        <ShoppingCart
+                        data={this.props.shoppingCart}
+
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <BillingDetails/>
+                    </Grid>
+
+
+                    <Grid item xs={6}>
+                        <OrderSummary/>
+                    </Grid>
                 </Grid>
             </Grid>
         );

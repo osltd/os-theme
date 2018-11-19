@@ -61,7 +61,6 @@ class Header extends React.Component {
                             </Grid>
                             {i !== routePath.length - 1 &&
                             <Grid item>
-
                                 <Typography variant={'body2'}
                                             onClick={() => this.props.history.push(n.link)}
                                             color={'secondary'}>/</Typography> </Grid>

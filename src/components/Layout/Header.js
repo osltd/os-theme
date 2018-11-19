@@ -104,7 +104,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
         editShoppingCart: (index) => dispatch({
             type: CART_OPERATE_SHOPPING_CART,
-            payload: index,
+            payload: {
+                key: 'remove',
+                value: index,
+
+            }
         })
     }
 
@@ -152,6 +156,13 @@ class Header extends React.Component {
                                     value={'feed'}
                                 />
                             </Grid>
+                            <Grid item>
+                                <Button
+                                    icon={'icon-cart'}
+                                    link={'/checkout'}
+                                    value={'checkout'}
+                                />
+                            </Grid>
                         </Grid>
                         {
                             (isWidthUp('lg', width)) ?
@@ -176,7 +187,7 @@ class Header extends React.Component {
                                         <PopUp
                                             dropDown={<DropDownList
                                                 data={this.props.shoppingCart}
-                                                onDelete={index=>this.props.editShoppingCart(index)}
+                                                onDelete={index => this.props.editShoppingCart(index)}
                                             />
                                             }
                                             parent={<Button

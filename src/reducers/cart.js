@@ -73,13 +73,28 @@ export default (state = defaultState, action) => {
         }
         case CART_OPERATE_SHOPPING_CART: {
             let shoppingCart = Array.from(state.shoppingCart)
-            shoppingCart.splice(action.payload, 1)
+            switch (action.payload.key) {
+                case 'remove':
 
-            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
+                    shoppingCart.splice(action.payload.value, 1)
 
-            return {
-                ...state,
-                shoppingCart: shoppingCart,
+                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
+
+                    return {
+                        ...state,
+                        shoppingCart: shoppingCart,
+
+                    }
+                case 'count':
+                    const {index, count} = action.payload.value
+                    shoppingCart[index].number = count
+                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
+
+                    return {
+                        ...state,
+                        shoppingCart: shoppingCart,
+
+                    }
 
             }
         }

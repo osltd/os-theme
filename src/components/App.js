@@ -78,10 +78,11 @@ class App extends React.Component {
                     </ScrollToTop>
                 </Switch>
             </BrowserRouter>
+
         )
 
     }
 }
-
+//todo('add in stock logic')
 
 export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(App))

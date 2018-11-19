@@ -23,7 +23,6 @@ const styles = theme => {
             borderBottom: '1px solid ' + theme.palette.secondary.light,
             maxWidth: '60px',
             padding: '6px 20px',
-
             cursor: 'pointer',
         }
     });
