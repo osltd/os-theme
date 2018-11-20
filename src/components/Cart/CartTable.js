@@ -169,7 +169,7 @@ class ShoppingCartTable extends React.Component {
                         <TableRow>
                             <TableCell colSpan={2}>Total</TableCell>
                             <TableCell
-                                numeric>{formatMoney(shoppingCart.length > 0 && shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}</TableCell>
+                                numeric>{'$ '+formatMoney(shoppingCart.length > 0 && shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

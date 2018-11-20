@@ -4,6 +4,7 @@ import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'
 import mainPage2 from './MainPage/Overview2'
+import ShoppingCart from './Cart/Overview'
 import Header from './Layout/Header'
 import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
@@ -71,7 +72,7 @@ class App extends React.Component {
                                 <Route exact path={'/feed/:id'} component={FeedDetail}/>
                                 <Route exact path={'/shop/:id'} component={Product}/>
                                 <Route exact path={'/checkout'} component={Checkout}/>
-
+                                <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
                             </div>
                             <Footer/>
                         </ErrorBoundary>

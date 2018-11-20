@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
+import {Table,Button} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import {formatMoney, refactorTitle} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import RadioList from '../Widget/RadioList'
-import Button from '../Widget/Button'
 import Terms from '../Widget/Terms'
 import {
     CART_OPERATE_SHOPPING_CART,
@@ -116,7 +115,7 @@ class OrderSummary extends React.Component {
                                     <TableCell
                                         className={classes.block}
                                     >
-                                        {refactorTitle(n.product.name)} X {n.number}
+                                        {refactorTitle(n.product.name)} X {n.number} ( {n.product.variants.find(variant => variant.id === n.variantId).description})
 
                                     </TableCell>
                                     <TableCell
@@ -149,13 +148,11 @@ class OrderSummary extends React.Component {
                         <TableRow>
 
                             <TableCell colSpan={2}>
-                                <Button
-                                    link={'#'}
-                                    value={'place order'}
-                                    icon={'icon-cart'}
-                                    border={true}
-
-                                />
+                                <Button  variant={'outlined'} color={'primary'}
+                                        onClick={this.saveDraftToCart}
+                                >
+                                    Place Order
+                                </Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>

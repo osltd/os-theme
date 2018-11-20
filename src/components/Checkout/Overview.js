@@ -8,7 +8,7 @@ import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "..
 import {withStyles} from '@material-ui/core/styles';
 import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
-import ShoppingCart from './CartTable'
+import ShoppingCart from '../Cart/CartTable'
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -77,12 +77,6 @@ class ShopOverview extends React.Component {
                         title={'Checkout'}
                     />
                 </Grid>
-                <Grid item >
-                    <ShoppingCart
-                        data={this.props.shoppingCart}
-
-                    />
-                </Grid>
                 <Grid item container spacing={32} md={10}>
 
                     <Grid item xs={6}>
@@ -100,7 +94,6 @@ class ShopOverview extends React.Component {
                     <Grid item xs={6}>
                         <Typography
                             className={classes.title}
-
                             variant={'display1'}>
                             Your Order Summary
                         </Typography>

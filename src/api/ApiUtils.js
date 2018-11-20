@@ -123,6 +123,12 @@ export const getRoutePath = url => {
                     link: '/checkout'
                 })
                 break
+            case n === 'shoppingCart'.toLowerCase():
+                result.push({
+                    label: n,
+                    link: '/shoppingCart'
+                })
+                break
             case !isNaN(n):
                 if (url[i - 1] === 'shop')
                     result.push({

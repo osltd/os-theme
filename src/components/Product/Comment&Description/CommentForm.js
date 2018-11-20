@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Grid} from '@material-ui/core';
+import {Button, Grid} from '@material-ui/core';
 import InputBar from '../../Widget/InputBar'
-import Button from '../../Widget/Button'
 
 const styles = theme => ({});
 
@@ -66,12 +65,10 @@ class OutlinedTextFields extends React.Component {
                 </Grid>
                 <Grid item>
                     <Button
-                        value={'submit'}
-                        border
-
-                    />
+                        variant={'outlined'}>
+                        Submit
+                    </Button>
                 </Grid>
-
             </Grid>
 
         );
