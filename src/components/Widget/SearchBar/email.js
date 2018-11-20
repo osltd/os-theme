@@ -15,15 +15,15 @@ const styles = theme => ({
     },
     textField: {
         color: 'white',
-/* border: 1px solid white; */
-padding: '10px 20px',
-width: '370px',
-flexBasis: '200px',
-borderRadius: '5px',
-background: '#000',
-        border:'1px solid '+theme.palette.secondary.light,
+        /* border: 1px solid white; */
+        padding: '10px 20px',
+        width: '370px',
+        flexBasis: '200px',
+        borderRadius: '5px',
+        background: '#000',
+        border: '1px solid ' + theme.palette.secondary.light,
     }, icon: {
-        margin:'auto',
+        margin: 'auto',
 
         '&:before': {
             fontSize: '18px',

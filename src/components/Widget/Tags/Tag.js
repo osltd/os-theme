@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography,Button} from '@material-ui/core'
+import {Button} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import classNames from 'classnames'
@@ -56,7 +56,7 @@ class CustomButton extends React.Component {
 
         return (
             <Button variant="extendedFab"
-                    onClick={()=>onClick()}
+                    onClick={() => onClick()}
                     className={classNames(classes.root,
                         selected ? classes.selected : null)}>
                 {value}

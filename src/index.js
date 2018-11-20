@@ -11,7 +11,6 @@ import {ConnectedRouter} from 'react-router-redux';
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-
             <MuiThemeProvider theme={theme}>
                 <App/>
             </MuiThemeProvider>

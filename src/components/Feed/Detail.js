@@ -45,11 +45,8 @@ class ResponsiveDialog extends React.Component {
 
     render() {
 
-        const {
-            classes
+        const {classes} = this.props
 
-
-        } = this.props
         if (this.hasValidFeed()) {
             const feed = this.props.feeds.find(n => n.id.toString() === this.props.match.params.id)
             return (
@@ -89,7 +86,7 @@ class ResponsiveDialog extends React.Component {
                             </Grid>
                             {
                                 feed.sections.map((n, i) =>
-                                    <Fragment>
+                                    <Fragment key={i}>
                                         <Grid item xs={10} key={i}>
                                             <Slick
                                                 data={feed.sections[i].medias.map(n => ({url: n.url,}))}
@@ -108,11 +105,7 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
             )
         } else {
-            return <NotFound
-                msg={"article doesn't exist"}
-
-
-            />
+            return <NotFound msg={"article doesn't exist"}/>
 
 
         }

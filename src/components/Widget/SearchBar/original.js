@@ -7,17 +7,22 @@ import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
+
+
+            border: '1px solid ' + theme.palette.primary.dark,
+            borderRadius: '5px',
+
+
     },
-    textField: {
-        border: '1px solid ' + theme.palette.primary.dark,
-        borderRadius: '5px',
-        padding: '5px 0px',
-    }, icon: {
-        padding: '2px',
+    input:{
+        margin: ' 5px 0 5px 10px ',
+
+    },
+
+    icon: {
+        padding: '10px',
+        margin:'auto',
         '&:before': {
-            fontSize: '30px',
         }
     }
 })
@@ -37,7 +42,11 @@ class OutlinedInputAdornments extends React.Component {
 
         return <Input
             fullWidth={true}
-            className={classNames(classes.textField,)}
+classes={{
+
+    root:classes.root,
+    input:classes.input,
+}}
             variant={'filled'}
             placeholder={placeholder}
             value={value ? value : ''}

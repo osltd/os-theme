@@ -30,7 +30,7 @@ const styles = theme => ({
 
 });
 
-class Header extends React.Component {
+class BodyHeader extends React.Component {
 
 
     componentDidMount() {
@@ -53,7 +53,7 @@ class Header extends React.Component {
             <Grid item xs={4} container justify={'flex-end'}>
                 {routePath.map(
                     (n, i) =>
-                        <Fragment>
+                        <Fragment key={i}>
                             <Grid item>
                                 <Typography variant={'body2'}
                                             onClick={() => this.props.history.push(n.link)}
@@ -72,9 +72,9 @@ class Header extends React.Component {
     }
 }
 
-Header.propTypes = {
+BodyHeader.propTypes = {
 
     classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(Header))
+export default withRouter(withStyles(styles)(BodyHeader))

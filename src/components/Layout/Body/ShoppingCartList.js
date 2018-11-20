@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom'
-import {Button, Grid,Fade, List, Tooltip, Typography, Zoom} from '@material-ui/core';
+import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
@@ -15,12 +15,12 @@ const styles = theme => ({
         maxWidth: '300px',
     },
     list: {
-        overflow:'auto',
+        overflow: 'auto',
         maxHeight: '300px',
         width: '100%',
     },
-    button:{
-        margin:"10px",
+    button: {
+        margin: "10px",
     }
     ,
     binIcon: {
@@ -42,7 +42,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 )
 
-class ShopingCartList extends React.Component {
+class ShoppingCartList extends React.Component {
     state = {
         anchor: 'left',
     };
@@ -71,9 +71,10 @@ class ShopingCartList extends React.Component {
                         {data.length > 0 ? data.map((n, i) =>
 
                             <ListItem
+                                key={i}
                                 component={n.link ? Link : null}
                                 to={n.link && n.link}
-                                button key={i}
+                                button
                                 onClick={n.onClick}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
@@ -93,7 +94,8 @@ class ShopingCartList extends React.Component {
                                                 {refactorTextLength(n.product.name)}
                                             </Typography>
                                             <Typography variant={'caption'}>
-                                                {n.number} X {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                {n.number} X
+                                                $ {n.product.variants.find(variant => variant.id === n.variantId).price
                                             }
                                             </Typography>
                                             <span
@@ -114,12 +116,12 @@ class ShopingCartList extends React.Component {
 
                     </List>
                 </Grid>
-                <Grid item container  justify={'center'} xs={12}>
+                <Grid item container justify={'center'} xs={12}>
                     <Grid item>
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                                href={'/shoppingCart'}>
+                            href={'/shoppingCart'}>
                             View Cart
                         </Button>
                     </Grid>
@@ -137,8 +139,8 @@ class ShopingCartList extends React.Component {
     }
 }
 
-ShopingCartList.propTypes = {
+ShoppingCartList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopingCartList))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartList))

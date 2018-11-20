@@ -92,10 +92,10 @@ class ResponsiveDialog extends React.Component {
                         <Grid item container direction={'row'}>
                             <Typography component={'del'} variant={'subheading'}
                                         className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                            <Typography variant={'Caption'}
+                            <Typography variant={'caption'}
                                         className={classes.price}>${formatMoney(promotePrice)}</Typography>
                         </Grid>
-                        : <Typography variant={'Caption'}
+                        : <Typography variant={'caption'}
                                       className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
                 }

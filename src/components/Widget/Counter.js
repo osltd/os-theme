@@ -30,23 +30,9 @@ const styles = theme => {
 }
 
 class Counter extends React.Component {
-    handleChange = number => {
-        this.setState({
-            number: number
-
-        });
-    };
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            number: 1,
-
-        }
-    }
 
     render() {
-        const {classes, number,onChange} = this.props;
+        const {classes, number, onChange} = this.props;
         return (
             <Grid container alignItems={'center'} className={classes.root}>
                 <Grid item>
@@ -57,8 +43,8 @@ class Counter extends React.Component {
                 </Grid>
                 <Grid item>
                     <Input
-                        value={ number?number:onChange(1)}
-                        onChange={e => onChange(e.target.value>0?e.target.value:1)}
+                        value={number ? number : onChange(1)}
+                        onChange={e => onChange(e.target.value > 0 ? e.target.value : 1)}
                         type="number"
                         className={classes.input}
 

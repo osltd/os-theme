@@ -14,8 +14,8 @@ const styles = theme => ({
         backgroundColor: 'black',
         color: 'white',
     },
-    emailBar:{
-        marginBottom:'30px',
+    emailBar: {
+        marginBottom: '30px',
     }
 });
 
@@ -25,7 +25,8 @@ class Footer extends React.Component {
         const {classes} = this.props;
         return (
             <Grid container justify={'space-between'} spacing={16} className={classes.root}>
-                <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar} alignItems={'center'} justify={'center'}>
+                <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
+                      alignItems={'center'} justify={'center'}>
                     <Grid item>
                         <Typography variant={'subheading'} color={'inherit'}>
                             NEWSLETTER
@@ -70,15 +71,15 @@ class Footer extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item xs={3} container direction={'column'} spacing={8}>
-                    <Grid item >
-                    <Typography variant={'title'} color={'inherit'}>
-                        USEFUL LINKS</Typography>
+                    <Grid item>
+                        <Typography variant={'title'} color={'inherit'}>
+                            USEFUL LINKS</Typography>
                     </Grid>
-                    <Grid item >
+                    <Grid item>
                         <FooterList/>
                     </Grid>
                 </Grid>
-                <Grid item xs={3} container  direction={'column'} spacing={8}>
+                <Grid item xs={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
                             FIND US ON</Typography>
@@ -97,7 +98,7 @@ class Footer extends React.Component {
                     <Grid item>
                         <Tag
 
-                        value={'color'}
+                            value={'color'}
                         />
                         <Tag
                             value={'gaming'}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Table,Button} from '@material-ui/core';
+import {Button, Table} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -38,6 +38,9 @@ const styles = theme => ({
                 color: '#ff8173',
             }
         }
+    },
+    button:{
+        margin:'20px 0',
     },
     counter: {
         minWidth: '170px',
@@ -96,15 +99,13 @@ class OrderSummary extends React.Component {
             <Paper className={classes.root}>
                 <Table className={classes.table}>
                     <TableHead>
-                        <TableRow
-                        >
+                        <TableRow>
+                            <TableCell className={classes.block}>Product</TableCell>
                             <TableCell
                                 className={classes.block}
-
-                            >Image</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>Product</TableCell>
+                                numeric>
+                                Price
+                            </TableCell>
 
                         </TableRow>
                     </TableHead>
@@ -112,34 +113,20 @@ class OrderSummary extends React.Component {
                         {shoppingCart.map((n, i) => {
                             return (
                                 <TableRow key={i}>
-                                    <TableCell
-                                        className={classes.block}
-                                    >
-                                        {refactorTitle(n.product.name)} X {n.number} ( {n.product.variants.find(variant => variant.id === n.variantId).description})
-
+                                    <TableCell className={classes.block}>
+                                        {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
                                     </TableCell>
-                                    <TableCell
-                                        className={classes.block}
-                                        numeric>
-                                        {
-                                            '$ ' + formatMoney(
-                                                n.product.variants.find(variant => variant.id === n.variantId).price * n.number
-                                            )
-
-
-                                        }
+                                    <TableCell className={classes.block} numeric>
+                                        {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
                                     </TableCell>
-
                                 </TableRow>
                             );
                         })}
-                    <TableRow>
-
-                        <TableCell colSpan={2}>
-                            <RadioList/>
-                        </TableCell>
-                    </TableRow> <TableRow>
-
+                        <TableRow>
+                            <TableCell colSpan={2}>
+                                <RadioList/>
+                            </TableCell>
+                        </TableRow> <TableRow>
                         <TableCell colSpan={2}>
                             <Terms/>
                         </TableCell>
@@ -148,7 +135,9 @@ class OrderSummary extends React.Component {
                         <TableRow>
 
                             <TableCell colSpan={2}>
-                                <Button  variant={'outlined'} color={'primary'}
+                                <Button
+                                    className={classes.button}
+                                    variant={'outlined'} color={'primary'}
                                         onClick={this.saveDraftToCart}
                                 >
                                     Place Order

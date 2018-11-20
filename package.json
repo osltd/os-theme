@@ -1,6 +1,7 @@
 {
-  "name": "fool-club",
+  "name": "osTheme",
   "version": "0.1.0",
+  "homepage": "http://www.so2die.com",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.1",

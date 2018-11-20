@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Grid,Button} from '@material-ui/core'
+import {Button, Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -9,7 +9,7 @@ const styles = theme => ({
         padding: '5px 0px',
         display: 'inline-block',
     }, color: {
-        margin:'5px',
+        margin: '5px',
         cursor: 'pointer',
     }
 })
@@ -24,25 +24,25 @@ class ColorPicker extends React.Component {
                 {
                     colors.map(
                         (n, i) =>
-                        <Button variant="extendedFab"
-                                children={<span/>}
-                            onClick={() => onClick(n)}
-                            key={i} className={classes.color} style={
-                            selectedColor === n ? {
-                                color:n,
-                                border: '5px solid ' + n,
-                                backgroundColor: 'white',
+                            <Button variant="extendedFab"
+                                    children={<span/>}
+                                    onClick={() => onClick(n)}
+                                    key={i} className={classes.color} style={
+                                selectedColor === n ? {
+                                    color: n,
+                                    border: '5px solid ' + n,
+                                    backgroundColor: 'white',
 
-                            } : {
-                                backgroundColor: n,
-                                color:n,
+                                } : {
+                                    backgroundColor: n,
+                                    color: n,
 
-                                border: '5px solid ' + n,
+                                    border: '5px solid ' + n,
 
-                            }
+                                }
 
 
-                        }/>
+                            }/>
                     )
                 }
             </Grid>

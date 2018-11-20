@@ -40,17 +40,14 @@ const styles = theme => ({
         fontFamily: 'arial',
         lineHeight: 1,
     },
-    description:{
-        lineHeight:'25px',
-        color:'#333',
-        fontSize:'15px',
-        marginBottom:'10px',
+    description: {
+        lineHeight: '25px',
+        color: '#333',
+        fontSize: '15px',
+        marginBottom: '10px',
     }
 
 })
-
-
-
 
 
 class ResponsiveDialog extends React.Component {
@@ -103,7 +100,8 @@ class ResponsiveDialog extends React.Component {
                                 className={classes.name}
                     >{name}</Typography>
 
-                    <Typography className={classes.description} variant={'caption'}>{refactorParaLength(description,200)}</Typography>
+                    <Typography className={classes.description}
+                                variant={'caption'}>{refactorParaLength(description, 200)}</Typography>
                     {
                         promotePrice ?
                             <Grid item container direction={'row'}>

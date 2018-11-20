@@ -1,9 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter,HashRouter, Route, Switch} from 'react-router-dom';
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'
-import mainPage2 from './MainPage/Overview2'
 import ShoppingCart from './Cart/Overview'
 import Header from './Layout/Header'
 import Shop from './Shop/Overview'
@@ -19,6 +18,7 @@ import {CART_INIT_SHOPPING_CART, INIT_FEEDS, INIT_PRODUCTS} from "../constants/a
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
+
 const mapStateToProps = state => ({});
 
 
@@ -38,9 +38,9 @@ const mapDispatchToProps = dispatch => ({
             )
 
         },
-        initShoppingCart:(data)=>dispatch({
-            type:CART_INIT_SHOPPING_CART,
-            payload:data,
+        initShoppingCart: (data) => dispatch({
+            type: CART_INIT_SHOPPING_CART,
+            payload: data,
         })
 
 
@@ -52,7 +52,6 @@ class App extends React.Component {
     componentDidMount() {
         this.props.initShoppingCart(
             JSON.parse(localStorage.getItem('shoppingCart'))
-
         )
 
         this.props.initApp()
@@ -84,6 +83,7 @@ class App extends React.Component {
 
     }
 }
+
 //todo('add in stock logic')
 
 export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(App))

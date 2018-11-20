@@ -112,8 +112,7 @@ class ShopOverview extends React.Component {
 
         }
     }
-    initPageNumber = length =>
-        this.props.editProductSort('page', numberToPagination(length, null)[0].label)
+    initPageNumber = length => this.props.editProductSort('page', numberToPagination(length, null)[0].label)
 
 
     render() {
@@ -207,7 +206,7 @@ class ShopOverview extends React.Component {
                             {this.props.viewMode === 'form' ?
 
                                 this.getProductProperty(products, 'display').map((n, i) =>
-                                    <Grid item xs={3} key={i}
+                                    <Grid item xs={4} key={i}
                                     >
                                         <ProductOverviewBox
                                             name={refactorTextLength(n.name)}

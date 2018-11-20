@@ -1,14 +1,12 @@
 import React from 'react';
-import {Grid, Divider,Typography} from '@material-ui/core';
-import List from '../Widget/List'
+import {Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
-import classNames from 'classnames';
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
 import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
-import ShoppingCart from '../Cart/CartTable'
+
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -26,13 +24,13 @@ const styles = theme => ({
 
     }, listMode: {
         padding: '20px',
-    },title:{
-       padding:'30px'
+    }, title: {
+        padding: '30px'
     }
 })
 
 const mapStateToProps = state => ({
-    shoppingCart:state.cart.shoppingCart,
+    shoppingCart: state.cart.shoppingCart,
 });
 
 
@@ -65,17 +63,14 @@ const mapDispatchToProps = dispatch => ({
 class ShopOverview extends React.Component {
 
 
-
     render() {
 
         const {classes} = this.props
 
         return (
-            <Grid container  justify={'center'}>
+            <Grid container justify={'center'}>
                 <Grid item sm={12}>
-                    <Header
-                        title={'Checkout'}
-                    />
+                    <Header title={'Checkout'}/>
                 </Grid>
                 <Grid item container spacing={32} md={10}>
 
@@ -89,8 +84,6 @@ class ShopOverview extends React.Component {
                         <Divider/>
                         <BillingDetails/>
                     </Grid>
-
-
                     <Grid item xs={6}>
                         <Typography
                             className={classes.title}

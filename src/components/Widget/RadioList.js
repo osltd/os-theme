@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Radio,Tooltip} from '@material-ui/core';
+import {Radio} from '@material-ui/core';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,12 +25,12 @@ class RadioButtonsGroup extends React.Component {
     };
 
     handleChange = event => {
-console.log(event.target.value)
+        console.log(event.target.value)
         this.setState({value: event.target.value});
     };
 
     render() {
-        const {classes,title} = this.props;
+        const {classes, title} = this.props;
 
         return (
             <FormControl component="fieldset" className={classes.formControl}>
@@ -48,16 +48,8 @@ console.log(event.target.value)
                     <FormControlLabel value="Cash On Delivery" control={<Radio/>} label="Cash On Delivery"/>
 
                     <FormControlLabel value="Direct Bank Transfer"
-                                      control={
-
-                        <Radio
-
-
-
-                    />
-
-
-                    } label="Direct Bank Transfer"/>
+                                      control={<Radio/>}
+                                      label="Direct Bank Transfer"/>
 
                     <FormControlLabel value="Pay with Check" control={<Radio/>} label="Pay with Check"/>
 

@@ -4,7 +4,6 @@ import {withStyles} from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import classNames from 'classnames'
 import {withRouter} from "react-router-dom";
 
@@ -15,21 +14,22 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     listItem: {
-        borderBottom: '1px solid '+theme.palette.secondary.light,
-        textTransform:'uppercase',
-        '& > p':{
-            color:theme.palette.secondary.light,
+        borderBottom: '1px solid ' + theme.palette.secondary.light,
+        textTransform: 'uppercase',
+        '& > p': {
+            color: theme.palette.secondary.light,
         }, '&:hover': {
-        '& > p':{
-           color:theme.palette.primary.dark,
-        }
+            '& > p': {
+                color: theme.palette.primary.dark,
+            }
         },
 
     },
     selected: {
-        '& > p':{
-            color:theme.palette.primary.dark,
-        }  },
+        '& > p': {
+            color: theme.palette.primary.dark,
+        }
+    },
     list: {
         maxHeight: '300px',
         overflow: 'auto',

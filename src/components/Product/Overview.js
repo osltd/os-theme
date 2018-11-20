@@ -3,11 +3,10 @@ import {Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
-import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
 import {getVariantOptions, refactorTextLength} from "../../api/ApiUtils"
-import NotFound from '../Layout/NotFound'
+import LoadingPage from '../Layout/LoadingPage'
 
 const styles = theme => {
     return (
@@ -30,16 +29,13 @@ const mapStateToProps = state => ({
 })
 
 
-const mapDispatchToProps = dispatch => ({
-
-    }
+const mapDispatchToProps = dispatch => ({}
 )
 
 class ResponsiveDialog extends React.Component {
     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
 
     render() {
-        const {classes} = this.props
         if (this.hasValidProduct()) {
 
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
@@ -53,28 +49,17 @@ class ResponsiveDialog extends React.Component {
                         route={'HOME/SHOP/SINGLE PRODUCT'}
                     />
                 </Grid>
-                <Grid item xs={10} container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                <Grid item xs={10}>
 
-                    <Grid item xs={7}>
-                        <Detail
-                            variantOptions={Object.values(variantOptions)}
-                            variantKeys={Object.keys(variantOptions)}
-                            description={product.description}
-                            name={refactorTextLength(product.name)}
-                            regPrice={product.variants[0] ? product.variants[0].price : 'not a reg price'}
-                            product={product}
+                    <Detail
+                        variantOptions={Object.values(variantOptions)}
+                        variantKeys={Object.keys(variantOptions)}
+                        description={product.description}
+                        name={refactorTextLength(product.name)}
+                        product={product}
 
-                        />
-                    </Grid>
+                    />
 
-                    <Grid item xs={5}>
-                        <SingleItemImgWall
-                            data={product.photos.map(n => ({
-                                src: n.url,
-                            }))}
-
-                        />
-                    </Grid>
                 </Grid>
                 <Grid item xs={10} container>
 
@@ -86,11 +71,7 @@ class ResponsiveDialog extends React.Component {
         }
 
         else {
-            return <NotFound
-                msg={"product doesn't exist"}
-
-
-            />
+            return <LoadingPage/>
 
 
         }

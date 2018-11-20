@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
-import Shield from "../Layout/ErrorHandling";
-import {Grid } from '@material-ui/core'
+import {Grid} from '@material-ui/core'
 import Header from '../Layout/Body/Header'
 import ShoppingCart from './CartTable'
+
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -65,13 +65,13 @@ class CartOverview extends React.Component {
     render() {
 
         const {classes} = this.props
-        return <Grid container  justify={'center'}>
+        return <Grid container justify={'center'}>
             <Grid item sm={12}>
                 <Header
                     title={'Shopping Cart'}
                 />
             </Grid>
-            <Grid item >
+            <Grid item>
                 <ShoppingCart/>
 
             </Grid></Grid>
