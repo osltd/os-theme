@@ -50,10 +50,7 @@ class CustomButton extends React.Component {
 
     render() {
         const {
-
             classes, link, onClick, value, icon2, icon, border
-
-
         } = this.props;
 
         return (

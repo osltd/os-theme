@@ -130,7 +130,7 @@ class ShopOverview extends React.Component {
 
                     />
                 </Grid>
-                <Grid item lg={10} container>
+                <Grid item lg={10} spacing={16} container>
                     <Grid item xs={12} lg={3}>
                         <List
                             data={getTagsCountsArray(this.props.products, (tag, number) => {
@@ -142,7 +142,7 @@ class ShopOverview extends React.Component {
                         />
 
                     </Grid>
-                    <Grid item sm={12} lg={9}>
+                    <Grid item  sm={12} lg={9}>
                         <Grid item container xs={12} alignItems={'center'} className={classes.toolBar}>
                             <Grid item xs={4}>
                                 <span
@@ -231,7 +231,6 @@ class ShopOverview extends React.Component {
                                     id={n.id}
                                 />))}
                         </Grid>
-
                     </Grid>
 
                 </Grid>
