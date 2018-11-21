@@ -23,7 +23,7 @@ class Footer extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container justify={'space-between'} spacing={16} className={classes.root}>
+            <Grid container justify={'space-between'} className={classes.root}>
                 <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
                       alignItems={'center'} justify={'center'}>
                     <Grid item>
@@ -69,7 +69,7 @@ class Footer extends React.Component {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item  xs={6} md={3} container direction={'column'} spacing={8}>
+                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
                             USEFUL LINKS</Typography>
@@ -90,23 +90,12 @@ class Footer extends React.Component {
                 </Grid>
                 <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
-
-                            TAGS</Typography>
+                        <Typography variant={'title'} color={'inherit'}>TAGS</Typography>
                     </Grid>
                     <Grid item>
-                        <Tag
-
-                            value={'color'}
-                        />
-                        <Tag
-                            value={'gaming'}
-
-                        />
-                        <Tag
-                            value={'gaming'}
-
-                        />
+                        <Tag value={'color'}/>
+                        <Tag value={'gaming'}/>
+                        <Tag value={'gaming'}/>
                     </Grid>
                 </Grid>
 

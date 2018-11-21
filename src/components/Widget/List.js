@@ -55,14 +55,10 @@ class SelectedListItem extends React.Component {
         const {classes, data, title, selectedValue} = this.props;
 
         return (data ? <Fragment>
-                <Typography
+                {
+                    title && <Typography variant={'title'}>{title}</Typography>
 
-                    variant={'title'}
-
-                >
-                    {title}
-                </Typography>
-
+                }
                 <List component="nav" className={classes.list}>
 
                     {data.map((n, i) =>

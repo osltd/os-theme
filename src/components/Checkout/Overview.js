@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {connect} from 'react-redux'
@@ -6,6 +6,8 @@ import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "..
 import {withStyles} from '@material-ui/core/styles';
 import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import Collapse from '../Widget/Collapse'
 
 const styles = theme => ({
     productCategory: {
@@ -72,31 +74,69 @@ class ShopOverview extends React.Component {
                 <Grid item sm={12}>
                     <Header title={'Checkout'}/>
                 </Grid>
-                <Grid item container spacing={32} md={10}>
+                <Grid item container justify={'center'} spacing={32} md={10}>
 
-                    <Grid item xs={6}>
-                        <Typography
-                            className={classes.title}
-                            variant={'display1'}>
-                            Billing Details
+                    {(isWidthUp('md', this.props.width)) ?
+                        (<Fragment>
+                            <Grid item xs={6}>
+                                <Typography
+                                    className={classes.title}
+                                    variant={'display1'}>
+                                    Your Order Summary
+                                </Typography>
+                                <Divider/>
+                                <OrderSummary/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography
+                                    className={classes.title}
+                                    variant={'display1'}>
+                                    Billing Details
 
-                        </Typography>
-                        <Divider/>
-                        <BillingDetails/>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Typography
-                            className={classes.title}
-                            variant={'display1'}>
-                            Your Order Summary
-                        </Typography>
-                        <Divider/>
-                        <OrderSummary/>
-                    </Grid>
+                                </Typography>
+                                <Divider/>
+                                <BillingDetails/>
+                            </Grid>
+                        </Fragment>)
+                        : (<Fragment>
+                            <Grid item xs={11}>
+                                <Collapse
+                                    arrow={true}
+                                    title={<Fragment>
+                                        <Typography
+                                            className={classes.title}
+                                            variant={'display1'}>
+                                            Your Order Summary
+                                        </Typography>
+
+                                        <Divider/>
+                                    </Fragment>}
+                                    collapse={
+                                        <OrderSummary/>
+
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={11}>
+                                        <Typography
+                                            className={classes.title}
+                                            variant={'display1'}>
+                                            Billing Details
+
+                                        </Typography>
+                                        <Divider/>
+                                    <BillingDetails/>
+
+                            </Grid>
+                        </Fragment>)
+
+                    }
                 </Grid>
+
+
             </Grid>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

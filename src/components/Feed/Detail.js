@@ -10,6 +10,8 @@ import List from '../Widget/List'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
+import PopUp from '../Widget/PopUp'
+import Collapse from '../Widget/Collapse'
 const styles = theme => (
     {
         productCategory: {
@@ -64,6 +66,9 @@ class ResponsiveDialog extends React.Component {
                                 })}
                                 link={'/feed'}
                                 title={'FEED CATEGORIES'}/>
+
+
+
                         </Grid>
                         <Grid item container xs={12} md={9}>
                             <Grid item container direction={'row'} alignItems={'center'} spacing={16} xs={12}>

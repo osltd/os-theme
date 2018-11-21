@@ -81,8 +81,6 @@ export const getTagsCountsArray = (products, onClick) => {
 
 export const getRoutePath = url => {
     url = url.split('/')
-    console.log(url)
-
     let result = []
     url.map((n, i) => {
         switch (true) {

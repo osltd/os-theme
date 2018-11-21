@@ -185,12 +185,12 @@ class Header extends React.Component {
                                     </Grid>
                                     <Grid item>
                                         <PopUp
-                                            dropDown={<DropDownList
+                                            popUp={<DropDownList
                                                 data={this.props.shoppingCart}
                                                 onDelete={index => this.props.editShoppingCart(index)}
                                             />
                                             }
-                                            parent={<Button
+                                            title={<Button
                                                 icon={'icon-cart'}
                                                 value={'shopping cart'}
                                             />}
@@ -216,10 +216,10 @@ class Header extends React.Component {
                                     </Grid>
                                     <Grid item>
                                         <PopUp
-                                            dropDown={<DropDownList
+                                            popUp={<DropDownList
                                             />
                                             }
-                                            parent={<Button
+                                            title={<Button
                                                 icon={'icon-cart'}
                                             />}
                                         />

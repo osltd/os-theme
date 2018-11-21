@@ -70,7 +70,7 @@ class AnchorPlayground extends React.Component {
     }
 
     render() {
-        const {classes, dropDown, parent,} = this.props;
+        const {classes, popUp, title,} = this.props;
         const {open} = this.state;
 
         return (
@@ -81,7 +81,7 @@ class AnchorPlayground extends React.Component {
                 container alignItems={'center'}>
 
                 <Grid item className={classes.button} onClick={this.handleClickButton}>
-                    {parent}
+                    {title}
                 </Grid>
                 <Popover
                     open={open}
@@ -97,7 +97,7 @@ class AnchorPlayground extends React.Component {
                         horizontal: 'right',
                     }}
                 >
-                    {dropDown}
+                    {popUp}
                 </Popover>
             </Grid>
         );

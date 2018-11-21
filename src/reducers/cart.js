@@ -85,7 +85,7 @@ export default (state = defaultState, action) => {
                         shoppingCart: shoppingCart,
 
                     }
-                case 'count':
+                default:
                     const {index, count} = action.payload.value
                     shoppingCart[index].number = count
                     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import {TableBody, Tooltip, Typography} from '@material-ui/core';
+import {Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -135,18 +135,18 @@ class ShoppingCartTable extends React.Component {
                                         </TableCell>
 
 
-                                            <TableCell
-                                                className={classes.block}
-                                                numeric>
-                                                <Tooltip
-                                                    title={'( ' + n.product.variants.find(variant => variant.id === n.variantId).description
-                                                    + ' )'}>
-                                                    <div>
-                                                {refactorTitle(n.product.name)
-                                                }</div>
-                                                </Tooltip>
+                                        <TableCell
+                                            className={classes.block}
+                                            numeric>
+                                            <Tooltip
+                                                title={'( ' + n.product.variants.find(variant => variant.id === n.variantId).description
+                                                + ' )'}>
+                                                <div>
+                                                    {refactorTitle(n.product.name)
+                                                    }</div>
+                                            </Tooltip>
 
-                                            </TableCell>
+                                        </TableCell>
 
                                         <TableCell
                                             className={classes.block}
@@ -187,9 +187,15 @@ class ShoppingCartTable extends React.Component {
                             </TableRow>
                         </TableBody>
                     </Table>
-                </Paper> : <Typography variant={'title'}>
-                    there is
-                </Typography>
+                </Paper> : <Grid spacing={32} alignItems={'center'} container>
+                    <span className={'icon-tongue'}/>
+                    <Grid item>
+                        <Typography variant={'title'}>
+                            there is no items in shopping cart
+                        </Typography>
+                    </Grid>
+                </Grid>
+
         );
     }
 }
