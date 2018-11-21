@@ -8,7 +8,6 @@ import Tag from '../Widget/Tags/Tag'
 
 const styles = theme => ({
     root: {
-        width: '100%',
         padding: '50px 100px 100px 100px',
         marginTop: '30px',
         backgroundColor: 'black',
@@ -70,7 +69,7 @@ class Footer extends React.Component {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item xs={3} container direction={'column'} spacing={8}>
+                <Grid item  xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
                             USEFUL LINKS</Typography>
@@ -79,7 +78,7 @@ class Footer extends React.Component {
                         <FooterList/>
                     </Grid>
                 </Grid>
-                <Grid item xs={3} container direction={'column'} spacing={8}>
+                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
                             FIND US ON</Typography>
@@ -89,7 +88,7 @@ class Footer extends React.Component {
                     </Grid>
 
                 </Grid>
-                <Grid item xs={3} container direction={'column'} spacing={8}>
+                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
 

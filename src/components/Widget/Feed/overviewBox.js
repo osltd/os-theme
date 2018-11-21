@@ -1,23 +1,20 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {Button, Grid, Typography} from '@material-ui/core';
 import moment from 'moment'
 import {withStyles} from "@material-ui/core/styles/index";
-import Button from '../Button'
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
 
     root: {
-        maxHeight: '540px',
-        minHeight: '540px',
-        overflow: 'auto',
+        minHeight: '450px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
     },
 
     img: {
         cursor: 'pointer',
         width: '100%',
-        height: '255px !important',
+        height:''
     },
     title: {
         cursor: 'pointer',
@@ -26,6 +23,9 @@ const styles = theme => ({
         }
     },
     content: {},
+    button:{
+        margin:'20px 0'
+    }
 
 })
 
@@ -71,7 +71,7 @@ class ResponsiveDialog extends React.Component {
                     <img src={src}
                          onClick={() => this.props.history.push('/feed/' + id)}
                          className={classes.img}/></Grid>
-                <Grid item direction={'column'} container xs={12} md={11} className={classes.content}>
+                <Grid item direction={'column'} container spacing={8} xs={12} md={11} className={classes.content}>
                     <Grid item>
                         <Typography
                             className={classes.title}
@@ -86,16 +86,19 @@ class ResponsiveDialog extends React.Component {
                     <Grid item>
 
                         <Typography variant={'body1'}
-                                    color={'secondary'}>{subTitle}{subTitle}{subTitle}{subTitle}</Typography>
+                                    color={'secondary'}>{subTitle}</Typography>
                     </Grid>
                     <Grid item>
 
                         <Button
-                            link={'/feed/' + id}
-                            value={'Continue Reading'}
+                            href={'/feed/' + id}
 
-                        />
 
+                            variant={'outlined'}
+                            className={classes.button}
+                        >
+                            Continue Reading
+                        </Button>
                     </Grid>
 
                 </Grid>

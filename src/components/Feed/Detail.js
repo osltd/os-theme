@@ -9,7 +9,7 @@ import moment from 'moment'
 import List from '../Widget/List'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
-
+import LoadingPage from '../Layout/LoadingPage'
 const styles = theme => (
     {
         productCategory: {
@@ -104,11 +104,7 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
                 </Grid>
             )
-        } else {
-            return <NotFound msg={"article doesn't exist"}/>
-
-
-        }
+        } else {return <LoadingPage/>}
     }
 }
 

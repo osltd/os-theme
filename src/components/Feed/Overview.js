@@ -66,8 +66,8 @@ class ResponsiveDialog extends React.Component {
                         title={'BLOG'} route={'HOME/BLOG'}
                     />
                 </Grid>
-                <Grid item container lg={10} spacing={16}>
-                    <Grid item md={3} xs={12}>
+                <Grid item container justify={'center'} xs={12} lg={10} spacing={16}>
+                    <Grid item lg={3} xs={11}>
                         <List
                             data={getTagsCountsArray(this.props.feeds, (tag, number) => {
                                 this.props.editFeedFilter('tag', tag)
@@ -85,9 +85,9 @@ class ResponsiveDialog extends React.Component {
                             placeholder={'type keywords'}
                         />
                     </Grid>
-                    <Grid item container md={9} spacing={32} xs={12}>
+                    <Grid item container lg={9} spacing={32} xs={11}>
                         {feeds && feeds.map((n, i) =>
-                            <Grid item sm={6} xs={12} key={i}>
+                            <Grid item md={6} xs={12} key={i}>
                                 <FeedOverviewBox
                                     id={n.id}
 

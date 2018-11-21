@@ -11,7 +11,7 @@ const styles = theme => ({
     root: {
         marginBottom: '50px',
         padding: '30px 200px',
-        height: '100px',
+        minHeight   : '100px',
         width: '100%',
         background: '#f7f7f7',
     },
@@ -46,11 +46,10 @@ class BodyHeader extends React.Component {
                      alignItems={'center'}
                      justify={'space-between'}
         >
-            <Grid item>
-                <Typography variant={'display1'}
-                            className={classes.title} color={'primary'}>{title}</Typography>
+            <Grid item md={8} xs={12}>
+                <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
-            <Grid item xs={4} container justify={'flex-end'}>
+            <Grid item md={4} container justify={'flex-end'}>
                 {routePath.map(
                     (n, i) =>
                         <Fragment key={i}>

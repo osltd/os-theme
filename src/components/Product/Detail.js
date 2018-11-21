@@ -147,14 +147,16 @@ class ResponsiveDialog extends React.Component {
                                         selectedVariant.price)}</Typography>
                                 }
                             </Grid>
-                            <Grid item container direction={'row'} alignItems={'flex-end'}>
+                            <Grid item container direction={'row'} spacing={8} alignItems={'flex-end'}>
+                                <Grid item >
                                 <Typography variant={'subheading'} className={classes.statusLabel}>
-                                    In Stock</Typography>
+                                    In Stock</Typography></Grid>
+                                <Grid item >
 
                                 <Typography variant={'title'}>
-                                    SKU MH03</Typography>
+                                    SKU MH03</Typography></Grid>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12}>
                                 <Typography variant={'body1'}>
                                     {description}
                                 </Typography>
@@ -176,7 +178,7 @@ class ResponsiveDialog extends React.Component {
 
                             </Grid>
 
-                            <Grid item container direction={'row'} spacing={16}>
+                            <Grid item container direction={'row'} spacing={32}>
                                 <Grid item>
                                     <Counter
                                         number={this.props.draft.number}

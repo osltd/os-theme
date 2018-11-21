@@ -86,9 +86,9 @@ class FeedsWall extends React.Component {
 
                 />
                 <BigFeedBox
-                    link={'/feed/' + data[2].id}
-                    title={refactorTitle(data[2].sections[0].title)}
-                    backgroundImg={data[2].sections[0].medias[0].url}
+                    link={'/feed/' + data[3].id}
+                    title={refactorTitle(data[3].sections[0].title)}
+                    backgroundImg={data[3].sections[0].medias[0].url}
 
                 />
             </Grid>
