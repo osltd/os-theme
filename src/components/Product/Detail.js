@@ -10,6 +10,7 @@ import Tag from '../Widget/Tags/Tag'
 import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART} from "../../constants/actionType";
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import LoadingPage from '../Layout/LoadingPage'
+import {withRouter} from 'react-router-dom'
 
 const styles = theme => {
     return (
@@ -117,6 +118,15 @@ class ResponsiveDialog extends React.Component {
         this.initVariant()
 
     }
+
+    componentDidUpdate(prevProps,prevState,snap) {
+        // Typical usage (don't forget to compare props):
+        if(this.props.location.pathname!==            prevProps.location.pathname
+        )this.initVariant()
+
+    }
+
+
     render() {
 
         const {
@@ -246,4 +256,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))

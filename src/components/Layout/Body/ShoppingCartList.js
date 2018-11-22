@@ -46,8 +46,12 @@ class ShoppingCartList extends React.Component {
     state = {
         anchor: 'left',
     };
-    handleChange = name => event => this.setState({[name]: event.target.value,});
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
 
+        });
+    };
 
     constructor() {
         super()
@@ -71,7 +75,8 @@ class ShoppingCartList extends React.Component {
                             <ListItem
                                 key={i}
                                 button
-                                onClick={n.onClick}>
+
+                                onClick={                               ()=>this.props.history.push('/shop/'+n.product.id)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
                                     title={n.product.variants.find(variant => variant.id === n.variantId).description}>
@@ -80,7 +85,6 @@ class ShoppingCartList extends React.Component {
                                         <Grid item sm={3}>
 
                                             <img
-                                                onClick={()=>this.props.history.push('/shop/'+n.pro)}
                                                 style={{width: '100%', minWidth: '50px'}}
                                                 src={n.product.photos[0].url}
                                             />

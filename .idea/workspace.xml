@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Product/Comment&amp;Description/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Comment&amp;Description/Overview.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Product/Detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Detail.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +26,29 @@
       <file leaf-file-name="Detail.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Product/Detail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+            <state relative-caret-position="219">
+              <caret line="123" selection-start-line="123" selection-end-line="123" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lib.dom.d.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="3016" column="4" selection-start-line="3016" selection-start-column="4" selection-end-line="3016" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShoppingCartList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="78" column="123" selection-start-line="78" selection-start-column="123" selection-end-line="78" selection-end-column="123" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,7 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>spacing=</find>
       <find>spacing</find>
       <find>.map(</find>
       <find>ResponsiveDialog</find>
@@ -76,6 +93,7 @@
       <find>:null</find>
       <find>withW</find>
       <find>this.props.hi</find>
+      <find>withRouter</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -411,12 +429,12 @@
       <option name="presentableId" value="Default" />
       <updated>1541663714045</updated>
       <workItem from="1541663715351" duration="2241000" />
-      <workItem from="1541666470268" duration="191125000" />
+      <workItem from="1541666470268" duration="192824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193366000" />
+    <option name="totallyTimeSpent" value="195065000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -494,13 +512,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/agents/Products.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -819,16 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Checkout/Overview.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
@@ -896,10 +897,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="78" column="123" selection-start-line="78" selection-start-column="123" selection-end-line="78" selection-end-column="123" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="3016" column="4" selection-start-line="3016" selection-start-column="4" selection-end-line="3016" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Product/Detail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="118" column="5" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+        <state relative-caret-position="219">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>
