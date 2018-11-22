@@ -118,14 +118,14 @@ class ShopOverview extends React.Component {
                                 />
                             </Grid>
                             <Grid item xs={11}>
-                                        <Typography
-                                            className={classes.title}
-                                            variant={'display1'}>
-                                            Billing Details
+                                <Typography
+                                    className={classes.title}
+                                    variant={'display1'}>
+                                    Billing Details
 
-                                        </Typography>
-                                        <Divider/>
-                                    <BillingDetails/>
+                                </Typography>
+                                <Divider/>
+                                <BillingDetails/>
 
                             </Grid>
                         </Fragment>)

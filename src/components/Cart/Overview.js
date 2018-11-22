@@ -74,7 +74,8 @@ class CartOverview extends React.Component {
             <Grid item>
                 <ShoppingCart/>
 
-            </Grid></Grid>
+            </Grid>
+        </Grid>
 
     }
 }

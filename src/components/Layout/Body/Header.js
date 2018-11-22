@@ -5,12 +5,12 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import {withRouter} from "react-router-dom";
 import {getRoutePath} from "../../../api/ApiUtils";
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme => ({
 
     root: {
         marginBottom: '50px',
-        padding: '30px 200px',
         minHeight   : '100px',
         width: '100%',
         background: '#f7f7f7',
@@ -37,19 +37,19 @@ class BodyHeader extends React.Component {
     }
 
     render() {
-        console.log()
         const {classes, title} = this.props;
         const routePath = getRoutePath(this.props.match.url)
         return <Grid container
                      className={classes.root}
                      direction={'row'}
                      alignItems={'center'}
-                     justify={'space-between'}
+                     justify={'center'}
         >
-            <Grid item md={8} xs={12}>
+            <Grid item md={2}/>
+            <Grid item md={5} xs={12} container justify={isWidthUp('md',this.props.width)?'flex-start':'center'}>
                 <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
-            <Grid item md={4} container justify={'flex-end'}>
+            <Grid item md={3} xs={11} container justify={isWidthUp('md',this.props.width)?'flex-end':'center'}>
                 {routePath.map(
                     (n, i) =>
                         <Fragment key={i}>
@@ -67,6 +67,9 @@ class BodyHeader extends React.Component {
                         </Fragment>
                 )}
             </Grid>
+            <Grid item  md={2}/>
+
+
         </Grid>
     }
 }
@@ -76,4 +79,4 @@ BodyHeader.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withStyles(styles)(BodyHeader))
+export default withWidth()(withRouter(withStyles(styles)(BodyHeader)))

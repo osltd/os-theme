@@ -12,7 +12,7 @@ import classNames from "classnames";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART} from "../../constants/actionType";
-
+import logo from '../../constants/img/Logo.jpg'
 const styles = theme => ({
     logo: {
         cursor: 'pointer',

@@ -10,6 +10,8 @@ import WhiteDropDown from '../Widget/WhiteDropDown'
 import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {arrayToFilter, getTagsCountsArray, numberToPagination, refactorTextLength, sort_by} from "../../api/ApiUtils";
 import ProductOverviewBox from '../Widget/Product/overviewBox'
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import PopUp from '../Widget/PopUp'
 
 const styles = theme => ({
     productCategory: {
@@ -28,6 +30,9 @@ const styles = theme => ({
 
     }, listMode: {
         padding: '20px',
+    },
+    array: {
+        paddingLeft: '5px',
     }
 })
 
@@ -113,6 +118,15 @@ class ShopOverview extends React.Component {
         }
     }
     initPageNumber = length => this.props.editProductSort('page', numberToPagination(length, null)[0].label)
+    getTagsList = () => <List
+        data={getTagsCountsArray(this.props.products, (tag, number) => {
+            this.popUp && this.popUp.handleClose()
+
+            this.props.editProductFilter('tag', tag)
+            this.initPageNumber(number)
+        })}
+        selectedValue={this.props.filter.tag}
+    />
 
 
     render() {
@@ -123,28 +137,29 @@ class ShopOverview extends React.Component {
         const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
         return (
             <Grid container justify={'center'}>
-                <Grid item sm={12}>
+                <Grid item xs={12}>
                     <Header
                         title={'shop'}
                         route={'home/shop'}
 
                     />
                 </Grid>
-                <Grid item lg={10} spacing={16} container>
-                    <Grid item xs={12} lg={3}>
-                        <List
-                            data={getTagsCountsArray(this.props.products, (tag, number) => {
-                                this.props.editProductFilter('tag', tag)
-                                this.initPageNumber(number)
-                            })}
-                            selectedValue={this.props.filter.tag}
-                            title={'PRODUCT CATEGORIES'}
-                        />
+                <Grid item lg={10} spacing={ isWidthUp('md', this.props.width)?16:0} container>
+                    {
 
-                    </Grid>
-                    <Grid item  sm={12} lg={9}>
-                        <Grid item container xs={12} alignItems={'center'} className={classes.toolBar}>
-                            <Grid item xs={4}>
+                        isWidthUp('md', this.props.width) ?
+                            <Grid item md={3}>
+                                <Typography variant={'title'}>
+                                    PRODUCT CATEGORIES
+                                </Typography>
+                                {this.getTagsList()}
+                            </Grid> : null
+
+                    }
+                    <Grid item xs={12} md={9}>
+                        <Grid item container xs={12} alignItems={'center'} justify={'space-between'} direction={'row'}
+                              className={classes.toolBar}>
+                            <Grid item xs={2}>
                                 <span
                                     onClick={() => this.props.changeViewMode('form')}
                                     className={classNames(classes.icon, 'icon-table')}/>
@@ -152,7 +167,7 @@ class ShopOverview extends React.Component {
                                     onClick={() => this.props.changeViewMode('list')}
                                     className={classNames('icon-list', classes.icon)}/>
                             </Grid>
-                            <Grid item xs={4} container alignItems={'center'} direction={'row'}>
+                            <Grid item xs={3} container alignItems={'center'} direction={'row'}>
                                 <Grid item>
                                     <Typography variant={'body2'}>
                                         Items
@@ -178,7 +193,7 @@ class ShopOverview extends React.Component {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                            <Grid item container xs={4} alignItems={'center'} direction={'row'}>
+                            <Grid item xs={3} container alignItems={'center'} direction={'row'}>
 
                                 <Grid item>
                                     <Typography variant={'body2'}>
@@ -200,6 +215,34 @@ class ShopOverview extends React.Component {
                                     />
                                 </Grid>
                             </Grid>
+                            {
+                                isWidthUp('md', this.props.width) ? null : <Grid item>
+                                    <PopUp
+                                        innerRef={e => this.popUp = e}
+
+                                        title={
+                                            <Grid container alignItems={'center'}>
+                                                <Typography variant={'body2'}>
+
+                                                    {this.props.filter.tag ?
+                                                        <Typography variant={'body2'}>
+
+                                                            {'tags:' + this.props.filter.tag}
+                                                        </Typography>
+                                                        :
+                                                        'Product Category'
+                                                    }
+                                                </Typography>
+
+                                                <span className={classes.array + ' ' + 'icon-circle-down'}/>
+                                            </Grid>
+
+                                        }
+                                        popUp={this.getTagsList()}
+                                    />
+
+                                </Grid>
+                            }
                         </Grid>
                         <Grid item container className={classes.listMode}>
 
@@ -217,10 +260,7 @@ class ShopOverview extends React.Component {
                                             promotePrice={n.promotePrice}
                                         />
                                     </Grid>
-                                )
-
-                                :
-                                this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
+                                ) : this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
                                     key={i}
                                     src={n.photos[0].url}
                                     name={refactorTextLength(n.name)}
@@ -239,4 +279,4 @@ class ShopOverview extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

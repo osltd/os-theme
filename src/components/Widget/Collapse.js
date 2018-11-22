@@ -6,18 +6,18 @@ import Collapse from '@material-ui/core/Collapse';
 
 const styles = theme => ({
     root: {
-        width:'100%'
+        width: '100%'
     },
     container: {
         display: 'flex',
     },
-    title:{
-        cursor:'pointer',
+    title: {
+        cursor: 'pointer',
     },
-    arrow:{
-        '&:before':{
-            fontSize:'30px',
-            color:theme.palette.secondary.dark,
+    arrow: {
+        '&:before': {
+            fontSize: '30px',
+            color: theme.palette.secondary.dark,
         }
 
     }
@@ -34,20 +34,20 @@ class SimpleCollapse extends React.Component {
     };
 
     render() {
-        const {classes, title, collapse,arrow} = this.props;
+        const {classes, title, collapse, arrow} = this.props;
         const {checked} = this.state;
 
         return (
-            <Grid container  className={classes.root}>
+            <Grid container className={classes.root}>
                 <Grid item container alignItems={'center'} className={classes.title} onClick={this.handleChange}>
-                    <Grid item >
+                    <Grid item>
 
-                    {title}
+                        {title}
                     </Grid>
                     {
                         arrow &&
-                        <Grid item >
-                            <span className={classes.arrow+' '+(checked?'icon-circle-down':'icon-circle-up')}/>
+                        <Grid item>
+                            <span className={classes.arrow + ' ' + (checked ? 'icon-circle-down' : 'icon-circle-up')}/>
                         </Grid>
                     }
                 </Grid>

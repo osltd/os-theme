@@ -39,7 +39,7 @@ const styles = theme => ({
 });
 
 
-class AnchorPlayground extends React.Component {
+class PopUp extends React.Component {
 
     anchorEl = null;
     handleChange = key => (event, value) => {
@@ -104,8 +104,8 @@ class AnchorPlayground extends React.Component {
     }
 }
 
-AnchorPlayground.propTypes = {
+PopUp.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AnchorPlayground)
+export default withStyles(styles)(PopUp)

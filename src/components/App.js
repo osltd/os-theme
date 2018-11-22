@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,HashRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'

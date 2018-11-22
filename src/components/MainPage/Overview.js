@@ -83,7 +83,7 @@ class ResponsiveDialog extends React.Component {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={10}>
+                    <Grid item xs={12} md={10}>
                         <MultiRows
                             data={this.props.products}
                         />
@@ -108,7 +108,7 @@ class ResponsiveDialog extends React.Component {
 
                     </Grid>
 
-                    <Grid item xs={9}>
+                    <Grid item xs={12} md={9}>
                         <MultiItems
                             data={this.props.products}
                         />

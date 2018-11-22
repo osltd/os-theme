@@ -9,6 +9,7 @@ import SearchBar from '../Widget/SearchBar/original'
 import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
+import LoadingPage from '../Layout/LoadingPage'
 
 const styles = theme => {
     return (
@@ -60,33 +61,39 @@ class ResponsiveDialog extends React.Component {
         const feeds = this.sortData()
         return (
 
-            <Grid container justify={'center'}>
+            <Grid container  justify={'center'}>
                 <Grid item xs={12}>
                     <Header
                         title={'BLOG'} route={'HOME/BLOG'}
                     />
                 </Grid>
-                <Grid item container justify={'center'} xs={12} lg={10} spacing={16}>
-                    <Grid item lg={3} xs={11}>
-                        <List
-                            data={getTagsCountsArray(this.props.feeds, (tag, number) => {
-                                this.props.editFeedFilter('tag', tag)
-                            })}
-                            selectedValue={this.props.filter.tag}
-                            title={'FEED CATEGORIES'}/>
+                <Grid item container justify={'center'} xs={12} lg={11} spacing={16}>
+                    <Grid item lg={3} container direction={'column'} spacing={16} xs={11}>
+                        <Grid item >
                         <Typography
                             variant={'title'}
                         >
                             SEARCH
                         </Typography>
+                        </Grid>
+                        <Grid item >
                         <SearchBar
                             value={this.props.filter.keyword}
                             onChange={value => this.props.editFeedFilter('keyword', value)}
                             placeholder={'type keywords'}
                         />
+                        </Grid>
+                        <Grid item>
+                        <List
+                            data={getTagsCountsArray(this.props.feeds, (tag, number) => {
+                                this.props.editFeedFilter('tag', tag)
+                            })}
+                            selectedValue={this.props.filter.tag}
+                            title={'FEED CATEGORIES'}/></Grid>
+
                     </Grid>
                     <Grid item container lg={9} spacing={32} xs={11}>
-                        {feeds && feeds.map((n, i) =>
+                        {feeds ? feeds.map((n, i) =>
                             <Grid item md={6} xs={12} key={i}>
                                 <FeedOverviewBox
                                     id={n.id}
@@ -98,7 +105,7 @@ class ResponsiveDialog extends React.Component {
                                     postDate={n.postDate}
                                     comments={0}
                                 />
-                            </Grid>)}
+                            </Grid>):<LoadingPage/>}
                     </Grid>
                 </Grid>
             </Grid>

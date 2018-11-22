@@ -148,13 +148,13 @@ class ResponsiveDialog extends React.Component {
                                 }
                             </Grid>
                             <Grid item container direction={'row'} spacing={8} alignItems={'flex-end'}>
-                                <Grid item >
-                                <Typography variant={'subheading'} className={classes.statusLabel}>
-                                    In Stock</Typography></Grid>
-                                <Grid item >
+                                <Grid item>
+                                    <Typography variant={'subheading'} className={classes.statusLabel}>
+                                        In Stock</Typography></Grid>
+                                <Grid item>
 
-                                <Typography variant={'title'}>
-                                    SKU MH03</Typography></Grid>
+                                    <Typography variant={'title'}>
+                                        SKU MH03</Typography></Grid>
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant={'body1'}>
@@ -234,7 +234,8 @@ class ResponsiveDialog extends React.Component {
                         </Grid>
                     </Grid>
                     <Grid item xs={5}>
-                        <SingleItemImgWall data={(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({src: n.url,}))}/>
+                        <SingleItemImgWall
+                            data={(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({src: n.url,}))}/>
                     </Grid>
                 </Grid> : <LoadingPage/>
 

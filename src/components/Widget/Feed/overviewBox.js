@@ -14,7 +14,7 @@ const styles = theme => ({
     img: {
         cursor: 'pointer',
         width: '100%',
-        height:''
+        height: ''
     },
     title: {
         cursor: 'pointer',
@@ -23,8 +23,8 @@ const styles = theme => ({
         }
     },
     content: {},
-    button:{
-        margin:'20px 0'
+    button: {
+        margin: '20px 0'
     }
 
 })

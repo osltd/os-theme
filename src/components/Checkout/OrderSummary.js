@@ -39,8 +39,8 @@ const styles = theme => ({
             }
         }
     },
-    button:{
-        margin:'20px 0',
+    button: {
+        margin: '20px 0',
     },
     counter: {
         minWidth: '170px',
@@ -138,7 +138,7 @@ class OrderSummary extends React.Component {
                                 <Button
                                     className={classes.button}
                                     variant={'outlined'} color={'primary'}
-                                        onClick={this.saveDraftToCart}
+                                    onClick={this.saveDraftToCart}
                                 >
                                     Place Order
                                 </Button>

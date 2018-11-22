@@ -6,8 +6,6 @@ import category from './reducers/category'
 import cart from './reducers/cart'
 
 
-
-
 export default combineReducers({
     product,
     feed,
