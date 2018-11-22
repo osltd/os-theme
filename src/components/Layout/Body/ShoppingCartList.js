@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {refactorTextLength} from "../../../api/ApiUtils";
@@ -46,12 +46,8 @@ class ShoppingCartList extends React.Component {
     state = {
         anchor: 'left',
     };
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
+    handleChange = name => event => this.setState({[name]: event.target.value,});
 
-        });
-    };
 
     constructor() {
         super()
@@ -61,6 +57,7 @@ class ShoppingCartList extends React.Component {
         }
     }
 
+
     render() {
         const {classes, data, onDelete} = this.props;
 
@@ -68,12 +65,11 @@ class ShoppingCartList extends React.Component {
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
                     <List className={classes.list} component="nav">
+                        {console.log(this.props)}
                         {data.length > 0 ? data.map((n, i) =>
 
                             <ListItem
                                 key={i}
-                                component={n.link ? Link : null}
-                                to={n.link && n.link}
                                 button
                                 onClick={n.onClick}>
                                 <Tooltip
@@ -84,6 +80,7 @@ class ShoppingCartList extends React.Component {
                                         <Grid item sm={3}>
 
                                             <img
+                                                onClick={()=>this.props.history.push('/shop/'+n.pro)}
                                                 style={{width: '100%', minWidth: '50px'}}
                                                 src={n.product.photos[0].url}
                                             />
@@ -143,4 +140,4 @@ ShoppingCartList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartList))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartList)))

@@ -101,12 +101,7 @@ class OrderSummary extends React.Component {
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.block}>Product</TableCell>
-                            <TableCell
-                                className={classes.block}
-                                numeric>
-                                Price
-                            </TableCell>
-
+                            <TableCell className={classes.block} numeric>Price</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -117,7 +112,7 @@ class OrderSummary extends React.Component {
                                         {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
                                     </TableCell>
                                     <TableCell className={classes.block} numeric>
-                                        {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
+                                        {'$ ' +formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
                                     </TableCell>
                                 </TableRow>
                             );
@@ -126,22 +121,19 @@ class OrderSummary extends React.Component {
                             <TableCell colSpan={2}>
                                 <RadioList/>
                             </TableCell>
-                        </TableRow> <TableRow>
-                        <TableCell colSpan={2}>
-                            <Terms/>
-                        </TableCell>
-                    </TableRow>
-
+                        </TableRow>
                         <TableRow>
-
+                            <TableCell colSpan={2}>
+                                <Terms/>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
                             <TableCell colSpan={2}>
                                 <Button
                                     className={classes.button}
                                     variant={'outlined'} color={'primary'}
                                     onClick={this.saveDraftToCart}
-                                >
-                                    Place Order
-                                </Button>
+                                >Place Order</Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>

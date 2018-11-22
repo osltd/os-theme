@@ -101,10 +101,12 @@ class ResponsiveDialog extends React.Component {
         let selectedDescription = []
         key.map((keyName, index) => (keyName !== 'number') ? selectedDescription.push(keyName + ':' + value[index]) : null)
         const isSelectedProduct = variants => (!selectedDescription.map(description => variants.description.split(',').includes(description)).includes(false))
+
         return product.variants.find(n => isSelectedProduct(n))
 
     }
     initVariant = () => {
+        console.log('init')
         const {variantKeys, variantOptions} = this.props
         this.props.emptyCartVariant()
         variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false))
@@ -115,7 +117,6 @@ class ResponsiveDialog extends React.Component {
         this.initVariant()
 
     }
-
     render() {
 
         const {

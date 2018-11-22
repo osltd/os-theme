@@ -39,17 +39,27 @@ class Overview extends React.Component {
                 <Grid item xs={12}>
                     <NavBar/>
                 </Grid>
-                <Grid item md={7} xs={12} className={classes.body}>
+                <Grid item container md={7} xs={12} className={classes.body}>
                     {this.props.section === 'Comments' ?
-                        <Fragment>
+                        <Grid item container spacing={16}>
+                            <Grid item >
                             <RatingBar/>
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
-                            <Comment/>
+                            </Grid>
+                            <Grid item >
+                                <Comment/>
+                            </Grid>
+                            <Grid item >
+                                <Comment/></Grid>
+                            <Grid item >
+                                <Comment/></Grid>
+                            <Grid item >
+                                <Comment/></Grid>
+                            <Grid item >
+                                <Comment/></Grid>
+<Grid item>
                             <CommentForm/>
-                        </Fragment> : <Description
+</Grid>
+                        </Grid> : <Description
 
                             content={content}
 
