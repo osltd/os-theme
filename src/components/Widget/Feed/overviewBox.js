@@ -3,6 +3,7 @@ import {Button, Grid, Typography} from '@material-ui/core';
 import moment from 'moment'
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
+import {Link} from 'react-router-dom'
 
 const styles = theme => ({
 
@@ -76,7 +77,6 @@ class ResponsiveDialog extends React.Component {
                         <Typography
                             className={classes.title}
                             onClick={() => this.props.history.push('/feed/' + id)}
-
                             variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>
                     <Grid item>
@@ -84,25 +84,18 @@ class ResponsiveDialog extends React.Component {
                             {'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                     </Grid>
                     <Grid item>
-
-                        <Typography variant={'body1'}
-                                    color={'secondary'}>{subTitle}</Typography>
+                        <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>
                     </Grid>
                     <Grid item>
-
                         <Button
-                            href={'/feed/' + id}
-
-
+                            onClick={() => this.props.history.push('/feed/' + id)}
                             variant={'outlined'}
                             className={classes.button}
                         >
                             Continue Reading
                         </Button>
                     </Grid>
-
                 </Grid>
-
             </Grid>
         );
     }

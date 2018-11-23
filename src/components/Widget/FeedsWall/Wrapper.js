@@ -80,9 +80,7 @@ class FeedsWall extends React.Component {
 
                             variant={'subheading'}
                         >
-                            {data[2].sections[0].title}          </Typography>)
-
-                        }
+                            {data[2].sections[0].title}          </Typography>)}
 
                 />
                 <BigFeedBox

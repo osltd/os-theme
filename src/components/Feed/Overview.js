@@ -47,21 +47,20 @@ const mapDispatchToProps = dispatch => ({
 
 class ResponsiveDialog extends React.Component {
 
-    sortData = () => (this.props.feeds) ?
-        Array.from(this.props.feeds).filter(n =>
-            (
-                ((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) &&
-                ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true)
-            )
-        ) : null
-
 
     render() {
         const {classes} = this.props
-        const feeds = this.sortData()
+        const feeds = (this.props.feeds) ?
+         this.props.feeds.filter(n =>
+                (
+                    ((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) &&
+                    ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true)
+                )
+            ) : null
+
         return (
 
-            <Grid container  justify={'center'}>
+            <Grid container justify={'center'}>
                 <Grid item xs={12}>
                     <Header
                         title={'BLOG'} route={'HOME/BLOG'}
@@ -69,27 +68,22 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
                 <Grid item container justify={'center'} xs={12} lg={11} spacing={16}>
                     <Grid item lg={3} container direction={'column'} spacing={16} xs={11}>
-                        <Grid item >
-                        <Typography
-                            variant={'title'}
-                        >
-                            SEARCH
-                        </Typography>
-                        </Grid>
-                        <Grid item >
-                        <SearchBar
-                            value={this.props.filter.keyword}
-                            onChange={value => this.props.editFeedFilter('keyword', value)}
-                            placeholder={'type keywords'}
-                        />
+                        <Grid item>
+                            <Typography variant={'title'}>SEARCH</Typography>
                         </Grid>
                         <Grid item>
-                        <List
-                            data={getTagsCountsArray(this.props.feeds, (tag, number) => {
-                                this.props.editFeedFilter('tag', tag)
-                            })}
-                            selectedValue={this.props.filter.tag}
-                            title={'FEED CATEGORIES'}/></Grid>
+                            <SearchBar
+                                value={this.props.filter.keyword}
+                                onChange={value => this.props.editFeedFilter('keyword', value)}
+                                placeholder={'type keywords'}/>
+                        </Grid>
+                        <Grid item>
+                            <List
+                                data={getTagsCountsArray(this.props.feeds, (tag, number) => {
+                                    this.props.editFeedFilter('tag', tag)
+                                })}
+                                selectedValue={this.props.filter.tag}
+                                title={'FEED CATEGORIES'}/></Grid>
 
                     </Grid>
                     <Grid item container lg={9} spacing={32} xs={11}>
@@ -105,7 +99,7 @@ class ResponsiveDialog extends React.Component {
                                     postDate={n.postDate}
                                     comments={0}
                                 />
-                            </Grid>):<LoadingPage/>}
+                            </Grid>) : <LoadingPage/>}
                     </Grid>
                 </Grid>
             </Grid>

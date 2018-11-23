@@ -217,6 +217,9 @@ class Header extends React.Component {
                                     <Grid item>
                                         <PopUp
                                             popUp={<DropDownList
+                                                data={this.props.shoppingCart}
+                                                onDelete={index => this.props.editShoppingCart(index)}
+
                                             />
                                             }
                                             title={<Button

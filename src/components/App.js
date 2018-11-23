@@ -23,7 +23,7 @@ const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async () => {
+        initApp: async (data) => {
             dispatch(
                 {
                     type: INIT_PRODUCTS,
@@ -36,13 +36,13 @@ const mapDispatchToProps = dispatch => ({
                     payload: await agent.Feeds.initFeeds(),
                 }
             )
+            dispatch({
+                type: CART_INIT_SHOPPING_CART,
+                payload: data,
+            })
+
 
         },
-        initShoppingCart: (data) => dispatch({
-            type: CART_INIT_SHOPPING_CART,
-            payload: data,
-        })
-
 
     }
 )
@@ -50,11 +50,8 @@ const mapDispatchToProps = dispatch => ({
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.initShoppingCart(
-            JSON.parse(localStorage.getItem('shoppingCart'))
-        )
 
-        this.props.initApp()
+        this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')))
     }
 
     render() {

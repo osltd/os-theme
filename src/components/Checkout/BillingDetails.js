@@ -175,7 +175,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
             </Grid>
 
-        );
+        )
     }
 }
 

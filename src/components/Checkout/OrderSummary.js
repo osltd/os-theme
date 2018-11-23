@@ -105,18 +105,17 @@ class OrderSummary extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {shoppingCart.map((n, i) => {
-                            return (
-                                <TableRow key={i}>
-                                    <TableCell className={classes.block}>
-                                        {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
-                                    </TableCell>
-                                    <TableCell className={classes.block} numeric>
-                                        {'$ ' +formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                        {shoppingCart.map((n, i) =>
+                            <TableRow key={i}>
+                                <TableCell className={classes.block}>
+                                    {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
+                                </TableCell>
+                                <TableCell className={classes.block} numeric>
+                                    {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
+                                </TableCell>
+                            </TableRow>)
+
+                        }
                         <TableRow>
                             <TableCell colSpan={2}>
                                 <RadioList/>
