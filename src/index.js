@@ -7,12 +7,16 @@ import {MuiThemeProvider} from '@material-ui/core'
 import {history, store} from './store';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
+import {SnackbarProvider} from 'notistack';
 
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <MuiThemeProvider theme={theme}>
+                <SnackbarProvider maxSnack={3}>
+
                 <App/>
+                </SnackbarProvider>
             </MuiThemeProvider>
         </ConnectedRouter>
     </Provider>, document.getElementById('root'));

@@ -15,7 +15,7 @@ const defaultState = {
     },
     sort: {
         sortBy: null,
-        page: '1 - 3',
+        page: '',
     }
     ,
     detail: {

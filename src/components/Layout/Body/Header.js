@@ -11,7 +11,7 @@ const styles = theme => ({
 
     root: {
         marginBottom: '50px',
-        minHeight   : '100px',
+        minHeight: '100px',
         width: '100%',
         background: '#f7f7f7',
     },
@@ -46,10 +46,10 @@ class BodyHeader extends React.Component {
                      justify={'center'}
         >
             <Grid item md={2}/>
-            <Grid item md={5} xs={12} container justify={isWidthUp('md',this.props.width)?'flex-start':'center'}>
+            <Grid item md={5} xs={12} container justify={isWidthUp('md', this.props.width) ? 'flex-start' : 'center'}>
                 <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
-            <Grid item md={3} xs={11} container justify={isWidthUp('md',this.props.width)?'flex-end':'center'}>
+            <Grid item md={3} xs={11} container justify={isWidthUp('md', this.props.width) ? 'flex-end' : 'center'}>
                 {routePath.map(
                     (n, i) =>
                         <Fragment key={i}>
@@ -67,7 +67,7 @@ class BodyHeader extends React.Component {
                         </Fragment>
                 )}
             </Grid>
-            <Grid item  md={2}/>
+            <Grid item md={2}/>
 
 
         </Grid>

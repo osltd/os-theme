@@ -1,6 +1,10 @@
 import React, {Fragment} from 'react';
 import {Dialog} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
 
+const styles= {
+
+}
 class ResponsiveDialog extends React.Component {
 
     handleClickOpen = () => {
@@ -10,6 +14,9 @@ class ResponsiveDialog extends React.Component {
 
         this.setState({open: false});
     };
+    //in parent
+    //                                innerRef={e => this.popUp = e}
+//this.popUp.handleClose()
 
     constructor(props) {
         super(props);
@@ -18,9 +25,8 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
-
     render() {
-        const {fullScreen, child, title} = this.props;
+        const {fullScreen, dialog, title} = this.props;
 
         return (
             <Fragment>
@@ -29,10 +35,8 @@ class ResponsiveDialog extends React.Component {
                     fullScreen={fullScreen ? (fullScreen) : false}
                     open={this.state.open}
                     onClose={this.handleClose}
-                    aria-labelledby="responsive-dialog-title"
                 >
-
-                    {child}
+                    {dialog}
                 </Dialog>
             </Fragment>
         );
@@ -40,4 +44,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default ResponsiveDialog
+export default withStyles(styles)(ResponsiveDialog)

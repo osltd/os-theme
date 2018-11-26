@@ -36,7 +36,7 @@ const theme = createMuiTheme({
 
         },
         error: {
-            main: '#66d342',
+            main: '#d34a34',
 
         },
         info: {

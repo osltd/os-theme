@@ -44,7 +44,6 @@ class OutlinedInputAdornments extends React.Component {
             variant={'filled'}
             placeholder={placeholder}
             value={value ? value : ''}
-            onChange={e => onChange(e.target.value)}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
 

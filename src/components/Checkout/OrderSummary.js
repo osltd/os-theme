@@ -9,14 +9,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {formatMoney, refactorTitle} from "../../api/ApiUtils";
 import {connect} from "react-redux";
-import RadioList from '../Widget/RadioList'
+import * as styleGuide from '../../constants/styleGuide'
+import {withSnackbar} from 'notistack';
 import Terms from '../Widget/Terms'
-import {
-    CART_OPERATE_SHOPPING_CART,
-    EDIT_PRODUCT_VIEW_MODE,
-    PRODUCT_EDIT_FILTER,
-    PRODUCT_EDIT_SORT
-} from "../../constants/actionType";
+import agent from '../../agent'
+import {withRouter} from "react-router-dom";
+import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
 
 const TAX_RATE = 0.07;
 
@@ -51,47 +49,65 @@ const styles = theme => ({
 });
 
 const mapStateToProps = state => ({
+    billingDetail: state.cart.billingDetail,
     shoppingCart: state.cart.shoppingCart,
 });
 
 
 const mapDispatchToProps = dispatch => ({
-
-        changeViewMode: (mode) =>
-            dispatch({
-                    type: EDIT_PRODUCT_VIEW_MODE,
-                    payload: mode,
-                }
-            )
-        ,
-        editProductSort: (key, value) => dispatch({
-            type: PRODUCT_EDIT_SORT,
-            payload: {
-                key: key,
-                value: value,
-            },
+        emptyShoppingCart: () => dispatch({
+            type: CART_INIT_SHOPPING_CART
         }),
-        editProductFilter: (key, value) => dispatch({
-            type: PRODUCT_EDIT_FILTER,
-            payload: {
-                key: key,
-                value: value,
-            },
-        }),
-        editShoppingCart: (key, value) => dispatch({
-            type: CART_OPERATE_SHOPPING_CART,
-            payload: {
-                key: key,
-                value: value,
-            },
+        emptyBillingDetail: () => dispatch({
+            type: CART_EMPTY_BILLING_DETAIL,
         })
     }
 )
 
 class OrderSummary extends React.Component {
+    constructor(props) {
+        super(props);
+        // Add some default error states
+        this.state = {
+            checked: false,
+        };
+    }
+
 
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
 
+    placeOrder = async () => {
+        const {billingDetail} = this.props
+        const data = {
+            "items": this.props.shoppingCart.map(n => ({
+                    id: n.variantId, qty: n.number,
+                })
+            )
+            ,
+            "contact": {
+                "name": {"first": billingDetail.firstName, "last": billingDetail.lastName},
+                "email": billingDetail.email,
+                "city": billingDetail.city,
+                "phone": billingDetail.phone,
+                "address": billingDetail.address,
+                "zipCode": billingDetail.zipCode,
+                "country": billingDetail.country,
+            },
+            "payment": {"number": billingDetail.visaNumber, "cvc": billingDetail.cvc, "date": billingDetail.expiryDate},
+            "startPurchase": false,
+
+            "shipping": billingDetail.selectedShippingMethod,
+        }
+        this.props.history.push('/loadingPage')
+        await  agent.Checkout.placeOrder(data).then(res => {
+                this.props.emptyShoppingCart()
+                this.props.emptyBillingDetail()
+                this.props.history.push('/confirmPage/' + res.data.data.orders[0].number)
+
+            }
+        ).catch(err => err.response.data.messages.map(n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)))
+
+    }
 
     render() {
         const {classes, shoppingCart} = this.props;
@@ -116,22 +132,27 @@ class OrderSummary extends React.Component {
                             </TableRow>)
 
                         }
+
                         <TableRow>
                             <TableCell colSpan={2}>
-                                <RadioList/>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell colSpan={2}>
-                                <Terms/>
+                                <Terms
+                                    checked={this.state.checked}
+                                    onChange={() => this.setState(
+                                        {
+                                            checked: !this.state.checked
+
+                                        }
+                                    )}
+                                />
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell colSpan={2}>
                                 <Button
+                                    disabled={!this.state.checked}
                                     className={classes.button}
                                     variant={'outlined'} color={'primary'}
-                                    onClick={this.saveDraftToCart}
+                                    onClick={this.placeOrder}
                                 >Place Order</Button>
                             </TableCell>
                         </TableRow>
@@ -146,4 +167,4 @@ OrderSummary.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(OrderSummary))
+export default withRouter(withSnackbar(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(OrderSummary))))

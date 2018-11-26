@@ -1,9 +1,11 @@
 import {
+    CART_EDIT_BILLING_DETAIL,
     CART_EDIT_VARIANT,
     CART_EMPTY_PRODUCT_VARIANT,
     CART_INIT_SHOPPING_CART,
     CART_OPERATE_SHOPPING_CART,
-    CART_SAVE_PRODUCT_TO_CART
+    CART_SAVE_PRODUCT_TO_CART,
+    CART_EMPTY_BILLING_DETAIL
 } from "../constants/actionType";
 
 
@@ -11,7 +13,7 @@ const defaultState = {
     shoppingCart: [],
 
     variant: {},
-
+    billingDetail: {},
 };
 
 export default (state = defaultState, action) => {
@@ -27,9 +29,10 @@ export default (state = defaultState, action) => {
                 }
             }
         case CART_SAVE_PRODUCT_TO_CART: {
+
             let shoppingCart = Array.from(state.shoppingCart)
             let existedInCart = shoppingCart.find(n => {
-                    if (n.variantId === action.payload.variantId && n.product === action.payload.product) {
+                    if (n.variantId === action.payload.variantId ) {
                         n.number += action.payload.number
                         return true
                     }
@@ -57,6 +60,9 @@ export default (state = defaultState, action) => {
 
 
         case CART_INIT_SHOPPING_CART: {
+            console.log(action.payload)
+            if(!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
+
             return {
                 ...state,
                 shoppingCart: action.payload ? action.payload : []
@@ -97,6 +103,28 @@ export default (state = defaultState, action) => {
                     }
 
             }
+        }
+        case CART_EDIT_BILLING_DETAIL: {
+            let billingDetail = Object.assign({}, state.billingDetail)
+            const {key, value} = action.payload
+            billingDetail[key] = value
+
+            return {
+                ...state,
+                billingDetail: billingDetail,
+
+            }
+
+
+        }
+        case     CART_EMPTY_BILLING_DETAIL:{
+            return {
+                ...state,
+                billingDetail: {},
+
+            }
+
+
         }
         default:
             return state

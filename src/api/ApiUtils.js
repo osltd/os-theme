@@ -13,7 +13,7 @@ export const formatMoney = (n, c = 2, d = '.', t = ',') => {
 }
 export const numberToPagination = (length, cb) => {
     let result = []
-    let itemsPerPage = 3
+    let itemsPerPage = 9
     if (length > itemsPerPage) {
         new Array(Math.floor(length / itemsPerPage)).fill(1).map(
             (n, i) => {
@@ -84,6 +84,7 @@ export const getRoutePath = url => {
                     }
                 )
                 break
+
             case n === 'feed':
                 result.push({
                     label: n,

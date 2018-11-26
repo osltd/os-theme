@@ -11,6 +11,7 @@ import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
+import Dialog from '../Widget/Dialog'
 
 const styles = theme => {
     return (
@@ -91,8 +92,7 @@ class ResponsiveDialog extends React.Component {
         let productCount = draft.number ? draft.number : 1
         let selectedVariantId = this.findSelectedVariant().id
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
-        this.initVariant()
-
+        this.dialog.handleClose()
     }
 
     findSelectedVariant = () => {
@@ -107,7 +107,6 @@ class ResponsiveDialog extends React.Component {
 
     }
     initVariant = () => {
-        console.log('init')
         const {variantKeys, variantOptions} = this.props
         this.props.emptyCartVariant()
         variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false))
@@ -115,14 +114,13 @@ class ResponsiveDialog extends React.Component {
     }
 
     componentDidMount() {
-        this.initVariant()
 
     }
 
-    componentDidUpdate(prevProps,prevState,snap) {
+    componentDidUpdate(prevProps, prevState, snap) {
         // Typical usage (don't forget to compare props):
-        if(this.props.location.pathname!==            prevProps.location.pathname
-        )this.initVariant()
+        if (this.props.location.pathname !== prevProps.location.pathname
+        ) this.initVariant()
 
     }
 
@@ -198,14 +196,49 @@ class ResponsiveDialog extends React.Component {
 
                                 </Grid>
                                 <Grid item>
+                                    <Dialog
+                                        innerRef={e => this.dialog = e}
+                                        title={
+                                            <Button variant="extendedFab" color={'secondary'}
 
-                                    <Button variant="extendedFab" color={'secondary'}
-                                            onClick={this.saveDraftToCart}
-                                    >
+                                            >
 
-                                        <span className={'icon-cart'}/>
-                                        Add To Cart
-                                    </Button>
+                                                <span className={'icon-cart'}/>
+                                                Add To Cart
+                                            </Button>}
+                                        dialog={
+                                            <Grid
+                                                style={
+                                                    {
+                                                        padding: '20px',
+                                                    }
+                                                }
+                                                container direction={'column'} spacing={32} alignItems={'center'}>
+                                                <Grid item>
+                                                    <Typography variant={'title'}>
+                                                        do u want to add to cart?
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item container spacing={32} justify={'center'}>
+                                                    <Grid item >
+                                                    <Button variant="extendedFab"
+                                                            onClick={this.saveDraftToCart}
+
+                                                    >
+                                                        yes
+                                                    </Button>
+                                                    </Grid>
+                                                    <Grid item >
+                                                    <Button variant="extendedFab"
+                                                            onClick={() => this.dialog.handleClose()}>
+                                                        no
+                                                    </Button>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        }
+                                    />
+
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -236,7 +269,6 @@ class ResponsiveDialog extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item>
-
                                 <SocialIcon type={'reddit'}/>
                                 <SocialIcon type={'facebook'}/>
                                 <SocialIcon type={'twitter'}/>

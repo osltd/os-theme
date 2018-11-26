@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
@@ -42,23 +42,23 @@ class Overview extends React.Component {
                 <Grid item container md={7} xs={12} className={classes.body}>
                     {this.props.section === 'Comments' ?
                         <Grid item container spacing={16}>
-                            <Grid item >
-                            <RatingBar/>
+                            <Grid item>
+                                <RatingBar/>
                             </Grid>
-                            <Grid item >
+                            <Grid item>
                                 <Comment/>
                             </Grid>
-                            <Grid item >
+                            <Grid item>
                                 <Comment/></Grid>
-                            <Grid item >
+                            <Grid item>
                                 <Comment/></Grid>
-                            <Grid item >
+                            <Grid item>
                                 <Comment/></Grid>
-                            <Grid item >
+                            <Grid item>
                                 <Comment/></Grid>
-<Grid item>
-                            <CommentForm/>
-</Grid>
+                            <Grid item>
+                                <CommentForm/>
+                            </Grid>
                         </Grid> : <Description
 
                             content={content}

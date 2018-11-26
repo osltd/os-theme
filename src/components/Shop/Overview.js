@@ -127,6 +127,7 @@ class ShopOverview extends React.Component {
         })}
         selectedValue={this.props.filter.tag}
     />
+
     render() {
         const {classes} = this.props
         const products = this.sortData()
@@ -139,7 +140,7 @@ class ShopOverview extends React.Component {
                         route={'home/shop'}
                     />
                 </Grid>
-                <Grid item lg={10} spacing={ isWidthUp('md', this.props.width)?16:0} container>
+                <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
                     {
                         isWidthUp('md', this.props.width) ?
                             <Grid item md={3}>
@@ -210,15 +211,7 @@ class ShopOverview extends React.Component {
                                         title={
                                             <Grid container alignItems={'center'}>
                                                 <Typography variant={'body2'}>
-
-                                                    {this.props.filter.tag ?
-                                                        <Typography variant={'body2'}>
-
-                                                            {'tags:' + this.props.filter.tag}
-                                                        </Typography>
-                                                        :
-                                                        'Product Category'
-                                                    }
+                                                    {this.props.filter.tag ? <Typography variant={'body2'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
                                                 </Typography>
                                                 <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                             </Grid>

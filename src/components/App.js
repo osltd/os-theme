@@ -18,6 +18,8 @@ import {CART_INIT_SHOPPING_CART, INIT_FEEDS, INIT_PRODUCTS} from "../constants/a
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
+import ConfirmPage from './Layout/ConfirmPage'
+import LoadingPage from './Layout/LoadingPage'
 
 const mapStateToProps = state => ({});
 
@@ -69,6 +71,9 @@ class App extends React.Component {
                                 <Route exact path={'/shop/:id'} component={Product}/>
                                 <Route exact path={'/checkout'} component={Checkout}/>
                                 <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                                <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
+                                <Route exact path={'/loadingPage'} component={LoadingPage}/>
+
                             </div>
                             <Footer/>
                         </ErrorBoundary>

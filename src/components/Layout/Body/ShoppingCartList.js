@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {refactorTextLength} from "../../../api/ApiUtils";
@@ -69,14 +69,13 @@ class ShoppingCartList extends React.Component {
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
                     <List className={classes.list} component="nav">
-                        {console.log(this.props)}
                         {data.length > 0 ? data.map((n, i) =>
 
                             <ListItem
                                 key={i}
                                 button
 
-                                onClick={                               ()=>this.props.history.push('/shop/'+n.product.id)}>
+                                onClick={() => this.props.history.push('/shop/' + n.product.id)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
                                     title={n.product.variants.find(variant => variant.id === n.variantId).description}>

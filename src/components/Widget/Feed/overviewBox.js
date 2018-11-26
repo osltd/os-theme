@@ -3,7 +3,6 @@ import {Button, Grid, Typography} from '@material-ui/core';
 import moment from 'moment'
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
-import {Link} from 'react-router-dom'
 
 const styles = theme => ({
 
