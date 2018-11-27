@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Button, Table} from '@material-ui/core';
+import {Button, Grid, ListItem, Table, Tooltip, Typography, Zoom} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, refactorTitle} from "../../api/ApiUtils";
+import {formatMoney, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -15,6 +15,7 @@ import Terms from '../Widget/Terms'
 import agent from '../../agent'
 import {withRouter} from "react-router-dom";
 import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
+import swal from '@sweetalert/with-react'
 
 const TAX_RATE = 0.07;
 
@@ -99,13 +100,80 @@ class OrderSummary extends React.Component {
             "shipping": billingDetail.selectedShippingMethod,
         }
         this.props.history.push('/loadingPage')
+        const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
-                this.props.emptyShoppingCart()
-                this.props.emptyBillingDetail()
-                this.props.history.push('/confirmPage/' + res.data.data.orders[0].number)
+
+                swal(<Grid container direction={'column'}>
+                    <Grid item>
+                        <Typography variant={'title'}>
+                            {
+                                "your contact id is " + res.data.data.orders[0].number
+
+                            }
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'body2'}>
+                            {
+                                " your contact number is " + this.props.billingDetail.phone
+                            }
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'body2'}>
+
+                            product details</Typography>
+                    </Grid>
+                    <Grid item>
+                        {
+                            this.props.shoppingCart.map((n, i) =>
+                                <ListItem
+                                    key={i}
+
+                                >
+                                    <Tooltip
+                                        TransitionComponent={Zoom}
+                                        title={n.product.variants.find(variant => variant.id === n.variantId).description}>
+
+                                        <Grid container spacing={16} alignItems={'center'}>
+                                            <Grid item sm={3}>
+
+                                                <img
+                                                    style={{width: '100%', minWidth: '50px'}}
+                                                    src={n.product.photos[0].url}
+                                                />
+
+                                            </Grid>
+                                            <Grid item sm={9}>
+                                                <Typography variant={'body2'}>
+                                                    {refactorTextLength(n.product.name)}
+                                                </Typography>
+                                                <Typography variant={'caption'}>
+                                                    {n.number} X
+                                                    $ {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                }
+                                                </Typography>
+
+                                            </Grid>
+                                        </Grid>
+                                    </Tooltip>
+
+                                </ListItem>)
+
+                        }
+                    </Grid>
+                </Grid>);
+            this.props.emptyShoppingCart()
+            this.props.emptyBillingDetail()
+            this.props.history.push('/')
 
             }
-        ).catch(err => err.response.data.messages.map(n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)))
+        ).catch(err => {
+            err.response.data.messages.map(n =>
+                this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+            )
+            this.props.history.goBack()
+        })
 
     }
 

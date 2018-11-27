@@ -121,7 +121,6 @@ class ShopOverview extends React.Component {
     getTagsList = () => <List
         data={getTagsCountsArray(this.props.products, (tag, number) => {
             this.popUp && this.popUp.handleClose()
-
             this.props.editProductFilter('tag', tag)
             this.initPageNumber(number)
         })}

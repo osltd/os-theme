@@ -12,10 +12,14 @@ const style = theme => ({
         width: 'calc(100%-80px)',
     },
     img: {
-        height: '600px',
+        minHeight: '600px',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        width: '100%',
+
+    },
+    imgOnly:{
         width: '100%',
 
     },
@@ -50,8 +54,10 @@ class SimpleSlider extends React.Component {
             prevArrow: <PrevArrow/>,
         };
         const {data, classes} = this.props
+        if (!(data[0]) )return null
+
         return (
-            data[0] ?
+            data.length>1?
                 <Slider {...settings} className={classes.root}>
 
                     {
@@ -63,7 +69,6 @@ class SimpleSlider extends React.Component {
                                           justify={'center'}
                                           style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
                                               backgroundImage: 'url("' + n.url + '")',
-                                              height: '100vh',
                                           })}
                                           onClick={() => n.link ? this.props.history.push(n.link) : null}
 
@@ -78,7 +83,12 @@ class SimpleSlider extends React.Component {
                         )
                     }
 
-                </Slider> : null
+                </Slider> :
+                    <img
+                        className={classes.imgOnly}
+
+                        src={data[0].url}
+                    />
         );
     }
 }

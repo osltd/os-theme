@@ -8,7 +8,7 @@ import InputBar from '../Widget/InputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
 import {withSnackbar} from 'notistack';
-import  LoadingPage from '../Layout/LoadingPage'
+import LoadingPage from '../Layout/LoadingPage'
 const TAX_RATE = 0.07;
 
 const styles = theme => ({
@@ -38,14 +38,14 @@ const styles = theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     },
-    shippingOptions:{
-        padding:'5px',
+    shippingOptions: {
+        padding: '5px',
 
-        border:'1px solid '+ theme.palette.secondary.light,
+        border: '1px solid ' + theme.palette.secondary.light,
     },
-    selectedOption:{
-        backgroundColor:theme.palette.secondary.light,
-        border:'1px solid '+ theme.palette.primary.dark,
+    selectedOption: {
+        backgroundColor: theme.palette.secondary.light,
+        border: '1px solid ' + theme.palette.primary.dark,
     }
 });
 
@@ -72,21 +72,26 @@ class ShoppingCartTable extends React.Component {
 
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            l: false,
+        };
+    }
+
     componentDidMount() {
-        this.getShippingRate()
 
 
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
 
-        if (this.props.billingDetail.shippingOptions === undefined) {
+        if (this.props.billingDetail.shippingOptions === undefined && this.props.billingDetail.address) {
             this.getShippingRate()
-
         }
     }
 
-    getShippingRate = async () =>
+    getShippingRate = async () => {
         this.props.editBillingDetail(
             'shippingOptions', await   agent.Checkout.getShippingRate({
 
@@ -97,6 +102,7 @@ class ShoppingCartTable extends React.Component {
                 }
             )
         )
+    }
 
 
     render() {
@@ -237,42 +243,46 @@ class ShoppingCartTable extends React.Component {
                         Shipping Options
                     </Typography>
                 </Grid>
-                <Grid item  container  justify={'space-between'}  xs={12}>
+                <Grid item container justify={'space-between'} xs={12}>
 
                     {
                         this.props.billingDetail.shippingOptions ? this.props.billingDetail.shippingOptions.map((n, i) => {
                                 return (
 
                                     <Grid
-                                    className={classNames(classes.shippingOptions,
-                                        (n.courier.id===this.props.billingDetail.selectedShippingMethod)?classes.selectedOption:null)}
-                                    item container xs={4}>
-                                    <Grid item>
+                                        className={classNames(classes.shippingOptions,
+                                            (n.courier.id === this.props.billingDetail.selectedShippingMethod) ? classes.selectedOption : null)}
+                                        item container xs={4}>
+                                        <Grid item>
 
-                                        <Typography variant={'body2'}>
-                                            name: {n.courier.name}
-                                        </Typography>
-                                        <Typography variant={'body1'}>
-                                            charge: {n.charge}
-                                        </Typography>
-                                        <Typography variant={'body1'}>
-                                            delivery time :{n.deliveryTime.min} days to {n.deliveryTime.max} days
-                                        </Typography>
-                                    </Grid>
+                                            <Typography variant={'body2'}>
+                                                name: {n.courier.name}
+                                            </Typography>
+                                            <Typography variant={'body1'}>
+                                                charge: {n.charge}
+                                            </Typography>
+                                            <Typography variant={'body1'}>
+                                                delivery time :{n.deliveryTime.min} days to {n.deliveryTime.max} days
+                                            </Typography>
+                                        </Grid>
 
 
-                                    <Grid item>
+                                        <Grid item>
 
-                                        <Button
-                                            className={classes.button}
-                                            variant={'outlined'} color={'primary'}
-                                            onClick={() => this.props.editBillingDetail('selectedShippingMethod', n.courier.id)}
-                                        >selected</Button>
-                                    </Grid>
-                                </Grid>)
+                                            <Button
+                                                className={classes.button}
+                                                variant={'outlined'} color={'primary'}
+                                                onClick={() => this.props.editBillingDetail('selectedShippingMethod', n.courier.id)}
+                                            >selected</Button>
+                                        </Grid>
+                                    </Grid>)
                             }
-                        ) : <LoadingPage/>
+                        ) : ((this.props.billingDetail.address&&!(this.props.billingDetail.shippingOptions))?<LoadingPage/>:null
+
+                        )
                     }
+
+
                 </Grid>
             </Grid>
 

@@ -12,6 +12,8 @@ const styles = theme => ({
     }, color: {
         margin: '5px',
         cursor: 'pointer',
+        minHeight:'40px',
+        width:'40px',
         borderRadius:'30px',
     }
 })

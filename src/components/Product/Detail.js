@@ -5,14 +5,15 @@ import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
 import ColorPick from '../Widget/ColorPicker'
 import Counter from '../Widget/Counter'
-import {formatMoney} from "../../api/ApiUtils";
+import {formatMoney, isImgOnlySections} from "../../api/ApiUtils";
 import Tag from '../Widget/Tags/Tag'
 import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART} from "../../constants/actionType";
 import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
 import Dialog from '../Widget/Dialog'
-
+import swal from 'sweetalert';
+import Slick from '../Widget/Slick/SingleItem'
 const styles = theme => {
     return (
         {
@@ -92,7 +93,8 @@ class ResponsiveDialog extends React.Component {
         let productCount = draft.number ? draft.number : 1
         let selectedVariantId = this.findSelectedVariant().id
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
-        this.dialog.handleClose()
+        swal("Congratulation!", " items added!", "success");
+
     }
 
     findSelectedVariant = () => {
@@ -102,7 +104,6 @@ class ResponsiveDialog extends React.Component {
         let selectedDescription = []
         key.map((keyName, index) => (keyName !== 'number') ? selectedDescription.push(keyName + ':' + value[index]) : null)
         const isSelectedProduct = variants => (!selectedDescription.map(description => variants.description.split(',').includes(description)).includes(false))
-
         return product.variants.find(n => isSelectedProduct(n))
 
     }
@@ -114,14 +115,12 @@ class ResponsiveDialog extends React.Component {
     }
 
     componentDidMount() {
+        this.initVariant()
 
     }
 
     componentDidUpdate(prevProps, prevState, snap) {
-        // Typical usage (don't forget to compare props):
-        if (this.props.location.pathname !== prevProps.location.pathname
-        ) this.initVariant()
-
+        if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
     }
 
 
@@ -149,7 +148,6 @@ class ResponsiveDialog extends React.Component {
                                         <Typography component={'del'} variant={'subheading'}
                                                     color={'secondary'}>$ {formatMoney(
                                             selectedVariant.price)}</Typography>
-
                                     </Fragment> :
                                     <Typography variant={'headline'}
                                                 className={classes.price}>$ {formatMoney(
@@ -196,49 +194,14 @@ class ResponsiveDialog extends React.Component {
 
                                 </Grid>
                                 <Grid item>
-                                    <Dialog
-                                        innerRef={e => this.dialog = e}
-                                        title={
-                                            <Button variant="extendedFab" color={'secondary'}
 
+                                            <Button variant="extendedFab" color={'secondary'}
+onClick={this.saveDraftToCart}
                                             >
 
                                                 <span className={'icon-cart'}/>
                                                 Add To Cart
-                                            </Button>}
-                                        dialog={
-                                            <Grid
-                                                style={
-                                                    {
-                                                        padding: '20px',
-                                                    }
-                                                }
-                                                container direction={'column'} spacing={32} alignItems={'center'}>
-                                                <Grid item>
-                                                    <Typography variant={'title'}>
-                                                        do u want to add to cart?
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item container spacing={32} justify={'center'}>
-                                                    <Grid item >
-                                                    <Button variant="extendedFab"
-                                                            onClick={this.saveDraftToCart}
-
-                                                    >
-                                                        yes
-                                                    </Button>
-                                                    </Grid>
-                                                    <Grid item >
-                                                    <Button variant="extendedFab"
-                                                            onClick={() => this.dialog.handleClose()}>
-                                                        no
-                                                    </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        }
-                                    />
-
+                                            </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -276,9 +239,14 @@ class ResponsiveDialog extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={5}>
-                        <SingleItemImgWall
-                            data={(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({src: n.url,}))}/>
+                    <Grid item container xs={5}>
+<Grid item xs={12}>
+                        <Slick
+                        data=
+                            {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
+
+                        />
+</Grid>
                     </Grid>
                 </Grid> : <LoadingPage/>
 
@@ -289,3 +257,38 @@ class ResponsiveDialog extends React.Component {
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))
+// <Dialog
+// innerRef={e => this.dialog = e}
+// title={}
+// dialog={
+// <Grid
+//     style={
+//         {
+//             padding: '20px',
+//         }
+//     }
+//     container direction={'column'} spacing={32} alignItems={'center'}>
+//     <Grid item>
+//         <Typography variant={'title'}>
+//             do u want to add to cart?
+//         </Typography>
+//     </Grid>
+//     <Grid item container spacing={32} justify={'center'}>
+//         <Grid item>
+//             <Button variant="extendedFab"
+//                     onClick={this.saveDraftToCart}
+//
+//             >
+//                 yes
+//             </Button>
+//         </Grid>
+//         <Grid item>
+//             <Button variant="extendedFab"
+//                     onClick={() => this.dialog.handleClose()}>
+//                 no
+//             </Button>
+//         </Grid>
+//     </Grid>
+// </Grid>
+// }
+// />
