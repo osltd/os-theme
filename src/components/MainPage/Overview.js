@@ -8,6 +8,7 @@ import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 import LoadingPage from '../Layout/LoadingPage'
+import {isImgOnlySections} from "../../api/ApiUtils";
 
 const styles = theme => {
     return (
@@ -56,7 +57,7 @@ class ResponsiveDialog extends React.Component {
                         <Carousel
                             data=
                                 {this.props.feeds
-                                    .filter(n => (n.sections && n.sections[0].medias[0]))
+                                    .filter(n => isImgOnlySections(n.sections))
                                     .map(n => ({
                                         link: '/feed/' + n.id,
                                         url: n.sections[0].medias[0].url,
@@ -68,7 +69,7 @@ class ResponsiveDialog extends React.Component {
 
                     <Grid item xs={12}>
                         <FeedsWall
-                            data={this.props.feeds.filter((n, i) => (n.sections && n.sections[0].medias[0]))}
+                            data={this.props.feeds.filter((n, i) => isImgOnlySections(n.sections))}
                         />
                     </Grid>
 

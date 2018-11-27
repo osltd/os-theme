@@ -8,13 +8,12 @@ import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import {withStyles} from "@material-ui/core/styles/index";
 
 const styles = theme => ({
-video:{
-  width:'100%',
-},
+    video: {
+        width: '100%',
+    },
 
     root: {},
     img: {
-        cursor: 'pointer',
         width: '100%',
         height: ''
     },
@@ -68,8 +67,9 @@ class Media extends React.Component {
         });
     };
     getMedia = data => {
-const {classes } = this.props
-        if (typeof data[0].ext === 'string' && data[0].ext.indexOf('product://') !== -1) {
+        const {classes} = this.props
+        if(data.length===0) return null
+        if (data.length>0  && data[0].ext.indexOf('product://') !== -1) {
             const productId = data[0].ext.replace(/^\D+/g, '')
             let validProduct = this.props.products.find(n => n.id.toString() === productId)
             if (validProduct && this.state.type !== 'product') this.setState({
@@ -117,7 +117,7 @@ const {classes } = this.props
 
         return <Grid container justify={'center'}
         >
-            <Grid item xs={11} lg={this.state.type==='product'&&!box?6:11}>
+            <Grid item xs={11} lg={this.state.type === 'product' && !box ? 6 : 11}>
                 {
                     this.getMedia(data)
                 }

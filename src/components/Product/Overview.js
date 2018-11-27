@@ -61,12 +61,15 @@ class ResponsiveDialog extends React.Component {
                     />
 
                 </Grid>
-                <Grid item xs={10} container>
+                {
+                    false &&   <Grid item xs={10} container>
 
-                    <CommentDescription
-                        content={product.description}
-                    />
-                </Grid>
+                        <CommentDescription
+                            content={product.description}
+                        />
+                    </Grid>
+                }
+
             </Grid>
         }
 

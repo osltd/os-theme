@@ -6,11 +6,13 @@ import {withStyles} from '@material-ui/core/styles';
 const styles = theme => ({
     root: {
         margin: 0,
-        padding: '5px 0px',
+        padding: '6px 0px',
         display: 'inline-block',
+
     }, color: {
         margin: '5px',
         cursor: 'pointer',
+        borderRadius:'30px',
     }
 })
 
@@ -25,11 +27,15 @@ class ColorPicker extends React.Component {
                     colors.map(
                         (n, i) =>
                             <Button variant="extendedFab"
-                                    children={<span/>}
+                                    children={
+                                        selectedColor === n ? <span
+                                            className={'icon-checkmark'}/> : <span/>
+                                    }
+
                                     onClick={() => onClick(n)}
                                     key={i} className={classes.color} style={
                                 selectedColor === n ? {
-                                    color: n,
+                                    color: n==='white'?'black':n,
                                     border: '5px solid ' + n,
                                     backgroundColor: 'white',
 
@@ -42,7 +48,10 @@ class ColorPicker extends React.Component {
                                 }
 
 
-                            }/>
+                            }
+
+
+                            />
                     )
                 }
             </Grid>

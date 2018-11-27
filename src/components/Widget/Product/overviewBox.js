@@ -83,7 +83,7 @@ class ResponsiveDialog extends React.Component {
 
                 }
                 <Typography variant={'title'}
-                            onClick={() => this.props.history.push('/shop/' + id)}
+                            onClick={() => window.location.href=('/shop/' + id)}
                             className={classes.name}
 
                 >{name}</Typography>

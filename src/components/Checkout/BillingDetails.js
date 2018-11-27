@@ -73,6 +73,7 @@ class ShoppingCartTable extends React.Component {
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
 
     componentDidMount() {
+        this.getShippingRate()
 
 
     }
