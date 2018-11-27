@@ -9,7 +9,7 @@ import List from '../Widget/List'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
-
+import Media from '../Widget/Media'
 const styles = theme => (
     {
         productCategory: {
@@ -53,7 +53,6 @@ class ResponsiveDialog extends React.Component {
                 <Grid container justify={'center'} className={classes.root}>
                     <Header
                         title={refactorTextLength(feed.sections[0].title)}
-                        route={'/'}
 
                     />
                     <Grid item container spacing={16} xs={12} lg={10}>
@@ -89,10 +88,12 @@ class ResponsiveDialog extends React.Component {
                             {
                                 feed.sections.map((n, i) =>
                                     <Fragment key={i}>
-                                        <Grid item xs={10} key={i}>
-                                            <Slick
-                                                data={feed.sections[i].medias.map(n => ({url: n.url,}))}
-                                            />
+                                        <Grid item container alignItems={'center'} justify={'center'} xs={12}  key={i}>
+                                            <Grid item xs={11}>
+                                                    <Media
+                                                     data ={feed.sections[i].medias}/>
+                                            </Grid>
+
                                         </Grid>
                                         <Grid item>
                                             <Typography variant={'body1'}>

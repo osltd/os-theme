@@ -3,6 +3,7 @@ import {Button, Grid, Typography} from '@material-ui/core';
 import moment from 'moment'
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
+import Media from '../../Widget/Media'
 
 const styles = theme => ({
 
@@ -11,11 +12,7 @@ const styles = theme => ({
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
     },
 
-    img: {
-        cursor: 'pointer',
-        width: '100%',
-        height: ''
-    },
+
     title: {
         cursor: 'pointer',
         '&:hover': {
@@ -64,13 +61,16 @@ class ResponsiveDialog extends React.Component {
             id, author,
             postDate,
             comments,
+            medias
         } = this.props;
         return (
             <Grid container className={classes.root} alignItems={'center'} direction={'column'}>
                 <Grid item xs={12}>
-                    <img src={src}
-                         onClick={() => this.props.history.push('/feed/' + id)}
-                         className={classes.img}/></Grid>
+                    <Media
+                        box={true}
+                        data={medias}/>
+                </Grid>
+
                 <Grid item direction={'column'} container spacing={8} xs={12} md={11} className={classes.content}>
                     <Grid item>
                         <Typography

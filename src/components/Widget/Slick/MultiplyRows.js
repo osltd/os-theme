@@ -77,67 +77,8 @@ class MultipleRows extends Component {
 
                         />
                     )
-                } {
-                data.map((n, i) =>
-                    <ProductOverviewBox
-                        key={i}
-                        id={n.id}
+                }
 
-                        name={refactorTextLength(n.name)}
-                        src={n.photos[0].url}
-                        category={n.tags}
-                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                        promotePrice={n.promotePrice}
-
-
-                    />
-                )
-            } {
-                data.map((n, i) =>
-                    <ProductOverviewBox
-                        key={i}
-                        id={n.id}
-
-                        name={refactorTextLength(n.name)}
-                        src={n.photos[0].url}
-                        category={n.tags}
-                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                        promotePrice={n.promotePrice}
-
-
-                    />
-                )
-            } {
-                data.map((n, i) =>
-                    <ProductOverviewBox
-                        key={i}
-                        id={n.id}
-
-                        name={refactorTextLength(n.name)}
-                        src={n.photos[0].url}
-                        category={n.tags}
-                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                        promotePrice={n.promotePrice}
-
-
-                    />
-                )
-            } {
-                data.map((n, i) =>
-                    <ProductOverviewBox
-                        key={i}
-                        id={n.id}
-
-                        name={refactorTextLength(n.name)}
-                        src={n.photos[0].url}
-                        category={n.tags}
-                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                        promotePrice={n.promotePrice}
-
-
-                    />
-                )
-            }
             </Slider>
         );
     }

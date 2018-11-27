@@ -84,9 +84,13 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
 
                     <Grid item xs={12} md={10}>
-                        <MultiRows
-                            data={this.props.products}
-                        />
+                        {
+                            this.props.products.length>8? <MultiRows
+                                data={this.props.products}
+                            />:  <MultiItems
+                                data={this.props.products}
+                            />
+                        }
                     </Grid>
 
                     <Grid item container alignItems={'center'} justify={'center'} className={classes.productCategory}>

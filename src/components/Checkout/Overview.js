@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Divider, Grid, Typography} from '@material-ui/core';
+import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
@@ -28,7 +28,14 @@ const styles = theme => ({
         padding: '20px',
     }, title: {
         padding: '30px'
+    },
+    form: {
+        margin:'40px',
+        padding:'40px',
+        border:'1px solid '+theme.palette.secondary.light,
+
     }
+
 })
 
 const mapStateToProps = state => ({
@@ -68,7 +75,42 @@ class ShopOverview extends React.Component {
     render() {
 
         const {classes} = this.props
+        if (this.props.shoppingCart.length < 1)
+            return (<Grid container alignItems={'center'} justify={'center'}>
 
+                <Header
+                    title={'confirmPage'}/>
+                <Grid item container xs={6} spacing={16} className={classes.form}>
+                    <Grid item>
+
+                        <Typography variant={'title'} color={'primary'}>
+                            you haven't put any items in cart
+                        </Typography>
+                    </Grid>
+
+                    <Grid item container alignItems={'center'} spacing={16}>
+                        <Grid item>
+                            <Typography variant={'subheading'} color={'primary'}>
+                                go to
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="extendedFab"
+                                onClick={() => this.props.history.push('/shop')}
+
+                            >
+                                shop
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'subheading'} color={'primary'}>
+                                to buy some
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>)
         return (
             <Grid container justify={'center'}>
                 <Grid item sm={12}>

@@ -91,8 +91,11 @@ class ResponsiveDialog extends React.Component {
                             <Grid item md={6} xs={12} key={i}>
                                 <FeedOverviewBox
                                     id={n.id}
-                                    src={n.sections && n.sections.find(section => !!section.medias[0]) ? n.sections.find(section => section.medias[0]).medias[0].url :
+                                    medias={n.sections[0].medias}
+                                    src={n.sections && n.sections.find(section => !!section.medias[0]
+                                    ) ? n.sections.find(section => section.medias[0]).medias[0].url :
                                         'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
+
                                     subTitle={refactorParaLength(n.sections[0].description)}
                                     title={n.sections[0].title}
                                     author={n.authors[0].name.first + ' ' + n.authors[0].name.last}
