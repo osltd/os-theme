@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Button, Grid, ListItem, Table, Tooltip, Typography, Zoom} from '@material-ui/core';
+import {Button, Grid, ListItem, Table, Typography} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -16,6 +16,7 @@ import agent from '../../agent'
 import {withRouter} from "react-router-dom";
 import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
 import swal from '@sweetalert/with-react'
+import {redirectUrl} from "../../api/ApiUtils";
 
 const TAX_RATE = 0.07;
 
@@ -66,17 +67,7 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class OrderSummary extends React.Component {
-    constructor(props) {
-        super(props);
-        // Add some default error states
-        this.state = {
-            checked: false,
-        };
-    }
-
-
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
-
     placeOrder = async () => {
         const {billingDetail} = this.props
         const data = {
@@ -99,16 +90,16 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
-        this.props.history.push('/loadingPage')
+        redirectUrl('/loadingPage',this.props.history)
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
                 console.log(this.props)
-            let selectShippingMethod=
-                this.props.billingDetail.shippingOptions.find(
-                    n => n.courier.id === this.props.billingDetail.selectedShippingMethod
-                )
-if (!(selectShippingMethod))selectShippingMethod= this.props.billingDetail.shippingOptions[0]
-            swal(
+                let selectShippingMethod =
+                    this.props.billingDetail.shippingOptions.find(
+                        n => n.courier.id === this.props.billingDetail.selectedShippingMethod
+                    )
+                if (!(selectShippingMethod)) selectShippingMethod = this.props.billingDetail.shippingOptions[0]
+                swal(
                     {
 
                         content: (<Grid container direction={'column'}>
@@ -134,49 +125,50 @@ if (!(selectShippingMethod))selectShippingMethod= this.props.billingDetail.shipp
                                             key={i}
 
                                         >
-                                                             <Grid container spacing={16} alignItems={'center'}>
-                                                    <Grid item sm={3}>
+                                            <Grid container spacing={16} alignItems={'center'}>
+                                                <Grid item sm={3}>
 
-                                                        <img
-                                                            style={{width: '100%', minWidth: '50px'}}
-                                                            src={n.product.photos[0].url}
-                                                        />
+                                                    <img
+                                                        style={{width: '100%', minWidth: '50px'}}
+                                                        src={n.product.photos[0].url}
+                                                    />
 
-                                                    </Grid>
-                                                    <Grid item sm={9}>
-                                                        <Typography variant={'body2'}>
-                                                            {refactorTextLength(n.product.name)}
-                                                        </Typography>
-                                                        <Typography variant={'caption'}>
-                                                            {n.number} X
-                                                            $ {n.product.variants.find(variant => variant.id === n.variantId).price
-                                                        }
-                                                        </Typography>
-                                                        <Typography variant={'caption'}>
+                                                </Grid>
+                                                <Grid item sm={9}>
+                                                    <Typography variant={'body2'}>
+                                                        {refactorTextLength(n.product.name)}
+                                                    </Typography>
+                                                    <Typography variant={'caption'}>
+                                                        {n.number} X
+                                                        $ {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                    }
+                                                    </Typography>
+                                                    <Typography variant={'caption'}>
 
                                                         {n.product.variants.find(variant => variant.id === n.variantId).description}
-                                                        </Typography>
-                                                    </Grid>
+                                                    </Typography>
                                                 </Grid>
+                                            </Grid>
                                         </ListItem>)
 
                                 }
                             </Grid>
                             <Grid item>
                                 <Typography variant={'body1'}>
-                                Total amount is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
+                                    Total amount
+                                    is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
                                 </Typography>
                                 <Typography variant={'body1'}>
-                              thanks for choosing  {
-                                selectShippingMethod.courier.name
+                                    thanks for choosing {
+                                    selectShippingMethod.courier.name
                                 }.</Typography>
                                 <Typography variant={'body1'}>
 
-                                the items will be there in {
-                                selectShippingMethod.deliveryTime.min
+                                    the items will be there in {
+                                    selectShippingMethod.deliveryTime.min
 
-                            } to {
-                                selectShippingMethod.deliveryTime.max
+                                } to {
+                                    selectShippingMethod.deliveryTime.max
 
                                 } days</Typography>
                             </Grid>
@@ -184,7 +176,7 @@ if (!(selectShippingMethod))selectShippingMethod= this.props.billingDetail.shipp
                     });
                 this.props.emptyShoppingCart()
                 this.props.emptyBillingDetail()
-                this.props.history.push('/')
+                redirectUrl('/',this.props.history)
 
             }
         ).catch(err => {
@@ -194,6 +186,14 @@ if (!(selectShippingMethod))selectShippingMethod= this.props.billingDetail.shipp
             this.props.history.goBack()
         })
 
+    }
+
+    constructor(props) {
+        super(props);
+        // Add some default error states
+        this.state = {
+            checked: false,
+        };
     }
 
     render() {

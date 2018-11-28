@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from "react-router-dom";
+import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => ({
     root: {
@@ -99,7 +100,7 @@ class ButtonBases extends React.Component {
                         key={i}
                         item sm={10} md={6} lg={4}
                         container
-                        onClick={() => this.props.history.push('/shop')}
+                        onClick={() => redirectUrl('/shop',this.props.history)}
                         className={classes.items}
 
                     >

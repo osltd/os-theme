@@ -5,7 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import Header from '../Layout/Body/Header'
 import ShoppingCart from './CartTable'
-import LoadingPage from '../Layout/LoadingPage'
+
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',

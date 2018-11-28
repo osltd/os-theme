@@ -5,15 +5,14 @@ import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
 import ColorPick from '../Widget/ColorPicker'
 import Counter from '../Widget/Counter'
-import {formatMoney, isImgOnlySections} from "../../api/ApiUtils";
+import {formatMoney} from "../../api/ApiUtils";
 import Tag from '../Widget/Tags/Tag'
 import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART} from "../../constants/actionType";
-import SingleItemImgWall from '../Widget/ImgWall/singleItem'
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
-import Dialog from '../Widget/Dialog'
 import swal from 'sweetalert';
 import Slick from '../Widget/Slick/SingleItem'
+
 const styles = theme => {
     return (
         {
@@ -195,13 +194,13 @@ class ResponsiveDialog extends React.Component {
                                 </Grid>
                                 <Grid item>
 
-                                            <Button variant="extendedFab" color={'secondary'}
-onClick={this.saveDraftToCart}
-                                            >
+                                    <Button variant="extendedFab" color={'secondary'}
+                                            onClick={this.saveDraftToCart}
+                                    >
 
-                                                <span className={'icon-cart'}/>
-                                                Add To Cart
-                                            </Button>
+                                        <span className={'icon-cart'}/>
+                                        Add To Cart
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -240,13 +239,13 @@ onClick={this.saveDraftToCart}
                         </Grid>
                     </Grid>
                     <Grid item container xs={5}>
-<Grid item xs={12}>
-                        <Slick
-                        data=
-                            {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
+                        <Grid item xs={12}>
+                            <Slick
+                                data=
+                                    {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
 
-                        />
-</Grid>
+                            />
+                        </Grid>
                     </Grid>
                 </Grid> : <LoadingPage/>
 

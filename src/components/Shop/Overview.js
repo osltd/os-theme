@@ -210,7 +210,8 @@ class ShopOverview extends React.Component {
                                         title={
                                             <Grid container alignItems={'center'}>
                                                 <Typography variant={'body2'}>
-                                                    {this.props.filter.tag ? <Typography variant={'body2'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
+                                                    {this.props.filter.tag ? <Typography
+                                                        variant={'body2'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
                                                 </Typography>
                                                 <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                             </Grid>

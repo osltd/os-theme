@@ -3,7 +3,7 @@ import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney, refactorParaLength} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
-
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     name: {
@@ -83,7 +83,7 @@ class ResponsiveDialog extends React.Component {
                 <Grid item xs={4}>
                     <img src={src}
 
-                         onClick={() => this.props.history.push('/shop/' + id)}
+                         onClick={() => redirectUrl('/shop/' + id,this.props.history)}
 
                          className={classes.img}/>
                 </Grid>
@@ -96,7 +96,7 @@ class ResponsiveDialog extends React.Component {
 
                     }
                     <Typography variant={'title'}
-                                onClick={() => this.props.history.push('/shop/' + id)}
+                                onClick={() => redirectUrl('/shop/' + id,this.props.history)}
                                 className={classes.name}
                     >{name}</Typography>
 

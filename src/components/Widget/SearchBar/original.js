@@ -32,7 +32,7 @@ class SearchBar extends React.Component {
 
 
     render() {
-        const {classes, placeholder, value, onChange,onKeyPress} = this.props;
+        const {classes, placeholder, value, onChange, onKeyPress} = this.props;
 
         return <Input
             fullWidth={true}
@@ -46,8 +46,8 @@ class SearchBar extends React.Component {
             value={value ? value : ''}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
-            onChange={e=>onChange(e.target.value)}
-            onKeyPress={e=>onKeyPress?onKeyPress(e.key):null}
+            onChange={e => onChange(e.target.value)}
+            onKeyPress={e => onKeyPress ? onKeyPress(e.key) : null}
         />
     }
 }

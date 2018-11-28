@@ -12,7 +12,8 @@ import classNames from "classnames";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
-import SearchBar from '../Widget/SearchBar/original'
+import {redirectUrl} from "../../api/ApiUtils";
+
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
@@ -124,21 +125,13 @@ class Header extends React.Component {
     handleChange = (event, value) => {
         this.setState({value});
     };
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            keyword:''
-        };
-    }
-
-    getInputBar=()=>
+    getInputBar = () =>
         <Input
-            onKeyDown={e=>
-                (e.key==='Enter'&&this.state.keyword)? this.props.history.push('/search/'+this.state.keyword):null
+            onKeyDown={e =>
+                (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword,this.props.history) : null
 
             }
-            onChange={e => this.setState({keyword:e.target.value})}
+            onChange={e => this.setState({keyword: e.target.value})}
 
             placeholder="Search…"
             classes={{
@@ -146,6 +139,13 @@ class Header extends React.Component {
                 input: this.props.classes.inputInput,
             }}
         />
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            keyword: ''
+        };
+    }
 
     render() {
         const {classes, width} = this.props;
@@ -158,7 +158,7 @@ class Header extends React.Component {
                         <Grid item xs={2}>
                             <img
                                 className={classes.logo}
-                                onClick={() => this.props.history.push('/')}
+                                onClick={() =>redirectUrl('/',this.props.history)}
                                 src={'https://brandmark.io/logo-rank/random/pepsi.png'}
                             />
                         </Grid>
@@ -166,21 +166,23 @@ class Header extends React.Component {
                             <Grid item>
                                 <Button
                                     icon={'icon-gift'}
-                                    link={'/shop'}
+                                    onClick={()=>redirectUrl('/shop')}
+
                                     value={'shop'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
                                     icon={'icon-books'}
-                                    link={'/feed'}
+                                    onClick={()=>redirectUrl('/feed')}
                                     value={'feed'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
                                     icon={'icon-cart'}
-                                    link={'/checkout'}
+                                    onClick={()=>redirectUrl('/checkout')}
+
                                     value={'checkout'}
                                 />
                             </Grid>
@@ -249,19 +251,19 @@ class Header extends React.Component {
         return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
 
             <BottomNavigationAction label="Home" value="Home"
-                                    onClick={() => this.props.history.push('/')}
+                                    onClick={() => redirectUrl('/',this.props.history)}
                                     icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
             <BottomNavigationAction label="Shops" value="Shops"
-                                    onClick={() => this.props.history.push('/shop')}
+                                    onClick={() => redirectUrl('/shop',this.props.history)}
 
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
             <BottomNavigationAction label="Feed" value="Feed"
-                                    onClick={() => this.props.history.push('/feed')}
+                                    onClick={() => redirectUrl('/feed',this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
             <BottomNavigationAction label="Checkout" value="Checkout    "
-                                    onClick={() => this.props.history.push('/checkout')}
+                                    onClick={() => redirectUrl('/checkout',this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
 
         </BottomNavigation>

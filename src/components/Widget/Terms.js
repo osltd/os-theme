@@ -24,7 +24,7 @@ class CheckboxLabels extends React.Component {
     };
 
     render() {
-        const {classes,checked,onChange} = this.props;
+        const {classes, checked, onChange} = this.props;
 
         return (
             <FormControlLabel

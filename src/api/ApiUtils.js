@@ -157,7 +157,11 @@ export const getVariantOptions = variants => {
     })
     return variantOverview
 }
-export const isImgOnlySections= sections=> (
-    sections && sections[0].medias[0]&& sections[0].medias[0].ext!=='mp4'
-        && (sections[0].medias[0].ext.indexOf('product')===-1
+export const isImgOnlySections = sections => (
+    sections && sections[0].medias[0] && sections[0].medias[0].ext !== 'mp4'
+    && (sections[0].medias[0].ext.indexOf('product') === -1
     ))
+
+export const redirectUrl = (url, history, reload = true) => {
+    (reload) ? window.location.href = url : history.push(url)
+}

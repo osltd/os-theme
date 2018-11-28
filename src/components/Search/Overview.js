@@ -51,19 +51,19 @@ const mapDispatchToProps = dispatch => ({
 
 class SearchPage extends React.Component {
 
+    searchData = (data) =>
+        data.filter(n => (this.props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1) : false)
+
     componentDidMount() {
         this.props.editSearchBar(this.props.match.params.keyword)
     }
+
     componentDidUpdate(prevProps, prevState, snapShot) {
         if (this.props.location !== prevProps.location)
             this.props.editSearchBar(this.props.match.params.keyword)
 
 
     }
-
-    searchData = (data) =>
-        data.filter(n => (this.props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1) : false)
-
 
     render() {
 
@@ -80,19 +80,19 @@ class SearchPage extends React.Component {
 
                 />
                 <Grid item xs={6} container spacing={16} direction={'column'}>
-                    <Grid item >
-                    <SearchBar
-                        value={this.props.keyword}
-                        onKeyPress={value => console.log(value)}
-                        onChange={value => this.props.editSearchBar(value)}
-                        placeholder={'please type keyword'}
-                    />
+                    <Grid item>
+                        <SearchBar
+                            value={this.props.keyword}
+                            onKeyPress={value => console.log(value)}
+                            onChange={value => this.props.editSearchBar(value)}
+                            placeholder={'please type keyword'}
+                        />
                     </Grid>
-                    <Grid item >
-                    <Typography variant={'title'}>
-                        {
-                            this.props.keyword && 'found ' + searchResultCount + ' matched results'
-                        }   </Typography>
+                    <Grid item>
+                        <Typography variant={'title'}>
+                            {
+                                this.props.keyword && 'found ' + searchResultCount + ' matched results'
+                            }   </Typography>
                     </Grid>
                 </Grid>
                 <Grid item container lg={9} spacing={32} xs={11}>
@@ -102,7 +102,7 @@ class SearchPage extends React.Component {
                         <Grid item xs={12}>
                             <Typography variant={'title'}>
 
-                            Products ({products.length})
+                                Products ({products.length})
                             </Typography></Grid>
 
                     }
@@ -124,10 +124,10 @@ class SearchPage extends React.Component {
                     {
                         feeds &&
                         <Grid item xs={12}>
-                        <Typography variant={'title'}>
+                            <Typography variant={'title'}>
 
-                            Feeds ({feeds.length})
-                        </Typography>
+                                Feeds ({feeds.length})
+                            </Typography>
                         </Grid>
                     }
                     {feeds && feeds.map((n, i) =>

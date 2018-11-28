@@ -10,6 +10,7 @@ import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
 import LoadingPage from '../Layout/LoadingPage'
+import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => {
     return (

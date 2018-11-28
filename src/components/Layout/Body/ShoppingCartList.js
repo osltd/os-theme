@@ -6,6 +6,7 @@ import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     listItem: {
@@ -75,7 +76,7 @@ class ShoppingCartList extends React.Component {
                                 key={i}
                                 button
 
-                                onClick={() => this.props.history.push('/shop/' + n.product.id)}>
+                                onClick={() => redirectUrl('/shop/' + n.product.id,this.props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
                                     title={n.product.variants.find(variant => variant.id === n.variantId).description}>
@@ -121,7 +122,7 @@ class ShoppingCartList extends React.Component {
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                            onClick={()=>this.props.history.push('/shoppingCart')}
+                            onClick={() => redirectUrl('/shoppingCart',this.props.history)}
                         >
                             View Cart
                         </Button>
@@ -129,7 +130,7 @@ class ShoppingCartList extends React.Component {
                     <Grid item>
                         <Button variant={'outlined'}
                                 className={classes.button}
-                                onClick={()=>this.props.history.push('/checkout')}>
+                                onClick={() => redirectUrl('/checkout',this.props.history)}>
                             Checkout
                         </Button>
                     </Grid>

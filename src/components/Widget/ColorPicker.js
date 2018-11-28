@@ -12,9 +12,9 @@ const styles = theme => ({
     }, color: {
         margin: '5px',
         cursor: 'pointer',
-        minHeight:'40px',
-        width:'40px',
-        borderRadius:'30px',
+        minHeight: '40px',
+        width: '40px',
+        borderRadius: '30px',
     }
 })
 
@@ -37,7 +37,7 @@ class ColorPicker extends React.Component {
                                     onClick={() => onClick(n)}
                                     key={i} className={classes.color} style={
                                 selectedColor === n ? {
-                                    color: n==='white'?'black':n,
+                                    color: n === 'white' ? 'black' : n,
                                     border: '5px solid ' + n,
                                     backgroundColor: 'white',
 

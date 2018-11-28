@@ -9,6 +9,7 @@ import agent from '../../agent'
 import classNames from 'classnames'
 import {withSnackbar} from 'notistack';
 import LoadingPage from '../Layout/LoadingPage'
+
 const TAX_RATE = 0.07;
 
 const styles = theme => ({
@@ -71,6 +72,18 @@ const mapDispatchToProps = dispatch => ({
 class ShoppingCartTable extends React.Component {
 
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
+    getShippingRate = async () => {
+        this.props.editBillingDetail(
+            'shippingOptions', await   agent.Checkout.getShippingRate({
+
+                    items: this.props.shoppingCart.map(n => ({
+                            id: n.variantId, qty: n.number,
+                        })
+                    )
+                }
+            )
+        )
+    }
 
     constructor(props) {
         super(props)
@@ -90,20 +103,6 @@ class ShoppingCartTable extends React.Component {
             this.getShippingRate()
         }
     }
-
-    getShippingRate = async () => {
-        this.props.editBillingDetail(
-            'shippingOptions', await   agent.Checkout.getShippingRate({
-
-                    items: this.props.shoppingCart.map(n => ({
-                            id: n.variantId, qty: n.number,
-                        })
-                    )
-                }
-            )
-        )
-    }
-
 
     render() {
         const {classes, billingDetail, shoppingCart} = this.props;
@@ -238,13 +237,13 @@ class ShoppingCartTable extends React.Component {
                         value={billingDetail.cvc}
                     />
                 </Grid>
-                <Grid item xs={12}>
-                    <Typography variant={'title'}>
-                        Shipping Options
-                    </Typography>
-                </Grid>
-                <Grid item container justify={'space-between'} xs={12}>
 
+                <Grid item container justify={'space-between'} xs={12}>
+                    {this.props.billingDetail.shippingOptions ? <Grid item xs={12}>
+                        <Typography variant={'title'}>
+                            Shipping Options
+                        </Typography>
+                    </Grid> : null}
                     {
                         this.props.billingDetail.shippingOptions ? this.props.billingDetail.shippingOptions.map((n, i) => {
                                 return (
@@ -277,7 +276,8 @@ class ShoppingCartTable extends React.Component {
                                         </Grid>
                                     </Grid>)
                             }
-                        ) : ((this.props.billingDetail.address&&!(this.props.billingDetail.shippingOptions))?<LoadingPage/>:null
+                        ) : ((this.props.billingDetail.address && !(this.props.billingDetail.shippingOptions)) ?
+                                <LoadingPage/> : null
 
                         )
                     }

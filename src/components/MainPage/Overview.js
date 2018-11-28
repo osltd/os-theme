@@ -86,9 +86,9 @@ class ResponsiveDialog extends React.Component {
 
                     <Grid item xs={12} md={10}>
                         {
-                            this.props.products.length>8? <MultiRows
+                            this.props.products.length > 8 ? <MultiRows
                                 data={this.props.products}
-                            />:  <MultiItems
+                            /> : <MultiItems
                                 data={this.props.products}
                             />
                         }

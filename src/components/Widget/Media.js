@@ -68,8 +68,8 @@ class Media extends React.Component {
     };
     getMedia = data => {
         const {classes} = this.props
-        if(data.length===0) return null
-        if (data.length>0  && data[0].ext.indexOf('product://') !== -1) {
+        if (data.length === 0) return null
+        if (data.length > 0 && data[0].ext.indexOf('product://') !== -1) {
             const productId = data[0].ext.replace(/^\D+/g, '')
             let validProduct = this.props.products.find(n => n.id.toString() === productId)
             if (validProduct && this.state.type !== 'product') this.setState({

@@ -3,13 +3,13 @@ import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
-import Slick from '../Widget/Slick/SingleItem'
 import moment from 'moment'
 import List from '../Widget/List'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
+
 const styles = theme => (
     {
         productCategory: {
@@ -88,10 +88,10 @@ class ResponsiveDialog extends React.Component {
                             {
                                 feed.sections.map((n, i) =>
                                     <Fragment key={i}>
-                                        <Grid item container alignItems={'center'} justify={'center'} xs={12}  key={i}>
+                                        <Grid item container alignItems={'center'} justify={'center'} xs={12} key={i}>
                                             <Grid item xs={11}>
-                                                    <Media
-                                                     data ={feed.sections[i].medias}/>
+                                                <Media
+                                                    data={feed.sections[i].medias}/>
                                             </Grid>
 
                                         </Grid>

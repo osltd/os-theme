@@ -2,9 +2,8 @@ import React, {Fragment} from 'react';
 import {Dialog} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 
-const styles= {
+const styles = {}
 
-}
 class ResponsiveDialog extends React.Component {
 
     handleClickOpen = () => {
@@ -25,6 +24,7 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
+
     render() {
         const {fullScreen, dialog, title} = this.props;
 

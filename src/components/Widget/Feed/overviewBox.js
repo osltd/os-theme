@@ -4,6 +4,7 @@ import moment from 'moment'
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
 import Media from '../../Widget/Media'
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
 
@@ -75,7 +76,7 @@ class ResponsiveDialog extends React.Component {
                     <Grid item>
                         <Typography
                             className={classes.title}
-                            onClick={() => this.props.history.push('/feed/' + id)}
+                            onClick={() => redirectUrl('/feed/' + id,this.props.history)}
                             variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>
                     <Grid item>
@@ -87,7 +88,7 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
                     <Grid item>
                         <Button
-                            onClick={() => this.props.history.push('/feed/' + id)}
+                            onClick={() => redirectUrl('/feed/' + id,this.props.history)}
                             variant={'outlined'}
                             className={classes.button}
                         >

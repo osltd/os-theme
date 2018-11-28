@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core';
 import {withRouter} from "react-router-dom";
-
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     root: {
@@ -35,7 +35,7 @@ class FeedsWall extends React.Component {
 
                 }}
 
-                      onClick={() => this.props.history.push(link)}
+                      onClick={() => redirectUrl(link,this.props.history)}
 
                 >
                     <Typography variant={'display1'} className={classes.title}>

@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import classNames from 'classnames'
 import {withRouter} from "react-router-dom";
+import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => ({
     root: {
@@ -47,7 +48,7 @@ class SelectedListItem extends React.Component {
     handleListItemClick = (event, index, cb) => {
         cb()
         if (this.props.link) {
-            this.props.history.push(this.props.link)
+            redirectUrl(this.props.link,this.props.history)
         }
     };
 

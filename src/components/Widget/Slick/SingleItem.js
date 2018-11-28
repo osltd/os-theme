@@ -5,6 +5,7 @@ import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {withRouter} from 'react-router-dom'
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
@@ -19,7 +20,7 @@ const style = theme => ({
         width: '100%',
 
     },
-    imgOnly:{
+    imgOnly: {
         width: '100%',
 
     },
@@ -54,10 +55,10 @@ class SimpleSlider extends React.Component {
             prevArrow: <PrevArrow/>,
         };
         const {data, classes} = this.props
-        if (!(data[0]) )return null
+        if (!(data[0])) return null
 
         return (
-            data.length>1?
+            data.length > 1 ?
                 <Slider {...settings} className={classes.root}>
 
                     {
@@ -70,7 +71,7 @@ class SimpleSlider extends React.Component {
                                           style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
                                               backgroundImage: 'url("' + n.url + '")',
                                           })}
-                                          onClick={() => n.link ? this.props.history.push(n.link) : null}
+                                          onClick={() => n.link ? redirectUrl(n.link,this.props.history) : null}
 
                                           className={classes.img}>
                                         {n.title && <Grid item lg={4}>
@@ -84,11 +85,11 @@ class SimpleSlider extends React.Component {
                     }
 
                 </Slider> :
-                    <img
-                        className={classes.imgOnly}
+                <img
+                    className={classes.imgOnly}
 
-                        src={data[0].url}
-                    />
+                    src={data[0].url}
+                />
         );
     }
 }

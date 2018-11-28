@@ -9,6 +9,8 @@ import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
 import LoadingPage from '../Layout/LoadingPage'
+import {redirectUrl} from "../../api/ApiUtils";
+
 
 const styles = theme => ({
     productCategory: {
@@ -99,7 +101,7 @@ class ShopOverview extends React.Component {
                         <Grid item>
                             <Button
                                 variant='outlined'
-                                onClick={() => this.props.history.push('/shop')}
+                                onClick={() => redirectUrl('/shop',this.props.history)}
 
                             >
                                 shop

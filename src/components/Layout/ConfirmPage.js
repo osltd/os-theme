@@ -1,24 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
-import Button from '../Widget/Button'
-import {fade} from '@material-ui/core/styles/colorManipulator';
+import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
-import PopUp from '../Widget/PopUp'
-import SearchIcon from '@material-ui/icons/Search';
-import DropDownList from './Body/ShoppingCartList'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
-import classNames from "classnames";
+import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {Typography} from '@material-ui/core'
 import {CART_OPERATE_SHOPPING_CART} from "../../constants/actionType";
 import Header from '../Layout/Body/Header'
+
 const styles = theme => ({
-    form:{
-        margin:'40px',
-        padding:'40px',
-        border:'1px solid '+theme.palette.secondary.light,
+    form: {
+        margin: '40px',
+        padding: '40px',
+        border: '1px solid ' + theme.palette.secondary.light,
     }
 
 });
@@ -58,23 +52,23 @@ class ConfirmPage extends React.Component {
         const {classes, width} = this.props;
         const {value} = this.state
 
-            return (
-                    <Grid container alignItems={'center'} justify={'center'}>
+        return (
+            <Grid container alignItems={'center'} justify={'center'}>
 
-                        <Header
-                        title={'confirmPage'}/>
-                        <Grid item className={classes.form}>
+                <Header
+                    title={'confirmPage'}/>
+                <Grid item className={classes.form}>
 
-                            <Typography variant={'title'} color={'primary'}>
-                            Shipping request successfully.
+                    <Typography variant={'title'} color={'primary'}>
+                        Shipping request successfully.
 
-                            </Typography>
-                            <Typography variant={'subheading'} color={'primary'}>
+                    </Typography>
+                    <Typography variant={'subheading'} color={'primary'}>
 
-                            your reference number is {this.props.match.params.orderId}
-                            </Typography>
-                        </Grid>
-                    </Grid>  )
+                        your reference number is {this.props.match.params.orderId}
+                    </Typography>
+                </Grid>
+            </Grid>)
     }
 }
 

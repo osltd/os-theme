@@ -62,7 +62,7 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const {classes, placeholder, multiline, title, value, onChange,validation,} = this.props;
+        const {classes, placeholder, multiline, title, value, onChange, validation,} = this.props;
 
         return (<Grid container direction={'column'}>
                 <Typography variant={'subheading'}>{title}</Typography>
