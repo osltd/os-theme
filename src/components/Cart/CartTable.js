@@ -12,6 +12,7 @@ import {formatMoney, refactorTitle} from "../../api/ApiUtils";
 import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
 import classNames from 'classnames'
+import LoadingPage from '../Layout/LoadingPage'
 import {
     CART_OPERATE_SHOPPING_CART,
     EDIT_PRODUCT_VIEW_MODE,
@@ -91,6 +92,8 @@ class ShoppingCartTable extends React.Component {
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
 
     render() {
+        if (this.props.shoppingCart===null) return <LoadingPage/>
+
         const {classes, shoppingCart} = this.props;
         return (
             shoppingCart.length > 0 ?

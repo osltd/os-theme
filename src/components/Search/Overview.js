@@ -96,8 +96,16 @@ class SearchPage extends React.Component {
                     </Grid>
                 </Grid>
                 <Grid item container lg={9} spacing={32} xs={11}>
+                    {
+                        products &&
+                        <Grid item xs={12}>
+                            <Typography variant={'subheading'}>
+
+                            Products ({products.length})
+                            </Typography></Grid>
+                    }
                     {products && products.map((n, i) => (
-                        <Grid item md={6} xs={12} key={i}>
+                        <Grid item md={4} sm={6} xs={12} key={i}>
 
 
                             <ProductOverviewBox
@@ -111,6 +119,15 @@ class SearchPage extends React.Component {
                                 id={n.id}
                             />
                         </Grid>))}
+                    {
+                        feeds &&
+                        <Grid item xs={12}>
+                        <Typography variant={'subheading'}>
+
+                            Feeds ({feeds.length})
+                        </Typography>
+                        </Grid>
+                    }
                     {feeds && feeds.map((n, i) =>
                         <Grid item md={6} xs={12} key={i}>
                             <FeedOverviewBox

@@ -63,7 +63,6 @@ const mapDispatchToProps = dispatch => ({
 class CartOverview extends React.Component {
 
     render() {
-        if (!(this.props.shoppingCart)) return <LoadingPage/>
 
         const {classes} = this.props
         return <Grid container justify={'center'}>

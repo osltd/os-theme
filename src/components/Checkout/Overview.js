@@ -9,6 +9,7 @@ import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
 import LoadingPage from '../Layout/LoadingPage'
+
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -30,9 +31,9 @@ const styles = theme => ({
         padding: '30px'
     },
     form: {
-        margin:'40px',
-        padding:'40px',
-        border:'1px solid '+theme.palette.secondary.light,
+        margin: '40px',
+        padding: '40px',
+        border: '1px solid ' + theme.palette.secondary.light,
 
     }
 
@@ -97,7 +98,7 @@ class ShopOverview extends React.Component {
                         </Grid>
                         <Grid item>
                             <Button
-                                variant="extendedFab"
+                                variant='outlined'
                                 onClick={() => this.props.history.push('/shop')}
 
                             >
