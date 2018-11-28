@@ -8,7 +8,7 @@ import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
-
+import LoadingPage from '../Layout/LoadingPage'
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
@@ -75,6 +75,7 @@ class ShopOverview extends React.Component {
     render() {
 
         const {classes} = this.props
+        if (!(this.props.shoppingCart)) return <LoadingPage/>
         if (this.props.shoppingCart.length < 1)
             return (<Grid container alignItems={'center'} justify={'center'}>
 

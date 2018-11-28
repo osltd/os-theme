@@ -14,6 +14,9 @@ export const CART_INIT_SHOPPING_CART = 'CART_INIT_SHOPPING_CART'
 export const CART_OPERATE_SHOPPING_CART = 'CART_OPERATE_SHOPPING_CART'
 export const CART_EDIT_BILLING_DETAIL = 'CART_EDIT_BILLING_DETAIL'
 export const CART_EMPTY_BILLING_DETAIL = 'CART_EMPTY_BILLING_DETAIL'
+export const
+    COMMON_EDIT_SEARCH_BAR='COMMON_EDIT_SEARCH_BAR'
+export const   COMMON_INIT_SEARCH_BAR = 'COMMON_INIT_SEARCH_BAR'
 export const gg = {
     "items": [{"qty": "9"}, {"id": 41, "qty": 1}],
     "contact": {

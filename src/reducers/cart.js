@@ -10,7 +10,7 @@ import {
 
 
 const defaultState = {
-    shoppingCart: [],
+    shoppingCart: null,
 
     variant: {},
     billingDetail: {},

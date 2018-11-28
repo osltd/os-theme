@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import {Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
+import {Button, Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -184,6 +184,19 @@ class ShoppingCartTable extends React.Component {
                                 <TableCell colSpan={2}>Total</TableCell>
                                 <TableCell
                                     numeric>{'$ ' + formatMoney(shoppingCart.length > 0 && shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}</TableCell>
+                                <TableCell colSpan={3} numeric>
+
+                                    <Button variant={'outlined'}
+                                            className={classes.button}
+                                            href={'/checkout'}>
+                                        Checkout
+                                    </Button>
+                                </TableCell>
+
+                            </TableRow>
+                            <TableRow>
+
+
                             </TableRow>
                         </TableBody>
                     </Table>

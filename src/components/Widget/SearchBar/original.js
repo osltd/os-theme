@@ -21,7 +21,7 @@ const styles = theme => ({
     }
 })
 
-class OutlinedInputAdornments extends React.Component {
+class SearchBar extends React.Component {
     state = {
         amount: '',
         password: '',
@@ -32,7 +32,7 @@ class OutlinedInputAdornments extends React.Component {
 
 
     render() {
-        const {classes, placeholder, value, onChange} = this.props;
+        const {classes, placeholder, value, onChange,onKeyPress} = this.props;
 
         return <Input
             fullWidth={true}
@@ -46,14 +46,14 @@ class OutlinedInputAdornments extends React.Component {
             value={value ? value : ''}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
-
-
+            onChange={e=>onChange(e.target.value)}
+            onKeyPress={e=>onKeyPress?onKeyPress(e.key):null}
         />
     }
 }
 
-OutlinedInputAdornments.propTypes = {
+SearchBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(OutlinedInputAdornments);
+export default withStyles(styles)(SearchBar);

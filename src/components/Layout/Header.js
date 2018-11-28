@@ -11,8 +11,8 @@ import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {CART_OPERATE_SHOPPING_CART} from "../../constants/actionType";
-
+import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
+import SearchBar from '../Widget/SearchBar/original'
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
@@ -98,6 +98,8 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
+    keyword: state.common.searchBar,
+
 });
 
 
@@ -109,6 +111,10 @@ const mapDispatchToProps = dispatch => ({
                 value: index,
 
             }
+        }),
+        editSearchBar: (keyword = null) => dispatch({
+            type: COMMON_EDIT_SEARCH_BAR,
+            payload: keyword
         })
     }
 
@@ -122,9 +128,24 @@ class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: 'recents',
+            keyword:''
         };
     }
+
+    getInputBar=()=>
+        <Input
+            onKeyDown={e=>
+                (e.key==='Enter'&&this.state.keyword)? this.props.history.push('/search/'+this.state.keyword):null
+
+            }
+            onChange={e => this.setState({keyword:e.target.value})}
+
+            placeholder="Search…"
+            classes={{
+                root: this.props.classes.inputRoot,
+                input: this.props.classes.inputInput,
+            }}
+        />
 
     render() {
         const {classes, width} = this.props;
@@ -174,13 +195,8 @@ class Header extends React.Component {
                                             <div className={classes.searchIcon}>
                                                 <SearchIcon/>
                                             </div>
-                                            <Input
-                                                placeholder="Search…"
-                                                classes={{
-                                                    root: classes.inputRoot,
-                                                    input: classes.inputInput,
-                                                }}
-                                            />
+
+                                            {this.getInputBar()}
                                         </div>
                                     </Grid>
                                     <Grid item>
@@ -205,13 +221,8 @@ class Header extends React.Component {
                                             <div className={classes.searchIcon}>
                                                 <SearchIcon/>
                                             </div>
-                                            <Input
-                                                placeholder="Search…"
-                                                classes={{
-                                                    root: classes.inputRoot,
-                                                    input: classes.inputInput,
-                                                }}
-                                            />
+                                            {this.getInputBar()}
+
                                         </div>
                                     </Grid>
                                     <Grid item>

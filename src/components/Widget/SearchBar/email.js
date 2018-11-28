@@ -32,7 +32,7 @@ const styles = theme => ({
     }
 })
 
-class OutlinedInputAdornments extends React.Component {
+class EmailSearchBar extends React.Component {
     state = {
         amount: '',
         password: '',
@@ -62,8 +62,8 @@ class OutlinedInputAdornments extends React.Component {
     }
 }
 
-OutlinedInputAdornments.propTypes = {
+EmailSearchBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(OutlinedInputAdornments);
+export default withStyles(styles)(EmailSearchBar);

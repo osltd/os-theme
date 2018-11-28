@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from 'react'
-import {Grid} from '@material-ui/core'
+import {Grid,CircularProgress,LinearProgress} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import loadingImg from '../../constants/img/loadingImg.gif'
 
@@ -18,9 +18,8 @@ class NotFound extends React.Component {
         const {classes, msg} = this.props;
         return (
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-                <img
-                    src={loadingImg}
-                />
+                <CircularProgress size={100}   />
+
             </Grid>);
     }
 }

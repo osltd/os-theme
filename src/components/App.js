@@ -20,6 +20,8 @@ import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
 import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
+import '../constants/Style.css'
+import SearchPage from './Search/Overview'
 
 const mapStateToProps = state => ({});
 
@@ -73,7 +75,7 @@ class App extends React.Component {
                                 <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
                                 <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                                 <Route exact path={'/loadingPage'} component={LoadingPage}/>
-
+                                <Route exact path={'/search/:keyword'} component={SearchPage}/>
                             </div>
                             <Footer/>
                         </ErrorBoundary>

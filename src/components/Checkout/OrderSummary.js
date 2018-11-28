@@ -102,70 +102,89 @@ class OrderSummary extends React.Component {
         this.props.history.push('/loadingPage')
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
+                console.log(this.props)
+            let selectShippingMethod=
+                this.props.billingDetail.shippingOptions.find(
+                    n => n.courier.id === this.props.billingDetail.selectedShippingMethod
+                )
+if (!(selectShippingMethod))selectShippingMethod= this.props.billingDetail.shippingOptions[0]
+            swal(
+                    {
 
-                swal(<Grid container direction={'column'}>
-                    <Grid item>
-                        <Typography variant={'title'}>
-                            {
-                                "your contact id is " + res.data.data.orders[0].number
+                        content: (<Grid container direction={'column'}>
+                            <Grid item>
+                                <Typography variant={'title'}>
+                                    {
+                                        "your contact id is " + res.data.data.orders[0].number
 
-                            }
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'body2'}>
-                            {
-                                " your contact number is " + this.props.billingDetail.phone
-                            }
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'body2'}>
+                                    }
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'body2'}>
+                                    {
+                                        " your contact number is " + this.props.billingDetail.phone
+                                    }
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                {
+                                    this.props.shoppingCart.map((n, i) =>
+                                        <ListItem
+                                            key={i}
 
-                            product details</Typography>
-                    </Grid>
-                    <Grid item>
-                        {
-                            this.props.shoppingCart.map((n, i) =>
-                                <ListItem
-                                    key={i}
+                                        >
+                                                             <Grid container spacing={16} alignItems={'center'}>
+                                                    <Grid item sm={3}>
 
-                                >
-                                    <Tooltip
-                                        TransitionComponent={Zoom}
-                                        title={n.product.variants.find(variant => variant.id === n.variantId).description}>
+                                                        <img
+                                                            style={{width: '100%', minWidth: '50px'}}
+                                                            src={n.product.photos[0].url}
+                                                        />
 
-                                        <Grid container spacing={16} alignItems={'center'}>
-                                            <Grid item sm={3}>
+                                                    </Grid>
+                                                    <Grid item sm={9}>
+                                                        <Typography variant={'body2'}>
+                                                            {refactorTextLength(n.product.name)}
+                                                        </Typography>
+                                                        <Typography variant={'caption'}>
+                                                            {n.number} X
+                                                            $ {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                        }
+                                                        </Typography>
+                                                        <Typography variant={'caption'}>
 
-                                                <img
-                                                    style={{width: '100%', minWidth: '50px'}}
-                                                    src={n.product.photos[0].url}
-                                                />
+                                                        {n.product.variants.find(variant => variant.id === n.variantId).description}
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                        </ListItem>)
 
-                                            </Grid>
-                                            <Grid item sm={9}>
-                                                <Typography variant={'body2'}>
-                                                    {refactorTextLength(n.product.name)}
-                                                </Typography>
-                                                <Typography variant={'caption'}>
-                                                    {n.number} X
-                                                    $ {n.product.variants.find(variant => variant.id === n.variantId).price
-                                                }
-                                                </Typography>
+                                }
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'body1'}>
+                                Total amount is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
+                                </Typography>
+                                <Typography variant={'body1'}>
+                              thanks for choosing  {
+                                selectShippingMethod.courier.name
+                                }.</Typography>
+                                <Typography variant={'body1'}>
 
-                                            </Grid>
-                                        </Grid>
-                                    </Tooltip>
+                                the items will be there in {
+                                selectShippingMethod.deliveryTime.min
 
-                                </ListItem>)
+                            } to {
+                                selectShippingMethod.deliveryTime.max
 
-                        }
-                    </Grid>
-                </Grid>);
-            this.props.emptyShoppingCart()
-            this.props.emptyBillingDetail()
-            this.props.history.push('/')
+                                } days</Typography>
+                            </Grid>
+                        </Grid>)
+                    });
+                this.props.emptyShoppingCart()
+                this.props.emptyBillingDetail()
+                this.props.history.push('/')
 
             }
         ).catch(err => {
