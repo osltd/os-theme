@@ -121,14 +121,15 @@ class ShoppingCartList extends React.Component {
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                            href={'/shoppingCart'}>
+                            onClick={()=>this.props.history.push('/shoppingCart')}
+                        >
                             View Cart
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button variant={'outlined'}
                                 className={classes.button}
-                                href={'/checkout'}>
+                                onClick={()=>this.props.history.push('/checkout')}>
                             Checkout
                         </Button>
                     </Grid>
