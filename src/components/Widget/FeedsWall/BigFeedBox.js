@@ -12,7 +12,7 @@ const styles = theme => ({
         backgroundPosition: 'center',
         backgroundColor: '#d3dbe2',
         cursor: 'pointer',
-        marginBottom: '20px',
+        marginBottom: 35,
     },
     title: {
         color: 'white',

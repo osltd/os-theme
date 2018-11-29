@@ -22,6 +22,7 @@ import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
 import '../constants/Style.css'
 import SearchPage from './Search/Overview'
+import 'font-awesome/css/font-awesome.min.css'
 
 const mapStateToProps = state => ({});
 
@@ -67,10 +68,10 @@ class App extends React.Component {
                             <Header/>
                             <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
                                 <Route exact path={'/'} component={mainPage}/>
-                                <Route exact path={'/shop'} component={Shop}/>
-                                <Route exact path={'/feed'} component={Feed}/>
-                                <Route exact path={'/feed/:id'} component={FeedDetail}/>
-                                <Route exact path={'/shop/:id'} component={Product}/>
+                                <Route exact path={'/products'} component={Shop}/>
+                                <Route exact path={'/feeds'} component={Feed}/>
+                                <Route exact path={'/feeds/:id'} component={FeedDetail}/>
+                                <Route exact path={'/products/:id'} component={Product}/>
                                 <Route exact path={'/checkout'} component={Checkout}/>
                                 <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
                                 <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>

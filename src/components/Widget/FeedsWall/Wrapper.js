@@ -23,13 +23,13 @@ const styles = theme => ({
 
     },
     left: {
-        paddingRight: '10px',
-        paddingLeft: '20px',
+        paddingRight: 20,
+        paddingLeft: 30,
 
     },
     right: {
-        paddingLeft: '10px',
-        paddingRight: '20px',
+        paddingLeft: 20,
+        paddingRight: 30,
     }
 });
 
@@ -42,49 +42,67 @@ class FeedsWall extends React.Component {
         return (data.length) ? <Grid container alignItems={'stretch'} className={classes.root}>
             <Grid item md={6} className={classes.left}>
                 <BigFeedBox
-                    link={'/feed/' + data[0].id}
+                    link={'/feeds/' + data[0].id}
 
                     backgroundImg={data[0].sections[0].medias[0].url}
                     title={refactorTitle(data[0].sections[0].title)}
 
                 />
                 <SmallFeedBox
-                    link={'/feed/' + data[1].id}
+                    link={'/feeds/' + data[1].id}
 
-                    left={<img
-                        style={{width: '100%', height: '300px'}}
-                        src={data[1].sections[0].medias[0].url}
-                    />}
-                    right={<Fragment>
+                    left={<div style={{
+                        height: '300px',
+                        backgroundSize: 'cover',
+                        backgroundImage: 'url(' + data[1].sections[0].medias[0].url + ')',
+                        width: '100%',
+                        backgroundPosition: 'center'
+                    }}></div>}
+                    right={<div style={{ textAlign: 'center' }}>
                         <Typography
                             style={{padding: '0 20px'}}
                             variant={'subheading'}
                         >
                             {data[1].sections[0].title}      </Typography>
+                            <br/>
+                            <Typography
+                            style={{padding: '0 20px', color: 'rgb(159, 159, 159)'}}
+                        >
+                            {data[1].sections[0].description}</Typography>
 
-                    </Fragment>}
+                    </div>}
 
                 />
             </Grid>
             <Grid item md={6} className={classes.right}>
                 <SmallFeedBox
-                    link={'/feed/' + data[2].id}
+                    link={'/feeds/' + data[2].id}
 
-                    right={<img
-                        style={{width: '100%', height: '300px'}}
-                        src={data[2].sections[0].medias[0].url}
-                    />}
+                    right={<div style={{
+                        height: '300px',
+                        backgroundSize: 'cover',
+                        backgroundImage: 'url(' + data[2].sections[0].medias[0].url + ')',
+                        width: '100%',
+                        backgroundPosition: 'center'
+                    }}></div>}
                     left=
-                        {(<Typography
+                        {(<div style={{ textAlign: 'center' }}>
+                            <Typography
                             style={{padding: '0 20px'}}
 
                             variant={'subheading'}
                         >
-                            {data[2].sections[0].title}          </Typography>)}
+                            {data[2].sections[0].title}</Typography>
+                            <br/>
+                            <Typography
+                            style={{padding: '0 20px', color: 'rgb(159, 159, 159)'}}
+                        >
+                            {data[2].sections[0].description}</Typography>
+                        </div>)}
 
                 />
                 <BigFeedBox
-                    link={'/feed/' + data[3].id}
+                    link={'/feeds/' + data[3].id}
                     title={refactorTitle(data[3].sections[0].title)}
                     backgroundImg={data[3].sections[0].medias[0].url}
 

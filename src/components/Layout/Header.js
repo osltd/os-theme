@@ -152,7 +152,7 @@ class Header extends React.Component {
         if (isWidthUp('md', width)) {
 
             return (
-                <AppBar position="fixed" className={classes.appBar}>
+                <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
                     <Grid container alignItems={'center'} justify={'space-between'}>
                         <Grid item xs={2}>
                             <img
@@ -164,17 +164,16 @@ class Header extends React.Component {
                         <Grid item xs={6} container>
                             <Grid item>
                                 <Button
-                                    icon={'icon-gift'}
-                                    onClick={()=>redirectUrl('/shop')}
-
-                                    value={'shop'}
+                                    icon={'fa fa-shopping-bag'}
+                                    onClick={()=>redirectUrl('/products')}
+                                    value={'products'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
-                                    icon={'icon-books'}
-                                    onClick={()=>redirectUrl('/feed')}
-                                    value={'feed'}
+                                    icon={'fa fa-rss'}
+                                    onClick={()=>redirectUrl('/feeds')}
+                                    value={'feeds'}
                                 />
                             </Grid>
                             <Grid item>
@@ -252,15 +251,15 @@ class Header extends React.Component {
                                     onClick={() => redirectUrl('/',this.props.history)}
                                     icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
-            <BottomNavigationAction label="Shops" value="Shops"
-                                    onClick={() => redirectUrl('/shop',this.props.history)}
+            <BottomNavigationAction label="Products" value="Products"
+                                    onClick={() => redirectUrl('/products',this.props.history)}
 
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
-            <BottomNavigationAction label="Feed" value="Feed"
-                                    onClick={() => redirectUrl('/feed',this.props.history)}
+            <BottomNavigationAction label="Feeds" value="Feeds"
+                                    onClick={() => redirectUrl('/feeds',this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
-            <BottomNavigationAction label="Checkout" value="Checkout    "
+            <BottomNavigationAction label="Checkout" value="Checkout"
                                     onClick={() => redirectUrl('/checkout',this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
 

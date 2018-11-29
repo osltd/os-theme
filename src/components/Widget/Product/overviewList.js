@@ -83,7 +83,7 @@ class ResponsiveDialog extends React.Component {
                 <Grid item xs={4}>
                     <img src={src}
 
-                         onClick={() => redirectUrl('/shop/' + id,this.props.history)}
+                         onClick={() => redirectUrl('/products/' + id,this.props.history)}
 
                          className={classes.img}/>
                 </Grid>
@@ -96,7 +96,7 @@ class ResponsiveDialog extends React.Component {
 
                     }
                     <Typography variant={'title'}
-                                onClick={() => redirectUrl('/shop/' + id,this.props.history)}
+                                onClick={() => redirectUrl('/products/' + id,this.props.history)}
                                 className={classes.name}
                     >{name}</Typography>
 

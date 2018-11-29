@@ -115,14 +115,14 @@ export const getRoutePath = url => {
                     result.push({
 
                             label: 'singleProduct',
-                            link: '/shop/' + n
+                            link: '/products/' + n
                         }
                     )
                 if (url[i - 1] === 'feed')
                     result.push({
 
                             label: 'currentFeeds',
-                            link: '/feed/' + n
+                            link: '/feeds/' + n
                         }
                     )
         }

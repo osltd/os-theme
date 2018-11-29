@@ -68,7 +68,7 @@ class ResponsiveDialog extends React.Component {
         } = this.props;
         return (
             <Grid container
-                  onClick={() => redirectUrl('/feed/' + id,this.props.history)}
+                  onClick={() => redirectUrl('/feeds/' + id,this.props.history)}
                   className={classes.root} alignItems={'center'} direction={'column'}>
                 <Grid item xs={12}>
                     <Media

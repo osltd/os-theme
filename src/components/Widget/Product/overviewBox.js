@@ -74,7 +74,7 @@ class ResponsiveDialog extends React.Component {
         return (
             <Grid container className={classes.root} direction={'column'}>
                 <img src={src}
-                     onClick={() => redirectUrl('/shop/' + id,this.props.history)}
+                     onClick={() => redirectUrl('/products/' + id,this.props.history)}
                      className={classes.img}/>
                 {
                     category && <Typography variant={'headline'}
@@ -84,7 +84,7 @@ class ResponsiveDialog extends React.Component {
 
                 }
                 <Typography variant={'title'}
-                            onClick={() => window.location.href = ('/shop/' + id)}
+                            onClick={() => window.location.href = ('/products/' + id)}
                             className={classes.name}
 
                 >{name}</Typography>

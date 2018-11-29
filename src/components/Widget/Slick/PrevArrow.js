@@ -5,24 +5,20 @@ const style = theme => ({
     root: {
         '&:hover': {
             '&:before': {
-                background: '#0f090a',
-                color: 'white',
-
+                background: 'rgba(255, 255, 255, 0.8)',
+                color: '#484848'
             }
         },
         '&:before': {
-
             borderRadius: '4px',
             padding: '5px',
             fontSize: '40px',
             position: 'absolute',
             top: '50%',
             cursor: 'pointer',
-            color: '#0f090a',
-            background: 'white',
-
+            color: '#484848',
+            background: 'rgba(255, 255, 255, 0.64)',
             zIndex: 2,
-
         }
 
     }
@@ -35,7 +31,7 @@ class PrevArrow extends React.Component {
         return (
             <span
                 className={classes.root + ' ' + 'icon-circle-left'}
-                style={{...style,}}
+                style={{...style}}
                 onClick={onClick}
 
             />

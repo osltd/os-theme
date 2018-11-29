@@ -53,13 +53,14 @@ class ResponsiveDialog extends React.Component {
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
+
                     <Grid item xs={12}>
                         <Carousel
                             data=
                                 {this.props.feeds
                                     .filter(n => isImgOnlySections(n.sections))
                                     .map(n => ({
-                                        link: '/feed/' + n.id,
+                                        link: '/feeds/' + n.id,
                                         url: n.sections[0].medias[0].url,
                                         title: n.sections[0].title,
                                     }))
@@ -67,7 +68,8 @@ class ResponsiveDialog extends React.Component {
                                 }/>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    
+                    <Grid item xs={12} style={{ marginTop: 80 }}>
                         <FeedsWall
                             data={this.props.feeds.filter((n, i) => isImgOnlySections(n.sections))}
                         />
