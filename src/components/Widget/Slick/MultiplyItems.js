@@ -16,9 +16,11 @@ const style = theme => ({
 
 class MultipleItems extends Component {
     render() {
-        const {classes, data, size} = this.props;
+        const {classes, data} = this.props;
+        var size = this.props.size || 4;
+        if (data.length > size) size = data.length;
         var products = [];
-        for (var i = 0; i < (size || 4); i++) {
+        for (var i = 0; i < size; i++) {
             i % 4 == 0 && products.push([]);
             products[Math.floor(i/4)].push(data[i] || {});
         }

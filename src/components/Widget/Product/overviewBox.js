@@ -31,9 +31,11 @@ const styles = theme => ({
     img: {
         cursor: 'pointer',
         width: '100%',
-        height: '355px !important',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        height: '320px !important',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#f8f8f8'
     },
 
     oldPrice: {},
