@@ -8,26 +8,20 @@ import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     root: {
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#F6F6F6',
         cursor: 'pointer',
-        marginBottom: '20px',
+        marginBottom: 35,
 
     },
 });
 
 
 class FeedsWall extends React.Component {
-
-
     render() {
         const {classes, left, right, link} = this.props;
 
         return (
-            <Grid container alignItems={'center'} className={classes.root}
-
-
-                  onClick={() => redirectUrl(link,this.props.history)}
-            >
+            <Grid container alignItems={'center'} className={classes.root} onClick={() => redirectUrl(link,this.props.history)}>
                 <Grid item container direction={'column'} justify={'flex-start'} alignItems={'center'} sm={5}>
                     {left}
                 </Grid>

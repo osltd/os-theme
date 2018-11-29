@@ -14,7 +14,7 @@ const styles = theme => ({
         margin: '0 10px',
     },
     btnText: {
-        fontWeight: '500',
+        fontWeight: '600',
         fontSize: '14px',
         textTransform: 'uppercase',
     },
@@ -60,7 +60,7 @@ class CustomButton extends React.Component {
                 component={link ? Link : 'span'}
                 to={link ? link : '#'}
                 alignItems={'center'}
-                className={classesNames(classes.root, border ? classes.border : null,)}
+                className={classesNames(classes.root, border ? classes.border : null)}
                 onClick={onClick}
             >
                 {icon && <span className={classes.icon + ' ' + icon}/>}

@@ -5,8 +5,8 @@ const style = theme => ({
     root: {
         '&:hover': {
             '&:before': {
-                background: '#0f090a',
-                color: 'white',
+                background: 'rgba(255, 255, 255, 0.8)',
+                color: '#484848',
 
             }
         },
@@ -18,10 +18,8 @@ const style = theme => ({
             top: '50%',
             cursor: 'pointer',
             right: '0px',
-
-            color: '#0f090a',
-            background: 'white',
-
+            color: '#484848',
+            background: 'rgba(255, 255, 255, 0.64)'
         }
 
     }

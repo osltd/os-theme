@@ -9,7 +9,7 @@ import {redirectUrl} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
-        margin: '40px 0px',
+        margin: 0,
         width: 'calc(100%-80px)',
     },
     img: {
@@ -30,7 +30,8 @@ const style = theme => ({
         fontWeight: '900',
         textAlign: 'center',
 
-    }, subTitle: {
+    },
+    subTitle: {
 
         color: 'white',
         fontSize: '30px',
@@ -43,8 +44,9 @@ const style = theme => ({
 class SimpleSlider extends React.Component {
     render() {
         let settings = {
-            dots: true,
+            dots: false,
             infinite: true,
+            lazyLoad: true,
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,

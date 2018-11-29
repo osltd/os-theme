@@ -76,7 +76,7 @@ class ShoppingCartList extends React.Component {
                                 key={i}
                                 button
 
-                                onClick={() => redirectUrl('/shop/' + n.product.id,this.props.history)}>
+                                onClick={() => redirectUrl('/products/' + n.product.id,this.props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
                                     title={n.product.variants.find(variant => variant.id === n.variantId).description}>
