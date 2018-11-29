@@ -10,7 +10,9 @@ const styles = theme => ({
 
     root: {
         minHeight: '450px',
+        paddingBottom:'20px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+        cursor:'pointer'
     },
 
 
@@ -65,7 +67,9 @@ class ResponsiveDialog extends React.Component {
             medias
         } = this.props;
         return (
-            <Grid container className={classes.root} alignItems={'center'} direction={'column'}>
+            <Grid container
+                  onClick={() => redirectUrl('/feed/' + id,this.props.history)}
+                  className={classes.root} alignItems={'center'} direction={'column'}>
                 <Grid item xs={12}>
                     <Media
                         box={true}
@@ -76,7 +80,6 @@ class ResponsiveDialog extends React.Component {
                     <Grid item>
                         <Typography
                             className={classes.title}
-                            onClick={() => redirectUrl('/feed/' + id,this.props.history)}
                             variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>
                     <Grid item>
@@ -86,15 +89,7 @@ class ResponsiveDialog extends React.Component {
                     <Grid item>
                         <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>
                     </Grid>
-                    <Grid item>
-                        <Button
-                            onClick={() => redirectUrl('/feed/' + id,this.props.history)}
-                            variant={'outlined'}
-                            className={classes.button}
-                        >
-                            Continue Reading
-                        </Button>
-                    </Grid>
+
                 </Grid>
             </Grid>
         );

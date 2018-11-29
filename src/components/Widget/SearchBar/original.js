@@ -43,7 +43,7 @@ class SearchBar extends React.Component {
             }}
             variant={'filled'}
             placeholder={placeholder}
-            value={value ? value : ''}
+            defaultValue={value ? value : ''}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-search')}/>}
             onChange={e => onChange(e.target.value)}

@@ -5,11 +5,11 @@ import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import moment from 'moment'
 import List from '../Widget/List'
-import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
+import {getTagsCountsArray, redirectUrl, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
-
+import classNames from 'classnames'
 const styles = theme => (
     {
         productCategory: {
@@ -18,6 +18,16 @@ const styles = theme => (
         toolBar: {
             backgroundColor: ''
         },
+        content:{
+            margin:'20px 0',
+        },
+        backIcon:{
+            fontSize:'30px'
+        },
+        backArrow:{
+            cursor:'pointer',
+
+        }
     })
 
 
@@ -55,7 +65,18 @@ class ResponsiveDialog extends React.Component {
                         title={refactorTextLength(feed.sections[0].title)}
 
                     />
+
                     <Grid item container spacing={16} xs={12} lg={10}>
+                        <Grid item container alignItems={'center'} xs={12}
+                              onClick={()=>redirectUrl('/feed')}
+                              className={classes.backArrow} >
+                            <span
+                                className={classNames('icon-circle-left',classes.backIcon)}/>
+                            <Typography variant={'title'}>
+                                back to feed
+                            </Typography>
+                        </Grid>
+
                         <Grid item xs={12} md={3}>
                             <List
                                 data={getTagsCountsArray(this.props.feeds, (tag, number) => {
@@ -88,15 +109,16 @@ class ResponsiveDialog extends React.Component {
                             {
                                 feed.sections.map((n, i) =>
                                     <Fragment key={i}>
-                                        <Grid item container alignItems={'center'} justify={'center'} xs={12} key={i}>
+                                        <Grid item container
+                                              alignItems={'center'}  justify={'center'} xs={12} key={i}>
                                             <Grid item xs={11}>
                                                 <Media
                                                     data={feed.sections[i].medias}/>
                                             </Grid>
 
                                         </Grid>
-                                        <Grid item>
-                                            <Typography variant={'body1'}>
+                                        <Grid item >
+                                            <Typography className={classes.content} variant={'body1'}>
                                                 {n.description}
                                             </Typography>
                                         </Grid>

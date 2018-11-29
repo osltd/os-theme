@@ -42,9 +42,8 @@ class Footer extends React.Component {
                 </Grid>
                 <Grid item sm={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
+                        <Typography variant={'title'} color={'inherit'}>THE BELL</Typography>
 
-                            THE BELL</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'caption'} color={'inherit'}>

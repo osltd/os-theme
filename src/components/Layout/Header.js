@@ -129,7 +129,6 @@ class Header extends React.Component {
         <Input
             onKeyDown={e =>
                 (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword,this.props.history) : null
-
             }
             onChange={e => this.setState({keyword: e.target.value})}
 
@@ -224,7 +223,6 @@ class Header extends React.Component {
                                                 <SearchIcon/>
                                             </div>
                                             {this.getInputBar()}
-
                                         </div>
                                     </Grid>
                                     <Grid item>

@@ -10,7 +10,6 @@ import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
 import LoadingPage from '../Layout/LoadingPage'
-import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => {
     return (
@@ -48,6 +47,23 @@ const mapDispatchToProps = dispatch => ({
 
 class ResponsiveDialog extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            timer: () => null
+        }
+
+    }
+
+    onChange = value => {
+        clearTimeout(this.state.timer)
+        this.setState(
+            {
+                timer: setTimeout(() => this.props.editFeedFilter('keyword', value), 500)
+
+            }
+        )
+    }
 
     render() {
         const {classes} = this.props
@@ -75,7 +91,7 @@ class ResponsiveDialog extends React.Component {
                         <Grid item>
                             <SearchBar
                                 value={this.props.filter.keyword}
-                                onChange={value => this.props.editFeedFilter('keyword', value)}
+                                onChange={value => this.onChange(value)}
                                 placeholder={'type keywords'}/>
                         </Grid>
                         <Grid item>

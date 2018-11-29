@@ -90,10 +90,9 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
-        redirectUrl('/loadingPage',this.props.history)
+        redirectUrl('/loadingPage',this.props.history,false)
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
-                console.log(this.props)
                 let selectShippingMethod =
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
@@ -175,8 +174,9 @@ class OrderSummary extends React.Component {
                         </Grid>)
                     });
                 this.props.emptyShoppingCart()
-                this.props.emptyBillingDetail()
-                redirectUrl('/',this.props.history)
+
+            this.props.emptyBillingDetail()
+                redirectUrl('/',this.props.history,false)
 
             }
         ).catch(err => {

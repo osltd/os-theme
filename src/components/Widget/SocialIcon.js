@@ -72,6 +72,21 @@ const styles = theme => ({
         }
 
 
+    },
+    whatsapp: {
+        '&:before': {
+            color: '#74ff57',
+
+        },
+        '&:hover': {
+            backgroundColor: '#74ff57',
+            '&:before': {
+
+                color: 'white',
+            }
+        }
+
+
     }
 })
 
@@ -97,15 +112,18 @@ class OutlinedInputAdornments extends React.Component {
                 return 'icon-twitter'
             case 'facebook':
                 return 'icon-facebook2'
+            case 'whatsapp':
+                return 'icon-whatsapp'
+
             default:
                 return null
         }
     }
 
     render() {
-        const {classes, type} = this.props;
+        const {classes, type,onClick} = this.props;
 
-        return <div className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
+        return <div onClick={onClick}className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
 
     }
 }

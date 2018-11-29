@@ -133,6 +133,7 @@ class ResponsiveDialog extends React.Component {
         return (
             selectedVariant ?
                 <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                    {console.log(this.props)}
                     <Grid item xs={7} container direction={'column'} spacing={40}>
                         <Grid item container spacing={16}>
                             <Grid item>
@@ -231,10 +232,11 @@ class ResponsiveDialog extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <SocialIcon type={'reddit'}/>
-                                <SocialIcon type={'facebook'}/>
-                                <SocialIcon type={'twitter'}/>
-                                <SocialIcon type={'youtube'}/>
+                                <SocialIcon type={'whatsapp'}
+                                onClick={()=>window.open('https://web.whatsapp.com/send?text='+window.location.href)}/>
+                                <SocialIcon type={'facebook'}
+                                onClick={()=>window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)}/>
+
                             </Grid>
                         </Grid>
                     </Grid>

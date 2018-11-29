@@ -50,6 +50,13 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class SearchPage extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            timer: () => null
+        }
+
+    }
 
     searchData = (data) =>
         data.filter(n => (this.props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1) : false)
@@ -63,6 +70,16 @@ class SearchPage extends React.Component {
             this.props.editSearchBar(this.props.match.params.keyword)
 
 
+    }
+
+    onChange = value => {
+        clearTimeout(this.state.timer)
+        this.setState(
+            {
+                timer: setTimeout(() => this.props.editSearchBar(value), 500)
+
+            }
+        )
     }
 
     render() {
@@ -83,8 +100,7 @@ class SearchPage extends React.Component {
                     <Grid item>
                         <SearchBar
                             value={this.props.keyword}
-                            onKeyPress={value => console.log(value)}
-                            onChange={value => this.props.editSearchBar(value)}
+                            onChange={value => this.onChange(value)}
                             placeholder={'please type keyword'}
                         />
                     </Grid>

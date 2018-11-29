@@ -57,7 +57,6 @@ class CustomButton extends React.Component {
 
             <Grid
                 container
-
                 component={link ? Link : 'span'}
                 to={link ? link : '#'}
                 alignItems={'center'}
