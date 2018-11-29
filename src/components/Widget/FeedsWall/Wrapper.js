@@ -48,7 +48,7 @@ class FeedsWall extends React.Component {
                     title={refactorTitle(data[0].sections[0].title)}
 
                 />
-                <SmallFeedBox
+                {data[1] && <SmallFeedBox
                     link={'/feeds/' + data[1].id}
 
                     left={<div style={{
@@ -72,10 +72,10 @@ class FeedsWall extends React.Component {
 
                     </div>}
 
-                />
+                />}
             </Grid>
             <Grid item md={6} className={classes.right}>
-                <SmallFeedBox
+                {data[2] && <SmallFeedBox
                     link={'/feeds/' + data[2].id}
 
                     right={<div style={{
@@ -100,13 +100,13 @@ class FeedsWall extends React.Component {
                             {data[2].sections[0].description}</Typography>
                         </div>)}
 
-                />
-                <BigFeedBox
+                />}
+                {data[3] && <BigFeedBox
                     link={'/feeds/' + data[3].id}
                     title={refactorTitle(data[3].sections[0].title)}
                     backgroundImg={data[3].sections[0].medias[0].url}
 
-                />
+                />}
             </Grid>
         </Grid> : null
     }

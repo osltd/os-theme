@@ -13,6 +13,10 @@ import {isImgOnlySections} from "../../api/ApiUtils";
 const styles = theme => {
     return (
         {
+            section: {
+                width: '100%',
+                margin: '0 80px'
+            },
             productCategory: {
                 backgroundColor: theme.palette.background.paper
             },
@@ -20,7 +24,8 @@ const styles = theme => {
                 textAlign: 'center',
                 color: theme.palette.secondary.light,
                 marginBottom: '30px',
-
+                wordWrap: 'break-word',
+                wordBreak: 'break-all'
 
             },
             title: {
@@ -28,6 +33,7 @@ const styles = theme => {
                 fontWeight: '700',
                 color: theme.palette.primary.dark,
                 marginBottom: '20px',
+                textAlign: 'center'
             }
 
 
@@ -75,26 +81,22 @@ class ResponsiveDialog extends React.Component {
                         />
                     </Grid>
 
-                    <Grid item container alignItems={'center'} justify={'center'} lg={5}>
-                        <Typography variant={'display1'} className={classes.title}>
-                            TOP INTERESTING
-                        </Typography>
-                        <Typography variant={'subheading'} className={classes.text}>
-                            Browse the collection of our best selling and top interesting products. You’ll definitely
-                            find
-                            what you are looking for.
-                        </Typography>
-                    </Grid>
+                    <section className={classes.section}>
+                        <div>
+                            <Typography variant={'display1'} className={classes.title}>
+                                TOP INTERESTING
+                            </Typography>
+                            <Typography variant={'subheading'} className={classes.text}>
+                                Browse the collection of our best selling and top interesting products. You’ll definitely
+                                find
+                                what you are looking for.
+                            </Typography>
+                        </div>
 
-                    <Grid item xs={12} md={10}>
-                        {
-                            this.props.products.length > 8 ? <MultiRows
-                                data={this.props.products}
-                            /> : <MultiItems
-                                data={this.props.products}
-                            />
-                        }
-                    </Grid>
+                        <div>
+                            <MultiItems data={this.props.products} size={8}/>
+                        </div>
+                    </section>
 
                     <Grid item container alignItems={'center'} justify={'center'} className={classes.productCategory}>
                         <Grid item lg={5} xs={12} container justify={'center'}>
@@ -115,12 +117,22 @@ class ResponsiveDialog extends React.Component {
 
                     </Grid>
 
-                    <Grid item xs={12} md={9}>
-                        <MultiItems
-                            data={this.props.products}
-                        />
-                    </Grid>
+                    <section className={classes.section}>
+                        <div>
+                            <Typography variant={'display1'} className={classes.title}>
+                                Featured Products
+                            </Typography>
+                            <Typography variant={'subheading'} className={classes.text}>
+                                Browse the collection of our best selling and top interesting products. You’ll definitely
+                                find
+                                what you are looking for.
+                            </Typography>
+                        </div>
 
+                        <div>
+                            <MultiItems data={this.props.products}/>
+                        </div>
+                    </section>
 
                 </Grid> : <LoadingPage/>
         );

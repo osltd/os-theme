@@ -26,13 +26,14 @@ const styles = theme => ({
     root: {
         minHeight: '340px',
         padding: '10px 20px 20px',
-        borderRadius: '2px',
-
+        borderRadius: '2px'
     },
     img: {
         cursor: 'pointer',
         width: '100%',
-        maxHeight: '255px !important',
+        height: '355px !important',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
     },
 
     oldPrice: {},
@@ -73,9 +74,9 @@ class ResponsiveDialog extends React.Component {
 
         return (
             <Grid container className={classes.root} direction={'column'}>
-                <img src={src}
-                     onClick={() => redirectUrl('/products/' + id,this.props.history)}
-                     className={classes.img}/>
+                <div style={{ backgroundImage: 'url(' + src + ')'}}
+                     onClick={() => id && redirectUrl('/products/' + id,this.props.history)}
+                     className={classes.img}></div>
                 {
                     category && <Typography variant={'headline'}
                                             className={classes.category}
