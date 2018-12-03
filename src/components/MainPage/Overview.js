@@ -2,7 +2,6 @@ import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import Carousel from '../Widget/Slick/SingleItem'
-import MultiRows from '../Widget/Slick/MultiplyRows'
 import {connect} from 'react-redux'
 import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
@@ -56,22 +55,15 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const {classes} = this.props
+        var latestArticle = (((this.props.feeds || [])[0] || {}).sections || [])[0];
+        
+        console.log();
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={12}>
-                        <Carousel
-                            data=
-                                {this.props.feeds
-                                    .filter(n => isImgOnlySections(n.sections))
-                                    .map(n => ({
-                                        link: '/feeds/' + n.id,
-                                        url: n.sections[0].medias[0].url,
-                                        title: n.sections[0].title,
-                                    }))
-
-                                }/>
+                        <Carousel data={latestArticle.medias} title={latestArticle.title} caption={latestArticle.description}/>
                     </Grid>
 
                     
@@ -81,6 +73,8 @@ class ResponsiveDialog extends React.Component {
                         />
                     </Grid>
 
+
+                    {/* ---------------- hot sale products ----------------*/}
                     <section className={classes.section}>
                         <div>
                             <Typography variant={'display1'} className={classes.title}>
@@ -97,6 +91,8 @@ class ResponsiveDialog extends React.Component {
                             <MultiItems data={this.props.products} size={8}/>
                         </div>
                     </section>
+                    {/* ---------------- /hot sale products ----------------*/}
+
 
                     <Grid item container alignItems={'center'} justify={'center'} className={classes.productCategory}>
                         <Grid item lg={5} xs={12} container justify={'center'}>

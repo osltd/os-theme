@@ -37,7 +37,27 @@ const style = theme => ({
         fontSize: '30px',
         fontWeight: '450',
 
+    },
+
+
+
+    item: {
+        position: 'relative',
+        '&:hover p': {
+            display: 'block'
+        }
+    },
+    caption: {
+        display: 'none',
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        backgroundColor: '#333333b3',
+        color: '#fff',
+        padding: '10px 20px'
     }
+
+
 
 })
 
@@ -56,8 +76,10 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        const {data, classes} = this.props
+        let {data, classes, title, style} = this.props
         if (!(data[0])) return null
+        style = style || {};
+
 
         return (
             data.length > 1 ?
@@ -76,9 +98,8 @@ class SimpleSlider extends React.Component {
                                           onClick={() => n.link ? redirectUrl(n.link,this.props.history) : null}
 
                                           className={classes.img}>
-                                        {n.title && <Grid item lg={4}>
-                                            <Typography variant="display4" className={classes.title}
-                                                        gutterBottom> {n.title}</Typography>
+                                        {title && <Grid item lg={4}>
+                                            <Typography variant="display4" className={classes.title} gutterBottom>{title}</Typography>
                                         </Grid>}
                                     </Grid>
                                 </div>
@@ -87,11 +108,10 @@ class SimpleSlider extends React.Component {
                     }
 
                 </Slider> :
-                <img
-                    className={classes.imgOnly}
-
-                    src={data[0].url}
-                />
+                <div className={classes.item} style={{...style}}>
+                    <img className={classes.imgOnly} src={data[0].url} width="100%"/>
+                    <p className={classes.caption + ' animated fadeIn'}>{title}</p>
+                </div>
         );
     }
 }
