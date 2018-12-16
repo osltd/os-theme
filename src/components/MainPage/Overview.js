@@ -55,15 +55,14 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const {classes} = this.props
-        var latestArticle = (((this.props.feeds || [])[0] || {}).sections || [])[0];
+        var latestArticle = (((this.props.feeds || [])[0] || {}).sections || [])[0] || {};
         
-        console.log();
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={12}>
-                        <Carousel data={latestArticle.medias} title={latestArticle.title} caption={latestArticle.description}/>
+                        <Carousel data={latestArticle.medias || []} title={latestArticle.title || ''} caption={latestArticle.description || ''}/>
                     </Grid>
 
                     

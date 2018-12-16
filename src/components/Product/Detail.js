@@ -16,6 +16,11 @@ import Slick from '../Widget/Slick/SingleItem'
 const styles = theme => {
     return (
         {
+            name: {
+                color: 'rgba(0, 0, 0)',
+                fontSize: 28,
+                fontWeight: 600
+            },
             productCategory: {
                 backgroundColor: theme.palette.background.paper
             },
@@ -23,7 +28,7 @@ const styles = theme => {
                 backgroundColor: ''
             },
             price: {
-                color: '#ffc98b',
+                color: '#bdb093',
             },
             statusLabel: {
                 color: 'green',
@@ -133,12 +138,12 @@ class ResponsiveDialog extends React.Component {
         return (
             selectedVariant ?
                 <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    {console.log(this.props)}
                     <Grid item xs={7} container direction={'column'} spacing={40}>
                         <Grid item container spacing={16}>
                             <Grid item>
                                 <Typography
-                                    variant={'display2'}>{name}
+                                    variant={'display2'}
+                                    className={classes.name}>{name}
                                 </Typography>
                             </Grid>
                             <Grid item container direction={'row'}>
@@ -168,6 +173,7 @@ class ResponsiveDialog extends React.Component {
                                     {description}
                                 </Typography>
                             </Grid>
+                            
                             <Grid item>
 
 
@@ -200,7 +206,7 @@ class ResponsiveDialog extends React.Component {
                                     >
 
                                         <span className={'icon-cart'}/>
-                                        Add To Cart
+                                        &nbsp;&nbsp;Add To Cart
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -225,9 +231,10 @@ class ResponsiveDialog extends React.Component {
                                     </Button>
                                 </Grid>
                             </Grid>
-                            <Grid item>
 
-                                <Typography variant={'title'}>
+                            
+                            <Grid item style={{ marginTop: 15 }}>
+                                <Typography variant={'title'} style={{ fontSize: 15 }}>
                                     SHARE THIS PRODUCT:
                                 </Typography>
                             </Grid>

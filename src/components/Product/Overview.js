@@ -45,7 +45,6 @@ class ResponsiveDialog extends React.Component {
             return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
-                        title={refactorTextLength(product.name)}
                         route={'HOME/SHOP/SINGLE PRODUCT'}
                     />
                 </Grid>
