@@ -88,7 +88,7 @@ class ShopOverview extends React.Component {
                     <Grid item>
 
                         <Typography variant={'title'} color={'primary'}>
-                            you haven't put any items in cart
+                            You haven't put any items in cart
                         </Typography>
                     </Grid>
 
@@ -101,10 +101,10 @@ class ShopOverview extends React.Component {
                         <Grid item>
                             <Button
                                 variant='outlined'
-                                onClick={() => redirectUrl('/shop',this.props.history)}
+                                onClick={() => redirectUrl('/products',this.props.history)}
 
                             >
-                                shop
+                                Products
                             </Button>
                         </Grid>
                         <Grid item>
