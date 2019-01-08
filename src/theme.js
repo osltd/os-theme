@@ -11,6 +11,13 @@ const theme = createMuiTheme({
         fontSize:'25px',
         },
     },
+    overrides: {
+        MuiButton: { // Name of the component ⚛️ / style sheet
+
+            text: { // Name of the rule
+                color: 'red', // Some CSS
+            },
+        },},
     palette: {
         primary: {
             main: '#020103',

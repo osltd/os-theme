@@ -55,15 +55,11 @@ const mapDispatchToProps = dispatch => ({
 
 class App extends React.Component {
     componentDidMount() {
-
         this.initApp().then(()=>null)
     }
 
     getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`)
-        console.log('data')
-        console.log(data)
-        console.log(_.concat(products, data))
         return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
     initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts())
