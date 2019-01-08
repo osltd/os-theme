@@ -17,7 +17,7 @@ export const numberToPagination = (length, cb) => {
     if (length > itemsPerPage) {
         new Array(Math.floor(length / itemsPerPage)).fill(1).map(
             (n, i) => {
-                let label = (1 + i * 3) + ' - ' + ((i + 1) * 3)
+                let label = (1 + i * itemsPerPage) + ' - ' + ((i + 1) * itemsPerPage)
                 result.push({
                     label: label,
                     onClick: () => cb(label)
@@ -34,6 +34,7 @@ export const numberToPagination = (length, cb) => {
             onClick: () => cb(label)
         })
     }
+    console.log(result)
     return result
 
 }

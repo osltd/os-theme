@@ -23,16 +23,17 @@ import LoadingPage from './Layout/LoadingPage'
 import '../constants/Style.css'
 import SearchPage from './Search/Overview'
 import 'font-awesome/css/font-awesome.min.css'
+import _ from 'lodash'
 
 const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async (data) => {
+        initApp: async (shoppingCart, products) => {
             dispatch(
                 {
                     type: INIT_PRODUCTS,
-                    payload: await agent.Products.initProducts(),
+                    payload: products,
                 }
             )
             dispatch(
@@ -43,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
             )
             dispatch({
                 type: CART_INIT_SHOPPING_CART,
-                payload: data,
+                payload: shoppingCart,
             })
 
 
@@ -53,11 +54,19 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class App extends React.Component {
-
     componentDidMount() {
 
-        this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')))
+        this.initApp().then(()=>null)
     }
+
+    getAllProducts = async (page = 1, products = []) => {
+        let data = await agent.Products.initProducts(`?page=${page}`)
+        console.log('data')
+        console.log(data)
+        console.log(_.concat(products, data))
+        return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
+    }
+    initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts())
 
     render() {
         return (
