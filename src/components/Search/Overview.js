@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
-import {refactorParaLength, refactorTextLength} from "../../api/ApiUtils";
+import {handleImgValid, refactorParaLength, refactorTextLength} from "../../api/ApiUtils";
 import withWidth from "@material-ui/core/withWidth/index";
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
@@ -128,7 +128,7 @@ class SearchPage extends React.Component {
 
                             <ProductOverviewBox
                                 key={i}
-                                src={n.photos[0].url}
+                                src={handleImgValid(n.photos[0])}
                                 name={refactorTextLength(n.name)}
                                 category={n.tags}
                                 regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}

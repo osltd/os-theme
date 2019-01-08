@@ -8,7 +8,14 @@ import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "..
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/WhiteDropDown'
 import ProductOverviewListForm from '../Widget/Product/overviewList'
-import {arrayToFilter, getTagsCountsArray, numberToPagination, refactorTextLength, sort_by} from "../../api/ApiUtils";
+import {
+    arrayToFilter,
+    getTagsCountsArray,
+    handleImgValid,
+    numberToPagination,
+    refactorTextLength,
+    sort_by
+} from "../../api/ApiUtils";
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
@@ -232,7 +239,7 @@ class ShopOverview extends React.Component {
                                         <ProductOverviewBox
                                             name={refactorTextLength(n.name)}
                                             id={n.id}
-                                            src={n.photos[0].url}
+                                            src={handleImgValid(n.photos[0])}
                                             category={n.tags}
                                             regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                                             promotePrice={n.promotePrice}
@@ -240,7 +247,7 @@ class ShopOverview extends React.Component {
                                     </Grid>
                                 ) : this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
                                     key={i}
-                                    src={n.photos[0].url}
+                                    src={handleImgValid(n.photos[0])}
                                     name={refactorTextLength(n.name)}
                                     category={n.tags}
                                     regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}

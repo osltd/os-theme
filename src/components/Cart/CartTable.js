@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import img from '../../constants/img/loadingImg.gif'
-import {formatMoney, refactorTitle} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, refactorTitle} from "../../api/ApiUtils";
 import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -131,7 +131,7 @@ class ShoppingCartTable extends React.Component {
                                             className={classes.block}
                                         >
 
-                                            <img src={n.product.photos[0].url}
+                                            <img src={handleImgValid(n.product.photos[0])}
                                                  className={classes.img}
                                             />
 

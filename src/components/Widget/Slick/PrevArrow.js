@@ -12,7 +12,7 @@ const style = theme => ({
         '&:before': {
             borderRadius: '4px',
             padding: '5px',
-            fontSize: '40px',
+            fontSize: '20 px',
             position: 'absolute',
             top: '50%',
             cursor: 'pointer',
@@ -30,7 +30,7 @@ class PrevArrow extends React.Component {
         const {classes, className, style, onClick} = this.props;
         return (
             <span
-                className={classes.root + ' ' + 'icon-circle-left'}
+                className={classes.root + ' ' + 'icon-left-16'}
                 style={{...style}}
                 onClick={onClick}
 

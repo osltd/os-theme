@@ -21,7 +21,6 @@ const styles = theme => ({
             boxShadow:
                 '2px 2px 0px 0px rgba(237,237,237,1)'
         },
-        width: '50px',
         height: '50px'
     },
     grow: {
@@ -154,31 +153,28 @@ class Header extends React.Component {
             return (
                 <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
                     <Grid container alignItems={'center'} justify={'space-between'}>
-                        <Grid item xs={2}>
+                        <Grid item xs={1}>
                             <img
                                 className={classes.logo}
                                 onClick={() =>redirectUrl('/',this.props.history)}
-                                src={'https://brandmark.io/logo-rank/random/pepsi.png'}
+                                src={'./Logo.png'}
                             />
                         </Grid>
                         <Grid item xs={6} container>
                             <Grid item>
                                 <Button
-                                    icon={'fa fa-shopping-bag'}
                                     onClick={()=>redirectUrl('/products')}
                                     value={'products'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
-                                    icon={'fa fa-rss'}
                                     onClick={()=>redirectUrl('/feeds')}
                                     value={'feeds'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
-                                    icon={'icon-cart'}
                                     onClick={()=>redirectUrl('/checkout')}
 
                                     value={'checkout'}

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import {refactorTextLength} from "../../../api/ApiUtils";
+import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
 import {redirectUrl} from "../../../api/ApiUtils";
 
@@ -86,7 +86,7 @@ class ShoppingCartList extends React.Component {
 
                                             <img
                                                 style={{width: '100%', minWidth: '50px'}}
-                                                src={n.product.photos[0].url}
+                                                src={handleImgValid(n.product.photos[0])}
                                             />
 
                                         </Grid>

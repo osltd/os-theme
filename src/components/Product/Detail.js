@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 import Slick from '../Widget/Slick/SingleItem'
 
 const styles = theme => {
+    console.log(theme)
     return (
         {
             name: {

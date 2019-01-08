@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Slider from 'react-slick';
 import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
-import {refactorTextLength} from "../../../api/ApiUtils";
+import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
@@ -75,7 +75,7 @@ class AppendDots extends Component {
                                 name={refactorTextLength(n.name)}
                                 id={n.id}
 
-                                src={n.photos[0].url}
+                                src={handleImgValid(n.photos[0])}
                                 category={n.category}
                                 regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                                 promotePrice={n.promotePrice}
@@ -90,7 +90,7 @@ class AppendDots extends Component {
                             name={refactorTextLength(n.name)}
                             id={n.id}
 
-                            src={n.photos[0].url}
+                            src={handleImgValid(n.photos[0])}
                             category={n.category}
                             regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                             promotePrice={n.promotePrice}
@@ -105,7 +105,7 @@ class AppendDots extends Component {
                             name={refactorTextLength(n.name)}
                             id={n.id}
 
-                            src={n.photos[0].url}
+                            src={handleImgValid(n.photos[0])}
                             category={n.category}
                             regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
                             promotePrice={n.promotePrice}

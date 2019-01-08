@@ -2,7 +2,7 @@ import ProductOverviewBox from './Product/overviewBox'
 import Slick from './Slick/SingleItem'
 import React from 'react'
 import {Grid, Typography} from '@material-ui/core'
-import {refactorTextLength} from "../../api/ApiUtils";
+import {handleImgValid, refactorTextLength} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import {withStyles} from "@material-ui/core/styles/index";
@@ -80,7 +80,7 @@ class Media extends React.Component {
                 <ProductOverviewBox
                     id={validProduct.id}
                     name={refactorTextLength(validProduct.name)}
-                    src={validProduct.photos[0].url}
+                    src={handleImgValid(validProduct.photos[0])}
                     category={validProduct.tags}
                     regPrice={validProduct.variants[0] ? validProduct.variants[0].price : 'not a reg price'}
                     promotePrice={validProduct.promotePrice}

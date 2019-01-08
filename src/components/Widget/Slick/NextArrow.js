@@ -13,7 +13,7 @@ const style = theme => ({
         '&:before': {
             borderRadius: '4px',
             padding: '5px',
-            fontSize: '40px',
+            fontSize: '20 px',
             position: 'absolute',
             top: '50%',
             cursor: 'pointer',
@@ -31,7 +31,7 @@ class NextArrow extends React.Component {
         const {classes, className, style, onClick} = this.props;
         return (
             <span
-                className={classes.root + ' ' + 'icon-circle-right'}
+                className={classes.root + ' ' + 'icon-right-16'}
                 style={{...style,}}
                 onClick={onClick}
 

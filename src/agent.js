@@ -4,7 +4,7 @@ import Products from './agents/Products'
 import Checkout from './agents/Checkout'
 
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
-axios.defaults.baseURL = /localhost/i.test(window.location.hostname) ? 'https://osdev.oneshop.hk/api' : '/api'
+axios.defaults.baseURL = /localhost/i.test(window.location.hostname) ? 'https://daviddev.oneshop.hk/api' : '/api'
 
 export default  {
     Feeds,
