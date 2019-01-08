@@ -203,7 +203,6 @@ class Header extends React.Component {
                                             />
                                             }
                                             title={<Button
-                                                icon={'icon-cart'}
                                                 value={'shopping cart'}
                                             />}
                                         />

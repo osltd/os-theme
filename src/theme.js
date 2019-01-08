@@ -4,8 +4,12 @@ const theme = createMuiTheme({
     typography: {
         // Use the system font instead of the default Roboto font.
         fontFamily: [
-      'open sans'
+            '-apple-system', 'BlinkMacSystemFont', 'sans-serif'
         ].join(','),
+        fontSize: 14,
+        display1: {
+        fontSize:'25px',
+        },
     },
     palette: {
         primary: {
