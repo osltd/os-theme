@@ -67,16 +67,18 @@ class ResponsiveDialog extends React.Component {
                     />
 
                     <Grid item container spacing={16} xs={12} lg={10}>
-                        <Grid item container alignItems={'center'} xs={12}
-                              onClick={()=>redirectUrl('/feed')}
-                              className={classes.backArrow} >
-                            <span
-                                className={classNames('icon-circle-left',classes.backIcon)}/>
-                            <Typography variant={'title'}>
-                                back to feed
-                            </Typography>
-                        </Grid>
+                        {
 
+                            false && <Grid item container alignItems={'center'} xs={12}
+                                           onClick={() => redirectUrl('/feed')}
+                                           className={classes.backArrow}>
+                            <span
+                                className={classNames('icon-circle-left', classes.backIcon)}/>
+                                <Typography variant={'title'}>
+                                    back to feed
+                                </Typography>
+                            </Grid>
+                        }
                         <Grid item xs={12} md={3}>
                             <List
                                 data={getTagsCountsArray(this.props.feeds, (tag, number) => {

@@ -13,9 +13,8 @@ import {withRouter} from 'react-router-dom'
 import swal from 'sweetalert';
 import Slick from '../Widget/Slick/SingleItem'
 
-const styles = theme => {
-    console.log(theme)
-    return (
+const styles = theme =>
+     (
         {
             name: {
                 color: 'rgba(0, 0, 0)',
@@ -37,7 +36,7 @@ const styles = theme => {
             }
         })
 
-}
+
 
 
 const mapStateToProps = state => ({

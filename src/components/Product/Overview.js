@@ -9,6 +9,8 @@ import {getVariantOptions, refactorTextLength} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 
 const styles = theme => {
+    console.log(theme)
+
     return (
         {
             productCategory: {

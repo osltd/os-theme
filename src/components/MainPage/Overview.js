@@ -10,6 +10,7 @@ import LoadingPage from '../Layout/LoadingPage'
 import {isImgOnlySections} from "../../api/ApiUtils";
 
 const styles = theme => {
+    console.log(theme)
     return (
         {
             section: {

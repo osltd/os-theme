@@ -14,8 +14,8 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: { // Name of the component ⚛️ / style sheet
 
-            text: { // Name of the rule
-                color: 'red', // Some CSS
+            extendedFab: { // Name of the rule
+boxShadow:'none',
             },
         },},
     palette: {

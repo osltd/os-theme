@@ -134,6 +134,21 @@ class ShopOverview extends React.Component {
         selectedValue={this.props.filter.tag}
     />
 
+    getPagination = (products) => {
+        if (products.length === 0) return false
+
+        let options = numberToPagination(this.getProductProperty(products, 'length'),
+            page => this.props.editProductSort('page', page))
+
+
+        if (this.props.sort.page !== options[0].label) options[0].onClick(options[0].label)
+
+        return (<WhiteDropDown
+            options={options}
+            selectedValue={this.props.sort.page}
+        />)
+    }
+
     render() {
         const {classes} = this.props
         const products = this.sortData()
@@ -175,12 +190,7 @@ class ShopOverview extends React.Component {
                                 </Grid>
                                 <Grid item>
                                     {
-                                        products.length > 0 && <WhiteDropDown
-                                            options={
-                                                numberToPagination(this.getProductProperty(products, 'length'),
-                                                    page => this.props.editProductSort('page', page))}
-                                            selectedValue={this.props.sort.page}
-                                        />
+                                        this.getPagination(products)
                                     }
                                 </Grid>
                                 <Grid item>

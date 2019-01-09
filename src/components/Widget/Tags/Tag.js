@@ -56,7 +56,7 @@ class CustomButton extends React.Component {
 
         return (
             <Button variant="extendedFab"
-                    onClick={() => onClick()}
+                    onClick={onClick}
                     className={classNames(classes.root,
                         selected ? classes.selected : null)}>
                 {value}
