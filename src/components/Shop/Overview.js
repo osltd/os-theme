@@ -141,7 +141,7 @@ class ShopOverview extends React.Component {
             page => this.props.editProductSort('page', page))
 
 
-        if (this.props.sort.page !== options[0].label) options[0].onClick(options[0].label)
+        if (this.props.sort.page ===null) options[0].onClick(options[0].label)
 
         return (<WhiteDropDown
             options={options}

@@ -7,7 +7,7 @@ import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 import LoadingPage from '../Layout/LoadingPage'
-import {isImgOnlySections} from "../../api/ApiUtils";
+import {isImgOnlySections, redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => {
     console.log(theme)
@@ -56,16 +56,22 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const {classes} = this.props
-        var latestArticle = (((this.props.feeds || [])[0] || {}).sections || [])[0] || {};
+        let latestArticle =this.props.feeds &&  this.props.feeds.filter((n, i) =>  isImgOnlySections(n.sections))
+
+            .filter((n,i)=>i<2)
+        console.log('latestArticle')
+
         console.log(latestArticle)
+
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
 
                     <Grid item xs={12}>
-                        <Carousel data={latestArticle.medias.filter(n=>n.ext!=='mp4') || []}
-                                  title={latestArticle.title || ''}
-                                  caption={latestArticle.description || ''}/>
+                        <Carousel
+                            data={latestArticle.map(n=> n.sections[0].medias[0])}
+                            title={latestArticle.map(n=> n.sections[0].title) || ''}
+                                  onClick={()=>redirectUrl(`/feeds/${latestArticle.id}`)}/>
                     </Grid>
 
                     

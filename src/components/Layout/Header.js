@@ -13,7 +13,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
-
+import logo from '../../constants/img/logo.png'
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
@@ -157,25 +157,25 @@ class Header extends React.Component {
                             <img
                                 className={classes.logo}
                                 onClick={() =>redirectUrl('/',this.props.history)}
-                                src={'./Logo.png'}
+                                src={logo}
                             />
                         </Grid>
                         <Grid item xs={6} container>
                             <Grid item>
                                 <Button
-                                    onClick={()=>redirectUrl('/products')}
+                                    onClick={()=>redirectUrl('/products',this.props.history)}
                                     value={'products'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
-                                    onClick={()=>redirectUrl('/feeds')}
+                                    onClick={()=>redirectUrl('/feeds',this.props.history)}
                                     value={'feeds'}
                                 />
                             </Grid>
                             <Grid item>
                                 <Button
-                                    onClick={()=>redirectUrl('/checkout')}
+                                    onClick={()=>redirectUrl('/checkout',this.props.history)}
 
                                     value={'checkout'}
                                 />

@@ -43,9 +43,7 @@ const style = theme => ({
 
     item: {
         position: 'relative',
-        '&:hover p': {
-            display: 'block'
-        }
+
     },
     caption: {
         display: 'none',
@@ -79,8 +77,6 @@ class SimpleSlider extends React.Component {
         let {data, classes, title, style} = this.props
         if (!(data[0])) return null
         style = style || {};
-
-
         return (
             data.length > 1 ?
                 <Slider {...settings} className={classes.root}>
@@ -96,7 +92,6 @@ class SimpleSlider extends React.Component {
                                               backgroundImage: 'url("' + n.url + '")',
                                           })}
                                           onClick={() => n.link ? redirectUrl(n.link,this.props.history) : null}
-
                                           className={classes.img}>
                                         {title && <Grid item lg={4}>
                                             <Typography variant="display4" className={classes.title} gutterBottom>{title}</Typography>
