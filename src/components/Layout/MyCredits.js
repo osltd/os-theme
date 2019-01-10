@@ -5,7 +5,7 @@ import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Button, Grid, Typography} from '@material-ui/core'
-import CustomButton from '../Widget/Button/Button'
+import CustomButton from '../Widget/Button/BlackButton'
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import Dialog from '../Widget/Dialog'
 import {redirectUrl} from "../../api/ApiUtils";
@@ -34,7 +34,8 @@ const styles = theme => ({
 
     },
     textAlign: {
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingBottom:'20px',
     }
 
 })
@@ -70,7 +71,40 @@ class Header extends React.Component {
     };
     logout = () => {
         localStorage.clear()
-        swal("You have successfully logout!", "see you", "success")
+
+        swal(
+            {
+
+                content: (<Grid container alignItems={'center'} direction={'column'}>
+                    <Grid item>
+                    <span className={'icon-like'}
+
+                          style={{
+                              fontSize: '80px',
+                              color: 'hsla(100,55%,69%,.5)',
+                              padding: '20px',
+
+                              display: 'block',
+                              width: '80px',
+                              height: '80px',
+                              border: '4px solid hsla(98,55%,69%,.2)',
+                              borderRadius: '50%',
+                              boxSizing: 'content-box',
+                          }}
+                    />
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'display1'}>
+                            You have successfully logout!
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'subHeading'}>
+                            see you </Typography>
+                    </Grid>
+
+                </Grid>)
+            })
         setTimeout(
             () => redirectUrl('/', this.props.history)
             , 1000

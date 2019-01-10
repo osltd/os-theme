@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import Input from '../../Widget/Input/original'
-import Header from '../../Layout/Body/Header'
 import Button from '../../Widget/Button/BlackButton'
 import {redirectUrl} from "../../../api/ApiUtils";
 import agent from '../../../agent'
@@ -13,10 +12,11 @@ import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
 
 const styles = theme => ({
-    root: {
-    },
-    title:{
-        textAlign:'center',
+    root: {},
+    title: {
+        paddingTop: '30px',
+
+        textAlign: 'center',
     },
     innerRoot: {
         padding: '0px 120px 60px 120px ',
@@ -63,12 +63,44 @@ class Login extends React.Component {
                 delete auth.token
                 localStorage.setItem('user', JSON.stringify(auth))
 
-                swal("Welcome back!", auth.name.nick, "success")
+                swal(
+                    {
+
+                        content: (<Grid container alignItems={'center'} direction={'column'}>
+                            <Grid item>
+                    <span className={'icon-like'}
+
+                          style={{
+                              fontSize: '80px',
+                              color: 'hsla(100,55%,69%,.5)',
+                              padding: '20px',
+
+                              display: 'block',
+                              width: '80px',
+                              height: '80px',
+                              border: '4px solid hsla(98,55%,69%,.2)',
+                              borderRadius: '50%',
+                              boxSizing: 'content-box',
+                          }}
+                    />
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'display1'}>
+                                    Welcome back!
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'subHeading'}>
+                                    {auth.name.nick} </Typography>
+                            </Grid>
+
+                        </Grid>)
+                    })
                 setTimeout(
                     () => redirectUrl('/', this.props.history), 1000
                 )
             }
-        ).catch(err =>{
+        ).catch(err => {
                 err.response.data.messages.map(n =>
                     this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                 )
@@ -77,8 +109,7 @@ class Login extends React.Component {
                         pwd: ''
                     }
                 )
-        }
-
+            }
         )
 
     constructor(props) {
@@ -99,9 +130,9 @@ class Login extends React.Component {
                       className={classes.innerRoot}>
                     <Grid item>
                         <Typography className={classes.title} variant={'display1'}>
-                        Login
+                            Login
 
-                    </Typography>
+                        </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Input

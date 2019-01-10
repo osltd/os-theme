@@ -14,9 +14,12 @@ import swal from '@sweetalert/with-react'
 
 const styles = theme => ({
     root: {
+
         backgroundColor: theme.palette.background.default,
     },
     title:{
+        paddingTop: '30px',
+
         textAlign:'center',
     },
     innerRoot: {
@@ -63,7 +66,40 @@ class Login extends React.Component {
 
             }
         ).then(
-            res => swal("Congratulation!", "Account created!", "success")
+            res =>
+        swal(
+            {
+
+                content: (<Grid container alignItems={'center'} direction={'column'}>
+                    <Grid item>
+                    <span className={'icon-like'}
+
+                          style={{
+                              fontSize: '80px',
+                              color: 'hsla(100,55%,69%,.5)',
+                              padding: '20px',
+
+                              display: 'block',
+                              width: '80px',
+                              height: '80px',
+                              border: '4px solid hsla(98,55%,69%,.2)',
+                              borderRadius: '50%',
+                              boxSizing: 'content-box',
+                          }}
+                    />
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'display1'}>
+                            Congratulation!
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant={'subHeading'}>
+                            Account created!</Typography>
+                    </Grid>
+
+                </Grid>)
+            })
         ).catch(
             err => err.response.data.messages.map(
                 n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)

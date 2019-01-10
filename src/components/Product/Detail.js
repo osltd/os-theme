@@ -10,12 +10,13 @@ import Tag from '../Widget/Tags/Tag'
 import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
-import swal from 'sweetalert';
+import swal from '@sweetalert/with-react'
+
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme =>
-     (
+    (
         {
             name: {
                 color: 'rgba(0, 0, 0)',
@@ -30,15 +31,13 @@ const styles = theme =>
             },
             price: {
                 color: 'green',
-                fontSize:'30px',
+                fontSize: '30px',
             },
             statusLabel: {
                 color: 'green',
                 fontWeight: '600',
             }
         })
-
-
 
 
 const mapStateToProps = state => ({
@@ -99,7 +98,40 @@ class ResponsiveDialog extends React.Component {
         let productCount = draft.number ? draft.number : 1
         let selectedVariantId = this.findSelectedVariant().id
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
-        swal("Congratulation!", " items added!", "success");
+        swal(
+            {
+
+                content: (<Grid container alignItems={'center'} direction={'column'}>
+                    <Grid item >
+                    <span className={'icon-like'}
+
+                    style={{
+                        fontSize:'80px',
+                        color:'hsla(100,55%,69%,.5)',
+                        padding:'20px',
+
+                        display:'block',
+                        width: '80px',
+                        height: '80px',
+                        border: '4px solid hsla(98,55%,69%,.2)',
+                        borderRadius: '50%',
+                        boxSizing: 'content-box',
+                    }}
+                    />
+                    </Grid>
+                    <Grid item>
+                    <Typography variant={'display1'}>
+                        Congratulation!
+                    </Typography>
+                    </Grid>
+                    <Grid item >
+                    <Typography variant={'subHeading'}>
+                        items added! </Typography>
+                    </Grid>
+
+                </Grid>)
+            })
+
 
     }
 
@@ -129,13 +161,13 @@ class ResponsiveDialog extends React.Component {
         if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
     }
 
-    getDetail=(selectedVariant)=>{
+    getDetail = (selectedVariant) => {
 
         const {
             classes, name, promotePrice,
             description, variantKeys, variantOptions, product
         } = this.props
-        return   <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
+        return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
             <Grid item container spacing={16}>
                 <Grid item>
                     <Typography
@@ -156,7 +188,7 @@ class ResponsiveDialog extends React.Component {
                             selectedVariant.price)}</Typography>
                     }
                 </Grid>
-                <Grid item container  spacing={8} direction={'column'} alignItems={'flex-start'}>
+                <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
                         <Typography variant={'subheading'} className={classes.statusLabel}>In Stock</Typography></Grid>
                     <Grid item>
@@ -228,28 +260,28 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
 
 
-                <Grid item style={{ marginTop: 15 }}>
-                    <Typography variant={'title'} style={{ fontSize: 15 }}>
+                <Grid item style={{marginTop: 15}}>
+                    <Typography variant={'title'} style={{fontSize: 15}}>
                         SHARE THIS PRODUCT:
                     </Typography>
                 </Grid>
                 <Grid item>
                     <SocialIcon type={'whatsapp'}
-                                onClick={()=>window.open('https://web.whatsapp.com/send?text='+window.location.href)}/>
+                                onClick={() => window.open('https://web.whatsapp.com/send?text=' + window.location.href)}/>
                     <SocialIcon type={'facebook'}
-                                onClick={()=>window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)}/>
+                                onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href)}/>
 
                 </Grid>
             </Grid>
         </Grid>
     }
-    getSlick=(selectedVariant)=>{
+    getSlick = (selectedVariant) => {
 
         const {
             classes, name, promotePrice,
             description, variantKeys, variantOptions, product
         } = this.props
-        return     <Grid item container xs={10} sm={5}>
+        return <Grid item container xs={10} sm={5}>
             <Grid item xs={12}>
                 <Slick
                     data=
@@ -262,13 +294,13 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const selectedVariant = this.findSelectedVariant()
-        const position = (isWidthUp('sm',this.props.width) || this.props.width==='sm')
+        const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm')
         return (
             selectedVariant ?
                 <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    { position ? this.getDetail(selectedVariant):null}
+                    {position ? this.getDetail(selectedVariant) : null}
                     {this.getSlick(selectedVariant)}
-                    {!position ? this.getDetail(selectedVariant):null}
+                    {!position ? this.getDetail(selectedVariant) : null}
                 </Grid> : <LoadingPage/>
 
         );

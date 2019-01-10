@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?9ulf7m');
-  src:  url('fonts/icomoon.eot?9ulf7m#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?9ulf7m') format('truetype'),
-    url('fonts/icomoon.woff?9ulf7m') format('woff'),
-    url('fonts/icomoon.svg?9ulf7m#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?eb6ee5');
+  src:  url('fonts/icomoon.eot?eb6ee5#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?eb6ee5') format('truetype'),
+    url('fonts/icomoon.woff?eb6ee5') format('woff'),
+    url('fonts/icomoon.svg?eb6ee5#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-like:before {
+  content: "\eaed";
+}
 .icon-left-16:before {
   content: "\eaeb";
   color: #311052;
