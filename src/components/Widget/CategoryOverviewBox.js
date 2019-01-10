@@ -16,12 +16,14 @@ const styles = theme => ({
     items: {
 
         textDecoration: 'none',
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.light,
 
     },
     image: {
         position: 'relative',
         height: 200,
+        opacity: 0.85,
+
         [theme.breakpoints.down('xs')]: {
             width: '100% !important', // Overrides inline-style
             height: 100,

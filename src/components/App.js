@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
 import {connect} from "react-redux";
-import {CART_INIT_SHOPPING_CART, INIT_FEEDS, INIT_PRODUCTS} from "../constants/actionType";
+import {CART_INIT_SHOPPING_CART,AUTH_INIT_USER_PROFILE,AUTH_INIT_TOKEN, INIT_FEEDS, INIT_PRODUCTS} from "../constants/actionType";
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
@@ -25,12 +25,16 @@ import SearchPage from './Search/Overview'
 import 'font-awesome/css/font-awesome.min.css'
 import _ from 'lodash'
 import NotFound from './Layout/NotFound'
+import MyCredits from './Layout/MyCredits'
+import Register from './Auth/Register/Overview'
+import Login from './Auth/Login/Overview'
+
 
 const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async (shoppingCart, products) => {
+        initApp: async (shoppingCart, products,token,user) => {
             dispatch(
                 {
                     type: INIT_PRODUCTS,
@@ -48,7 +52,23 @@ const mapDispatchToProps = dispatch => ({
                 payload: shoppingCart,
             })
 
+            //todo('check the token valid  IF VALIDED')
+            dispatch(
+                {
+                    type: AUTH_INIT_TOKEN,
+                    payload: token,
 
+                }
+            )
+            //todo('if valid get user profile')
+
+            dispatch(
+                {
+                    type: AUTH_INIT_USER_PROFILE,
+                    payload: user,
+
+                }
+            )
         },
 
     }
@@ -68,7 +88,13 @@ class App extends React.Component {
         let data = await agent.Products.initProducts(`?page=${page}`)
         return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
-    initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts())
+    initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts(),
+            localStorage.getItem('token'),
+            JSON.parse(localStorage.getItem('user'))
+
+
+
+    )
 
     render() {
         return (
@@ -77,9 +103,13 @@ class App extends React.Component {
                     <ScrollToTop>
                         <ErrorBoundary>
                             <Header/>
+                            <MyCredits/>
+
                             <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/404'} component={NotFound}/>
+                                <Route exact path={'/login'} component={Login}/>
+                                <Route exact path={'/register'} component={Register}/>
 
                                 <Route exact path={'/products'} component={Shop}/>
                                 <Route exact path={'/feeds'} component={Feed}/>

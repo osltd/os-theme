@@ -25,6 +25,7 @@ const style = theme => ({
 
     },
     title: {
+        letterSpacing:'2px',
         color: 'white',
         fontSize: '40px',
         fontWeight: '900',
@@ -94,7 +95,7 @@ class SimpleSlider extends React.Component {
                                           onClick={() => n.link ? redirectUrl(n.link,this.props.history) : null}
                                           className={classes.img}>
                                         {title && <Grid item lg={4}>
-                                            <Typography variant="display4" className={classes.title} gutterBottom>{title}</Typography>
+                                            <Typography variant="display4" className={classes.title} gutterBottom>{title[i]}</Typography>
                                         </Grid>}
                                     </Grid>
                                 </div>

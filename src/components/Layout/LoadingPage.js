@@ -24,7 +24,7 @@ class NotFound extends React.Component {
         this.setState(
             {
                 timer: setTimeout(
-                    () => redirectUrl('/404', this.props.history), 2000
+                    () => redirectUrl('/404', this.props.history), 3000
                 )
             }
         )

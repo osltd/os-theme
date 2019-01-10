@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
-import Button from '../Widget/Button'
+import Button from '../Widget/Button/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
 import {withStyles} from '@material-ui/core/styles';
 import PopUp from '../Widget/PopUp'
@@ -17,10 +17,7 @@ import logo from '../../constants/img/logo.png'
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
-        '&:hover': {
-            boxShadow:
-                '2px 2px 0px 0px rgba(237,237,237,1)'
-        },
+
         height: '50px'
     },
     grow: {
@@ -130,7 +127,7 @@ class Header extends React.Component {
                 (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword,this.props.history) : null
             }
             onChange={e => this.setState({keyword: e.target.value})}
-
+disableUnderline={true}
             placeholder="Search…"
             classes={{
                 root: this.props.classes.inputRoot,

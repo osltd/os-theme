@@ -29,7 +29,7 @@ const styles = theme =>
                 backgroundColor: ''
             },
             price: {
-                color: '#bdb093',
+                color: 'green',
                 fontSize:'30px',
             },
             statusLabel: {
@@ -156,10 +156,9 @@ class ResponsiveDialog extends React.Component {
                             selectedVariant.price)}</Typography>
                     }
                 </Grid>
-                <Grid item container direction={'row'} spacing={8} alignItems={'flex-end'}>
+                <Grid item container  spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
-                        <Typography variant={'subheading'} className={classes.statusLabel}>
-                            In Stock</Typography></Grid>
+                        <Typography variant={'subheading'} className={classes.statusLabel}>In Stock</Typography></Grid>
                     <Grid item>
 
                         <Typography variant={'title'}>
@@ -176,7 +175,6 @@ class ResponsiveDialog extends React.Component {
 
                     {
                         variantKeys.map((n, i) =>
-
                             <Fragment key={i}>
                                 <Typography variant={'title'}>
                                     {n}
@@ -271,7 +269,6 @@ class ResponsiveDialog extends React.Component {
                     { position ? this.getDetail(selectedVariant):null}
                     {this.getSlick(selectedVariant)}
                     {!position ? this.getDetail(selectedVariant):null}
-
                 </Grid> : <LoadingPage/>
 
         );

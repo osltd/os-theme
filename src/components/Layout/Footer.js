@@ -10,7 +10,6 @@ import SocialIcon from '../Widget/SocialIcon'
 const styles = theme => ({
     root: {
         padding: '50px 100px 100px 100px',
-        marginTop: '30px',
         backgroundColor: 'black',
         color: 'white',
     },
@@ -26,24 +25,20 @@ class Footer extends React.Component {
         return (
             <Grid container justify={'space-between'} className={classes.root}>
                 <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
-                      alignItems={'center'} justify={'center'}>
+                       >
                     <Grid item>
-                        <Typography variant={'subheading'} color={'inherit'}>
+                        <Typography variant={'title'} color={'inherit'}>
                             NEWSLETTER
                         </Typography>
                     </Grid>
-                    <Grid item>
-                        <Typography variant={'body1'} color={'inherit'}>
-                            Be the first to hear about new styles and offers and see how you’ve helped.
-                        </Typography>
-                    </Grid>
+
                     <Grid item>
                         <SearchBar/>
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>THE BELL</Typography>
+                        <Typography variant={'title'} color={'inherit'}>MYSHOP</Typography>
 
                     </Grid>
                     <Grid item>
@@ -84,15 +79,7 @@ class Footer extends React.Component {
                     />
                     </Grid>
                 </Grid>
-                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
-                    <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
-                            USEFUL LINKS</Typography>
-                    </Grid>
-                    <Grid item>
-                        <FooterList/>
-                    </Grid>
-                </Grid>
+
                 <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>
@@ -111,6 +98,9 @@ class Footer extends React.Component {
                         <Tag value={'color'}/>
                         <Tag value={'gaming'}/>
                         <Tag value={'gaming'}/>
+                        <Tag value={'clothes'}/>
+                        <Tag value={'iphoneX'}/>
+                        <Tag value={'Play Station'}/>
                     </Grid>
                 </Grid>
 

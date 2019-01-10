@@ -5,6 +5,7 @@ import feed from './reducers/feed'
 import category from './reducers/category'
 import cart from './reducers/cart'
 import common from './reducers/common'
+import auth from './reducers/auth'
 
 export default combineReducers({
     product,
@@ -12,5 +13,6 @@ export default combineReducers({
     category,
     cart,
     common,
+    auth,
     router: routerReducer
 });

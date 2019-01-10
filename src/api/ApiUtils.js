@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export const refactorTextLength = content => (typeof content === 'string') ? content.length > 20 ? content.slice(0, 15).concat('...') : content : ''
+export const refactorTextLength = content => (typeof content === 'string') ? content.length > 20 ? content.slice(0) : content : ''
 export const refactorParaLength = (content, length = 45) => (typeof content === 'string') ? content.length > length ? content.slice(0, length).concat('...') : content : ''
 export const refactorTitle = content => (typeof content === 'string') ? content.length > 22 ? content.slice(0, 22) : content : ''
 
@@ -14,6 +14,13 @@ export const formatMoney = (n, c = 2, d = '.', t = ',') => {
 export const numberToPagination = (length, cb) => {
     let result = []
     let itemsPerPage = 9
+    if (length === itemsPerPage) {
+        return [{
+                    label: '1 - 9',
+                    onClick: () => cb('1 - 9')
+
+                }]
+    }
     if (length > itemsPerPage) {
         new Array(Math.floor(length / itemsPerPage)).fill(1).map(
             (n, i) => {

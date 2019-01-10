@@ -16,6 +16,9 @@ export const CART_EDIT_BILLING_DETAIL = 'CART_EDIT_BILLING_DETAIL'
 export const CART_EMPTY_BILLING_DETAIL = 'CART_EMPTY_BILLING_DETAIL'
 export const
     COMMON_EDIT_SEARCH_BAR='COMMON_EDIT_SEARCH_BAR'
+
+export const AUTH_INIT_TOKEN='AUTH_INIT_TOKEN'
+export const AUTH_INIT_USER_PROFILE='AUTH_INIT_USER_PROFILE'
 export const   COMMON_INIT_SEARCH_BAR = 'COMMON_INIT_SEARCH_BAR'
 export const gg = {
     "items": [{"qty": "9"}, {"id": 41, "qty": 1}],

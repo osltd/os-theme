@@ -20,6 +20,8 @@ const styles = theme => {
                 margin: '0 80px'
             },
             productCategory: {
+                paddingTop:'40px',
+
                 paddingBottom:'40px',
                 backgroundColor: theme.palette.background.paper
             },
@@ -32,6 +34,7 @@ const styles = theme => {
 
             },
             title: {
+                paddingTop:'20px',
                 marginTop: '50px',
                 fontWeight: '700',
                 color: theme.palette.primary.dark,
@@ -73,8 +76,8 @@ class ResponsiveDialog extends React.Component {
         const {classes} = this.props
         let latestArticle =this.props.feeds &&  this.props.feeds.filter((n, i) =>  isImgOnlySections(n.sections))
 
-            .filter((n,i)=>i<2)
-
+            .filter((n,i)=>i<3)
+console.log(latestArticle && latestArticle.map(n=> n.sections[0].title))
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
@@ -100,11 +103,7 @@ class ResponsiveDialog extends React.Component {
                             <Typography variant={'display1'} className={classes.title}>
                                 TOP INTERESTING
                             </Typography>
-                            <Typography variant={'subheading'} className={classes.text}>
-                                Browse the collection of our best selling and top interesting products. You’ll definitely
-                                find
-                                what you are looking for.
-                            </Typography>
+
                         </div>
 
                         <div>
@@ -115,16 +114,7 @@ class ResponsiveDialog extends React.Component {
 
 
                     <Grid item container alignItems={'center'} justify={'center'} className={classes.productCategory}>
-                        <Grid item lg={5} xs={12} container justify={'center'}>
-                            <Typography variant={'display1'} className={classes.title}>
-                                PRODUCT CATEGORIES
-                            </Typography>
-                            <Typography variant={'subheading'} className={classes.text}>
-                                Variety of product categories, tens of products, only five-stars reviews. Browse the
-                                collections
-                                right now.
-                            </Typography>
-                        </Grid>
+
                         <Grid item xs={12} md={10} lg={10}>
                             <CategoryOverviewBox
                                 category={this.props.category}
@@ -134,16 +124,12 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
 
                     <section className={classes.section}>
-                        <div>
-                            <Typography variant={'display1'} className={classes.title}>
-                                Featured Products
+                        <Grid item >
+
+                        <Typography variant={'display1'} className={classes.title}>
+                        FEATURE PRODUCTS
                             </Typography>
-                            <Typography variant={'subheading'} className={classes.text}>
-                                Browse the collection of our best selling and top interesting products. You’ll definitely
-                                find
-                                what you are looking for.
-                            </Typography>
-                        </div>
+                        </Grid>
 
                         <div>
                             {
