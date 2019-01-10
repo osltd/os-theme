@@ -164,7 +164,8 @@ export const isImgOnlySections = sections => (
     ))
 
 export const redirectUrl = (url, history, reload = true) => {
-      (/localhost/i.test(window.location.hostname)) ? window.location.href = url : history.push(url)
+
+    (reload) ? window.location.href = url : history.push(url)
 }
 
-export const handleImgValid = img => img ? img.url:'/notFound/not-found-image.jpg'
+export const handleImgValid = img => img ? img.url?img.url:img:'/notFound/not-found-image.jpg'

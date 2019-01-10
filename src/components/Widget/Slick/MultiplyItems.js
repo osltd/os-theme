@@ -22,7 +22,7 @@ class MultipleItems extends Component {
             infinite: true,
             speed: 500,
             rows:2,
-            slidesPerRow: 4,
+            slidesPerRow: this.props.size?this.props.size:4,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 5000,

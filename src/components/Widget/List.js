@@ -54,7 +54,7 @@ class SelectedListItem extends React.Component {
 
     render() {
         const {classes, data, title, selectedValue} = this.props;
-
+console.log(data)
         return (data ? <Fragment>
                 {
                     title && <Typography variant={'title'}>{title}</Typography>

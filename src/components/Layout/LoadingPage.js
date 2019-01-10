@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from 'react'
 import {CircularProgress, Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
+import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = theme => ({
     root: {
@@ -13,12 +14,34 @@ const styles = theme => ({
 
 
 class NotFound extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={
+            timer:()=>null,
+        }
+    }
+    componentDidMount() {
+        this.setState(
+            {
+                timer: setTimeout(
+                    () => redirectUrl('/404', this.props.history), 2000
+                )
+            }
+        )
+
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.timer)
+    }
+
     render() {
         const {classes, msg} = this.props;
-        return (
-            <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-                <CircularProgress size={100}/>
 
+        return (
+
+            <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
+                <CircularProgress size={400}/>
             </Grid>);
     }
 }

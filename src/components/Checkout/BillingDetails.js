@@ -74,7 +74,7 @@ class ShoppingCartTable extends React.Component {
     getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
     getShippingRate = async () => {
         this.props.editBillingDetail(
-            'shippingOptions', await   agent.Checkout.getShippingRate({
+            'shippingOptions', await agent.Checkout.getShippingRate({
 
                     items: this.props.shoppingCart.map(n => ({
                             id: n.variantId, qty: n.number,

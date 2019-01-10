@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
@@ -10,22 +10,22 @@ import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
 import classNames from 'classnames'
+
 const styles = theme => (
     {
         productCategory: {
             backgroundColor: theme.palette.background.paper
         },
         toolBar: {
-            backgroundColor: ''
         },
-        content:{
-            margin:'20px 0',
+        content: {
+            margin: '20px 0',
         },
-        backIcon:{
-            fontSize:'30px'
+        backIcon: {
+            fontSize: '30px'
         },
-        backArrow:{
-            cursor:'pointer',
+        backArrow: {
+            cursor: 'pointer',
 
         }
     })
@@ -51,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
 
 class ResponsiveDialog extends React.Component {
     hasValidFeed = () => (this.props.feeds && !!this.props.feeds.find(n => n.id.toString() === this.props.match.params.id))
+
 
 
     render() {
@@ -83,8 +84,8 @@ class ResponsiveDialog extends React.Component {
                             <List
                                 data={getTagsCountsArray(this.props.feeds, (tag, number) => {
                                     this.props.editFeedFilter('tag', tag)
+                                    redirectUrl('/feeds',this.props.history,false)
                                 })}
-                                link={'/feed'}
                                 title={'FEED CATEGORIES'}/>
 
 
@@ -110,21 +111,21 @@ class ResponsiveDialog extends React.Component {
                             </Grid>
                             {
                                 feed.sections.map((n, i) =>
-                                    <Fragment key={i}>
-                                        <Grid item container
-                                              alignItems={'center'}  justify={'center'} xs={12} key={i}>
-                                            <Grid item xs={11}>
-                                                <Media
-                                                    data={feed.sections[i].medias}/>
-                                            </Grid>
-
+                                    <Grid item container
+                                          alignItems={'center'} xs={12} key={i}>
+                                        <Grid item xs={12}>
+                                            <Media
+                                                data={feed.sections[i].medias}/>
                                         </Grid>
-                                        <Grid item >
+                                        <Grid item xs={1}/>
+                                        <Grid item xs={10}>
                                             <Typography className={classes.content} variant={'body1'}>
                                                 {n.description}
                                             </Typography>
                                         </Grid>
-                                    </Fragment>
+                                        <Grid item xs={1}/>
+
+                                    </Grid>
                                 )
                             }
                         </Grid>

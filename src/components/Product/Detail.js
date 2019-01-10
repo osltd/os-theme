@@ -11,7 +11,8 @@ import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
 import swal from 'sweetalert';
-import Slick from '../Widget/Slick/SingleItem'
+import Slick from '../Widget/Slick/Products'
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme =>
      (
@@ -29,6 +30,7 @@ const styles = theme =>
             },
             price: {
                 color: '#bdb093',
+                fontSize:'30px',
             },
             statusLabel: {
                 color: 'green',
@@ -127,135 +129,149 @@ class ResponsiveDialog extends React.Component {
         if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
     }
 
-
-    render() {
+    getDetail=(selectedVariant)=>{
 
         const {
             classes, name, promotePrice,
             description, variantKeys, variantOptions, product
         } = this.props
+        return   <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
+            <Grid item container spacing={16}>
+                <Grid item>
+                    <Typography
+                        variant={'display2'}
+                        className={classes.name}>{name}
+                    </Typography>
+                </Grid>
+                <Grid item container direction={'row'}>
+                    {promotePrice ? <Fragment>
+                            <Typography variant={'headline'}
+                                        className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
+                            <Typography component={'del'} variant={'subheading'}
+                                        color={'secondary'}>$ {formatMoney(
+                                selectedVariant.price)}</Typography>
+                        </Fragment> :
+                        <Typography variant={'headline'}
+                                    className={classes.price}>$ {formatMoney(
+                            selectedVariant.price)}</Typography>
+                    }
+                </Grid>
+                <Grid item container direction={'row'} spacing={8} alignItems={'flex-end'}>
+                    <Grid item>
+                        <Typography variant={'subheading'} className={classes.statusLabel}>
+                            In Stock</Typography></Grid>
+                    <Grid item>
+
+                        <Typography variant={'title'}>
+                            SKU MH03</Typography></Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant={'body1'}>
+                        {description}
+                    </Typography>
+                </Grid>
+
+                <Grid item>
+
+
+                    {
+                        variantKeys.map((n, i) =>
+
+                            <Fragment key={i}>
+                                <Typography variant={'title'}>
+                                    {n}
+                                </Typography>
+                                {this.getVariant(n, i, variantOptions)}
+                            </Fragment>
+                        )
+                    }
+
+                </Grid>
+
+                <Grid item container direction={'row'} spacing={32}>
+                    <Grid item>
+                        <Counter
+                            number={this.props.draft.number}
+                            onChange={number => this.props.editCartVariant('number', number)}
+                        />
+
+                    </Grid>
+                    <Grid item>
+
+                        <Button variant="extendedFab" color={'secondary'}
+                                onClick={this.saveDraftToCart}
+                        >
+
+                            <span className={'icon-cart'}/>
+                            &nbsp;&nbsp;Add To Cart
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Divider/>
+            <Grid item container direction={'column'} spacing={16}>
+                <Grid item container spacing={16}>
+                    <Grid item>
+                        <Button variant="extendedFab" color={'secondary'}>
+                            <span className={'icon-heart'}/>
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="extendedFab" color={'secondary'}>
+                            <span className={'icon-mail2'}/>
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="extendedFab" color={'secondary'}>
+                            <span className={'icon-coin-dollar'}/>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+
+                <Grid item style={{ marginTop: 15 }}>
+                    <Typography variant={'title'} style={{ fontSize: 15 }}>
+                        SHARE THIS PRODUCT:
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <SocialIcon type={'whatsapp'}
+                                onClick={()=>window.open('https://web.whatsapp.com/send?text='+window.location.href)}/>
+                    <SocialIcon type={'facebook'}
+                                onClick={()=>window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)}/>
+
+                </Grid>
+            </Grid>
+        </Grid>
+    }
+    getSlick=(selectedVariant)=>{
+
+        const {
+            classes, name, promotePrice,
+            description, variantKeys, variantOptions, product
+        } = this.props
+        return     <Grid item container xs={10} sm={5}>
+            <Grid item xs={12}>
+                <Slick
+                    data=
+                        {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
+
+                />
+            </Grid>
+        </Grid>
+    }
+
+    render() {
         const selectedVariant = this.findSelectedVariant()
+        const position = (isWidthUp('sm',this.props.width) || this.props.width==='sm')
         return (
             selectedVariant ?
                 <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    <Grid item xs={7} container direction={'column'} spacing={40}>
-                        <Grid item container spacing={16}>
-                            <Grid item>
-                                <Typography
-                                    variant={'display2'}
-                                    className={classes.name}>{name}
-                                </Typography>
-                            </Grid>
-                            <Grid item container direction={'row'}>
-                                {promotePrice ? <Fragment>
-                                        <Typography variant={'headline'}
-                                                    className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
-                                        <Typography component={'del'} variant={'subheading'}
-                                                    color={'secondary'}>$ {formatMoney(
-                                            selectedVariant.price)}</Typography>
-                                    </Fragment> :
-                                    <Typography variant={'headline'}
-                                                className={classes.price}>$ {formatMoney(
-                                        selectedVariant.price)}</Typography>
-                                }
-                            </Grid>
-                            <Grid item container direction={'row'} spacing={8} alignItems={'flex-end'}>
-                                <Grid item>
-                                    <Typography variant={'subheading'} className={classes.statusLabel}>
-                                        In Stock</Typography></Grid>
-                                <Grid item>
+                    { position ? this.getDetail(selectedVariant):null}
+                    {this.getSlick(selectedVariant)}
+                    {!position ? this.getDetail(selectedVariant):null}
 
-                                    <Typography variant={'title'}>
-                                        SKU MH03</Typography></Grid>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Typography variant={'body1'}>
-                                    {description}
-                                </Typography>
-                            </Grid>
-                            
-                            <Grid item>
-
-
-                                {
-                                    variantKeys.map((n, i) =>
-
-                                        <Fragment key={i}>
-                                            <Typography variant={'title'}>
-                                                {n}
-                                            </Typography>
-                                            {this.getVariant(n, i, variantOptions)}
-                                        </Fragment>
-                                    )
-                                }
-
-                            </Grid>
-
-                            <Grid item container direction={'row'} spacing={32}>
-                                <Grid item>
-                                    <Counter
-                                        number={this.props.draft.number}
-                                        onChange={number => this.props.editCartVariant('number', number)}
-                                    />
-
-                                </Grid>
-                                <Grid item>
-
-                                    <Button variant="extendedFab" color={'secondary'}
-                                            onClick={this.saveDraftToCart}
-                                    >
-
-                                        <span className={'icon-cart'}/>
-                                        &nbsp;&nbsp;Add To Cart
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-
-                        <Divider/>
-                        <Grid item container direction={'column'} spacing={16}>
-                            <Grid item container spacing={16}>
-                                <Grid item>
-                                    <Button variant="extendedFab" color={'secondary'}>
-                                        <span className={'icon-heart'}/>
-                                    </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="extendedFab" color={'secondary'}>
-                                        <span className={'icon-mail2'}/>
-                                    </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="extendedFab" color={'secondary'}>
-                                        <span className={'icon-coin-dollar'}/>
-                                    </Button>
-                                </Grid>
-                            </Grid>
-
-                            
-                            <Grid item style={{ marginTop: 15 }}>
-                                <Typography variant={'title'} style={{ fontSize: 15 }}>
-                                    SHARE THIS PRODUCT:
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <SocialIcon type={'whatsapp'}
-                                onClick={()=>window.open('https://web.whatsapp.com/send?text='+window.location.href)}/>
-                                <SocialIcon type={'facebook'}
-                                onClick={()=>window.open('https://www.facebook.com/sharer/sharer.php?u='+window.location.href)}/>
-
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item container xs={5}>
-                        <Grid item xs={12}>
-                            <Slick
-                                data=
-                                    {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
-
-                            />
-                        </Grid>
-                    </Grid>
                 </Grid> : <LoadingPage/>
 
         );
@@ -264,7 +280,7 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))
+export default withWidth()(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))))
 // <Dialog
 // innerRef={e => this.dialog = e}
 // title={}

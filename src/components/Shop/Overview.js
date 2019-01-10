@@ -141,7 +141,7 @@ class ShopOverview extends React.Component {
             page => this.props.editProductSort('page', page))
 
 
-        if (this.props.sort.page ===null) options[0].onClick(options[0].label)
+        if (this.props.sort.page ==='') options[0].onClick(options[0].label)
 
         return (<WhiteDropDown
             options={options}
@@ -244,7 +244,7 @@ class ShopOverview extends React.Component {
                             {this.props.viewMode === 'form' ?
 
                                 this.getProductProperty(products, 'display').map((n, i) =>
-                                    <Grid item xs={4} key={i}
+                                    <Grid item xs={12} sm={6} md={4} key={i}
                                     >
                                         <ProductOverviewBox
                                             name={refactorTextLength(n.name)}

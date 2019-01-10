@@ -7,7 +7,9 @@ const styles = theme => ({
     root: {
         width: '100%',
         padding: '40px',
-        marginTop: '30px',
+        marginTop: '200px',
+        marginBottom: '200px',
+
     }
 });
 
@@ -17,10 +19,7 @@ class NotFound extends React.Component {
         const {classes, msg} = this.props;
         return (
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-                <Typography variant={'subheading'}>
-                    {
-                        msg ? msg : "cant't find current page due to network problem"
-                    }</Typography>
+                <Typography variant={'subheading'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
 
 
             </Grid>);

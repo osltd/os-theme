@@ -36,17 +36,17 @@ const mapDispatchToProps = dispatch => ({}
 
 class ResponsiveDialog extends React.Component {
     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
-
     render() {
-        if (this.hasValidProduct()) {
+        console.log(this.hasValidProduct())
 
+        if (this.hasValidProduct()) {
+            console.log('ggg')
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
             const variantOptions = getVariantOptions(product.variants)
-
-
             return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
+                        title={product.name}
                         route={'HOME/SHOP/SINGLE PRODUCT'}
                     />
                 </Grid>
@@ -56,7 +56,6 @@ class ResponsiveDialog extends React.Component {
                         variantOptions={Object.values(variantOptions)}
                         variantKeys={Object.keys(variantOptions)}
                         description={product.description}
-                        name={refactorTextLength(product.name)}
                         product={product}
 
                     />

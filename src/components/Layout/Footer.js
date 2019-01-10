@@ -5,6 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import SearchBar from '../Widget/SearchBar/email'
 import FooterList from '../Widget/FooterList'
 import Tag from '../Widget/Tags/Tag'
+import SocialIcon from '../Widget/SocialIcon'
 
 const styles = theme => ({
     root: {
@@ -40,7 +41,7 @@ class Footer extends React.Component {
                         <SearchBar/>
                     </Grid>
                 </Grid>
-                <Grid item sm={3} container direction={'column'} spacing={8}>
+                <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'title'} color={'inherit'}>THE BELL</Typography>
 
@@ -55,6 +56,7 @@ class Footer extends React.Component {
                             205 Arapahoe St, Schoenchen, KS 69696
                         </Typography>
                     </Grid>
+
                     <Grid item>
                         <Typography variant={'subheading'} color={'inherit'}>
 
@@ -66,6 +68,20 @@ class Footer extends React.Component {
 
                             Phone: +1 123-456-6789
                         </Typography>
+                    </Grid>
+                    <Grid item>
+                        <SocialIcon
+                            type={'facebook'}
+                        />
+                        <SocialIcon
+                            type={'youtube'}
+                        /><SocialIcon
+                        type={'twitter'}
+                    /><SocialIcon
+                        type={'reddit'}
+                    /><SocialIcon
+                        type={'whatsapp'}
+                    />
                     </Grid>
                 </Grid>
                 <Grid item xs={6} md={3} container direction={'column'} spacing={8}>

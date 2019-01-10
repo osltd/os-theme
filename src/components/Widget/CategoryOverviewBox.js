@@ -100,7 +100,7 @@ class ButtonBases extends React.Component {
                         key={i}
                         item sm={10} md={6} lg={4}
                         container
-                        onClick={() => redirectUrl('/shop',this.props.history)}
+                        onClick={() => redirectUrl('/products',this.props.history)}
                         className={classes.items}
 
                     >

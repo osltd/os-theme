@@ -24,6 +24,7 @@ import '../constants/Style.css'
 import SearchPage from './Search/Overview'
 import 'font-awesome/css/font-awesome.min.css'
 import _ from 'lodash'
+import NotFound from './Layout/NotFound'
 
 const mapStateToProps = state => ({});
 
@@ -57,7 +58,12 @@ class App extends React.Component {
     componentDidMount() {
         this.initApp().then(()=>null)
     }
+    deleteId = (id=67)=>
+    {
+        agent.Checkout.deleteProduct(id)
+     return    id===1?null:this.deleteId(id-1)
 
+    }
     getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`)
         return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
@@ -73,6 +79,8 @@ class App extends React.Component {
                             <Header/>
                             <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
                                 <Route exact path={'/'} component={mainPage}/>
+                                <Route exact path={'/404'} component={NotFound}/>
+
                                 <Route exact path={'/products'} component={Shop}/>
                                 <Route exact path={'/feeds'} component={Feed}/>
                                 <Route exact path={'/feeds/:id'} component={FeedDetail}/>

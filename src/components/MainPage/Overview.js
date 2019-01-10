@@ -8,6 +8,8 @@ import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 import LoadingPage from '../Layout/LoadingPage'
 import {isImgOnlySections, redirectUrl} from "../../api/ApiUtils";
+import {withRouter} from "react-router-dom";
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme => {
     console.log(theme)
@@ -18,6 +20,7 @@ const styles = theme => {
                 margin: '0 80px'
             },
             productCategory: {
+                paddingBottom:'40px',
                 backgroundColor: theme.palette.background.paper
             },
             text: {
@@ -54,14 +57,23 @@ const mapDispatchToProps = dispatch => ({}
 
 class ResponsiveDialog extends React.Component {
 
+    getSlick=()=>{
+    if    (
+        isWidthUp('md', this.props.width)
+    )  return      <MultiItems data={this.props.products} />
+        if    (
+            isWidthUp('sm', this.props.width)
+        )  return      <MultiItems data={this.props.products} size={3} />
+        if    (
+            isWidthUp('xs', this.props.width)
+        )  return      <MultiItems data={this.props.products} size={2}  />
+
+    }
     render() {
         const {classes} = this.props
         let latestArticle =this.props.feeds &&  this.props.feeds.filter((n, i) =>  isImgOnlySections(n.sections))
 
             .filter((n,i)=>i<2)
-        console.log('latestArticle')
-
-        console.log(latestArticle)
 
         return (
             (this.props.feeds && this.props.products) ?
@@ -96,7 +108,7 @@ class ResponsiveDialog extends React.Component {
                         </div>
 
                         <div>
-                            <MultiItems data={this.props.products} size={8}/>
+                            {this.getSlick()      }
                         </div>
                     </section>
                     {/* ---------------- /hot sale products ----------------*/}
@@ -134,7 +146,8 @@ class ResponsiveDialog extends React.Component {
                         </div>
 
                         <div>
-                            <MultiItems data={this.props.products}/>
+                            {
+                                this.getSlick()      }
                         </div>
                     </section>
 
@@ -144,4 +157,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))

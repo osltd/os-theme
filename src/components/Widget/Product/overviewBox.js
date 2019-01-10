@@ -1,9 +1,9 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney} from "../../../api/ApiUtils";
+import {formatMoney, handleImgValid, redirectUrl} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
-import {redirectUrl} from "../../../api/ApiUtils";
+import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme => ({
     name: {
@@ -28,16 +28,23 @@ const styles = theme => ({
         padding: '10px 20px 20px',
         borderRadius: '2px'
     },
-    img: {
+    divImg: {
+        height: '300px',
         cursor: 'pointer',
-        width: '100%',
-        height: '320px !important',
         backgroundSize: 'contain',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#f8f8f8'
     },
 
+    img: {
+        cursor: 'pointer',
+        width: '100%',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#f8f8f8'
+    },
     oldPrice: {},
     price: {
         color: '#333333',
@@ -57,6 +64,7 @@ class ResponsiveDialog extends React.Component {
             "background-color": this.props.backgroundColor
         }
     })
+
     handleClickOpen = () => this.setState({open: true});
 
     handleClose = () => {
@@ -71,14 +79,44 @@ class ResponsiveDialog extends React.Component {
         }
     }
 
+    getImg = () => {
+        const {classes, src, name, id, category, regPrice, promotePrice} = this.props;
+        return <div
+            style={{
+                backgroundImage: 'url(' + handleImgValid(src) + ')',
+                backgroundColor: 'transparent',
+            }}
+            onClick={() => id && redirectUrl('/products/' + id, this.props.history)}
+            className={classes.divImg}/>
+        if (isWidthDown('xs', this.props.width)) {
+            return <img
+                src={handleImgValid(src)}
+                onClick={() => id && redirectUrl('/products/' + id, this.props.history)}
+                className={classes.img}
+            />
+        }
+        return isWidthUp('lg', this.props.width) ? <div
+                style={{
+                    backgroundImage: 'url(' + handleImgValid(src) + ')',
+
+                }}
+                onClick={() => id && redirectUrl('/products/' + id, this.props.history)}
+                className={classes.divImg}/> :
+            <img
+                src={handleImgValid(src)}
+                onClick={() => id && redirectUrl('/products/' + id, this.props.history)}
+                className={classes.img}
+            />
+    }
+
     render() {
         const {classes, src, name, id, category, regPrice, promotePrice} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>
-                <div style={{ backgroundImage: 'url(' + src + ')'}}
-                     onClick={() => id && redirectUrl('/products/' + id,this.props.history)}
-                     className={classes.img}></div>
+                {
+                    this.getImg()
+                }
                 {
                     category && <Typography variant={'headline'}
                                             className={classes.category}
@@ -110,5 +148,4 @@ class ResponsiveDialog extends React.Component {
 
 }
 
-
-export default withRouter(withStyles(styles)(ResponsiveDialog))
+export default withWidth()(withRouter(withStyles(styles)(ResponsiveDialog)))
