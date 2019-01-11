@@ -90,7 +90,6 @@ class OrderSummary extends React.Component {
         }
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
-                let result = res.data.data.orders
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
@@ -98,7 +97,7 @@ class OrderSummary extends React.Component {
                 console.log(res)
                 redirectUrl('/loadingPage', this.props.history, false)
 console.log(res.data.messages)
-                if (res.data.messages.length>0) {
+                if (res.data&& res.data.messages.length>0) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -107,6 +106,7 @@ console.log(res.data.messages)
 
                     return null
                 }
+                let result = res.data.data.orders
                 if (result.length > 0) {
                     //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                     console.log('gooooood')
