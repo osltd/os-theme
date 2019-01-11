@@ -139,9 +139,6 @@ class ShopOverview extends React.Component {
 
         let options = numberToPagination(this.getProductProperty(products, 'length'),
             page => this.props.editProductSort('page', page))
-console.log(this.getProductProperty(products, 'length'))
-
-console.log(options)
         if (this.props.sort.page ==='') options[0].onClick(options[0].label)
 
         return (<WhiteDropDown

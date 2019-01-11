@@ -74,10 +74,8 @@ class ResponsiveDialog extends React.Component {
     }
     render() {
         const {classes} = this.props
-        let latestArticle =this.props.feeds &&  this.props.feeds.filter((n, i) =>  isImgOnlySections(n.sections))
+        let latestArticle =this.props.feeds &&  this.props.feeds.filter((n, i) =>  isImgOnlySections(n.sections)).filter((n,i)=>i<3)
 
-            .filter((n,i)=>i<3)
-console.log(latestArticle && latestArticle.map(n=> n.sections[0].title))
         return (
             (this.props.feeds && this.props.products) ?
                 <Grid container alignItems={'flex-start'} justify={'center'}>
@@ -132,8 +130,7 @@ console.log(latestArticle && latestArticle.map(n=> n.sections[0].title))
                         </Grid>
 
                         <div>
-                            {
-                                this.getSlick()      }
+                            {this.getSlick()      }
                         </div>
                     </section>
 
