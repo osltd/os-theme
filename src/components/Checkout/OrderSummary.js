@@ -89,13 +89,15 @@ class OrderSummary extends React.Component {
             "shipping": billingDetail.selectedShippingMethod,
         }
         const {classes} = this.props
+        redirectUrl('/loadingPage', this.props.history, false)
+conosle.log('loading.>>>>>')
         await  agent.Checkout.placeOrder(data).then(res => {
-                let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
+
+            let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
                 console.log(res)
-                redirectUrl('/loadingPage', this.props.history, false)
                 if (res.data&& res.data.messages&&  res.data.messages.length>0) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
