@@ -37,10 +37,13 @@
       <file leaf-file-name="OrderSummary.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+            <state relative-caret-position="178">
+              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#2178#2888#0" />
+                <element signature="e#3578#3882#0" />
+                <element signature="e#3922#8211#0" />
               </folding>
             </state>
           </provider>
@@ -352,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="363140000" />
+    <option name="totallyTimeSpent" value="363443000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -863,10 +866,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+        <state relative-caret-position="178">
+          <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#2178#2888#0" />
+            <element signature="e#3578#3882#0" />
+            <element signature="e#3922#8211#0" />
           </folding>
         </state>
       </provider>

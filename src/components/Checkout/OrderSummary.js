@@ -96,8 +96,7 @@ class OrderSummary extends React.Component {
                     ) : 'no shipping method provided'
                 console.log(res)
                 redirectUrl('/loadingPage', this.props.history, false)
-console.log(res.data.messages)
-                if (res.data&& res.data.messages.length>0) {
+                if (res.data&& res.data.messages&&  res.data.messages.length>0) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -107,7 +106,7 @@ console.log(res.data.messages)
                     return null
                 }
                 let result = res.data.data.orders
-                if (result.length > 0) {
+                if (result && result.length > 0) {
                     //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                     console.log('gooooood')
                     swal({
@@ -194,7 +193,7 @@ console.log(res.data.messages)
 
             }
         ).catch(err => {
-            console.log('wrong one........')
+            console.log('wrong.....')
             console.log(err)
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
