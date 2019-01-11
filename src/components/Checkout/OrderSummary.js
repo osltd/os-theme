@@ -124,7 +124,7 @@ console.log(res.data.messages)
                             <Grid item>
                                 <Typography variant={'body2'}>
                                     {
-                                        " your contact number is " + this.props.billingDetail.phone
+                                     false &&    " your contact number is " + this.props.billingDetail.phone
                                     }
                                 </Typography>
                             </Grid>
