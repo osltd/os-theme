@@ -17,7 +17,7 @@ import {connect} from "react-redux";
 import {
     AUTH_INIT_TOKEN,
     AUTH_INIT_USER_PROFILE,
-    CART_INIT_SHOPPING_CART,
+    CART_INIT_SHOPPING_CART, CATEGORY_INIT_CATEGORY,
     INIT_FEEDS,
     INIT_PRODUCTS
 } from "../constants/actionType";
@@ -40,7 +40,7 @@ const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async (shoppingCart, products, token, user) => {
+        initApp: async (shoppingCart, products, token, user,category) => {
             dispatch(
                 {
                     type: INIT_FEEDS,
@@ -51,6 +51,12 @@ const mapDispatchToProps = dispatch => ({
                 {
                     type: INIT_PRODUCTS,
                     payload: products,
+                }
+            )
+            dispatch(
+                {
+                    type:CATEGORY_INIT_CATEGORY,
+                    payload: category,
                 }
             )
             dispatch({
@@ -84,7 +90,11 @@ class App extends React.Component {
     componentDidMount() {
         this.initApp().then(() => null)
     }
+initBusiness = async ()=>{
+        let shops= await  agent.Products.initBusiness()
+return shops.find(n=>n.id===14).tags.split(',')
 
+}
     deleteId = (id = 67) => {
         agent.Checkout.deleteProduct(id)
         return id === 1 ? null : this.deleteId(id - 1)
@@ -94,9 +104,12 @@ class App extends React.Component {
         let data = await agent.Products.initProducts(`?page=${page}`)
         return (data && data.length > 0 )? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
-    initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts(),
+    initApp = async () => this.props.initApp(
+        JSON.parse(localStorage.getItem('shoppingCart')),
+        await  this.getAllProducts(),
         localStorage.getItem('token'),
-        JSON.parse(localStorage.getItem('user'))
+        JSON.parse(localStorage.getItem('user')),
+        await this.initBusiness()
     )
 
     render() {
@@ -112,7 +125,7 @@ class App extends React.Component {
                                 <Route exact path={'/404'} component={NotFound}/>
                                 <Route exact path={'/login'} component={Login}/>
                                 <Route exact path={'/register'} component={Register}/>
-                                <Route exact path={'/products'} component={Shop}/>
+                                <Route exact path={'/products'} component={Shop}  />
                                 <Route exact path={'/feeds'} component={Feed}/>
                                 <Route exact path={'/feeds/:id'} component={FeedDetail}/>
                                 <Route exact path={'/products/:id'} component={Product}/>

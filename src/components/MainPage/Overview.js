@@ -149,6 +149,7 @@ if (this.props.feeds===null && this.props.products===null) return      <LoadingP
 
                             <Grid item xs={12} md={10} lg={10}>
                                 <CategoryOverviewBox
+
                                     category={this.props.category}
                                 />
                             </Grid>

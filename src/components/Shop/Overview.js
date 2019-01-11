@@ -8,7 +8,7 @@ import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "..
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/WhiteDropDown'
 import LoadingPage from '../Layout/LoadingPage'
-
+import _ from 'lodash'
 import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {
     arrayToFilter,
@@ -80,7 +80,13 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class ShopOverview extends React.Component {
+    initFilter = ()=>{
+        let query = this.props.history.location.search
+        let isTags = (query.slice(_.lastIndexOf(query,'?'),_.lastIndexOf(query,'=')+1).indexOf('tags')!==-1)
+        let  queryTag = query.slice(_.lastIndexOf(query,'=')+1,query.length)
+        if (isTags && this.props.filter.tag!==queryTag) this.props.editProductFilter('tag',queryTag)
 
+    }
 
     sortData = () => {
 
@@ -150,10 +156,52 @@ class ShopOverview extends React.Component {
         />)
     }
 
+    componentDidMount(){
+        this.initFilter()
+    }
+
+    getProductsList = (products)=>{
+
+
+        if(products.length===0) {
+            return<Typography variant={'subheading'}> there are no products under <strong>{
+                this.props.filter.tag
+            }</strong> category yet</Typography>
+
+
+        }
+
+
+
+
+        return   this.props.viewMode === 'form' ?
+
+            this.getProductProperty(products, 'display').map((n, i) =>
+                <Grid item xs={12} sm={6} md={4} key={i}
+                >
+                    <ProductOverviewBox
+                        name={refactorTextLength(n.name)}
+                        id={n.id}
+                        src={handleImgValid(n.photos[0])}
+                        category={n.tags}
+                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                        promotePrice={n.promotePrice}
+                    />
+                </Grid>
+            ) : this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
+                key={i}
+                src={handleImgValid(n.photos[0])}
+                name={refactorTextLength(n.name)}
+                category={n.tags}
+                regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                promotePrice={n.promotePrice}
+                description={n.description}
+                id={n.id}
+            />))
+    }
     render() {
         const {classes} = this.props
         if (this.props.products===null) return<LoadingPage/>
-
         const products = this.sortData()
         const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
         return (
@@ -166,7 +214,7 @@ class ShopOverview extends React.Component {
                 </Grid>
 
                 {
-                    products.length>0 ? <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
+                    this.props.products.length>0 ? <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
                     {
                         isWidthUp('md', this.props.width) ?
                             <Grid item md={3}>
@@ -246,30 +294,9 @@ class ShopOverview extends React.Component {
                             }
                         </Grid>
                         <Grid item container className={classes.listMode}>
-                            {this.props.viewMode === 'form' ?
-
-                                this.getProductProperty(products, 'display').map((n, i) =>
-                                    <Grid item xs={12} sm={6} md={4} key={i}
-                                    >
-                                        <ProductOverviewBox
-                                            name={refactorTextLength(n.name)}
-                                            id={n.id}
-                                            src={handleImgValid(n.photos[0])}
-                                            category={n.tags}
-                                            regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                                            promotePrice={n.promotePrice}
-                                        />
-                                    </Grid>
-                                ) : this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
-                                    key={i}
-                                    src={handleImgValid(n.photos[0])}
-                                    name={refactorTextLength(n.name)}
-                                    category={n.tags}
-                                    regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                                    promotePrice={n.promotePrice}
-                                    description={n.description}
-                                    id={n.id}
-                                />))}
+                            {
+                                this.getProductsList(products)
+                            }
                         </Grid>
                     </Grid>
                 </Grid>:
