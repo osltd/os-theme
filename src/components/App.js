@@ -53,7 +53,6 @@ const mapDispatchToProps = dispatch => ({
                     payload: products,
                 }
             )
-
             dispatch({
                 type: CART_INIT_SHOPPING_CART,
                 payload: shoppingCart,

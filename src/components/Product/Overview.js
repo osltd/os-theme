@@ -37,10 +37,11 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
     render() {
-
-        if (this.hasValidProduct()) {
+if (!this.props.products) return <LoadingPage/>
             const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
             const variantOptions = getVariantOptions(product.variants)
+
+
             return <Grid container alignItems={'center'} justify={'center'}>
                 <Grid item xs={12}>
                     <Header
@@ -69,13 +70,7 @@ class ResponsiveDialog extends React.Component {
                 }
 
             </Grid>
-        }
 
-        else {
-            return <LoadingPage/>
-
-
-        }
     }
 
 

@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import img from '../../constants/img/loadingImg.gif'
 import {formatMoney, handleImgValid, refactorTitle} from "../../api/ApiUtils";
 import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
