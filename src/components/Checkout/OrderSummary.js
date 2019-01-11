@@ -70,8 +70,8 @@ class OrderSummary extends React.Component {
     placeOrder = async () => {
         const {billingDetail} = this.props
         const data = {
-            "email": billingDetail.email,
             "address": billingDetail.address,
+            "phone": billingDetail.phone,
 
             "items": this.props.shoppingCart.map(n => ({
                     id: n.variantId, qty: n.number,
