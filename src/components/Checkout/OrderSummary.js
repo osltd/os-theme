@@ -90,14 +90,15 @@ class OrderSummary extends React.Component {
         }
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
+                let result = res.data.data.orders
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
-            console.log(res.data.data.orders)
-            redirectUrl('/loadingPage', this.props.history, false)
+                console.log(res)
+                redirectUrl('/loadingPage', this.props.history, false)
 
-            if (!res.data.data.orders) {
+                if (result === undefined) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -106,8 +107,7 @@ class OrderSummary extends React.Component {
 
                     return null
                 }
-let result = res.data.data.orders
-                if (result.length>0){
+                if (result.length > 0) {
                     //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                     console.log('gooooood')
                     swal({
@@ -169,16 +169,16 @@ let result = res.data.data.orders
                                     is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
                                 </Typography>
                                 {/*<Typography variant={'body1'}>*/}
-                                    {/*thanks for choosing {*/}
-                                    {/*selectShippingMethod.courier.name*/}
+                                {/*thanks for choosing {*/}
+                                {/*selectShippingMethod.courier.name*/}
                                 {/*}.</Typography>*/}
                                 {/*<Typography variant={'body1'}>*/}
 
-                                    {/*the items will be there in {*/}
-                                    {/*selectShippingMethod.deliveryTime.min*/}
+                                {/*the items will be there in {*/}
+                                {/*selectShippingMethod.deliveryTime.min*/}
 
                                 {/*} to {*/}
-                                    {/*selectShippingMethod.deliveryTime.max*/}
+                                {/*selectShippingMethod.deliveryTime.max*/}
 
                                 {/*} days</Typography>*/}
                             </Grid>
