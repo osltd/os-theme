@@ -9,6 +9,7 @@ import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
 import agent from '../../../agent'
 import swal from '@sweetalert/with-react'
+import {redirectUrl} from "../../../api/ApiUtils";
 
 
 const styles = theme => ({
@@ -98,10 +99,15 @@ class Login extends React.Component {
                             <Grid item>
                                 <Typography variant={'subHeading'}>
                                     Account created!</Typography>
+                                <Typography variant={'subHeading'}>
+                                    You can Login now!</Typography>
                             </Grid>
 
                         </Grid>)
                     })
+                setTimeout(
+                    () => redirectUrl('/login', this.props.history), 1000
+                )
             }
         ).catch(
             err => (err.response) ? err.response.data.messages.map(
