@@ -110,8 +110,7 @@ class OrderSummary extends React.Component {
                 }
 
                 if (res.data.data.orders){
-                    redirectUrl('/', this.props.history, false)
-
+console.log('finaaaaaa')
                     if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                     swal({
 
@@ -190,6 +189,8 @@ class OrderSummary extends React.Component {
                     this.props.emptyShoppingCart()
 
                     this.props.emptyBillingDetail()
+                    redirectUrl('/', this.props.history, false)
+
                 }
 
 
