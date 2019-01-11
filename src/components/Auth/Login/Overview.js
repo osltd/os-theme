@@ -59,15 +59,18 @@ class Login extends React.Component {
                 console.log(res)
                 console.log('res')
                 if (!res.data.result) {
-                    res.data.messages.map(n =>
+               res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                     )
                     return null
                 }
                 if (res.data.result) {
-                    agent.Auth.assignName(this.state.email).then(res =>
-                        console.log(res)
-                    )
+                    console.log('assign acc')
+                        agent.Auth.assignName(this.state.email).then(
+                            res => console.log(res)
+                        )
+                    console.log('get acc')
+
                     agent.Auth.getAccount().then(
                         res => console.log(res)
                     )
