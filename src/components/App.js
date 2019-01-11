@@ -106,7 +106,7 @@ class App extends React.Component {
         JSON.parse(localStorage.getItem('shoppingCart')),
         await  this.getAllProducts(),
         localStorage.getItem('token'),
-        await agent.Auth.getAccount(),
+        await agent.Auth.getAccount().then(res=>res.data.data.consumers),
         await this.initBusiness()
     )
 

@@ -17,7 +17,7 @@ export default (state = defaultState, action) => {
             }
         }
         case AUTH_INIT_USER_PROFILE: {
-
+console.log(action.payload)
             return {
                 ...state,
                 user: action.payload,
