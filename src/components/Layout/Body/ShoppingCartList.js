@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
+import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
-import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     listItem: {
@@ -76,7 +75,7 @@ class ShoppingCartList extends React.Component {
                                 key={i}
                                 button
 
-                                onClick={() => redirectUrl('/products/' + n.product.id,this.props.history)}>
+                                onClick={() => redirectUrl('/products/' + n.product.id, this.props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
                                     title={n.product.variants.find(variant => variant.id === n.variantId).description}>
@@ -122,7 +121,7 @@ class ShoppingCartList extends React.Component {
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                            onClick={() => redirectUrl('/shoppingCart',this.props.history)}
+                            onClick={() => redirectUrl('/shoppingCart', this.props.history)}
                         >
                             View Cart
                         </Button>
@@ -130,7 +129,7 @@ class ShoppingCartList extends React.Component {
                     <Grid item>
                         <Button variant={'outlined'}
                                 className={classes.button}
-                                onClick={() => redirectUrl('/checkout',this.props.history)}>
+                                onClick={() => redirectUrl('/checkout', this.props.history)}>
                             Checkout
                         </Button>
                     </Grid>

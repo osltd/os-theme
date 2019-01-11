@@ -63,7 +63,7 @@ class SimpleSlider extends React.Component {
                                               backgroundImage: 'url("' + n.url + '")',
 
                                           })}
-                                          onClick={() => n.link ? redirectUrl(n.link,this.props.history) : null}
+                                          onClick={() => n.link ? redirectUrl(n.link, this.props.history) : null}
 
                                           className={classes.img}>
                                         {n.title && <Grid item lg={4}>

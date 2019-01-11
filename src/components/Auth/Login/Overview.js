@@ -56,7 +56,23 @@ class Login extends React.Component {
             , passwd: this.state.pwd
         }).then(
             res => {
+                console.log(res)
+                console.log('res')
+                if (!res.data.result) {
+                    res.data.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    )
+                    return null
+                }
+                if (res.data.result) {
+                    agent.Auth.assignName(this.state.email).then(res =>
+                        console.log(res)
+                    )
+                    agent.Auth.getAccount().then(
+                        res => console.log(res)
+                    )
 
+                }
                 const auth = res.data.data.tokens[0]
 
                 localStorage.setItem('token', auth.token)
@@ -101,14 +117,17 @@ class Login extends React.Component {
                 )
             }
         ).catch(err => {
-                err.response.data.messages.map(n =>
-                    this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-                )
-                this.setState(
-                    {
-                        pwd: ''
-                    }
-                )
+                if (err.response) {
+                    err.response.data.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    )
+                    this.setState(
+                        {
+                            pwd: ''
+                        }
+                    )
+                }
+
             }
         )
 

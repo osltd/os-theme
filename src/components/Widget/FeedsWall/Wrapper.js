@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core';
@@ -58,14 +58,14 @@ class FeedsWall extends React.Component {
                         width: '100%',
                         backgroundPosition: 'center'
                     }}></div>}
-                    right={<div style={{ textAlign: 'center' }}>
+                    right={<div style={{textAlign: 'center'}}>
                         <Typography
                             style={{padding: '0 20px'}}
                             variant={'subheading'}
                         >
                             {data[1].sections[0].title}      </Typography>
-                            <br/>
-                            <Typography
+                        <br/>
+                        <Typography
                             style={{padding: '0 20px', color: 'rgb(159, 159, 159)'}}
                         >
                             {data[1].sections[0].description}</Typography>
@@ -86,18 +86,18 @@ class FeedsWall extends React.Component {
                         backgroundPosition: 'center'
                     }}></div>}
                     left=
-                        {(<div style={{ textAlign: 'center' }}>
+                        {(<div style={{textAlign: 'center'}}>
                             <Typography
-                            style={{padding: '0 20px'}}
+                                style={{padding: '0 20px'}}
 
-                            variant={'subheading'}
-                        >
-                            {data[2].sections[0].title}</Typography>
+                                variant={'subheading'}
+                            >
+                                {data[2].sections[0].title}</Typography>
                             <br/>
                             <Typography
-                            style={{padding: '0 20px', color: 'rgb(159, 159, 159)'}}
-                        >
-                            {data[2].sections[0].description}</Typography>
+                                style={{padding: '0 20px', color: 'rgb(159, 159, 159)'}}
+                            >
+                                {data[2].sections[0].description}</Typography>
                         </div>)}
 
                 />}

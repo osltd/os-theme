@@ -121,9 +121,9 @@ class OutlinedInputAdornments extends React.Component {
     }
 
     render() {
-        const {classes, type,onClick} = this.props;
+        const {classes, type, onClick} = this.props;
 
-        return <div onClick={onClick}className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
+        return <div onClick={onClick} className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
 
     }
 }

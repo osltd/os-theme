@@ -21,7 +21,8 @@ class FeedsWall extends React.Component {
         const {classes, left, right, link} = this.props;
 
         return (
-            <Grid container alignItems={'center'} className={classes.root} onClick={() => redirectUrl(link,this.props.history)}>
+            <Grid container alignItems={'center'} className={classes.root}
+                  onClick={() => redirectUrl(link, this.props.history)}>
                 <Grid item container direction={'column'} justify={'flex-start'} alignItems={'center'} sm={5}>
                     {left}
                 </Grid>

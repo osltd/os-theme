@@ -102,31 +102,31 @@ class ResponsiveDialog extends React.Component {
             {
 
                 content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item >
+                    <Grid item>
                     <span className={'icon-like'}
 
-                    style={{
-                        fontSize:'80px',
-                        color:'hsla(100,55%,69%,.5)',
-                        padding:'20px',
+                          style={{
+                              fontSize: '80px',
+                              color: 'hsla(100,55%,69%,.5)',
+                              padding: '20px',
 
-                        display:'block',
-                        width: '80px',
-                        height: '80px',
-                        border: '4px solid hsla(98,55%,69%,.2)',
-                        borderRadius: '50%',
-                        boxSizing: 'content-box',
-                    }}
+                              display: 'block',
+                              width: '80px',
+                              height: '80px',
+                              border: '4px solid hsla(98,55%,69%,.2)',
+                              borderRadius: '50%',
+                              boxSizing: 'content-box',
+                          }}
                     />
                     </Grid>
                     <Grid item>
-                    <Typography variant={'display1'}>
-                        Congratulation!
-                    </Typography>
+                        <Typography variant={'display1'}>
+                            Congratulation!
+                        </Typography>
                     </Grid>
-                    <Grid item >
-                    <Typography variant={'subHeading'}>
-                        items added! </Typography>
+                    <Grid item>
+                        <Typography variant={'subHeading'}>
+                            items added! </Typography>
                     </Grid>
 
                 </Grid>)
@@ -151,16 +151,6 @@ class ResponsiveDialog extends React.Component {
         variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false))
         this.props.editCartVariant('number', 1)
     }
-
-    componentDidMount() {
-        this.initVariant()
-
-    }
-
-    componentDidUpdate(prevProps, prevState, snap) {
-        if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
-    }
-
     getDetail = (selectedVariant) => {
 
         const {
@@ -290,6 +280,15 @@ class ResponsiveDialog extends React.Component {
                 />
             </Grid>
         </Grid>
+    }
+
+    componentDidMount() {
+        this.initVariant()
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snap) {
+        if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
     }
 
     render() {

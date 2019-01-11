@@ -70,15 +70,6 @@ class ResponsiveDialog extends React.Component {
     handleClose = () => {
         this.setState({open: false});
     };
-
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
-
     getImg = () => {
         const {classes, src, name, id, category, regPrice, promotePrice} = this.props;
         return <div
@@ -107,6 +98,14 @@ class ResponsiveDialog extends React.Component {
                 onClick={() => id && redirectUrl('/products/' + id, this.props.history)}
                 className={classes.img}
             />
+    }
+
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+        this.state = {
+            open: false,
+        }
     }
 
     render() {

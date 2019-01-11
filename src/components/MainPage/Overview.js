@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => ({}
 class ResponsiveDialog extends React.Component {
 
     getSlick = (search = '') => {
-        let selectedProducts = search ? this.props.products.filter(n => n.tags.find(m => m === search)) : this.props.products
+        let selectedProducts = search ? this.props.products.filter(n => n.tags.find(m => m.toLowerCase() === search)) : this.props.products
         if (
             isWidthUp('md', this.props.width)
         ) return <MultiItems data={selectedProducts}/>
@@ -85,7 +85,7 @@ class ResponsiveDialog extends React.Component {
         let hasCategoryToShow = (this.props.category.length > 0)
 
         let hasSelectedProductsToShow = hasProductsToShow && this.props.products
-            .filter(n => n.tags.find(m => m === FEATURED_PRODUCTS)).length > 0
+            .filter(n => n.tags.find(m => m.toLowerCase() === FEATURED_PRODUCTS)).length > 0
 
         let getDataFromAPI = (this.props.feeds === null && this.props.products === null)
         if (getDataFromAPI) return <LoadingPage/>

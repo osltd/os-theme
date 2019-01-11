@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, redirectUrl, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -16,7 +16,6 @@ import agent from '../../agent'
 import {withRouter} from "react-router-dom";
 import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
 import swal from '@sweetalert/with-react'
-import {redirectUrl} from "../../api/ApiUtils";
 
 const TAX_RATE = 0.07;
 
@@ -71,6 +70,10 @@ class OrderSummary extends React.Component {
     placeOrder = async () => {
         const {billingDetail} = this.props
         const data = {
+            "email": billingDetail.email,
+            "address": billingDetail.address,
+            "phone": billingDetail.phone,
+
             "items": this.props.shoppingCart.map(n => ({
                     id: n.variantId, qty: n.number,
                 })
@@ -78,10 +81,7 @@ class OrderSummary extends React.Component {
             ,
             "contact": {
                 "name": {"first": billingDetail.firstName, "last": billingDetail.lastName},
-                "email": billingDetail.email,
                 "city": billingDetail.city,
-                "phone": billingDetail.phone,
-                "address": billingDetail.address,
                 "zipCode": billingDetail.zipCode,
                 "country": billingDetail.country,
             },
@@ -90,13 +90,23 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
-        redirectUrl('/loadingPage',this.props.history,false)
+        console.log(data)
+        redirectUrl('/loadingPage', this.props.history, false)
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
-                let selectShippingMethod =
+                let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
+                    ) : 'no shipping method provided'
+                if (res.data.result === false) {
+                    console.log('this is going wrong')
+                    res.data.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                     )
+                    this.props.history.goBack()
+
+                    return null
+                }
                 if (!(selectShippingMethod)) selectShippingMethod = this.props.billingDetail.shippingOptions[0]
                 swal(
                     {
@@ -175,15 +185,19 @@ class OrderSummary extends React.Component {
                     });
                 this.props.emptyShoppingCart()
 
-            this.props.emptyBillingDetail()
-                redirectUrl('/',this.props.history,false)
+                this.props.emptyBillingDetail()
+                redirectUrl('/', this.props.history, false)
 
             }
         ).catch(err => {
-            err.response.data.messages.map(n =>
-                this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-            )
+            if (err.response && err.response.data.messages.length > 0) {
+                err.response.data.messages.map(n =>
+                    this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                )
+
+            }
             this.props.history.goBack()
+
         })
 
     }

@@ -21,8 +21,8 @@ class MultipleItems extends Component {
             dots: true,
             infinite: true,
             speed: 500,
-            rows:2,
-            slidesPerRow: this.props.size?this.props.size:4,
+            rows: 2,
+            slidesPerRow: this.props.size ? this.props.size : 4,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 5000,
@@ -40,23 +40,23 @@ class MultipleItems extends Component {
         // }
         return (
 
-                <Slider {...settings} className={classes.root}>
+            <Slider {...settings} className={classes.root}>
 
                 {data.map((n, i) =>
-                        <div key={i} style={{display: 'flex'}}>
+                    <div key={i} style={{display: 'flex'}}>
 
-                            <ProductOverviewBox
-                                id={n.id}
-                                name={refactorTextLength(n.name)}
-                                src={((n.photos || [])[0] || {}).url}
-                                category={n.tags}
-                                regPrice={(n.variants || [])[0] ? n.variants[0].price : 'not a reg price'}
-                                promotePrice={n.promotePrice}
-                            />
-                        </div>
+                        <ProductOverviewBox
+                            id={n.id}
+                            name={refactorTextLength(n.name)}
+                            src={((n.photos || [])[0] || {}).url}
+                            category={n.tags}
+                            regPrice={(n.variants || [])[0] ? n.variants[0].price : 'not a reg price'}
+                            promotePrice={n.promotePrice}
+                        />
+                    </div>
                 )}
 
-                </Slider>
+            </Slider>
         );
     }
 }

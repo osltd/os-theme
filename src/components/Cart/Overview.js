@@ -7,22 +7,9 @@ import Header from '../Layout/Body/Header'
 import ShoppingCart from './CartTable'
 
 const styles = theme => ({
-    productCategory: {
-        backgroundColor: '#F7F7F7',
 
-    },
-    toolBar: {
-        padding: '10px',
-        backgroundColor: theme.palette.background.paper,
-    },
-    icon: {
-        padding: '10px',
-        cursor: 'pointer',
-        alignItems: 'center',
-        border: '1px solid black',
-
-    }, listMode: {
-        padding: '20px',
+    shoppingCart: {
+        paddingBottom: '30px',
     }
 })
 
@@ -71,7 +58,7 @@ class CartOverview extends React.Component {
                     title={'Shopping Cart'}
                 />
             </Grid>
-            <Grid item>
+            <Grid item className={classes.shoppingCart}>
                 <ShoppingCart/>
 
             </Grid>

@@ -48,13 +48,13 @@ class SelectedListItem extends React.Component {
     handleListItemClick = (event, index, cb) => {
         cb()
         if (this.props.link) {
-            redirectUrl(this.props.link,this.props.history)
+            redirectUrl(this.props.link, this.props.history)
         }
     };
 
     render() {
         const {classes, data, title, selectedValue} = this.props;
-console.log(data)
+        console.log(data)
         return (data ? <Fragment>
                 {
                     title && <Typography variant={'title'}>{title}</Typography>

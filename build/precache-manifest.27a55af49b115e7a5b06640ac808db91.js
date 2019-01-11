@@ -1,31 +1,31 @@
 self.__precacheManifest = [
   {
-    "revision": "3756585aa5a26bde8bb0fb46c39ff39a",
-    "url": "/static/media/icomoon.3756585a.woff"
+    "revision": "5c51136f036b4a97c6771ea6b616a2fa",
+    "url": "/static/media/icomoon.5c51136f.eot"
   },
   {
-    "revision": "9970572e4504cd076308",
-    "url": "/static/css/main.b6fbd208.chunk.css"
+    "revision": "2e2a54b09001e7127a69",
+    "url": "/static/css/main.24e319b4.chunk.css"
   },
   {
     "revision": "912ec66d7572ff821749319396470bde",
     "url": "/static/media/fontawesome-webfont.912ec66d.svg"
   },
   {
-    "revision": "789b0394d71acac3707b",
-    "url": "/static/js/1.789b0394.chunk.js"
+    "revision": "c46babde06d435762a87",
+    "url": "/static/js/1.c46babde.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
     "url": "/static/js/runtime~main.229c360f.js"
   },
   {
-    "revision": "523fe1f3632b38740ab33c27338bd9fc",
-    "url": "/static/media/logo.523fe1f3.png"
-  },
-  {
     "revision": "ced611daf7709cc778da928fec876475",
     "url": "/static/media/slick.ced611da.eot"
+  },
+  {
+    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
+    "url": "/static/media/slick.b7c9e1e4.woff"
   },
   {
     "revision": "d41f55a78e6f49a5512878df1737e58a",
@@ -36,28 +36,20 @@ self.__precacheManifest = [
     "url": "/static/media/slick.f97e3bbf.svg"
   },
   {
-    "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
-    "url": "/static/media/slick.b7c9e1e4.woff"
-  },
-  {
-    "revision": "9970572e4504cd076308",
-    "url": "/static/js/main.9970572e.chunk.js"
+    "revision": "2e2a54b09001e7127a69",
+    "url": "/static/js/main.2e2a54b0.chunk.js"
   },
   {
     "revision": "3e5ca811b15adb9c04782826962d481a",
     "url": "/static/media/icomoon.3e5ca811.ttf"
   },
   {
-    "revision": "5c51136f036b4a97c6771ea6b616a2fa",
-    "url": "/static/media/icomoon.5c51136f.eot"
+    "revision": "3756585aa5a26bde8bb0fb46c39ff39a",
+    "url": "/static/media/icomoon.3756585a.woff"
   },
   {
     "revision": "f221699afa1e028686d4d8c5976c1c7b",
     "url": "/static/media/icomoon.f221699a.svg"
-  },
-  {
-    "revision": "af7ae505a9eed503f8b8e6982036873e",
-    "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
     "revision": "fee66e712a8a08eef5805a46892932ad",
@@ -68,15 +60,19 @@ self.__precacheManifest = [
     "url": "/static/media/fontawesome-webfont.674f50d2.eot"
   },
   {
+    "revision": "af7ae505a9eed503f8b8e6982036873e",
+    "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
+  },
+  {
     "revision": "b06871f281fee6b241d60582ae9369b9",
     "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
-    "revision": "789b0394d71acac3707b",
-    "url": "/static/css/1.fadad09d.chunk.css"
+    "revision": "c46babde06d435762a87",
+    "url": "/static/css/1.be4c0a6d.chunk.css"
   },
   {
-    "revision": "c3d1b29669aa1d32a106fc83729d384d",
+    "revision": "1019a25192f652453cc2d758e3333585",
     "url": "/index.html"
   }
 ];

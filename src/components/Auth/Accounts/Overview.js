@@ -4,14 +4,13 @@ import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {Button, Grid, Typography} from '@material-ui/core'
-import CustomButton from '../Widget/Button/BlackButton'
-import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR, COMMON_INIT_MY_CREDIT} from "../../constants/actionType";
-import Dialog from '../Widget/Dialog'
-import {redirectUrl} from "../../api/ApiUtils";
+import {Grid, Typography} from '@material-ui/core'
+import CustomButton from '../../Widget/Button/BlackButton'
+import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
-import MyAccount from '../Auth/Accounts/Overview'
+import agent from '../../../agent'
+
 const styles = theme => ({
 
     root: {
@@ -42,47 +41,24 @@ const styles = theme => ({
 
 
 const mapStateToProps = state => ({
-    shoppingCart: state.cart.shoppingCart,
-    keyword: state.common.searchBar,
     user: state.auth.user,
 });
 
 
-const mapDispatchToProps = dispatch => ({
-        editShoppingCart: (index) => dispatch({
-            type: CART_OPERATE_SHOPPING_CART,
-            payload: {
-                key: 'remove',
-                value: index,
-
-            }
-        }),
-        editSearchBar: (keyword = null) => dispatch({
-            type: COMMON_EDIT_SEARCH_BAR,
-            payload: keyword
-        }),
-        putMyCreditToGeneral:(myCredit)=> dispatch(
-            {
-                type:COMMON_INIT_MY_CREDIT,
-                payload:myCredit,
-            }
-        )
-    }
-
-)
-
-class Header extends React.Component {
+class MyAccount extends React.Component {
     handleChange = (event, value) => {
         this.setState({value});
     };
     logout = () => {
         localStorage.clear()
+        agent.Auth.logout().then(
+            res => {
 
-        swal(
-            {
+                swal(
+                    {
 
-                content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item>
+                        content: (<Grid container alignItems={'center'} direction={'column'}>
+                            <Grid item>
                     <span className={'icon-like'}
 
                           style={{
@@ -98,25 +74,38 @@ class Header extends React.Component {
                               boxSizing: 'content-box',
                           }}
                     />
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'display1'}>
-                            You have successfully logout!
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subHeading'}>
-                            see you </Typography>
-                    </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'display1'}>
+                                    You have successfully logout!
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'subHeading'}>
+                                    see you </Typography>
+                            </Grid>
 
-                </Grid>)
-            })
-        setTimeout(
-            () => redirectUrl('/', this.props.history)
-            , 1000
-        )
+                        </Grid>)
+                    })
+                setTimeout(
+                    () => redirectUrl('/', this.props.history)
+                    , 1000
+                )
+            }
+        ).catch(err => console.log(err))
     }
-    getDialog = () => {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            keyword: ''
+        };
+    }
+
+    componentDidMount() {
+    }
+
+    render() {
 
         const {classes, width, user} = this.props;
         return (!_.isEmpty(user)) ?
@@ -169,39 +158,10 @@ class Header extends React.Component {
                 </Grid>)
 
     }
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            keyword: ''
-        };
-    }
-componentDidMount(){
-        this.props.putMyCreditToGeneral(this.dialog)
-}
-    render() {
-        const {classes, width} = this.props;
-        const {value} = this.state
-
-        return (
-            <Grid container justify={'flex-end'} className={classes.root}>
-                <Dialog
-                    opacity={true}
-                    innerRef={e => this.dialog = e}
-                    title={
-                        <Button className={classes.button}>My Credits</Button>
-                    }
-                    dialog={<MyAccount/>}
-                />
-
-            </Grid>
-        )
-
-    }
 }
 
-Header.propTypes = {
+MyAccount.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))
+export default connect(mapStateToProps, {})(withRouter(withWidth()(withStyles(styles)(MyAccount))))

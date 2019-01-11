@@ -16,8 +16,7 @@ const styles = theme => (
         productCategory: {
             backgroundColor: theme.palette.background.paper
         },
-        toolBar: {
-        },
+        toolBar: {},
         content: {
             margin: '20px 0',
         },
@@ -53,7 +52,6 @@ class ResponsiveDialog extends React.Component {
     hasValidFeed = () => (this.props.feeds && !!this.props.feeds.find(n => n.id.toString() === this.props.match.params.id))
 
 
-
     render() {
 
         const {classes} = this.props
@@ -84,7 +82,7 @@ class ResponsiveDialog extends React.Component {
                             <List
                                 data={getTagsCountsArray(this.props.feeds, (tag, number) => {
                                     this.props.editFeedFilter('tag', tag)
-                                    redirectUrl('/feeds',this.props.history,false)
+                                    redirectUrl('/feeds', this.props.history, false)
                                 })}
                                 title={'FEED CATEGORIES'}/>
 
@@ -97,7 +95,7 @@ class ResponsiveDialog extends React.Component {
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'subheading'}>
-                                        {feed.authors.length>0?feed.authors[0].name.first + ' ' + feed.authors[0].name.last:'no authors'}
+                                        {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : 'no authors'}
                                     </Typography>
                                 </Grid>
                                 <Grid item>

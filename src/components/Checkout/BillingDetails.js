@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from "react-redux";
-import {Button, Grid, Typography} from '@material-ui/core'
+import {Button, CircularProgress, Grid, Typography} from '@material-ui/core'
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
 import InputBar from '../Widget/InputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
 import {withSnackbar} from 'notistack';
-import LoadingPage from '../Layout/LoadingPage'
 
 const TAX_RATE = 0.07;
 
@@ -84,6 +83,57 @@ class ShoppingCartTable extends React.Component {
             )
         )
     }
+    getShippingMethod = () => {
+        const {classes} = this.props
+        let hasValidShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0)
+
+        return <Grid item container justify={'space-between'} xs={12}>
+            {hasValidShippingMethod ? <Grid item xs={12}>
+                <Typography variant={'title'}>
+                    Shipping Options
+                </Typography>
+            </Grid> : null}
+            {
+                hasValidShippingMethod ? this.props.billingDetail.shippingOptions.map((n, i) => {
+                        return (
+
+                            <Grid
+                                className={classNames(classes.shippingOptions,
+                                    (n.courier.id === this.props.billingDetail.selectedShippingMethod) ? classes.selectedOption : null)}
+                                item container xs={4}>
+                                <Grid item>
+
+                                    <Typography variant={'body2'}>
+                                        name: {n.courier.name}
+                                    </Typography>
+                                    <Typography variant={'body1'}>
+                                        charge: {n.charge}
+                                    </Typography>
+                                    <Typography variant={'body1'}>
+                                        delivery time :{n.deliveryTime.min} days to {n.deliveryTime.max} days
+                                    </Typography>
+                                </Grid>
+
+
+                                <Grid item>
+
+                                    <Button
+                                        className={classes.button}
+                                        variant={'outlined'} color={'primary'}
+                                        onClick={() => this.props.editBillingDetail('selectedShippingMethod', n.courier.id)}
+                                    >selected</Button>
+                                </Grid>
+                            </Grid>)
+                    }
+                ) : ((this.props.billingDetail.address && !(this.props.billingDetail.shippingOptions)) ?
+                    <CircularProgress size={40}/>
+                    : null)
+            }
+
+
+        </Grid>
+
+    }
 
     constructor(props) {
         super(props)
@@ -101,6 +151,7 @@ class ShoppingCartTable extends React.Component {
 
         if (this.props.billingDetail.shippingOptions === undefined && this.props.billingDetail.address) {
             this.getShippingRate()
+
         }
     }
 
@@ -237,53 +288,9 @@ class ShoppingCartTable extends React.Component {
                         value={billingDetail.cvc}
                     />
                 </Grid>
-
-                <Grid item container justify={'space-between'} xs={12}>
-                    {this.props.billingDetail.shippingOptions ? <Grid item xs={12}>
-                        <Typography variant={'title'}>
-                            Shipping Options
-                        </Typography>
-                    </Grid> : null}
-                    {
-                        this.props.billingDetail.shippingOptions ? this.props.billingDetail.shippingOptions.map((n, i) => {
-                                return (
-
-                                    <Grid
-                                        className={classNames(classes.shippingOptions,
-                                            (n.courier.id === this.props.billingDetail.selectedShippingMethod) ? classes.selectedOption : null)}
-                                        item container xs={4}>
-                                        <Grid item>
-
-                                            <Typography variant={'body2'}>
-                                                name: {n.courier.name}
-                                            </Typography>
-                                            <Typography variant={'body1'}>
-                                                charge: {n.charge}
-                                            </Typography>
-                                            <Typography variant={'body1'}>
-                                                delivery time :{n.deliveryTime.min} days to {n.deliveryTime.max} days
-                                            </Typography>
-                                        </Grid>
-
-
-                                        <Grid item>
-
-                                            <Button
-                                                className={classes.button}
-                                                variant={'outlined'} color={'primary'}
-                                                onClick={() => this.props.editBillingDetail('selectedShippingMethod', n.courier.id)}
-                                            >selected</Button>
-                                        </Grid>
-                                    </Grid>)
-                            }
-                        ) : ((this.props.billingDetail.address && !(this.props.billingDetail.shippingOptions)) ?
-                                <LoadingPage/> : null
-
-                        )
-                    }
-
-
-                </Grid>
+                {
+                    this.getShippingMethod()
+                }
             </Grid>
 
         )

@@ -1,10 +1,9 @@
 import React from 'react';
-import {Grid,Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import Input from '../../Widget/Input/original'
-import Header from '../../Layout/Body/Header'
 import Button from '../../Widget/Button/BlackButton'
 import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
@@ -17,10 +16,10 @@ const styles = theme => ({
 
         backgroundColor: theme.palette.background.default,
     },
-    title:{
+    title: {
         paddingTop: '30px',
 
-        textAlign:'center',
+        textAlign: 'center',
     },
     innerRoot: {
         padding: '0px 120px 60px 120px ',
@@ -67,11 +66,11 @@ class Login extends React.Component {
             }
         ).then(
             res =>
-        swal(
-            {
+                swal(
+                    {
 
-                content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item>
+                        content: (<Grid container alignItems={'center'} direction={'column'}>
+                            <Grid item>
                     <span className={'icon-like'}
 
                           style={{
@@ -87,19 +86,19 @@ class Login extends React.Component {
                               boxSizing: 'content-box',
                           }}
                     />
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'display1'}>
-                            Congratulation!
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subHeading'}>
-                            Account created!</Typography>
-                    </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'display1'}>
+                                    Congratulation!
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'subHeading'}>
+                                    Account created!</Typography>
+                            </Grid>
 
-                </Grid>)
-            })
+                        </Grid>)
+                    })
         ).catch(
             err => err.response.data.messages.map(
                 n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -127,10 +126,10 @@ class Login extends React.Component {
             <Grid container className={classes.root} justify={'center'} alignItems={'center'}>
                 <Grid item container spacing={16} md={8} xs={12} lg={6} direction={'column'}
                       className={classes.innerRoot}>
-                    <Grid item >
-                    <Typography className={classes.title} variant={'display1'}>
-                 Create your account
-                    </Typography>
+                    <Grid item>
+                        <Typography className={classes.title} variant={'display1'}>
+                            Create your account
+                        </Typography>
                     </Grid>
                     <Grid item>
                         <Input

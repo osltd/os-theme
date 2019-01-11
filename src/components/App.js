@@ -17,7 +17,8 @@ import {connect} from "react-redux";
 import {
     AUTH_INIT_TOKEN,
     AUTH_INIT_USER_PROFILE,
-    CART_INIT_SHOPPING_CART, CATEGORY_INIT_CATEGORY,
+    CART_INIT_SHOPPING_CART,
+    CATEGORY_INIT_CATEGORY,
     INIT_FEEDS,
     INIT_PRODUCTS
 } from "../constants/actionType";
@@ -40,7 +41,7 @@ const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async (shoppingCart, products, token, user,category) => {
+        initApp: async (shoppingCart, products, token, user, category) => {
             dispatch(
                 {
                     type: INIT_FEEDS,
@@ -55,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
             )
             dispatch(
                 {
-                    type:CATEGORY_INIT_CATEGORY,
+                    type: CATEGORY_INIT_CATEGORY,
                     payload: category,
                 }
             )
@@ -87,14 +88,11 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class App extends React.Component {
-    componentDidMount() {
-        this.initApp().then(() => null)
-    }
-initBusiness = async ()=>{
-        let shops= await  agent.Products.initBusiness()
-return shops.find(n=>n.id===14).tags.split(',')
+    initBusiness = async () => {
+        let shops = await  agent.Products.initBusiness()
+        return shops.find(n => n.id === 14).tags.split(',')
 
-}
+    }
     deleteId = (id = 67) => {
         agent.Checkout.deleteProduct(id)
         return id === 1 ? null : this.deleteId(id - 1)
@@ -102,7 +100,7 @@ return shops.find(n=>n.id===14).tags.split(',')
     }
     getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`)
-        return (data && data.length > 0 )? this.getAllProducts(page + 1, _.concat(products, data)) : products
+        return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
     initApp = async () => this.props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
@@ -111,6 +109,10 @@ return shops.find(n=>n.id===14).tags.split(',')
         JSON.parse(localStorage.getItem('user')),
         await this.initBusiness()
     )
+
+    componentDidMount() {
+        this.initApp().then(() => null)
+    }
 
     render() {
         return (
@@ -125,7 +127,7 @@ return shops.find(n=>n.id===14).tags.split(',')
                                 <Route exact path={'/404'} component={NotFound}/>
                                 <Route exact path={'/login'} component={Login}/>
                                 <Route exact path={'/register'} component={Register}/>
-                                <Route exact path={'/products'} component={Shop}  />
+                                <Route exact path={'/products'} component={Shop}/>
                                 <Route exact path={'/feeds'} component={Feed}/>
                                 <Route exact path={'/feeds/:id'} component={FeedDetail}/>
                                 <Route exact path={'/products/:id'} component={Product}/>

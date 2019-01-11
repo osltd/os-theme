@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-
+import {redirectUrl} from "../../api/ApiUtils";
+import Dialog from '../Widget/Dialog'
+import MyAccount from '../Auth/Accounts/Overview'
 const styles = theme => ({
     root: {
         width: '100%',
@@ -18,33 +20,54 @@ function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
 }
 
-function SimpleList(props) {
-    const {classes} = props;
-    const items = ['Shopping Cart',
-        'Checkout',
-        'Wishlist',
-        'My Account',
-        'Login',
-        'Register'
-    ]
-    return (
-        <div className={classes.root}>
-            <List component="nav">
-                {
-                    items.map((n, i) =>
-                        <ListItem className={classes.item} button key={i}>
-                            <Typography variant={'body2'} color={'inherit'}> {n}</Typography>
-                        </ListItem>)
-                }
+class FooterList extends React.Component {
+    render() {
+
+        const {classes} = this.props;
+        const items = [
+            {label: "Shopping Cart", url: "shoppingcart"}
+            , {label: "Checkout", url: "checkout"}
+            , {label: "My Account", url: ""}
+            , {label: "Login", url: "login"}
+            , {label: "Register", url: "register"}
+        ]
+        return (
+            <div className={classes.root}>
+                <List component="nav">
+                    {
+                        items.map((n, i) =>
+                            (n.label==='My Account')?   <Dialog
+                                    key={i}
+                                    opacity={true}
+                                    innerRef={e => this.dialog = e}
+                                    title={
+                                        <ListItem className={classes.item} button >
+                                            <Typography variant={'body2'} color={'inherit'}
+                                            > {n.label}</Typography>
+                                        </ListItem>        }
+                                    dialog={<MyAccount/>}
+                                />:
+                            <ListItem className={classes.item} button key={i}>
+                                <Typography variant={'body2'} color={'inherit'}
+                                            onClick={() => redirectUrl(`/${n.url}`, this.props.history)}
+
+                                > {n.label}</Typography>
+                            </ListItem>
 
 
-            </List>
-        </div>
-    );
+
+                        )
+                    }
+
+
+                </List>
+            </div>
+        );
+    }
 }
 
-SimpleList.propTypes = {
+FooterList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleList);
+export default withStyles(styles)(FooterList);

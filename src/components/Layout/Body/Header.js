@@ -4,9 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import {withRouter} from "react-router-dom";
-import {getRoutePath} from "../../../api/ApiUtils";
+import {getRoutePath, redirectUrl} from "../../../api/ApiUtils";
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
-import {redirectUrl} from "../../../api/ApiUtils";
 
 const styles = theme => ({
 
@@ -56,13 +55,13 @@ class BodyHeader extends React.Component {
                         <Fragment key={i}>
                             <Grid item>
                                 <Typography variant={'body2'}
-                                            onClick={() => redirectUrl(n.link,this.props.history)}
+                                            onClick={() => redirectUrl(n.link, this.props.history)}
                                             className={classes.route} color={'secondary'}>{n.label}</Typography>
                             </Grid>
                             {i !== routePath.length - 1 &&
                             <Grid item>
                                 <Typography variant={'body2'}
-                                            onClick={() => redirectUrl(n.link,this.props.history)}
+                                            onClick={() => redirectUrl(n.link, this.props.history)}
                                             color={'secondary'}>/</Typography> </Grid>
                             }
                         </Fragment>

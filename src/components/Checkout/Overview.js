@@ -101,7 +101,7 @@ class ShopOverview extends React.Component {
                         <Grid item>
                             <Button
                                 variant='outlined'
-                                onClick={() => redirectUrl('/products',this.props.history)}
+                                onClick={() => redirectUrl('/products', this.props.history)}
 
                             >
                                 Products

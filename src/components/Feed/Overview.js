@@ -47,14 +47,6 @@ const mapDispatchToProps = dispatch => ({
 
 class ResponsiveDialog extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            timer: () => null
-        }
-
-    }
-
     onChange = value => {
         clearTimeout(this.state.timer)
         this.setState(
@@ -63,6 +55,14 @@ class ResponsiveDialog extends React.Component {
 
             }
         )
+    }
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            timer: () => null
+        }
+
     }
 
     render() {
@@ -104,28 +104,25 @@ class ResponsiveDialog extends React.Component {
 
                     </Grid>
                     <Grid item container lg={9} spacing={32} xs={11}>
-                        {feeds ? feeds.length>0?feeds.map((n, i) =>
-                            <Grid item md={6} xs={12} key={i}>
-                                <FeedOverviewBox
-                                    id={n.id}
-                                    medias={n.sections[0].medias}
-                                    src={n.sections && n.sections.find(section => !!section.medias[0]
-                                    ) ? n.sections.find(section => section.medias[0]).medias[0].url :
-                                        'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
+                        {feeds ? feeds.length > 0 ? feeds.map((n, i) =>
+                                <Grid item md={6} xs={12} key={i}>
+                                    <FeedOverviewBox
+                                        id={n.id}
+                                        medias={n.sections[0].medias}
+                                        src={n.sections && n.sections.find(section => !!section.medias[0]
+                                        ) ? n.sections.find(section => section.medias[0]).medias[0].url :
+                                            'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
 
-                                    subTitle={refactorParaLength(n.sections[0].description)}
-                                    title={n.sections[0].title}
-                                    author={n.authors.length>0?n.authors[0].name.first + ' ' + n.authors[0].name.last:'no authors'}
-                                    postDate={n.postDate}
-                                    comments={0}
-                                />
-                            </Grid>):
+                                        subTitle={refactorParaLength(n.sections[0].description)}
+                                        title={n.sections[0].title}
+                                        author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
+                                        postDate={n.postDate}
+                                        comments={0}
+                                    />
+                                </Grid>) :
 
 
                             <Typography variant={'subheading'}> there are no posts available yet</Typography>
-
-
-
 
 
                             : <LoadingPage/>}

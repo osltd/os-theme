@@ -13,7 +13,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
-import logo from '../../constants/img/logo.png'
+
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
@@ -126,10 +126,10 @@ class Header extends React.Component {
     getInputBar = () =>
         <Input
             onKeyDown={e =>
-                (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword,this.props.history) : null
+                (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword, this.props.history) : null
             }
             onChange={e => this.setState({keyword: e.target.value})}
-disableUnderline={true}
+            disableUnderline={true}
             placeholder="Search…"
             classes={{
                 root: this.props.classes.inputRoot,
@@ -152,36 +152,36 @@ disableUnderline={true}
         if (isWidthUp('md', width)) {
 
             return (
-                <AppBar position="fixed" className={classes.appBar} style={{ boxShadow: 'none' }}>
+                <AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
                     <Grid container alignItems={'center'} justify={'space-between'}>
                         <Grid item xs={1}>
                             <img
                                 className={classes.logo}
-                                onClick={() =>redirectUrl('/',this.props.history)}
-                                src={/localhost/i.test(window.location.hostname) ? 'https://myshop.test.ocs.zone/logo.png' :'/logo.png'}
+                                onClick={() => redirectUrl('/', this.props.history)}
+                                src={/localhost/i.test(window.location.hostname) ? 'https://myshop.test.ocs.zone/logo.png' : '/logo.png'}
                             />
                         </Grid>
                         <Grid item xs={6} container>
                             {
-                                hasProductsToShow    && <Grid item>
+                                hasProductsToShow && <Grid item>
                                     <Button
-                                        onClick={()=>redirectUrl('/products',this.props.history)}
+                                        onClick={() => redirectUrl('/products', this.props.history)}
                                         value={'products'}
                                     />
                                 </Grid>
                             }
-                                {
-                                    hasFeedsToShow &&
-                                    <Grid item>
-                                        <Button
-                                        onClick={()=>redirectUrl('/feeds',this.props.history)}
+                            {
+                                hasFeedsToShow &&
+                                <Grid item>
+                                    <Button
+                                        onClick={() => redirectUrl('/feeds', this.props.history)}
                                         value={'feeds'}
                                     />
-                                    </Grid>
-                                }
-                            {(hasProductsToShow) &&     <Grid item>
+                                </Grid>
+                            }
+                            {(hasProductsToShow) && <Grid item>
                                 <Button
-                                    onClick={()=>redirectUrl('/checkout',this.props.history)}
+                                    onClick={() => redirectUrl('/checkout', this.props.history)}
 
                                     value={'checkout'}
                                 />
@@ -251,19 +251,19 @@ disableUnderline={true}
         return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
 
             <BottomNavigationAction label="Home" value="Home"
-                                    onClick={() => redirectUrl('/',this.props.history)}
+                                    onClick={() => redirectUrl('/', this.props.history)}
                                     icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
             <BottomNavigationAction label="Products" value="Products"
-                                    onClick={() => redirectUrl('/products',this.props.history)}
+                                    onClick={() => redirectUrl('/products', this.props.history)}
 
                                     icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
             <BottomNavigationAction label="Feeds" value="Feeds"
-                                    onClick={() => redirectUrl('/feeds',this.props.history)}
+                                    onClick={() => redirectUrl('/feeds', this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
             <BottomNavigationAction label="Checkout" value="Checkout"
-                                    onClick={() => redirectUrl('/checkout',this.props.history)}
+                                    onClick={() => redirectUrl('/checkout', this.props.history)}
                                     icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
 
         </BottomNavigation>
