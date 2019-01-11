@@ -90,7 +90,7 @@ class OrderSummary extends React.Component {
         }
         const {classes} = this.props
         redirectUrl('/loadingPage', this.props.history, false)
-conosle.log('loading.>>>>>')
+console.log('loading.>>>>>')
         await  agent.Checkout.placeOrder(data).then(res => {
 
             let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
