@@ -90,13 +90,11 @@ class OrderSummary extends React.Component {
         }
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
-            console.log('getting result')
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
             console.log(res.data.data.orders)
-            console.log('doing right')
             redirectUrl('/loadingPage', this.props.history, false)
 
             if (!res.data.data.orders) {
@@ -108,16 +106,17 @@ class OrderSummary extends React.Component {
 
                     return null
                 }
-
-                if (res.data.data.orders){
-                    if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
+let result = res.data.data.orders
+                if (result.length>0){
+                    //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
+                    console.log('gooooood')
                     swal({
 
                         content: (<Grid container direction={'column'}>
                             <Grid item>
                                 <Typography variant={'title'}>
                                     {
-                                        "your contact id is " + res.data.data.orders[0].id
+                                        "your contact id is " + result[0].id
 
                                     }
                                 </Typography>
@@ -169,19 +168,19 @@ class OrderSummary extends React.Component {
                                     Total amount
                                     is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
                                 </Typography>
-                                <Typography variant={'body1'}>
-                                    thanks for choosing {
-                                    selectShippingMethod.courier.name
-                                }.</Typography>
-                                <Typography variant={'body1'}>
+                                {/*<Typography variant={'body1'}>*/}
+                                    {/*thanks for choosing {*/}
+                                    {/*selectShippingMethod.courier.name*/}
+                                {/*}.</Typography>*/}
+                                {/*<Typography variant={'body1'}>*/}
 
-                                    the items will be there in {
-                                    selectShippingMethod.deliveryTime.min
+                                    {/*the items will be there in {*/}
+                                    {/*selectShippingMethod.deliveryTime.min*/}
 
-                                } to {
-                                    selectShippingMethod.deliveryTime.max
+                                {/*} to {*/}
+                                    {/*selectShippingMethod.deliveryTime.max*/}
 
-                                } days</Typography>
+                                {/*} days</Typography>*/}
                             </Grid>
                         </Grid>)
                     });

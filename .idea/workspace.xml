@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,13 +42,12 @@
       <file leaf-file-name="OrderSummary.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
+            <state relative-caret-position="304">
+              <caret line="176" column="50" selection-start-line="176" selection-start-column="50" selection-end-line="176" selection-end-column="50" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#2178#2930#0" />
                 <element signature="e#2366#2437#0" />
-                <element signature="e#4115#4439#0" />
               </folding>
             </state>
           </provider>
@@ -404,7 +404,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="361252000" />
+    <option name="totallyTimeSpent" value="361530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -915,13 +915,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        <state relative-caret-position="304">
+          <caret line="176" column="50" selection-start-line="176" selection-start-column="50" selection-end-line="176" selection-end-column="50" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#2178#2930#0" />
             <element signature="e#2366#2437#0" />
-            <element signature="e#4115#4439#0" />
           </folding>
         </state>
       </provider>
