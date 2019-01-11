@@ -43,7 +43,6 @@ const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
         initApp: async (shoppingCart, products, token, user, category) => {
             console.log('user profile')
-            console.log(user)
             dispatch(
                 {
                     type: INIT_FEEDS,
@@ -80,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
             dispatch(
                 {
                     type: AUTH_INIT_USER_PROFILE,
-                    payload: user,
+                    payload:  user.data?user.data.data.consumers[0]:{},
 
                 }
             )

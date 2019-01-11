@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/icomoon.5c51136f.eot"
   },
   {
-    "revision": "bbe51033f56c93bd87b9",
+    "revision": "8c9017fae926fbc84666",
     "url": "/static/css/main.24e319b4.chunk.css"
   },
   {
@@ -24,10 +24,6 @@ self.__precacheManifest = [
     "url": "/static/media/slick.d41f55a7.ttf"
   },
   {
-    "revision": "ced611daf7709cc778da928fec876475",
-    "url": "/static/media/slick.ced611da.eot"
-  },
-  {
     "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
     "url": "/static/media/slick.b7c9e1e4.woff"
   },
@@ -36,43 +32,47 @@ self.__precacheManifest = [
     "url": "/static/media/slick.f97e3bbf.svg"
   },
   {
-    "revision": "bbe51033f56c93bd87b9",
-    "url": "/static/js/main.bbe51033.chunk.js"
+    "revision": "ced611daf7709cc778da928fec876475",
+    "url": "/static/media/slick.ced611da.eot"
   },
   {
-    "revision": "3e5ca811b15adb9c04782826962d481a",
-    "url": "/static/media/icomoon.3e5ca811.ttf"
+    "revision": "8c9017fae926fbc84666",
+    "url": "/static/js/main.8c9017fa.chunk.js"
   },
   {
     "revision": "3756585aa5a26bde8bb0fb46c39ff39a",
     "url": "/static/media/icomoon.3756585a.woff"
   },
   {
+    "revision": "3e5ca811b15adb9c04782826962d481a",
+    "url": "/static/media/icomoon.3e5ca811.ttf"
+  },
+  {
     "revision": "f221699afa1e028686d4d8c5976c1c7b",
     "url": "/static/media/icomoon.f221699a.svg"
-  },
-  {
-    "revision": "fee66e712a8a08eef5805a46892932ad",
-    "url": "/static/media/fontawesome-webfont.fee66e71.woff"
-  },
-  {
-    "revision": "b06871f281fee6b241d60582ae9369b9",
-    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
     "revision": "af7ae505a9eed503f8b8e6982036873e",
     "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
+    "revision": "fee66e712a8a08eef5805a46892932ad",
+    "url": "/static/media/fontawesome-webfont.fee66e71.woff"
+  },
+  {
     "revision": "674f50d287a8c48dc19ba404d20fe713",
     "url": "/static/media/fontawesome-webfont.674f50d2.eot"
+  },
+  {
+    "revision": "b06871f281fee6b241d60582ae9369b9",
+    "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
     "revision": "485aa9626d756ff61e74",
     "url": "/static/css/1.be4c0a6d.chunk.css"
   },
   {
-    "revision": "f0cfc542d0347ec123fe0582e654c14d",
+    "revision": "4545b17eff6c8a7d206b60b45196e58b",
     "url": "/index.html"
   }
 ];
