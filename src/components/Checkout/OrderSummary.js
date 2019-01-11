@@ -97,8 +97,8 @@ class OrderSummary extends React.Component {
                     ) : 'no shipping method provided'
                 console.log(res)
                 redirectUrl('/loadingPage', this.props.history, false)
-
-                if (result === undefined) {
+console.log(res.data.messages)
+                if (res.data.messages.length>0) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
