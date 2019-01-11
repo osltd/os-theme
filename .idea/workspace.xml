@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.ae41abc5.chunk.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/main.ae41abc5.chunk.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/lifestyle.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/category/lifestyle.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/sport.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/category/sport.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/tech.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/category/technology.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Products.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/Products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MainPage/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainPage/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Product/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/actionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/actionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/category.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Overview.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Overview.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/MainPage/Overview.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="150" column="45" lean-forward="true" selection-start-line="150" selection-start-column="45" selection-end-line="150" selection-end-column="45" />
+            <state relative-caret-position="266">
+              <caret line="87" column="71" selection-start-line="87" selection-start-column="71" selection-end-line="87" selection-end-column="71" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -41,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
-              <caret line="113" column="36" lean-forward="true" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+              <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -58,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Overview.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Overview.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Shop/Overview.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
@@ -75,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/src/agents/Products.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="77" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
+              <caret line="4" column="77" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -164,8 +152,8 @@
       <find>LoadingP</find>
       <find>img</find>
       <find>loadingImg</find>
-      <find>editProductFilter</find>
       <find>no pro</find>
+      <find>editProductFilter</find>
     </findStrings>
     <replaceStrings>
       <replace>redirectUrl(</replace>
@@ -222,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/agent.js" />
         <option value="$PROJECT_DIR$/src/components/Cart/CartTable.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/Header.js" />
-        <option value="$PROJECT_DIR$/src/components/MainPage/Overview.js" />
         <option value="$PROJECT_DIR$/src/agents/Products.js" />
         <option value="$PROJECT_DIR$/src/reducers/auth.js" />
         <option value="$PROJECT_DIR$/src/constants/actionType.js" />
@@ -231,6 +218,7 @@
         <option value="$PROJECT_DIR$/src/components/Product/Overview.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/components/Shop/Overview.js" />
+        <option value="$PROJECT_DIR$/src/components/MainPage/Overview.js" />
       </list>
     </option>
   </component>
@@ -248,7 +236,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="797" />
@@ -451,10 +439,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344078000" />
+    <option name="totallyTimeSpent" value="344893000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -863,27 +851,10 @@
     <entry file="file://$PROJECT_DIR$/public/img/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/agents/Products.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="77" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MainPage/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="150" column="45" lean-forward="true" selection-start-line="150" selection-start-column="45" selection-end-line="150" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
-          <caret line="113" column="36" lean-forward="true" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+          <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -891,16 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-17">
           <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="127" column="61" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,13 +874,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/Style.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/actionType.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="35" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Product/Overview.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -938,6 +892,40 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#5931#9776#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agents/Products.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="77" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/actionType.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="127" column="61" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MainPage/Overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="87" column="71" selection-start-line="87" selection-start-column="71" selection-end-line="87" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>

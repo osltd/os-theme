@@ -10,6 +10,7 @@ import LoadingPage from '../Layout/LoadingPage'
 import {isImgOnlySections, redirectUrl} from "../../api/ApiUtils";
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
+const FEATURED_PRODUCTS = 'featured'
 const styles = theme => {
     console.log(theme)
     return (
@@ -59,16 +60,17 @@ const mapDispatchToProps = dispatch => ({}
 
 class ResponsiveDialog extends React.Component {
 
-    getSlick = () => {
+    getSlick = (search = '') => {
+        let selectedProducts = search ? this.props.products.filter(n => n.tags.find(m => m === search)) : this.props.products
         if (
             isWidthUp('md', this.props.width)
-        ) return <MultiItems data={this.props.products}/>
+        ) return <MultiItems data={selectedProducts}/>
         if (
             isWidthUp('sm', this.props.width)
-        ) return <MultiItems data={this.props.products} size={3}/>
+        ) return <MultiItems data={selectedProducts} size={3}/>
         if (
             isWidthUp('xs', this.props.width)
-        ) return <MultiItems data={this.props.products} size={2}/>
+        ) return <MultiItems data={selectedProducts} size={2}/>
 
     }
 
@@ -77,103 +79,110 @@ class ResponsiveDialog extends React.Component {
         let latestArticle = this.props.feeds && this.props.feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3)
 
         let hasProductsToShow = (this.props.products && this.props.products.length > 0)
+
         let hasFeedsToShow = (this.props.feeds && this.props.feeds.length > 0)
-if (this.props.feeds===null && this.props.products===null) return      <LoadingPage/>
 
-      if   (!(hasProductsToShow) && !(hasFeedsToShow))
-          return <Grid  xs={12}>
-          <Carousel
-              data={new Array(3).fill(1)
-                  .map((n,i) => ({
-                      url:`img/init/photo${i+1}.jpeg`,
-                  }))}
+        let hasCategoryToShow = (this.props.category.length > 0)
 
-              title={[
-              'shops is under construction',
-                  'there is no products and feeds in this shops yet',
+        let hasSelectedProductsToShow = hasProductsToShow && this.props.products
+            .filter(n => n.tags.find(m => m === FEATURED_PRODUCTS)).length > 0
 
-                  'please wait']}
+        let getDataFromAPI = (this.props.feeds === null && this.props.products === null)
+        if (getDataFromAPI) return <LoadingPage/>
+
+        if (!(hasProductsToShow) && !(hasFeedsToShow))
+            return <Grid xs={12}>
+                <Carousel
+                    data={new Array(3).fill(1)
+                        .map((n, i) => ({
+                            url: `img/init/photo${i + 1}.jpeg`,
+                        }))}
+
+                    title={[
+                        'shops is under construction',
+                        'there is no products and feeds in this shops yet',
+
+                        'please wait']}
 
 
-          />
-      </Grid>
-
-
+                />
+            </Grid>
 
 
         return (
-                <Grid container alignItems={'flex-start'} justify={'center'}>
+            <Grid container alignItems={'flex-start'} justify={'center'}>
 
-                    {
+                {
 
-                        hasFeedsToShow && <Fragment>
+                    hasFeedsToShow && <Fragment>
 
-                            <Grid item xs={12}>
-                                <Carousel
-                                    data={latestArticle.map(n => n.sections[0].medias[0])}
-                                    title={latestArticle.map(n => n.sections[0].title) || ''}
-                                    onClick={() => redirectUrl(`/feeds/${latestArticle.id}`)}/>
-                            </Grid>
-
-
-                            <Grid item xs={12} style={{marginTop: 80}}>
-                                <FeedsWall
-                                    data={this.props.feeds.filter((n, i) => isImgOnlySections(n.sections))}
-                                />
-                            </Grid>
-                        </Fragment>
-
-                    }
-
-
-                    {/* ---------------- hot sale products ----------------*/}
-                    {
-                        hasProductsToShow && <section className={classes.section}>
-                            <div>
-                                <Typography variant={'display1'} className={classes.title}>
-                                    TOP INTERESTING
-                                </Typography>
-
-                            </div>
-
-                            <div>
-                                {this.getSlick()}
-                            </div>
-                        </section>
-                    }
-                    {/* ---------------- /hot sale products ----------------*/}
-
-                    {
-                        hasProductsToShow && <Grid item container alignItems={'center'} justify={'center'}
-                                                   className={classes.productCategory}>
-
-                            <Grid item xs={12} md={10} lg={10}>
-                                <CategoryOverviewBox
-
-                                    category={this.props.category}
-                                />
-                            </Grid>
-
+                        <Grid item xs={12}>
+                            <Carousel
+                                data={latestArticle.map(n => n.sections[0].medias[0])}
+                                title={latestArticle.map(n => n.sections[0].title) || ''}
+                                onClick={() => redirectUrl(`/feeds/${latestArticle.id}`)}/>
                         </Grid>
-                    }
-                    {
-
-                        hasProductsToShow && <section className={classes.section}>
-                            <Grid item>
-
-                                <Typography variant={'display1'} className={classes.title}>
-                                    FEATURE PRODUCTS
-                                </Typography>
-                            </Grid>
-
-                            <div>
-                                {this.getSlick()}
-                            </div>
-                        </section>
-                    }
 
 
-                </Grid>
+                        <Grid item xs={12} style={{marginTop: 80}}>
+                            <FeedsWall
+                                data={this.props.feeds.filter((n, i) => isImgOnlySections(n.sections))}
+                            />
+                        </Grid>
+                    </Fragment>
+
+                }
+
+
+                {/* ---------------- hot sale products ----------------*/}
+                {
+                    hasProductsToShow && <section className={classes.section}>
+                        <div>
+                            <Typography variant={'display1'} className={classes.title}>
+                                TOP INTERESTING
+                            </Typography>
+
+                        </div>
+
+                        <div>
+                            {this.getSlick()}
+                        </div>
+                    </section>
+                }
+                {/* ---------------- /hot sale products ----------------*/}
+
+                {
+                    hasCategoryToShow && <Grid item container alignItems={'center'} justify={'center'}
+                                               className={classes.productCategory}>
+
+                        <Grid item xs={12} md={10} lg={10}>
+                            <CategoryOverviewBox
+
+                                category={this.props.category}
+                            />
+                        </Grid>
+
+                    </Grid>
+                }
+                {
+
+                    hasSelectedProductsToShow &&
+                    <section className={classes.section}>
+                        <Grid item>
+
+                            <Typography variant={'display1'} className={classes.title}>
+                                FEATURE PRODUCTS
+                            </Typography>
+                        </Grid>
+
+                        <div>
+                            {this.getSlick(FEATURED_PRODUCTS)}
+                        </div>
+                    </section>
+                }
+
+
+            </Grid>
         );
     }
 }
