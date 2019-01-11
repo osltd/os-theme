@@ -96,18 +96,20 @@ class ResponsiveDialog extends React.Component {
 
 
                     {/* ---------------- hot sale products ----------------*/}
-                    <section className={classes.section}>
-                        <div>
-                            <Typography variant={'display1'} className={classes.title}>
-                                TOP INTERESTING
-                            </Typography>
+                    {
+                        this.props.products &&  <section className={classes.section}>
+                            <div>
+                                <Typography variant={'display1'} className={classes.title}>
+                                    TOP INTERESTING
+                                </Typography>
 
-                        </div>
+                            </div>
 
-                        <div>
-                            {this.getSlick()      }
-                        </div>
-                    </section>
+                            <div>
+                                {this.getSlick()      }
+                            </div>
+                        </section>
+                    }
                     {/* ---------------- /hot sale products ----------------*/}
 
 
@@ -130,7 +132,7 @@ class ResponsiveDialog extends React.Component {
                         </Grid>
 
                         <div>
-                            {this.getSlick()      }
+                            {this.getSlick()}
                         </div>
                     </section>
 

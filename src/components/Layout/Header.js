@@ -154,7 +154,7 @@ disableUnderline={true}
                             <img
                                 className={classes.logo}
                                 onClick={() =>redirectUrl('/',this.props.history)}
-                                src={logo}
+                                src={'/img/logo.png'}
                             />
                         </Grid>
                         <Grid item xs={6} container>
