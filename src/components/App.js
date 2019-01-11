@@ -14,7 +14,13 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
 import {connect} from "react-redux";
-import {CART_INIT_SHOPPING_CART,AUTH_INIT_USER_PROFILE,AUTH_INIT_TOKEN, INIT_FEEDS, INIT_PRODUCTS} from "../constants/actionType";
+import {
+    AUTH_INIT_TOKEN,
+    AUTH_INIT_USER_PROFILE,
+    CART_INIT_SHOPPING_CART,
+    INIT_FEEDS,
+    INIT_PRODUCTS
+} from "../constants/actionType";
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
@@ -34,7 +40,7 @@ const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: async (shoppingCart, products,token,user) => {
+        initApp: async (shoppingCart, products, token, user) => {
             dispatch(
                 {
                     type: INIT_PRODUCTS,
@@ -76,12 +82,12 @@ const mapDispatchToProps = dispatch => ({
 
 class App extends React.Component {
     componentDidMount() {
-        this.initApp().then(()=>null)
+        this.initApp().then(() => null)
     }
-    deleteId = (id=67)=>
-    {
+
+    deleteId = (id = 67) => {
         agent.Checkout.deleteProduct(id)
-     return    id===1?null:this.deleteId(id-1)
+        return id === 1 ? null : this.deleteId(id - 1)
 
     }
     getAllProducts = async (page = 1, products = []) => {
@@ -89,28 +95,23 @@ class App extends React.Component {
         return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
     initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts(),
-            localStorage.getItem('token'),
-            JSON.parse(localStorage.getItem('user'))
-
-
-
+        localStorage.getItem('token'),
+        JSON.parse(localStorage.getItem('user'))
     )
 
     render() {
         return (
             <BrowserRouter>
-                <Switch>
-                    <ScrollToTop>
-                        <ErrorBoundary>
-                            <Header/>
-                            <MyCredits/>
-
-                            <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
+                <ScrollToTop>
+                    <ErrorBoundary>
+                        <Header/>
+                        <MyCredits/>
+                        <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
+                            <Switch>
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/404'} component={NotFound}/>
                                 <Route exact path={'/login'} component={Login}/>
                                 <Route exact path={'/register'} component={Register}/>
-
                                 <Route exact path={'/products'} component={Shop}/>
                                 <Route exact path={'/feeds'} component={Feed}/>
                                 <Route exact path={'/feeds/:id'} component={FeedDetail}/>
@@ -120,11 +121,12 @@ class App extends React.Component {
                                 <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                                 <Route exact path={'/loadingPage'} component={LoadingPage}/>
                                 <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                            </div>
-                            <Footer/>
-                        </ErrorBoundary>
-                    </ScrollToTop>
-                </Switch>
+                                <Route component={NotFound}/>
+                            </Switch>
+                        </div>
+                        <Footer/>
+                    </ErrorBoundary>
+                </ScrollToTop>
             </BrowserRouter>
 
         )
