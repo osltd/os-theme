@@ -88,9 +88,9 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
-        redirectUrl('/loadingPage', this.props.history, false)
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
+            console.log('getting result')
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
@@ -198,7 +198,6 @@ class OrderSummary extends React.Component {
                 )
 
             }
-            this.props.history.goBack()
 
         })
 
