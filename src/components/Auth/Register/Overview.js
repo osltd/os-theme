@@ -65,9 +65,12 @@ class Login extends React.Component {
 
             }
         ).then(
-            res =>
-                swal(
-                    {
+            res => {
+                if (
+                    !res.data.result
+                ) {res.data.messages.map(n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar))
+                    return null}
+                swal({
 
                         content: (<Grid container alignItems={'center'} direction={'column'}>
                             <Grid item>
@@ -99,10 +102,11 @@ class Login extends React.Component {
 
                         </Grid>)
                     })
+            }
         ).catch(
-            err => err.response.data.messages.map(
+            err => (err.response) ? err.response.data.messages.map(
                 n => this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-            )
+            ) : null
         )
     }
 

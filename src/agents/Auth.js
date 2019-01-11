@@ -1,7 +1,7 @@
 import axios from "axios/index";
 
 const Auth = {
-    register: (newUser) => axios.post('/customers', newUser),
+    register: (newUser) => axios.post('/consumers', newUser),
     login: user => axios.post('/sessions', user),
     assignName:async (firstName,lastName)=>await axios.put('/consumers/session',{
         firstName:firstName,
