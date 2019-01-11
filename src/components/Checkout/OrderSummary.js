@@ -88,7 +88,6 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
-        console.log(data)
         redirectUrl('/loadingPage', this.props.history, false)
         const {classes} = this.props
         await  agent.Checkout.placeOrder(data).then(res => {
@@ -96,7 +95,7 @@ class OrderSummary extends React.Component {
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
-                if (res.data.result === false) {
+                if (!res.data.result) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -113,7 +112,7 @@ class OrderSummary extends React.Component {
                             <Grid item>
                                 <Typography variant={'title'}>
                                     {
-                                        "your contact id is " + res.data.data.orders[0].number
+                                        "your contact id is " + res.data.data.orders[0].id
 
                                     }
                                 </Typography>
