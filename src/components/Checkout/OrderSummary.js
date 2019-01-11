@@ -195,6 +195,7 @@ console.log(res.data.messages)
             }
         ).catch(err => {
             console.log('wrong one')
+            console.log(err)
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
                     this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
