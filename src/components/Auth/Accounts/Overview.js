@@ -115,8 +115,15 @@ class MyAccount extends React.Component {
                   justify={'center'}
                   alignItems={'center'}
             >
+                {
+                    console.log('this is user infomation')
+                }
+                {
+                    console.log(user)
+                }
+
                 <Grid item xs={12} className={classes.textAlign}>
-                    <Typography>{`${user.first_name} ${user.last_name} welcome back`}</Typography>
+                    <Typography>{`${user['first_name']} ${user['last_name']} welcome back`}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                     <CustomButton
