@@ -8,7 +8,7 @@ import {
 
 
 const defaultState = {
-    products: [],
+    products: null,
     viewMode: 'form',
     filter: {
         tag: null,
@@ -30,7 +30,7 @@ export default (state = defaultState, action) => {
         case INIT_PRODUCTS:
             return {
                 ...state,
-                products: action.payload,
+                products: action.payload?action.payload:[],
             }
 
         case EDIT_PRODUCT_VIEW_MODE:

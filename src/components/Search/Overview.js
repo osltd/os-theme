@@ -85,9 +85,9 @@ class SearchPage extends React.Component {
     render() {
 
         const {classes} = this.props
-        if (!this.props.products || !this.props.feeds) return <LoadingPage/>
-        const products = this.props.products && this.searchData(this.props.products)
-        const feeds = this.props.feeds && this.searchData(this.props.feeds)
+        if (!this.props.products &&  !this.props.feeds) return <LoadingPage/>
+        const products = this.props.products ? this.searchData(this.props.products):[]
+        const feeds = this.props.feeds ?this.searchData(this.props.feeds):[]
         const searchResultCount = products.length + feeds.length
 
         return (
@@ -157,7 +157,7 @@ class SearchPage extends React.Component {
 
                                 subTitle={refactorParaLength(n.sections[0].description)}
                                 title={n.sections[0].title}
-                                author={n.authors[0].name.first + ' ' + n.authors[0].name.last}
+                                author={n.authors[0]?n.authors[0].name.first + ' ' + n.authors[0].name.last:'no authors'}
                                 postDate={n.postDate}
                                 comments={0}
                             />

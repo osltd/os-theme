@@ -78,9 +78,9 @@ class ResponsiveDialog extends React.Component {
 
         let hasProductsToShow = (this.props.products && this.props.products.length > 0)
         let hasFeedsToShow = (this.props.feeds && this.props.feeds.length > 0)
-if (!(this.props.feeds && this.props.products)) return      <LoadingPage/>
+if (this.props.feeds===null && this.props.products===null) return      <LoadingPage/>
 
-      if   (!(hasProductsToShow && hasFeedsToShow))
+      if   (!(hasProductsToShow) && !(hasFeedsToShow))
           return <Grid  xs={12}>
           <Carousel
               data={new Array(3).fill(1)

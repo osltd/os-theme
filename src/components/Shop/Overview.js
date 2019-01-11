@@ -7,6 +7,8 @@ import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/WhiteDropDown'
+import LoadingPage from '../Layout/LoadingPage'
+
 import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {
     arrayToFilter,
@@ -81,6 +83,7 @@ class ShopOverview extends React.Component {
 
 
     sortData = () => {
+
         let data = Array.from(this.props.products)
         data = data.filter(n => (this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true)
         let sortBy = () => {
@@ -149,10 +152,10 @@ class ShopOverview extends React.Component {
 
     render() {
         const {classes} = this.props
+        if (this.props.products===null) return<LoadingPage/>
+
         const products = this.sortData()
         const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
-        console.log(products)
-
         return (
             <Grid container justify={'center'}>
                 <Grid item xs={12}>

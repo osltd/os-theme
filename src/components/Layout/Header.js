@@ -179,7 +179,7 @@ disableUnderline={true}
                                     />
                                     </Grid>
                                 }
-                            {(hasProductsToShow&&hasFeedsToShow) &&     <Grid item>
+                            {(hasProductsToShow) &&     <Grid item>
                                 <Button
                                     onClick={()=>redirectUrl('/checkout',this.props.history)}
 
@@ -201,19 +201,21 @@ disableUnderline={true}
                                             {this.getInputBar()}
                                         </div>
                                     </Grid>
-                                    <Grid item>
-                                        <PopUp
-                                            popUp={<DropDownList
-                                                data={this.props.shoppingCart}
-                                                onDelete={index => this.props.editShoppingCart(index)}
+                                    {
+                                        hasProductsToShow && <Grid item>
+                                            <PopUp
+                                                popUp={<DropDownList
+                                                    data={this.props.shoppingCart}
+                                                    onDelete={index => this.props.editShoppingCart(index)}
+                                                />
+                                                }
+                                                title={<Button
+                                                    value={'shopping cart'}
+                                                />}
                                             />
-                                            }
-                                            title={<Button
-                                                value={'shopping cart'}
-                                            />}
-                                        />
 
-                                    </Grid>
+                                        </Grid>
+                                    }
                                 </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'center'}>
 
                                     <Grid item>

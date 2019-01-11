@@ -21,7 +21,7 @@ export default (state = defaultState, action) => {
         case INIT_FEEDS: {
             return {
                 ...state,
-                feeds: action.payload?action.payload:[],
+                feeds:action.payload?action.payload:[],
             }
         }
         case FEED_EDIT_SORT: {

@@ -43,16 +43,17 @@ const mapDispatchToProps = dispatch => ({
         initApp: async (shoppingCart, products, token, user) => {
             dispatch(
                 {
-                    type: INIT_PRODUCTS,
-                    payload: products,
-                }
-            )
-            dispatch(
-                {
                     type: INIT_FEEDS,
                     payload: await agent.Feeds.initFeeds(),
                 }
             )
+            dispatch(
+                {
+                    type: INIT_PRODUCTS,
+                    payload: products,
+                }
+            )
+
             dispatch({
                 type: CART_INIT_SHOPPING_CART,
                 payload: shoppingCart,
