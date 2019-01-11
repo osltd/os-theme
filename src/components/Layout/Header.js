@@ -97,6 +97,8 @@ const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
     keyword: state.common.searchBar,
 
+    products: state.product.products,
+    feeds: state.feed.feeds,
 });
 
 
@@ -145,6 +147,8 @@ disableUnderline={true}
     render() {
         const {classes, width} = this.props;
         const {value} = this.state
+        let hasProductsToShow = (this.props.products && this.props.products.length > 0)
+        let hasFeedsToShow = (this.props.feeds && this.props.feeds.length > 0)
         if (isWidthUp('md', width)) {
 
             return (
@@ -158,25 +162,30 @@ disableUnderline={true}
                             />
                         </Grid>
                         <Grid item xs={6} container>
-                            <Grid item>
-                                <Button
-                                    onClick={()=>redirectUrl('/products',this.props.history)}
-                                    value={'products'}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <Button
-                                    onClick={()=>redirectUrl('/feeds',this.props.history)}
-                                    value={'feeds'}
-                                />
-                            </Grid>
-                            <Grid item>
+                            {
+                                hasProductsToShow    && <Grid item>
+                                    <Button
+                                        onClick={()=>redirectUrl('/products',this.props.history)}
+                                        value={'products'}
+                                    />
+                                </Grid>
+                            }
+                                {
+                                    hasFeedsToShow &&
+                                    <Grid item>
+                                        <Button
+                                        onClick={()=>redirectUrl('/feeds',this.props.history)}
+                                        value={'feeds'}
+                                    />
+                                    </Grid>
+                                }
+                            {(hasProductsToShow&&hasFeedsToShow) &&     <Grid item>
                                 <Button
                                     onClick={()=>redirectUrl('/checkout',this.props.history)}
 
                                     value={'checkout'}
                                 />
-                            </Grid>
+                            </Grid>}
                         </Grid>
                         {
                             (isWidthUp('lg', width)) ?

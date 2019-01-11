@@ -92,7 +92,7 @@ class App extends React.Component {
     }
     getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`)
-        return data.length > 0 ? this.getAllProducts(page + 1, _.concat(products, data)) : products
+        return (data && data.length > 0 )? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
     initApp = async () => this.props.initApp(JSON.parse(localStorage.getItem('shoppingCart')), await  this.getAllProducts(),
         localStorage.getItem('token'),

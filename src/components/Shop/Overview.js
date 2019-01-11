@@ -151,6 +151,8 @@ class ShopOverview extends React.Component {
         const {classes} = this.props
         const products = this.sortData()
         const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
+        console.log(products)
+
         return (
             <Grid container justify={'center'}>
                 <Grid item xs={12}>
@@ -159,7 +161,9 @@ class ShopOverview extends React.Component {
                         route={'home/shop'}
                     />
                 </Grid>
-                <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
+
+                {
+                    products.length>0 ? <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
                     {
                         isWidthUp('md', this.props.width) ?
                             <Grid item md={3}>
@@ -265,7 +269,12 @@ class ShopOverview extends React.Component {
                                 />))}
                         </Grid>
                     </Grid>
-                </Grid>
+                </Grid>:
+
+                        <Typography variant={'subheading'}> there are no products available yet</Typography>
+
+
+                }
             </Grid>
         );
     }
