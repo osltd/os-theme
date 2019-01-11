@@ -100,7 +100,7 @@ class Footer extends React.Component {
                         <Tag value={'gaming'}/>
                         <Tag value={'clothes'}/>
                         <Tag value={'iphoneX'}/>
-                        <Tag value={'Play Station'}/>
+                        <Tag value={'Play Station 4'}/>
                     </Grid>
                 </Grid>
 
