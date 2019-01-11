@@ -95,6 +95,8 @@ class OrderSummary extends React.Component {
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
+            console.log(res)
+            console.log('doing right')
                 if (!res.data.result) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
@@ -104,9 +106,10 @@ class OrderSummary extends React.Component {
 
                     return null
                 }
-                if (!(selectShippingMethod)) selectShippingMethod = this.props.billingDetail.shippingOptions[0]
-                swal(
-                    {
+
+                if (res.data.result){
+                    if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
+                    swal({
 
                         content: (<Grid container direction={'column'}>
                             <Grid item>
@@ -180,10 +183,12 @@ class OrderSummary extends React.Component {
                             </Grid>
                         </Grid>)
                     });
-                this.props.emptyShoppingCart()
+                    this.props.emptyShoppingCart()
 
-                this.props.emptyBillingDetail()
-                redirectUrl('/', this.props.history, false)
+                    this.props.emptyBillingDetail()
+                    redirectUrl('/', this.props.history, false)
+                }
+
 
             }
         ).catch(err => {
