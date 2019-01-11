@@ -97,7 +97,7 @@ class ResponsiveDialog extends React.Component {
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'subheading'}>
-                                        {feed.authors[0].name.first + ' ' + feed.authors[0].name.last}
+                                        {feed.authors.length>0?feed.authors[0].name.first + ' ' + feed.authors[0].name.last:'no authors'}
                                     </Typography>
                                 </Grid>
                                 <Grid item>

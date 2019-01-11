@@ -1,7 +1,7 @@
 import axios from "axios/index";
 
 const Feeds = {
-    initFeeds: feedsId => axios.get('/articles').then(res => res.data.data.articles).catch(err => console.log(err)),
+    initFeeds: feedsId => axios.get('/articles').then(res => res.data.data.posts).catch(err => console.log(err)),
 
 
 }
