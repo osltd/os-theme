@@ -72,7 +72,6 @@ class OrderSummary extends React.Component {
         const data = {
             "email": billingDetail.email,
             "address": billingDetail.address,
-            "phone": billingDetail.phone,
 
             "items": this.props.shoppingCart.map(n => ({
                     id: n.variantId, qty: n.number,
