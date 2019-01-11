@@ -95,11 +95,11 @@ class OrderSummary extends React.Component {
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
-            console.log(res)
+            console.log(res.data.data.orders)
             console.log('doing right')
             redirectUrl('/loadingPage', this.props.history, false)
 
-            if (!res.data.result) {
+            if (!res.data.data.orders) {
                     console.log('this is going wrong')
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -110,7 +110,6 @@ class OrderSummary extends React.Component {
                 }
 
                 if (res.data.data.orders){
-console.log('finaaaaaa')
                     if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                     swal({
 
