@@ -59,34 +59,26 @@ class Login extends React.Component {
                 console.log(res)
                 console.log('res')
                 if (!res.data.result) {
-               res.data.messages.map(n =>
+                    res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                     )
                     return null
                 }
                 if (res.data.result) {
                     console.log('assign acc')
-                        agent.Auth.assignName(this.state.email).then(
-                            res => console.log(res)
-                        )
+                    agent.Auth.assignName(this.state.email).then(
+                        res => console.log(res)
+                    )
                     console.log('get acc')
 
                     agent.Auth.getAccount().then(
                         res => console.log(res)
                     )
+                    swal(
+                        {
 
-                }
-                const auth = res.data.data.tokens[0]
-
-                localStorage.setItem('token', auth.token)
-                delete auth.token
-                localStorage.setItem('user', JSON.stringify(auth))
-
-                swal(
-                    {
-
-                        content: (<Grid container alignItems={'center'} direction={'column'}>
-                            <Grid item>
+                            content: (<Grid container alignItems={'center'} direction={'column'}>
+                                <Grid item>
                     <span className={'icon-like'}
 
                           style={{
@@ -102,22 +94,22 @@ class Login extends React.Component {
                               boxSizing: 'content-box',
                           }}
                     />
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'display1'}>
-                                    Welcome back!
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'subHeading'}>
-                                    {auth.name.nick} </Typography>
-                            </Grid>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant={'display1'}>
+                                        Welcome back!
+                                    </Typography>
+                                </Grid>
 
-                        </Grid>)
-                    })
-                setTimeout(
-                    () => redirectUrl('/', this.props.history), 1000
-                )
+                            </Grid>)
+                        })
+                    setTimeout(
+                        () => redirectUrl('/', this.props.history), 1000
+                    )
+
+
+                }
+
             }
         ).catch(err => {
                 if (err.response) {

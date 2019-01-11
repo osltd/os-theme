@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/icomoon.5c51136f.eot"
   },
   {
-    "revision": "6d2b26934201b2ad968b",
+    "revision": "4657546b2dd4ef0c6877",
     "url": "/static/css/main.24e319b4.chunk.css"
   },
   {
@@ -20,14 +20,6 @@ self.__precacheManifest = [
     "url": "/static/js/runtime~main.229c360f.js"
   },
   {
-    "revision": "d41f55a78e6f49a5512878df1737e58a",
-    "url": "/static/media/slick.d41f55a7.ttf"
-  },
-  {
-    "revision": "ced611daf7709cc778da928fec876475",
-    "url": "/static/media/slick.ced611da.eot"
-  },
-  {
     "revision": "f97e3bbf73254b0112091d0192f17aec",
     "url": "/static/media/slick.f97e3bbf.svg"
   },
@@ -36,20 +28,32 @@ self.__precacheManifest = [
     "url": "/static/media/slick.b7c9e1e4.woff"
   },
   {
-    "revision": "6d2b26934201b2ad968b",
-    "url": "/static/js/main.6d2b2693.chunk.js"
+    "revision": "d41f55a78e6f49a5512878df1737e58a",
+    "url": "/static/media/slick.d41f55a7.ttf"
+  },
+  {
+    "revision": "ced611daf7709cc778da928fec876475",
+    "url": "/static/media/slick.ced611da.eot"
+  },
+  {
+    "revision": "4657546b2dd4ef0c6877",
+    "url": "/static/js/main.4657546b.chunk.js"
   },
   {
     "revision": "3e5ca811b15adb9c04782826962d481a",
     "url": "/static/media/icomoon.3e5ca811.ttf"
   },
   {
+    "revision": "3756585aa5a26bde8bb0fb46c39ff39a",
+    "url": "/static/media/icomoon.3756585a.woff"
+  },
+  {
     "revision": "f221699afa1e028686d4d8c5976c1c7b",
     "url": "/static/media/icomoon.f221699a.svg"
   },
   {
-    "revision": "3756585aa5a26bde8bb0fb46c39ff39a",
-    "url": "/static/media/icomoon.3756585a.woff"
+    "revision": "af7ae505a9eed503f8b8e6982036873e",
+    "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
     "revision": "674f50d287a8c48dc19ba404d20fe713",
@@ -64,15 +68,11 @@ self.__precacheManifest = [
     "url": "/static/media/fontawesome-webfont.b06871f2.ttf"
   },
   {
-    "revision": "af7ae505a9eed503f8b8e6982036873e",
-    "url": "/static/media/fontawesome-webfont.af7ae505.woff2"
-  },
-  {
     "revision": "485aa9626d756ff61e74",
     "url": "/static/css/1.be4c0a6d.chunk.css"
   },
   {
-    "revision": "bb927584603186e41265a3a53558042c",
+    "revision": "13abb853b7cde95910e36d2bb31746e8",
     "url": "/index.html"
   }
 ];

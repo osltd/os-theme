@@ -79,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
             dispatch(
                 {
                     type: AUTH_INIT_USER_PROFILE,
-                    payload:  user.data?user.data.data.consumers[0]:{},
+                    payload:  (user.data&&user.data.data)?user.data.data.consumers[0]:{},
 
                 }
             )
