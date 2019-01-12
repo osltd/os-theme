@@ -29,7 +29,6 @@ import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
 import '../constants/Style.css'
 import SearchPage from './Search/Overview'
-import 'font-awesome/css/font-awesome.min.css'
 import _ from 'lodash'
 import NotFound from './Layout/NotFound'
 import MyCredits from './Layout/MyCredits'
@@ -107,7 +106,7 @@ class App extends React.Component {
         JSON.parse(localStorage.getItem('shoppingCart')),
         await  this.getAllProducts(),
         localStorage.getItem('token'),
-        await agent.Auth.getAccount().then(res=>res),
+        await agent.Auth.getAccount().then(res=>res).catch(err=>err),
         await this.initBusiness()
     )
 
