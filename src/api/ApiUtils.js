@@ -41,7 +41,6 @@ export const numberToPagination = (length, cb) => {
             onClick: () => cb(label)
         })
     }
-    console.log(result)
     return result
 
 }
@@ -79,7 +78,7 @@ export const getTagsCountsArray = (products, onClick) => {
 
 }
 
-export const getRoutePath = url => {
+export const getRoutePath = (url) => {
     url = url.split('/')
     let result = []
     url.map((n, i) => {

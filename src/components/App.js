@@ -12,7 +12,6 @@ import Product from './Product/Overview'
 import FeedDetail from './Feed/Detail'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import '../constants/icon/style.css'
 import {connect} from "react-redux";
 import {
     AUTH_INIT_TOKEN,
@@ -22,6 +21,7 @@ import {
     INIT_FEEDS,
     INIT_PRODUCTS
 } from "../constants/actionType";
+import '../constants/icon/style.css'
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'

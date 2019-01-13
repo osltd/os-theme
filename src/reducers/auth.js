@@ -7,9 +7,7 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-
     switch (action.type) {
-
         case AUTH_INIT_TOKEN: {
             return {
                 ...state,

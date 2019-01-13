@@ -4,7 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import {withRouter} from "react-router-dom";
-import {getRoutePath, redirectUrl} from "../../../api/ApiUtils";
+import {getRoutePath, redirectUrl} from "../../../api/test";
+
+
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const styles = theme => ({
