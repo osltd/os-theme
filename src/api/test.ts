@@ -8,8 +8,6 @@ export const refactorParaLength = (content:string, length :number = 45):string =
 interface routePath {
     label: string,
     link: string,
-
-
 }
 export const getRoutePath = (url :string):Array<routePath> => {
     let result :Array<routePath> = []
