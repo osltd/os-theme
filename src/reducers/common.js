@@ -3,7 +3,6 @@ import {COMMON_EDIT_SEARCH_BAR,COMMON_INIT_MY_CREDIT} from "../constants/actionT
 
 const defaultState = {
     searchBar: '',
-myCredit:null,
 };
 
 export default (state = defaultState, action) => {
@@ -18,12 +17,6 @@ export default (state = defaultState, action) => {
             }
         }
 
-        case COMMON_INIT_MY_CREDIT:{
-            return {
-                ...state,
-                searchBar: action.payload
-            }
-        }
         default:
             return state
     }

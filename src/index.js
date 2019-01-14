@@ -11,8 +11,7 @@ import {SnackbarProvider} from 'notistack';
 ReactDOM.render(
     <Provider store={store}>
             <MuiThemeProvider theme={theme}>
-                <SnackbarProvider maxSnack={3}>
-
+                <SnackbarProvider maxSnolack={3}>
                 <App/>
                 </SnackbarProvider>
             </MuiThemeProvider>

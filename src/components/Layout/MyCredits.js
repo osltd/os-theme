@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Button, Grid, Typography} from '@material-ui/core'
 import CustomButton from '../Widget/Button/BlackButton'
-import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR, COMMON_INIT_MY_CREDIT} from "../../constants/actionType";
+import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import Dialog from '../Widget/Dialog'
 import {redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
@@ -61,12 +61,6 @@ const mapDispatchToProps = dispatch => ({
             type: COMMON_EDIT_SEARCH_BAR,
             payload: keyword
         }),
-        putMyCreditToGeneral:(myCredit)=> dispatch(
-            {
-                type:COMMON_INIT_MY_CREDIT,
-                payload:myCredit,
-            }
-        )
     }
 
 )
@@ -176,9 +170,6 @@ class Header extends React.Component {
             keyword: ''
         };
     }
-componentDidMount(){
-        this.props.putMyCreditToGeneral(this.dialog)
-}
     render() {
         const {classes, width} = this.props;
         const {value} = this.state

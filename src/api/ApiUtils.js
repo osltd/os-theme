@@ -78,68 +78,6 @@ export const getTagsCountsArray = (products, onClick) => {
 
 }
 
-export const getRoutePath = (url) => {
-    url = url.split('/')
-    let result = []
-    url.map((n, i) => {
-        switch (true) {
-            case n === "":
-                if (i === 0) result.push(
-                    {
-                        label: 'home',
-                        link: '/',
-                    }
-                )
-                break
-
-            case n === 'feed':
-                result.push({
-                    label: n,
-                    link: '/feed',
-
-                })
-                break
-            case n === 'shop':
-                result.push({
-                    label: n,
-                    link: '/shop'
-                })
-                break
-            case n === 'checkout':
-                result.push({
-                    label: n,
-                    link: '/checkout'
-                })
-                break
-            case n === 'shoppingCart'.toLowerCase():
-                result.push({
-                    label: n,
-                    link: '/shoppingCart'
-                })
-                break
-            case !isNaN(n):
-                if (url[i - 1] === 'shop')
-                    result.push({
-
-                            label: 'singleProduct',
-                            link: '/products/' + n
-                        }
-                    )
-                if (url[i - 1] === 'feed')
-                    result.push({
-
-                            label: 'currentFeeds',
-                            link: '/feeds/' + n
-                        }
-                    )
-        }
-
-    })
-    return result
-
-
-}
-
 export const cartesian = (...arg) => {
     let r = [], max = arg.length - 1;
     const helper = (arr, i) => {
