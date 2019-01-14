@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import {number} from "prop-types";
 
 
 export const refactorParaLength = (content:string, length :number = 45):string =>

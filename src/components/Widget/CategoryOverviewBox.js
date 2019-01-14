@@ -90,9 +90,8 @@ const styles = theme => ({
     },
 });
 
-class ButtonBases extends React.Component {
-    render() {
-        const {classes, category} = this.props
+const  ButtonBases =(props)=> {
+        const {classes, category} = props
 
         return (
 
@@ -141,7 +140,6 @@ class ButtonBases extends React.Component {
                 ))}
             </Grid>
         );
-    }
 }
 
 ButtonBases.propTypes = {

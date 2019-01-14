@@ -144,12 +144,13 @@ class ShopOverview extends React.Component {
     />
 
     getPagination = (products) => {
-        if (products.length === 0) return false
+        if (products.length === 0) return null
 
         let options = numberToPagination(this.getProductProperty(products, 'length'),
             page => this.props.editProductSort('page', page))
-        if (this.props.sort.page === '') options[0].onClick(options[0].label)
+        //todo('have error of Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
 
+        if (this.props.sort.page === '') this.props.editProductSort('page', options[0].label)
         return (<WhiteDropDown
             options={options}
             selectedValue={this.props.sort.page}
@@ -164,7 +165,7 @@ class ShopOverview extends React.Component {
             }</strong> category yet</Typography>
 
 
-        }
+         }
 
 
         return this.props.viewMode === 'form' ?

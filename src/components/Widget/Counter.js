@@ -29,10 +29,9 @@ const styles = theme => {
 
 }
 
-class Counter extends React.Component {
+const  Counter =(props)=> {
 
-    render() {
-        const {classes, number, onChange} = this.props;
+        const {classes, number, onChange} = props;
         return (
             <Grid container alignItems={'center'} className={classes.root}>
                 <Grid item>
@@ -47,7 +46,6 @@ class Counter extends React.Component {
                         onChange={e => onChange(e.target.value > 0 ? e.target.value : 1)}
                         type="number"
                         className={classes.input}
-
                         disableUnderline={true}
                     />
                 </Grid>
@@ -60,9 +58,9 @@ class Counter extends React.Component {
             </Grid>
         )
     }
-}
 
 Counter.propTypes = {
+    number: PropTypes.number.isRequired,
     classes: PropTypes.object.isRequired,
 };
 
