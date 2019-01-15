@@ -8,12 +8,16 @@ import {store} from './store';
 import {Provider} from 'react-redux';
 import {SnackbarProvider} from 'notistack';
 
-ReactDOM.render(
-    <Provider store={store}>
-        <MuiThemeProvider theme={theme}>
-            <SnackbarProvider maxSnolack={3}>
-                <App/>
-            </SnackbarProvider>
-        </MuiThemeProvider>
-    </Provider>, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.createRoot(
+    document.getElementById('root')).render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <MuiThemeProvider theme={theme}>
+                <SnackbarProvider maxSnolack={3}>
+                    <App/>
+                </SnackbarProvider>
+            </MuiThemeProvider>
+        </Provider>
+    </React.StrictMode>
+)
+registerServiceWorker()

@@ -12,8 +12,8 @@ import {redirectUrl} from "../../api/ApiUtils";
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const FEATURED_PRODUCTS = 'featured'
-const styles = theme => (
-        {
+
+const styles = theme => ({
             section: {
                 width: '100%',
                 margin: '0 80px'
@@ -44,14 +44,11 @@ const styles = theme => (
 
         })
 
-
-
 const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
 });
-
 
 const mapDispatchToProps = dispatch => ({}
 )

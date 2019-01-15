@@ -56,73 +56,53 @@ export default (state = defaultState, action) => {
                 shoppingCart: shoppingCart,
             }
         }
-
-
         case CART_INIT_SHOPPING_CART: {
             if(!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
-
             return {
                 ...state,
                 shoppingCart: action.payload ? action.payload : []
             }
-
         }
         case  CART_EMPTY_PRODUCT_VARIANT: {
-
             return {
                 ...state,
                 variant: {},
             }
-
         }
         case CART_OPERATE_SHOPPING_CART: {
             let shoppingCart = Array.from(state.shoppingCart)
             switch (action.payload.key) {
                 case 'remove':
-
                     shoppingCart.splice(action.payload.value, 1)
-
                     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
-
                     return {
                         ...state,
                         shoppingCart: shoppingCart,
-
                     }
                 default:
                     const {index, count} = action.payload.value
                     shoppingCart[index].number = count
                     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
-
                     return {
                         ...state,
                         shoppingCart: shoppingCart,
-
                     }
-
             }
         }
         case CART_EDIT_BILLING_DETAIL: {
             let billingDetail = Object.assign({}, state.billingDetail)
             const {key, value} = action.payload
             billingDetail[key] = value
-
             return {
                 ...state,
                 billingDetail: billingDetail,
-
             }
-
-
         }
         case     CART_EMPTY_BILLING_DETAIL:{
             return {
                 ...state,
                 billingDetail: {},
-
             }
-
-
         }
         default:
             return state
