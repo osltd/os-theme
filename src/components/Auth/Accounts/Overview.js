@@ -44,21 +44,14 @@ const mapStateToProps = state => ({
     user: state.auth.user,
 });
 
+const logout = (props) => {
+    agent.Auth.logout().then(
+        res => {
 
-class MyAccount extends React.Component {
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
-    logout = () => {
-        localStorage.clear()
-        agent.Auth.logout().then(
-            res => {
-
-                swal(
-                    {
-
-                        content: (<Grid container alignItems={'center'} direction={'column'}>
-                            <Grid item>
+            swal(
+                {
+                    content: (<Grid container alignItems={'center'} direction={'column'}>
+                        <Grid item>
                     <span className={'icon-like'}
 
                           style={{
@@ -74,97 +67,76 @@ class MyAccount extends React.Component {
                               boxSizing: 'content-box',
                           }}
                     />
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'display1'}>
-                                    You have successfully logout!
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'subHeading'}>
-                                    see you </Typography>
-                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'display1'}>
+                                You have successfully logout!
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'subHeading'}>
+                                see you </Typography>
+                        </Grid>
 
-                        </Grid>)
-                    })
-                setTimeout(
-                    () => redirectUrl('/', this.props.history)
-                    , 1000
-                )
-            }
-        ).catch(err => console.log(err))
-    }
+                    </Grid>)
+                })
+            setTimeout(() => redirectUrl('/', props.history), 1000)
+        }
+    ).catch(err => console.log(err))
+}
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            keyword: ''
-        };
-    }
+const MyAccount = (props) => {
+    const {classes, width, user} = props;
+    return (!_.isEmpty(user)) ?
 
-    componentDidMount() {
-    }
+        <Grid container
+              className={classes.dialog}
+              justify={'center'}
+              alignItems={'center'}
+        >
 
-    render() {
-
-        const {classes, width, user} = this.props;
-        return (!_.isEmpty(user)) ?
+            <Grid item xs={12} className={classes.textAlign}>
+                <Typography>{`${user['first_name']} ${user['last_name']} welcome back`}</Typography>
+            </Grid>
+            <Grid item xs={8}>
+                <CustomButton
+                    onClick={logout}
+                    value={'Logout'}
+                />
+            </Grid>
+        </Grid>
+        : (
 
             <Grid container
                   className={classes.dialog}
                   justify={'center'}
                   alignItems={'center'}
             >
-                {
-                    console.log('this is user infomation')
-                }
-                {
-                    console.log(user)
-                }
 
                 <Grid item xs={12} className={classes.textAlign}>
-                    <Typography>{`${user['first_name']} ${user['last_name']} welcome back`}</Typography>
+                    <Typography>
+                        Log in or sign up to earn rewards today
+                    </Typography>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={4}>
                     <CustomButton
-                        onClick={this.logout}
-                        value={'Logout'}
+                        onClick={() => redirectUrl('/login')}
+                        value={'Log In'}
                     />
                 </Grid>
-            </Grid>
-            : (
+                <Grid item xs={1}/>
 
-                <Grid container
-                      className={classes.dialog}
-                      justify={'center'}
-                      alignItems={'center'}
-                >
+                <Grid item xs={4}>
 
-                    <Grid item xs={12} className={classes.textAlign}>
-                        <Typography>
-                            Log in or sign up to earn rewards today
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <CustomButton
-                            onClick={() => redirectUrl('/login')}
-                            value={'Log In'}
-                        />
-                    </Grid>
-                    <Grid item xs={1}/>
+                    <CustomButton
+                        onClick={() => redirectUrl('/register')}
 
-                    <Grid item xs={4}>
+                        value={'Register'}
+                    />
+                </Grid>
 
-                        <CustomButton
-                            onClick={() => redirectUrl('/register')}
+            </Grid>)
 
-                            value={'Register'}
-                        />
-                    </Grid>
-
-                </Grid>)
-
-    }
 }
 
 MyAccount.propTypes = {

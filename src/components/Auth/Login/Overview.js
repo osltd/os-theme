@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
@@ -49,34 +49,27 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 )
 
-class Login extends React.Component {
-    login = async () =>
+const Login = (props)=> {
+    const {classes, enqueueSnackbar,history} = props
+    const [email, setEmail] = useState('')
+    const [pwd, setPwd] = useState('')
+
+
+    const handleLoginProcess = async () =>
         await  agent.Auth.login({
-            email: this.state.email
-            , passwd: this.state.pwd
-        }).then(
-            res => {
-                console.log(res)
-                console.log('res')
+            email: email
+            , passwd: pwd
+        })
+            .then(res => {
                 if (!res.data.result) {
-                    res.data.messages.map(n =>
-                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-                    )
+                    res.data.messages.map(n => enqueueSnackbar(n, styleGuide.errorSnackbar))
                     return null
                 }
                 if (res.data.result) {
-                    console.log('assign acc')
-                    agent.Auth.assignName(this.state.email).then(
-                        res => console.log(res)
-                    )
-                    console.log('get acc')
-
-                    agent.Auth.getAccount().then(
-                        res => console.log(res)
-                    )
+                    //todo('pass user info to redux')
+                    agent.Auth.getAccount().then(res => console.log(res))
                     swal(
                         {
-
                             content: (<Grid container alignItems={'center'} direction={'column'}>
                                 <Grid item>
                     <span className={'icon-like'}
@@ -104,90 +97,74 @@ class Login extends React.Component {
                             </Grid>)
                         })
                     setTimeout(
-                        () => redirectUrl('/', this.props.history), 1000
+                        () => redirectUrl('/', history), 1000
                     )
 
 
                 }
 
-            }
-        ).catch(err => {
-                if (err.response) {
-                    err.response.data.messages.map(n =>
-                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-                    )
-                    this.setState(
-                        {
-                            pwd: ''
-                        }
-                    )
+            })
+            .catch(err => {
+                    if (err.response) {
+                        err.response.data.messages.map(n =>
+                            enqueueSnackbar(n, styleGuide.errorSnackbar)
+                        )
+                        setPwd('')
+                    }
                 }
+            )
 
-            }
-        )
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            email: '',
-            pwd: ''
-        }
-    }
+    return (
 
-    render() {
+        <Grid container className={classes.root} direction={'column'} alignItems={'center'}>
+            <Grid item container spacing={16} md={8} xs={12} lg={6} direction={'column'}
+                  className={classes.innerRoot}>
+                <Grid item>
+                    <Typography className={classes.title} variant={'display1'}>
+                        Login
 
-        const {classes} = this.props
-        return (
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Input
+                        placeholder={'email'}
+                        value={email}
+                        onChange={e => setEmail(e)}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Input
+                        type={'password'}
+                        placeholder={'password'}
+                        value={pwd}
+                        onChange={e => setPwd(e)}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography
+                        className={classes.blueUnderline}
+                        variant={'title'}>
+                        Forgot your password?
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        onClick={handleLoginProcess}
+                        value={'Sign In'}
+                    />
+                </Grid>
 
-            <Grid container className={classes.root} direction={'column'} alignItems={'center'}>
-                <Grid item container spacing={16} md={8} xs={12} lg={6} direction={'column'}
-                      className={classes.innerRoot}>
-                    <Grid item>
-                        <Typography className={classes.title} variant={'display1'}>
-                            Login
-
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Input
-                            placeholder={'email'}
-                            value={this.state.email}
-                            onChange={e => this.setState({email: e})}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Input
-                            type={'password'}
-                            placeholder={'password'}
-                            value={this.state.pwd}
-                            onChange={e => this.setState({pwd: e})}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography
-                            className={classes.blueUnderline}
-                            variant={'title'}>
-                            Forgot your password?
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            onClick={this.login}
-                            value={'Sign In'}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Typography
-                            onClick={() => redirectUrl('/', this.props.history)}
-                            className={classes.blueUnderline} variant={'title'}>
-                            Return to Store
-                        </Typography>
-                    </Grid>
+                <Grid item xs={12}>
+                    <Typography
+                        onClick={() => redirectUrl('/', history)}
+                        className={classes.blueUnderline} variant={'title'}>
+                        Return to Store
+                    </Typography>
                 </Grid>
             </Grid>
-        );
-    }
+        </Grid>
+    )
 }
 
 export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))))
