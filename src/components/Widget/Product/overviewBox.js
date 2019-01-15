@@ -1,7 +1,8 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, handleImgValid, redirectUrl} from "../../../api/ApiUtils";
+import {formatMoney, handleImgValid, } from "../../../api/ApiUtils";
+import {redirectUrl} from '../../../api/ApiUtils'
 import {withRouter} from "react-router-dom";
 import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
 

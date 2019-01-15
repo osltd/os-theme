@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button/Button'
@@ -119,157 +119,153 @@ const mapDispatchToProps = dispatch => ({
 
 )
 
-class Header extends React.Component {
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
-    getInputBar = () =>
+const Header = props => {
+    const [keyword, setKeyword] = useState('')
+const [navBar,setNavBar] =  useState('')
+    const {
+        history,
+        classes,
+        width,
+        products,
+        feeds,
+        shoppingCart,
+        editShoppingCart,
+
+
+    } = props
+    let getInputBar = () =>
         <Input
             onKeyDown={e =>
-                (e.key === 'Enter' && this.state.keyword) ? redirectUrl('/search/' + this.state.keyword, this.props.history) : null
+                (e.key === 'Enter' && keyword) ? redirectUrl('/search/' + keyword, history) : null
             }
-            onChange={e => this.setState({keyword: e.target.value})}
+            onChange={e => setKeyword(e.target.value)}
             disableUnderline={true}
             placeholder="Search…"
             classes={{
-                root: this.props.classes.inputRoot,
-                input: this.props.classes.inputInput,
+                root: classes.inputRoot,
+                input: classes.inputInput,
             }}
         />
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            keyword: ''
-        };
-    }
 
-    render() {
-        const {classes, width} = this.props;
-        const {value} = this.state
-        let hasProductsToShow = (this.props.products && this.props.products.length > 0)
-        let hasFeedsToShow = (this.props.feeds && this.props.feeds.length > 0)
-        if (isWidthUp('md', width)) {
-
-            return (
-                <AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
-                    <Grid container alignItems={'center'} justify={'space-between'}>
-                        <Grid item xs={1}>
-                            <img
-                                className={classes.logo}
-                                onClick={() => redirectUrl('/', this.props.history)}
-                                src={/localhost/i.test(window.location.hostname) ? 'https://myshop.test.ocs.zone/logo.png' : '/logo.png'}
-                            />
-                        </Grid>
-                        <Grid item xs={6} container>
-                            {
-                                hasProductsToShow && <Grid item>
-                                    <Button
-                                        onClick={() => redirectUrl('/products', this.props.history)}
-                                        value={'products'}
-                                    />
-                                </Grid>
-                            }
-                            {
-                                hasFeedsToShow &&
-                                <Grid item>
-                                    <Button
-                                        onClick={() => redirectUrl('/feeds', this.props.history)}
-                                        value={'feeds'}
-                                    />
-                                </Grid>
-                            }
-                            {(hasProductsToShow) && <Grid item>
-                                <Button
-                                    onClick={() => redirectUrl('/checkout', this.props.history)}
-
-                                    value={'checkout'}
-                                />
-                            </Grid>}
-                        </Grid>
+    let hasProductsToShow = (products && products.length > 0)
+    let hasFeedsToShow = (feeds && feeds.length > 0)
+    if (isWidthUp('md', width)) {return (<AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
+                <Grid container alignItems={'center'} justify={'space-between'}>
+                    <Grid item xs={1}>
+                        <img
+                            className={classes.logo}
+                            onClick={() => redirectUrl('/', history)}
+                            src={/localhost/i.test(window.location.hostname) ? 'https://myshop.test.ocs.zone/logo.png' : '/logo.png'}
+                        />
+                    </Grid>
+                    <Grid item xs={6} container>
                         {
-                            (isWidthUp('lg', width)) ?
-                                <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
+                            hasProductsToShow && <Grid item>
+                                <Button
+                                    onClick={() => redirectUrl('/products', history)}
+                                    value={'products'}
+                                />
+                            </Grid>
+                        }
+                        {
+                            hasFeedsToShow &&
+                            <Grid item>
+                                <Button
+                                    onClick={() => redirectUrl('/feeds',history)}
+                                    value={'feeds'}
+                                />
+                            </Grid>
+                        }
+                        {(hasProductsToShow) && <Grid item>
+                            <Button
+                                onClick={() => redirectUrl('/checkout', history)}
 
-                                    <Grid item>
-                                        <div className={classes.grow}/>
-                                        <div className={classes.search}>
-                                            <div className={classes.searchIcon}>
-                                                <SearchIcon/>
-                                            </div>
+                                value={'checkout'}
+                            />
+                        </Grid>}
+                    </Grid>
+                    {
+                        (isWidthUp('lg', width)) ?
+                            <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
 
-                                            {this.getInputBar()}
+                                <Grid item>
+                                    <div className={classes.grow}/>
+                                    <div className={classes.search}>
+                                        <div className={classes.searchIcon}>
+                                            <SearchIcon/>
                                         </div>
-                                    </Grid>
-                                    {
-                                        hasProductsToShow && <Grid item>
-                                            <PopUp
-                                                popUp={<DropDownList
-                                                    data={this.props.shoppingCart}
-                                                    onDelete={index => this.props.editShoppingCart(index)}
-                                                />
-                                                }
-                                                title={<Button
-                                                    value={'shopping cart'}
-                                                />}
-                                            />
-
-                                        </Grid>
-                                    }
-                                </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'center'}>
-
-                                    <Grid item>
-                                        <div className={classes.grow}/>
-                                        <div className={classes.search}>
-                                            <div className={classes.searchIcon}>
-                                                <SearchIcon/>
-                                            </div>
-                                            {this.getInputBar()}
-                                        </div>
-                                    </Grid>
-                                    <Grid item>
+                                        {getInputBar()}
+                                    </div>
+                                </Grid>
+                                {
+                                    hasProductsToShow && <Grid item>
                                         <PopUp
                                             popUp={<DropDownList
-                                                data={this.props.shoppingCart}
-                                                onDelete={index => this.props.editShoppingCart(index)}
-
+                                                data={shoppingCart}
+                                                onDelete={index => editShoppingCart(index)}
                                             />
                                             }
                                             title={<Button
-                                                icon={'icon-cart'}
+                                                value={'shopping cart'}
                                             />}
                                         />
 
                                     </Grid>
+                                }
+                            </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'center'}>
+
+                                <Grid item>
+                                    <div className={classes.grow}/>
+                                    <div className={classes.search}>
+                                        <div className={classes.searchIcon}>
+                                            <SearchIcon/>
+                                        </div>
+                                        {getInputBar()}
+                                    </div>
                                 </Grid>
-                        }
+                                <Grid item>
+                                    <PopUp
+                                        popUp={<DropDownList
+                                            data={shoppingCart}
+                                            onDelete={index => editShoppingCart(index)}
 
-                    </Grid>
-                </AppBar>)
+                                        />
+                                        }
+                                        title={<Button
+                                            icon={'icon-cart'}
+                                        />}
+                                    />
 
-        }
-        return <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
+                                </Grid>
+                            </Grid>
+                    }
 
-            <BottomNavigationAction label="Home" value="Home"
-                                    onClick={() => redirectUrl('/', this.props.history)}
-                                    icon={<span className={classNames('icon-home', classes.icon)}/>}/>
+                </Grid>
+            </AppBar>)}
 
-            <BottomNavigationAction label="Products" value="Products"
-                                    onClick={() => redirectUrl('/products', this.props.history)}
+    return <BottomNavigation value={navBar} onChange={(event, value) => setNavBar(value)
+    } className={classes.root}>
 
-                                    icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
+        <BottomNavigationAction label="Home" value="Home"
+                                onClick={() => redirectUrl('/',history)}
+                                icon={<span className={classNames('icon-home', classes.icon)}/>}/>
 
-            <BottomNavigationAction label="Feeds" value="Feeds"
-                                    onClick={() => redirectUrl('/feeds', this.props.history)}
-                                    icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
-            <BottomNavigationAction label="Checkout" value="Checkout"
-                                    onClick={() => redirectUrl('/checkout', this.props.history)}
-                                    icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
+        <BottomNavigationAction label="Products" value="Products"
+                                onClick={() => redirectUrl('/products', history)}
 
-        </BottomNavigation>
+                                icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
+
+        <BottomNavigationAction label="Feeds" value="Feeds"
+                                onClick={() => redirectUrl('/feeds',history)}
+                                icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
+        <BottomNavigationAction label="Checkout" value="Checkout"
+                                onClick={() => redirectUrl('/checkout', history)}
+                                icon={<span className={classNames(classes.icon, 'icon-coin-dollar')}/>}/>
+
+    </BottomNavigation>
 
 
-    }
 }
 
 Header.propTypes = {

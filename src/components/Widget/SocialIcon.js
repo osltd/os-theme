@@ -90,19 +90,10 @@ const styles = theme => ({
     }
 })
 
-class OutlinedInputAdornments extends React.Component {
-    state = {
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    };
+const SocialIcon = (props) => {
+    const {classes, type, onClick} = props
 
-    handleChange = prop => event => {
-        this.setState({[prop]: event.target.value});
-    };
-    getIconType = type => {
+    let getIconType = type => {
         switch (type) {
             case 'reddit':
                 return 'icon-reddit'
@@ -120,16 +111,15 @@ class OutlinedInputAdornments extends React.Component {
         }
     }
 
-    render() {
-        const {classes, type, onClick} = this.props;
 
-        return <div onClick={onClick} className={classNames(classes[type], classes.root, this.getIconType(type),)}/>
+    return <div onClick={onClick} className={classNames(classes[type], classes.root, getIconType(type),)}/>
 
-    }
 }
 
-OutlinedInputAdornments.propTypes = {
+SocialIcon.propTypes = {
+    type: PropTypes.oneOf(['reddit', 'youtube', 'twitter', 'facebook', 'whatsapp']),
+    onClick: PropTypes.func,
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(OutlinedInputAdornments);
+export default withStyles(styles)(SocialIcon);

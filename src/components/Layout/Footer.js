@@ -7,7 +7,7 @@ import FooterList from '../Widget/FooterList'
 import Tag from '../Widget/Tags/Tag'
 import SocialIcon from '../Widget/SocialIcon'
 import {connect} from "react-redux";
-import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
+import {redirectUrl,getTagsCountsArray} from "../../api/ApiUtils";
 import _ from 'lodash'
 
 const styles = theme => ({

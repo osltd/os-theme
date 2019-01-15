@@ -54,7 +54,6 @@ const mapDispatchToProps = dispatch => ({
             payload: {
                 key: 'remove',
                 value: index,
-
             }
         }),
         editSearchBar: (keyword = null) => dispatch({
@@ -65,12 +64,11 @@ const mapDispatchToProps = dispatch => ({
 
 )
 
-class Header extends React.Component {
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
-    logout = () => {
-        localStorage.clear()
+const MyCredits = props=>  {
+    const {classes, width,history} = props;
+
+    let  logout = () => {
+        const {history} = props;
 
         swal(
             {
@@ -106,16 +104,14 @@ class Header extends React.Component {
                 </Grid>)
             })
         setTimeout(
-            () => redirectUrl('/', this.props.history)
+            () => redirectUrl('/', history)
             , 1000
         )
     }
-    getDialog = () => {
+  let   getDialog = () => {
 
-        const {classes, width, user} = this.props;
-        return (!_.isEmpty(user)) ?
-
-            <Grid container
+        const {classes, width, user,history} = props;
+        return (!_.isEmpty(user)) ? <Grid container
                   className={classes.dialog}
                   justify={'center'}
                   alignItems={'center'}
@@ -125,14 +121,11 @@ class Header extends React.Component {
                 </Grid>
                 <Grid item xs={8}>
                     <CustomButton
-                        onClick={this.logout}
+                        onClick={logout}
                         value={'Logout'}
                     />
                 </Grid>
-            </Grid>
-            : (
-
-                <Grid container
+            </Grid> : <Grid container
                       className={classes.dialog}
                       justify={'center'}
                       alignItems={'center'}
@@ -145,7 +138,7 @@ class Header extends React.Component {
                     </Grid>
                     <Grid item xs={4}>
                         <CustomButton
-                            onClick={() => redirectUrl('/login')}
+                            onClick={() => redirectUrl('/login',history)}
                             value={'Log In'}
                         />
                     </Grid>
@@ -154,25 +147,16 @@ class Header extends React.Component {
                     <Grid item xs={4}>
 
                         <CustomButton
-                            onClick={() => redirectUrl('/register')}
+                            onClick={() => redirectUrl('/register',history)}
 
                             value={'Register'}
                         />
                     </Grid>
 
-                </Grid>)
+                </Grid>
 
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            keyword: ''
-        };
-    }
-    render() {
-        const {classes, width} = this.props;
-        const {value} = this.state
 
         return (
             <Grid container justify={'flex-end'} className={classes.root}>
@@ -187,12 +171,10 @@ class Header extends React.Component {
 
             </Grid>
         )
-
-    }
 }
 
-Header.propTypes = {
+MyCredits.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(MyCredits))))

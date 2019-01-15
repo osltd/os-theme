@@ -7,13 +7,12 @@ import MultiItems from '../Widget/Slick/MultiplyItems'
 import FeedsWall from '../Widget/FeedsWall/Wrapper'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 import LoadingPage from '../Layout/LoadingPage'
-import {isImgOnlySections, redirectUrl} from "../../api/ApiUtils";
+import {isImgOnlySections} from "../../api/ApiUtils";
+import {redirectUrl} from "../../api/ApiUtils";
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
 const FEATURED_PRODUCTS = 'featured'
-const styles = theme => {
-    console.log(theme)
-    return (
+const styles = theme => (
         {
             section: {
                 width: '100%',
@@ -45,7 +44,6 @@ const styles = theme => {
 
         })
 
-}
 
 
 const mapStateToProps = state => ({
@@ -59,6 +57,7 @@ const mapDispatchToProps = dispatch => ({}
 )
 
 class ResponsiveDialog extends React.Component {
+
 
     getSlick = (search = '') => {
         let selectedProducts = search ? this.props.products.filter(n => n.tags.find(m => m.toLowerCase() === search)) : this.props.products
@@ -165,11 +164,9 @@ class ResponsiveDialog extends React.Component {
                     </Grid>
                 }
                 {
-
                     hasSelectedProductsToShow &&
                     <section className={classes.section}>
                         <Grid item>
-
                             <Typography variant={'display1'} className={classes.title}>
                                 FEATURE PRODUCTS
                             </Typography>

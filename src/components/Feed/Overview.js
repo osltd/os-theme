@@ -6,8 +6,8 @@ import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
-import {getTagsCountsArray} from "../../api/ApiUtils";
-import {refactorParaLength} from "../../api/test"
+import {getTagsCountsArray,refactorParaLength} from "../../api/ApiUtils";
+
 
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'

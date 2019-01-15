@@ -1,47 +1,30 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useState} from 'react';
 import {Dialog} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 
 const styles = {}
 
-class ResponsiveDialog extends React.Component {
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
+const ResponsiveDialog = props => {
+    let myRef = React.createRef();
     //in parent
     //                                innerRef={e => this.popUp = e}
 //this.popUp.handleClose()
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
+    const [open, setOpen] = useState(false)
+    const {fullScreen, dialog, title} = props;
 
-    render() {
-        const {fullScreen, dialog, title} = this.props;
-
-        return (
-            <Fragment>
-                <span onClick={this.handleClickOpen}>{title}</span>
-                <Dialog
-                    fullScreen={fullScreen ? (fullScreen) : false}
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                >
-                    {dialog}
-                </Dialog>
-            </Fragment>
-        );
-    }
+    return (
+        <Fragment>
+            <span onClick={()=>setOpen(true)}>{title}</span>
+            <Dialog
+                fullScreen={fullScreen ? (fullScreen) : false}
+                open={open}
+                onClose={()=>setOpen(false)}
+            >
+                {dialog}
+            </Dialog>
+        </Fragment>
+    );
 }
 
 
-export default withStyles(styles)(ResponsiveDialog)
+export default (ResponsiveDialog)

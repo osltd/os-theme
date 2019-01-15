@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import {withRouter} from "react-router-dom";
-import {getRoutePath, redirectUrl} from "../../../api/test";
+import {getRoutePath, redirectUrl} from "../../../api/ApiUtils";
 
 
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
@@ -32,15 +32,11 @@ const styles = theme => ({
 
 });
 
-class BodyHeader extends React.Component {
+const BodyHeader =(props)=> {
 
 
-    componentDidMount() {
-    }
-
-    render() {
-        const {classes, title} = this.props;
-        const routePath = getRoutePath(this.props.match.url)
+        const {classes, title,width,history,match} = props;
+        const routePath = getRoutePath(match.url)
         return <Grid container
                      className={classes.root}
                      direction={'row'}
@@ -48,33 +44,30 @@ class BodyHeader extends React.Component {
                      justify={'center'}
         >
             <Grid item md={2}/>
-            <Grid item md={5} xs={12} container justify={isWidthUp('md', this.props.width) ? 'flex-start' : 'center'}>
+            <Grid item md={5} xs={12} container justify={isWidthUp('md',width) ? 'flex-start' : 'center'}>
                 <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
-            <Grid item md={3} xs={11} container justify={isWidthUp('md', this.props.width) ? 'flex-end' : 'center'}>
+            <Grid item md={3} xs={11} container justify={isWidthUp('md', width) ? 'flex-end' : 'center'}>
                 {routePath.map(
                     (n, i) =>
                         <Fragment key={i}>
                             <Grid item>
                                 <Typography variant={'body2'}
-                                            onClick={() => redirectUrl(n.link, this.props.history)}
+                                            onClick={() => redirectUrl(n.link, history)}
                                             className={classes.route} color={'secondary'}>{n.label}</Typography>
                             </Grid>
                             {i !== routePath.length - 1 &&
                             <Grid item>
                                 <Typography variant={'body2'}
-                                            onClick={() => redirectUrl(n.link, this.props.history)}
+                                            onClick={() => redirectUrl(n.link, history)}
                                             color={'secondary'}>/</Typography> </Grid>
                             }
                         </Fragment>
                 )}
             </Grid>
             <Grid item md={2}/>
-
-
         </Grid>
     }
-}
 
 BodyHeader.propTypes = {
 

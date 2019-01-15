@@ -6,6 +6,7 @@
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
     "@sweetalert/with-react": "^0.1.1",
+    "@types/history": "^4.7.2",
     "@types/jest": "^23.3.12",
     "@types/lodash": "^4.14.119",
     "@types/node": "^10.12.18",

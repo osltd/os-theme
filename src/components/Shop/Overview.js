@@ -16,8 +16,8 @@ import {
     handleImgValid,
     numberToPagination,
     refactorTextLength,
-    sort_by
 } from "../../api/ApiUtils";
+import {    sort_by} from '../../api/backup'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'

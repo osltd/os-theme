@@ -11,7 +11,6 @@ import {
 
 const defaultState = {
     shoppingCart: null,
-
     variant: {},
     billingDetail: {},
 };
@@ -60,7 +59,6 @@ export default (state = defaultState, action) => {
 
 
         case CART_INIT_SHOPPING_CART: {
-            console.log(action.payload)
             if(!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
 
             return {

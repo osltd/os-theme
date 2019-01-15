@@ -77,7 +77,7 @@ export const getTagsCountsArray = (products, onClick) => {
     return result
 
 }
-
+//cant ts
 export const cartesian = (...arg) => {
     let r = [], max = arg.length - 1;
     const helper = (arr, i) => {
@@ -93,6 +93,7 @@ export const cartesian = (...arg) => {
 
 export const getVariantOptions = variants => {
     let variantOverview = []
+    console.log(variants)
     variants.map(option => {
         option.description.split(',').forEach(opt => {
             opt = opt.split(':')
@@ -100,16 +101,13 @@ export const getVariantOptions = variants => {
             variantOverview[opt[0]].indexOf(opt[1]) < 0 && variantOverview[opt[0]].push(opt[1])
         });
     })
+    console.log(variantOverview)
+
     return variantOverview
 }
 export const isImgOnlySections = sections => (
     sections && sections[0].medias[0] && sections[0].medias[0].ext !== 'mp4'
     && (sections[0].medias[0].ext.indexOf('product') === -1
     ))
-
-export const redirectUrl = (url, history, reload = true) => {
-
-    (reload) ? window.location.href = url : history.push(url)
-}
 
 export const handleImgValid = img => img ? img.url?img.url:img:'/notFound/not-found-image.jpg'

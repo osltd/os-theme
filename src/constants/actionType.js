@@ -22,6 +22,8 @@ export const CATEGORY_INIT_CATEGORY='CATEGORY_INIT_CATEGORY'
 export const COMMON_INIT_MY_CREDIT='COMMON_INIT_MY_CREDIT'
 export const AUTH_INIT_USER_PROFILE='AUTH_INIT_USER_PROFILE'
 export const   COMMON_INIT_SEARCH_BAR = 'COMMON_INIT_SEARCH_BAR'
+
+
 export const gg = {
     "items": [{"qty": "9"}, {"id": 41, "qty": 1}],
     "contact": {

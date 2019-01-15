@@ -19,7 +19,6 @@ const styles = theme => ({
     },
     title: {
         paddingTop: '30px',
-
         textAlign: 'center',
     },
     innerRoot: {

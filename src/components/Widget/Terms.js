@@ -14,40 +14,32 @@ const styles = {
     checked: {},
 };
 
-class CheckboxLabels extends React.Component {
-    state = {
-        checkedG: false,
-    };
+const Terms = props => {
+    const {classes, checked, onChange,label} = props
+    return (
+        <FormControlLabel
+            control={
+                <Checkbox
+                    checked={checked}
+                    onChange={onChange}
+                    value="checkedG"
+                    classes={{
+                        root: classes.root,
+                        checked: classes.checked,
+                    }}
+                />
+            }
+            label={label?label:"I have read and agree to the website terms and conditions."}
+        />
 
-    handleChange = name => event => {
-        this.setState({[name]: event.target.checked});
-    };
-
-    render() {
-        const {classes, checked, onChange} = this.props;
-
-        return (
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={checked}
-                        onChange={onChange}
-                        value="checkedG"
-                        classes={{
-                            root: classes.root,
-                            checked: classes.checked,
-                        }}
-                    />
-                }
-                label="I have read and agree to the website terms and conditions."
-            />
-
-        );
-    }
+    )
 }
 
-CheckboxLabels.propTypes = {
+Terms.propTypes = {
+    checked: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
+    label: PropTypes.string,
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CheckboxLabels);
+export default withStyles(styles)(Terms);

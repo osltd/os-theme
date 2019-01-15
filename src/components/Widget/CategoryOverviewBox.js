@@ -91,7 +91,7 @@ const styles = theme => ({
 });
 
 const  ButtonBases =(props)=> {
-        const {classes, category} = props
+        const {classes,history, category} = props
 
         return (
 
@@ -101,7 +101,7 @@ const  ButtonBases =(props)=> {
                         key={i}
                         item sm={10} md={6} lg={4}
                         container
-                        onClick={() => redirectUrl(`/products?tags=${image.name}`, this.props.history)}
+                        onClick={() => redirectUrl(`/products?tags=${image.name}`, history)}
                         className={classes.items}
 
                     >

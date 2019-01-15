@@ -1,7 +1,8 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, redirectUrl, refactorParaLength} from "../../../api/ApiUtils";
+import {formatMoney, refactorParaLength} from "../../../api/ApiUtils";
+import {redirectUrl} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({

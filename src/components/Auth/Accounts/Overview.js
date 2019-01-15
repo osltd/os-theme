@@ -39,7 +39,6 @@ const styles = theme => ({
 
 })
 
-
 const mapStateToProps = state => ({
     user: state.auth.user,
 });
@@ -47,18 +46,16 @@ const mapStateToProps = state => ({
 const logout = (props) => {
     agent.Auth.logout().then(
         res => {
-
             swal(
                 {
                     content: (<Grid container alignItems={'center'} direction={'column'}>
                         <Grid item>
-                    <span className={'icon-like'}
-
-                          style={{
+                    <span
+                        className={'icon-like'}
+                        style={{
                               fontSize: '80px',
                               color: 'hsla(100,55%,69%,.5)',
                               padding: '20px',
-
                               display: 'block',
                               width: '80px',
                               height: '80px',
@@ -112,7 +109,6 @@ const MyAccount = (props) => {
                   justify={'center'}
                   alignItems={'center'}
             >
-
                 <Grid item xs={12} className={classes.textAlign}>
                     <Typography>
                         Log in or sign up to earn rewards today
@@ -121,11 +117,9 @@ const MyAccount = (props) => {
                 <Grid item xs={4}>
                     <CustomButton
                         onClick={() => redirectUrl('/login')}
-                        value={'Log In'}
-                    />
+                        value={'Log In'}/>
                 </Grid>
                 <Grid item xs={1}/>
-
                 <Grid item xs={4}>
 
                     <CustomButton

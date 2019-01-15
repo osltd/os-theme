@@ -14,18 +14,14 @@ const styles = theme => ({
 });
 
 
-class NotFound extends React.Component {
-    render() {
-        const {classes, msg} = this.props;
+const NotFound =props=> {
+        const {classes, msg} = props;
         return (
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
                 <Typography
                     variant={'subheading'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
-
-
             </Grid>);
     }
-}
 
 NotFound.propTypes = {
     classes: PropTypes.object.isRequired,

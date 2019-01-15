@@ -7,7 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, redirectUrl, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
+import {redirectUrl} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';

@@ -93,11 +93,6 @@ class App extends React.Component {
         return shops.find(n => n.id === 14).tags.split(',')
 
     }
-    deleteId = (id = 67) => {
-        agent.Checkout.deleteProduct(id)
-        return id === 1 ? null : this.deleteId(id - 1)
-
-    }
     getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`)
         return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products

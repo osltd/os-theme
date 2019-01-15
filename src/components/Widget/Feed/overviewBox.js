@@ -86,8 +86,7 @@ class ResponsiveDialog extends React.Component {
                             variant={'headline'} color={'primary'}>{title}</Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'caption'}>
-                            {'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
+                        <Typography variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>

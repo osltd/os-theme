@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
+import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
+import { redirectUrl} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
 
 const styles = theme => ({
