@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({}
 class Footer extends React.Component {
 
     getTags = () => {
+        //todo(handle err)
         const {products, feeds} = this.props
         let productsArr = getTagsCountsArray(products, () => console.log('ggg'))
         let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
@@ -45,6 +46,7 @@ class Footer extends React.Component {
         //
         // let allTags =_.uniq(productsTags.concat(feedsTags))
         console.log(productsTags)
+
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                 <Grid item>

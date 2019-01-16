@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
 import {
+    AUTH_INIT_TOKEN,
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
     CATEGORY_INIT_CATEGORY,
@@ -35,105 +36,77 @@ import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 
 
-const mapStateToProps = state => ({
-
-
-    products: state.product.products,
-});
+const mapStateToProps = state => ({});
 
 
 const mapDispatchToProps = dispatch => ({
-        initApp: (shoppingCart) => {
-            agent.Products.initProducts().then(res =>
-                dispatch(
-                    {
-                        type: INIT_PRODUCTS,
-                        payload: res.data.data.products,
-                    }
-                )
-            ).catch(err => dispatch(
-                {
-                    type: INIT_PRODUCTS,
-                    payload: [],
-                }
-            ))
-
-            agent.Feeds.initFeeds().then(res =>
-                dispatch(
-                    {
-                        type: INIT_FEEDS,
-                        payload: res.data.data.posts,
-                    }
-                )
-            ).catch(err => dispatch(
+        initApp: async (shoppingCart, products, token, user, category) => {
+            console.log('user profile')
+            dispatch(
                 {
                     type: INIT_FEEDS,
-                    payload: [],
+                    payload: await agent.Feeds.initFeeds(),
                 }
-            ))
-            agent.Auth.getAccount().then(user =>
-                dispatch(
-                    {
-                        type: AUTH_INIT_USER_PROFILE,
-                        payload: (user.data && user.data.data) ? user.data.data.consumers[0] : {},
-                    }
-                )
-            ).catch(err => dispatch(
-                {
-                    type: AUTH_INIT_USER_PROFILE,
-                    payload: {},
-
-                }
-            ))
-            agent.Products.initBusiness().then(res =>
-                dispatch(
-                    {
-                        type: CATEGORY_INIT_CATEGORY,
-                        payload: res.data.data.businesses.find(n => n.id === 14).tags.split(','),
-                    }
-                )
-            ).catch(err =>
-                dispatch(
-                    {
-                        type: CATEGORY_INIT_CATEGORY,
-                        payload: []
-                    }
-                )
             )
-
-            dispatch({
-                type: CART_INIT_SHOPPING_CART,
-                payload: shoppingCart,
-            })
-
-
-        },
-        finishLoadingProducts: products =>
             dispatch(
                 {
                     type: INIT_PRODUCTS,
                     payload: products,
                 }
             )
+            dispatch(
+                {
+                    type: CATEGORY_INIT_CATEGORY,
+                    payload: category,
+                }
+            )
+            dispatch({
+                type: CART_INIT_SHOPPING_CART,
+                payload: shoppingCart,
+            })
+
+            //todo('check the token valid  IF VALIDED')
+            dispatch(
+                {
+                    type: AUTH_INIT_TOKEN,
+                    payload: token,
+
+                }
+            )
+            //todo('if valid get user profile')
+
+            dispatch(
+                {
+                    type: AUTH_INIT_USER_PROFILE,
+                    payload:  (user.data&&user.data.data)?user.data.data.consumers[0]:{},
+
+                }
+            )
+        },
 
     }
 )
 
 class App extends React.Component {
-    getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
+    initBusiness = async () => {
+        let shops = await  agent.Products.initBusiness()
+        return shops.find(n => n.id === 14).tags.split(',')
+
+    }
+    getAllProducts = async  (page = 1, products = []) => {
+        let data = await  agent.Products.initProducts(`?page=${page}`)
         return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
-    initApp = async () =>  await  this.props.initApp(
+    initApp = async () => this.props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
+        await   this.getAllProducts(),
+        localStorage.getItem('token'),
+        agent.Auth.getAccount().then(res=>res).catch(err=>err),
+        this.initBusiness()
     )
 
     componentDidMount() {
-        this.initApp().then(
-        async () =>
-                this.props.finishLoadingProducts(
-                    await this.getAllProducts()
-                ))
+        this.initApp().then(() => null)
     }
 
     render() {
