@@ -14,7 +14,7 @@ ReactDOM.render(
         <ConnectedRouter history={history}>
 
         <MuiThemeProvider theme={theme}>
-            <SnackbarProvider maxSnolack={3}>
+            <SnackbarProvider maxSnack={3}>
                 <App/>
             </SnackbarProvider>
         </MuiThemeProvider>

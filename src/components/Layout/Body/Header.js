@@ -48,9 +48,7 @@ const BodyHeader =(props)=> {
                 <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
             <Grid item md={3} xs={11} container justify={isWidthUp('md', width) ? 'flex-end' : 'center'}>
-                {routePath.map(
-                    (n, i) =>
-                        <Fragment key={i}>
+                {routePath.map((n, i) => <Fragment key={i}>
                             <Grid item>
                                 <Typography variant={'body2'}
                                             onClick={() => redirectUrl(n.link, history)}
@@ -62,8 +60,7 @@ const BodyHeader =(props)=> {
                                             onClick={() => redirectUrl(n.link, history)}
                                             color={'secondary'}>/</Typography> </Grid>
                             }
-                        </Fragment>
-                )}
+                        </Fragment>)}
             </Grid>
             <Grid item md={2}/>
         </Grid>

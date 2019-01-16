@@ -10,6 +10,7 @@ import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
 import classNames from 'classnames'
+import * as styleGuide from "../../constants/styleGuide";
 
 const styles = theme => (
     {
@@ -130,3 +131,4 @@ const FeedDetail = (props) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FeedDetail))
+

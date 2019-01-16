@@ -50,9 +50,6 @@ class ConfirmPage extends React.Component {
 
     render() {
         const {classes, width} = this.props;
-        const {value} = this.state
-
-
         return (
             <Grid container alignItems={'center'} justify={'center'}>
 

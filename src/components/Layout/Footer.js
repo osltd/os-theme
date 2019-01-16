@@ -66,8 +66,6 @@ class Footer extends React.Component {
                 </Grid>
             </Grid>
         )
-
-
     }
 
     render() {

@@ -71,12 +71,7 @@ class ResponsiveDialog extends React.Component {
         const {classes} = this.props
         const feeds = (this.props.feeds) ?
             this.props.feeds.filter(n =>
-                (
-                    ((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) &&
-                    ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true)
-                )
-            ) : null
-
+                (((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) && ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true))) : null
         return (
 
             <Grid container justify={'center'}>

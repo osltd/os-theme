@@ -62,7 +62,7 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const {classes, placeholder, multiline, title, value, onChange, validation,} = this.props;
+        const {classes, placeholder, multiline, title, value, onChange,disabled, validation,} = this.props;
 
         return (<Grid container direction={'column'}>
                 <Typography variant={'subheading'}>{title}</Typography>
@@ -77,6 +77,7 @@ class OutlinedTextFields extends React.Component {
                             onChange={e => onChange(e.target.value)}
                         /> :
                         <Input
+                            disabled={(disabled)}
                             value={value ? value : ''}
                             className={classes.input}
                             rows={multiline ? 5 : 1}

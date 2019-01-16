@@ -10,7 +10,7 @@ import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
 import LoadingPage from '../Layout/LoadingPage'
 import {redirectUrl} from "../../api/ApiUtils";
-
+import PromoCode from './PromoCode'
 
 const styles = theme => ({
     productCategory: {
@@ -132,6 +132,13 @@ class ShopOverview extends React.Component {
                                 </Typography>
                                 <Divider/>
                                 <OrderSummary/>
+                                <Typography
+                                    className={classes.title}
+                                    variant={'display1'}>
+                                    Promo Code
+                                </Typography>
+                                <Divider/>
+                                <PromoCode/>
                             </Grid>
                             <Grid item xs={6}>
                                 <Typography

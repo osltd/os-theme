@@ -77,6 +77,7 @@ class OrderSummary extends React.Component {
                 })
             )
             ,
+            "coupons":billingDetail.coupons?billingDetail.coupons.code:'',
             "contact": {
                 "name": {"first": billingDetail.firstName, "last": billingDetail.lastName},
                 "city": billingDetail.city,
@@ -88,17 +89,15 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         }
+        console.log(data)
         const {classes} = this.props
         redirectUrl('/loadingPage', this.props.history, false)
 
         await  agent.Checkout.placeOrder(data).then(res => {
-                console.log('this is the response')
-                console.log(res)
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
-                console.log(res)
                 if (typeof res.data === 'string') {
                     this.props.enqueueSnackbar(res.data+' please log in first'
                         , styleGuide.errorSnackbar)
@@ -169,11 +168,45 @@ class OrderSummary extends React.Component {
                                         </ListItem>)
 
                                 }
+                                {
+
+                                    this.props.billingDetail.coupons  && <ListItem
+
+                                >
+                                    <Grid container spacing={16} alignItems={'center'}>
+                                        <Grid item sm={3}>
+
+                                            <img
+                                                style={{width: '100%', minWidth: '50px'}}
+                                                src={'/img/checkout/coupon.png'}
+                                            />
+
+                                        </Grid>
+                                        <Grid item sm={9}>
+                                            <Typography variant={'body2'}>
+                                                {billingDetail.coupons.title}
+                                            </Typography>
+
+                                            <Typography variant={'caption'}>
+
+                                                {(billingDetail.coupons.type === 'FIXED') ? '-$ ' + formatMoney(billingDetail.coupons.discount) :
+                                                    `-${billingDetail.coupons.discount}%`}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </ListItem>
+                                }
                             </Grid>
                             <Grid item>
                                 <Typography variant={'body1'}>
                                     Total amount
-                                    is {'$ ' + formatMoney(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur), 0))}
+                                    is {'$ ' + formatMoney(
+
+                                        this.getDiscountedPrice(    this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur),
+                                            0 ),   billingDetail.coupons
+                                        )
+
+                                    )}
                                 </Typography>
                                 {/*<Typography variant={'body1'}>*/}
                                 {/*thanks for choosing {*/}
@@ -201,7 +234,6 @@ class OrderSummary extends React.Component {
 
             }
         ).catch(err => {
-            console.log('wrong.....')
             console.log(err)
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
@@ -214,6 +246,9 @@ class OrderSummary extends React.Component {
         })
 
     }
+    getDiscountedPrice = (amount,coupon)=>coupon ?((coupon.type==='FIXED')?amount-coupon.discount:amount*(1-coupon.discount*.01)):amount
+
+
 
     constructor(props) {
         super(props);
@@ -224,7 +259,7 @@ class OrderSummary extends React.Component {
     }
 
     render() {
-        const {classes, shoppingCart} = this.props;
+        const {classes, shoppingCart,billingDetail} = this.props;
         return (
             <Paper className={classes.root}>
                 <Table className={classes.table}>
@@ -235,17 +270,49 @@ class OrderSummary extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {shoppingCart.map((n, i) =>
-                            <TableRow key={i}>
-                                <TableCell className={classes.block}>
-                                    {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
-                                </TableCell>
-                                <TableCell className={classes.block} numeric>
-                                    {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
-                                </TableCell>
-                            </TableRow>)
+
+                         {shoppingCart.map((n, i) =>
+                        <TableRow key={i}>
+                            <TableCell className={classes.block}>
+                                {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
+                            </TableCell>
+                            <TableCell className={classes.block} numeric>
+                                {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
+                            </TableCell>
+                        </TableRow>)
+
+                    }
+
+                        {billingDetail.coupons && <TableRow >
+                            <TableCell className={classes.block}>
+                                {billingDetail.coupons.title}
+
+                            </TableCell>
+                            <TableCell className={classes.block} numeric>
+                                {(billingDetail.coupons.type==='FIXED')?'-$ ' + formatMoney(billingDetail.coupons.discount):
+                                `-${billingDetail.coupons.discount}%`}
+                            </TableCell>
+                        </TableRow>
+
 
                         }
+                            <TableRow >
+                                <TableCell className={classes.block}>
+                                    Total amount
+                                </TableCell>
+                                <TableCell className={classes.block} numeric>
+                                    {'$ ' + formatMoney(
+
+                                        this.getDiscountedPrice(    this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur),
+                                            0 ),   billingDetail.coupons
+                                        )
+
+                                    )}
+                                </TableCell>
+                            </TableRow>
+
+
+
 
                         <TableRow>
                             <TableCell colSpan={2}>

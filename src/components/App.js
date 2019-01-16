@@ -129,6 +129,7 @@ class App extends React.Component {
     )
 
     componentDidMount() {
+        agent.Checkout.getPromoCode()
         this.initApp().then(
         async () =>
                 this.props.finishLoadingProducts(
