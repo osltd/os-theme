@@ -4,16 +4,20 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme'
 import {MuiThemeProvider} from '@material-ui/core'
-import {store} from './store';
+import {history,store} from './store';
 import {Provider} from 'react-redux';
 import {SnackbarProvider} from 'notistack';
+import {ConnectedRouter} from 'react-router-redux';
 
 ReactDOM.render(
     <Provider store={store}>
+        <ConnectedRouter history={history}>
+
         <MuiThemeProvider theme={theme}>
             <SnackbarProvider maxSnolack={3}>
                 <App/>
             </SnackbarProvider>
         </MuiThemeProvider>
+        </ConnectedRouter>
     </Provider>, document.getElementById('root'));
 registerServiceWorker()
