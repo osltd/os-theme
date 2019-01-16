@@ -93,16 +93,16 @@ class App extends React.Component {
         return shops.find(n => n.id === 14).tags.split(',')
 
     }
-    getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`)
+    getAllProducts = async  (page = 1, products = []) => {
+        let data = await  agent.Products.initProducts(`?page=${page}`)
         return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
     initApp = async () => this.props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
-        await  this.getAllProducts(),
+       await   this.getAllProducts(),
         localStorage.getItem('token'),
-        await agent.Auth.getAccount().then(res=>res).catch(err=>err),
-        await this.initBusiness()
+      agent.Auth.getAccount().then(res=>res).catch(err=>err),
+          this.initBusiness()
     )
 
     componentDidMount() {

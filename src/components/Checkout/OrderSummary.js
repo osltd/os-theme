@@ -7,8 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
-import {redirectUrl} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, redirectUrl, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -91,16 +90,22 @@ class OrderSummary extends React.Component {
         }
         const {classes} = this.props
         redirectUrl('/loadingPage', this.props.history, false)
-console.log('loading.>>>>>')
-        await  agent.Checkout.placeOrder(data).then(res => {
 
-            let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
+        await  agent.Checkout.placeOrder(data).then(res => {
+                console.log('this is the response')
+                console.log(res)
+                let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided'
                 console.log(res)
-                if (res.data&& res.data.messages&&  res.data.messages.length>0) {
-                    console.log('this is going wrong')
+                if (typeof res.data === 'string') {
+                    this.props.enqueueSnackbar(res.data+' please log in first'
+                        , styleGuide.errorSnackbar)
+                    this.props.history.goBack()
+                    return null
+                }
+                if (res.data && res.data.messages && res.data.messages.length > 0) {
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                     )
@@ -126,7 +131,7 @@ console.log('loading.>>>>>')
                             <Grid item>
                                 <Typography variant={'body2'}>
                                     {
-                                     false &&    " your contact number is " + this.props.billingDetail.phone
+                                        false && " your contact number is " + this.props.billingDetail.phone
                                     }
                                 </Typography>
                             </Grid>

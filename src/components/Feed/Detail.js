@@ -62,7 +62,7 @@ const FeedDetail = (props) => {
                 <Grid item container spacing={16} xs={12} lg={10}>
                     {
                         false && <Grid item container alignItems={'center'} xs={12}
-                                       onClick={() => redirectUrl('/feed')}
+                                       onClick={() => redirectUrl('/feed',history)}
                                        className={classes.backArrow}>
                             <span
                                 className={classNames('icon-circle-left', classes.backIcon)}/>

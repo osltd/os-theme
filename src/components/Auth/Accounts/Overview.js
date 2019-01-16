@@ -83,7 +83,7 @@ const logout = (props) => {
 }
 
 const MyAccount = (props) => {
-    const {classes, width, user} = props;
+    const {classes, width, user,history} = props;
     return (!_.isEmpty(user)) ?
 
         <Grid container
@@ -116,14 +116,14 @@ const MyAccount = (props) => {
                 </Grid>
                 <Grid item xs={4}>
                     <CustomButton
-                        onClick={() => redirectUrl('/login')}
+                        onClick={() => redirectUrl('/login',history)}
                         value={'Log In'}/>
                 </Grid>
                 <Grid item xs={1}/>
                 <Grid item xs={4}>
 
                     <CustomButton
-                        onClick={() => redirectUrl('/register')}
+                        onClick={() => redirectUrl('/register',history)}
 
                         value={'Register'}
                     />
