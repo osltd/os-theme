@@ -166,10 +166,9 @@ const PromoCode = props => {
                                 variant={'body1'} color={'primary'}
                             >
                                 {(coupons) ?
-                                    `Promo Code value is ${coupons.discount},\r
-                                      expire date is ${coupons.end_time},\r
-                                    you need to buy${coupons.requirements.items} \r
-                                 items and reach HKD ${coupons.requirements.amount} to use it` : 'no Promo available'
+                                    `
+                                                                        Promo Code valid
+                             ` : 'no Promo code available'
                                 }
                             </Typography>
                         </TableCell>
