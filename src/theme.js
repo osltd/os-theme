@@ -16,6 +16,7 @@ const theme = createMuiTheme({
 
             extendedFab: { // Name of the rule
 boxShadow:'none',
+
             },
         },},
     palette: {

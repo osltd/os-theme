@@ -167,8 +167,9 @@ const PromoCode = props => {
                             >
                                 {(coupons) ?
                                     `
-                                                                        Promo Code valid
-                             ` : 'no Promo code available'
+
+                                                                   Promo Code valid
+                           ` : 'no Promo code available'
                                 }
                             </Typography>
                         </TableCell>
