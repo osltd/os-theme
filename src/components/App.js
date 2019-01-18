@@ -85,20 +85,30 @@ const mapDispatchToProps = dispatch => ({
 
                 }
             ))
-            agent.Products.initBusiness().then(res =>
-                dispatch(
-                    {
-                        type: CATEGORY_INIT_CATEGORY,
-                        payload: res.data.data.businesses.find(n => n.id === 14).tags.split(','),
+            agent.Products.initBusiness().then(res => {
+
+                    if (res.data.data.shops) {
+
+                        dispatch(
+                            {
+                                type: CATEGORY_INIT_CATEGORY,
+                                payload: res.data.data.shops[0].tags.split(','),
+                            }
+                        )
+                        document.title = res.data.data.shops[0].name
                     }
-                )
-            ).catch(err =>
-                dispatch(
-                    {
-                        type: CATEGORY_INIT_CATEGORY,
-                        payload: []
-                    }
-                )
+                }
+            ).catch(err => {
+
+                    document.title = 'One Shop'
+
+                    dispatch(
+                        {
+                            type: CATEGORY_INIT_CATEGORY,
+                            payload: []
+                        }
+                    )
+                }
             )
 
             dispatch({
@@ -124,14 +134,14 @@ class App extends React.Component {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
         return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products
     }
-    initApp = async () =>  await  this.props.initApp(
+    initApp = async () => await  this.props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
     )
 
     componentDidMount() {
         agent.Checkout.getPromoCode()
         this.initApp().then(
-        async () =>
+            async () =>
                 this.props.finishLoadingProducts(
                     await this.getAllProducts()
                 ))
