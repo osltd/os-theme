@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import history from 'history'
-import {Clickable, RoutePath, VariantOptions} from "../interfaces/client/Common";
+import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Common";
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
 
@@ -166,3 +166,15 @@ export const isImgOnlySections = (sections: Array<Section>) => (
     && (sections[0].medias[0].ext.indexOf('product') === -1
     ))
 export const handleImgValid = (img: any): string => img ? img.url ? img.url : img : '/notFound/not-found-image.jpg'
+export const stringToTags = (string?:any):Array<Tag> =>
+{
+
+    console.log(string)
+ return   (string) ? (string.search(',') !== -1) ? _.uniq(_.split(string, ',')).filter(k => k !== '')
+    .map((n:any, i) =>
+    n = {
+        label: n,
+        value: n,
+    }) : [{label: string, value: string,}] : []
+
+}

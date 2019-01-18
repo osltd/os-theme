@@ -10,11 +10,12 @@ import {connect} from "react-redux";
 import {withSnackbar} from 'notistack';
 import agent from '../../agent'
 import InputBar from '../Widget/InputBar'
-
+import TagsSearchBar from '../Widget/Input/tag'
 import {withRouter} from "react-router-dom";
+import {stringToTags} from '../../api/ApiUtils'
 import * as styleGuide from "../../constants/styleGuide";
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
-
+import _ from 'lodash'
 const TAX_RATE = 0.07;
 
 const styles = theme => ({
@@ -159,6 +160,24 @@ const PromoCode = props => {
                                 variant={'outlined'} color={'primary'}
                             >Check</Button>
                         </TableCell>
+                    </TableRow>
+                    <TableRow>
+                   <TagsSearchBar
+                        defaultValue={
+                            stringToTags(promoCode)
+                        }
+                            onChange={value => setPromoCode( _.join(_.map(value, 'value'), ','))}
+
+
+
+
+
+
+                   />
+
+
+
+
                     </TableRow>
                     <TableRow>
                         <TableCell colSpan={2}>

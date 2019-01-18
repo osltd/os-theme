@@ -169,6 +169,7 @@ class App extends React.Component {
                                 <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                                 <Route exact path={'/loadingPage'} component={LoadingPage}/>
                                 <Route exact path={'/search/:keyword'} component={SearchPage}/>
+
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
