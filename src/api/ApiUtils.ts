@@ -3,6 +3,7 @@ import history from 'history'
 import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Common";
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
+import {Image} from "@material-ui/icons";
 
 export const refactorParaLength = (content: string, length: number = 45): string =>
     content.length > length ? content.slice(0, length).concat('...') : content

@@ -7,9 +7,11 @@ import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
 import InputBar from '../Widget/InputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
-import {withSnackbar} from 'notistack';
-const TAX_RATE = 0.07;
+import CountryCode from '../Widget/Input/Country'
 
+import {withSnackbar} from 'notistack';
+
+const TAX_RATE = 0.07;
 const styles = theme => ({
     root: {
         width: '100%',
@@ -189,15 +191,8 @@ class ShoppingCartTable extends React.Component {
                     />
 
                 </Grid>
+
                 <Grid item xs={6}>
-                    <InputBar
-                        title={'Phone Number'}
-                        placeholder={'Phone Number'}
-                        onChange={value => this.props.editBillingDetail('phone', value)}
-                        value={billingDetail.phone}
-                    />
-                </Grid>
-                <Grid item xs={4}>
                     <InputBar
                         title={'City'}
                         placeholder={'City'}
@@ -206,7 +201,7 @@ class ShoppingCartTable extends React.Component {
                         value={billingDetail.city}
                     />
 
-                </Grid> <Grid item xs={4}>
+                </Grid> <Grid item xs={6}>
                 <InputBar
                     title={'Country'}
                     placeholder={'Country'}
@@ -216,6 +211,18 @@ class ShoppingCartTable extends React.Component {
                 />
 
             </Grid>
+                <Grid item container alignItems={'center'} xs={12}>
+                    <Grid item xs={4}>
+                        <CountryCode/>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <InputBar
+                            placeholder={'Phone Number'}
+                            onChange={value => this.props.editBillingDetail('phone', value)}
+                            value={billingDetail.phone}
+                        />
+                    </Grid>
+                </Grid>
                 <Grid item xs={12}>
                     <InputBar
                         title={'Street Address'}
@@ -253,11 +260,14 @@ class ShoppingCartTable extends React.Component {
                             }
                         }
                         title={'visa number'}
-                        placeholder={'visa number'}
+                        placeholder={'please enter your visa number'}
+                        type="visa"
 
                         onChange={value => this.props.editBillingDetail('visaNumber', value)}
                         value={billingDetail.visaNumber}
+
                     />
+
                 </Grid>
 
                 <Grid item xs={6}>
@@ -287,6 +297,7 @@ class ShoppingCartTable extends React.Component {
                         value={billingDetail.cvc}
                     />
                 </Grid>
+
                 {
                     this.getShippingMethod()
                 }

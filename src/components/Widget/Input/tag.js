@@ -95,7 +95,6 @@ function Control(props) {
 
             InputProps={{
                 inputComponent,
-                disableUnderline: true,
                 startAdornment: <span className={'icon-search-16'} style={{margin: 'auto'}}/>,
 
                 inputProps: {

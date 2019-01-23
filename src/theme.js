@@ -8,17 +8,16 @@ const theme = createMuiTheme({
         ].join(','),
         fontSize: 14,
         display1: {
-        fontSize:'25px',
+            fontSize: '25px',
         },
     },
     overrides: {
         MuiButton: { // Name of the component ⚛️ / style sheet
-
             extendedFab: { // Name of the rule
-boxShadow:'none',
-
+                boxShadow: 'none',
             },
-        },},
+        },
+    },
     palette: {
         primary: {
             main: '#020103',

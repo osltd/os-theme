@@ -1,8 +1,13 @@
-import {COMMON_EDIT_SEARCH_BAR,COMMON_INIT_MY_CREDIT} from "../constants/actionType";
+import {COMMON_EDIT_SEARCH_BAR,COMMON_INIT_SHOP_INFO} from "../constants/actionType";
 
 
 const defaultState = {
-    searchBar: '',
+shopInfo:{
+
+},
+    searchBar:'',
+
+
 };
 
 export default (state = defaultState, action) => {
@@ -14,6 +19,12 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 searchBar: searchBar
+            }
+        }
+        case COMMON_INIT_SHOP_INFO: {
+            return {
+                ...state,
+                shopInfo: action.payload
             }
         }
 

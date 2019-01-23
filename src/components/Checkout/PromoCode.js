@@ -161,7 +161,9 @@ const PromoCode = props => {
                             >Check</Button>
                         </TableCell>
                     </TableRow>
-                    <TableRow>
+                    {
+                        false && <TableRow>
+
                    <TagsSearchBar
                         defaultValue={
                             stringToTags(promoCode)
@@ -175,10 +177,7 @@ const PromoCode = props => {
 
                    />
 
-
-
-
-                    </TableRow>
+                    </TableRow>}
                     <TableRow>
                         <TableCell colSpan={2}>
                             <Typography

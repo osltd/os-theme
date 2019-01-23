@@ -1,15 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Grid, Input, Typography} from '@material-ui/core';
-import Cleave from 'cleave.js/react'
+import {Grid, TextField} from '@material-ui/core';
+import NumberFormat from 'react-number-format';
+
+
+const NumberFormatCustom = props => {
+
+    const {inputRef, onChange,format, placeholder, ...other} = props;
+    console.log(props)
+    return (
+        <NumberFormat
+            {...other}
+            getInputRef={inputRef}
+            placeholder={placeholder}
+            onValueChange={values => {
+                onChange({
+                    target: {
+                        value: values.value,
+                    }
+                })
+            }}
+            format={format}
+        />
+    )
+
+}
+
+NumberFormatCustom.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 const styles = theme => ({
-    input: {
-        border: '1px solid ' + theme.palette.secondary.main,
-        padding: '10px',
-
-    }, cleave: {
+    input: {}, cleave: {
         fontSize: '18px',
         color: 'currentColor',
         margin: 0,
@@ -62,30 +86,31 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const {classes, placeholder, multiline, title, value, onChange,disabled, validation,} = this.props;
+        const {classes, placeholder, multiline, title, value, onChange, disabled, validation,format} = this.props;
 
         return (<Grid container direction={'column'}>
-                <Typography variant={'subheading'}>{title}</Typography>
+                {<TextField
+                    disabled={(disabled)}
+                    value={value ? value : ''}
+                    rows={multiline ? 5 : 1}
+                    className={classes.input}
+                    variant={'outlined'}
+                    onChange={e => onChange(e.target.value)}
+                    disableUnderline={true}
+                    label={title}
+                    placeholder={placeholder}
+                    format="#### #### #### ####"
 
-                {
-                    validation ?
-                        <Cleave
-                            value={value && value}
-                            className={classes.cleave}
-                            placeholder={placeholder}
-                            options={validation}
-                            onChange={e => onChange(e.target.value)}
-                        /> :
-                        <Input
-                            disabled={(disabled)}
-                            value={value ? value : ''}
-                            className={classes.input}
-                            rows={multiline ? 5 : 1}
-                            onChange={e => onChange(e.target.value)}
-                            disableUnderline={true}
-                            placeholder={placeholder}
-                            multiline={!!multiline}
-                        />
+                    InputProps={
+                        validation ? {
+                            inputComponent: NumberFormatCustom,
+                            inputProps: {
+                                format: '#### #### #### ####'
+                            },
+                        } : null
+                    }
+                    multiline={!!multiline}
+                />
 
                 }
 

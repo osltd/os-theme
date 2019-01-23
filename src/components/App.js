@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
 import {
+    COMMON_INIT_SHOP_INFO,
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
     CATEGORY_INIT_CATEGORY,
@@ -88,11 +89,17 @@ const mapDispatchToProps = dispatch => ({
             agent.Products.initBusiness().then(res => {
 
                     if (res.data.data.shops) {
-
+                        console.log(res.data.data)
                         dispatch(
                             {
                                 type: CATEGORY_INIT_CATEGORY,
                                 payload: res.data.data.shops[0].tags.split(','),
+                            }
+                        )
+                        dispatch(
+                            {
+                                type: COMMON_INIT_SHOP_INFO,
+                                payload: res.data.data.shops[0],
                             }
                         )
                         document.title = res.data.data.shops[0].name
