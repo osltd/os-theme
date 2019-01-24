@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Grid, TextField} from '@material-ui/core';
+import {Grid, TextField,InputAdornment} from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
 
 const NumberFormatCustom = props => {
 
     const {inputRef, onChange, placeholder, ...other} = props;
-    console.log(props)
     return (
         <NumberFormat
             {...other}
             getInputRef={inputRef}
             placeholder={placeholder}
             onValueChange={values => {
+                console.log(values)
                 onChange({
                     target: {
                         value: values.value,
@@ -98,14 +98,15 @@ class OutlinedTextFields extends React.Component {
                     disableUnderline={true}
                     label={title}
                     placeholder={placeholder}
-
                     InputProps={
                         validation ? {
+                            startAdornment: <InputAdornment position="start">{validation.prefix}</InputAdornment>,
+
                             inputComponent: NumberFormatCustom,
                             inputProps: {
                                 format: validation.format,
                                 mask: validation.mask,
-                                prefix:validation.prefix,
+
                             },
                         } : null
                     }

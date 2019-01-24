@@ -117,7 +117,11 @@ const MyCredits = props=>  {
                   alignItems={'center'}
             >
                 <Grid item xs={12} className={classes.textAlign}>
-                    <Typography>{`${user.name.first} ${user.name.last} welcome back`}</Typography>
+                    <Typography>
+                        {
+
+                        ( (user['first_name'])&&( user['last_name']))?
+                            `${ user['first_name']} ${user['last_name']} welcome back`:'welcome back'}</Typography>
                 </Grid>
                 <Grid item xs={8}>
                     <CustomButton

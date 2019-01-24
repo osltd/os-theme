@@ -11,6 +11,10 @@ import Collapse from '../Widget/Collapse'
 import LoadingPage from '../Layout/LoadingPage'
 import {redirectUrl} from "../../api/ApiUtils";
 import PromoCode from './PromoCode'
+import {withSnackbar} from 'notistack';
+
+import _ from 'lodash'
+import * as styleGuide from "../../constants/styleGuide";
 
 const styles = theme => ({
     productCategory: {
@@ -43,9 +47,9 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
+    user: state.auth.user,
+
 });
-
-
 const mapDispatchToProps = dispatch => ({
 
         changeViewMode: (mode) =>
@@ -75,10 +79,19 @@ const mapDispatchToProps = dispatch => ({
 class ShopOverview extends React.Component {
 
 
+    componentDidMount() {
+
+    }
+
     render() {
 
         const {classes} = this.props
-        if (!(this.props.shoppingCart)) return <LoadingPage/>
+        if (!(this.props.shoppingCart) || this.props.user === null) return <LoadingPage/>
+        if (_.isEmpty(this.props.user)) {
+            redirectUrl('/login', this.props.history, false)
+            this.props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar)
+        }
+
         if (this.props.shoppingCart.length < 1)
             return (<Grid container alignItems={'center'} justify={'center'}>
 
@@ -192,4 +205,4 @@ class ShopOverview extends React.Component {
     }
 }
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))
+export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview))))

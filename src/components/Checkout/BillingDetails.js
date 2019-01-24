@@ -139,13 +139,7 @@ class ShoppingCartTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            l: false,
         };
-    }
-
-    componentDidMount() {
-
-
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
@@ -238,7 +232,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={7}>
                     <InputBar
-                        placeholder={billingDetail.countryCode.value}
+                        placeholder={'please enter ur phone number for contact'}
                         validation={
                             {
                                 prefix: `${billingDetail.countryCode.value}`,

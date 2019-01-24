@@ -2,7 +2,7 @@ import {AUTH_INIT_TOKEN, AUTH_INIT_USER_PROFILE} from "../constants/actionType";
 
 
 const defaultState = {
-    user: {},
+    user: null,
     token: '',
 };
 

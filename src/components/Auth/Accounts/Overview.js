@@ -93,7 +93,12 @@ const MyAccount = (props) => {
         >
 
             <Grid item xs={12} className={classes.textAlign}>
-                <Typography>{`${user['first_name']} ${user['last_name']} welcome back`}</Typography>
+                <Typography>
+                    {
+
+                        ( (user['first_name'])&&( user['last_name']))?
+                            `${ user['first_name']} ${user['last_name']} welcome back`:'welcome back'}
+                    </Typography>
             </Grid>
             <Grid item xs={8}>
                 <CustomButton
