@@ -211,17 +211,43 @@ class ShoppingCartTable extends React.Component {
                 />
 
             </Grid>
-                <Grid item container alignItems={'center'} xs={12}>
-                    <Grid item xs={4}>
-                        <CountryCode/>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <InputBar
-                            placeholder={'Phone Number'}
-                            onChange={value => this.props.editBillingDetail('phone', value)}
-                            value={billingDetail.phone}
-                        />
-                    </Grid>
+                <Grid item xs={6}>
+                    <InputBar
+                        validation={
+                            {
+                                format: '###-###',
+
+
+                            }
+                        }
+                        title={'Postcode/ZIP'}
+                        placeholder={'Postcode/ZIP'}
+
+                        onChange={value => this.props.editBillingDetail('zipCode', value)}
+                        value={billingDetail.zipCode}
+                    />
+
+                </Grid>
+                <Grid item xs={5}>
+                    <CountryCode
+                        value={billingDetail.countryCode}
+
+                        onChange={value => this.props.editBillingDetail('countryCode', value)}
+
+                    />
+                </Grid>
+                <Grid item xs={7}>
+                    <InputBar
+                        placeholder={billingDetail.countryCode.value}
+                        validation={
+                            {
+                                prefix: `${billingDetail.countryCode.value}`,
+
+                            }
+                        }
+                        onChange={value => this.props.editBillingDetail('phone', value)}
+                        value={billingDetail.phone}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <InputBar
@@ -239,24 +265,7 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         validation={
                             {
-                                blocks: [3, 3],
-                                delimiter: '-',
-                            }
-                        }
-                        title={'Postcode/ZIP'}
-                        placeholder={'Postcode/ZIP'}
-
-                        onChange={value => this.props.editBillingDetail('zipCode', value)}
-                        value={billingDetail.zipCode}
-                    />
-
-                </Grid>
-
-                <Grid item xs={12}>
-                    <InputBar
-                        validation={
-                            {
-                                creditCard: true,
+                                format: '#### #### #### ####',
                             }
                         }
                         title={'visa number'}
@@ -276,8 +285,9 @@ class ShoppingCartTable extends React.Component {
                         placeholder={'MM/YY'}
                         validation={
                             {
-                                blocks: [2, 2],
-                                delimiter: '/',
+                                format: '##/##',
+
+                                mask: ['M', 'M', 'Y', 'Y'],
                             }
                         }
                         onChange={value => this.props.editBillingDetail('expiryDate', value)}
@@ -290,7 +300,9 @@ class ShoppingCartTable extends React.Component {
                         placeholder={'XXX'}
                         validation={
                             {
-                                blocks: [3],
+                                format: '###',
+
+
                             }
                         }
                         onChange={value => this.props.editBillingDetail('cvc', value)}

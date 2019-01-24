@@ -7,7 +7,7 @@ import NumberFormat from 'react-number-format';
 
 const NumberFormatCustom = props => {
 
-    const {inputRef, onChange,format, placeholder, ...other} = props;
+    const {inputRef, onChange, placeholder, ...other} = props;
     console.log(props)
     return (
         <NumberFormat
@@ -21,7 +21,6 @@ const NumberFormatCustom = props => {
                     }
                 })
             }}
-            format={format}
         />
     )
 
@@ -86,7 +85,7 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const {classes, placeholder, multiline, title, value, onChange, disabled, validation,format} = this.props;
+        const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = this.props;
 
         return (<Grid container direction={'column'}>
                 {<TextField
@@ -99,13 +98,14 @@ class OutlinedTextFields extends React.Component {
                     disableUnderline={true}
                     label={title}
                     placeholder={placeholder}
-                    format="#### #### #### ####"
 
                     InputProps={
                         validation ? {
                             inputComponent: NumberFormatCustom,
                             inputProps: {
-                                format: '#### #### #### ####'
+                                format: validation.format,
+                                mask: validation.mask,
+                                prefix:validation.prefix,
                             },
                         } : null
                     }

@@ -1,18 +1,20 @@
 import {
     CART_EDIT_BILLING_DETAIL,
     CART_EDIT_VARIANT,
+    CART_EMPTY_BILLING_DETAIL,
     CART_EMPTY_PRODUCT_VARIANT,
     CART_INIT_SHOPPING_CART,
     CART_OPERATE_SHOPPING_CART,
-    CART_SAVE_PRODUCT_TO_CART,
-    CART_EMPTY_BILLING_DETAIL
+    CART_SAVE_PRODUCT_TO_CART
 } from "../constants/actionType";
 
 
 const defaultState = {
     shoppingCart: null,
     variant: {},
-    billingDetail: {},
+    billingDetail: {
+        countryCode: {label: "Hong Kong (  +852 )", value: "+852"},
+    },
 };
 
 export default (state = defaultState, action) => {
@@ -31,7 +33,7 @@ export default (state = defaultState, action) => {
 
             let shoppingCart = Array.from(state.shoppingCart)
             let existedInCart = shoppingCart.find(n => {
-                    if (n.variantId === action.payload.variantId ) {
+                    if (n.variantId === action.payload.variantId) {
                         n.number += action.payload.number
                         return true
                     }
@@ -57,7 +59,7 @@ export default (state = defaultState, action) => {
             }
         }
         case CART_INIT_SHOPPING_CART: {
-            if(!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
+            if (!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
             return {
                 ...state,
                 shoppingCart: action.payload ? action.payload : []
@@ -98,7 +100,7 @@ export default (state = defaultState, action) => {
                 billingDetail: billingDetail,
             }
         }
-        case     CART_EMPTY_BILLING_DETAIL:{
+        case     CART_EMPTY_BILLING_DETAIL: {
             return {
                 ...state,
                 billingDetail: {},
