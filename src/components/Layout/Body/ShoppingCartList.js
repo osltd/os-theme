@@ -91,7 +91,7 @@ class ShoppingCartList extends React.Component {
 
                                         </Grid>
                                         <Grid item sm={9}>
-                                            <Typography variant={'body2'}>
+                                            <Typography variant={'body1'}>
                                                 {refactorTextLength(n.product.name)}
                                             </Typography>
                                             <Typography variant={'caption'}>
@@ -110,7 +110,7 @@ class ShoppingCartList extends React.Component {
                         ) : <ListItem
                         >
 
-                            <Typography variant={'subheading'}>
+                            <Typography variant={'subtitle1'}>
                                 you haven't put any items in cart
                             </Typography>
                         </ListItem>}

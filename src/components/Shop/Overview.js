@@ -160,7 +160,7 @@ class ShopOverview extends React.Component {
 
 
         if (products.length === 0) {
-            return <Typography variant={'subheading'}> there are no products under <strong>{
+            return <Typography variant={'subtitle1'}> there are no products under <strong>{
                 this.props.filter.tag
             }</strong> category yet</Typography>
 
@@ -218,7 +218,7 @@ class ShopOverview extends React.Component {
                             {
                                 isWidthUp('md', this.props.width) ?
                                     <Grid item md={3}>
-                                        <Typography variant={'title'}>
+                                        <Typography variant={'h6'}>
                                             PRODUCT CATEGORIES
                                         </Typography>
                                         {this.getTagsList()}
@@ -238,7 +238,7 @@ class ShopOverview extends React.Component {
                                     </Grid>
                                     <Grid item xs={3} container alignItems={'center'} direction={'row'}>
                                         <Grid item>
-                                            <Typography variant={'body2'}>
+                                            <Typography variant={'body1'}>
                                                 Items
                                             </Typography>
                                         </Grid>
@@ -248,7 +248,7 @@ class ShopOverview extends React.Component {
                                             }
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant={'body2'}>
+                                            <Typography variant={'body1'}>
                                                 of {this.getProductProperty(products, 'length')}
                                             </Typography>
                                         </Grid>
@@ -256,7 +256,7 @@ class ShopOverview extends React.Component {
                                     <Grid item xs={3} container alignItems={'center'} direction={'row'}>
 
                                         <Grid item>
-                                            <Typography variant={'body2'}>
+                                            <Typography variant={'body1'}>
                                                 sort by
                                             </Typography>
                                         </Grid>
@@ -280,9 +280,9 @@ class ShopOverview extends React.Component {
                                                 innerRef={e => this.popUp = e}
                                                 title={
                                                     <Grid container alignItems={'center'}>
-                                                        <Typography variant={'body2'}>
+                                                        <Typography variant={'body1'}>
                                                             {this.props.filter.tag ? <Typography
-                                                                variant={'body2'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
+                                                                variant={'body1'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
                                                         </Typography>
                                                         <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                                     </Grid>
@@ -302,7 +302,7 @@ class ShopOverview extends React.Component {
                             </Grid>
                         </Grid> :
 
-                        <Typography variant={'subheading'}> there are no products available yet</Typography>
+                        <Typography variant={'subtitle1'}> there are no products available yet</Typography>
 
 
                 }

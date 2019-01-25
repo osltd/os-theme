@@ -100,14 +100,14 @@ class ShopOverview extends React.Component {
                 <Grid item container xs={6} spacing={16} className={classes.form}>
                     <Grid item>
 
-                        <Typography variant={'title'} color={'primary'}>
+                        <Typography variant={'h6'} color={'primary'}>
                             You haven't put any items in cart
                         </Typography>
                     </Grid>
 
                     <Grid item container alignItems={'center'} spacing={16}>
                         <Grid item>
-                            <Typography variant={'subheading'} color={'primary'}>
+                            <Typography variant={'subtitle1'} color={'primary'}>
                                 go to
                             </Typography>
                         </Grid>
@@ -121,7 +121,7 @@ class ShopOverview extends React.Component {
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Typography variant={'subheading'} color={'primary'}>
+                            <Typography variant={'subtitle1'} color={'primary'}>
                                 to buy some
                             </Typography>
                         </Grid>
@@ -140,14 +140,14 @@ class ShopOverview extends React.Component {
                             <Grid item xs={6}>
                                 <Typography
                                     className={classes.title}
-                                    variant={'display1'}>
+                                    variant={'h4'}>
                                     Your Order Summary
                                 </Typography>
                                 <Divider/>
                                 <OrderSummary/>
                                 <Typography
                                     className={classes.title}
-                                    variant={'display1'}>
+                                    variant={'h4'}>
                                     Promo Code
                                 </Typography>
                                 <Divider/>
@@ -156,7 +156,7 @@ class ShopOverview extends React.Component {
                             <Grid item xs={6}>
                                 <Typography
                                     className={classes.title}
-                                    variant={'display1'}>
+                                    variant={'h4'}>
                                     Billing Details
 
                                 </Typography>
@@ -171,7 +171,7 @@ class ShopOverview extends React.Component {
                                     title={<Fragment>
                                         <Typography
                                             className={classes.title}
-                                            variant={'display1'}>
+                                            variant={'h4'}>
                                             Your Order Summary
                                         </Typography>
 
@@ -186,7 +186,7 @@ class ShopOverview extends React.Component {
                             <Grid item xs={11}>
                                 <Typography
                                     className={classes.title}
-                                    variant={'display1'}>
+                                    variant={'h4'}>
                                     Billing Details
 
                                 </Typography>

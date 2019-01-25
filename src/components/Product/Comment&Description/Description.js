@@ -26,7 +26,7 @@ class Description extends React.Component {
 
         return (
             <Grid container>
-                <Typography variant={'body2'}>
+                <Typography variant={'body1'}>
                     {content}
                 </Typography>
             </Grid>

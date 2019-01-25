@@ -19,7 +19,7 @@ const NotFound =props=> {
         return (
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
                 <Typography
-                    variant={'subheading'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
+                    variant={'subtitle1'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
             </Grid>);
     }
 

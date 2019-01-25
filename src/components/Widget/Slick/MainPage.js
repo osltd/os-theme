@@ -67,7 +67,7 @@ class SimpleSlider extends React.Component {
 
                                           className={classes.img}>
                                         {n.title && <Grid item lg={4}>
-                                            <Typography variant="display4" className={classes.title}
+                                            <Typography variant="h1" className={classes.title}
                                                         gutterBottom> {n.title}</Typography>
                                         </Grid>}
                                     </Grid>

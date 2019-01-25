@@ -48,9 +48,9 @@ class CustomButton extends React.Component {
             className={classes.root}
             variant={'outlined'}
             onClick={onClick}>
-            <Typography variant={'title'} color={'inherit'} className={icon}/>
-            <Typography variant={'title'} color={'inherit'}>{value}</Typography>
-            <Typography variant={'title'} color={'inherit'} className={icon2}/>
+            <Typography variant={'h6'} color={'inherit'} className={icon}/>
+            <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
+            <Typography variant={'h6'} color={'inherit'} className={icon2}/>
         </Button>
     }
 }

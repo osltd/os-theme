@@ -90,7 +90,7 @@ class ShoppingCartTable extends React.Component {
 
         return <Grid item container justify={'space-between'} xs={12}>
             {hasValidShippingMethod ? <Grid item xs={12}>
-                <Typography variant={'title'}>
+                <Typography variant={'h6'}>
                     Shipping Options
                 </Typography>
             </Grid> : null}
@@ -104,7 +104,7 @@ class ShoppingCartTable extends React.Component {
                                 item container xs={4}>
                                 <Grid item>
 
-                                    <Typography variant={'body2'}>
+                                    <Typography variant={'body1'}>
                                         name: {n.courier.name}
                                     </Typography>
                                     <Typography variant={'body1'}>

@@ -50,7 +50,7 @@ class Footer extends React.Component {
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                 <Grid item>
-                    <Typography variant={'title'} color={'inherit'}>TAGS</Typography>
+                    <Typography variant={'h6'} color={'inherit'}>TAGS</Typography>
                 </Grid>
                 <Grid item>
                     {
@@ -75,7 +75,7 @@ class Footer extends React.Component {
                 <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
                 >
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
+                        <Typography variant={'h6'} color={'inherit'}>
                             NEWSLETTER
                         </Typography>
                     </Grid>
@@ -86,7 +86,7 @@ class Footer extends React.Component {
                 </Grid>
                 <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>MYSHOP</Typography>
+                        <Typography variant={'h6'} color={'inherit'}>MYSHOP</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'caption'} color={'inherit'}>
@@ -100,12 +100,12 @@ class Footer extends React.Component {
                     </Grid>
 
                     <Grid item>
-                        <Typography variant={'subheading'} color={'inherit'}>
+                        <Typography variant={'subtitle1'} color={'inherit'}>
                             Email: your@example.com
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'subheading'} color={'inherit'}>
+                        <Typography variant={'subtitle1'} color={'inherit'}>
                             Phone: +1 123-456-6789
                         </Typography>
                     </Grid>
@@ -119,7 +119,7 @@ class Footer extends React.Component {
                 </Grid>
                 <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'title'} color={'inherit'}>
+                        <Typography variant={'h6'} color={'inherit'}>
                             FIND US ON</Typography>
                     </Grid>
                     <Grid item>

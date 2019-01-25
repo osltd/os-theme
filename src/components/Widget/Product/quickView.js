@@ -52,17 +52,17 @@ class ResponsiveDialog extends React.Component {
         return (
             <Grid container className={classes.root} direction={'column'}>
                 <img src={src} className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{category}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{name}</Typography>
+                <Typography variant={'h5'} color={'primary'}>{category}</Typography>
+                <Typography variant={'h6'} color={'secondary'}>{name}</Typography>
                 {
                     promotePrice ?
                         <Grid item container direction={'row'}>
 
-                            <Typography component={'del'} variant={'subheading'}
+                            <Typography component={'del'} variant={'subtitle1'}
                                         className={classes.oldPrice}>$ {regPrice}</Typography>
-                            <Typography variant={'subheading'} className={classes.price}>${promotePrice}</Typography>
+                            <Typography variant={'subtitle1'} className={classes.price}>${promotePrice}</Typography>
                         </Grid>
-                        : <Typography variant={'subheading'} className={classes.price}>$ {regPrice}</Typography>
+                        : <Typography variant={'subtitle1'} className={classes.price}>$ {regPrice}</Typography>
 
                 }
 

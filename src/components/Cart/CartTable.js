@@ -203,7 +203,7 @@ const ShoppingCartTable = (props)=> {
                 </Paper> : <Grid spacing={32} alignItems={'center'} container>
                     <span className={'icon-tongue'}/>
                     <Grid item>
-                        <Typography variant={'title'}>
+                        <Typography variant={'h6'}>
                             there is no items in shopping cart
                         </Typography>
                     </Grid>

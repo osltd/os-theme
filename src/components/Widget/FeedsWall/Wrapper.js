@@ -61,7 +61,7 @@ class FeedsWall extends React.Component {
                     right={<div style={{textAlign: 'center'}}>
                         <Typography
                             style={{padding: '0 20px'}}
-                            variant={'subheading'}
+                            variant={'subtitle1'}
                         >
                             {data[1].sections[0].title}      </Typography>
                         <br/>
@@ -90,7 +90,7 @@ class FeedsWall extends React.Component {
                             <Typography
                                 style={{padding: '0 20px'}}
 
-                                variant={'subheading'}
+                                variant={'subtitle1'}
                             >
                                 {data[2].sections[0].title}</Typography>
                             <br/>

@@ -66,8 +66,8 @@ class ResponsiveDialog extends React.Component {
             <Grid container className={classes.root} direction={'column'}>
 
                 <img src={src} className={classes.cf6_image}/>
-                <Typography variant={'headline'} color={'primary'}>{title}</Typography>
-                <Typography variant={'title'} color={'secondary'}>{subTitle}</Typography>
+                <Typography variant={'h5'} color={'primary'}>{title}</Typography>
+                <Typography variant={'h6'} color={'secondary'}>{subTitle}</Typography>
 
             </Grid>
         );

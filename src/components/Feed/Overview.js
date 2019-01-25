@@ -83,7 +83,7 @@ class ResponsiveDialog extends React.Component {
                 <Grid item container justify={'center'} xs={12} lg={11} spacing={16}>
                     <Grid item lg={3} container direction={'column'} spacing={16} xs={11}>
                         <Grid item>
-                            <Typography variant={'title'}>SEARCH</Typography>
+                            <Typography variant={'h6'}>SEARCH</Typography>
                         </Grid>
                         <Grid item>
                             <SearchBar
@@ -119,7 +119,7 @@ class ResponsiveDialog extends React.Component {
                                 </Grid>) :
 
 
-                            <Typography variant={'subheading'}> there are no posts available yet</Typography>
+                            <Typography variant={'subtitle1'}> there are no posts available yet</Typography>
 
 
                             : <LoadingPage/>}

@@ -30,7 +30,7 @@ class WhiteDropDown extends React.Component {
 
         return (
             <Grid container className={classes.root} alignItems={'center'}>
-                <Typography variant={'title'} className={classes.username}>
+                <Typography variant={'h6'} className={classes.username}>
                     Cristopher Lee
                 </Typography>
                 <span className={classNames('icon-star-full', classes.star)}/>

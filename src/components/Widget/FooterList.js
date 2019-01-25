@@ -42,13 +42,13 @@ class FooterList extends React.Component {
                                     innerRef={e => this.dialog = e}
                                     title={
                                         <ListItem className={classes.item} button >
-                                            <Typography variant={'body2'} color={'inherit'}
+                                            <Typography variant={'body1'} color={'inherit'}
                                             > {n.label}</Typography>
                                         </ListItem>        }
                                     dialog={<MyAccount/>}
                                 />:
                             <ListItem className={classes.item} button key={i}>
-                                <Typography variant={'body2'} color={'inherit'}
+                                <Typography variant={'body1'} color={'inherit'}
                                             onClick={() => redirectUrl(`/${n.url}`, this.props.history)}
 
                                 > {n.label}</Typography>

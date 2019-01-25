@@ -35,7 +35,7 @@ const  Counter =(props)=> {
         return (
             <Grid container alignItems={'center'} className={classes.root}>
                 <Grid item>
-                    <Typography variant={'title'}
+                    <Typography variant={'h6'}
                                 className={classes.operator}
                                 onClick={() => onChange(number > 1 ? (number - 1) : 0)}>-
                     </Typography>
@@ -50,7 +50,7 @@ const  Counter =(props)=> {
                     />
                 </Grid>
                 <Grid item>
-                    <Typography variant={'title'}
+                    <Typography variant={'h6'}
                                 className={classes.operator}
                                 onClick={() => onChange(parseInt(number) + 1)}>+
                     </Typography>

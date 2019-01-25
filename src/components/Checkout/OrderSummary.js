@@ -120,7 +120,7 @@ class OrderSummary extends React.Component {
 
                         content: (<Grid container direction={'column'}>
                             <Grid item>
-                                <Typography variant={'title'}>
+                                <Typography variant={'h6'}>
                                     {
                                         "your contact id is " + result[0].id
 
@@ -128,7 +128,7 @@ class OrderSummary extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant={'body2'}>
+                                <Typography variant={'body1'}>
                                     {
                                         false && " your contact number is " + this.props.billingDetail.phone
                                     }
@@ -151,7 +151,7 @@ class OrderSummary extends React.Component {
 
                                                 </Grid>
                                                 <Grid item sm={9}>
-                                                    <Typography variant={'body2'}>
+                                                    <Typography variant={'body1'}>
                                                         {refactorTextLength(n.product.name)}
                                                     </Typography>
                                                     <Typography variant={'caption'}>
@@ -183,7 +183,7 @@ class OrderSummary extends React.Component {
 
                                         </Grid>
                                         <Grid item sm={9}>
-                                            <Typography variant={'body2'}>
+                                            <Typography variant={'body1'}>
                                                 {billingDetail.coupons.title}
                                             </Typography>
 

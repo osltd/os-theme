@@ -33,7 +33,7 @@ class FeedsWall extends React.Component {
                 <Grid container alignItems={'center'} justify={'center'} className={classes.root} style={{
                     backgroundImage: 'url(' + backgroundImg + ')'
                 }} onClick={() => redirectUrl(link, this.props.history)}>
-                    <Typography variant={'display1'} className={classes.title}>
+                    <Typography variant={'h4'} className={classes.title}>
                         {title}
                     </Typography>
                 </Grid>

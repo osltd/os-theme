@@ -11,7 +11,7 @@ const TopInterest = props => {
     return (products) ?
         <section className={classes.section}>
             <Grid item>
-                <Typography variant={'display1'} className={classes.title}>
+                <Typography variant={'h4'} className={classes.title}>
                     FEATURE PRODUCTS
                 </Typography>
             </Grid>

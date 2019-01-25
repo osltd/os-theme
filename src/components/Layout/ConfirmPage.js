@@ -57,11 +57,11 @@ class ConfirmPage extends React.Component {
                     title={'confirmPage'}/>
                 <Grid item className={classes.form}>
 
-                    <Typography variant={'title'} color={'primary'}>
+                    <Typography variant={'h6'} color={'primary'}>
                         Shipping request successfully.
 
                     </Typography>
-                    <Typography variant={'subheading'} color={'primary'}>
+                    <Typography variant={'subtitle1'} color={'primary'}>
 
                         your reference number is {this.props.match.params.orderId}
                     </Typography>

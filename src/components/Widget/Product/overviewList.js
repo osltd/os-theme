@@ -89,13 +89,13 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
                 <Grid item xs={8}>
                     {
-                        category && <Typography variant={'headline'}
+                        category && <Typography variant={'h5'}
                                                 className={classes.category}
 
                                                 color={'primary'}>{category && category.join(',')}</Typography>
 
                     }
-                    <Typography variant={'title'}
+                    <Typography variant={'h6'}
                                 onClick={() => redirectUrl('/products/' + id, this.props.history)}
                                 className={classes.name}
                     >{name}</Typography>
@@ -106,12 +106,12 @@ class ResponsiveDialog extends React.Component {
                         promotePrice ?
                             <Grid item container direction={'row'}>
 
-                                <Typography component={'del'} variant={'subheading'}
+                                <Typography component={'del'} variant={'subtitle1'}
                                             className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                                <Typography variant={'subheading'}
+                                <Typography variant={'subtitle1'}
                                             className={classes.price}>${formatMoney(promotePrice)}</Typography>
                             </Grid>
-                            : <Typography variant={'subheading'}
+                            : <Typography variant={'subtitle1'}
                                           className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
                     }

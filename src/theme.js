@@ -2,12 +2,14 @@ import {createMuiTheme} from '@material-ui/core'
 
 const theme = createMuiTheme({
     typography: {
+        useNextVariants: true,
+
         // Use the system font instead of the default Roboto font.
         fontFamily: [
             '-apple-system', 'BlinkMacSystemFont', 'sans-serif'
         ].join(','),
         fontSize: 14,
-        display1: {
+        h4: {
             fontSize: '25px',
         },
     },

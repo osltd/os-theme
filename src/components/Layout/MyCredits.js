@@ -92,12 +92,12 @@ const MyCredits = props=>  {
                     />
                     </Grid>
                     <Grid item>
-                        <Typography variant={'display1'}>
+                        <Typography variant={'h4'}>
                             You have successfully logout!
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'subHeading'}>
+                        <Typography variant={'subtitle1'}>
                             see you </Typography>
                     </Grid>
 

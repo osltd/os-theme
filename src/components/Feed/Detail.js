@@ -67,7 +67,7 @@ const FeedDetail = (props) => {
                                        className={classes.backArrow}>
                             <span
                                 className={classNames('icon-circle-left', classes.backIcon)}/>
-                            <Typography variant={'title'}>
+                            <Typography variant={'h6'}>
                                 back to feed
                             </Typography>
                         </Grid>
@@ -88,7 +88,7 @@ const FeedDetail = (props) => {
                                 <span className={'icon-quill'}/>
                             </Grid>
                             <Grid item>
-                                <Typography variant={'subheading'}>
+                                <Typography variant={'subtitle1'}>
                                     {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : 'no authors'}
                                 </Typography>
                             </Grid>
@@ -96,7 +96,7 @@ const FeedDetail = (props) => {
                                 <span className={'icon-calendar'}/>
                             </Grid>
                             <Grid item>
-                                <Typography variant={'subheading'}>
+                                <Typography variant={'subtitle1'}>
                                     {moment(feed.time).format('MMM Do YYYY')}
                                 </Typography>
                             </Grid>

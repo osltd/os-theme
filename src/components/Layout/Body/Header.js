@@ -45,18 +45,18 @@ const BodyHeader =(props)=> {
         >
             <Grid item md={2}/>
             <Grid item md={5} xs={12} container justify={isWidthUp('md',width) ? 'flex-start' : 'center'}>
-                <Typography variant={'display1'} className={classes.title} color={'primary'}>{title}</Typography>
+                <Typography variant={'h4'} className={classes.title} color={'primary'}>{title}</Typography>
             </Grid>
             <Grid item md={3} xs={11} container justify={isWidthUp('md', width) ? 'flex-end' : 'center'}>
                 {routePath.map((n, i) => <Fragment key={i}>
                             <Grid item>
-                                <Typography variant={'body2'}
+                                <Typography variant={'body1'}
                                             onClick={() => redirectUrl(n.link, history)}
                                             className={classes.route} color={'secondary'}>{n.label}</Typography>
                             </Grid>
                             {i !== routePath.length - 1 &&
                             <Grid item>
-                                <Typography variant={'body2'}
+                                <Typography variant={'body1'}
                                             onClick={() => redirectUrl(n.link, history)}
                                             color={'secondary'}>/</Typography> </Grid>
                             }

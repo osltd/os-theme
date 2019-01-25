@@ -57,7 +57,7 @@ class SelectedListItem extends React.Component {
         console.log(data)
         return (data ? <Fragment>
                 {
-                    title && <Typography variant={'title'}>{title}</Typography>
+                    title && <Typography variant={'h6'}>{title}</Typography>
 
                 }
                 <List component="nav" className={classes.list}>

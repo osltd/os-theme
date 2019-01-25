@@ -64,7 +64,7 @@ class CustomButton extends React.Component {
                 onClick={onClick}
             >
                 {icon && <span className={classes.icon + ' ' + icon}/>}
-                {value && <Typography variant={'title'} className={classes.btnText}>{value}</Typography>}
+                {value && <Typography variant={'h6'} className={classes.btnText}>{value}</Typography>}
                 {icon2 && <span className={classes.icon + ' ' + icon2}/>}
             </Grid>
 

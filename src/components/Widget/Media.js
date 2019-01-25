@@ -87,7 +87,7 @@ class Media extends React.Component {
 
 
                 />
-            ) : <Typography variant={'title'}>
+            ) : <Typography variant={'h6'}>
                 there should be product {productId} here, but product {productId} is no longer exist</Typography>
         }
         if (this.props.box && data[0].ext !== 'mp4') {

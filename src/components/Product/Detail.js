@@ -120,12 +120,12 @@ class ResponsiveDialog extends React.Component {
                     />
                     </Grid>
                     <Grid item>
-                        <Typography variant={'display1'}>
+                        <Typography variant={'h4'}>
                             Congratulation!
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={'subHeading'}>
+                        <Typography variant={'subtitle1'}>
                             items added! </Typography>
                     </Grid>
 
@@ -161,29 +161,29 @@ class ResponsiveDialog extends React.Component {
             <Grid item container spacing={16}>
                 <Grid item>
                     <Typography
-                        variant={'display2'}
+                        variant={'h3'}
                         className={classes.name}>{name}
                     </Typography>
                 </Grid>
                 <Grid item container direction={'row'}>
                     {promotePrice ? <Fragment>
-                            <Typography variant={'headline'}
+                            <Typography variant={'h5'}
                                         className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
-                            <Typography component={'del'} variant={'subheading'}
+                            <Typography component={'del'} variant={'subtitle1'}
                                         color={'secondary'}>$ {formatMoney(
                                 selectedVariant.price)}</Typography>
                         </Fragment> :
-                        <Typography variant={'headline'}
+                        <Typography variant={'h5'}
                                     className={classes.price}>$ {formatMoney(
                             selectedVariant.price)}</Typography>
                     }
                 </Grid>
                 <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
-                        <Typography variant={'subheading'} className={classes.statusLabel}>In Stock</Typography></Grid>
+                        <Typography variant={'subtitle1'} className={classes.statusLabel}>In Stock</Typography></Grid>
                     <Grid item>
 
-                        <Typography variant={'title'}>
+                        <Typography variant={'h6'}>
                             SKU MH03</Typography></Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -198,7 +198,7 @@ class ResponsiveDialog extends React.Component {
                     {
                         variantKeys.map((n, i) =>
                             <Fragment key={i}>
-                                <Typography variant={'title'}>
+                                <Typography variant={'h6'}>
                                     {n}
                                 </Typography>
                                 {this.getVariant(n, i, variantOptions)}
@@ -251,7 +251,7 @@ class ResponsiveDialog extends React.Component {
 
 
                 <Grid item style={{marginTop: 15}}>
-                    <Typography variant={'title'} style={{fontSize: 15}}>
+                    <Typography variant={'h6'} style={{fontSize: 15}}>
                         SHARE THIS PRODUCT:
                     </Typography>
                 </Grid>
@@ -321,7 +321,7 @@ export default withWidth()(withRouter(connect(mapStateToProps, mapDispatchToProp
 //     }
 //     container direction={'column'} spacing={32} alignItems={'center'}>
 //     <Grid item>
-//         <Typography variant={'title'}>
+//         <Typography variant={'h6'}>
 //             do u want to add to cart?
 //         </Typography>
 //     </Grid>

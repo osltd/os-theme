@@ -61,10 +61,10 @@ class WhiteDropDown extends React.Component {
                           onClick={this.handleClickListItem}
                 >
                     {icon && <span className={classes.icon + ' ' + icon}/>}
-                    <Typography variant={'body2'}>
+                    <Typography variant={'body1'}>
                         {label}{labelExtra}
                     </Typography>
-                    <Typography variant={'body2'}>
+                    <Typography variant={'body1'}>
                         {selectedValue ? selectedValue : options[this.state.selectedIndex].label}
                     </Typography>
                     {icon2 && <span className={classes.icon + ' ' + icon2}/>}
@@ -83,7 +83,7 @@ class WhiteDropDown extends React.Component {
                             selected={i === this.state.selectedIndex}
                             onClick={() => this.handleMenuItemClick(i, n.onClick)}
                         >
-                            <Typography variant={'body2'}>
+                            <Typography variant={'body1'}>
                                 {n.label}</Typography>
                         </MenuItem>
                     ))}

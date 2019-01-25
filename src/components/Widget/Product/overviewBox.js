@@ -108,13 +108,13 @@ const ProductOverviewBox =(props)=> {
             <Grid container className={classes.root} direction={'column'}>
                 {getImg()}
                 {
-                    category && <Typography variant={'headline'}
+                    category && <Typography variant={'h5'}
                                             className={classes.category}
 
                                             color={'primary'}>{category && category.join(',')}</Typography>
 
                 }
-                <Typography variant={'title'}
+                <Typography variant={'h6'}
                             onClick={() => window.location.href = ('/products/' + id)}
                             className={classes.name}
 
@@ -122,7 +122,7 @@ const ProductOverviewBox =(props)=> {
                 {
                     (promotePrice) ?
                         <Grid item container direction={'row'}>
-                            <Typography component={'del'} variant={'subheading'}
+                            <Typography component={'del'} variant={'subtitle1'}
                                         className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
                             <Typography variant={'caption'}
                                         className={classes.price}>${formatMoney(promotePrice)}</Typography>

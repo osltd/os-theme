@@ -104,7 +104,7 @@ class SearchPage extends React.Component {
                         />
                     </Grid>
                     <Grid item>
-                        <Typography variant={'title'}>
+                        <Typography variant={'h6'}>
                             {
                                 this.props.keyword && 'found ' + searchResultCount + ' matched results'
                             }   </Typography>
@@ -115,7 +115,7 @@ class SearchPage extends React.Component {
                     {
                         products &&
                         <Grid item xs={12}>
-                            <Typography variant={'title'}>
+                            <Typography variant={'h6'}>
 
                                 Products ({products.length})
                             </Typography></Grid>
@@ -139,7 +139,7 @@ class SearchPage extends React.Component {
                     {
                         feeds &&
                         <Grid item xs={12}>
-                            <Typography variant={'title'}>
+                            <Typography variant={'h6'}>
 
                                 Feeds ({feeds.length})
                             </Typography>

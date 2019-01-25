@@ -91,14 +91,14 @@ class Login extends React.Component {
                     />
                             </Grid>
                             <Grid item>
-                                <Typography variant={'display1'}>
+                                <Typography variant={'h4'}>
                                     Congratulation!
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant={'subHeading'}>
+                                <Typography variant={'subtitle1'}>
                                     Account created!</Typography>
-                                <Typography variant={'subHeading'}>
+                                <Typography variant={'subtitle1'}>
                                     You can Login now!</Typography>
                             </Grid>
 
@@ -136,7 +136,7 @@ class Login extends React.Component {
                 <Grid item container spacing={16} md={8} xs={12} lg={6} direction={'column'}
                       className={classes.innerRoot}>
                     <Grid item>
-                        <Typography className={classes.title} variant={'display1'}>
+                        <Typography className={classes.title} variant={'h4'}>
                             Create your account
                         </Typography>
                     </Grid>
