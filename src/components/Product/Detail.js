@@ -3,7 +3,7 @@ import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
-import ColorPick from '../Widget/ColorPicker'
+import ColorPick from '../Widget/ColorPicker.tsx'
 import Counter from '../Widget/Counter'
 import {formatMoney} from "../../api/ApiUtils";
 import Tag from '../Widget/Tags/Tag'

@@ -36,12 +36,6 @@ const styles = theme => ({
         overflow: 'auto',
     }
 });
-const dummyData = ['DECOR & FURNITURE (19)',
-    'ELECTRONICS & COMPUTER (4)',
-    'FASHION & CLOTHINGS (3)',
-    'HOME, GARDEN & TOOLS (5)',
-    'SPORT & OUTDOORS (7)',
-    'TOY, KIDS & BABY']
 
 class SelectedListItem extends React.Component {
 

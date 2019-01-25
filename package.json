@@ -7,6 +7,7 @@
     "@material-ui/icons": "^2.0.0",
     "@material-ui/styles": "^3.0.0-alpha.8",
     "@sweetalert/with-react": "^0.1.1",
+    "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/jest": "^23.3.12",
     "@types/lodash": "^4.14.119",
@@ -53,5 +54,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://myshop.oneshop.hk/"
+  "proxy": "https://myshop.test.ocs.zone/"
 }

@@ -16,14 +16,10 @@ const styles = theme => ({
     }
 });
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
 
-class FooterList extends React.Component {
-    render() {
+const FooterList =props=> {
 
-        const {classes} = this.props;
+        const {classes} = props;
         const items = [
             {label: "Shopping Cart", url: "shoppingcart"}
             , {label: "Checkout", url: "checkout"}
@@ -49,21 +45,16 @@ class FooterList extends React.Component {
                                 />:
                             <ListItem className={classes.item} button key={i}>
                                 <Typography variant={'body1'} color={'inherit'}
-                                            onClick={() => redirectUrl(`/${n.url}`, this.props.history)}
-
+                                            onClick={() => redirectUrl(`/${n.url}`, props.history)}
                                 > {n.label}</Typography>
                             </ListItem>
-
-
-
                         )
                     }
 
 
                 </List>
             </div>
-        );
-    }
+        )
 }
 
 FooterList.propTypes = {

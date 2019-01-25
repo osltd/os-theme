@@ -126,5 +126,5 @@ class Media extends React.Component {
 
     }
 }
-
+//todo(unsafe)
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Media))

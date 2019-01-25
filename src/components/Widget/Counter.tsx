@@ -1,10 +1,10 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import {withStyles,Theme} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Grid, Input, Typography} from '@material-ui/core';
+import {MaterialUIClasses} from "../../interfaces/client/Common";
 
-const styles = theme => {
-    return ({
+const styles = (theme:Theme) => ({
         root: {},
         operator: {
             padding: '10px',
@@ -22,23 +22,25 @@ const styles = theme => {
             borderTop: '1px solid ' + theme.palette.secondary.light,
             borderBottom: '1px solid ' + theme.palette.secondary.light,
             maxWidth: '60px',
-            padding: '6px 20px',
+            padding: '10px 20px',
             cursor: 'pointer',
         }
-    });
-
+    })
+interface Props {
+    classes:MaterialUIClasses,
+    number:number,
+    onChange:(n:any)=>number
 }
 
-const  Counter =(props)=> {
+const  Counter:React.FunctionComponent<Props> =(props)=> {
 
-        const {classes, number, onChange} = props;
+        const {classes,number,onChange} = props;
         return (
             <Grid container alignItems={'center'} className={classes.root}>
                 <Grid item>
                     <Typography variant={'h6'}
                                 className={classes.operator}
-                                onClick={() => onChange(number > 1 ? (number - 1) : 0)}>-
-                    </Typography>
+                                onClick={() => onChange(number > 1 ? (number - 1) : 0)}>-</Typography>
                 </Grid>
                 <Grid item>
                     <Input
@@ -58,10 +60,5 @@ const  Counter =(props)=> {
             </Grid>
         )
     }
-
-Counter.propTypes = {
-    number: PropTypes.number.isRequired,
-    classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Counter);

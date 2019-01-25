@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://myshop.oneshop.hk/'
+export const TEST_URL ='https://myshop.test.ocs.zone/'
 export const COUNTRY_CODE = [{"label": "Israel (  +972 )", "value": "+972"}, {
     "label": "Afghanistan (  +93 )",
     "value": "+93"

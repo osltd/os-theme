@@ -52,40 +52,12 @@ const styles = theme => ({
     }
 
 
-});
+})
 
-const currencies = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-    {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
-    },
-];
+const InputBar=props=> {
 
-class OutlinedTextFields extends React.Component {
-    state = {
-        name: '',
-    };
 
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    };
-
-    render() {
-        const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = this.props;
+        const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
 
         return (<Grid container direction={'column'}>
                 {<TextField
@@ -101,7 +73,6 @@ class OutlinedTextFields extends React.Component {
                     InputProps={
                         validation ? {
                             startAdornment: <InputAdornment position="start">{validation.prefix}</InputAdornment>,
-
                             inputComponent: NumberFormatCustom,
                             inputProps: {
                                 format: validation.format,
@@ -119,11 +90,10 @@ class OutlinedTextFields extends React.Component {
 
 
         );
-    }
 }
 
-OutlinedTextFields.propTypes = {
+InputBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(OutlinedTextFields);
+export default withStyles(styles)(InputBar);

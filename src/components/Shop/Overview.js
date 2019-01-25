@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
-import WhiteDropDown from '../Widget/WhiteDropDown'
+import WhiteDropDown from '../Widget/DropDown'
 import LoadingPage from '../Layout/LoadingPage'
 import _ from 'lodash'
 import ProductOverviewListForm from '../Widget/Product/overviewList'

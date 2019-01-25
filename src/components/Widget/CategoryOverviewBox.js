@@ -90,41 +90,41 @@ const styles = theme => ({
     },
 });
 
-const  ButtonBases =(props)=> {
-        const {classes,history, category} = props
+const ButtonBases = (props) => {
+    const {classes, history, category} = props
 
-        return (
+    return (
 
-            <Grid container alignItems={'center'} spacing={16} justify={'center'} className={classes.root}>
-                {category.map((image, i) => (
-                    <Grid
-                        key={i}
-                        item sm={10} md={6} lg={4}
-                        container
-                        onClick={() => redirectUrl(`/products?tags=${image.name}`, history)}
-                        className={classes.items}
+        <Grid container alignItems={'center'} spacing={16} justify={'center'} className={classes.root}>
+            {category.map((image, i) => (
+                <Grid
+                    key={i}
+                    item sm={10} md={6} lg={4}
+                    container
+                    onClick={() => redirectUrl(`/products?tags=${image.name}`, history)}
+                    className={classes.items}
 
+                >
+                    <ButtonBase
+                        focusRipple
+                        key={image.title}
+                        className={classes.image}
+                        focusVisibleClassName={classes.focusVisible}
+                        style={{
+                            width: '100%',
+                            minHeight: '500px',
+                            margin: '5px',
+                        }}
                     >
-                        <ButtonBase
-                            focusRipple
-                            key={image.title}
-                            className={classes.image}
-                            focusVisibleClassName={classes.focusVisible}
-                            style={{
-                                width: '100%',
-                                minHeight: '500px',
-                                margin: '5px',
-                            }}
-                        >
-                            <Grid
+                        <Grid
 
-                                className={classes.imageSrc}
-                                style={{
-                                    backgroundImage: `url(${image.img})`,
-                                }}
-                            />
-                            <span className={classes.imageBackdrop}/>
-                            <span className={classes.imageButton}>
+                            className={classes.imageSrc}
+                            style={{
+                                backgroundImage: `url(${image.img})`,
+                            }}
+                        />
+                        <span className={classes.imageBackdrop}/>
+                        <span className={classes.imageButton}>
             <Typography
                 component="span"
                 variant="subtitle1"
@@ -135,15 +135,18 @@ const  ButtonBases =(props)=> {
                 <span className={classes.imageMarked}/>
             </Typography>
           </span>
-                        </ButtonBase>
-                    </Grid>
-                ))}
-            </Grid>
-        );
+                    </ButtonBase>
+                </Grid>
+            ))}
+        </Grid>
+    );
 }
 
 ButtonBases.propTypes = {
+
     classes: PropTypes.object.isRequired,
+
+
 };
 
 export default withRouter(withStyles(styles)(ButtonBases))

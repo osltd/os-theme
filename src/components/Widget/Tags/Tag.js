@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '@material-ui/core'
+import {Button,Fab} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import classNames from 'classnames'
@@ -26,7 +26,7 @@ const styles = theme => ({
     }
 });
 
-class CustomButton extends React.Component {
+class Tag extends React.Component {
     state = {
         anchor: 'left',
     };
@@ -55,19 +55,19 @@ class CustomButton extends React.Component {
         } = this.props;
 
         return (
-            <Button variant="extendedFab"
+            <Fab variant={"extended"}
                     onClick={onClick}
                     className={classNames(classes.root,
                         selected ? classes.selected : null)}>
                 {value}
-            </Button>
+            </Fab>
 
         )
     }
 }
 
-CustomButton.propTypes = {
+Tag.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomButton);
+export default withStyles(styles)(Tag);

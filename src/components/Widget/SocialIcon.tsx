@@ -2,9 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import {Theme, withStyles} from '@material-ui/core/styles';
+import {MaterialUIClasses} from "../../interfaces/client/Common";
 
-const styles = theme => ({
+const styles = (theme:Theme) => ({
     root: {
         padding: '12px',
         border: '1px solid ' + theme.palette.secondary.main,
@@ -89,11 +90,17 @@ const styles = theme => ({
 
     }
 })
+interface Props {
+    classes:MaterialUIClasses,
+    label: string
+    onClick: ()=>void,
+    type:string
 
-const SocialIcon = (props) => {
+}
+
+const SocialIcon:React.FunctionComponent<Props> = (props) => {
     const {classes, type, onClick} = props
-
-    let getIconType = type => {
+    let getIconType = (type:string):string => {
         switch (type) {
             case 'reddit':
                 return 'icon-reddit'
@@ -107,19 +114,11 @@ const SocialIcon = (props) => {
                 return 'icon-whatsapp'
 
             default:
-                return null
+                return 'icon-facebook2'
         }
     }
-
-
     return <div onClick={onClick} className={classNames(classes[type], classes.root, getIconType(type),)}/>
 
-}
-
-SocialIcon.propTypes = {
-    type: PropTypes.oneOf(['reddit', 'youtube', 'twitter', 'facebook', 'whatsapp']),
-    onClick: PropTypes.func,
-    classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(SocialIcon);

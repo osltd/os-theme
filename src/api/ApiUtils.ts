@@ -179,3 +179,4 @@ export const stringToTags = (string?:any):Array<Tag> =>
     }) : [{label: string, value: string,}] : []
 
 }
+export const formatExpiryDate=(date:string):string=>(date&&date.length===4)?date.slice(0,2).concat('/',date.slice(2,4)):date

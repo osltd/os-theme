@@ -17,7 +17,7 @@ const styles = theme => ({
 
 });
 
-class WhiteDropDown extends React.Component {
+class DropDown extends React.Component {
 
     handleChange = name => event => {
         this.setState({
@@ -93,8 +93,8 @@ class WhiteDropDown extends React.Component {
     }
 }
 
-WhiteDropDown.propTypes = {
+DropDown.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(WhiteDropDown);
+//todo(need to improve)
+export default withStyles(styles)(DropDown);

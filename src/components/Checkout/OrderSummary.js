@@ -7,7 +7,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, redirectUrl, refactorTextLength, refactorTitle} from "../../api/ApiUtils";
+import {
+    formatExpiryDate,
+    formatMoney,
+    handleImgValid,
+    redirectUrl,
+    refactorTextLength,
+    refactorTitle
+} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -84,7 +91,8 @@ class OrderSummary extends React.Component {
                 "zipCode": billingDetail.zipCode,
                 "country": billingDetail.country,
             },
-            "payment": {"number": billingDetail.visaNumber, "cvc": billingDetail.cvc, "date": billingDetail.expiryDate},
+            "payment": {"number": billingDetail.visaNumber, "cvc": billingDetail.cvc, "date": formatExpiryDate(billingDetail.expiryDate)
+            },
             "startPurchase": false,
 
             "shipping": billingDetail.selectedShippingMethod,

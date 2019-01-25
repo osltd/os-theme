@@ -9,6 +9,9 @@ export interface VariantOptions {
     [key:string]:Array<string>,
 }
 
+export interface MaterialUIClasses {
+    [key:string]:string
+}
 export interface Tag {
     label: string,
     value: string,
