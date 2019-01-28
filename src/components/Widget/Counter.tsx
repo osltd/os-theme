@@ -1,11 +1,12 @@
 import React from 'react';
-import {withStyles,Theme} from '@material-ui/core/styles';
+import {Theme, withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Grid, Input, Typography} from '@material-ui/core';
 import {MaterialUIClasses} from "../../interfaces/client/Common";
+import {CounterValidation} from "../../api/ApiUtils";
+import createStyles from "@material-ui/core/styles/createStyles";
 
-const styles = (theme:Theme) => ({
-        root: {},
+const styles = (theme:Theme) => createStyles({
         operator: {
             padding: '10px',
             cursor: 'pointer',
@@ -29,7 +30,7 @@ const styles = (theme:Theme) => ({
 interface Props {
     classes:MaterialUIClasses,
     number:number,
-    onChange:(n:any)=>number
+    onChange:(number:number)=>number
 }
 
 const  Counter:React.FunctionComponent<Props> =(props)=> {
@@ -45,7 +46,7 @@ const  Counter:React.FunctionComponent<Props> =(props)=> {
                 <Grid item>
                     <Input
                         value={number ? number : onChange(1)}
-                        onChange={e => onChange(e.target.value > 0 ? e.target.value : 1)}
+                        onChange={e => onChange(CounterValidation(parseInt(e.target.value) ))}
                         type="number"
                         className={classes.input}
                         disableUnderline={true}
@@ -54,7 +55,7 @@ const  Counter:React.FunctionComponent<Props> =(props)=> {
                 <Grid item>
                     <Typography variant={'h6'}
                                 className={classes.operator}
-                                onClick={() => onChange(parseInt(number) + 1)}>+
+                                onClick={() => onChange(number + 1)}>+
                     </Typography>
                 </Grid>
             </Grid>

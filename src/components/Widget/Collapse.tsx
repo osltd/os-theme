@@ -5,8 +5,9 @@ import {Grid} from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 import {MaterialUIClasses} from "../../interfaces/client/Common";
 import {Theme} from "@material-ui/core/styles";
+import createStyles from "@material-ui/core/styles/createStyles";
 
-const styles = (theme: Theme) => ({
+const styles = (theme: Theme) => createStyles({
     root: {
         width: '100%'
     },

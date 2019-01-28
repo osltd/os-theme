@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import {Fab, Grid} from '@material-ui/core'
 import {withStyles,Theme} from '@material-ui/core/styles';
 import {MaterialUIClasses} from "../../interfaces/client/Common";
+import createStyles from "@material-ui/core/styles/createStyles";
 
-const styles = (theme:Theme) => ({
+const styles = (theme:Theme) => createStyles({
     root: {
         margin: 0,
         padding: '6px 0px',

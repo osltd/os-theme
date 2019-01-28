@@ -30,32 +30,7 @@ const styles = theme => ({
 })
 
 
-class ResponsiveDialog extends React.Component {
-
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
-
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
-
-    render() {
+const FeedOverviewBox = props=> {
         const {
             classes,
             src,
@@ -65,12 +40,11 @@ class ResponsiveDialog extends React.Component {
             postDate,
             comments,
             medias
-        } = this.props;
+        } = props;
         return (
             <Grid container
-                  onClick={() => redirectUrl('/feeds/' + id, this.props.history)}
+                  onClick={() => redirectUrl('/feeds/' + id, props.history)}
                   className={classes.root} alignItems={'center'}
-
                   justify={'center'}
             >
                 <Grid item xs={12}>
@@ -94,10 +68,9 @@ class ResponsiveDialog extends React.Component {
 
                 </Grid>
             </Grid>
-        );
-    }
+        )
 
 }
 
 
-export default withRouter(withStyles(styles)(ResponsiveDialog))
+export default withRouter(withStyles(styles)(FeedOverviewBox))

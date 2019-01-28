@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {redirectUrl} from "../../api/ApiUtils";
-import Dialog from '../Widget/Dialog'
+import Dialog from './Dialog'
 import MyAccount from '../Auth/Accounts/Overview'
 const styles = theme => ({
     root: {

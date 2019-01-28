@@ -180,3 +180,4 @@ export const stringToTags = (string?:any):Array<Tag> =>
 
 }
 export const formatExpiryDate=(date:string):string=>(date&&date.length===4)?date.slice(0,2).concat('/',date.slice(2,4)):date
+export const CounterValidation = (num:number):number=> (num >0) ?num:1
