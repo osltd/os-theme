@@ -17,7 +17,7 @@ import {
     numberToPagination,
     refactorTextLength,
 } from "../../api/ApiUtils";
-import {    sort_by} from '../../api/backup'
+import {sort_by} from '../../api/backup'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
@@ -54,31 +54,31 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 
-        changeViewMode: (mode) =>
-            dispatch({
-                    type: EDIT_PRODUCT_VIEW_MODE,
-                    payload: mode,
-                }
-            )
-        ,
-        editProductSort: (key, value) => dispatch({
-            type: PRODUCT_EDIT_SORT,
-            payload: {
-                key: key,
-                value: value,
-            },
-        }),
-        editProductFilter: (key, value) => dispatch({
-            type: PRODUCT_EDIT_FILTER,
-            payload: {
-                key: key,
-                value: value,
-            },
-        }),
-    })
+    changeViewMode: (mode) =>
+        dispatch({
+                type: EDIT_PRODUCT_VIEW_MODE,
+                payload: mode,
+            }
+        )
+    ,
+    editProductSort: (key, value) => dispatch({
+        type: PRODUCT_EDIT_SORT,
+        payload: {
+            key: key,
+            value: value,
+        },
+    }),
+    editProductFilter: (key, value) => dispatch({
+        type: PRODUCT_EDIT_FILTER,
+        payload: {
+            key: key,
+            value: value,
+        },
+    }),
+})
 
-const  ShopOverview =props=> {
-   let  initFilter = () => {
+const ShopOverview = props => {
+    let initFilter = () => {
         let query = props.history.location.search
         let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1)
         let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length)
@@ -86,7 +86,7 @@ const  ShopOverview =props=> {
 
     }
 
-  let  sortData = () => {
+    let sortData = () => {
 
         let data = Array.from(props.products)
         data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true)
@@ -117,7 +117,7 @@ const  ShopOverview =props=> {
         return sortBy()
 
     }
-  let  getProductProperty = (products, type) => {
+    let getProductProperty = (products, type) => {
         switch (type) {
             case 'display':
                 if (props.sort.page) {
@@ -131,30 +131,30 @@ const  ShopOverview =props=> {
 
         }
     }
- let   initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label)
-    let  getTagsList = () => <List
+    let initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label)
+    let getTagsList = () => <List
         data={getTagsCountsArray(props.products, (tag, number) => {
-            popUp && popUp.handleClose()
             props.editProductFilter('tag', tag)
             initPageNumber(number)
         })}
         selectedValue={props.filter.tag}
     />
 
-    let  getPagination = (products) => {
+    let getPagination = (products) => {
         if (products.length === 0) return null
-
         let options = numberToPagination(getProductProperty(products, 'length'),
             page => props.editProductSort('page', page))
         //todo('have error of Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
 
-        if (props.sort.page === '') props.editProductSort('page', options[0].label)
+        if (props.sort.page === ''&&  (!(_.isEmpty(options[0].label))))
+
+            props.editProductSort('page', options[0].label)
         return (<WhiteDropDown
             options={options}
             selectedValue={props.sort.page}
         />)
     }
-    let   getProductsList = (products) => {
+    let getProductsList = (products) => {
 
 
         if (products.length === 0) {
@@ -163,7 +163,7 @@ const  ShopOverview =props=> {
             }</strong> category yet</Typography>
 
 
-         }
+        }
 
 
         return props.viewMode === 'form' ?
@@ -193,119 +193,116 @@ const  ShopOverview =props=> {
     }
 
     let popUp = useRef()
-    useEffect(
-        ()=>initFilter(),
-        []
-    )
-        const {classes} = props
-        if (props.products === null) return <LoadingPage/>
-        const products = sortData()
-        const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
-        return (
-            <Grid container justify={'center'}>
-                <Grid item xs={12}>
-                    <Header
-                        title={'shop'}
-                        route={'home/shop'}
-                    />
-                </Grid>
+    useEffect(() => initFilter())
+    const {classes} = props
+    if (props.products === null) return <LoadingPage/>
+    const products = sortData()
+    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
+    return (
+        <Grid container justify={'center'}>
+            <Grid item xs={12}>
+                <Header
+                    title={'shop'}
+                    route={'home/shop'}
+                />
+            </Grid>
 
-                {
-                    props.products.length > 0 ?
-                        <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
-                            {
-                                isWidthUp('md', props.width) ?
-                                    <Grid item md={3}>
-                                        <Typography variant={'h6'}>
-                                            PRODUCT CATEGORIES
-                                        </Typography>
-                                        {getTagsList()}
-                                    </Grid> : null
-                            }
-                            <Grid item xs={12} md={9}>
-                                <Grid item container xs={12} alignItems={'center'} justify={'space-between'}
-                                      direction={'row'}
-                                      className={classes.toolBar}>
-                                    <Grid item xs={2}>
+            {
+                props.products.length > 0 ?
+                    <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
+                        {
+                            isWidthUp('md', props.width) ?
+                                <Grid item md={3}>
+                                    <Typography variant={'h6'}>
+                                        PRODUCT CATEGORIES
+                                    </Typography>
+                                    {getTagsList()}
+                                </Grid> : null
+                        }
+                        <Grid item xs={12} md={9}>
+                            <Grid item container xs={12} alignItems={'center'} justify={'space-between'}
+                                  direction={'row'}
+                                  className={classes.toolBar}>
+                                <Grid item xs={2}>
                                 <span
                                     onClick={() => props.changeViewMode('form')}
                                     className={classNames(classes.icon, 'icon-table')}/>
-                                        <span
-                                            onClick={() => props.changeViewMode('list')}
-                                            className={classNames('icon-list', classes.icon)}/>
+                                    <span
+                                        onClick={() => props.changeViewMode('list')}
+                                        className={classNames('icon-list', classes.icon)}/>
+                                </Grid>
+                                <Grid item xs={3} container alignItems={'center'} direction={'row'}>
+                                    <Grid item>
+                                        <Typography variant={'body1'}>
+                                            Items
+                                        </Typography>
                                     </Grid>
-                                    <Grid item xs={3} container alignItems={'center'} direction={'row'}>
-                                        <Grid item>
-                                            <Typography variant={'body1'}>
-                                                Items
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            {
-                                                getPagination(products)
+                                    <Grid item>
+                                        {
+                                            getPagination(products)
+                                        }
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography variant={'body1'}>
+                                            of {getProductProperty(products, 'length')}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={3} container alignItems={'center'} direction={'row'}>
+
+                                    <Grid item>
+                                        <Typography variant={'body1'}>
+                                            sort by
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+
+                                        <WhiteDropDown
+                                            options={
+                                                arrayToFilter(
+                                                    filterOptions, value => {
+                                                        props.editProductSort('sortBy', value)
+                                                        initPageNumber(getProductProperty(sortData(), 'length'))
+                                                    }
+                                                )}
+                                            selectedValue={props.sort.sortBy}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                {
+                                    isWidthUp('md', props.width) ? null : <Grid item>
+                                        <PopUp
+                                            innerRef={e => popUp = e}
+                                            title={
+                                                <Grid container alignItems={'center'}>
+                                                    <Typography variant={'body1'}>
+                                                        {props.filter.tag ? <Typography
+                                                            variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : 'Product Category'}
+                                                    </Typography>
+                                                    <span className={classes.array + ' ' + 'icon-circle-down'}/>
+                                                </Grid>
+
                                             }
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant={'body1'}>
-                                                of {getProductProperty(products, 'length')}
-                                            </Typography>
-                                        </Grid>
+                                            popUp={getTagsList()}
+                                        />
+
                                     </Grid>
-                                    <Grid item xs={3} container alignItems={'center'} direction={'row'}>
-
-                                        <Grid item>
-                                            <Typography variant={'body1'}>
-                                                sort by
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item>
-
-                                            <WhiteDropDown
-                                                options={
-                                                    arrayToFilter(
-                                                        filterOptions, value => {
-                                                            props.editProductSort('sortBy', value)
-                                                            initPageNumber(getProductProperty(sortData(), 'length'))
-                                                        }
-                                                    )}
-                                                selectedValue={props.sort.sortBy}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                    {
-                                        isWidthUp('md', props.width) ? null : <Grid item>
-                                            <PopUp
-                                                innerRef={e => popUp = e}
-                                                title={
-                                                    <Grid container alignItems={'center'}>
-                                                        <Typography variant={'body1'}>
-                                                            {props.filter.tag ? <Typography
-                                                                variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : 'Product Category'}
-                                                        </Typography>
-                                                        <span className={classes.array + ' ' + 'icon-circle-down'}/>
-                                                    </Grid>
-
-                                                }
-                                                popUp={getTagsList()}
-                                            />
-
-                                        </Grid>
-                                    }
-                                </Grid>
-                                <Grid item container className={classes.listMode}>
-                                    {
-                                        getProductsList(products)
-                                    }
-                                </Grid>
+                                }
                             </Grid>
-                        </Grid> :
+                            <Grid item container className={classes.listMode}>
+                                {
+                                    getProductsList(products)
+                                }
+                            </Grid>
+                        </Grid>
+                    </Grid> :
 
-                        <Typography variant={'subtitle1'}> there are no products available yet</Typography>
+                    <Typography variant={'subtitle1'}> there are no products available yet</Typography>
 
 
-                }
-            </Grid>
-        );
+            }
+        </Grid>
+    );
 }
 
 export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

@@ -3,6 +3,7 @@ import React from 'react'
 import {CircularProgress, Grid} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import {redirectUrl} from "../../api/ApiUtils";
+import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -51,4 +52,4 @@ NotFound.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NotFound)
+export default withRouter(withStyles(styles)(NotFound))

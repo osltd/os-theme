@@ -72,8 +72,7 @@ const mapDispatchToProps = dispatch => ({
                 value: value,
             },
         }),
-    }
-)
+    })
 
 const CheckoutOverview = props => {
 
@@ -85,10 +84,12 @@ const CheckoutOverview = props => {
     switch (true) {
         case rendering:
             return <LoadingPage/>
-        case needLogin:
+        case needLogin:{
+
             redirectUrl('/login', props.history, false)
             props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar)
-            break
+            return null
+        }
         case NoProductsInCart:
             return (<Grid container alignItems={'center'} justify={'center'}>
 

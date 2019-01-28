@@ -57,7 +57,7 @@ class FeedsWall extends React.Component {
                         backgroundImage: 'url(' + data[1].sections[0].medias[0].url + ')',
                         width: '100%',
                         backgroundPosition: 'center'
-                    }}></div>}
+                    }}/>}
                     right={<div style={{textAlign: 'center'}}>
                         <Typography
                             style={{padding: '0 20px'}}
@@ -84,7 +84,7 @@ class FeedsWall extends React.Component {
                         backgroundImage: 'url(' + data[2].sections[0].medias[0].url + ')',
                         width: '100%',
                         backgroundPosition: 'center'
-                    }}></div>}
+                    }}/>}
                     left=
                         {(<div style={{textAlign: 'center'}}>
                             <Typography

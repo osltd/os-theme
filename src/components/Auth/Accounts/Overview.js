@@ -50,20 +50,20 @@ const logout = (props) => {
                 {
                     content: (<Grid container alignItems={'center'} direction={'column'}>
                         <Grid item>
-                            {false &&    <span
-                        className={'icon-like'}
-                        style={{
-                            fontSize: '80px',
-                            color: 'hsla(100,55%,69%,.5)',
-                            padding: '20px',
-                            display: 'block',
-                            width: '80px',
-                            height: '80px',
-                            border: '4px solid hsla(98,55%,69%,.2)',
-                            borderRadius: '50%',
-                            boxSizing: 'content-box',
-                        }}
-                    />}
+                            {false && <span
+                                className={'icon-like'}
+                                style={{
+                                    fontSize: '80px',
+                                    color: 'hsla(100,55%,69%,.5)',
+                                    padding: '20px',
+                                    display: 'block',
+                                    width: '80px',
+                                    height: '80px',
+                                    border: '4px solid hsla(98,55%,69%,.2)',
+                                    borderRadius: '50%',
+                                    boxSizing: 'content-box',
+                                }}
+                            />}
                         </Grid>
                         <Grid item>
                             <Typography variant={'h4'}>
@@ -121,14 +121,21 @@ const MyAccount = (props) => {
                 </Grid>
                 <Grid item xs={4}>
                     <CustomButton
-                        onClick={() => redirectUrl('/login', history)}
+                        onClick={() => {
+                            props.dialog && props.dialog.handleClose()
+                            redirectUrl('/login', history)
+                        }}
+
                         value={'Log In'}/>
                 </Grid>
                 <Grid item xs={1}/>
                 <Grid item xs={4}>
 
                     <CustomButton
-                        onClick={() => redirectUrl('/register', history)}
+                        onClick={() => {
+                            props.dialog && props.dialog.handleClose()
+                            redirectUrl('/register', history)
+                        }}
 
                         value={'Register'}
                     />

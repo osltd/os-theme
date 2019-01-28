@@ -189,10 +189,6 @@ const ShoppingCartTable = (props) => {
                             </TableCell>
 
                         </TableRow>
-                        <TableRow>
-
-
-                        </TableRow>
                     </TableBody>
                 </Table>
             </Paper> : <Grid spacing={32} alignItems={'center'} container>

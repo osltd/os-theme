@@ -64,9 +64,7 @@ const FeedDetail = (props) => {
         const feed = feeds.find(n => n.id.toString() === match.params.id)
         return (
             <Grid container justify={'center'} className={classes.root}>
-                <Header
-                    title={refactorTextLength(feed.sections[0].title)}
-                />
+                <Header title={refactorTextLength(feed.sections[0].title)}/>
                 <Grid item container spacing={16} xs={12} lg={10}>
                     {
                         false && <Grid item container alignItems={'center'} xs={12}
