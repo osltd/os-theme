@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?eb6ee5');
-  src:  url('fonts/icomoon.eot?eb6ee5#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?eb6ee5') format('truetype'),
-    url('fonts/icomoon.woff?eb6ee5') format('woff'),
-    url('fonts/icomoon.svg?eb6ee5#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?13a3aa');
+  src:  url('fonts/icomoon.eot?13a3aa#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?13a3aa') format('truetype'),
+    url('fonts/icomoon.woff?13a3aa') format('woff'),
+    url('fonts/icomoon.svg?13a3aa#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,8 +24,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-like:before {
-  content: "\eaed";
+.icon-icons8-calendar:before {
+  content: "\eaee";
+}
+.icon-icons8-edit:before {
+  content: "\eaef";
 }
 .icon-left-16:before {
   content: "\eaeb";
@@ -34,6 +37,9 @@
 .icon-right-16:before {
   content: "\eaec";
   color: #311052;
+}
+.icon-like:before {
+  content: "\eaed";
 }
 .icon-home:before {
   content: "\e900";

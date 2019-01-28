@@ -50,7 +50,7 @@ const logout = (props) => {
                 {
                     content: (<Grid container alignItems={'center'} direction={'column'}>
                         <Grid item>
-                    <span
+                            {false &&    <span
                         className={'icon-like'}
                         style={{
                             fontSize: '80px',
@@ -63,7 +63,7 @@ const logout = (props) => {
                             borderRadius: '50%',
                             boxSizing: 'content-box',
                         }}
-                    />
+                    />}
                         </Grid>
                         <Grid item>
                             <Typography variant={'h4'}>

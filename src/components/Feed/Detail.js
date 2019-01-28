@@ -27,6 +27,13 @@ const styles = theme => (
         backArrow: {
             cursor: 'pointer',
 
+        },
+        basicInfo:{
+            paddingBottom:'10px',
+        },
+        basicInfoText:{
+            display:"inline-block",
+            paddingLeft:'5px',
         }
     })
 
@@ -83,20 +90,21 @@ const FeedDetail = (props) => {
 
                     </Grid>
                     <Grid item container xs={12} md={9}>
-                        <Grid item container direction={'row'} alignItems={'center'} spacing={16} xs={12}>
+                        <Grid item container direction={'row'}
+                              justify={'space-between'}
+                              alignItems={'center'}
+                              className={classes.basicInfo}
+
+                              spacing={16} xs={12}>
                             <Grid item>
-                                <span className={'icon-quill'}/>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'subtitle1'}>
+                                <span className={'icon-icons8-edit'}/>
+                                 <Typography variant={'subtitle1'} className={classes.basicInfoText}>
                                     {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : 'no authors'}
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <span className={'icon-calendar'}/>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant={'subtitle1'}>
+                                <span className={'icon-icons8-calendar'}/>
+                                <Typography variant={'subtitle1'} className={classes.basicInfoText}>
                                     {moment(feed.time).format('MMM Do YYYY')}
                                 </Typography>
                             </Grid>

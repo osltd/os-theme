@@ -9,7 +9,6 @@ import {redirectUrl} from "../../../api/ApiUtils";
 
 const style = theme => ({
     root: {
-        margin: 0,
         width: 'calc(100%-80px)',
     },
     img: {

@@ -75,7 +75,7 @@ const MyCredits = props=>  {
 
                 content: (<Grid container alignItems={'center'} direction={'column'}>
                     <Grid item>
-                    <span className={'icon-like'}
+                        {false && <span className={'icon-like'}
 
                           style={{
                               fontSize: '80px',
@@ -89,7 +89,7 @@ const MyCredits = props=>  {
                               borderRadius: '50%',
                               boxSizing: 'content-box',
                           }}
-                    />
+                    />}
                     </Grid>
                     <Grid item>
                         <Typography variant={'h4'}>

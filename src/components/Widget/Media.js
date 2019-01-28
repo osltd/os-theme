@@ -117,7 +117,7 @@ class Media extends React.Component {
 
         return <Grid container justify={'center'}
         >
-            <Grid item xs={11} lg={this.state.type === 'product' && !box ? 6 : 11}>
+            <Grid item xs={12} lg={this.state.type === 'product' && !box ? 6 : 12}>
                 {this.getMedia(data)}
             </Grid>
 
