@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import List from '../Widget/List'
 import Header from '../Layout/Body/Header'
@@ -50,8 +50,7 @@ const mapStateToProps = state => ({
     viewMode: state.product.viewMode,
     sort: state.product.sort,
     filter: state.product.filter,
-});
-
+})
 
 const mapDispatchToProps = dispatch => ({
 
@@ -76,24 +75,23 @@ const mapDispatchToProps = dispatch => ({
                 value: value,
             },
         }),
-    }
-)
+    })
 
-class ShopOverview extends React.Component {
-    initFilter = () => {
-        let query = this.props.history.location.search
+const  ShopOverview =props=> {
+   let  initFilter = () => {
+        let query = props.history.location.search
         let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1)
         let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length)
-        if (isTags && this.props.filter.tag !== queryTag) this.props.editProductFilter('tag', queryTag)
+        if (isTags && props.filter.tag !== queryTag) props.editProductFilter('tag', queryTag)
 
     }
 
-    sortData = () => {
+  let  sortData = () => {
 
-        let data = Array.from(this.props.products)
-        data = data.filter(n => (this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true)
+        let data = Array.from(props.products)
+        data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true)
         let sortBy = () => {
-            switch (this.props.sort.sortBy) {
+            switch (props.sort.sortBy) {
                 case 'Name A-Z':
                     return data.sort(sort_by('name', null))
                 case 'Name Z-A':
@@ -119,11 +117,11 @@ class ShopOverview extends React.Component {
         return sortBy()
 
     }
-    getProductProperty = (products, type) => {
+  let  getProductProperty = (products, type) => {
         switch (type) {
             case 'display':
-                if (this.props.sort.page) {
-                    let range = this.props.sort.page.split(' - ')
+                if (props.sort.page) {
+                    let range = props.sort.page.split(' - ')
                     return products.filter((n, i) => (i >= range[0] - 1 && i <= range[1] - 1))
 
                 }
@@ -133,44 +131,44 @@ class ShopOverview extends React.Component {
 
         }
     }
-    initPageNumber = length => this.props.editProductSort('page', numberToPagination(length, null)[0].label)
-    getTagsList = () => <List
-        data={getTagsCountsArray(this.props.products, (tag, number) => {
-            this.popUp && this.popUp.handleClose()
-            this.props.editProductFilter('tag', tag)
-            this.initPageNumber(number)
+ let   initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label)
+    let  getTagsList = () => <List
+        data={getTagsCountsArray(props.products, (tag, number) => {
+            popUp && popUp.handleClose()
+            props.editProductFilter('tag', tag)
+            initPageNumber(number)
         })}
-        selectedValue={this.props.filter.tag}
+        selectedValue={props.filter.tag}
     />
 
-    getPagination = (products) => {
+    let  getPagination = (products) => {
         if (products.length === 0) return null
 
-        let options = numberToPagination(this.getProductProperty(products, 'length'),
-            page => this.props.editProductSort('page', page))
+        let options = numberToPagination(getProductProperty(products, 'length'),
+            page => props.editProductSort('page', page))
         //todo('have error of Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
 
-        if (this.props.sort.page === '') this.props.editProductSort('page', options[0].label)
+        if (props.sort.page === '') props.editProductSort('page', options[0].label)
         return (<WhiteDropDown
             options={options}
-            selectedValue={this.props.sort.page}
+            selectedValue={props.sort.page}
         />)
     }
-    getProductsList = (products) => {
+    let   getProductsList = (products) => {
 
 
         if (products.length === 0) {
             return <Typography variant={'subtitle1'}> there are no products under <strong>{
-                this.props.filter.tag
+                props.filter.tag
             }</strong> category yet</Typography>
 
 
          }
 
 
-        return this.props.viewMode === 'form' ?
+        return props.viewMode === 'form' ?
 
-            this.getProductProperty(products, 'display').map((n, i) =>
+            getProductProperty(products, 'display').map((n, i) =>
                 <Grid item xs={12} sm={6} md={4} key={i}
                 >
                     <ProductOverviewBox
@@ -182,7 +180,7 @@ class ShopOverview extends React.Component {
                         promotePrice={n.promotePrice}
                     />
                 </Grid>
-            ) : this.getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
+            ) : getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
                 key={i}
                 src={handleImgValid(n.photos[0])}
                 name={refactorTextLength(n.name)}
@@ -194,14 +192,14 @@ class ShopOverview extends React.Component {
             />))
     }
 
-    componentDidMount() {
-        this.initFilter()
-    }
-
-    render() {
-        const {classes} = this.props
-        if (this.props.products === null) return <LoadingPage/>
-        const products = this.sortData()
+    let popUp = useRef()
+    useEffect(
+        ()=>initFilter(),
+        []
+    )
+        const {classes} = props
+        if (props.products === null) return <LoadingPage/>
+        const products = sortData()
         const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
         return (
             <Grid container justify={'center'}>
@@ -213,15 +211,15 @@ class ShopOverview extends React.Component {
                 </Grid>
 
                 {
-                    this.props.products.length > 0 ?
-                        <Grid item lg={10} spacing={isWidthUp('md', this.props.width) ? 16 : 0} container>
+                    props.products.length > 0 ?
+                        <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
                             {
-                                isWidthUp('md', this.props.width) ?
+                                isWidthUp('md', props.width) ?
                                     <Grid item md={3}>
                                         <Typography variant={'h6'}>
                                             PRODUCT CATEGORIES
                                         </Typography>
-                                        {this.getTagsList()}
+                                        {getTagsList()}
                                     </Grid> : null
                             }
                             <Grid item xs={12} md={9}>
@@ -230,10 +228,10 @@ class ShopOverview extends React.Component {
                                       className={classes.toolBar}>
                                     <Grid item xs={2}>
                                 <span
-                                    onClick={() => this.props.changeViewMode('form')}
+                                    onClick={() => props.changeViewMode('form')}
                                     className={classNames(classes.icon, 'icon-table')}/>
                                         <span
-                                            onClick={() => this.props.changeViewMode('list')}
+                                            onClick={() => props.changeViewMode('list')}
                                             className={classNames('icon-list', classes.icon)}/>
                                     </Grid>
                                     <Grid item xs={3} container alignItems={'center'} direction={'row'}>
@@ -244,12 +242,12 @@ class ShopOverview extends React.Component {
                                         </Grid>
                                         <Grid item>
                                             {
-                                                this.getPagination(products)
+                                                getPagination(products)
                                             }
                                         </Grid>
                                         <Grid item>
                                             <Typography variant={'body1'}>
-                                                of {this.getProductProperty(products, 'length')}
+                                                of {getProductProperty(products, 'length')}
                                             </Typography>
                                         </Grid>
                                     </Grid>
@@ -266,29 +264,29 @@ class ShopOverview extends React.Component {
                                                 options={
                                                     arrayToFilter(
                                                         filterOptions, value => {
-                                                            this.props.editProductSort('sortBy', value)
-                                                            this.initPageNumber(this.getProductProperty(this.sortData(), 'length'))
+                                                            props.editProductSort('sortBy', value)
+                                                            initPageNumber(getProductProperty(sortData(), 'length'))
                                                         }
                                                     )}
-                                                selectedValue={this.props.sort.sortBy}
+                                                selectedValue={props.sort.sortBy}
                                             />
                                         </Grid>
                                     </Grid>
                                     {
-                                        isWidthUp('md', this.props.width) ? null : <Grid item>
+                                        isWidthUp('md', props.width) ? null : <Grid item>
                                             <PopUp
-                                                innerRef={e => this.popUp = e}
+                                                innerRef={e => popUp = e}
                                                 title={
                                                     <Grid container alignItems={'center'}>
                                                         <Typography variant={'body1'}>
-                                                            {this.props.filter.tag ? <Typography
-                                                                variant={'body1'}>{'tags:' + this.props.filter.tag}</Typography> : 'Product Category'}
+                                                            {props.filter.tag ? <Typography
+                                                                variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : 'Product Category'}
                                                         </Typography>
                                                         <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                                     </Grid>
 
                                                 }
-                                                popUp={this.getTagsList()}
+                                                popUp={getTagsList()}
                                             />
 
                                         </Grid>
@@ -296,7 +294,7 @@ class ShopOverview extends React.Component {
                                 </Grid>
                                 <Grid item container className={classes.listMode}>
                                     {
-                                        this.getProductsList(products)
+                                        getProductsList(products)
                                     }
                                 </Grid>
                             </Grid>
@@ -308,7 +306,6 @@ class ShopOverview extends React.Component {
                 }
             </Grid>
         );
-    }
 }
 
 export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

@@ -136,24 +136,18 @@ class ShoppingCartTable extends React.Component {
 
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-        };
-    }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
 
         if (this.props.billingDetail.shippingOptions === undefined && this.props.billingDetail.address) {
             this.getShippingRate()
-
         }
     }
 
     render() {
         const {classes, billingDetail, shoppingCart} = this.props;
         return (
-            <Grid container spacing={16}>
+            <Grid container spacing={16} className={classes.root}>
 
                 <Grid item xs={6}>
                     <InputBar
@@ -190,7 +184,6 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         title={'City'}
                         placeholder={'City'}
-
                         onChange={value => this.props.editBillingDetail('city', value)}
                         value={billingDetail.city}
                     />
@@ -199,7 +192,6 @@ class ShoppingCartTable extends React.Component {
                 <InputBar
                     title={'Country'}
                     placeholder={'Country'}
-
                     onChange={value => this.props.editBillingDetail('country', value)}
                     value={billingDetail.country}
                 />
@@ -210,33 +202,27 @@ class ShoppingCartTable extends React.Component {
                         validation={
                             {
                                 format: '###-###',
-
-
                             }
                         }
                         title={'Postcode/ZIP'}
                         placeholder={'Postcode/ZIP'}
-
                         onChange={value => this.props.editBillingDetail('zipCode', value)}
                         value={billingDetail.zipCode}
                     />
 
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={6}>
                     <CountryCode
                         value={billingDetail.countryCode}
-
                         onChange={value => this.props.editBillingDetail('countryCode', value)}
-
                     />
                 </Grid>
-                <Grid item xs={7}>
+                <Grid item xs={6}>
                     <InputBar
                         placeholder={'please enter ur phone number for contact'}
                         validation={
                             {
                                 prefix: `${billingDetail.countryCode.value}`,
-
                             }
                         }
                         onChange={value => this.props.editBillingDetail('phone', value)}
@@ -247,13 +233,10 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         title={'Street Address'}
                         placeholder={'Street Address'}
-
                         onChange={value => this.props.editBillingDetail('address', value)}
                         value={billingDetail.address}
                     />
-
                 </Grid>
-
 
                 <Grid item xs={12}>
                     <InputBar
@@ -280,7 +263,6 @@ class ShoppingCartTable extends React.Component {
                         validation={
                             {
                                 format: '##/##',
-
                                 mask: ['M', 'M', 'Y', 'Y'],
                             }
                         }
@@ -295,8 +277,6 @@ class ShoppingCartTable extends React.Component {
                         validation={
                             {
                                 format: '###',
-
-
                             }
                         }
                         onChange={value => this.props.editBillingDetail('cvc', value)}
@@ -304,9 +284,7 @@ class ShoppingCartTable extends React.Component {
                     />
                 </Grid>
 
-                {
-                    this.getShippingMethod()
-                }
+                {this.getShippingMethod()}
             </Grid>
 
         )

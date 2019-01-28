@@ -54,19 +54,18 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 )
 
-class ResponsiveDialog extends React.Component {
+const MainPageOverview =props=> {
 
 
-    render() {
 
-        const {classes} = this.props
-        let getDataFromAPI = (this.props.feeds === null && this.props.products === null)
+        const {classes,feeds,products,history,category} = props
+        let getDataFromAPI = (feeds === null && products === null)
         if (getDataFromAPI) return <LoadingPage/>
-        let latestArticle = this.props.feeds && this.props.feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3)
-        let hasProductsToShow = (this.props.products && this.props.products.length > 0)
-        let hasFeedsToShow = (this.props.feeds && this.props.feeds.length > 0)
-        let hasCategoryToShow = (this.props.category.length > 0)
-        let hasSelectedProductsToShow = hasProductsToShow && this.props.products
+        let latestArticle = feeds && feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3)
+        let hasProductsToShow = (products && products.length > 0)
+        let hasFeedsToShow = (feeds && feeds.length > 0)
+        let hasCategoryToShow = (category.length > 0)
+        let hasSelectedProductsToShow = hasProductsToShow && products
             .filter(n => n.tags.find(m => m.toLowerCase() === FEATURED_PRODUCTS)).length > 0
 
 
@@ -96,13 +95,13 @@ class ResponsiveDialog extends React.Component {
                     <SectionBanner
                         hasFeedsToShow={hasFeedsToShow}
                         latestArticle={latestArticle}
-                        feeds={this.props.feeds}
+                        feeds={feeds}
                     />
                 </Suspense>
                 {/* ---------------- hot sale products ----------------*/}
                 {
                     <Suspense fallback={null}>
-                        <SectionTopInterest self={this.props}/>
+                        <SectionTopInterest self={props}/>
                     </Suspense>
 
                 }
@@ -115,7 +114,7 @@ class ResponsiveDialog extends React.Component {
                         <Grid item xs={12} md={10} lg={10}>
                             <CategoryOverviewBox
 
-                                category={this.props.category}
+                                category={category}
                             />
                         </Grid>
 
@@ -123,7 +122,7 @@ class ResponsiveDialog extends React.Component {
                 }
                 {
                     <Suspense fallback={null}>
-                        <SectionFeatureProducts self={this.props}/>
+                        <SectionFeatureProducts self={props}/>
                     </Suspense>
 
                 }
@@ -132,7 +131,6 @@ class ResponsiveDialog extends React.Component {
             </Grid>
         );
     }
-}
 
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainPageOverview)))

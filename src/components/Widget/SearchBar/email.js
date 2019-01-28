@@ -17,7 +17,6 @@ const styles = theme => ({
         color: 'white',
         /* border: 1px solid white; */
         padding: '10px 20px',
-        width: '370px',
         flexBasis: '200px',
         borderRadius: '5px',
         background: '#000',

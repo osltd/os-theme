@@ -45,8 +45,7 @@ const Tag: React.FunctionComponent<Props> = props => {
     return (
         <Fab variant={"extended"}
              onClick={onClick}
-             className={classNames(classes.root,
-                 selected ? classes.selected : null)}>
+             className={classNames(classes.root, selected ? classes.selected : null)}>
             {value}
         </Fab>
 

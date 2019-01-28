@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
@@ -39,69 +39,50 @@ const styles = theme => ({
 });
 
 
-class PopUp extends React.Component {
+const PopUp = props => {
 
-    anchorEl = null;
-    handleChange = key => (event, value) => {
-        this.setState({
-            [key]: value,
-        });
-    };
-    handleClickButton = event => {
-        this.setState({
-            anchorEl: event.currentTarget,
-            open: true,
-        });
-    };
-    handleClose = () => this.setState({open: false,});
+    const [open, setOpen] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    let handleClickButton = event => {
+        setAnchorEl(
+            event.currentTarget
+        )
+        setOpen(true)
+    }
     //in parent
     //                                innerRef={e => this.popUp = e}
 //this.popUp.handleClose()
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
+    const {classes, popUp, title,} = props;
 
-        this.state = {
-            open: false,
-            anchorEl: null,
-        };
+    return (
 
-    }
+        <Grid
 
-    render() {
-        const {classes, popUp, title,} = this.props;
-        const {open} = this.state;
+            container alignItems={'center'}>
 
-        return (
-
-            <Grid
-                ref={this.myRef}
-
-                container alignItems={'center'}>
-
-                <Grid item className={classes.button} onClick={this.handleClickButton}>
-                    {title}
-                </Grid>
-                <Popover
-                    open={open}
-                    anchorEl={this.state.anchorEl}
-                    anchorReference={'anchorEl'}
-                    onClose={this.handleClose}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                >
-                    {popUp}
-                </Popover>
+            <Grid item className={classes.button} onClick={handleClickButton}>
+                {title}
             </Grid>
-        );
-    }
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                anchorReference={'anchorEl'}
+                onClose={() => setOpen(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+            >
+                {popUp}
+            </Popover>
+        </Grid>
+    );
 }
 
 PopUp.propTypes = {

@@ -110,7 +110,7 @@ class ResponsiveDialog extends React.Component {
                                         ) ? n.sections.find(section => section.medias[0]).medias[0].url :
                                             'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
 
-                                        subTitle={refactorParaLength(111)}
+                                        subTitle={refactorParaLength(n.sections[0].description)}
                                         title={n.sections[0].title}
                                         author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
                                         postDate={n.postDate}

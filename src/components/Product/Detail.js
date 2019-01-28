@@ -100,7 +100,6 @@ class ResponsiveDialog extends React.Component {
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
         swal(
             {
-
                 content: (<Grid container alignItems={'center'} direction={'column'}>
                     <Grid item>
                     <span className={'icon-like'}

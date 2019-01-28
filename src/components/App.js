@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
@@ -37,8 +37,6 @@ import Login from './Auth/Login/Overview'
 
 
 const mapStateToProps = state => ({
-
-
     products: state.product.products,
 });
 
@@ -136,58 +134,58 @@ const mapDispatchToProps = dispatch => ({
     }
 )
 
-class App extends React.Component {
-    getAllProducts = async (page = 1, products = []) => {
+const App = props => {
+    let getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
-        return (data && data.length > 0) ? this.getAllProducts(page + 1, _.concat(products, data)) : products
+        return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
     }
-    initApp = async () => await  this.props.initApp(
+    let initApp = async () => await props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
     )
 
-    componentDidMount() {
-        agent.Checkout.getPromoCode()
-        this.initApp().then(
-            async () =>
-                this.props.finishLoadingProducts(
-                    await this.getAllProducts()
-                ))
-    }
+    useEffect(
+        () => {
+            initApp().then(
+                async () =>
+                    props.finishLoadingProducts(
+                        await getAllProducts()
+                    )
+            )
+            return null
+        }, [])
 
-    render() {
-        return (
-            <BrowserRouter>
-                <ScrollToTop>
-                    <ErrorBoundary>
-                        <Header/>
-                        <MyCredits/>
-                        <div style={(isWidthUp('md', this.props.width)) ? {paddingTop: '76px'} : null}>
-                            <Switch>
-                                <Route exact path={'/'} component={mainPage}/>
-                                <Route exact path={'/404'} component={NotFound}/>
-                                <Route exact path={'/login'} component={Login}/>
-                                <Route exact path={'/register'} component={Register}/>
-                                <Route exact path={'/products'} component={Shop}/>
-                                <Route exact path={'/feeds'} component={Feed}/>
-                                <Route exact path={'/feeds/:id'} component={FeedDetail}/>
-                                <Route exact path={'/products/:id'} component={Product}/>
-                                <Route exact path={'/checkout'} component={Checkout}/>
-                                <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
-                                <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
-                                <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                                <Route exact path={'/search/:keyword'} component={SearchPage}/>
 
-                                <Route component={NotFound}/>
-                            </Switch>
-                        </div>
-                        <Footer/>
-                    </ErrorBoundary>
-                </ScrollToTop>
-            </BrowserRouter>
+    return (
+        <BrowserRouter>
+            <ScrollToTop>
+                <ErrorBoundary>
+                    <Header/>
+                    <MyCredits/>
+                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : null}>
+                        <Switch>
+                            <Route exact path={'/'} component={mainPage}/>
+                            <Route exact path={'/404'} component={NotFound}/>
+                            <Route exact path={'/login'} component={Login}/>
+                            <Route exact path={'/register'} component={Register}/>
+                            <Route exact path={'/products'} component={Shop}/>
+                            <Route exact path={'/feeds'} component={Feed}/>
+                            <Route exact path={'/feeds/:id'} component={FeedDetail}/>
+                            <Route exact path={'/products/:id'} component={Product}/>
+                            <Route exact path={'/checkout'} component={Checkout}/>
+                            <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                            <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
+                            <Route exact path={'/loadingPage'} component={LoadingPage}/>
+                            <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                            <Route component={NotFound}/>
+                        </Switch>
+                    </div>
+                    <Footer/>
+                </ErrorBoundary>
+            </ScrollToTop>
+        </BrowserRouter>
 
-        )
+    )
 
-    }
 }
 
 //todo('add in stock logic')

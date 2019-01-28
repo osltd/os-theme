@@ -58,6 +58,8 @@ const style = theme => ({
 
 })
 
+
+
 class SimpleSlider extends React.Component {
     render() {
         let settings = {

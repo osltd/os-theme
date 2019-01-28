@@ -131,8 +131,6 @@ const Header = props => {
         feeds,
         shoppingCart,
         editShoppingCart,
-
-
     } = props
     let getInputBar = () =>
         <Input
@@ -151,6 +149,7 @@ const Header = props => {
 
     let hasProductsToShow = (products && products.length > 0)
     let hasFeedsToShow = (feeds && feeds.length > 0)
+
     if (isWidthUp('md', width)) {
         return (<AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
             <Grid container alignItems={'center'} justify={'space-between'}>

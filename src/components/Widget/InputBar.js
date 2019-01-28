@@ -14,7 +14,6 @@ const NumberFormatCustom = props => {
             getInputRef={inputRef}
             placeholder={placeholder}
             onValueChange={values => {
-                console.log(values)
                 onChange({
                     target: {
                         value: values.value,
@@ -32,26 +31,9 @@ NumberFormatCustom.propTypes = {
 };
 
 const styles = theme => ({
-    input: {}, cleave: {
-        fontSize: '18px',
-        color: 'currentColor',
-        margin: 0,
-        padding: '16px 10px 17px 10px',
-        border: '1px solid ' + theme.palette.secondary.main,
-
-        display: 'block',
-        minWidth: 0,
-        flexGrow: 1,
-        '&:focus': {
-            outline: 'none',
-        },
-        '&::placeholder': {
-            color: theme.palette.secondary.light,
-        }
-
+    input: {
+        width:'100%',
     }
-
-
 })
 
 const InputBar=props=> {
@@ -59,13 +41,12 @@ const InputBar=props=> {
 
         const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
 
-        return (<Grid container direction={'column'}>
-                {<TextField
+        return <TextField
                     disabled={(disabled)}
                     value={value ? value : ''}
                     rows={multiline ? 5 : 1}
                     className={classes.input}
-                    variant={'outlined'}
+                    variant={"outlined"}
                     onChange={e => onChange(e.target.value)}
                     disableUnderline={true}
                     label={title}
@@ -77,19 +58,13 @@ const InputBar=props=> {
                             inputProps: {
                                 format: validation.format,
                                 mask: validation.mask,
-
                             },
                         } : null
                     }
                     multiline={!!multiline}
                 />
 
-                }
 
-            </Grid>
-
-
-        );
 }
 
 InputBar.propTypes = {

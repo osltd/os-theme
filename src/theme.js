@@ -14,6 +14,13 @@ const theme = createMuiTheme({
         },
     },
     overrides: {
+        MuiOutlinedInput:{
+            root:{
+
+
+            }
+
+        },
         MuiButton: { // Name of the component ⚛️ / style sheet
             extendedFab: { // Name of the rule
                 boxShadow: 'none',

@@ -11,8 +11,7 @@ import Collapse from '../Widget/Collapse'
 import LoadingPage from '../Layout/LoadingPage'
 import {redirectUrl} from "../../api/ApiUtils";
 import PromoCode from './PromoCode'
-import {withSnackbar} from 'notistack';
-
+import {withSnackbar} from 'notistack'
 import _ from 'lodash'
 import * as styleGuide from "../../constants/styleGuide";
 
@@ -76,23 +75,21 @@ const mapDispatchToProps = dispatch => ({
     }
 )
 
-class ShopOverview extends React.Component {
+const CheckoutOverview = props => {
 
+    const {classes} = props
+    const rendering = (!(props.shoppingCart) || props.user === null)
+    const needLogin = (_.isEmpty(props.user))
+    const NoProductsInCart = (props.shoppingCart.length < 1)
 
-    componentDidMount() {
-
-    }
-
-    render() {
-
-        const {classes} = this.props
-        if (!(this.props.shoppingCart) || this.props.user === null) return <LoadingPage/>
-        if (_.isEmpty(this.props.user)) {
-            redirectUrl('/login', this.props.history, false)
-            this.props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar)
-        }
-
-        if (this.props.shoppingCart.length < 1)
+    switch (true) {
+        case rendering:
+            return <LoadingPage/>
+        case needLogin:
+            redirectUrl('/login', props.history, false)
+            props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar)
+            break
+        case NoProductsInCart:
             return (<Grid container alignItems={'center'} justify={'center'}>
 
                 <Header
@@ -114,7 +111,7 @@ class ShopOverview extends React.Component {
                         <Grid item>
                             <Button
                                 variant='outlined'
-                                onClick={() => redirectUrl('/products', this.props.history)}
+                                onClick={() => redirectUrl('/products', props.history)}
 
                             >
                                 Products
@@ -128,81 +125,82 @@ class ShopOverview extends React.Component {
                     </Grid>
                 </Grid>
             </Grid>)
-        return (
-            <Grid container justify={'center'}>
-                <Grid item sm={12}>
-                    <Header title={'Checkout'}/>
+        default:
+            return (
+                <Grid container justify={'center'}>
+                    <Grid item sm={12}>
+                        <Header title={'Checkout'}/>
+                    </Grid>
+                    <Grid item container justify={'center'} spacing={32} md={10}>
+
+                        {(isWidthUp('md', props.width)) ?
+                            (<Fragment>
+                                <Grid item xs={6}>
+                                    <Typography
+                                        className={classes.title}
+                                        variant={'h4'}>
+                                        Your Order Summary
+                                    </Typography>
+                                    <Divider/>
+                                    <OrderSummary/>
+                                    <Typography
+                                        className={classes.title}
+                                        variant={'h4'}>
+                                        Promo Code
+                                    </Typography>
+                                    <Divider/>
+                                    <PromoCode/>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography
+                                        className={classes.title}
+                                        variant={'h4'}>
+                                        Billing Details
+
+                                    </Typography>
+                                    <Divider/>
+                                    <BillingDetails/>
+                                </Grid>
+                            </Fragment>)
+                            : (<Fragment>
+                                <Grid item xs={11}>
+                                    <Collapse
+                                        arrow={true}
+                                        title={<Fragment>
+                                            <Typography
+                                                className={classes.title}
+                                                variant={'h4'}>
+                                                Your Order Summary
+                                            </Typography>
+
+                                            <Divider/>
+                                        </Fragment>}
+                                        collapse={
+                                            <OrderSummary/>
+
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={11}>
+                                    <Typography
+                                        className={classes.title}
+                                        variant={'h4'}>
+                                        Billing Details
+
+                                    </Typography>
+                                    <Divider/>
+                                    <BillingDetails/>
+
+                                </Grid>
+                            </Fragment>)
+
+                        }
+                    </Grid>
+
+
                 </Grid>
-                <Grid item container justify={'center'} spacing={32} md={10}>
-
-                    {(isWidthUp('md', this.props.width)) ?
-                        (<Fragment>
-                            <Grid item xs={6}>
-                                <Typography
-                                    className={classes.title}
-                                    variant={'h4'}>
-                                    Your Order Summary
-                                </Typography>
-                                <Divider/>
-                                <OrderSummary/>
-                                <Typography
-                                    className={classes.title}
-                                    variant={'h4'}>
-                                    Promo Code
-                                </Typography>
-                                <Divider/>
-                                <PromoCode/>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Typography
-                                    className={classes.title}
-                                    variant={'h4'}>
-                                    Billing Details
-
-                                </Typography>
-                                <Divider/>
-                                <BillingDetails/>
-                            </Grid>
-                        </Fragment>)
-                        : (<Fragment>
-                            <Grid item xs={11}>
-                                <Collapse
-                                    arrow={true}
-                                    title={<Fragment>
-                                        <Typography
-                                            className={classes.title}
-                                            variant={'h4'}>
-                                            Your Order Summary
-                                        </Typography>
-
-                                        <Divider/>
-                                    </Fragment>}
-                                    collapse={
-                                        <OrderSummary/>
-
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={11}>
-                                <Typography
-                                    className={classes.title}
-                                    variant={'h4'}>
-                                    Billing Details
-
-                                </Typography>
-                                <Divider/>
-                                <BillingDetails/>
-
-                            </Grid>
-                        </Fragment>)
-
-                    }
-                </Grid>
-
-
-            </Grid>
-        );
+            )
     }
 }
 
-export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview))))
+export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckoutOverview))))
