@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
-import { redirectUrl} from "../../../api/ApiUtils";
+import {redirectUrl} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
 
 const styles = theme => ({
@@ -62,10 +62,10 @@ class ShoppingCartList extends React.Component {
         }
     }
 
+    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product
 
     render() {
         const {classes, data, onDelete} = this.props;
-
         return (
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
@@ -79,7 +79,7 @@ class ShoppingCartList extends React.Component {
                                 onClick={() => redirectUrl('/products/' + n.product.id, this.props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
-                                    title={n.product.variants.find(variant => variant.id === n.variantId).description}>
+                                    title={this.selectedData(n).description}>
 
                                     <Grid container spacing={16}>
                                         <Grid item sm={3}>
@@ -96,7 +96,7 @@ class ShoppingCartList extends React.Component {
                                             </Typography>
                                             <Typography variant={'caption'}>
                                                 {n.number} X
-                                                $ {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                $ {this.selectedData(n).price
                                             }
                                             </Typography>
                                             <span

@@ -74,7 +74,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
     return result
 }
 
-export const redirectUrl = (url: string, history: history.History, reload: boolean = false) => (reload) ? window.location.href = url : history.push(url)
+export const redirectUrl = (url: string, history: history.History, reload: boolean = true) => (reload) ? window.location.href = url : history.push(url)
 
 
 export const numberToPagination = (length: number, cb: Function): Array<Clickable> => {

@@ -73,7 +73,8 @@ const mapDispatchToProps = dispatch => ({
 )
 
 class OrderSummary extends React.Component {
-    getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
+    getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId)?
+        product.product.variants.find(variant => variant.id === product.variantId):product.product).price * product.number
     placeOrder = async () => {
         const {billingDetail} = this.props
         const data = {
@@ -267,7 +268,9 @@ class OrderSummary extends React.Component {
     }
 
     render() {
-        const {classes, shoppingCart,billingDetail} = this.props;
+        const {classes, shoppingCart,billingDetail} = this.props
+        const selectedVariant=n => n.product.variants.find(variant => variant.id === n.variantId)?
+            n.product.variants.find(variant => variant.id === n.variantId):n.product
         return (
             <Paper className={classes.root}>
                 <Table className={classes.table}>
@@ -282,10 +285,10 @@ class OrderSummary extends React.Component {
                          {shoppingCart.map((n, i) =>
                         <TableRow key={i}>
                             <TableCell className={classes.block}>
-                                {refactorTitle(n.product.name)} X {n.number}( {n.product.variants.find(variant => variant.id === n.variantId).description})
+                                {refactorTitle(n.product.name)} X {n.number}( {selectedVariant(n).description})
                             </TableCell>
                             <TableCell className={classes.block} numeric>
-                                {'$ ' + formatMoney(n.product.variants.find(variant => variant.id === n.variantId).price * n.number)}
+                                {'$ ' + formatMoney(selectedVariant(n).price * n.number)}
                             </TableCell>
                         </TableRow>)
 

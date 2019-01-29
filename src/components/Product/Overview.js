@@ -52,13 +52,16 @@ class ResponsiveDialog extends React.Component {
             </Grid>
             <Grid item xs={10}>
 
-                <Detail
-                    variantOptions={Object.values(variantOptions)}
-                    variantKeys={Object.keys(variantOptions)}
-                    description={product.description}
-                    product={product}
+                {
+                 <Detail
+                     variantOptions={Object.values(variantOptions)}
+                     variantKeys={Object.keys(variantOptions)}
+                     description={product.description}
+                     product={product}
 
-                />
+                    />
+                }
+
 
             </Grid>
             {

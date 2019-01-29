@@ -6,7 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import createStyles from "@material-ui/core/styles/createStyles";
 import {Clickable, MaterialUIClasses} from "../../interfaces/client/Common";
 
-const styles = (theme:Theme) => createStyles({
+const styles = (theme: Theme) => createStyles({
     root: {},
     title: {
         fontWeight: 'lighter',
@@ -19,18 +19,18 @@ const styles = (theme:Theme) => createStyles({
 });
 
 interface Props {
-classes:MaterialUIClasses,
-    icon?:string,
-    icon2?:string,
-label:string,
-    labelExtra?:string,
-    options:Array<Clickable>,
-    selectedValue?:string,
+    classes: MaterialUIClasses,
+    icon?: string,
+    icon2?: string,
+    label: string,
+    labelExtra?: string,
+    options: Array<Clickable>,
+    selectedValue?: string,
 }
 
 const DropDown: React.FunctionComponent<Props> = props => {
 
-    const [anchorEl, setAnchorEl]:[any,any] = useState(null)
+    const [anchorEl, setAnchorEl]: [any, any] = useState(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     const handleMenuItemClick = (index: number, cb: Function): void => {
@@ -52,7 +52,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
         <Fragment>
             <ListItem button
                       className={classes.root}
-                      onClick={e=>setAnchorEl(e.currentTarget)}
+                      onClick={e => setAnchorEl(e.currentTarget)}
             >
                 {icon && <span className={classes.icon + ' ' + icon}/>}
                 <Typography variant={'body1'}>
@@ -68,7 +68,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
                 id="lock-menu"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
-                onClose={()=>setAnchorEl(null)}
+                onClose={() => setAnchorEl(null)}
 
             >
                 {options.map((n, i) => (

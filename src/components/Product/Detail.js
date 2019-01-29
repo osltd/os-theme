@@ -11,7 +11,7 @@ import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
 import swal from '@sweetalert/with-react'
-
+import Detail from './Details/Details'
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 
@@ -102,21 +102,21 @@ class ResponsiveDialog extends React.Component {
             {
                 content: (<Grid container alignItems={'center'} direction={'column'}>
                     <Grid item>
-                        {false &&     <span className={'icon-like'}
+                        {false && <span className={'icon-like'}
 
-                          style={{
-                              fontSize: '80px',
-                              color: 'hsla(100,55%,69%,.5)',
-                              padding: '20px',
+                                        style={{
+                                            fontSize: '80px',
+                                            color: 'hsla(100,55%,69%,.5)',
+                                            padding: '20px',
 
-                              display: 'block',
-                              width: '80px',
-                              height: '80px',
-                              border: '4px solid hsla(98,55%,69%,.2)',
-                              borderRadius: '50%',
-                              boxSizing: 'content-box',
-                          }}
-                    />}
+                                            display: 'block',
+                                            width: '80px',
+                                            height: '80px',
+                                            border: '4px solid hsla(98,55%,69%,.2)',
+                                            borderRadius: '50%',
+                                            boxSizing: 'content-box',
+                                        }}
+                        />}
                     </Grid>
                     <Grid item>
                         <Typography variant={'h4'}>
@@ -273,8 +273,7 @@ class ResponsiveDialog extends React.Component {
         return <Grid item container xs={10} sm={5}>
             <Grid item xs={12}>
                 <Slick
-                    data=
-                        {(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
+                    data={(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({url: n.url,}))}
 
                 />
             </Grid>
@@ -282,7 +281,7 @@ class ResponsiveDialog extends React.Component {
     }
 
     componentDidMount() {
-        this.initVariant()
+      if(this.props.variantKeys)  this.initVariant()
 
     }
 
@@ -291,17 +290,46 @@ class ResponsiveDialog extends React.Component {
     }
 
     render() {
-        const selectedVariant = this.findSelectedVariant()
+        const {
+            variantOptions, product, variantKeys
+        } = this.props
         const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm')
-        return (
-            selectedVariant ?
-                <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    {position ? this.getDetail(selectedVariant) : null}
-                    {this.getSlick(selectedVariant)}
-                    {!position ? this.getDetail(selectedVariant) : null}
-                </Grid> : <LoadingPage/>
 
-        );
+      if  (variantOptions&&variantKeys&&variantOptions.length < 1 && variantKeys.length <1)    {
+          if(product){
+
+              return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                  {position ? <Detail {...this.props}
+                                      selectedVariant={this.props.product} /> : null}
+
+                  <Grid item container xs={10} sm={5}>
+                      <Grid item xs={12}>
+                          <Slick
+                              data={product.photos? product.photos.map(n => ({url: n.url,})):[]}
+                          />
+                      </Grid>
+                  </Grid>
+
+                  {!position ? <Detail {...this.props}
+                                       selectedVariant={this.props.product}
+                  /> : null}
+
+              </Grid>
+          }else  return null
+      }
+        else {
+          const selectedVariant = this.findSelectedVariant()
+          return (
+              selectedVariant ?
+                  <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                      {position ? this.getDetail(selectedVariant) : null}
+                      {this.getSlick(selectedVariant)}
+                      {!position ? this.getDetail(selectedVariant) : null}
+                  </Grid> : <LoadingPage/>
+
+          );
+
+      }
 
     }
 }

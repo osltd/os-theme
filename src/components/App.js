@@ -141,6 +141,7 @@ const App = props => {
     }
     let initApp = async () => await props.initApp(
         JSON.parse(localStorage.getItem('shoppingCart')),
+        //todo(init to [] storage)
     )
 
     useEffect(
@@ -152,7 +153,7 @@ const App = props => {
                     )
             )
             return null
-        }, [])
+        },[])
 
 
     return (

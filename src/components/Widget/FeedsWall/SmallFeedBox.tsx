@@ -4,33 +4,33 @@ import {Theme, withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
 import {withRouter} from "react-router-dom";
 import {redirectUrl} from "../../../api/ApiUtils";
-import makeStyles from "@material-ui/styles/es/makeStyles";
-import createStyles from "@material-ui/core/styles/createStyles";
-
+import makeStyles from "@material-ui/styles/makeStyles";
+import {History} from 'history'
 
 const useStyle = makeStyles(
-    createStyles((theme:Theme) => ({
-            root: {
-                backgroundColor: '#F6F6F6',
-                cursor: 'pointer',
-                marginBottom: 35,
+    {
+        root: {
+            backgroundColor: '#F6F6F6',
+            cursor: 'pointer',
+            marginBottom: 35,
 
-            },
-        })
-    ))
+        },
+    })
 
 interface Props {
-    left:ReactNode
-    right:ReactNode
-    link:string
+    left: ReactNode
+    right: ReactNode
+    link: string
+    history: History
 
 }
-const FeedsWall:React.FunctionComponent<Props> = props => {
+
+const FeedsWall: React.FunctionComponent<Props> = props => {
     const classes = useStyle()
-    const {left, right, link} = props;
+    const {left, right, link, history} = props;
     return (
         <Grid container alignItems={'center'} className={classes.root}
-              onClick={() => redirectUrl(link, this.props.history)}>
+              onClick={() => redirectUrl(link, history)}>
             <Grid item container direction={'column'} justify={'flex-start'} alignItems={'center'} sm={5}>
                 {left}
             </Grid>
@@ -42,4 +42,4 @@ const FeedsWall:React.FunctionComponent<Props> = props => {
 }
 
 
-export default withRouter((FeedsWall))
+export default FeedsWall
