@@ -3,6 +3,7 @@ import {Grid} from '@material-ui/core';
 import {redirectUrl} from "../../../api/ApiUtils";
 import makeStyles from "@material-ui/styles/makeStyles";
 import {History} from 'history'
+import {RouteComponentProps} from "react-router";
 
 const useStyle = makeStyles(
     {
@@ -14,17 +15,16 @@ const useStyle = makeStyles(
         },
     });
 
-interface Props {
+interface Props  {
+    history:History
     left: ReactNode
     right: ReactNode
     link: string
-    history: History
-
 }
 
 const FeedsWall: React.FunctionComponent<Props> = props => {
-    const classes = useStyle();
-    const {left, right, link, history} = props;
+    const classes = useStyle()
+    const {left, right, link, history} = props
     return (
         <Grid container alignItems={'center'} className={classes.root}
               onClick={() => redirectUrl(link, history)}>

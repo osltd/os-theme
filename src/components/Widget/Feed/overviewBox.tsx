@@ -1,11 +1,13 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid, Theme, Typography} from '@material-ui/core';
 import moment from 'moment'
-import {withStyles} from "@material-ui/core/styles/index";
+import {Media as interfaceMedia} from '../../../interfaces/server/Common'
 import Media from '../../Widget/Media'
+import {makeStyles} from '@material-ui/styles'
 import {redirectUrl} from "../../../api/ApiUtils";
+import {History} from "history";
 
-const styles = theme => ({
+const useStyle = makeStyles((theme: Theme) => ({
 
     root: {
         minHeight: '450px',
@@ -26,13 +28,23 @@ const styles = theme => ({
         margin: '20px 0'
     }
 
-});
+}))
 
+interface Props {
+    history: History
+    subTitle: string
+    title: string
+    id: number
+    author: string
+    postDate: string
+    comments: string
+    medias: Array<interfaceMedia>
+}
 
-const FeedOverviewBox = props => {
+const FeedOverviewBox: React.FunctionComponent<Props> = props => {
+    const classes = useStyle()
     const {
-        classes,
-        src,
+        history,
         subTitle,
         title,
         id, author,
@@ -42,7 +54,7 @@ const FeedOverviewBox = props => {
     } = props;
     return (
         <Grid container
-              onClick={() => redirectUrl('/feeds/' + id, props.history)}
+              onClick={() => redirectUrl('/feeds/' + id, history)}
               className={classes.root} alignItems={'center'}
               justify={'center'}
         >
@@ -73,4 +85,4 @@ const FeedOverviewBox = props => {
 };
 
 
-export default (withStyles(styles)(FeedOverviewBox))
+export default (FeedOverviewBox)

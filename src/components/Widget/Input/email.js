@@ -20,13 +20,7 @@ const styles = theme => ({
 });
 
 class SearchBar extends React.Component {
-    state = {
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    };
+
 
 
     render() {

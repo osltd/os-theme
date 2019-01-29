@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import List from '../Widget/List'
 import Header from '../Layout/Body/Header'
@@ -78,6 +78,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ShopOverview = props => {
+    const [tag,setTag] = useState('')
+    const [sortBy,setSortBy]= useState('')
     let initFilter = () => {
         let query = props.history.location.search;
         let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
@@ -87,7 +89,6 @@ const ShopOverview = props => {
     };
 
     let sortData = () => {
-
         let data = Array.from(props.products);
         data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true);
         let sortBy = () => {
@@ -115,7 +116,6 @@ const ShopOverview = props => {
             }
         };
         return sortBy()
-
     };
     let getProductProperty = (products, type) => {
         switch (type) {
@@ -296,10 +296,7 @@ const ShopOverview = props => {
                             </Grid>
                         </Grid>
                     </Grid> :
-
                     <Typography variant={'subtitle1'}> there are no products available yet</Typography>
-
-
             }
         </Grid>
     );

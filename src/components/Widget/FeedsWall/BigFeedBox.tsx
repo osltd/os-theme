@@ -4,6 +4,7 @@ import {redirectUrl} from "../../../api/ApiUtils";
 import {makeStyles} from '@material-ui/styles'
 
 import {History} from "history";
+import {RouteComponentProps} from "react-router";
 
 const useStyle = makeStyles((theme: Theme) => ({
     root: {
@@ -22,7 +23,7 @@ const useStyle = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    history: History
+    history:History
     title: string
     backgroundImg: string
     link: string
