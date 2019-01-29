@@ -118,11 +118,11 @@ const mapDispatchToProps = dispatch => ({
         })
     }
 
-)
+);
 
 const Header = props => {
-    const [keyword, setKeyword] = useState('')
-    const [navBar, setNavBar] = useState('')
+    const [keyword, setKeyword] = useState('');
+    const [navBar, setNavBar] = useState('');
     const {
         history,
         classes,
@@ -131,7 +131,7 @@ const Header = props => {
         feeds,
         shoppingCart,
         editShoppingCart,
-    } = props
+    } = props;
     let getInputBar = () =>
         <Input
             onKeyDown={e =>
@@ -144,11 +144,11 @@ const Header = props => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
             }}
-        />
+        />;
 
 
-    let hasProductsToShow = (products && products.length > 0)
-    let hasFeedsToShow = (feeds && feeds.length > 0)
+    let hasProductsToShow = (products && products.length > 0);
+    let hasFeedsToShow = (feeds && feeds.length > 0);
 
     if (isWidthUp('md', width)) {
         return (<AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
@@ -272,10 +272,10 @@ const Header = props => {
     </BottomNavigation>
 
 
-}
+};
 
 Header.propTypes = {
     classes: PropTypes.object.isRequired,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))

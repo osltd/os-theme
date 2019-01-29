@@ -10,6 +10,7 @@ export const history = createHistory();
 const myRouterMiddleware = routerMiddleware(history);
 
 const getMiddleware = () => {
+
     if (process.env.NODE_ENV === 'production') {
         return applyMiddleware(myRouterMiddleware,);
     } else {

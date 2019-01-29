@@ -1,4 +1,4 @@
-import {createContext,useReducer} from 'react'
+import {createContext} from 'react'
 import {combineReducers} from 'redux';
 import product from './reducers/product';
 import {routerReducer} from 'react-router-redux';
@@ -30,7 +30,7 @@ export const initialState = {count: 0};
 //             return state;
 //     }
 // }
-export const reducer =  combineReducers({
+export const reducer = combineReducers({
     product,
     feed,
     category,
@@ -38,7 +38,7 @@ export const reducer =  combineReducers({
     common,
     auth,
     router: routerReducer
-})
+});
 
 
-export const   Context = createContext({})
+export const Context = createContext({});

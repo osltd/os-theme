@@ -1,12 +1,13 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
+import {Theme} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, handleImgValid, } from "../../../api/ApiUtils";
-import {redirectUrl} from '../../../api/ApiUtils'
-import {withRouter} from "react-router-dom";
+import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
+import {makeStyles} from '@material-ui/styles'
 import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
+import {History} from "history";
+import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 
-const styles = theme => ({
+const useStyle = makeStyles((theme: Theme) => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
@@ -53,23 +54,34 @@ const styles = theme => ({
         lineHeight: 1,
     }
 
-})
+}));
 
+interface Props {
+    padding?: string
+    backgroundColor?: string
+    src: string
+    name: string
+    id: number
+    width: Breakpoint
+    category: Array<string>
+    regPrice: number
+    promotePrice?: number
+    history: History
+}
 
-const ProductOverviewBox =(props)=> {
+const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
 
-   let styles = theme => ({
+    let styles = () => ({
         content: {
             "padding": props.padding,
             "min-height": "100vh",
             "background-color": props.backgroundColor
         }
-    })
+    });
 
 
-
-
-    const {classes, src, name, id,width, category, regPrice, promotePrice,history} = props;
+    const classes = useStyle();
+    const {src, name, id, width, category, regPrice, promotePrice, history} = props;
 
 
     let getImg = () => {
@@ -79,7 +91,7 @@ const ProductOverviewBox =(props)=> {
                 backgroundColor: 'transparent',
             }}
             onClick={() => id && redirectUrl('/products/' + id, history)}
-            className={classes.divImg}/>
+            className={classes.divImg}/>;
         //responsive forbidden
         if (isWidthDown('xs', width)) {
             return <img
@@ -97,44 +109,43 @@ const ProductOverviewBox =(props)=> {
                 className={classes.divImg}/> :
             <img
                 src={handleImgValid(src)}
-                onClick={() => id && redirectUrl('/products/' + id,history)}
+                onClick={() => id && redirectUrl('/products/' + id, history)}
                 className={classes.img}
             />
-    }
+    };
 
 
+    return (
+        <Grid container className={classes.root} direction={'column'}>
+            {getImg()}
+            {
+                category && <Typography variant={'h5'}
+                                        className={classes.category}
 
-        return (
-            <Grid container className={classes.root} direction={'column'}>
-                {getImg()}
-                {
-                    category && <Typography variant={'h5'}
-                                            className={classes.category}
+                                        color={'primary'}>{category && category.join(',')}</Typography>
 
-                                            color={'primary'}>{category && category.join(',')}</Typography>
+            }
+            <Typography variant={'h6'}
+                        onClick={() => window.location.href = ('/products/' + id)}
+                        className={classes.name}
 
-                }
-                <Typography variant={'h6'}
-                            onClick={() => window.location.href = ('/products/' + id)}
-                            className={classes.name}
+            >{name}</Typography>
+            {
+                (promotePrice) ?
+                    <Grid item container direction={'row'}>
+                        <Typography component={'del'} variant={'subtitle1'}
+                                    className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
+                        <Typography variant={'caption'}
+                                    className={classes.price}>${formatMoney(promotePrice)}</Typography>
+                    </Grid>
+                    : <Typography variant={'caption'}
+                                  className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
-                >{name}</Typography>
-                {
-                    (promotePrice) ?
-                        <Grid item container direction={'row'}>
-                            <Typography component={'del'} variant={'subtitle1'}
-                                        className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                            <Typography variant={'caption'}
-                                        className={classes.price}>${formatMoney(promotePrice)}</Typography>
-                        </Grid>
-                        : <Typography variant={'caption'}
-                                      className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+            }
 
-                }
+        </Grid>
+    );
 
-            </Grid>
-        );
+};
 
-}
-
-export default withWidth()(withRouter(withStyles(styles)(ProductOverviewBox)))
+export default withWidth()(ProductOverviewBox)

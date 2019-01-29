@@ -1,16 +1,16 @@
-import { ReactElement, ReactNode } from "react";
+import {ReactElement, ReactNode} from "react";
 import * as PropTypes from "prop-types";
 
 declare const uniqueType: unique symbol;
 
-class TestClass { }
+class TestClass {
+}
 
 interface Props {
     any?: any;
     array: string[];
     bool: boolean;
     element: ReactElement<any>;
-    func(foo: string): void;
     node?: ReactNode;
     requiredNode: NonNullable<ReactNode>;
     number: number;
@@ -34,6 +34,8 @@ interface Props {
     };
     optionalNumber?: number | null;
     customProp?: typeof uniqueType;
+
+    func(foo: string): void;
 }
 
 const innerProps = {
@@ -149,7 +151,7 @@ type ExtractFromOuterPropsMatch4 = Props extends ExtractedPropsFromOuterPropsWit
 // $ExpectType false
 type ExtractPropsMismatch = ExtractedPartialProps extends Props ? true : false;
 
-PropTypes.checkPropTypes({ xs: PropTypes.array }, { xs: [] }, 'location', 'componentName');
+PropTypes.checkPropTypes({xs: PropTypes.array}, {xs: []}, 'location', 'componentName');
 
 // This would be the type that JSX sees
 type Defaultize<T, D> =

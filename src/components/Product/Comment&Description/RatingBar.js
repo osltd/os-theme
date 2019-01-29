@@ -14,7 +14,7 @@ const styles = theme => (
             }
         }
     }
-)
+);
 
 const mapStateToProps = state => ({
     section: state.product.detail.section
@@ -32,22 +32,22 @@ const mapDispatchToProps = dispatch => ({
         })
 
     }
-)
+);
 
 class RatingBar extends React.Component {
 
     getStar = star => Array(Math.floor(star)).fill('star').map((n, i) => <span
         key={i}
 
-        className={classNames(this.props.classes.icon, 'icon-star-full')}/>)
+        className={classNames(this.props.classes.icon, 'icon-star-full')}/>);
     getHalfStar = star => !!(star % 1) ?
         <span
 
-            className={classNames(this.props.classes.icon, 'icon-star-half')}/> : null
+            className={classNames(this.props.classes.icon, 'icon-star-half')}/> : null;
     getEmptyStar = star => Array(5 - Math.floor(star) - (!!(star % 1) ? 1 : 0)).fill('star').map((n, i) =>
         <span
             key={i}
-            className={classNames(this.props.classes.icon, 'icon-star-empty')}/>)
+            className={classNames(this.props.classes.icon, 'icon-star-empty')}/>);
 
 
     render() {

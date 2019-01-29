@@ -43,14 +43,14 @@ const styles = theme => ({
     array: {
         paddingLeft: '5px',
     }
-})
+});
 
 const mapStateToProps = state => ({
     products: state.product.products,
     viewMode: state.product.viewMode,
     sort: state.product.sort,
     filter: state.product.filter,
-})
+});
 
 const mapDispatchToProps = dispatch => ({
 
@@ -75,85 +75,85 @@ const mapDispatchToProps = dispatch => ({
             value: value,
         },
     }),
-})
+});
 
 const ShopOverview = props => {
     let initFilter = () => {
-        let query = props.history.location.search
-        let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1)
-        let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length)
+        let query = props.history.location.search;
+        let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
+        let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
         if (isTags && props.filter.tag !== queryTag) props.editProductFilter('tag', queryTag)
 
-    }
+    };
 
     let sortData = () => {
 
-        let data = Array.from(props.products)
-        data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true)
+        let data = Array.from(props.products);
+        data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true);
         let sortBy = () => {
             switch (props.sort.sortBy) {
                 case 'Name A-Z':
-                    return data.sort(sort_by('name', null))
+                    return data.sort(sort_by('name', null));
                 case 'Name Z-A':
-                    return data.sort(sort_by('name', null, true))
+                    return data.sort(sort_by('name', null, true));
                 case 'Price Low to High':
                     return data.sort((a, b) => {
-                            let priceA = a.variants[0] ? a.variants[0].price : 0
-                            let priceB = b.variants[0] ? b.variants[0].price : 0
+                            let priceA = a.variants[0] ? a.variants[0].price : 0;
+                            let priceB = b.variants[0] ? b.variants[0].price : 0;
                             return (priceA < priceB) ? -1 : 1
                         }
-                    )
+                    );
                 case       'Price High to Low':
                     return data.sort((a, b) => {
-                            let priceA = a.variants[0] ? a.variants[0].price : 0
-                            let priceB = b.variants[0] ? b.variants[0].price : 0
+                            let priceA = a.variants[0] ? a.variants[0].price : 0;
+                            let priceB = b.variants[0] ? b.variants[0].price : 0;
                             return (priceA > priceB) ? -1 : 1
                         }
-                    )
+                    );
                 default:
                     return data
             }
-        }
+        };
         return sortBy()
 
-    }
+    };
     let getProductProperty = (products, type) => {
         switch (type) {
             case 'display':
                 if (props.sort.page) {
-                    let range = props.sort.page.split(' - ')
+                    let range = props.sort.page.split(' - ');
                     return products.filter((n, i) => (i >= range[0] - 1 && i <= range[1] - 1))
 
                 }
-                return products
+                return products;
             case 'length':
                 return products.length
 
         }
-    }
-    let initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label)
+    };
+    let initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label);
     let getTagsList = () => <List
         data={getTagsCountsArray(props.products, (tag, number) => {
-            props.editProductFilter('tag', tag)
+            props.editProductFilter('tag', tag);
             initPageNumber(number)
         })}
         selectedValue={props.filter.tag}
-    />
+    />;
 
     let getPagination = (products) => {
-        if (products.length === 0) return null
+        if (products.length === 0) return null;
         let options = numberToPagination(getProductProperty(products, 'length'),
-            page => props.editProductSort('page', page))
+            page => props.editProductSort('page', page));
         //todo('have error of Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
 
-        if (props.sort.page === ''&&  (!(_.isEmpty(options[0].label))))
+        if (props.sort.page === '' && (!(_.isEmpty(options[0].label))))
 
-            props.editProductSort('page', options[0].label)
+            props.editProductSort('page', options[0].label);
         return (<WhiteDropDown
             options={options}
             selectedValue={props.sort.page}
         />)
-    }
+    };
     let getProductsList = (products) => {
 
 
@@ -190,14 +190,14 @@ const ShopOverview = props => {
                 description={n.description}
                 id={n.id}
             />))
-    }
+    };
 
-    let popUp = useRef()
-    useEffect(() => initFilter(),[])
-    const {classes} = props
-    if (props.products === null) return <LoadingPage/>
-    const products = sortData()
-    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low']
+    let popUp = useRef();
+    useEffect(() => initFilter(), []);
+    const {classes} = props;
+    if (props.products === null) return <LoadingPage/>;
+    const products = sortData();
+    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low'];
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
@@ -261,7 +261,7 @@ const ShopOverview = props => {
                                             options={
                                                 arrayToFilter(
                                                     filterOptions, value => {
-                                                        props.editProductSort('sortBy', value)
+                                                        props.editProductSort('sortBy', value);
                                                         initPageNumber(getProductProperty(sortData(), 'length'))
                                                     }
                                                 )}
@@ -303,6 +303,6 @@ const ShopOverview = props => {
             }
         </Grid>
     );
-}
+};
 
 export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

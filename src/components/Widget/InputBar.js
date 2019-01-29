@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {Grid, TextField,InputAdornment} from '@material-ui/core';
+import {InputAdornment, TextField} from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 
 
@@ -23,7 +23,7 @@ const NumberFormatCustom = props => {
         />
     )
 
-}
+};
 
 NumberFormatCustom.propTypes = {
     inputRef: PropTypes.func.isRequired,
@@ -32,40 +32,40 @@ NumberFormatCustom.propTypes = {
 
 const styles = theme => ({
     input: {
-        width:'100%',
+        width: '100%',
     }
-})
+});
 
-const InputBar=props=> {
-
-
-        const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
-
-        return <TextField
-                    disabled={(disabled)}
-                    value={value ? value : ''}
-                    rows={multiline ? 5 : 1}
-                    className={classes.input}
-                    variant={"outlined"}
-                    onChange={e => onChange(e.target.value)}
-                    disableUnderline={true}
-                    label={title}
-                    placeholder={placeholder}
-                    InputProps={
-                        validation ? {
-                            startAdornment: <InputAdornment position="start">{validation.prefix}</InputAdornment>,
-                            inputComponent: NumberFormatCustom,
-                            inputProps: {
-                                format: validation.format,
-                                mask: validation.mask,
-                            },
-                        } : null
-                    }
-                    multiline={!!multiline}
-                />
+const InputBar = props => {
 
 
-}
+    const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
+
+    return <TextField
+        disabled={(disabled)}
+        value={value ? value : ''}
+        rows={multiline ? 5 : 1}
+        className={classes.input}
+        variant={"outlined"}
+        onChange={e => onChange(e.target.value)}
+        disableUnderline={true}
+        label={title}
+        placeholder={placeholder}
+        InputProps={
+            validation ? {
+                startAdornment: <InputAdornment position="start">{validation.prefix}</InputAdornment>,
+                inputComponent: NumberFormatCustom,
+                inputProps: {
+                    format: validation.format,
+                    mask: validation.mask,
+                },
+            } : null
+        }
+        multiline={!!multiline}
+    />
+
+
+};
 
 InputBar.propTypes = {
     classes: PropTypes.object.isRequired,

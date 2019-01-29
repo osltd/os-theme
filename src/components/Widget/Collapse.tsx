@@ -1,10 +1,8 @@
 import React, {ReactNode, useState} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import {Theme, withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 import {MaterialUIClasses} from "../../interfaces/client/Common";
-import {Theme} from "@material-ui/core/styles";
 import createStyles from "@material-ui/core/styles/createStyles";
 
 const styles = (theme: Theme) => createStyles({
@@ -36,13 +34,13 @@ interface Props {
 }
 
 const SimpleCollapse: React.FunctionComponent<Props> = props => {
-    const [checked, setChecked] = useState(false)
+    const [checked, setChecked] = useState(false);
 
     const {classes, title, collapse, arrow} = props;
 
     return (
         <Grid container className={classes.root}>
-            <Grid item container alignItems={'center'} className={classes.title} onClick={()=>setChecked(!checked)}>
+            <Grid item container alignItems={'center'} className={classes.title} onClick={() => setChecked(!checked)}>
                 <Grid item>
                     {title}
                 </Grid>
@@ -61,6 +59,6 @@ const SimpleCollapse: React.FunctionComponent<Props> = props => {
 
         </Grid>
     );
-}
+};
 
 export default withStyles(styles)(SimpleCollapse)

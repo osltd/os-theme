@@ -16,7 +16,7 @@ const styles = theme => (
             }
         }
     }
-)
+);
 
 const mapStateToProps = state => ({
     section: state.product.detail.section
@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
         })
 
     }
-)
+);
 
 class LabelBottomNavigation extends React.Component {
     state = {
@@ -42,7 +42,7 @@ class LabelBottomNavigation extends React.Component {
     };
 
     handleChange = (event, value) =>
-        this.props.editActiveSection('section', value)
+        this.props.editActiveSection('section', value);
 
 
     render() {

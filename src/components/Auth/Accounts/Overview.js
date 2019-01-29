@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
-import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Grid, Typography} from '@material-ui/core'
 import CustomButton from '../../Widget/Button/BlackButton'
@@ -37,7 +36,7 @@ const styles = theme => ({
         paddingBottom: '20px',
     }
 
-})
+});
 
 const mapStateToProps = state => ({
     user: state.auth.user,
@@ -76,11 +75,11 @@ const logout = (props) => {
                         </Grid>
 
                     </Grid>)
-                })
+                });
             setTimeout(() => redirectUrl('/', props.history), 1000)
         }
     ).catch(err => console.log(err))
-}
+};
 
 const MyAccount = (props) => {
     const {classes, width, user, history} = props;
@@ -122,7 +121,7 @@ const MyAccount = (props) => {
                 <Grid item xs={4}>
                     <CustomButton
                         onClick={() => {
-                            props.dialog && props.dialog.handleClose()
+                            props.dialog && props.dialog.handleClose();
                             redirectUrl('/login', history)
                         }}
 
@@ -133,7 +132,7 @@ const MyAccount = (props) => {
 
                     <CustomButton
                         onClick={() => {
-                            props.dialog && props.dialog.handleClose()
+                            props.dialog && props.dialog.handleClose();
                             redirectUrl('/register', history)
                         }}
 
@@ -143,10 +142,10 @@ const MyAccount = (props) => {
 
             </Grid>)
 
-}
+};
 
 MyAccount.propTypes = {
     classes: PropTypes.object.isRequired,
-}
+};
 
-export default connect(mapStateToProps, {})(withRouter(withWidth()(withStyles(styles)(MyAccount))))
+export default connect(mapStateToProps, {})((withWidth()(withStyles(styles)(MyAccount))))

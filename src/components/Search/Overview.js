@@ -32,7 +32,7 @@ const styles = theme => ({
     array: {
         paddingLeft: '5px',
     }
-})
+});
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -47,28 +47,29 @@ const mapDispatchToProps = dispatch => ({
             payload: keyword
         })
     }
-)
+);
 
 class SearchPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            timer: () => null
+        }
+
+    }
+
     searchData = (data) =>
-        data.filter(n => (this.props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1) : false)
+        data.filter(n => (this.props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(this.props.keyword.toLowerCase()) !== -1) : false);
+
     onChange = value => {
-        clearTimeout(this.state.timer)
+        clearTimeout(this.state.timer);
         this.setState(
             {
                 timer: setTimeout(() => this.props.editSearchBar(value), 500)
 
             }
         )
-    }
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            timer: () => null
-        }
-
-    }
+    };
 
     componentDidMount() {
         this.props.editSearchBar(this.props.match.params.keyword)
@@ -83,11 +84,11 @@ class SearchPage extends React.Component {
 
     render() {
 
-        const {classes} = this.props
-        if (!this.props.products && !this.props.feeds) return <LoadingPage/>
-        const products = this.props.products ? this.searchData(this.props.products) : []
-        const feeds = this.props.feeds ? this.searchData(this.props.feeds) : []
-        const searchResultCount = products.length + feeds.length
+        const {classes} = this.props;
+        if (!this.props.products && !this.props.feeds) return <LoadingPage/>;
+        const products = this.props.products ? this.searchData(this.props.products) : [];
+        const feeds = this.props.feeds ? this.searchData(this.props.feeds) : [];
+        const searchResultCount = products.length + feeds.length;
 
         return (
             <Grid container alignItems={'center'} justify={'center'}>

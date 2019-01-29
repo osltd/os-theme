@@ -6,8 +6,7 @@ export default (state, action) => {
     switch (action.type) {
 
         case COMMON_EDIT_SEARCH_BAR: {
-            console.log('finally')
-            let searchBar = action.payload ? action.payload : ''
+            let searchBar = action.payload ? action.payload : '';
             return {
                 ...state,
                 searchBar: searchBar

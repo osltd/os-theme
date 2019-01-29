@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Fab, Theme} from '@material-ui/core'
+import {Fab, Theme} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames'
 import {MaterialUIClasses} from "../../../interfaces/client/Common";
@@ -41,7 +41,7 @@ const Tag: React.FunctionComponent<Props> = props => {
         value,
         onClick,
         selected
-    } = props
+    } = props;
     return (
         <Fab variant={"extended"}
              onClick={onClick}
@@ -50,6 +50,6 @@ const Tag: React.FunctionComponent<Props> = props => {
         </Fab>
 
     )
-}
+};
 
 export default withStyles(styles)(Tag);

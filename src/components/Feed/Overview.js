@@ -6,7 +6,7 @@ import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
-import {getTagsCountsArray,refactorParaLength} from "../../api/ApiUtils";
+import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
 
 
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
@@ -24,7 +24,7 @@ const styles = theme => {
             },
         })
 
-}
+};
 
 
 const mapStateToProps = state => ({
@@ -45,33 +45,33 @@ const mapDispatchToProps = dispatch => ({
         }),
 
     }
-)
+);
 
 class ResponsiveDialog extends React.Component {
 
-    onChange = value => {
-        clearTimeout(this.state.timer)
-        this.setState(
-            {
-                timer: setTimeout(() => this.props.editFeedFilter('keyword', value), 500)
-
-            }
-        )
-    }
-
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             timer: () => null
         }
 
     }
 
+    onChange = value => {
+        clearTimeout(this.state.timer);
+        this.setState(
+            {
+                timer: setTimeout(() => this.props.editFeedFilter('keyword', value), 500)
+
+            }
+        )
+    };
+
     render() {
-        const {classes} = this.props
+        const {classes} = this.props;
         const feeds = (this.props.feeds) ?
             this.props.feeds.filter(n =>
-                (((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) && ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true))) : null
+                (((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) && ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true))) : null;
         return (
 
             <Grid container justify={'center'}>

@@ -24,7 +24,7 @@ const style = (theme: Theme) => createStyles({
         }
 
     }
-})
+});
 
 interface Props {
     classes: MaterialUIClasses
@@ -34,7 +34,7 @@ interface Props {
 
 const PrevArrow: React.FunctionComponent<Props> = props => {
 
-    const {classes, style, onClick} = props
+    const {classes, style, onClick} = props;
     return (
         <span
             className={classes.root + ' ' + 'icon-left-16'}
@@ -46,6 +46,6 @@ const PrevArrow: React.FunctionComponent<Props> = props => {
 
     )
 
-}
+};
 
 export default withStyles(style)(PrevArrow)

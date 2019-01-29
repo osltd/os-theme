@@ -9,7 +9,7 @@ import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 
 const styles = theme => {
-    console.log(theme)
+    console.log(theme);
 
     return (
         {
@@ -21,61 +21,60 @@ const styles = theme => {
             },
         })
 
-}
+};
 
 
 const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
-})
+});
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
 const SingleProduct = props => {
-  let  hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id)
+    let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
 
-        if (!props.products) return <LoadingPage/>
-        const product = props.products.find(n => n.id.toString() === props.match.params.id)
-        const variantOptions = getVariantOptions(product.variants)
-
-
-        return <Grid container alignItems={'center'} justify={'center'}>
-            <Grid item xs={12}>
-                <Header
-                    title={product.name}
-                    route={'HOME/SHOP/SINGLE PRODUCT'}
-                />
-            </Grid>
-            <Grid item xs={10}>
-
-                {
-                 <Detail
-                     variantOptions={Object.values(variantOptions)}
-                     variantKeys={Object.keys(variantOptions)}
-                     description={product.description}
-                     product={product}
-
-                    />
-                }
+    if (!props.products) return <LoadingPage/>;
+    const product = props.products.find(n => n.id.toString() === props.match.params.id);
+    const variantOptions = getVariantOptions(product.variants);
 
 
-            </Grid>
+    return <Grid container alignItems={'center'} justify={'center'}>
+        <Grid item xs={12}>
+            <Header
+                title={product.name}
+                route={'HOME/SHOP/SINGLE PRODUCT'}
+            />
+        </Grid>
+        <Grid item xs={10}>
+
             {
-                false && <Grid item xs={10} container>
+                <Detail
+                    variantOptions={Object.values(variantOptions)}
+                    variantKeys={Object.keys(variantOptions)}
+                    description={product.description}
+                    product={product}
 
-                    <CommentDescription
-                        content={product.description}
-                    />
-                </Grid>
+                />
             }
 
+
         </Grid>
+        {
+            false && <Grid item xs={10} container>
 
-    }
+                <CommentDescription
+                    content={product.description}
+                />
+            </Grid>
+        }
 
+    </Grid>
+
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SingleProduct))

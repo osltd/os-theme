@@ -1,6 +1,6 @@
 import {createMuiTheme} from '@material-ui/core'
 
-const theme = createMuiTheme({
+export default createMuiTheme({
     typography: {
         useNextVariants: true,
 
@@ -14,11 +14,8 @@ const theme = createMuiTheme({
         },
     },
     overrides: {
-        MuiOutlinedInput:{
-            root:{
-
-
-            }
+        MuiOutlinedInput: {
+            root: {}
 
         },
         MuiButton: { // Name of the component ⚛️ / style sheet
@@ -69,4 +66,3 @@ const theme = createMuiTheme({
     },
 })
 
-export default theme

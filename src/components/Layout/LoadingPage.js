@@ -16,7 +16,7 @@ const styles = theme => ({
 
 class NotFound extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             timer: () => null,
         }

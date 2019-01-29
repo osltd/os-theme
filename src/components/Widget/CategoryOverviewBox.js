@@ -91,7 +91,7 @@ const styles = theme => ({
 });
 
 const ButtonBases = (props) => {
-    const {classes, history, category} = props
+    const {classes, history, category} = props;
 
     return (
 
@@ -140,7 +140,7 @@ const ButtonBases = (props) => {
             ))}
         </Grid>
     );
-}
+};
 
 ButtonBases.propTypes = {
 

@@ -29,7 +29,7 @@ const styles = theme => ({
             color: 'white',
         }
     }
-})
+});
 
 class EmailSearchBar extends React.Component {
     state = {

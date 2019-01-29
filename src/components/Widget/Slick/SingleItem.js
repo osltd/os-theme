@@ -4,7 +4,6 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
-import {withRouter} from 'react-router-dom'
 import {redirectUrl} from "../../../api/ApiUtils";
 
 const style = theme => ({
@@ -55,7 +54,7 @@ const style = theme => ({
     }
 
 
-})
+});
 
 class SimpleSlider extends React.Component {
     render() {
@@ -72,8 +71,8 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        let {data, classes, title, style} = this.props
-        if (!(data[0])) return null
+        let {data, classes, title, style} = this.props;
+        if (!(data[0])) return null;
         style = style || {};
         return (
             data.length > 1 ?
@@ -110,4 +109,4 @@ class SimpleSlider extends React.Component {
     }
 }
 
-export default withRouter(withStyles(style)(SimpleSlider))
+export default (withStyles(style)(SimpleSlider))

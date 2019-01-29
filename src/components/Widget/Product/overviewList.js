@@ -1,11 +1,9 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, refactorParaLength} from "../../../api/ApiUtils";
-import {redirectUrl} from "../../../api/ApiUtils";
-import {withRouter} from "react-router-dom";
+import {formatMoney, redirectUrl, refactorParaLength} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const styles = makeStyles(theme => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
@@ -47,80 +45,55 @@ const styles = theme => ({
         marginBottom: '10px',
     }
 
-})
+}));
 
 
-class ResponsiveDialog extends React.Component {
+const ProductOverviewList = props => {
 
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
 
-        this.setState({open: false});
-    };
+    const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
+    return (
+        <Grid container spacing={16} alignItems={'center'} className={classes.root}>
+            <Grid item xs={4}>
+                <img src={src}
 
-    render() {
-        const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;
+                     onClick={() => redirectUrl('/products/' + id, this.props.history)}
 
-        return (
-            <Grid container spacing={16} alignItems={'center'} className={classes.root}>
-                <Grid item xs={4}>
-                    <img src={src}
-
-                         onClick={() => redirectUrl('/products/' + id, this.props.history)}
-
-                         className={classes.img}/>
-                </Grid>
-                <Grid item xs={8}>
-                    {
-                        category && <Typography variant={'h5'}
-                                                className={classes.category}
-
-                                                color={'primary'}>{category && category.join(',')}</Typography>
-
-                    }
-                    <Typography variant={'h6'}
-                                onClick={() => redirectUrl('/products/' + id, this.props.history)}
-                                className={classes.name}
-                    >{name}</Typography>
-
-                    <Typography className={classes.description}
-                                variant={'caption'}>{refactorParaLength(description, 200)}</Typography>
-                    {
-                        promotePrice ?
-                            <Grid item container direction={'row'}>
-
-                                <Typography component={'del'} variant={'subtitle1'}
-                                            className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
-                                <Typography variant={'subtitle1'}
-                                            className={classes.price}>${formatMoney(promotePrice)}</Typography>
-                            </Grid>
-                            : <Typography variant={'subtitle1'}
-                                          className={classes.price}>$ {formatMoney(regPrice)}</Typography>
-
-                    }
-                </Grid>
+                     className={classes.img}/>
             </Grid>
-        );
-    }
+            <Grid item xs={8}>
+                {
+                    category && <Typography variant={'h5'}
+                                            className={classes.category}
 
-}
+                                            color={'primary'}>{category && category.join(',')}</Typography>
+
+                }
+                <Typography variant={'h6'}
+                            onClick={() => redirectUrl('/products/' + id, this.props.history)}
+                            className={classes.name}
+                >{name}</Typography>
+
+                <Typography className={classes.description}
+                            variant={'caption'}>{refactorParaLength(description, 200)}</Typography>
+                {
+                    promotePrice ?
+                        <Grid item container direction={'row'}>
+
+                            <Typography component={'del'} variant={'subtitle1'}
+                                        className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
+                            <Typography variant={'subtitle1'}
+                                        className={classes.price}>${formatMoney(promotePrice)}</Typography>
+                        </Grid>
+                        : <Typography variant={'subtitle1'}
+                                      className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+
+                }
+            </Grid>
+        </Grid>
+    );
+};
 
 
-export default withRouter(withStyles(styles)(ResponsiveDialog))
+export default (ProductOverviewList)

@@ -1,19 +1,16 @@
 import {Button, Divider, Grid, Typography} from "@material-ui/core";
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import {formatMoney} from "../../../api/ApiUtils";
 import Counter from "../../Widget/Counter";
-import React from "react";
 import SocialIcon from '../../Widget/SocialIcon'
 import swal from "@sweetalert/with-react";
-import Variants from "./Variants";
-import {findSelectedVariant} from './api'
 
-let NO_VARIANT_ID = 1
+let NO_VARIANT_ID = 1;
 const Detail = (props) => {
     let saveDraftToCart = () => {
-        const {draft, product} = props
-        let productCount = draft.number ? draft.number : 1
-        props.dispatchDraftToCart(product, productCount, NO_VARIANT_ID)
+        const {draft, product} = props;
+        let productCount = draft.number ? draft.number : 1;
+        props.dispatchDraftToCart(product, productCount, NO_VARIANT_ID);
         swal(
             {
                 content: (<Grid container alignItems={'center'} direction={'column'}>
@@ -48,12 +45,12 @@ const Detail = (props) => {
             })
 
 
-    }
+    };
 
     const {
         classes, name, promotePrice,
         description, variantKeys, variantOptions, product, selectedVariant
-    } = props
+    } = props;
     return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
         <Grid item container spacing={16}>
             <Grid item>
@@ -146,6 +143,6 @@ const Detail = (props) => {
             </Grid>
         </Grid>
     </Grid>
-}
+};
 
 export default Detail

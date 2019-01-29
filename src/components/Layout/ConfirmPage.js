@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
-import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART} from "../../constants/actionType";
 import Header from '../Layout/Body/Header'
@@ -34,19 +33,19 @@ const mapDispatchToProps = dispatch => ({
         })
     }
 
-)
+);
 
 class ConfirmPage extends React.Component {
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
-
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             value: 'recents',
         };
     }
+
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
 
     render() {
         const {classes, width} = this.props;
@@ -72,6 +71,6 @@ class ConfirmPage extends React.Component {
 
 ConfirmPage.propTypes = {
     classes: PropTypes.object.isRequired,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(ConfirmPage))))
+export default connect(mapStateToProps, mapDispatchToProps)((withWidth()(withStyles(styles)(ConfirmPage))))

@@ -9,10 +9,10 @@ import withWidth from "@material-ui/core/withWidth/index";
 import LoadingPage from '../Layout/LoadingPage'
 
 
-const SectionBanner = lazy(() => import('./Sections/Banner'))
-const SectionTopInterest = lazy(() => import('./Sections/TopInterest'))
-const SectionFeatureProducts = lazy(() => import('./Sections/FeatureProducts'))
-const FEATURED_PRODUCTS = 'featured'
+const SectionBanner = lazy(() => import('./Sections/Banner'));
+const SectionTopInterest = lazy(() => import('./Sections/TopInterest'));
+const SectionFeatureProducts = lazy(() => import('./Sections/FeatureProducts'));
+const FEATURED_PRODUCTS = 'featured';
 
 const styles = theme => ({
     section: {
@@ -43,7 +43,7 @@ const styles = theme => ({
     }
 
 
-})
+});
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -52,85 +52,84 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
-const MainPageOverview =props=> {
-
-
-
-        const {classes,feeds,products,history,category} = props
-        let getDataFromAPI = (feeds === null && products === null)
-        if (getDataFromAPI) return <LoadingPage/>
-        let latestArticle = feeds && feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3)
-        let hasProductsToShow = (products && products.length > 0)
-        let hasFeedsToShow = (feeds && feeds.length > 0)
-        let hasCategoryToShow = (category.length > 0)
-        let hasSelectedProductsToShow = hasProductsToShow && products
-            .filter(n => n.tags.find(m => m.toLowerCase() === FEATURED_PRODUCTS)).length > 0
+const MainPageOverview = props => {
 
 
-        if (!(hasProductsToShow) && !(hasFeedsToShow))
-            return <Grid xs={12}>
-                <Carousel
-                    data={new Array(3).fill(1)
-                        .map((n, i) => ({
-                            url: `img/init/photo${i + 1}.jpeg`,
-                        }))}
-
-                    title={[
-                        'shops is under construction',
-                        'there is no products and feeds in this shops yet',
-
-                        'please wait']}
+    const {classes, feeds, products, history, category} = props;
+    let getDataFromAPI = (feeds === null && products === null);
+    if (getDataFromAPI) return <LoadingPage/>;
+    let latestArticle = feeds && feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3);
+    let hasProductsToShow = (products && products.length > 0);
+    let hasFeedsToShow = (feeds && feeds.length > 0);
+    let hasCategoryToShow = (category.length > 0);
+    let hasSelectedProductsToShow = hasProductsToShow && products
+        .filter(n => n.tags.find(m => m.toLowerCase() === FEATURED_PRODUCTS)).length > 0;
 
 
+    if (!(hasProductsToShow) && !(hasFeedsToShow))
+        return <Grid xs={12}>
+            <Carousel
+                data={new Array(3).fill(1)
+                    .map((n, i) => ({
+                        url: `img/init/photo${i + 1}.jpeg`,
+                    }))}
+
+                title={[
+                    'shops is under construction',
+                    'there is no products and feeds in this shops yet',
+
+                    'please wait']}
+
+
+            />
+        </Grid>;
+
+
+    return (
+
+        <Grid container alignItems={'flex-start'} justify={'center'}>
+            <Suspense fallback={null}>
+                <SectionBanner
+                    hasFeedsToShow={hasFeedsToShow}
+                    latestArticle={latestArticle}
+                    feeds={feeds}
                 />
-            </Grid>
-
-
-        return (
-
-            <Grid container alignItems={'flex-start'} justify={'center'}>
+            </Suspense>
+            {/* ---------------- hot sale products ----------------*/}
+            {
                 <Suspense fallback={null}>
-                    <SectionBanner
-                        hasFeedsToShow={hasFeedsToShow}
-                        latestArticle={latestArticle}
-                        feeds={feeds}
-                    />
+                    <SectionTopInterest self={props}/>
                 </Suspense>
-                {/* ---------------- hot sale products ----------------*/}
-                {
-                    <Suspense fallback={null}>
-                        <SectionTopInterest self={props}/>
-                    </Suspense>
 
-                }
-                {/* ---------------- /hot sale products ----------------*/}
+            }
+            {/* ---------------- /hot sale products ----------------*/}
 
-                {
-                    hasCategoryToShow && <Grid item container alignItems={'center'} justify={'center'}
-                                               className={classes.productCategory}>
+            {
+                hasCategoryToShow && <Grid item container alignItems={'center'} justify={'center'}
+                                           className={classes.productCategory}>
 
-                        <Grid item xs={12} md={10} lg={10}>
-                            <CategoryOverviewBox
+                    <Grid item xs={12} md={10} lg={10}>
+                        <CategoryOverviewBox
 
-                                category={category}
-                            />
-                        </Grid>
-
+                            category={category}
+                        />
                     </Grid>
-                }
-                {
-                    <Suspense fallback={null}>
-                        <SectionFeatureProducts self={props}/>
-                    </Suspense>
 
-                }
+                </Grid>
+            }
+            {
+                <Suspense fallback={null}>
+                    <SectionFeatureProducts self={props}/>
+                </Suspense>
+
+            }
 
 
-            </Grid>
-        );
-    }
+        </Grid>
+    );
+};
 
 
 export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainPageOverview)))

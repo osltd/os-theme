@@ -30,12 +30,12 @@ interface Props {
 
 const DropDown: React.FunctionComponent<Props> = props => {
 
-    const [anchorEl, setAnchorEl]: [any, any] = useState(null)
-    const [selectedIndex, setSelectedIndex] = useState(0)
+    const [anchorEl, setAnchorEl]: [any, any] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
     const handleMenuItemClick = (index: number, cb: Function): void => {
-        setSelectedIndex(index)
-        setAnchorEl(null)
+        setSelectedIndex(index);
+        setAnchorEl(null);
         cb()
     };
 
@@ -84,7 +84,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
             </Menu>
         </Fragment>
     )
-}
+};
 
 //todo(need to improve)
 export default withStyles(styles)(DropDown);

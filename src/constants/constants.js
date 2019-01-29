@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://myshop.oneshop.hk/'
-export const TEST_URL ='https://myshop.test.ocs.zone/'
+export const BASE_URL = 'https://myshop.oneshop.hk/';
+export const TEST_URL = 'https://myshop.test.ocs.zone/';
 export const COUNTRY_CODE = [{"label": "Israel (  +972 )", "value": "+972"}, {
     "label": "Afghanistan (  +93 )",
     "value": "+93"
@@ -369,4 +369,4 @@ export const COUNTRY_CODE = [{"label": "Israel (  +972 )", "value": "+972"}, {
 }, {"label": "Virgin Islands, British (  +1 284 )", "value": "+1 284"}, {
     "label": "Virgin Islands, U.S. (  +1 340 )",
     "value": "+1 340"
-}]
+}];

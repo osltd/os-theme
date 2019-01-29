@@ -20,12 +20,20 @@ const styles = theme => ({
 
         }
     },
-})
+});
 
 class CustomButton extends React.Component {
     state = {
         anchor: 'left',
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            placeHolder: '',
+        }
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -33,16 +41,9 @@ class CustomButton extends React.Component {
         });
     };
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            placeHolder: '',
-        }
-    }
-
     render() {
 
-        const {classes, link, onClick, value, icon2, icon, border} = this.props
+        const {classes, link, onClick, value, icon2, icon, border} = this.props;
 
         return <Button
             className={classes.root}

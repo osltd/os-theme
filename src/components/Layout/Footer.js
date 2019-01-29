@@ -7,7 +7,7 @@ import FooterList from '../Widget/FooterList'
 import Tag from '../Widget/Tags/Tag'
 import SocialIcon from '../Widget/SocialIcon'
 import {connect} from "react-redux";
-import {redirectUrl,getTagsCountsArray} from "../../api/ApiUtils";
+import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -30,22 +30,22 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
 class Footer extends React.Component {
 
     getTags = () => {
         //todo(handle err)
-        const {products, feeds} = this.props
-        let productsArr = getTagsCountsArray(products, () => console.log('ggg'))
-        let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
-        delete productsTags[_.indexOf(productsTags, 'all')]
+        const {products, feeds} = this.props;
+        let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
+        let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : [];
+        delete productsTags[_.indexOf(productsTags, 'all')];
         // let feedsArr = getTagsCountsArray(feeds, () => redirectUrl('/', this.props.history))
         // let feedsTags = (feedsArr && feedsArr.length > 0) ? feedsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
         //
         //
         // let allTags =_.uniq(productsTags.concat(feedsTags))
-        console.log(productsTags)
+        console.log(productsTags);
 
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
@@ -66,7 +66,7 @@ class Footer extends React.Component {
                 </Grid>
             </Grid>
         )
-    }
+    };
 
     render() {
         const {classes} = this.props;

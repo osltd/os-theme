@@ -1,19 +1,19 @@
-import React, {useContext, useReducer} from 'react'
+import React, {useContext} from 'react'
 import {Context} from '../../context'
 
 export default function Counter({initialCount}) {
-    const {state,dispatch} = useContext(
+    const {state, dispatch} = useContext(
         Context
-    )
-    console.log('state test2')
+    );
+    console.log('state test2');
     console.log(
         state.Common
-    )
-    console.log('dispatch test2')
+    );
+    console.log('dispatch test2');
 
     console.log(
         dispatch
-    )
+    );
     return (
         <>
             Count: {state.count}

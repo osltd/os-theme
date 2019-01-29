@@ -1,10 +1,3 @@
-
-
-export default  {
-shopInfo:{
-
-},
-    searchBar:'',
-
-
-};
+export default {
+    shopInfo: {}, searchBar: '',
+}
