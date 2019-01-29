@@ -193,7 +193,7 @@ const ShopOverview = props => {
     }
 
     let popUp = useRef()
-    useEffect(() => initFilter())
+    useEffect(() => initFilter(),[])
     const {classes} = props
     if (props.products === null) return <LoadingPage/>
     const products = sortData()

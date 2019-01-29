@@ -100,35 +100,35 @@ class ResponsiveDialog extends React.Component {
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId)
         swal(
             {
-                content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item>
-                        {false && <span className={'icon-like'}
+                content: (
+                    <Grid container alignItems={'center'} direction={'column'}>
+                        <Grid item>
+                            {false && <span className={'icon-like'}
 
-                                        style={{
-                                            fontSize: '80px',
-                                            color: 'hsla(100,55%,69%,.5)',
-                                            padding: '20px',
+                                            style={{
+                                                fontSize: '80px',
+                                                color: 'hsla(100,55%,69%,.5)',
+                                                padding: '20px',
 
-                                            display: 'block',
-                                            width: '80px',
-                                            height: '80px',
-                                            border: '4px solid hsla(98,55%,69%,.2)',
-                                            borderRadius: '50%',
-                                            boxSizing: 'content-box',
-                                        }}
-                        />}
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'h4'}>
-                            Congratulation!
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subtitle1'}>
-                            items added! </Typography>
-                    </Grid>
-
-                </Grid>)
+                                                display: 'block',
+                                                width: '80px',
+                                                height: '80px',
+                                                border: '4px solid hsla(98,55%,69%,.2)',
+                                                borderRadius: '50%',
+                                                boxSizing: 'content-box',
+                                            }}
+                            />}
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'h4'}>
+                                Congratulation!
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'subtitle1'}>
+                                items added! </Typography>
+                        </Grid>
+                    </Grid>)
             })
 
 
@@ -281,7 +281,7 @@ class ResponsiveDialog extends React.Component {
     }
 
     componentDidMount() {
-      if(this.props.variantKeys)  this.initVariant()
+        if (this.props.variantKeys) this.initVariant()
 
     }
 
@@ -295,41 +295,40 @@ class ResponsiveDialog extends React.Component {
         } = this.props
         const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm')
 
-      if  (variantOptions&&variantKeys&&variantOptions.length < 1 && variantKeys.length <1)    {
-          if(product){
+        if (variantOptions && variantKeys && variantOptions.length < 1 && variantKeys.length < 1) {
+            if (product) {
 
-              return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                  {position ? <Detail {...this.props}
-                                      selectedVariant={this.props.product} /> : null}
+                return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                    {position ? <Detail {...this.props}
+                                        selectedVariant={this.props.product}/> : null}
 
-                  <Grid item container xs={10} sm={5}>
-                      <Grid item xs={12}>
-                          <Slick
-                              data={product.photos? product.photos.map(n => ({url: n.url,})):[]}
-                          />
-                      </Grid>
-                  </Grid>
+                    <Grid item container xs={10} sm={5}>
+                        <Grid item xs={12}>
+                            <Slick
+                                data={product.photos ? product.photos.map(n => ({url: n.url,})) : []}
+                            />
+                        </Grid>
+                    </Grid>
 
-                  {!position ? <Detail {...this.props}
-                                       selectedVariant={this.props.product}
-                  /> : null}
+                    {!position ? <Detail {...this.props}
+                                         selectedVariant={this.props.product}
+                    /> : null}
 
-              </Grid>
-          }else  return null
-      }
-        else {
-          const selectedVariant = this.findSelectedVariant()
-          return (
-              selectedVariant ?
-                  <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                      {position ? this.getDetail(selectedVariant) : null}
-                      {this.getSlick(selectedVariant)}
-                      {!position ? this.getDetail(selectedVariant) : null}
-                  </Grid> : <LoadingPage/>
+                </Grid>
+            } else return null
+        } else {
+            const selectedVariant = this.findSelectedVariant()
+            return (
+                selectedVariant ?
+                    <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                        {position ? this.getDetail(selectedVariant) : null}
+                        {this.getSlick(selectedVariant)}
+                        {!position ? this.getDetail(selectedVariant) : null}
+                    </Grid> : <LoadingPage/>
 
-          );
+            );
 
-      }
+        }
 
     }
 }

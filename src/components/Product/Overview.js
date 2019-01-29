@@ -34,12 +34,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 )
 
-class ResponsiveDialog extends React.Component {
-    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+const SingleProduct = props => {
+  let  hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id)
 
-    render() {
-        if (!this.props.products) return <LoadingPage/>
-        const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+        if (!props.products) return <LoadingPage/>
+        const product = props.products.find(n => n.id.toString() === props.match.params.id)
         const variantOptions = getVariantOptions(product.variants)
 
 
@@ -78,7 +77,5 @@ class ResponsiveDialog extends React.Component {
     }
 
 
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SingleProduct))

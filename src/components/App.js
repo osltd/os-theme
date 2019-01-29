@@ -13,6 +13,8 @@ import FeedDetail from './Feed/Detail'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
+import Test from './Widget/test'
+import Testt from './Widget/test2'
 import {
     COMMON_INIT_SHOP_INFO,
     AUTH_INIT_USER_PROFILE,
@@ -135,6 +137,7 @@ const mapDispatchToProps = dispatch => ({
 )
 
 const App = props => {
+
     let getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
@@ -153,7 +156,7 @@ const App = props => {
                     )
             )
             return null
-        },[])
+        }, [])
 
 
     return (
@@ -178,7 +181,10 @@ const App = props => {
                             <Route exact path={'/loadingPage'} component={LoadingPage}/>
                             <Route exact path={'/search/:keyword'} component={SearchPage}/>
                             <Route component={NotFound}/>
+
                         </Switch>
+                        <Test/>
+                        <Testt/>
                     </div>
                     <Footer/>
                 </ErrorBoundary>
