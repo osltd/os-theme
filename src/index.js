@@ -11,12 +11,10 @@ import {ConnectedRouter} from 'react-router-redux';
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
             <MuiThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>
                     <App/>
                 </SnackbarProvider>
             </MuiThemeProvider>
-        </ConnectedRouter>
     </Provider>, document.getElementById('root'));
 registerServiceWorker()

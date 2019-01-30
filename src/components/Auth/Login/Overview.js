@@ -149,6 +149,14 @@ const Login = (props)=> {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
+                    <Typography
+                        onClick={()=>redirectUrl('/register',props.history)}
+                        className={classes.blueUnderline}
+                        variant={'h6'}>
+                        Dont have your own account yet?
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
                     <Button
                         onClick={handleLoginProcess}
                         value={'Sign In'}

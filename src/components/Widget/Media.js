@@ -67,7 +67,31 @@ class Media extends React.Component {
         });
     };
     getMedia = data => {
+        console.log('-----------')
+        console.log(data)
         const {classes} = this.props
+        if (data.length > 0 && data[0].ext === 'product') {
+            const productId = data[0].url
+
+            let validProduct = this.props.products.find(n => n.id.toString() === productId)
+            if (validProduct && this.state.type !== 'product') this.setState({
+                type: 'product'
+            })
+            return (validProduct) ? (
+
+                <ProductOverviewBox
+                    id={validProduct.id}
+                    name={refactorTextLength(validProduct.name)}
+                    src={handleImgValid(validProduct.photos[0])}
+                    category={validProduct.tags}
+                    regPrice={validProduct.variants[0] ? validProduct.variants[0].price : 'not a reg price'}
+                    promotePrice={validProduct.promotePrice}
+                />
+            ) :null
+                // <Grid container alignItems={'center'} justify={"center"}> <Typography variant={'h6'} >
+                //     there should be product {productId} here,<br/> but product {productId} is no longer exist</Typography></Grid>
+                //
+        }
         if (data.length === 0) return null
         if (data.length > 0 && data[0].ext.indexOf('product://') !== -1) {
             const productId = data[0].ext.replace(/^\D+/g, '')
@@ -106,7 +130,6 @@ class Media extends React.Component {
             default:
                 return <Slick
                     data={data.map(n => ({url: n.url,}))}
-
                 />
         }
     }
@@ -126,5 +149,6 @@ class Media extends React.Component {
 
     }
 }
+
 //todo(unsafe)
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Media))

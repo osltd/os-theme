@@ -113,7 +113,7 @@ class ResponsiveDialog extends React.Component {
                                         subTitle={refactorParaLength(n.sections[0].description)}
                                         title={n.sections[0].title}
                                         author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
-                                        postDate={n.postDate}
+                                        postDate={n.time}
                                         comments={0}
                                     />
                                 </Grid>) :
