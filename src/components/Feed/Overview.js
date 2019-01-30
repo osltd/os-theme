@@ -8,7 +8,7 @@ import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
 import {getTagsCountsArray,refactorParaLength} from "../../api/ApiUtils";
 
-
+import Gallery from './Gallery'
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
 import LoadingPage from '../Layout/LoadingPage'
@@ -66,7 +66,6 @@ class ResponsiveDialog extends React.Component {
         }
 
     }
-
     render() {
         const {classes} = this.props
         const feeds = (this.props.feeds) ?
@@ -100,9 +99,9 @@ class ResponsiveDialog extends React.Component {
                                 title={'FEED CATEGORIES'}/></Grid>
 
                     </Grid>
-                    <Grid item container lg={9} spacing={32} xs={11}>
-                        {feeds ? feeds.length > 0 ? feeds.map((n, i) =>
-                                <Grid item md={6} xs={12} key={i}>
+                    <Grid item  lg={9} spacing={32} xs={11} >
+                        <Gallery
+                            elements=    {feeds ? feeds.length > 0 ? feeds.map((n, i) =>
                                     <FeedOverviewBox
                                         id={n.id}
                                         medias={n.sections[0].medias}
@@ -115,14 +114,14 @@ class ResponsiveDialog extends React.Component {
                                         author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
                                         postDate={n.time}
                                         comments={0}
-                                    />
-                                </Grid>) :
+                                    />) :
 
 
-                            <Typography variant={'subtitle1'}> there are no posts available yet</Typography>
+                                <Typography variant={'subtitle1'}> there are no posts available yet</Typography>
 
 
-                            : <LoadingPage/>}
+                                : <LoadingPage/>}
+                        />
                     </Grid>
                 </Grid>
             </Grid>

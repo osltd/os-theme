@@ -9,8 +9,8 @@ import {redirectUrl} from "../../../api/ApiUtils";
 const styles = theme => ({
 
     root: {
-        minHeight: '450px',
         paddingBottom: '20px',
+        width:'350px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer'
     },
