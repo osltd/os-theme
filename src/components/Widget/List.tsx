@@ -57,7 +57,6 @@ const CustomList: React.FunctionComponent<Props> = props => {
             redirectUrl(link, history)
         }
     };
-    console.log(data);
     return (data ? <Fragment>
             {
                 title && <Typography variant={'h6'}>{title}</Typography>

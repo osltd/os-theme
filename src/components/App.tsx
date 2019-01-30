@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
@@ -36,6 +36,7 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import {Product} from "../interfaces/server/Product";
+import {Store} from "../store/store";
 
 
 const mapStateToProps = (state:any) => ({
@@ -139,7 +140,7 @@ interface Props {
 [key:string]:any
 }
 const App:React.FunctionComponent<Props> = props => {
-
+    const {state,dispatch} = useContext(Store)
     let getAllProducts = async (page:number = 1, products:Array<Product> = []):Promise<Array<Product>> => {
 
         let data:Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])

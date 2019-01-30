@@ -1,7 +1,7 @@
 import {Product} from "../../interfaces/server/Product";
+import _ from 'lodash'
 
-
-export let sortData = (
+export const sortData = (
     data: Array<Product>,
     sort?: 'Name A-Z' | 'Name Z-A' | 'Price Low to High' | 'Price High to Low',
     tag?: string
@@ -34,4 +34,14 @@ export let sortData = (
         }
     }
     return sortBy()
+}
+
+
+export const initFilter = (query: string,
+                           tag: string,
+                           cb: (x: string) => void
+) => {
+    let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
+    let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
+    if (isTags && tag !== queryTag) cb(queryTag)
 }

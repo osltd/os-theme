@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import List from '../Widget/List'
 import Header from '../Layout/Body/Header'
@@ -8,19 +8,16 @@ import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "..
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/DropDown'
 import LoadingPage from '../Layout/LoadingPage'
-import _ from 'lodash'
-import ProductOverviewListForm from '../Widget/Product/overviewList'
+import {Store} from '../../store/store'
+import Pagination from './Sections/Pagination'
+import TagList from './Sections/TagList'
 import {
     arrayToFilter,
     getTagsCountsArray,
-    handleImgValid,
-    numberToPagination,
-    refactorTextLength,
 } from "../../api/ApiUtils";
-import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
-import {sortData} from "./Effect";
+import {sortData, initFilter} from "./Effect";
 
 const styles = theme => ({
     productCategory: {
@@ -80,84 +77,32 @@ const mapDispatchToProps = dispatch => ({
 const ShopOverview = props => {
     const [tag,setTag] = useState('')
     const [sortBy,setSortBy]= useState('')
-    let initFilter = () => {
-        let query = props.history.location.search;
-        let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
-        let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
-        if (isTags && props.filter.tag !== queryTag) props.editProductFilter('tag', queryTag)
-    }
+    const [page,setPage]=useState('')
+    const {state, dispatch} = useContext(Store)
+    const {classes,history } = props;
+    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low'];
     let getProductProperty = (products, type) => {
         switch (type) {
             case 'display':
                 if (props.sort.page) {
                     let range = props.sort.page.split(' - ');
                     return products.filter((n, i) => (i >= range[0] - 1 && i <= range[1] - 1))
-
                 }
-                return products;
+                return products
             case 'length':
                 return products.length
-
         }
     };
-    let initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label);
-    let getTagsList = () => <List
-        data={getTagsCountsArray(props.products, (tag, number) => {
-            props.editProductFilter('tag', tag);
-            initPageNumber(number)
-        })}
-        selectedValue={props.filter.tag}
-    />;
-    let getPagination = (products) => {
-        if (products.length === 0) return null;
-        let options = numberToPagination(getProductProperty(products, 'length'),
-            page => props.editProductSort('page', page));
-        //todo('have error of Warning: Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.")
 
-        if (props.sort.page === '' && (!(_.isEmpty(options[0].label))))
-
-            props.editProductSort('page', options[0].label);
-        return (<WhiteDropDown
-            options={options}
-            selectedValue={props.sort.page}
-        />)
-    };
-    let getProductsList = (products) => {
-        if (products.length === 0) {
-            return <Typography variant={'subtitle1'}> there are no products under <strong>{
-                props.filter.tag
-            }</strong> category yet</Typography>
-        }
-        return props.viewMode === 'form' ?
-            getProductProperty(products, 'display').map((n, i) =>
-                <Grid item xs={12} sm={6} md={4} key={i}
-                >
-                    <ProductOverviewBox
-                        name={refactorTextLength(n.name)}
-                        id={n.id}
-                        src={handleImgValid(n.photos[0])}
-                        category={n.tags}
-                        regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                        promotePrice={n.promotePrice}
-                    />
-                </Grid>
-            ) : getProductProperty(products, 'display').map((n, i) => (<ProductOverviewListForm
-                key={i}
-                src={handleImgValid(n.photos[0])}
-                name={refactorTextLength(n.name)}
-                category={n.tags}
-                regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
-                promotePrice={n.promotePrice}
-                description={n.description}
-                id={n.id}
-            />))
-    };
-    let popUp = useRef()
-    useEffect(() => initFilter(), []);
-    const {classes} = props;
-    if (props.products === null) return <LoadingPage/>;
-    const products = sortData();
-    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low'];
+    useEffect(() => initFilter(
+        history.location.search,
+        tag,
+        x=>setTag(x)
+    ), [])
+    if (props.products === null) return <LoadingPage/>
+    const products = sortData(products,
+        )
+    const HasProduct = prodtucts.length>0
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
@@ -166,7 +111,6 @@ const ShopOverview = props => {
                     route={'home/shop'}
                 />
             </Grid>
-
             {
                 props.products.length > 0 ?
                     <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
@@ -176,6 +120,16 @@ const ShopOverview = props => {
                                     <Typography variant={'h6'}>
                                         PRODUCT CATEGORIES
                                     </Typography>
+                                    <TagList
+                                       data={getTagsCountsArray(props.products, (tag, number) => {
+                                        props.editProductFilter('tag', tag);
+                                        initPageNumber(number)
+                                    })}
+                                    selectedValue={props.filter.tag}
+                                        onClick={()=>console.log('gg')}
+                                        tag={'11'}
+                                    history
+                                    />
                                     {getTagsList()}
                                 </Grid> : null
                         }
@@ -198,9 +152,9 @@ const ShopOverview = props => {
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        {
-                                            getPagination(products)
-                                        }
+                                        <Pagination
+
+                                        />
                                     </Grid>
                                     <Grid item>
                                         <Typography variant={'body1'}>

@@ -22,7 +22,7 @@ interface Props {
     classes: MaterialUIClasses,
     icon?: string,
     icon2?: string,
-    label: string,
+    label?: string,
     labelExtra?: string,
     options: Array<Clickable>,
     selectedValue?: string,
@@ -34,8 +34,8 @@ const DropDown: React.FunctionComponent<Props> = props => {
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const handleMenuItemClick = (index: number, cb: Function): void => {
-        setSelectedIndex(index);
-        setAnchorEl(null);
+        setSelectedIndex(index)
+        setAnchorEl(null)
         cb()
     };
 

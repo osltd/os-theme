@@ -1,25 +1,13 @@
 import React, {createContext, useReducer} from 'react';
-import App from '../components/App';
 import reducer from './dispatch'
 import initialState from './state'
-import {actionType} from "../constants/actionType";
-import {Product} from "../interfaces/server/Product";
 
-export interface Action {
-    type: actionType
-    payload: any
-}
 
-export interface State {
-    products: Array<Product> | null
-}
-
-const Store = createContext({})
-
-export default () => {
+const Provider: React.ComponentType = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
+    const Store = createContext(state)
 
-    return <Store.Provider value={{state, dispatch}}>
-        <App/>
-    </Store.Provider>
+    return <Provider value={}>
+        {children}
+    </Provider>
 }
