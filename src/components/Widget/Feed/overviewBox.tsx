@@ -1,5 +1,6 @@
 import React from 'react';
-import {Grid, Theme, Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
+import {Theme} from '@material-ui/core/styles'
 import moment from 'moment'
 import {Media as interfaceMedia} from '../../../interfaces/server/Common'
 import Media from '../../Widget/Media'
@@ -9,26 +10,29 @@ import {History} from "history";
 
 const useStyle = makeStyles((theme: Theme) => ({
 
-    root: {
-        minHeight: '450px',
-        paddingBottom: '20px',
-        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-        cursor: 'pointer'
-    },
+            root: {
+                minHeight: '450px',
+                paddingBottom: '20px',
+                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+                cursor: 'pointer'
+            },
 
 
-    title: {
-        cursor: 'pointer',
-        '&:hover': {
-            color: theme.palette.secondary.light,
-        }
-    },
-    content: {},
-    button: {
-        margin: '20px 0'
-    }
+            title: {
+                cursor: 'pointer',
+                '&:hover': {
+                    color: theme.palette.secondary.light,
+                }
+            },
+            content: {},
+            button: {
+                margin: '20px 0'
+            }
 
-}))
+        })
+
+
+)
 
 interface Props {
     history: History

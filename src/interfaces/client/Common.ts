@@ -11,7 +11,6 @@ export interface VariantOptions {
 export interface MaterialUIClasses {
     [key: string]: string
 }
-
 export interface Tag {
     label: string,
     value: string,

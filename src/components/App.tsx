@@ -8,13 +8,12 @@ import Header from './Layout/Header'
 import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
 import Feed from './Feed/Overview'
-import Product from './Product/Overview'
+import ProductOverview from './Product/Overview'
+
 import FeedDetail from './Feed/Detail'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
-import Test from './Widget/test'
-import Testt from './Widget/test2'
 import {
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
@@ -36,15 +35,16 @@ import NotFound from './Layout/NotFound'
 import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
+import {Product} from "../interfaces/server/Product";
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state:any) => ({
     products: state.product.products,
 });
 
 
-const mapDispatchToProps = dispatch => ({
-        initApp: (shoppingCart) => {
+const mapDispatchToProps = (dispatch:any) => ({
+        initApp: (shoppingCart:string) => {
             agent.Products.initProducts().then(res =>
                 dispatch(
                     {
@@ -125,7 +125,7 @@ const mapDispatchToProps = dispatch => ({
 
 
         },
-        finishLoadingProducts: products =>
+        finishLoadingProducts: (products:Array<Product>) =>
             dispatch(
                 {
                     type: INIT_PRODUCTS,
@@ -135,17 +135,23 @@ const mapDispatchToProps = dispatch => ({
 
     }
 );
+interface Props {
+[key:string]:any
+}
+const App:React.FunctionComponent<Props> = props => {
 
-const App = props => {
+    let getAllProducts = async (page:number = 1, products:Array<Product> = []):Promise<Array<Product>> => {
 
-    let getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
-        return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
-    };
-    let initApp = async () => await props.initApp(
-        JSON.parse(localStorage.getItem('shoppingCart')),
-        //todo(init to [] storage)
-    );
+        let data:Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
+        return ( data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
+    }
+    let getShoppingCart = (): string => {
+
+        let shoppingCart: string | null = localStorage.getItem('shoppingCart')
+        return JSON.parse(shoppingCart !== null ? shoppingCart : '')
+    }
+    let initApp = async () => await props.initApp(getShoppingCart())
+
 
     useEffect(
         () => {
@@ -154,8 +160,8 @@ const App = props => {
                     props.finishLoadingProducts(
                         await getAllProducts()
                     )
-            );
-            return null
+            )
+
         }, []);
 
 
@@ -165,7 +171,7 @@ const App = props => {
                 <ErrorBoundary>
                     <Header/>
                     <MyCredits/>
-                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : null}>
+                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : {}}>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/404'} component={NotFound}/>
@@ -174,7 +180,7 @@ const App = props => {
                             <Route exact path={'/products'} component={Shop}/>
                             <Route exact path={'/feeds'} component={Feed}/>
                             <Route exact path={'/feeds/:id'} component={FeedDetail}/>
-                            <Route exact path={'/products/:id'} component={Product}/>
+                            <Route exact path={'/products/:id'} component={ProductOverview}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
                             <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
                             <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
@@ -183,8 +189,6 @@ const App = props => {
                             <Route component={NotFound}/>
 
                         </Switch>
-                        <Test/>
-                        <Testt/>
                     </div>
                     <Footer/>
                 </ErrorBoundary>

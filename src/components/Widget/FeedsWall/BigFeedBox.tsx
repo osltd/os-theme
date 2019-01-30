@@ -4,7 +4,6 @@ import {redirectUrl} from "../../../api/ApiUtils";
 import {makeStyles} from '@material-ui/styles'
 
 import {History} from "history";
-import {RouteComponentProps} from "react-router";
 
 const useStyle = makeStyles((theme: Theme) => ({
     root: {

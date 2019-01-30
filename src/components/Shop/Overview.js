@@ -17,10 +17,10 @@ import {
     numberToPagination,
     refactorTextLength,
 } from "../../api/ApiUtils";
-import {sort_by} from '../../api/backup'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
+import {sortData} from "./Effect";
 
 const styles = theme => ({
     productCategory: {
@@ -85,38 +85,7 @@ const ShopOverview = props => {
         let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
         let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
         if (isTags && props.filter.tag !== queryTag) props.editProductFilter('tag', queryTag)
-
-    };
-
-    let sortData = () => {
-        let data = Array.from(props.products);
-        data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true);
-        let sortBy = () => {
-            switch (props.sort.sortBy) {
-                case 'Name A-Z':
-                    return data.sort(sort_by('name', null));
-                case 'Name Z-A':
-                    return data.sort(sort_by('name', null, true));
-                case 'Price Low to High':
-                    return data.sort((a, b) => {
-                            let priceA = a.variants[0] ? a.variants[0].price : 0;
-                            let priceB = b.variants[0] ? b.variants[0].price : 0;
-                            return (priceA < priceB) ? -1 : 1
-                        }
-                    );
-                case       'Price High to Low':
-                    return data.sort((a, b) => {
-                            let priceA = a.variants[0] ? a.variants[0].price : 0;
-                            let priceB = b.variants[0] ? b.variants[0].price : 0;
-                            return (priceA > priceB) ? -1 : 1
-                        }
-                    );
-                default:
-                    return data
-            }
-        };
-        return sortBy()
-    };
+    }
     let getProductProperty = (products, type) => {
         switch (type) {
             case 'display':
@@ -139,7 +108,6 @@ const ShopOverview = props => {
         })}
         selectedValue={props.filter.tag}
     />;
-
     let getPagination = (products) => {
         if (products.length === 0) return null;
         let options = numberToPagination(getProductProperty(products, 'length'),
@@ -155,19 +123,12 @@ const ShopOverview = props => {
         />)
     };
     let getProductsList = (products) => {
-
-
         if (products.length === 0) {
             return <Typography variant={'subtitle1'}> there are no products under <strong>{
                 props.filter.tag
             }</strong> category yet</Typography>
-
-
         }
-
-
         return props.viewMode === 'form' ?
-
             getProductProperty(products, 'display').map((n, i) =>
                 <Grid item xs={12} sm={6} md={4} key={i}
                 >
@@ -191,8 +152,7 @@ const ShopOverview = props => {
                 id={n.id}
             />))
     };
-
-    let popUp = useRef();
+    let popUp = useRef()
     useEffect(() => initFilter(), []);
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
