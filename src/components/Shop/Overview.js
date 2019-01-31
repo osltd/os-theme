@@ -1,23 +1,16 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import List from '../Widget/List'
-import Header from '../Layout/Body/Header'
 import classNames from 'classnames';
-import {connect} from 'react-redux'
-import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
-import WhiteDropDown from '../Widget/DropDown'
+import DropDown from '../Widget/DropDown'
 import LoadingPage from '../Layout/LoadingPage'
 import {Store} from '../../store/store'
 import Pagination from './Sections/Pagination'
 import TagList from './Sections/TagList'
-import {
-    arrayToFilter,
-    getTagsCountsArray,
-} from "../../api/ApiUtils";
+import {arrayToFilter, getTagsCountsArray,} from "../../api/ApiUtils";
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
-import {sortData, initFilter} from "./Effect";
+import {initFilter, sortData} from "./Effect";
 
 const styles = theme => ({
     productCategory: {
@@ -75,42 +68,24 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const ShopOverview = props => {
-    const [tag,setTag] = useState('')
-    const [sortBy,setSortBy]= useState('')
-    const [page,setPage]=useState('')
+    const [tag, setTag] = useState('')
+    const [sortBy, setSortBy] = useState('')
+    const [page, setPage] = useState('')
     const {state, dispatch} = useContext(Store)
-    const {classes,history } = props;
-    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low'];
-    let getProductProperty = (products, type) => {
-        switch (type) {
-            case 'display':
-                if (props.sort.page) {
-                    let range = props.sort.page.split(' - ');
-                    return products.filter((n, i) => (i >= range[0] - 1 && i <= range[1] - 1))
-                }
-                return products
-            case 'length':
-                return products.length
-        }
-    };
+    console.log('----------------------------state-----------------------------------')
+    console.log(state)
+    console.log('----------------------------dispatch-----------------------------------')
+    console.log(dispatch)
+    const {classes, history} = props;
 
     useEffect(() => initFilter(
         history.location.search,
         tag,
-        x=>setTag(x)
+        x => setTag(x)
     ), [])
     if (props.products === null) return <LoadingPage/>
-    const products = sortData(products,
-        )
-    const HasProduct = prodtucts.length>0
     return (
         <Grid container justify={'center'}>
-            <Grid item xs={12}>
-                <Header
-                    title={'shop'}
-                    route={'home/shop'}
-                />
-            </Grid>
             {
                 props.products.length > 0 ?
                     <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
@@ -121,14 +96,14 @@ const ShopOverview = props => {
                                         PRODUCT CATEGORIES
                                     </Typography>
                                     <TagList
-                                       data={getTagsCountsArray(props.products, (tag, number) => {
-                                        props.editProductFilter('tag', tag);
-                                        initPageNumber(number)
-                                    })}
-                                    selectedValue={props.filter.tag}
-                                        onClick={()=>console.log('gg')}
+                                        data={getTagsCountsArray(props.products, (tag, number) => {
+                                            props.editProductFilter('tag', tag);
+                                            initPageNumber(number)
+                                        })}
+                                        selectedValue={props.filter.tag}
+                                        onClick={() => console.log('gg')}
                                         tag={'11'}
-                                    history
+                                        history
                                     />
                                     {getTagsList()}
                                 </Grid> : null

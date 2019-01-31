@@ -39,13 +39,13 @@ import {Product} from "../interfaces/server/Product";
 import {Store} from "../store/store";
 
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state: any) => ({
     products: state.product.products,
 });
 
 
-const mapDispatchToProps = (dispatch:any) => ({
-        initApp: (shoppingCart:string) => {
+const mapDispatchToProps = (dispatch: any) => ({
+        initApp: (shoppingCart: string) => {
             agent.Products.initProducts().then(res =>
                 dispatch(
                     {
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch:any) => ({
 
 
         },
-        finishLoadingProducts: (products:Array<Product>) =>
+        finishLoadingProducts: (products: Array<Product>) =>
             dispatch(
                 {
                     type: INIT_PRODUCTS,
@@ -136,15 +136,28 @@ const mapDispatchToProps = (dispatch:any) => ({
 
     }
 );
-interface Props {
-[key:string]:any
-}
-const App:React.FunctionComponent<Props> = props => {
-    const {state,dispatch} = useContext(Store)
-    let getAllProducts = async (page:number = 1, products:Array<Product> = []):Promise<Array<Product>> => {
 
-        let data:Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
-        return ( data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
+interface Props {
+    [key: string]: any
+}
+
+const App: React.FunctionComponent<Props> = props => {
+    const {state, dispatch} = useContext(Store)
+
+    let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
+        let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
+        if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data))
+        else {
+            dispatch(
+                {
+                    type: INIT_PRODUCTS,
+                    payload: products
+                }
+            )
+            return products
+        }
+
+
     }
     let getShoppingCart = (): string => {
 
@@ -170,8 +183,10 @@ const App:React.FunctionComponent<Props> = props => {
         <BrowserRouter>
             <ScrollToTop>
                 <ErrorBoundary>
+
                     <Header/>
                     <MyCredits/>
+
                     <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : {}}>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
@@ -191,6 +206,7 @@ const App:React.FunctionComponent<Props> = props => {
 
                         </Switch>
                     </div>
+
                     <Footer/>
                 </ErrorBoundary>
             </ScrollToTop>
