@@ -36,7 +36,7 @@ import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import {Product} from "../interfaces/server/Product";
 import {Reducer} from "../store/store";
-
+import Test from './Widget/test'
 
 const mapStateToProps = (state: any) => ({
     products: state.product.products,
@@ -205,7 +205,7 @@ const App: React.FunctionComponent<Props> = props => {
 
                         </Switch>
                     </div>
-
+<Test/>
                     <Footer/>
                 </ErrorBoundary>
             </ScrollToTop>

@@ -2,33 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/constants/enum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/materialUIInstall.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/ApiUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/ApiUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/backup.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cart/CartTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cart/CartTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Feed/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Feed/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Search/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Search/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Effect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Overview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Sections/Pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Sections/Pagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Sections/ProductsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Sections/ProductsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Sections/TagList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Sections/TagList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/DropDown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/DropDown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/FeedsWall/Wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/FeedsWall/Wrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/List.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/List.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/Product/overviewList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/client/Common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/client/Common.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Widget/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,41 +26,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="68" column="29" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="29" />
+            <state relative-caret-position="481">
+              <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#313#1097#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/theme.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="47" selection-start-column="43" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="397">
+              <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -89,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+            <state relative-caret-position="255">
+              <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -99,24 +60,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Shop/Sections/Pagination.tsx">
+        <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/styles/index.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
+            <state relative-caret-position="177">
+              <caret line="209" column="8" selection-start-line="209" selection-start-column="8" selection-end-line="209" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/materialUIInstall.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Widget/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
+        <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2044">
-              <caret line="288" column="37" lean-forward="true" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
+            <state relative-caret-position="314">
+              <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -193,8 +181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Widget/test.js" />
-        <option value="$PROJECT_DIR$/src/store/dispatch/common.js" />
         <option value="$PROJECT_DIR$/src/store/state/common.js" />
         <option value="$PROJECT_DIR$/src/history.js" />
         <option value="$PROJECT_DIR$/src/components/Widget/Product/overviewList.js" />
@@ -224,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/components/Widget/List.tsx" />
         <option value="$PROJECT_DIR$/src/store/state.ts" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/components/App.tsx" />
         <option value="$PROJECT_DIR$/src/store.js" />
         <option value="$PROJECT_DIR$/src/components/Widget/DropDown.tsx" />
         <option value="$PROJECT_DIR$/src/interfaces/server/Product.ts" />
@@ -234,16 +219,19 @@
         <option value="$PROJECT_DIR$/src/components/Widget/FeedsWall/Wrapper.tsx" />
         <option value="$PROJECT_DIR$/src/components/Cart/CartTable.js" />
         <option value="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" />
-        <option value="$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx" />
         <option value="$PROJECT_DIR$/src/constants/enum.ts" />
         <option value="$PROJECT_DIR$/src/components/Shop/Sections/TagList.tsx" />
         <option value="$PROJECT_DIR$/src/components/Shop/Sections/Pagination.tsx" />
         <option value="$PROJECT_DIR$/src/components/Shop/Effect.ts" />
         <option value="$PROJECT_DIR$/src/components/Shop/Overview.tsx" />
         <option value="$PROJECT_DIR$/src/components/Shop/Sections/ProductsList.tsx" />
+        <option value="$PROJECT_DIR$/src/materialUIInstall.ts" />
+        <option value="$PROJECT_DIR$/src/components/App.tsx" />
+        <option value="$PROJECT_DIR$/src/components/Widget/test.js" />
+        <option value="$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx" />
         <option value="$PROJECT_DIR$/src/index.tsx" />
-        <option value="$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx" />
         <option value="$PROJECT_DIR$/src/theme.js" />
+        <option value="$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx" />
       </list>
     </option>
   </component>
@@ -326,13 +314,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Widget" type="462c0819:PsiDirectoryNode" />
-              <item name="Product" type="462c0819:PsiDirectoryNode" />
+              <item name="Input" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Widget" type="462c0819:PsiDirectoryNode" />
+              <item name="Product" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
@@ -359,7 +349,7 @@
     <property name="SearchEverywhereHistoryKey" value="replace&#9;ACTION&#9;Replace&#10;find in path&#9;ACTION&#9;FindInPath&#10;find &#9;ACTION&#9;FindInPath&#10;find in &#9;ACTION&#9;FindInPath&#10;histo&#9;ACTION&#9;Vcs.ShowTabbedFileHistory" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549013316232" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549019109916" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -458,12 +448,12 @@
       <workItem from="1548824992250" duration="3973000" />
       <workItem from="1548834563809" duration="467000" />
       <workItem from="1548992443061" duration="14721000" />
-      <workItem from="1549013461179" duration="3114000" />
+      <workItem from="1549013461179" duration="5281000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="563646000" />
+    <option name="totallyTimeSpent" value="565813000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -604,23 +594,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/react/cjs/react.development.js" />
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Dialog.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-275">
-          <folding>
-            <element signature="e#0#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Product/Details/api.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -654,13 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/styles/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="214" column="28" lean-forward="true" selection-start-line="214" selection-start-column="28" selection-end-line="214" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -786,16 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="181" column="22" selection-start-line="181" selection-start-column="9" selection-end-line="181" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Feed/Overview.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -874,16 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="62" column="15" lean-forward="true" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/api/ApiUtils.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -957,33 +903,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2044">
           <caret line="288" column="37" lean-forward="true" selection-start-line="288" selection-start-column="37" selection-end-line="288" selection-end-column="37" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="68" column="29" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#313#1097#0" />
           </folding>
         </state>
       </provider>
@@ -1001,10 +926,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/theme.js">
+    <entry file="file://$PROJECT_DIR$/src/agent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="47" selection-start-column="43" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="38" column="31" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewBox.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Widget/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/styles/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="209" column="8" selection-start-line="209" selection-start-column="8" selection-end-line="209" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/theme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/materialUIInstall.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

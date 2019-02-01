@@ -1,10 +1,12 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid, Theme, Typography} from '@material-ui/core';
 import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
 import {RouteComponentProps, withRouter} from "react-router";
+import withStyles from "@material-ui/core/styles/withStyles";
+import {WithStyles} from "@material-ui/styles/withStyles";
 
-const useStyles = makeStyles(theme =>{
+const useStyles = (theme:Theme) =>{
 console.log('21309i12-39-102930-9120-39-0129-309')
     console.log(theme)
     return ({
@@ -49,9 +51,7 @@ console.log('21309i12-39-102930-9120-39-0129-309')
         marginBottom: '10px',
     }
 
-})},{
-    withTheme:true
-});
+})}
 
 interface Props extends RouteComponentProps {
     src: string
@@ -66,9 +66,6 @@ interface Props extends RouteComponentProps {
 
 const ProductOverviewList: React.FunctionComponent<Props> = props => {
 
-    const classes = useStyles()
-    console.log("ggqwehuooiewoijg")
-    console.log(classes)
     const {src, name, category, id, regPrice, promotePrice, history, description} = props;
 
     return (
@@ -114,4 +111,4 @@ const ProductOverviewList: React.FunctionComponent<Props> = props => {
 };
 
 
-export default withRouter(ProductOverviewList)
+export default withStyles(useStyles)(withRouter(ProductOverviewList))
