@@ -4,8 +4,9 @@ import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom'
 import classesNames from 'classnames'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         textDecoration: 'none',
         padding: '3px',
@@ -27,32 +28,15 @@ const styles = theme => ({
         marginRight: '5px',
         '&:before': {}
     }
-});
+}))
 
-class CustomButton extends React.Component {
-    state = {
-        anchor: 'left',
-    };
+const  CustomButton =props=> {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            placeHolder: '',
 
-        }
-    }
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-
-        });
-    };
-
-    render() {
+        const classes =useStyles()
         const {
-            classes, link, onClick, value, icon2, icon, border
-        } = this.props;
+             link, onClick, value, icon2, icon, border
+        } = props;
 
         return (
 
@@ -71,10 +55,5 @@ class CustomButton extends React.Component {
 
         )
     }
-}
 
-CustomButton.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(CustomButton);
+export default CustomButton

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classNames from 'classnames';
 import {Input} from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -29,40 +30,23 @@ const styles = theme => ({
             color: 'white',
         }
     }
-});
+}))
 
-class EmailSearchBar extends React.Component {
-    state = {
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    };
+const  EmailSearchBar =props => {
 
-    handleChange = prop => event => {
-        this.setState({[prop]: event.target.value});
-    };
-
-
-    render() {
-        const {classes} = this.props;
+const [email,setEmail] = useState('')
+        const classes = useStyles()
 
         return <Input
             className={classNames(classes.margin, classes.textField)}
             variant={'filled'}
             placeholder={'enter email address'}
-            value={this.state.weight}
-            onChange={this.handleChange('weight')}
+            value={email}
+            onChange={e=>setEmail(e.target.value)}
             disableUnderline={true}
             endAdornment={<span className={classNames(classes.icon, 'icon-envelop')}/>}
 
         />
     }
-}
 
-EmailSearchBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(EmailSearchBar);
+export default (EmailSearchBar);

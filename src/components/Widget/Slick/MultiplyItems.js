@@ -4,33 +4,33 @@ import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
 import {refactorTextLength} from "../../../api/ApiUtils";
 import Slider from "react-slick";
-
+import {makeStyles} from "@material-ui/styles";
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 
-const style = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         margin: '40px',
         width: 'calc(100%-80px)'
     },
-});
+}))
 
-class MultipleItems extends Component {
-    render() {
+const MultipleItems = props =>  {
+    const classes = useStyles()
         let settings = {
             dots: true,
             infinite: true,
             speed: 500,
             rows: 2,
-            slidesPerRow: this.props.size ? this.props.size : 4,
+            slidesPerRow: props.size ? props.size : 4,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 5000,
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        const {classes, data} = this.props;
-        // let size = this.props.size || 4;
+        const { data} = props;
+        // let size = props.size || 4;
         // if (data.length > size) size = data.length;
         // var products = [];
         //
@@ -58,7 +58,6 @@ class MultipleItems extends Component {
 
             </Slider>
         );
-    }
 }
 
-export default withStyles(style)(MultipleItems)
+export default(MultipleItems)

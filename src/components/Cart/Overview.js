@@ -3,16 +3,17 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import Header from '../Layout/Body/Header'
 import ShoppingCart from './CartTable'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
 
     shoppingCart: {
         paddingBottom: '30px',
     }
-});
+}))
 
 const CartOverview = (props) => {
-    const {classes} = props;
+    const classes = useStyles();
     return <Grid container justify={'center'}>
         <Grid item sm={12}>
             <Header title={'Shopping Cart'}/>
@@ -24,4 +25,4 @@ const CartOverview = (props) => {
 
 };
 
-export default (withStyles(styles)(CartOverview))
+export default CartOverview

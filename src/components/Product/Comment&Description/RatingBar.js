@@ -5,8 +5,9 @@ import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
 import {connect} from "react-redux";
 import {Grid} from '@material-ui/core'
 import classNames from 'classnames'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => (
+const useStyles = makeStyles( theme => (
     {
         root: {}, icon: {
             '&:before': {
@@ -14,8 +15,7 @@ const styles = theme => (
             }
         }
     }
-);
-
+))
 const mapStateToProps = state => ({
     section: state.product.detail.section
 });
@@ -51,7 +51,8 @@ class RatingBar extends React.Component {
 
 
     render() {
-        const {classes, section} = this.props;
+        const classes = useStyles()
+        const { section} = this.props;
 
         return (
 
@@ -99,4 +100,4 @@ RatingBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(RatingBar))
+export default connect(mapStateToProps, mapDispatchToProps)(RatingBar)

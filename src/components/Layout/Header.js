@@ -13,8 +13,9 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     logo: {
         cursor: 'pointer',
 
@@ -90,8 +91,7 @@ const styles = theme => ({
         },
     },
 
-});
-
+}))
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -121,11 +121,12 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const Header = props => {
+    const classes = useStyles()
+
     const [keyword, setKeyword] = useState('');
     const [navBar, setNavBar] = useState('');
     const {
         history,
-        classes,
         width,
         products,
         feeds,
@@ -278,4 +279,4 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(Header)))

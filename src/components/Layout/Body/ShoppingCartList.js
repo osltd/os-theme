@@ -6,8 +6,9 @@ import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles ( {
     listItem: {
         cursor: 'pointer',
     },
@@ -32,40 +33,19 @@ const styles = theme => ({
             }
         }
     }
-});
+})
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
 });
 
 
-const mapDispatchToProps = dispatch => ({}
-);
 
-class ShoppingCartList extends React.Component {
-    state = {
-        anchor: 'left',
-    };
+const ShoppingCartList = props => {
 
-    constructor() {
-        super();
-        this.state = {
-            placeHolder: '',
-
-        }
-    }
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-
-        });
-    };
-
-    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
-
-    render() {
-        const {classes, data, onDelete} = this.props;
+   let  selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
+const classes = useStyles()
+        const {data, onDelete} = props;
         return (
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
@@ -75,11 +55,10 @@ class ShoppingCartList extends React.Component {
                             <ListItem
                                 key={i}
                                 button
-
-                                onClick={() => redirectUrl('/products/' + n.product.id, this.props.history)}>
+                                onClick={() => redirectUrl('/products/' + n.product.id, props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
-                                    title={this.selectedData(n).description}>
+                                    title={selectedData(n).description}>
 
                                     <Grid container spacing={16}>
                                         <Grid item sm={3}>
@@ -88,7 +67,6 @@ class ShoppingCartList extends React.Component {
                                                 style={{width: '100%', minWidth: '50px'}}
                                                 src={handleImgValid(n.product.photos[0])}
                                             />
-
                                         </Grid>
                                         <Grid item sm={9}>
                                             <Typography variant={'body1'}>
@@ -96,7 +74,7 @@ class ShoppingCartList extends React.Component {
                                             </Typography>
                                             <Typography variant={'caption'}>
                                                 {n.number} X
-                                                $ {this.selectedData(n).price
+                                                $ {selectedData(n).price
                                             }
                                             </Typography>
                                             <span
@@ -122,7 +100,7 @@ class ShoppingCartList extends React.Component {
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                            onClick={() => redirectUrl('/shoppingCart', this.props.history)}
+                            onClick={() => redirectUrl('/shoppingCart', props.history)}
                         >
                             View Cart
                         </Button>
@@ -130,7 +108,7 @@ class ShoppingCartList extends React.Component {
                     <Grid item>
                         <Button variant={'outlined'}
                                 className={classes.button}
-                                onClick={() => redirectUrl('/checkout', this.props.history)}>
+                                onClick={() => redirectUrl('/checkout', props.history)}>
                             Checkout
                         </Button>
                     </Grid>
@@ -138,11 +116,10 @@ class ShoppingCartList extends React.Component {
                 </Grid>
             </Grid>
         )
-    }
 }
 
 ShoppingCartList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartList)))
+export default withRouter(connect(mapStateToProps, {})(ShoppingCartList))

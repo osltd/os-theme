@@ -7,8 +7,9 @@ import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
 import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => {
+const useStyles = makeStyles( theme => {
     console.log(theme);
 
     return (
@@ -21,8 +22,7 @@ const styles = theme => {
             },
         })
 
-};
-
+})
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({}
 
 const SingleProduct = props => {
     let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
-
+const classes =useStyles()
     if (!props.products) return <LoadingPage/>;
     const product = props.products.find(n => n.id.toString() === props.match.params.id);
     const variantOptions = getVariantOptions(product.variants);
@@ -77,4 +77,4 @@ const SingleProduct = props => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SingleProduct))
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

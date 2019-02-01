@@ -18,10 +18,11 @@ import {
     PRODUCT_EDIT_FILTER,
     PRODUCT_EDIT_SORT
 } from "../../constants/actionType";
+import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -46,7 +47,7 @@ const styles = theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-});
+}))
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -88,8 +89,8 @@ const mapDispatchToProps = dispatch => ({
 const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
 
 const ShoppingCartTable = (props) => {
-    const {classes, shoppingCart} = props;
-
+    const { shoppingCart} = props;
+const classes = useStyles()
     if (shoppingCart === null) return <LoadingPage/>;
 
     return (
@@ -208,4 +209,4 @@ ShoppingCartTable.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartTable))
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)

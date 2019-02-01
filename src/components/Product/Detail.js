@@ -13,8 +13,9 @@ import swal from '@sweetalert/with-react'
 import Detail from './Details/Details'
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme =>
+const useStyles = makeStyles( theme =>
     (
         {
             name: {
@@ -36,8 +37,7 @@ const styles = theme =>
                 color: 'green',
                 fontWeight: '600',
             }
-        });
-
+        }))
 
 const mapStateToProps = state => ({
     draft: state.cart.variant,
@@ -150,9 +150,9 @@ class ResponsiveDialog extends React.Component {
         this.props.editCartVariant('number', 1)
     };
     getDetail = (selectedVariant) => {
+        const classes = useStyles()
 
-        const {
-            classes, name, promotePrice,
+        const { name, promotePrice,
             description, variantKeys, variantOptions, product
         } = this.props;
         return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
@@ -333,7 +333,7 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog)))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(ResponsiveDialog))
 // <Dialog
 // innerRef={e => this.dialog = e}
 // title={}

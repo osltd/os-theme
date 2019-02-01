@@ -4,12 +4,10 @@ import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtil
 import {makeStyles} from "@material-ui/styles";
 import {RouteComponentProps, withRouter} from "react-router";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {WithStyles} from "@material-ui/styles/withStyles";
+import {WithStyles} from "@material-ui/core";
+import createStyles from "@material-ui/core/styles/createStyles";
 
-const useStyles = (theme:Theme) =>{
-console.log('21309i12-39-102930-9120-39-0129-309')
-    console.log(theme)
-    return ({
+const useStyles =makeStyles( (theme:Theme) =>({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
@@ -27,7 +25,6 @@ console.log('21309i12-39-102930-9120-39-0129-309')
         color: theme.palette.secondary.light,
         marginTop: '15px',
     },
-
     root: {
         padding: '10px',
 
@@ -37,10 +34,8 @@ console.log('21309i12-39-102930-9120-39-0129-309')
         width: '100%',
         maxHeight: '255px !important',
     },
-
     oldPrice: {},
     price: {
-        color: 'red',
         fontFamily: 'arial',
         lineHeight: 1,
     },
@@ -49,11 +44,9 @@ console.log('21309i12-39-102930-9120-39-0129-309')
         color: '#333',
         fontSize: '15px',
         marginBottom: '10px',
-    }
+    }}))
 
-})}
-
-interface Props extends RouteComponentProps {
+interface nonStyleProps  {
     src: string
     name: string
     id: number
@@ -63,10 +56,11 @@ interface Props extends RouteComponentProps {
     description?: string
 }
 
+type Props = nonStyleProps & RouteComponentProps
 
 const ProductOverviewList: React.FunctionComponent<Props> = props => {
-
-    const {src, name, category, id, regPrice, promotePrice, history, description} = props;
+const classes = useStyles()
+    const {src, name, category, id, regPrice, promotePrice, history,description} = props;
 
     return (
         <Grid container spacing={16} alignItems={'center'} className={classes.root}>
@@ -111,4 +105,4 @@ const ProductOverviewList: React.FunctionComponent<Props> = props => {
 };
 
 
-export default withStyles(useStyles)(withRouter(ProductOverviewList))
+export default (withRouter(ProductOverviewList))

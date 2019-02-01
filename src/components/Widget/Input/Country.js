@@ -6,11 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import {emphasize} from '@material-ui/core/styles/colorManipulator';
-
+import {makeStyles} from "@material-ui/styles/es";
 import {COUNTRY_CODE} from '../../../constants/constants'
 import withStyles from "@material-ui/core/styles/withStyles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {},
     input: {
         display: 'flex',
@@ -57,8 +57,7 @@ const styles = theme => ({
     divider: {
         height: theme.spacing.unit * 2,
     },
-});
-
+}))
 
 const selectStyles = theme => ({
     input: base => ({
@@ -164,7 +163,8 @@ const components = {
 };
 
 const IntegrationReactSelect = props => {
-    const {classes, value, onChange} = props;
+    const { value, onChange} = props;
+    const classes = useStyles()
 
     const theme = useTheme();
 
@@ -183,4 +183,4 @@ const IntegrationReactSelect = props => {
     );
 };
 
-export default withStyles(styles)(IntegrationReactSelect)
+export default (IntegrationReactSelect)

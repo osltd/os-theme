@@ -25,7 +25,6 @@ import '../constants/icon/style.css'
 import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
-import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
 import '../constants/Style.css'
 import SearchPage from './Search/Overview'
@@ -198,7 +197,6 @@ const App: React.FunctionComponent<Props> = props => {
                             <Route exact path={'/products/:id'} component={ProductOverview}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
                             <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
-                            <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                             <Route exact path={'/loadingPage'} component={LoadingPage}/>
                             <Route exact path={'/search/:keyword'} component={SearchPage}/>
                             <Route component={NotFound}/>

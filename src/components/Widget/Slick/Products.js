@@ -5,8 +5,9 @@ import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {withRouter} from 'react-router-dom'
 import {handleImgValid} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles/";
 
-const style = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         margin: 0,
         width: 'calc(100%-80px)',
@@ -56,12 +57,12 @@ const style = theme => ({
     }
 
 
-});
+}))
 
 
-class SimpleSlider extends React.Component {
-    render() {
-        let settings = {
+const SimpleSlick = props => {
+const classes = useStyles()
+    let settings = {
             dots: false,
             infinite: true,
             lazyLoad: true,
@@ -74,7 +75,7 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        let {data, classes, title, style} = this.props;
+        let {data, title, style} = props;
         if (!(data[0])) return null;
         style = style || {};
         return (
@@ -102,7 +103,6 @@ class SimpleSlider extends React.Component {
                     <p className={classes.caption + ' animated fadeIn'}>{title}</p>
                 </div>
         );
-    }
 }
 
-export default withRouter(withStyles(style)(SimpleSlider))
+export default SimpleSlick

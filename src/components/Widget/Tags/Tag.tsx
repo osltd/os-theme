@@ -4,8 +4,9 @@ import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames'
 import {MaterialUIClasses} from "../../../interfaces/client/Common";
 import createStyles from "@material-ui/core/es/styles/createStyles";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = (theme: Theme) => createStyles({
+const useStyles = makeStyles( (theme: Theme) => createStyles({
     root: {
         display: 'inline-block',
         borderRadius: 0,
@@ -25,7 +26,7 @@ const styles = (theme: Theme) => createStyles({
 
 
     }
-});
+}))
 
 interface Props {
     selected?: boolean,
@@ -35,9 +36,8 @@ interface Props {
 }
 
 const Tag: React.FunctionComponent<Props> = props => {
-
+const classes = useStyles()
     const {
-        classes,
         value,
         onClick,
         selected
@@ -52,4 +52,4 @@ const Tag: React.FunctionComponent<Props> = props => {
     )
 };
 
-export default withStyles(styles)(Tag);
+export default Tag

@@ -9,8 +9,9 @@ import SocialIcon from '../Widget/SocialIcon'
 import {connect} from "react-redux";
 import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         padding: '50px 100px 100px 100px',
         backgroundColor: 'black',
@@ -19,7 +20,7 @@ const styles = theme => ({
     emailBar: {
         marginBottom: '30px',
     }
-});
+}))
 
 
 const mapStateToProps = state => ({
@@ -32,15 +33,15 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 );
 
-class Footer extends React.Component {
+const Footer = props => {
 
-    getTags = () => {
+ let    getTags = () => {
         //todo(handle err)
-        const {products, feeds} = this.props;
+        const {products, feeds} = props;
         let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
         let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : [];
         delete productsTags[_.indexOf(productsTags, 'all')];
-        // let feedsArr = getTagsCountsArray(feeds, () => redirectUrl('/', this.props.history))
+        // let feedsArr = getTagsCountsArray(feeds, () => redirectUrl('/', props.history))
         // let feedsTags = (feedsArr && feedsArr.length > 0) ? feedsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
         //
         //
@@ -58,7 +59,7 @@ class Footer extends React.Component {
                             (n, i) => <Tag
                                 key={i}
                                 value={n}
-                                onClick={() => redirectUrl(`/products?tags=${n}`, this.props.history)}
+                                onClick={() => redirectUrl(`/products?tags=${n}`, props.history)}
                             />
                         )
                     }
@@ -68,8 +69,8 @@ class Footer extends React.Component {
         )
     };
 
-    render() {
-        const {classes} = this.props;
+        const classes = useStyles()
+
         return (
             <Grid container justify={'space-between'} className={classes.root}>
                 <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
@@ -126,13 +127,8 @@ class Footer extends React.Component {
                         <FooterList/>
                     </Grid>
                 </Grid>
-                {this.getTags()}
+                {getTags()}
             </Grid>);
     }
-}
 
-Footer.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Footer))
+export default connect(mapStateToProps, mapDispatchToProps)(Footer)

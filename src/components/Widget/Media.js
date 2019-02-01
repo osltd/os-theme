@@ -6,8 +6,9 @@ import {handleImgValid, refactorTextLength} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import {withStyles} from "@material-ui/core/styles/index";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     video: {
         width: '100%',
     },
@@ -17,7 +18,7 @@ const styles = theme => ({
         width: '100%',
         height: ''
     },
-});
+}))
 
 const currencies = [
     {
@@ -67,7 +68,8 @@ class Media extends React.Component {
         });
     };
     getMedia = data => {
-        const {classes} = this.props;
+        const classes = useStyles()
+
         if (data.length === 0) return null;
         if (data.length > 0 && data[0].ext.indexOf('product://') !== -1) {
             const productId = data[0].ext.replace(/^\D+/g, '');
@@ -128,4 +130,4 @@ class Media extends React.Component {
 }
 
 //todo(unsafe)
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Media))
+export default connect(mapStateToProps, mapDispatchToProps)(Media)

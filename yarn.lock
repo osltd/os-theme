@@ -989,10 +989,10 @@
     "@babel/runtime" "7.0.0-rc.1"
     recompose "^0.28.0"
 
-"@material-ui/styles@^3.0.0-alpha.8":
-  version "3.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-3.0.0-alpha.8.tgz#14c5680e09b37ebedb26e8a6593aa8afe9fbb15c"
-  integrity sha512-66X0fN9AmXexpnk8wWin2L0p4PzRvIP8Cy2pzXANrbfpHyTgDsURiGECRgv+cgtIBoAjqb/x+NxEE92RYFYFWQ==
+"@material-ui/styles@^3.0.0-alpha.9":
+  version "3.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-3.0.0-alpha.9.tgz#3ecab7e9db8ba3d9614df475063fee01c0b2585f"
+  integrity sha512-1AmmTj82ip4Sp3XTTFQklkh+mnjQAtSIpqkGpKsAbS/XCG8X13/qUJ4AWlwC/OOPBLJl85Hm2jVUXhmAidD6bg==
   dependencies:
     "@babel/runtime" "^7.2.0"
     "@emotion/hash" "^0.7.1"

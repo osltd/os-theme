@@ -9,9 +9,9 @@ const TopInterest = props => {
     const {hasProductsToShow, products, width, classes} = props.self;
 
     return (products) ?
-        <section className={classes.section}>
+        <section >
             <Grid item>
-                <Typography variant={'h4'} className={classes.title}>
+                <Typography variant={'h4'} >
                     FEATURE PRODUCTS
                 </Typography>
             </Grid>

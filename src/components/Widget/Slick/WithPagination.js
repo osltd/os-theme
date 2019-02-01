@@ -3,16 +3,16 @@ import Slider from 'react-slick';
 import {withStyles} from '@material-ui/core/styles';
 import ProductOverviewBox from '../Product/overviewBox'
 import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const style = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         margin: '40px',
         width: 'calc(100%-80px)',
     },
-});
+}))
 
-class AppendDots extends Component {
-    render() {
+const  AppendDots =props=> {
         const settings = {
             dots: true,
             infinite: true,
@@ -65,7 +65,8 @@ class AppendDots extends Component {
 
 
         };
-        const {classes, data} = this.props;
+        const { data} = props
+    const classes =useStyles()
         return (
             <div className={classes.root}>
                 <Slider {...settings}  >
@@ -120,6 +121,5 @@ class AppendDots extends Component {
             </div>
         );
     }
-}
 
-export default withStyles(style)(AppendDots)
+export default (AppendDots)

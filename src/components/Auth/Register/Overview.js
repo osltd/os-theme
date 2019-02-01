@@ -9,9 +9,9 @@ import * as styleGuide from "../../../constants/styleGuide";
 import agent from '../../../agent'
 import swal from '@sweetalert/with-react'
 import {redirectUrl} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
 
         backgroundColor: theme.palette.background.default,
@@ -28,8 +28,7 @@ const styles = theme => ({
     paddingTop: {
         paddingTop: '20px !important',
     }
-});
-
+}))
 const Login = props => {
     let register = () => {
         const pwdDidNotMatch = (pwd !== confirmPwd);
@@ -107,9 +106,8 @@ const Login = props => {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [confirmPwd, setConfirmPwd] = useState('');
+    const classes = useStyles()
 
-
-    const {classes} = props;
     return (
 
         <Grid container className={classes.root} justify={'center'} alignItems={'center'}>
@@ -170,4 +168,4 @@ const Login = props => {
     );
 };
 
-export default withSnackbar(withWidth()(withStyles(styles)(Login)))
+export default withSnackbar(withWidth()(Login))

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {InputAdornment, TextField} from '@material-ui/core';
 import NumberFormat from 'react-number-format';
-
+import {makeStyles} from "@material-ui/styles";
 
 const NumberFormatCustom = props => {
 
@@ -30,16 +30,17 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     input: {
         width: '100%',
     }
-});
+}))
 
 const InputBar = props => {
 
+    const classes = useStyles()
 
-    const {classes, placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
+    const { placeholder, multiline, title, value, onChange, disabled, validation, format} = props;
 
     return <TextField
         disabled={(disabled)}
@@ -71,4 +72,4 @@ InputBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(InputBar);
+export default (InputBar);

@@ -14,8 +14,9 @@ import PromoCode from './PromoCode'
 import {withSnackbar} from 'notistack'
 import _ from 'lodash'
 import * as styleGuide from "../../constants/styleGuide";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -42,8 +43,7 @@ const styles = theme => ({
 
     }
 
-});
-
+}))
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
     user: state.auth.user,
@@ -75,8 +75,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const CheckoutOverview = props => {
+    const classes = useStyles()
 
-    const {classes} = props;
     const rendering = (!(props.shoppingCart) || props.user === null);
     const needLogin = (_.isEmpty(props.user));
     const NoProductsInCart = (props.shoppingCart.length < 1);
@@ -203,4 +203,4 @@ const CheckoutOverview = props => {
     }
 };
 
-export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckoutOverview))))
+export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(CheckoutOverview)))

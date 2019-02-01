@@ -16,10 +16,11 @@ import {stringToTags} from '../../api/ApiUtils'
 import * as styleGuide from "../../constants/styleGuide";
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
 import _ from 'lodash'
+import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -47,8 +48,7 @@ const styles = theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-});
-
+}))
 const mapStateToProps = state => ({
     coupons: state.cart.billingDetail.coupons,
     shoppingCart: state.cart.shoppingCart,
@@ -70,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const PromoCode = props => {
+    const classes= useStyles()
     const [promoCode, setPromoCode] = useState('');
     let itemsOf = product => {
 
@@ -77,7 +78,7 @@ const PromoCode = props => {
     };
     let getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
 
-    const {classes, shoppingCart, setCoupons, coupons} = props;
+    const { shoppingCart, setCoupons, coupons} = props;
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>
@@ -200,4 +201,4 @@ PromoCode.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withRouter(withSnackbar(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PromoCode))))
+export default withRouter(withSnackbar(connect(mapStateToProps, mapDispatchToProps)(PromoCode)))

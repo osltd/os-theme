@@ -10,8 +10,9 @@ import Dialog from '../Widget/Dialog'
 import {redirectUrl} from "../../api/ApiUtils";
 import swal from '@sweetalert/with-react'
 import MyAccount from '../Auth/Accounts/Overview'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
 
     root: {
         paddingRight: '50px',
@@ -37,7 +38,7 @@ const styles = theme => ({
         paddingBottom: '20px',
     }
 
-});
+}))
 
 
 const mapStateToProps = state => ({
@@ -66,7 +67,9 @@ const mapDispatchToProps = dispatch => ({
 const MyCredits = props => {
 
     let dialogRef = useRef();
-    const {classes, width, history} = props;
+    const classes = useStyles()
+
+    const { width, history} = props;
 
     let logout = () => {
         const {history} = props;
@@ -133,4 +136,4 @@ MyCredits.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(MyCredits))))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(MyCredits)))

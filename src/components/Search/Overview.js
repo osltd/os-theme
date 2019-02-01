@@ -10,8 +10,9 @@ import Header from '../Layout/Body/Header'
 import LoadingPage from '../Layout/LoadingPage'
 import SearchBar from '../Widget/SearchBar/original'
 import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -32,7 +33,7 @@ const styles = theme => ({
     array: {
         paddingLeft: '5px',
     }
-});
+}))
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -47,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
             payload: keyword
         })
     }
-);
+)
 
 class SearchPage extends React.Component {
     constructor(props) {
@@ -83,8 +84,8 @@ class SearchPage extends React.Component {
     }
 
     render() {
+        const classes = useStyles()
 
-        const {classes} = this.props;
         if (!this.props.products && !this.props.feeds) return <LoadingPage/>;
         const products = this.props.products ? this.searchData(this.props.products) : [];
         const feeds = this.props.feeds ? this.searchData(this.props.feeds) : [];
@@ -169,4 +170,4 @@ class SearchPage extends React.Component {
     }
 }
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SearchPage)))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(SearchPage))

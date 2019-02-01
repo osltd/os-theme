@@ -2,8 +2,9 @@ import React from "react";
 import {Theme, withStyles} from '@material-ui/core/styles';
 import createStyles from "@material-ui/core/styles/createStyles";
 import {MaterialUIClasses} from "../../../interfaces/client/Common";
+import {makeStyles} from "@material-ui/styles";
 
-const style = (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         '&:hover': {
             '&:before': {
@@ -24,17 +25,16 @@ const style = (theme: Theme) => createStyles({
         }
 
     }
-});
+}))
 
 interface Props {
-    classes: MaterialUIClasses
     style?: any
     onClick: () => void
 }
 
 const PrevArrow: React.FunctionComponent<Props> = props => {
-
-    const {classes, style, onClick} = props;
+const classes =useStyles()
+    const { style, onClick} = props;
     return (
         <span
             className={classes.root + ' ' + 'icon-left-16'}
@@ -48,4 +48,4 @@ const PrevArrow: React.FunctionComponent<Props> = props => {
 
 };
 
-export default withStyles(style)(PrevArrow)
+export default (PrevArrow)

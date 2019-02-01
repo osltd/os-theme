@@ -5,8 +5,9 @@ import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {withRouter} from 'react-router-dom'
+import {makeStyles} from "@material-ui/styles";
 
-const style = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         margin: '40px',
         width: 'calc(100%-80px)',
@@ -32,10 +33,10 @@ const style = theme => ({
 
     }
 
-});
+}))
 
-class SimpleSlider extends React.Component {
-    render() {
+const  SimpleSlider =props=> {
+    const classes = useStyles()
         let settings = {
             dots: true,
             infinite: true,
@@ -48,7 +49,7 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        const {data, classes} = this.props;
+        const {data,history} = props;
         return (
             data[0] ?
                 <Slider {...settings} className={classes.root}>
@@ -63,7 +64,7 @@ class SimpleSlider extends React.Component {
                                               backgroundImage: 'url("' + n.url + '")',
 
                                           })}
-                                          onClick={() => n.link ? redirectUrl(n.link, this.props.history) : null}
+                                          onClick={() => n.link ? redirectUrl(n.link,history) : null}
 
                                           className={classes.img}>
                                         {n.title && <Grid item lg={4}>
@@ -78,7 +79,6 @@ class SimpleSlider extends React.Component {
 
                 </Slider> : null
         );
-    }
 }
 
-export default withRouter(withStyles(style)(SimpleSlider))
+export default withRouter((SimpleSlider))

@@ -12,8 +12,9 @@ import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
 import LoadingPage from '../Layout/LoadingPage'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => {
+const useStyles = makeStyles( theme => {
     return (
         {
             productCategory: {
@@ -24,7 +25,7 @@ const styles = theme => {
             },
         })
 
-};
+})
 
 
 const mapStateToProps = state => ({
@@ -67,8 +68,8 @@ class ResponsiveDialog extends React.Component {
         )
     };
 
-    render() {
-        const {classes} = this.props;
+    render() {        const classes = useStyles()
+
         const feeds = (this.props.feeds) ?
             this.props.feeds.filter(n =>
                 (((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) && ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true))) : null;
@@ -132,4 +133,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsiveDialog)

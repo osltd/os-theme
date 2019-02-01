@@ -5,8 +5,9 @@ import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from "react-router-dom";
 import {redirectUrl} from "../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -88,10 +89,11 @@ const styles = theme => ({
         left: 'calc(50% - 9px)',
         transition: theme.transitions.create('opacity'),
     },
-});
+}))
 
 const ButtonBases = (props) => {
-    const {classes, history, category} = props;
+    const { history, category} = props;
+    const classes = useStyles()
 
     return (
 
@@ -149,4 +151,4 @@ ButtonBases.propTypes = {
 
 };
 
-export default withRouter(withStyles(styles)(ButtonBases))
+export default withRouter(ButtonBases)

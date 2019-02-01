@@ -9,8 +9,9 @@ import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
 
     root: {
         paddingRight: '50px',
@@ -36,8 +37,7 @@ const styles = theme => ({
         paddingBottom: '20px',
     }
 
-});
-
+}))
 const mapStateToProps = state => ({
     user: state.auth.user,
 });
@@ -82,7 +82,8 @@ const logout = (props) => {
 };
 
 const MyAccount = (props) => {
-    const {classes, width, user, history} = props;
+    const classes =useStyles()
+    const { width, user, history} = props;
     return (!_.isEmpty(user)) ?
 
         <Grid container
@@ -148,4 +149,4 @@ MyAccount.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, {})((withWidth()(withStyles(styles)(MyAccount))))
+export default connect(mapStateToProps, {})((withWidth()(MyAccount)))

@@ -6,8 +6,9 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import classNames from 'classnames'
 import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
 import {connect} from "react-redux";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => (
+const useStyles = makeStyles( theme => (
     {
         root: {}, icon: {
             '&:before': {
@@ -16,7 +17,7 @@ const styles = theme => (
             }
         }
     }
-);
+))
 
 const mapStateToProps = state => ({
     section: state.product.detail.section
@@ -46,7 +47,8 @@ class LabelBottomNavigation extends React.Component {
 
 
     render() {
-        const {classes, section} = this.props;
+        const classes = useStyles()
+        const { section} = this.props;
 
         return (
             <BottomNavigation value={section} onChange={this.handleChange} className={classes.root}>
@@ -63,4 +65,4 @@ LabelBottomNavigation.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LabelBottomNavigation))
+export default connect(mapStateToProps, mapDispatchToProps)(LabelBottomNavigation)

@@ -10,8 +10,9 @@ import agent from '../../../agent'
 import swal from '@sweetalert/with-react'
 import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {},
     title: {
         paddingTop: '30px',
@@ -37,7 +38,7 @@ const styles = theme => ({
         }
     }
 
-});
+}))
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -50,7 +51,8 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const Login = (props) => {
-    const {classes, enqueueSnackbar, history} = props;
+    const classes = useStyles()
+    const { enqueueSnackbar, history} = props;
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
 
@@ -167,4 +169,4 @@ const Login = (props) => {
     )
 };
 
-export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))))
+export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)((Login))))

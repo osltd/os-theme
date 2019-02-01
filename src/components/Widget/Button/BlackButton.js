@@ -2,8 +2,9 @@ import React from 'react';
 import {Button, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         textTransform: 'capitalize',
         padding: '16px',
@@ -20,7 +21,7 @@ const styles = theme => ({
 
         }
     },
-});
+}))
 
 class CustomButton extends React.Component {
     state = {
@@ -42,8 +43,8 @@ class CustomButton extends React.Component {
     };
 
     render() {
-
-        const {classes, link, onClick, value, icon2, icon, border} = this.props;
+const classes =useStyles()
+        const { link, onClick, value, icon2, icon, border} = this.props;
 
         return <Button
             className={classes.root}
@@ -61,4 +62,4 @@ CustomButton.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CustomButton);
+export default (CustomButton);

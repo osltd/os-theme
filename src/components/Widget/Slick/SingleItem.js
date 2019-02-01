@@ -5,8 +5,9 @@ import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {redirectUrl} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const style = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: 'calc(100%-80px)',
     },
@@ -54,10 +55,9 @@ const style = theme => ({
     }
 
 
-});
+}))
 
-class SimpleSlider extends React.Component {
-    render() {
+const  SimpleSlider =props => {
         let settings = {
             dots: false,
             infinite: true,
@@ -71,7 +71,8 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        let {data, classes, title, style} = this.props;
+        const classes =useStyles()
+        let {data, title,history, style} = props;
         if (!(data[0])) return null;
         style = style || {};
         return (
@@ -88,7 +89,7 @@ class SimpleSlider extends React.Component {
                                           style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
                                               backgroundImage: 'url("' + n.url + '")',
                                           })}
-                                          onClick={() => n.link ? redirectUrl(n.link, this.props.history) : null}
+                                          onClick={() => n.link ? redirectUrl(n.link, history) : null}
                                           className={classes.img}>
                                         {title && <Grid item lg={4}>
                                             <Typography variant="h1" className={classes.title}
@@ -106,7 +107,6 @@ class SimpleSlider extends React.Component {
                     <p className={classes.caption + ' animated fadeIn'}>{title}</p>
                 </div>
         );
-    }
 }
 
-export default (withStyles(style)(SimpleSlider))
+export default ((SimpleSlider))

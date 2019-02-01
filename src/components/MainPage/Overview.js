@@ -7,14 +7,14 @@ import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
 import {isImgOnlySections} from "../../api/ApiUtils";
 import withWidth from "@material-ui/core/withWidth/index";
 import LoadingPage from '../Layout/LoadingPage'
-
+import {makeStyles} from "@material-ui/styles";
 
 const SectionBanner = lazy(() => import('./Sections/Banner'));
 const SectionTopInterest = lazy(() => import('./Sections/TopInterest'));
 const SectionFeatureProducts = lazy(() => import('./Sections/FeatureProducts'));
 const FEATURED_PRODUCTS = 'featured';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     section: {
         width: '100%',
         margin: '0 80px'
@@ -43,7 +43,7 @@ const styles = theme => ({
     }
 
 
-});
+}))
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -55,9 +55,8 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const MainPageOverview = props => {
-
-
-    const {classes, feeds, products, history, category} = props;
+    const classes = useStyles()
+    const {feeds, products, history, category} = props;
     let getDataFromAPI = (feeds === null && products === null);
     if (getDataFromAPI) return <LoadingPage/>;
     let latestArticle = feeds && feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3);
@@ -132,4 +131,4 @@ const MainPageOverview = props => {
 };
 
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainPageOverview)))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(MainPageOverview))

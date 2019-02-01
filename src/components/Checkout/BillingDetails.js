@@ -8,11 +8,11 @@ import InputBar from '../Widget/InputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
 import CountryCode from '../Widget/Input/Country'
-
+import {makeStyles} from "@material-ui/styles";
 import {withSnackbar} from 'notistack';
 
 const TAX_RATE = 0.07;
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -48,7 +48,7 @@ const styles = theme => ({
         backgroundColor: theme.palette.secondary.light,
         border: '1px solid ' + theme.palette.primary.dark,
     }
-});
+}))
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -145,7 +145,9 @@ class ShoppingCartTable extends React.Component {
     }
 
     render() {
-        const {classes, billingDetail, shoppingCart} = this.props;
+        const classes= useStyles()
+
+        const { billingDetail, shoppingCart} = this.props;
         return (
             <Grid container spacing={16} className={classes.root}>
 
@@ -295,4 +297,4 @@ ShoppingCartTable.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartTable)))
+export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable))

@@ -1,9 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Theme, withStyles} from '@material-ui/core/styles';
+import {Theme, WithStyles, withStyles} from '@material-ui/core/styles';
 import {MaterialUIClasses} from "../../interfaces/client/Common";
+import {socialIcon} from "../../constants/enum";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = (theme: Theme) => ({
+const useStyles = makeStyles( (theme: Theme) => ({
     root: {
         padding: '12px',
         border: '1px solid ' + theme.palette.secondary.main,
@@ -87,18 +89,20 @@ const styles = (theme: Theme) => ({
 
 
     }
-});
+}))
 
 interface Props {
-    classes: MaterialUIClasses,
     label: string
     onClick: () => void,
-    type: string
+    type:socialIcon
 
 }
 
+
 const SocialIcon: React.FunctionComponent<Props> = (props) => {
-    const {classes, type, onClick} = props;
+    const classes = useStyles()
+
+    const { type, onClick} = props;
     let getIconType = (type: string): string => {
         switch (type) {
             case 'reddit':
@@ -120,4 +124,4 @@ const SocialIcon: React.FunctionComponent<Props> = (props) => {
 
 };
 
-export default withStyles(styles)(SocialIcon);
+export default (SocialIcon);

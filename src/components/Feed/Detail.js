@@ -10,8 +10,9 @@ import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
 import classNames from 'classnames'
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => (
+const useStyles = makeStyles( theme => (
     {
         productCategory: {
             backgroundColor: theme.palette.background.paper
@@ -34,7 +35,7 @@ const styles = theme => (
             display: "inline-block",
             paddingLeft: '5px',
         }
-    });
+    }))
 
 
 const mapStateToProps = state => ({
@@ -56,8 +57,9 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const FeedDetail = (props) => {
+    const classes = useStyles()
 
-    const {feeds, match, classes, editFeedFilter, history} = props;
+    const {feeds, match, editFeedFilter, history} = props;
     const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id));
     if (hasValidFeed()) {
         const feed = feeds.find(n => n.id.toString() === match.params.id);
@@ -135,5 +137,5 @@ const FeedDetail = (props) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FeedDetail))
+export default connect(mapStateToProps, mapDispatchToProps)(FeedDetail)
 

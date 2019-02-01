@@ -22,10 +22,11 @@ import Terms from '../Widget/Terms'
 import agent from '../../agent'
 import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
 import swal from '@sweetalert/with-react'
+import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const styles = theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -53,7 +54,7 @@ const styles = theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-});
+}))
 
 const mapStateToProps = state => ({
     billingDetail: state.cart.billingDetail,
@@ -84,6 +85,7 @@ class OrderSummary extends React.Component {
         product.product.variants.find(variant => variant.id === product.variantId) : product.product).price * product.number;
 
     placeOrder = async () => {
+
         const {billingDetail} = this.props;
         const data = {
             "address": billingDetail.address,
@@ -110,7 +112,7 @@ class OrderSummary extends React.Component {
             "shipping": billingDetail.selectedShippingMethod,
         };
         console.log(data);
-        const {classes} = this.props;
+
         redirectUrl('/loadingPage', this.props.history, false);
 
         await agent.Checkout.placeOrder(data).then(res => {
@@ -268,7 +270,8 @@ class OrderSummary extends React.Component {
     getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
 
     render() {
-        const {classes, shoppingCart, billingDetail} = this.props;
+        const classes = useStyles()
+        const { shoppingCart, billingDetail} = this.props;
         const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
             n.product.variants.find(variant => variant.id === n.variantId) : n.product;
         return (
@@ -354,4 +357,4 @@ OrderSummary.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default (withSnackbar(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(OrderSummary))))
+export default (withSnackbar(connect(mapStateToProps, mapDispatchToProps)(OrderSummary)))

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Grid, Theme, Typography} from '@material-ui/core';
+import {Grid, Theme, Typography, WithStyles} from '@material-ui/core';
 import LoadingPage from '../Layout/LoadingPage'
 import {Reducer} from '../../store/store'
 import Pagination from './Sections/Pagination'
@@ -15,8 +15,11 @@ import {arrayToFilter, getTagsCountsArray} from "../../api/ApiUtils";
 import classNames from 'classnames'
 import DropDown from '../Widget/DropDown'
 import ProductsList from './Sections/ProductsList'
+import createStyles from "@material-ui/core/styles/createStyles";
+import {RouteComponentProps} from "react-router";
+import withStyles from "@material-ui/core/styles/withStyles";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const style =(theme: Theme) => createStyles( {
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -37,18 +40,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     array: {
         paddingLeft: '5px',
     }
-}))
-
-interface Props {
-    history: History
-}
+})
+type Props = RouteComponentProps & WithStyles<typeof style>
 
 const ShopOverview: React.FunctionComponent<Props> = props => {
-    const classes = useStyles()
+    const {classes} = props
 
     const theme: Theme = useTheme()
     const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint))
-
     const [viewMode, setViewMode] = useState(viewModeType.FORM)
     const [tag, setTag] = useState('')
     const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC)
@@ -56,10 +55,11 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
     const {state, dispatch} = useContext(Reducer)
     let products = state.products
     if (products === undefined) return <LoadingPage/>
+
     let sortedProduct = sortData(products, tag, sortBy)
+
     const hasProductsToShow = products.length > 0
 
-    console.log('----------------------------state-----------------------------------')
 
     const {history} = props
     useEffect(() => initFilter(
@@ -78,7 +78,6 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
             <Grid item xs={12}>
                 <Header
                     title={'shop'}
-                    route={'home/shop'}
                 />
             </Grid>
 
@@ -176,4 +175,4 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
     );
 };
 
-export default React.memo(ShopOverview)
+export default React.memo(withStyles(style)(ShopOverview))
