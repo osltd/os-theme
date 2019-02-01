@@ -4,10 +4,10 @@ import reducer from './reducer';
 import {routerMiddleware} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
-export const history = createHistory();
+export const historyRouter = createHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
-const myRouterMiddleware = routerMiddleware(history);
+const myRouterMiddleware = routerMiddleware(historyRouter);
 
 const getMiddleware = () => {
 

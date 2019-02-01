@@ -1,30 +1,22 @@
 import List from '../../Widget/List'
-import {getTagsCountsArray} from "../../../api/ApiUtils";
 import React from "react";
-import {Product} from "../../../interfaces/server/Product";
-import {History} from "history";
+import {Clickable} from "../../../interfaces/client/Common";
 
 interface Props {
-    products: Array<Product>,
-    onClick:Function,
+    data: Array<Clickable>
     tag: string
-    history: History
 }
 
-const  getTagsList: React.FunctionComponent<Props> = props => {
+const TagList: React.FunctionComponent<Props> = props => {
     const {
-        products,
-        onClick,
-        tag,
-        history
+        tag, data
     } = props
 
     return <List
-        history={history}
-        data={getTagsCountsArray(products, onClick)}
+        data={data}
         selectedValue={tag}
     />
 
 }
 
-export default getTagsList
+export default TagList

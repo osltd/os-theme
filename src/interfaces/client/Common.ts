@@ -16,6 +16,8 @@ export interface Tag {
     value: string,
 }
 
+export type viewMode = 'form'|'list'
+
 export interface RoutePath {
     label: string,
     link: string,

@@ -4,13 +4,7 @@ import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Co
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
 
-export const refactorParaLength = (content: string, length: number = 45): string =>
-    content.length > length ? content.slice(0, length).concat('...') : content;
-
 export const refactorTextLength = (content: string, length: number = 20): string =>
-    content.length > length ? content.slice(0, length).concat('...') : content;
-
-export const refactorTitle = (content: string, length: number = 22): string =>
     content.length > length ? content.slice(0, length).concat('...') : content;
 
 export const getRoutePath = (url: string): Array<RoutePath> => {

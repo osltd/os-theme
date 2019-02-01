@@ -13,7 +13,7 @@ import {
     handleImgValid,
     redirectUrl,
     refactorTextLength,
-    refactorTitle
+
 } from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
@@ -285,7 +285,7 @@ class OrderSummary extends React.Component {
                         {shoppingCart.map((n, i) =>
                             <TableRow key={i}>
                                 <TableCell className={classes.block}>
-                                    {refactorTitle(n.product.name)} X {n.number}( {selectedVariant(n).description})
+                                    {refactorTextLength(n.product.name,20)} X {n.number}( {selectedVariant(n).description})
                                 </TableCell>
                                 <TableCell className={classes.block} numeric>
                                     {'$ ' + formatMoney(selectedVariant(n).price * n.number)}

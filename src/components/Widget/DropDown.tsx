@@ -1,12 +1,13 @@
 import React, {Fragment, useState} from 'react';
-import {Theme, withStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import {ListItem, Typography} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import createStyles from "@material-ui/core/styles/createStyles";
 import {Clickable, MaterialUIClasses} from "../../interfaces/client/Common";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {},
     title: {
         fontWeight: 'lighter',
@@ -16,10 +17,9 @@ const styles = (theme: Theme) => createStyles({
         marginRight: '5px',
     }
 
-});
+}))
 
 interface Props {
-    classes: MaterialUIClasses,
     icon?: string,
     icon2?: string,
     label?: string,
@@ -32,7 +32,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
 
     const [anchorEl, setAnchorEl]: [any, any] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
-
+    const classes = useStyles()
     const handleMenuItemClick = (index: number, cb: Function): void => {
         setSelectedIndex(index)
         setAnchorEl(null)
@@ -41,7 +41,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
 
 
     const {
-        classes, icon,
+        icon,
         icon2, label,
         labelExtra, options,
         selectedValue
@@ -87,4 +87,4 @@ const DropDown: React.FunctionComponent<Props> = props => {
 };
 
 //todo(need to improve)
-export default withStyles(styles)(DropDown);
+export default (DropDown);

@@ -6,7 +6,7 @@ import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
-import {getTagsCountsArray, refactorParaLength} from "../../api/ApiUtils";
+import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 
 
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
@@ -110,7 +110,7 @@ class ResponsiveDialog extends React.Component {
                                         ) ? n.sections.find(section => section.medias[0]).medias[0].url :
                                             'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
 
-                                        subTitle={refactorParaLength(n.sections[0].description)}
+                                        subTitle={refactorTextLength(n.sections[0].description,45)}
                                         title={n.sections[0].title}
                                         author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
                                         postDate={n.postDate}

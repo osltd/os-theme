@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Theme} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles, useTheme} from '@material-ui/styles'
 import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
 import {History} from "history";
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
+import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
+import {historyRouter} from "../../../store";
+import {RouteComponentProps, withRouter} from "react-router";
 
 const useStyle = makeStyles((theme: Theme) => ({
     name: {
@@ -56,34 +59,22 @@ const useStyle = makeStyles((theme: Theme) => ({
 
 }));
 
-interface Props {
-    padding?: string
-    backgroundColor?: string
+interface Props extends RouteComponentProps{
     src: string
     name: string
     id: number
-    width: Breakpoint
     category: Array<string>
     regPrice: number
     promotePrice?: number
-    history: History
 }
 
 const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
-
-    let styles = () => ({
-        content: {
-            "padding": props.padding,
-            "min-height": "100vh",
-            "background-color": props.backgroundColor
-        }
-    });
-
-
+    const theme: Theme = useTheme()
+    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint))
+    const isWidthDown = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.down(breakpoint))
     const classes = useStyle();
-    const {src, name, id, width, category, regPrice, promotePrice, history} = props;
-
-
+    const {src, name, id,history, category, regPrice, promotePrice} = props;
+    console.log(history)
     let getImg = () => {
         return <div
             style={{
@@ -93,14 +84,14 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
             onClick={() => id && redirectUrl('/products/' + id, history)}
             className={classes.divImg}/>;
         //responsive forbidden
-        if (isWidthDown('xs', width)) {
+        if (isWidthDown('xs')) {
             return <img
                 src={handleImgValid(src)}
                 onClick={() => id && redirectUrl('/products/' + id, history)}
                 className={classes.img}
             />
         }
-        return isWidthUp('lg', width) ? <div
+        return isWidthUp('lg') ? <div
                 style={{
                     backgroundImage: 'url(' + handleImgValid(src) + ')',
 
@@ -148,4 +139,4 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
 
 };
 
-export default withWidth()(ProductOverviewBox)
+export default withRouter(ProductOverviewBox)

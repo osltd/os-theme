@@ -9,7 +9,6 @@ import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
 import Feed from './Feed/Overview'
 import ProductOverview from './Product/Overview'
-
 import FeedDetail from './Feed/Detail'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -36,7 +35,7 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import {Product} from "../interfaces/server/Product";
-import {Store} from "../store/store";
+import {Reducer} from "../store/store";
 
 
 const mapStateToProps = (state: any) => ({
@@ -142,7 +141,7 @@ interface Props {
 }
 
 const App: React.FunctionComponent<Props> = props => {
-    const {state, dispatch} = useContext(Store)
+    const {state, dispatch} = useContext(Reducer)
 
     let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
         let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])

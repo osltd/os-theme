@@ -1,9 +1,13 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, redirectUrl, refactorParaLength} from "../../../api/ApiUtils";
+import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
+import {RouteComponentProps, withRouter} from "react-router";
 
-const styles = makeStyles(theme => ({
+const useStyles = makeStyles(theme =>{
+console.log('21309i12-39-102930-9120-39-0129-309')
+    console.log(theme)
+    return ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
@@ -34,7 +38,7 @@ const styles = makeStyles(theme => ({
 
     oldPrice: {},
     price: {
-        color: '#333333',
+        color: 'red',
         fontFamily: 'arial',
         lineHeight: 1,
     },
@@ -45,20 +49,34 @@ const styles = makeStyles(theme => ({
         marginBottom: '10px',
     }
 
-}));
+})},{
+    withTheme:true
+});
+
+interface Props extends RouteComponentProps {
+    src: string
+    name: string
+    id: number
+    category: Array<string>
+    regPrice: number
+    promotePrice?: number
+    description?: string
+}
 
 
-const ProductOverviewList = props => {
+const ProductOverviewList: React.FunctionComponent<Props> = props => {
 
-
-    const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;
+    const classes = useStyles()
+    console.log("ggqwehuooiewoijg")
+    console.log(classes)
+    const {src, name, category, id, regPrice, promotePrice, history, description} = props;
 
     return (
         <Grid container spacing={16} alignItems={'center'} className={classes.root}>
             <Grid item xs={4}>
                 <img src={src}
 
-                     onClick={() => redirectUrl('/products/' + id, this.props.history)}
+                     onClick={() => redirectUrl('/products/' + id, history)}
 
                      className={classes.img}/>
             </Grid>
@@ -71,12 +89,12 @@ const ProductOverviewList = props => {
 
                 }
                 <Typography variant={'h6'}
-                            onClick={() => redirectUrl('/products/' + id, this.props.history)}
+                            onClick={() => redirectUrl('/products/' + id, history)}
                             className={classes.name}
                 >{name}</Typography>
 
                 <Typography className={classes.description}
-                            variant={'caption'}>{refactorParaLength(description, 200)}</Typography>
+                            variant={'caption'}>{refactorTextLength(description ? description : 'no description here', 200)}</Typography>
                 {
                     promotePrice ?
                         <Grid item container direction={'row'}>
@@ -96,4 +114,4 @@ const ProductOverviewList = props => {
 };
 
 
-export default (ProductOverviewList)
+export default withRouter(ProductOverviewList)

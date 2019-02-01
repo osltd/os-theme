@@ -8,25 +8,21 @@ import {ThemeProvider} from '@material-ui/styles'
 import {SnackbarProvider} from 'notistack';
 import App from './components/App'
 import ReactDOM from 'react-dom'
-import {Router} from 'react-router-dom'
-import history from './history'
-import Store from './store/store'
+import Reducer from './store/store'
 
 ReactDOM.render(
     //react-router-dom make history global
-    <Store>
-        <Router history={history}>
-            <Provider store={store}>
+    <Reducer>
+        <Provider store={store}>
+            <MuiThemeProvider theme={theme}>
                 <ThemeProvider theme={theme}>
-                    <MuiThemeProvider theme={theme}>
-                        <SnackbarProvider maxSnack={3}>
-
-                            <App/>
-                        </SnackbarProvider>
-                    </MuiThemeProvider>
+                    <SnackbarProvider maxSnack={3}>
+                        <App/>
+                    </SnackbarProvider>
                 </ThemeProvider>
-            </Provider>
-        </Router>
-    </Store>
+            </MuiThemeProvider>
+
+        </Provider>
+    </Reducer>
     , document.getElementById('root'));
 registerServiceWorker();

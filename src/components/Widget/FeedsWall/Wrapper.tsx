@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/styles';
 import {Grid, Typography} from '@material-ui/core';
 import BigFeedBox from './BigFeedBox'
 import SmallFeedBox from './SmallFeedBox'
-import {refactorTitle} from "../../../api/ApiUtils";
+import {refactorTextLength} from "../../../api/ApiUtils";
 import {RouteComponentProps} from "react-router";
 import {History} from "history";
 import {Feed} from "../../../interfaces/server/Feed";
@@ -52,7 +52,7 @@ const FeedsWall: React.FunctionComponent<Props> = props => {
                 history={history}
                 link={'/feeds/' + data[0].id}
                 backgroundImg={data[0].sections[0].medias[0].url}
-                title={refactorTitle(data[0].sections[0].title)}
+                title={data[0].sections[0].title}
             />
             {data[1] && <SmallFeedBox
                 history={history}
@@ -113,7 +113,7 @@ const FeedsWall: React.FunctionComponent<Props> = props => {
             {data[3] && <BigFeedBox
                 history={history}
                 link={'/feeds/' + data[3].id}
-                title={refactorTitle(data[3].sections[0].title)}
+                title={data[3].sections[0].title}
                 backgroundImg={data[3].sections[0].medias[0].url}
 
             />}
