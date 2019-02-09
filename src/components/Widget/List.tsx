@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         maxHeight: '300px',
         overflow: 'auto',
     }
-}))
+}));
 
 interface Props {
     data: Array<Clickable>
@@ -42,7 +42,7 @@ interface Props {
 }
 
 const List: React.FunctionComponent<Props> = props => {
-    const classes = useStyles()
+    const classes = useStyles();
     const {data, title, selectedValue} = props;
 
     let handleListItemClick = (event: any, index: number, cb: Function): void => {

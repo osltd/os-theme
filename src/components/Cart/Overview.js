@@ -1,16 +1,15 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import Header from '../Layout/Body/Header'
 import ShoppingCart from './CartTable'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
 
     shoppingCart: {
         paddingBottom: '30px',
     }
-}))
+}));
 
 const CartOverview = (props) => {
     const classes = useStyles();

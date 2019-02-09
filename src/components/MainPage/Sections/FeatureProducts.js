@@ -6,19 +6,19 @@ const FEATURED_PRODUCTS = 'featured';
 
 const TopInterest = props => {
 
-    const {hasProductsToShow, products, width, classes} = props.self;
+    const {hasProductsToShow, products, width, classes} = props;
 
     return (products) ?
-        <section >
+        <section>
             <Grid item>
-                <Typography variant={'h4'} >
+                <Typography variant={'h4'}>
                     FEATURE PRODUCTS
                 </Typography>
             </Grid>
             <div>
                 <Slick
                     search={FEATURED_PRODUCTS}
-                    self={props.self}/>
+                    {...props} />
             </div>
         </section> : null
 

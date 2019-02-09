@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -11,7 +10,7 @@ import {emphasize} from '@material-ui/core/styles/colorManipulator';
 import CreatableSelect from 'react-select/lib/Creatable';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         padding: '3px',
@@ -71,9 +70,10 @@ const useStyles = makeStyles( theme => ({
 
         height: theme.spacing.unit * 2,
     },
-}))
+}));
+
 function NoOptionsMessage(props) {
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <Typography
@@ -203,9 +203,9 @@ class IntegrationReactSelect extends React.Component {
     };
 
     render() {
-        const classes = useStyles()
+        const classes = useStyles();
 
-        const { theme, value, tagsOptions, onChange, placeholder} = this.props;
+        const {theme, value, tagsOptions, onChange, placeholder} = this.props;
 
         const selectStyles = {
             input: base => ({
@@ -241,10 +241,5 @@ class IntegrationReactSelect extends React.Component {
         );
     }
 }
-
-IntegrationReactSelect.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-};
 
 export default (IntegrationReactSelect);

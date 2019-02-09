@@ -4,8 +4,6 @@ import {makeStyles} from '@material-ui/styles';
 import {Grid, Typography} from '@material-ui/core';
 import BigFeedBox from './BigFeedBox'
 import SmallFeedBox from './SmallFeedBox'
-import {refactorTextLength} from "../../../api/ApiUtils";
-import {RouteComponentProps} from "react-router";
 import {History} from "history";
 import {Feed} from "../../../interfaces/server/Feed";
 
@@ -34,16 +32,16 @@ const useStyle = makeStyles((theme: Theme) => ({
         paddingLeft: 20,
         paddingRight: 30,
     }
-}))
+}));
 
-interface Props  {
+interface Props {
     history: History
     data: Array<Feed>
 }
 
 const FeedsWall: React.FunctionComponent<Props> = props => {
 
-    const classes = useStyle()
+    const classes = useStyle();
 
     const {data, history} = props;
     return (data.length) ? <Grid container alignItems={'stretch'} className={classes.root}>
@@ -118,9 +116,9 @@ const FeedsWall: React.FunctionComponent<Props> = props => {
 
             />}
         </Grid>
-    </Grid> :null
+    </Grid> : null
 
 
-}
+};
 
 export default (FeedsWall)

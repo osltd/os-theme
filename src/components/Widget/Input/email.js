@@ -2,10 +2,9 @@ import React from 'react';
 import {Input} from '@material-ui/core';
 
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         padding: '8px',
         backgroundColor: theme.palette.background.paper,
@@ -18,15 +17,14 @@ const useStyles = makeStyles( theme => ({
         margin: 'auto',
         '&:before': {}
     }
-}))
+}));
 
 class SearchBar extends React.Component {
 
 
-
     render() {
-        const { placeholder, value, onChange, onKeyPress} = this.props;
-        const classes = useStyles()
+        const {placeholder, value, onChange, onKeyPress} = this.props;
+        const classes = useStyles();
 
         return <Input
             fullWidth={true}
@@ -46,9 +44,5 @@ class SearchBar extends React.Component {
 
     }
 }
-
-SearchBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (SearchBar)

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {Button, Grid} from '@material-ui/core';
 import InputBar from '../../Widget/InputBar'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({}))
+const useStyles = makeStyles(theme => ({}));
 
 const currencies = [
     {
@@ -41,7 +40,7 @@ class OutlinedTextFields extends React.Component {
     };
 
     render() {
-        const classes = useStyles()
+        const classes = useStyles();
 
         return (
             <Grid container spacing={16}>
@@ -76,8 +75,5 @@ class OutlinedTextFields extends React.Component {
     }
 }
 
-OutlinedTextFields.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (OutlinedTextFields);

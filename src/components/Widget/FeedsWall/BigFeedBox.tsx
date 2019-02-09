@@ -22,7 +22,7 @@ const useStyle = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    history:History
+    history: History
     title: string
     backgroundImg: string
     link: string

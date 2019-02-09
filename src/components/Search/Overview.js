@@ -1,7 +1,6 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/core/styles';
 import {handleImgValid, refactorTextLength} from "../../api/ApiUtils";
 import withWidth from "@material-ui/core/withWidth/index";
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
@@ -12,7 +11,7 @@ import SearchBar from '../Widget/SearchBar/original'
 import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -33,7 +32,7 @@ const useStyles = makeStyles( theme => ({
     array: {
         paddingLeft: '5px',
     }
-}))
+}));
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -48,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
             payload: keyword
         })
     }
-)
+);
 
 class SearchPage extends React.Component {
     constructor(props) {
@@ -84,7 +83,7 @@ class SearchPage extends React.Component {
     }
 
     render() {
-        const classes = useStyles()
+        const classes = useStyles();
 
         if (!this.props.products && !this.props.feeds) return <LoadingPage/>;
         const products = this.props.products ? this.searchData(this.props.products) : [];
@@ -156,7 +155,7 @@ class SearchPage extends React.Component {
                                 ) ? n.sections.find(section => section.medias[0]).medias[0].url :
                                     'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
 
-                                subTitle={refactorTextLength(n.sections[0].description,45)}
+                                subTitle={refactorTextLength(n.sections[0].description, 45)}
                                 title={n.sections[0].title}
                                 author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
                                 postDate={n.postDate}

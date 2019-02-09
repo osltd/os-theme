@@ -4,7 +4,7 @@ import {ListItem, Typography} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import createStyles from "@material-ui/core/styles/createStyles";
-import {Clickable, MaterialUIClasses} from "../../interfaces/client/Common";
+import {Clickable} from "../../interfaces/client/Common";
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         marginRight: '5px',
     }
 
-}))
+}));
 
 interface Props {
     icon?: string,
@@ -32,10 +32,10 @@ const DropDown: React.FunctionComponent<Props> = props => {
 
     const [anchorEl, setAnchorEl]: [any, any] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const classes = useStyles()
+    const classes = useStyles();
     const handleMenuItemClick = (index: number, cb: Function): void => {
-        setSelectedIndex(index)
-        setAnchorEl(null)
+        setSelectedIndex(index);
+        setAnchorEl(null);
         cb()
     };
 

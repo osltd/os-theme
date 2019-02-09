@@ -10,14 +10,14 @@ interface Props {
 }
 
 let Pagination: React.FunctionComponent<Props> = (props) => {
-    const {length, page, onClick} = props
+    const {length, page, onClick} = props;
     if (length === 0) return null;
-    let options = numberToPagination(length, onClick)
-    if (page === '' && (!(_.isEmpty(options[0].label)))) onClick(options[0].label)
+    let options = numberToPagination(length, onClick);
+    if (page === '' && (!(_.isEmpty(options[0].label)))) onClick(options[0].label);
     return (<DropDown
         options={options}
         selectedValue={page}
     />)
-}
+};
 //todo rerender even props not change
 export default React.memo(Pagination)

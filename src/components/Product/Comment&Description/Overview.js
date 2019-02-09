@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Comment from './Comment'
 import NavBar from './NavBar'
@@ -9,7 +8,7 @@ import Description from './Description'
 import RatingBar from './RatingBar'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         border: '1px solid ' + theme.palette.secondary.dark,
     },
@@ -17,7 +16,7 @@ const useStyles = makeStyles( theme => ({
 
         padding: '20px',
     }
-}))
+}));
 
 
 const mapStateToProps = state => ({
@@ -34,8 +33,8 @@ const mapDispatchToProps = dispatch => ({}
 class Overview extends React.Component {
 
     render() {
-        const classes =useStyles()
-        const { content} = this.props;
+        const classes = useStyles();
+        const {content} = this.props;
         return (
             <Grid container className={classes.root}>
                 <Grid item xs={12}>

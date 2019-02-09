@@ -2,12 +2,9 @@ import React from 'react';
 import {Grid, Theme, Typography} from '@material-ui/core';
 import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
-import {RouteComponentProps, withRouter} from "react-router";
-import withStyles from "@material-ui/core/styles/withStyles";
-import {WithStyles} from "@material-ui/core";
-import createStyles from "@material-ui/core/styles/createStyles";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-const useStyles =makeStyles( (theme:Theme) =>({
+const useStyles = makeStyles((theme: Theme) => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
@@ -44,9 +41,10 @@ const useStyles =makeStyles( (theme:Theme) =>({
         color: '#333',
         fontSize: '15px',
         marginBottom: '10px',
-    }}))
+    }
+}));
 
-interface nonStyleProps  {
+interface nonStyleProps {
     src: string
     name: string
     id: number
@@ -59,8 +57,8 @@ interface nonStyleProps  {
 type Props = nonStyleProps & RouteComponentProps
 
 const ProductOverviewList: React.FunctionComponent<Props> = props => {
-const classes = useStyles()
-    const {src, name, category, id, regPrice, promotePrice, history,description} = props;
+    const classes = useStyles();
+    const {src, name, category, id, regPrice, promotePrice, history, description} = props;
 
     return (
         <Grid container spacing={16} alignItems={'center'} className={classes.root}>

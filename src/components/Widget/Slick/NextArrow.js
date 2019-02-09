@@ -1,5 +1,4 @@
 import React from "react";
-import {withStyles} from '@material-ui/core/styles';
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -24,22 +23,22 @@ const useStyles = makeStyles(theme => ({
         }
 
     }
-}))
+}));
 
 const NextArrow = props => {
-const classes = useStyles()
-        const {  style, onClick} = props;
-        return (
-            <span
-                className={classes.root + ' ' + 'icon-right-16'}
-                style={{...style,}}
-                onClick={onClick}
+    const classes = useStyles();
+    const {style, onClick} = props;
+    return (
+        <span
+            className={classes.root + ' ' + 'icon-right-16'}
+            style={{...style,}}
+            onClick={onClick}
 
-            />
+        />
 
 
-        )
+    )
 
-}
+};
 
 export default (NextArrow)

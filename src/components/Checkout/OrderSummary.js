@@ -1,20 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {Button, Grid, ListItem, Table, Typography} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {
-    formatExpiryDate,
-    formatMoney,
-    handleImgValid,
-    redirectUrl,
-    refactorTextLength,
-
-} from "../../api/ApiUtils";
+import {formatExpiryDate, formatMoney, handleImgValid, redirectUrl, refactorTextLength,} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -26,7 +18,7 @@ import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -54,7 +46,7 @@ const useStyles = makeStyles( theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-}))
+}));
 
 const mapStateToProps = state => ({
     billingDetail: state.cart.billingDetail,
@@ -270,8 +262,8 @@ class OrderSummary extends React.Component {
     getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
 
     render() {
-        const classes = useStyles()
-        const { shoppingCart, billingDetail} = this.props;
+        const classes = useStyles();
+        const {shoppingCart, billingDetail} = this.props;
         const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
             n.product.variants.find(variant => variant.id === n.variantId) : n.product;
         return (
@@ -288,7 +280,7 @@ class OrderSummary extends React.Component {
                         {shoppingCart.map((n, i) =>
                             <TableRow key={i}>
                                 <TableCell className={classes.block}>
-                                    {refactorTextLength(n.product.name,20)} X {n.number}( {selectedVariant(n).description})
+                                    {refactorTextLength(n.product.name, 20)} X {n.number}( {selectedVariant(n).description})
                                 </TableCell>
                                 <TableCell className={classes.block} numeric>
                                     {'$ ' + formatMoney(selectedVariant(n).price * n.number)}
@@ -353,8 +345,5 @@ class OrderSummary extends React.Component {
     }
 }
 
-OrderSummary.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (withSnackbar(connect(mapStateToProps, mapDispatchToProps)(OrderSummary)))

@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
@@ -12,7 +11,7 @@ import swal from '@sweetalert/with-react'
 import MyAccount from '../Auth/Accounts/Overview'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
 
     root: {
         paddingRight: '50px',
@@ -38,7 +37,7 @@ const useStyles = makeStyles( theme => ({
         paddingBottom: '20px',
     }
 
-}))
+}));
 
 
 const mapStateToProps = state => ({
@@ -67,9 +66,9 @@ const mapDispatchToProps = dispatch => ({
 const MyCredits = props => {
 
     let dialogRef = useRef();
-    const classes = useStyles()
+    const classes = useStyles();
 
-    const { width, history} = props;
+    const {width, history} = props;
 
     let logout = () => {
         const {history} = props;
@@ -132,8 +131,5 @@ const MyCredits = props => {
     )
 };
 
-MyCredits.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(MyCredits)))

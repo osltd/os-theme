@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import Input from '../../Widget/Input/original'
 import Button from '../../Widget/Button/BlackButton'
@@ -12,7 +11,7 @@ import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {},
     title: {
         paddingTop: '30px',
@@ -38,7 +37,7 @@ const useStyles = makeStyles( theme => ({
         }
     }
 
-}))
+}));
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -51,8 +50,8 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const Login = (props) => {
-    const classes = useStyles()
-    const { enqueueSnackbar, history} = props;
+    const classes = useStyles();
+    const {enqueueSnackbar, history} = props;
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
 

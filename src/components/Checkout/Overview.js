@@ -3,7 +3,6 @@ import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
-import {withStyles} from '@material-ui/core/styles';
 import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
@@ -16,7 +15,7 @@ import _ from 'lodash'
 import * as styleGuide from "../../constants/styleGuide";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -43,7 +42,7 @@ const useStyles = makeStyles( theme => ({
 
     }
 
-}))
+}));
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
     user: state.auth.user,
@@ -75,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const CheckoutOverview = props => {
-    const classes = useStyles()
+    const classes = useStyles();
 
     const rendering = (!(props.shoppingCart) || props.user === null);
     const needLogin = (_.isEmpty(props.user));

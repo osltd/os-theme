@@ -1,6 +1,6 @@
 import React from 'react';
 import {History} from 'history'
-import {Theme, withStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {redirectUrl} from "../../api/ApiUtils";
@@ -9,8 +9,9 @@ import MyAccount from '../Auth/Accounts/Overview'
 import createStyles from "@material-ui/core/styles/createStyles";
 import {MaterialUIClasses} from "../../interfaces/client/Common";
 import {makeStyles} from "@material-ui/styles";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-const useStyles = makeStyles( (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         width: '100%',
         maxWidth: 360,
@@ -18,17 +19,16 @@ const useStyles = makeStyles( (theme: Theme) => createStyles({
         padding: 0,
         color: 'white',
     }
-}))
+}));
 
-interface Props {
-    history: History
+interface Props extends RouteComponentProps{
     classes: MaterialUIClasses
 
 }
 
 const FooterList: React.FunctionComponent<Props> = props => {
-const classes = useStyles()
-    const { history} = props;
+    const classes = useStyles();
+    const {history} = props;
     const items = [
         {label: "Shopping Cart", url: "shoppingcart"}
         , {label: "Checkout", url: "checkout"}
@@ -65,4 +65,4 @@ const classes = useStyles()
     )
 };
 
-export default FooterList
+export default withRouter(FooterList)

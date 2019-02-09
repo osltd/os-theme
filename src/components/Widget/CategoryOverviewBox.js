@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from "react-router-dom";
 import {redirectUrl} from "../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -89,11 +88,11 @@ const useStyles = makeStyles( theme => ({
         left: 'calc(50% - 9px)',
         transition: theme.transitions.create('opacity'),
     },
-}))
+}));
 
 const ButtonBases = (props) => {
-    const { history, category} = props;
-    const classes = useStyles()
+    const {history, category} = props;
+    const classes = useStyles();
 
     return (
 
@@ -144,11 +143,5 @@ const ButtonBases = (props) => {
     );
 };
 
-ButtonBases.propTypes = {
-
-    classes: PropTypes.object.isRequired,
-
-
-};
 
 export default withRouter(ButtonBases)

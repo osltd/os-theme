@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ErrorBoundary from "./Layout/ErrorHandling";
+import {BrowserRouter, Route, RouteComponentProps, Switch} from 'react-router-dom';
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'
 import ShoppingCart from './Cart/Overview'
@@ -26,7 +25,6 @@ import agent from '../agent'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
 import LoadingPage from './Layout/LoadingPage'
-import '../constants/Style.css'
 import SearchPage from './Search/Overview'
 import _ from 'lodash'
 import NotFound from './Layout/NotFound'
@@ -135,34 +133,34 @@ const mapDispatchToProps = (dispatch: any) => ({
     }
 );
 
-interface Props {
+interface Props extends RouteComponentProps{
     [key: string]: any
 }
 
 const App: React.FunctionComponent<Props> = props => {
-    const {state, dispatch} = useContext(Reducer)
+    const {state, dispatch} = useContext(Reducer);
 
     let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
-        let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
-        if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data))
+        let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
+        if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data));
         else {
             dispatch(
                 {
                     type: INIT_PRODUCTS,
                     payload: products
                 }
-            )
+            );
             return products
         }
 
 
-    }
+    };
     let getShoppingCart = (): string => {
 
-        let shoppingCart: string | null = localStorage.getItem('shoppingCart')
+        let shoppingCart: string | null = localStorage.getItem('shoppingCart');
         return JSON.parse(shoppingCart !== null ? shoppingCart : '')
-    }
-    let initApp = async () => await props.initApp(getShoppingCart())
+    };
+    let initApp = async () => await props.initApp(getShoppingCart());
 
 
     useEffect(
@@ -180,7 +178,6 @@ const App: React.FunctionComponent<Props> = props => {
     return (
         <BrowserRouter>
             <ScrollToTop>
-                <ErrorBoundary>
 
                     <Header/>
                     <MyCredits/>
@@ -203,9 +200,8 @@ const App: React.FunctionComponent<Props> = props => {
 
                         </Switch>
                     </div>
-<Test/>
+                    <Test/>
                     <Footer/>
-                </ErrorBoundary>
             </ScrollToTop>
         </BrowserRouter>
 
@@ -215,4 +211,4 @@ const App: React.FunctionComponent<Props> = props => {
 
 //todo('add in stock logic')
 
-export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)

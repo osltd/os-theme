@@ -5,12 +5,12 @@ import initialState from './state'
 
 export const Reducer: Context<{
     [key: string]: any
-}> = createContext({})
+}> = createContext({});
 
 const Provider: React.ComponentType = ({children}) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState);
     return <Reducer.Provider value={{state, dispatch}}>
         {children}
     </Reducer.Provider>
-}
+};
 export default Provider

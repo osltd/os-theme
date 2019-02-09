@@ -10,13 +10,13 @@ interface Props {
 const TagList: React.FunctionComponent<Props> = props => {
     const {
         tag, data
-    } = props
+    } = props;
 
     return <List
         data={data}
         selectedValue={tag}
     />
 
-}
+};
 
 export default TagList

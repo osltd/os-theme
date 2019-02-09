@@ -2,7 +2,7 @@ import {Component} from 'react'
 
 class ScrollToTop extends Component {
     componentDidUpdate(prevProps, prevState, snapShot) {
-        console.log('gg')
+        console.log('gg');
         if (this.props.location !== prevProps.location) {
             window.scrollTo(0, 0)
         }

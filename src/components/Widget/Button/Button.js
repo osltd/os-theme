@@ -1,12 +1,10 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
-import PropTypes from "prop-types";
 import {Link} from 'react-router-dom'
 import classesNames from 'classnames'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         textDecoration: 'none',
         padding: '3px',
@@ -28,32 +26,32 @@ const useStyles = makeStyles( theme => ({
         marginRight: '5px',
         '&:before': {}
     }
-}))
+}));
 
-const  CustomButton =props=> {
+const CustomButton = props => {
 
 
-        const classes =useStyles()
-        const {
-             link, onClick, value, icon2, icon, border
-        } = props;
+    const classes = useStyles();
+    const {
+        link, onClick, value, icon2, icon, border
+    } = props;
 
-        return (
+    return (
 
-            <Grid
-                container
-                component={link ? Link : 'span'}
-                to={link ? link : '#'}
-                alignItems={'center'}
-                className={classesNames(classes.root, border ? classes.border : null)}
-                onClick={onClick}
-            >
-                {icon && <span className={classes.icon + ' ' + icon}/>}
-                {value && <Typography variant={'h6'} className={classes.btnText}>{value}</Typography>}
-                {icon2 && <span className={classes.icon + ' ' + icon2}/>}
-            </Grid>
+        <Grid
+            container
+            component={link ? Link : 'span'}
+            to={link ? link : '#'}
+            alignItems={'center'}
+            className={classesNames(classes.root, border ? classes.border : null)}
+            onClick={onClick}
+        >
+            {icon && <span className={classes.icon + ' ' + icon}/>}
+            {value && <Typography variant={'h6'} className={classes.btnText}>{value}</Typography>}
+            {icon2 && <span className={classes.icon + ' ' + icon2}/>}
+        </Grid>
 
-        )
-    }
+    )
+};
 
 export default CustomButton

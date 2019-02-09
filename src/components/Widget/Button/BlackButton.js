@@ -1,10 +1,9 @@
 import React from 'react';
 import {Button, Typography} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         textTransform: 'capitalize',
         padding: '16px',
@@ -21,30 +20,12 @@ const useStyles = makeStyles( theme => ({
 
         }
     },
-}))
+}));
 
-class CustomButton extends React.Component {
-    state = {
-        anchor: 'left',
-    };
+const BlackButton = props => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            placeHolder: '',
-        }
-    }
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-
-        });
-    };
-
-    render() {
-const classes =useStyles()
-        const { link, onClick, value, icon2, icon, border} = this.props;
+        const classes = useStyles();
+        const {link, onClick, value, icon2, icon, border} = props;
 
         return <Button
             className={classes.root}
@@ -54,12 +35,7 @@ const classes =useStyles()
             <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
             <Typography variant={'h6'} color={'inherit'} className={icon2}/>
         </Button>
-    }
 }
 
 
-CustomButton.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default (CustomButton);
+export default (BlackButton);

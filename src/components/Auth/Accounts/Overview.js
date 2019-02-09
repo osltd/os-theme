@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import {connect} from "react-redux";
 import {Grid, Typography} from '@material-ui/core'
@@ -11,7 +10,7 @@ import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
 
     root: {
         paddingRight: '50px',
@@ -37,7 +36,7 @@ const useStyles = makeStyles( theme => ({
         paddingBottom: '20px',
     }
 
-}))
+}));
 const mapStateToProps = state => ({
     user: state.auth.user,
 });
@@ -82,8 +81,8 @@ const logout = (props) => {
 };
 
 const MyAccount = (props) => {
-    const classes =useStyles()
-    const { width, user, history} = props;
+    const classes = useStyles();
+    const {width, user, history} = props;
     return (!_.isEmpty(user)) ?
 
         <Grid container
@@ -145,8 +144,5 @@ const MyAccount = (props) => {
 
 };
 
-MyAccount.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps, {})((withWidth()(MyAccount)))

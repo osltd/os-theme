@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import Input from '../../Widget/Input/original'
 import Button from '../../Widget/Button/BlackButton'
@@ -11,7 +10,7 @@ import swal from '@sweetalert/with-react'
 import {redirectUrl} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
 
         backgroundColor: theme.palette.background.default,
@@ -28,7 +27,7 @@ const useStyles = makeStyles( theme => ({
     paddingTop: {
         paddingTop: '20px !important',
     }
-}))
+}));
 const Login = props => {
     let register = () => {
         const pwdDidNotMatch = (pwd !== confirmPwd);
@@ -106,7 +105,7 @@ const Login = props => {
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [confirmPwd, setConfirmPwd] = useState('');
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
 

@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import React from 'react'
 import {Grid, Typography} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         padding: '40px',
@@ -12,12 +11,12 @@ const useStyles = makeStyles( theme => ({
         marginBottom: '200px',
 
     }
-}))
+}));
 
 
 const NotFound = props => {
-    const classes = useStyles()
-    const { msg} = props;
+    const classes = useStyles();
+    const {msg} = props;
     return (
         <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
             <Typography
@@ -25,8 +24,5 @@ const NotFound = props => {
         </Grid>);
 };
 
-NotFound.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (NotFound)

@@ -1,9 +1,8 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( props => ({
+const useStyles = makeStyles(props => ({
     root: {
         padding: '0 10px 0 10px',
     },
@@ -26,7 +25,7 @@ const useStyles = makeStyles( props => ({
         fontWeight: '900',
     }
 
-}))
+}));
 
 class ResponsiveDialog extends React.Component {
 
@@ -47,8 +46,8 @@ class ResponsiveDialog extends React.Component {
     });
 
     render() {
-        const classes = useStyles()
-        const { src, name, category, regPrice, promotePrice} = this.props;
+        const classes = useStyles();
+        const {src, name, category, regPrice, promotePrice} = this.props;
 
         return (
             <Grid container className={classes.root} direction={'column'}>

@@ -8,9 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {emphasize} from '@material-ui/core/styles/colorManipulator';
 import {makeStyles} from "@material-ui/styles/es";
 import {COUNTRY_CODE} from '../../../constants/constants'
-import withStyles from "@material-ui/core/styles/withStyles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {},
     input: {
         display: 'flex',
@@ -57,7 +56,7 @@ const useStyles = makeStyles( theme => ({
     divider: {
         height: theme.spacing.unit * 2,
     },
-}))
+}));
 
 const selectStyles = theme => ({
     input: base => ({
@@ -163,8 +162,8 @@ const components = {
 };
 
 const IntegrationReactSelect = props => {
-    const { value, onChange} = props;
-    const classes = useStyles()
+    const {value, onChange} = props;
+    const classes = useStyles();
 
     const theme = useTheme();
 

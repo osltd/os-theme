@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import {Grid, Popover} from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     buttonWrapper: {
         position: 'relative',
         marginBottom: theme.spacing.unit * 4,
@@ -36,7 +35,7 @@ const useStyles = makeStyles( theme => ({
             display: 'flex'
         }
     }
-}))
+}));
 
 const PopUp = props => {
 
@@ -53,8 +52,8 @@ const PopUp = props => {
     //                                innerRef={e => this.popUp = e}
 //this.popUp.handleClose()
 
-    const { popUp, title,} = props;
-const classes =useStyles()
+    const {popUp, title,} = props;
+    const classes = useStyles();
     return (
 
         <Grid
@@ -84,8 +83,5 @@ const classes =useStyles()
     );
 };
 
-PopUp.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (PopUp)

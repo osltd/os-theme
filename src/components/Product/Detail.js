@@ -1,6 +1,5 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {Button, Divider, Grid, Typography} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import SocialIcon from '../Widget/SocialIcon'
 import ColorPick from '../Widget/ColorPicker.tsx'
@@ -15,7 +14,7 @@ import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme =>
+const useStyles = makeStyles(theme =>
     (
         {
             name: {
@@ -37,7 +36,7 @@ const useStyles = makeStyles( theme =>
                 color: 'green',
                 fontWeight: '600',
             }
-        }))
+        }));
 
 const mapStateToProps = state => ({
     draft: state.cart.variant,
@@ -72,43 +71,42 @@ const mapDispatchToProps = dispatch => ({
     }
 );
 
-class ResponsiveDialog extends React.Component {
+const  SingleProductDetail = props => {
 
-    getVariant = (keyName, index, variantOptions, needRender = true) => {
-        let needInit = !(this.props.draft[keyName]);
-        if (needInit || !needRender) this.props.editCartVariant(keyName, variantOptions[index][0]);
+ let    getVariant = (keyName, index, variantOptions, needRender = true) => {
+        let needInit = !(props.draft[keyName]);
+        if (needInit || !needRender) props.editCartVariant(keyName, variantOptions[index][0]);
         return needRender ? (keyName === 'color') ?
             <ColorPick
                 colors={variantOptions[index]}
-                onClick={color => this.props.editCartVariant(keyName, color)}
-                selectedColor={this.props.draft[keyName]}
+                onClick={color => props.editCartVariant(keyName, color)}
+                selectedColor={props.draft[keyName]}
             /> :
             variantOptions[index].map((options, k) => <Tag
                     key={k}
                     value={options}
-                    onClick={() => this.props.editCartVariant(keyName, options)}
-                    selected={(this.props.draft[keyName] === options)}
+                    onClick={() => props.editCartVariant(keyName, options)}
+                    selected={(props.draft[keyName] === options)}
                 />
             ) : null
 
     };
-    saveDraftToCart = () => {
-        const {draft, product} = this.props;
+ let   saveDraftToCart = () => {
+        const {draft, product} = props;
         let productCount = draft.number ? draft.number : 1;
-        let selectedVariantId = this.findSelectedVariant().id;
-        this.props.dispatchDraftToCart(product, productCount, selectedVariantId);
+        let selectedVariantId = findSelectedVariant().id;
+        props.dispatchDraftToCart(product, productCount, selectedVariantId);
         swal(
             {
                 content: (
                     <Grid container alignItems={'center'} direction={'column'}>
                         <Grid item>
-                            {false && <span className={'icon-like'}
-
+                            {false && <span
+                                className={'icon-like'}
                                             style={{
                                                 fontSize: '80px',
                                                 color: 'hsla(100,55%,69%,.5)',
                                                 padding: '20px',
-
                                                 display: 'block',
                                                 width: '80px',
                                                 height: '80px',
@@ -133,8 +131,8 @@ class ResponsiveDialog extends React.Component {
 
     };
 
-    findSelectedVariant = () => {
-        const {draft, product} = this.props;
+    let findSelectedVariant = () => {
+        const {draft, product} = props;
         let key = Object.keys(draft);
         let value = Object.values(draft);
         let selectedDescription = [];
@@ -143,18 +141,19 @@ class ResponsiveDialog extends React.Component {
         return product.variants.find(n => isSelectedProduct(n))
 
     };
-    initVariant = () => {
-        const {variantKeys, variantOptions} = this.props;
-        this.props.emptyCartVariant();
-        variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false));
-        this.props.editCartVariant('number', 1)
+    let initVariant = () => {
+        const {variantKeys, variantOptions} = props;
+        props.emptyCartVariant();
+        variantKeys.map((n, i) => getVariant(n, i, variantOptions, false));
+        props.editCartVariant('number', 1)
     };
-    getDetail = (selectedVariant) => {
-        const classes = useStyles()
+    let   getDetail = (selectedVariant) => {
+        const classes = useStyles();
 
-        const { name, promotePrice,
+        const {
+            name, promotePrice,
             description, variantKeys, variantOptions, product
-        } = this.props;
+        } = props;
         return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
             <Grid item container spacing={16}>
                 <Grid item>
@@ -199,7 +198,7 @@ class ResponsiveDialog extends React.Component {
                                 <Typography variant={'h6'}>
                                     {n}
                                 </Typography>
-                                {this.getVariant(n, i, variantOptions)}
+                                {getVariant(n, i, variantOptions)}
                             </Fragment>
                         )
                     }
@@ -209,15 +208,15 @@ class ResponsiveDialog extends React.Component {
                 <Grid item container direction={'row'} spacing={32}>
                     <Grid item>
                         <Counter
-                            number={this.props.draft.number}
-                            onChange={number => this.props.editCartVariant('number', number)}
+                            number={props.draft.number}
+                            onChange={number => props.editCartVariant('number', number)}
                         />
 
                     </Grid>
                     <Grid item>
 
                         <Button variant="extendedFab" color={'secondary'}
-                                onClick={this.saveDraftToCart}
+                                onClick={saveDraftToCart}
                         >
 
                             <span className={'icon-cart'}/>
@@ -263,12 +262,12 @@ class ResponsiveDialog extends React.Component {
             </Grid>
         </Grid>
     };
-    getSlick = (selectedVariant) => {
+    let   getSlick = (selectedVariant) => {
 
         const {
             classes, name, promotePrice,
             description, variantKeys, variantOptions, product
-        } = this.props;
+        } = props;
         return <Grid item container xs={10} sm={5}>
             <Grid item xs={12}>
                 <Slick
@@ -278,28 +277,28 @@ class ResponsiveDialog extends React.Component {
             </Grid>
         </Grid>
     };
+    
+    
+    useEffect(
+        ()=>      {
+            if (props.variantKeys) initVariant()
 
-    componentDidMount() {
-        if (this.props.variantKeys) this.initVariant()
+        },
+        []
 
-    }
+)
 
-    componentDidUpdate(prevProps, prevState, snap) {
-        if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
-    }
-
-    render() {
         const {
             variantOptions, product, variantKeys
-        } = this.props;
-        const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm');
+        } = props;
+        const position = (isWidthUp('sm', props.width) || props.width === 'sm');
 
         if (variantOptions && variantKeys && variantOptions.length < 1 && variantKeys.length < 1) {
             if (product) {
 
                 return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    {position ? <Detail {...this.props}
-                                        selectedVariant={this.props.product}/> : null}
+                    {position ? <Detail {...props}
+                                        selectedVariant={props.product}/> : null}
 
                     <Grid item container xs={10} sm={5}>
                         <Grid item xs={12}>
@@ -309,33 +308,32 @@ class ResponsiveDialog extends React.Component {
                         </Grid>
                     </Grid>
 
-                    {!position ? <Detail {...this.props}
-                                         selectedVariant={this.props.product}
+                    {!position ? <Detail {...props}
+                                         selectedVariant={props.product}
                     /> : null}
 
                 </Grid>
             } else return null
         } else {
-            const selectedVariant = this.findSelectedVariant();
+            const selectedVariant = findSelectedVariant();
             return (
                 selectedVariant ?
                     <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                        {position ? this.getDetail(selectedVariant) : null}
-                        {this.getSlick(selectedVariant)}
-                        {!position ? this.getDetail(selectedVariant) : null}
+                        {position ? getDetail(selectedVariant) : null}
+                        {getSlick(selectedVariant)}
+                        {!position ? getDetail(selectedVariant) : null}
                     </Grid> : <LoadingPage/>
 
             );
 
         }
 
-    }
 }
 
 
-export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(ResponsiveDialog))
+export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(SingleProductDetail))
 // <Dialog
-// innerRef={e => this.dialog = e}
+// innerRef={e => dialog = e}
 // title={}
 // dialog={
 // <Grid
@@ -353,7 +351,7 @@ export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(Responsi
 //     <Grid item container spacing={32} justify={'center'}>
 //         <Grid item>
 //             <Button variant="extendedFab"
-//                     onClick={this.saveDraftToCart}
+//                     onClick={saveDraftToCart}
 //
 //             >
 //                 yes
@@ -361,7 +359,7 @@ export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(Responsi
 //         </Grid>
 //         <Grid item>
 //             <Button variant="extendedFab"
-//                     onClick={() => this.dialog.handleClose()}>
+//                     onClick={() => dialog.handleClose()}>
 //                 no
 //             </Button>
 //         </Grid>
@@ -369,3 +367,8 @@ export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(Responsi
 // </Grid>
 // }
 // />
+
+//
+// componentDidUpdate(prevProps, prevState, snap) {
+//     if (props.location.pathname !== prevProps.location.pathname) initVariant()
+// }

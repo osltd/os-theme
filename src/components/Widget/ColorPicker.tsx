@@ -1,8 +1,6 @@
 import React from 'react';
 import {Fab, Grid} from '@material-ui/core'
-import {Theme, withStyles} from '@material-ui/core/styles';
-import {MaterialUIClasses} from "../../interfaces/client/Common";
-import createStyles from "@material-ui/core/styles/createStyles";
+import {Theme} from '@material-ui/core/styles';
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: '40px',
         borderRadius: '30px',
     }
-}))
+}));
 
 interface Props {
     onClick: <T extends {}>(x: T) => void,
@@ -27,8 +25,8 @@ interface Props {
 }
 
 const ColorPicker: React.FunctionComponent<Props> = props => {
-const classes = useStyles()
-    const { colors, selectedColor, onClick} = props;
+    const classes = useStyles();
+    const {colors, selectedColor, onClick} = props;
     return (
         <Grid container>
             {

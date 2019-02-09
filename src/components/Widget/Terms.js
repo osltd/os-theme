@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( {
+const useStyles = makeStyles({
     root: {
         color: 'gold',
         '&$checked': {
@@ -13,12 +12,12 @@ const useStyles = makeStyles( {
         },
     },
     checked: {},
-})
+});
 
 const Terms = props => {
-    const classes = useStyles()
+    const classes = useStyles();
 
-    const { checked, onChange, label} = props;
+    const {checked, onChange, label} = props;
     return (
         <FormControlLabel
             control={
@@ -38,11 +37,5 @@ const Terms = props => {
     )
 };
 
-Terms.propTypes = {
-    checked: PropTypes.bool.isRequired,
-    onChange: PropTypes.func.isRequired,
-    label: PropTypes.string,
-    classes: PropTypes.object.isRequired,
-};
 
 export default (Terms);

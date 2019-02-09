@@ -1,10 +1,9 @@
 import {actionType, INIT_PRODUCTS} from "../constants/actionType";
 import {State} from "./state";
-import {Product} from "../interfaces/server/Product";
 
 export interface Action {
     type: actionType
-    payload:any
+    payload: any
 }
 
 
@@ -19,8 +18,7 @@ const dispatch = (state: State, action: Action): State => {
         default:
             return state
     }
-}
-
+};
 
 
 export default dispatch

@@ -4,8 +4,7 @@ import LoadingPage from '../Layout/LoadingPage'
 import {Reducer} from '../../store/store'
 import Pagination from './Sections/Pagination'
 import {initFilter, sortData} from "./Effect";
-import {makeStyles, useTheme} from "@material-ui/styles";
-import {History} from "history";
+import {useTheme} from "@material-ui/styles";
 import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery'
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import Header from '../Layout/Body/Header'
@@ -17,9 +16,14 @@ import DropDown from '../Widget/DropDown'
 import ProductsList from './Sections/ProductsList'
 import createStyles from "@material-ui/core/styles/createStyles";
 import {RouteComponentProps} from "react-router";
-import withStyles from "@material-ui/core/styles/withStyles";
+import {makeStyles} from "@material-ui/styles";
 
-const style =(theme: Theme) => createStyles( {
+const useStyles  =makeStyles( (theme: Theme) =>{
+    console.log('this should be the theme')
+
+    console.log(theme)
+
+    return ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -40,37 +44,34 @@ const style =(theme: Theme) => createStyles( {
     array: {
         paddingLeft: '5px',
     }
-})
-type Props = RouteComponentProps & WithStyles<typeof style>
+})})
+type Props = RouteComponentProps
 
 const ShopOverview: React.FunctionComponent<Props> = props => {
-    const {classes} = props
 
-    const theme: Theme = useTheme()
-    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint))
-    const [viewMode, setViewMode] = useState(viewModeType.FORM)
-    const [tag, setTag] = useState('')
-    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC)
-    const [page, setPage] = useState('')
-    const {state, dispatch} = useContext(Reducer)
-    let products = state.products
-    if (products === undefined) return <LoadingPage/>
+    const classes = useStyles()
+    const theme: Theme = useTheme();
+    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
+    const [viewMode, setViewMode] = useState(viewModeType.FORM);
+    const [tag, setTag] = useState('');
+    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC);
+    const [page, setPage] = useState('');
+    const {state, dispatch} = useContext(Reducer);
 
-    let sortedProduct = sortData(products, tag, sortBy)
+    let products = state.products;
+    if (products === undefined) return <LoadingPage/>;
 
-    const hasProductsToShow = products.length > 0
+    let sortedProduct = sortData(products, tag, sortBy);
+
+    const hasProductsToShow = products.length > 0;
 
 
-    const {history} = props
+    const {history} = props;
     useEffect(() => initFilter(
         history.location.search,
         tag,
         x => setTag(x)
-    ), [])
-
-
-
-
+    ), []);
 
 
     return (
@@ -91,15 +92,14 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         PRODUCT CATEGORIES
                                     </Typography>
                                     <TagList data={getTagsCountsArray(products, (n: string) => {
-                                        console.log(tag)
+                                        console.log(tag);
                                         console.log(n
-                                        )
+                                        );
                                         if (n !== tag) {
-                                            console.log('ggg')
                                             setPage('')
 
                                         }
-                                        console.log(`new page is ${page}`)
+                                        console.log(`new page is ${page}`);
                                         setTag(n)
 
                                     })}
@@ -146,7 +146,7 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         <DropDown options={arrayToFilter(
                                             [filterOptions.NAME_ASC, filterOptions.NAME_DES,
                                                 filterOptions.PRICE_ASC, filterOptions.PRICE_DES], (n: filterOptions) => {
-                                                setSortBy(n)
+                                                setSortBy(n);
                                                 setPage('')
                                             }
                                         )
@@ -175,4 +175,4 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
     );
 };
 
-export default React.memo(withStyles(style)(ShopOverview))
+export default (ShopOverview)

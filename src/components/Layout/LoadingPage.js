@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
 import React from 'react'
 import {CircularProgress, Grid} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
 import {redirectUrl} from "../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         padding: '40px',
         marginTop: '30px',
     }
-}))
+}));
+
 class NotFound extends React.Component {
     constructor(props) {
         super(props);
@@ -37,7 +37,7 @@ class NotFound extends React.Component {
     }
 
     render() {
-        const { msg} = this.props;
+        const {msg} = this.props;
 
         return (
 
@@ -47,8 +47,5 @@ class NotFound extends React.Component {
     }
 }
 
-NotFound.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default withRouter(NotFound)

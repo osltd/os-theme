@@ -10,29 +10,27 @@ import {History} from "history";
 
 const useStyle = makeStyles((theme: Theme) => ({
 
-            root: {
-                minHeight: '450px',
-                paddingBottom: '20px',
-                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-                cursor: 'pointer'
-            },
+        root: {
+            minHeight: '450px',
+            paddingBottom: '20px',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+            cursor: 'pointer'
+        },
 
 
-            title: {
-                cursor: 'pointer',
-                '&:hover': {
-                    color: theme.palette.secondary.light,
-                }
-            },
-            content: {},
-            button: {
-                margin: '20px 0'
+        title: {
+            cursor: 'pointer',
+            '&:hover': {
+                color: theme.palette.secondary.light,
             }
+        },
+        content: {},
+        button: {
+            margin: '20px 0'
+        }
 
-        })
-
-
-)
+    })
+);
 
 interface Props {
     history: History
@@ -46,7 +44,7 @@ interface Props {
 }
 
 const FeedOverviewBox: React.FunctionComponent<Props> = props => {
-    const classes = useStyle()
+    const classes = useStyle();
     const {
         history,
         subTitle,

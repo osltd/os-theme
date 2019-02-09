@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import {Button, Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
@@ -22,7 +21,7 @@ import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -47,7 +46,7 @@ const useStyles = makeStyles( theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-}))
+}));
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -89,8 +88,8 @@ const mapDispatchToProps = dispatch => ({
 const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
 
 const ShoppingCartTable = (props) => {
-    const { shoppingCart} = props;
-const classes = useStyles()
+    const {shoppingCart} = props;
+    const classes = useStyles();
     if (shoppingCart === null) return <LoadingPage/>;
 
     return (
@@ -140,7 +139,7 @@ const classes = useStyles()
                                     title={'( ' + n.product.variants.find(variant => variant.id === n.variantId).description
                                     + ' )'}>
                                     <div>
-                                        {refactorTextLength(n.product.name,20)
+                                        {refactorTextLength(n.product.name, 20)
                                         }</div>
                                 </Tooltip>
 
@@ -205,8 +204,5 @@ const classes = useStyles()
 };
 
 
-ShoppingCartTable.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)

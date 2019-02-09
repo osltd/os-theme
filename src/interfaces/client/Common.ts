@@ -11,12 +11,13 @@ export interface VariantOptions {
 export interface MaterialUIClasses {
     [key: string]: string
 }
+
 export interface Tag {
     label: string,
     value: string,
 }
 
-export type viewMode = 'form'|'list'
+export type viewMode = 'form' | 'list'
 
 export interface RoutePath {
     label: string,

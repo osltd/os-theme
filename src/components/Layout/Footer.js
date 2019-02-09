@@ -1,7 +1,5 @@
-import PropTypes from "prop-types";
 import React from 'react'
 import {Grid, Typography} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
 import SearchBar from '../Widget/SearchBar/email'
 import FooterList from '../Widget/FooterList'
 import Tag from '../Widget/Tags/Tag'
@@ -11,7 +9,7 @@ import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         padding: '50px 100px 100px 100px',
         backgroundColor: 'black',
@@ -20,7 +18,7 @@ const useStyles = makeStyles( theme => ({
     emailBar: {
         marginBottom: '30px',
     }
-}))
+}));
 
 
 const mapStateToProps = state => ({
@@ -35,7 +33,7 @@ const mapDispatchToProps = dispatch => ({}
 
 const Footer = props => {
 
- let    getTags = () => {
+    let getTags = () => {
         //todo(handle err)
         const {products, feeds} = props;
         let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
@@ -69,66 +67,66 @@ const Footer = props => {
         )
     };
 
-        const classes = useStyles()
+    const classes = useStyles();
 
-        return (
-            <Grid container justify={'space-between'} className={classes.root}>
-                <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
-                >
-                    <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>
-                            NEWSLETTER
-                        </Typography>
-                    </Grid>
-
-                    <Grid item>
-                        <SearchBar/>
-                    </Grid>
+    return (
+        <Grid container justify={'space-between'} className={classes.root}>
+            <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
+            >
+                <Grid item>
+                    <Typography variant={'h6'} color={'inherit'}>
+                        NEWSLETTER
+                    </Typography>
                 </Grid>
-                <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
-                    <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>MYSHOP</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'caption'} color={'inherit'}>
 
-                            We are a team of designers and developers that create quality Wordpress, Magento,
-                            Prestashop,
-                            Opencarte themes and provided premium and dedicated support to our products.
-
-                            205 Arapahoe St, Schoenchen, KS 69696
-                        </Typography>
-                    </Grid>
-
-                    <Grid item>
-                        <Typography variant={'subtitle1'} color={'inherit'}>
-                            Email: your@example.com
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subtitle1'} color={'inherit'}>
-                            Phone: +1 123-456-6789
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <SocialIcon type={'facebook'}/>
-                        <SocialIcon type={'youtube'}/>
-                        <SocialIcon type={'twitter'}/>
-                        <SocialIcon type={'reddit'}/>
-                        <SocialIcon type={'whatsapp'}/>
-                    </Grid>
+                <Grid item>
+                    <SearchBar/>
                 </Grid>
-                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
-                    <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>
-                            FIND US ON</Typography>
-                    </Grid>
-                    <Grid item>
-                        <FooterList/>
-                    </Grid>
+            </Grid>
+            <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
+                <Grid item>
+                    <Typography variant={'h6'} color={'inherit'}>MYSHOP</Typography>
                 </Grid>
-                {getTags()}
-            </Grid>);
-    }
+                <Grid item>
+                    <Typography variant={'caption'} color={'inherit'}>
+
+                        We are a team of designers and developers that create quality Wordpress, Magento,
+                        Prestashop,
+                        Opencarte themes and provided premium and dedicated support to our products.
+
+                        205 Arapahoe St, Schoenchen, KS 69696
+                    </Typography>
+                </Grid>
+
+                <Grid item>
+                    <Typography variant={'subtitle1'} color={'inherit'}>
+                        Email: your@example.com
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={'subtitle1'} color={'inherit'}>
+                        Phone: +1 123-456-6789
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <SocialIcon type={'facebook'}/>
+                    <SocialIcon type={'youtube'}/>
+                    <SocialIcon type={'twitter'}/>
+                    <SocialIcon type={'reddit'}/>
+                    <SocialIcon type={'whatsapp'}/>
+                </Grid>
+            </Grid>
+            <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
+                <Grid item>
+                    <Typography variant={'h6'} color={'inherit'}>
+                        FIND US ON</Typography>
+                </Grid>
+                <Grid item>
+                    <FooterList/>
+                </Grid>
+            </Grid>
+            {getTags()}
+        </Grid>);
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer)

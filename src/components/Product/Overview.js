@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import CommentDescription from './Comment&Description/Overview'
@@ -9,7 +8,7 @@ import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => {
+const useStyles = makeStyles(theme => {
     console.log(theme);
 
     return (
@@ -22,7 +21,7 @@ const useStyles = makeStyles( theme => {
             },
         })
 
-})
+});
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -36,7 +35,7 @@ const mapDispatchToProps = dispatch => ({}
 
 const SingleProduct = props => {
     let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
-const classes =useStyles()
+    const classes = useStyles();
     if (!props.products) return <LoadingPage/>;
     const product = props.products.find(n => n.id.toString() === props.match.params.id);
     const variantOptions = getVariantOptions(product.variants);

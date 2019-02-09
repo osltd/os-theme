@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick";
-import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
@@ -33,52 +32,52 @@ const useStyles = makeStyles(theme => ({
 
     }
 
-}))
+}));
 
-const  SimpleSlider =props=> {
-    const classes = useStyles()
-        let settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 5000,
+const SimpleSlider = props => {
+    const classes = useStyles();
+    let settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
 
-            nextArrow: <NextArrow/>,
-            prevArrow: <PrevArrow/>,
-        };
-        const {data,history} = props;
-        return (
-            data[0] ?
-                <Slider {...settings} className={classes.root}>
+        nextArrow: <NextArrow/>,
+        prevArrow: <PrevArrow/>,
+    };
+    const {data, history} = props;
+    return (
+        data[0] ?
+            <Slider {...settings} className={classes.root}>
 
-                    {
+                {
 
-                        data.map((n, i) => (<div key={i}>
+                    data.map((n, i) => (<div key={i}>
 
-                                    <Grid container
-                                          alignItems={'center'}
-                                          style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
-                                              backgroundImage: 'url("' + n.url + '")',
+                                <Grid container
+                                      alignItems={'center'}
+                                      style={Object.assign(n.link ? {cursor: 'pointer'} : {}, {
+                                          backgroundImage: 'url("' + n.url + '")',
 
-                                          })}
-                                          onClick={() => n.link ? redirectUrl(n.link,history) : null}
+                                      })}
+                                      onClick={() => n.link ? redirectUrl(n.link, history) : null}
 
-                                          className={classes.img}>
-                                        {n.title && <Grid item lg={4}>
-                                            <Typography variant="h1" className={classes.title}
-                                                        gutterBottom> {n.title}</Typography>
-                                        </Grid>}
-                                    </Grid>
-                                </div>
-                            )
+                                      className={classes.img}>
+                                    {n.title && <Grid item lg={4}>
+                                        <Typography variant="h1" className={classes.title}
+                                                    gutterBottom> {n.title}</Typography>
+                                    </Grid>}
+                                </Grid>
+                            </div>
                         )
-                    }
+                    )
+                }
 
-                </Slider> : null
-        );
-}
+            </Slider> : null
+    );
+};
 
-export default withRouter((SimpleSlider))
+export default (SimpleSlider)

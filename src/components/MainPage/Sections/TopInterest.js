@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Typography} from '@material-ui/core';
 import Slick from './Widget/Slick'
 
 const TopInterest = props => {
-    const {hasProductsToShow, products, width} = props.self;
+    const {hasProductsToShow, products,search} = props;
 
 
     return (products) ?
-        <section >
+        <section>
             <div>
-                <Typography variant={'h4'} >
+                <Typography variant={'h4'}>
                     TOP INTERESTING
                 </Typography>
             </div>
             <div>
                 <Slick
-                    self={props.self}
-
+                    hasProductsToShow={hasProductsToShow}
+                    products={products}
+                    search={search}
                 />
             </div>
         </section> : null

@@ -1,11 +1,10 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
 import PropTypes from "prop-types";
 import {Grid, Typography} from '@material-ui/core';
 import classNames from 'classnames'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         padding: '5px',
     },
@@ -15,14 +14,15 @@ const useStyles = makeStyles( theme => ({
             color: 'gold',
         }
     }
-}))
+}));
+
 class WhiteDropDown extends React.Component {
 
 
     render() {
-        const classes = useStyles()
+        const classes = useStyles();
         const {
-             icon, value,
+            icon, value,
             icon2, label,
             labelExtra, options,
             selectedValue
@@ -51,9 +51,5 @@ class WhiteDropDown extends React.Component {
         )
     }
 }
-
-WhiteDropDown.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default (WhiteDropDown);

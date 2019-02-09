@@ -1,18 +1,17 @@
 import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import {Theme, withStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {getRoutePath, redirectUrl} from "../../../api/ApiUtils";
 
 import {makeStyles, useTheme} from "@material-ui/styles";
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import withWidth from "@material-ui/core/withWidth/index";
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {breakpoints} from "../../../constants/enum";
 
-const useStyles =makeStyles( (theme:Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
 
     root: {
         marginBottom: '50px',
@@ -33,19 +32,19 @@ const useStyles =makeStyles( (theme:Theme) => ({
         }
     }
 
-}))
+}));
 
-interface Props extends RouteComponentProps{
-    title?:string
+interface Props extends RouteComponentProps {
+    title?: string
 }
 
-const BodyHeader:React.FunctionComponent<Props> = (props) => {
+const BodyHeader: React.FunctionComponent<Props> = (props) => {
 
-const classes = useStyles()
-    const { title, history, match} = props;
+    const classes = useStyles();
+    const {title, history, match} = props;
     const routePath = getRoutePath(match.url);
-    const theme: Theme = useTheme()
-    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint))
+    const theme: Theme = useTheme();
+    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
 
     return <Grid container
                  className={classes.root}

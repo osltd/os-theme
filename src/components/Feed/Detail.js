@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import moment from 'moment'
@@ -12,7 +11,7 @@ import Media from '../Widget/Media'
 import classNames from 'classnames'
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles( theme => (
+const useStyles = makeStyles(theme => (
     {
         productCategory: {
             backgroundColor: theme.palette.background.paper
@@ -35,7 +34,7 @@ const useStyles = makeStyles( theme => (
             display: "inline-block",
             paddingLeft: '5px',
         }
-    }))
+    }));
 
 
 const mapStateToProps = state => ({
@@ -57,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const FeedDetail = (props) => {
-    const classes = useStyles()
+    const classes = useStyles();
 
     const {feeds, match, editFeedFilter, history} = props;
     const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id));

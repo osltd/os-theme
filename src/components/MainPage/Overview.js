@@ -1,6 +1,5 @@
 import React, {lazy, Suspense} from 'react';
 import {Grid} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
 import Carousel from '../Widget/Slick/SingleItem'
 import {connect} from 'react-redux'
 import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
@@ -43,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     }
 
 
-}))
+}));
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -55,7 +54,7 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const MainPageOverview = props => {
-    const classes = useStyles()
+    const classes = useStyles();
     const {feeds, products, history, category} = props;
     let getDataFromAPI = (feeds === null && products === null);
     if (getDataFromAPI) return <LoadingPage/>;
@@ -99,7 +98,7 @@ const MainPageOverview = props => {
             {/* ---------------- hot sale products ----------------*/}
             {
                 <Suspense fallback={null}>
-                    <SectionTopInterest self={props}/>
+                    <SectionTopInterest {...props}/>
                 </Suspense>
 
             }
@@ -120,7 +119,7 @@ const MainPageOverview = props => {
             }
             {
                 <Suspense fallback={null}>
-                    <SectionFeatureProducts self={props}/>
+                    <SectionFeatureProducts {...props}/>
                 </Suspense>
 
             }

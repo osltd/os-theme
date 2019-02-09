@@ -1,14 +1,11 @@
-import React, {useContext} from 'react';
-import {Theme} from "@material-ui/core/styles/index";
+import React from 'react';
+import {Theme} from "@material-ui/core/styles";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
 import {makeStyles, useTheme} from '@material-ui/styles'
-import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
-import {History} from "history";
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
-import {historyRouter} from "../../../store";
-import {RouteComponentProps, withRouter} from "react-router";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 const useStyle = makeStyles((theme: Theme) => ({
     name: {
@@ -59,22 +56,24 @@ const useStyle = makeStyles((theme: Theme) => ({
 
 }));
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     src: string
     name: string
     id: number
     category: Array<string>
     regPrice: number
     promotePrice?: number
+
 }
 
 const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
-    const theme: Theme = useTheme()
-    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint))
-    const isWidthDown = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.down(breakpoint))
+    const theme: Theme = useTheme();
+    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
+    const isWidthDown = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.down(breakpoint));
     const classes = useStyle();
-    const {src, name, id,history, category, regPrice, promotePrice} = props;
-    console.log(history)
+console.log(props)
+    console.log('---------')
+    const {src, name, id, history, category, regPrice, promotePrice} = props;
     let getImg = () => {
         return <div
             style={{
