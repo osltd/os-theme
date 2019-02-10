@@ -200,7 +200,6 @@ const App: React.FunctionComponent<Props> = props => {
 
                         </Switch>
                     </div>
-                    <Test/>
                     <Footer/>
             </ScrollToTop>
         </BrowserRouter>

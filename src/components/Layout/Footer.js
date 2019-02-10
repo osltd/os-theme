@@ -8,11 +8,12 @@ import {connect} from "react-redux";
 import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
 import {makeStyles} from "@material-ui/styles";
+import {withRouter} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
         padding: '50px 100px 100px 100px',
-        backgroundColor: 'black',
+        backgroundColor: theme.palette.primary.main,
         color: 'white',
     },
     emailBar: {
@@ -129,4 +130,4 @@ const Footer = props => {
         </Grid>);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Footer)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Footer))

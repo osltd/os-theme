@@ -1,4 +1,4 @@
-import {Button, Divider, Grid, Typography} from "@material-ui/core";
+import {Button, Divider,Fab, Grid, Typography} from "@material-ui/core";
 import React, {Fragment} from "react";
 import {formatMoney} from "../../../api/ApiUtils";
 import Counter from "../../Widget/Counter";
@@ -112,19 +112,19 @@ const Detail = (props) => {
         <Grid item container direction={'column'} spacing={16}>
             <Grid item container spacing={16}>
                 <Grid item>
-                    <Button variant="extendedFab" color={'secondary'}>
+                    <Fab variant={"extended"} color={'secondary'}>
                         <span className={'icon-heart'}/>
-                    </Button>
+                    </Fab>
                 </Grid>
                 <Grid item>
-                    <Button variant="extendedFab" color={'secondary'}>
-                        <span className={'icon-mail2'}/>
-                    </Button>
+                    <Fab variant={"extended"} color={'secondary'}>
+                    <span className={'icon-mail2'}/>
+                    </Fab>
                 </Grid>
                 <Grid item>
-                    <Button variant="extendedFab" color={'secondary'}>
-                        <span className={'icon-coin-dollar'}/>
-                    </Button>
+                    <Fab variant={"extended"} color={'secondary'}>
+                    <span className={'icon-coin-dollar'}/>
+                    </Fab>
                 </Grid>
             </Grid>
 

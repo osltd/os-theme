@@ -7,7 +7,6 @@ import {redirectUrl} from "../../api/ApiUtils";
 import Dialog from './Dialog'
 import MyAccount from '../Auth/Accounts/Overview'
 import createStyles from "@material-ui/core/styles/createStyles";
-import {MaterialUIClasses} from "../../interfaces/client/Common";
 import {makeStyles} from "@material-ui/styles";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 interface Props extends RouteComponentProps{
-    classes: MaterialUIClasses
 
 }
 
@@ -53,7 +51,9 @@ const FooterList: React.FunctionComponent<Props> = props => {
                             /> :
                             <ListItem className={classes.item} button key={i}>
                                 <Typography variant={'body1'} color={'inherit'}
-                                            onClick={() => redirectUrl(`/${n.url}`, history)}
+                                            onClick={() =>
+                                                redirectUrl(`/${n.url}`,history)
+                                            } >
                                 > {n.label}</Typography>
                             </ListItem>
                     )

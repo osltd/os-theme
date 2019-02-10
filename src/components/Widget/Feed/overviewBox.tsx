@@ -7,6 +7,7 @@ import Media from '../../Widget/Media'
 import {makeStyles} from '@material-ui/styles'
 import {redirectUrl} from "../../../api/ApiUtils";
 import {History} from "history";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 const useStyle = makeStyles((theme: Theme) => ({
 
@@ -32,7 +33,7 @@ const useStyle = makeStyles((theme: Theme) => ({
     })
 );
 
-interface Props {
+interface Props extends RouteComponentProps{
     history: History
     subTitle: string
     title: string
@@ -87,4 +88,4 @@ const FeedOverviewBox: React.FunctionComponent<Props> = props => {
 };
 
 
-export default (FeedOverviewBox)
+export default withRouter(FeedOverviewBox)

@@ -16,9 +16,7 @@ const TopInterest = props => {
                 </Typography>
             </Grid>
             <div>
-                <Slick
-                    search={FEATURED_PRODUCTS}
-                    {...props} />
+
             </div>
         </section> : null
 

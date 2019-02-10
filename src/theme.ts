@@ -1,5 +1,5 @@
 import {createMuiTheme} from "@material-ui/core/styles"
-import {deepOrange,amber,green} from '@material-ui/core/colors'
+import {amber, deepOrange} from '@material-ui/core/colors'
 
 export default createMuiTheme({
     typography: {
@@ -14,9 +14,7 @@ export default createMuiTheme({
         },
     },
     overrides: {
-        MuiOutlinedInput: {
-
-        },
+        MuiOutlinedInput: {},
         MuiButton: { // Name of the component ⚛️ / style sheet
 
             extendedFab: { // Name of the rule
@@ -26,9 +24,8 @@ export default createMuiTheme({
     },
     palette: {
         primary: deepOrange,
-        secondary: amber ,
+        secondary: amber,
         background: {
-
             default: "#fafafa",
             paper: "#f7f7f7",
         },

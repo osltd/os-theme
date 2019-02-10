@@ -22,16 +22,9 @@ const Slick: React.FunctionComponent<Props> = props => {
 
     let keyword = search ? search : '';
     let selectedProducts = (search && products) ? products.filter((n: Product) => n.tags.find(m => m.toLowerCase() === keyword)) : products;
-    if (
-        isWidthUp(breakpoints.md)
-    ) return <MultiItems data={selectedProducts}/>;
-    if (
-        isWidthUp(breakpoints.sm)
-    ) return <MultiItems data={selectedProducts} size={3}/>;
-    if (
-        isWidthUp(breakpoints.xs)
-    ) return <MultiItems data={selectedProducts} size={2}/>
-    else return <span/>
+
+        return <MultiItems data={selectedProducts} />;
+
 };
 
-export default Slick
+export default React.memo(Slick)

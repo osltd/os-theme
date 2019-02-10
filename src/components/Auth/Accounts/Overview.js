@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         height: 0,
         zIndex: 10000,
         '& :hover': {
-            color: 'black',
+            color: theme.palette.primary.main,
 
         }
     }, dialog: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         color: 'white',
         transition: '0.2s',
-        backgroundColor: 'black',
+        backgroundColor: theme.palette.primary.main,
 
     },
     textAlign: {

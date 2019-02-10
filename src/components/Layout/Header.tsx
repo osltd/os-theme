@@ -1,25 +1,23 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input, Theme} from '@material-ui/core';
 import Button from '../Widget/Button/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
 import PopUp from '../Widget/PopUp'
 import SearchIcon from '@material-ui/icons/Search';
 import DropDownList from './Body/ShoppingCartList'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
-import {makeStyles, useTheme} from "@material-ui/styles";
-import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
-import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
+import {makeStyles} from "@material-ui/styles";
 import {breakpoints} from "../../constants/enum";
 import {Product} from "../../interfaces/server/Product";
 import {Feed} from "../../interfaces/server/Feed";
+import {useThemeWidth} from "../../hooks/useThemeWidth";
 
-const useStyles = makeStyles((theme:Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
     logo: {
         cursor: 'pointer',
 
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme:Theme) => ({
     },
     appBar: {
         backgroundColor: 'white',
-        color: 'black',
+        color: theme.palette.primary.main,
         width: '100%',
         padding: '10px',
     },
@@ -97,7 +95,7 @@ const useStyles = makeStyles((theme:Theme) => ({
 
 }));
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state: any) => ({
     shoppingCart: state.cart.shoppingCart,
     keyword: state.common.searchBar,
 
@@ -107,8 +105,8 @@ const mapStateToProps = (state:any) => ({
 });
 
 
-const mapDispatchToProps = (dispatch:any) => ({
-        editShoppingCart: (index:any) => dispatch({
+const mapDispatchToProps = (dispatch: any) => ({
+        editShoppingCart: (index: any) => dispatch({
             type: CART_OPERATE_SHOPPING_CART,
             payload: {
                 key: 'remove',
@@ -123,25 +121,25 @@ const mapDispatchToProps = (dispatch:any) => ({
     }
 
 )
-interface notStyledProps  {
-    products:Array<Product>,
-    feeds:Array<Feed>,
-    shoppingCart:any,
-    editShoppingCart:(g:any)=>any,
-    icon:string,
+
+interface notStyledProps {
+    products: Array<Product>,
+    feeds: Array<Feed>,
+    shoppingCart: any,
+    editShoppingCart: (g: any) => any,
+    icon: string,
 }
+
 type Props = notStyledProps & RouteComponentProps
 
-const Header:React.FunctionComponent<Props> = props => {
+const Header: React.FunctionComponent<Props> = props => {
     const classes = useStyles();
 
     const [keyword, setKeyword] = useState('');
     const [navBar, setNavBar] = useState('');
 
 
-    const theme: Theme = useTheme();
-    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
-
+    const themeWidth = useThemeWidth()
     const {
         history,
         products,
@@ -149,25 +147,12 @@ const Header:React.FunctionComponent<Props> = props => {
         shoppingCart,
         editShoppingCart,
     } = props
-    let getInputBar = () =>
-        <Input
-            onKeyDown={e =>
-                (e.key === 'Enter' && keyword) ? redirectUrl('/search/' + keyword, history) : null
-            }
-            onChange={e => setKeyword(e.target.value)}
-            disableUnderline={true}
-            placeholder="Search…"
-            classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-            }}
-        />;
 
 
     let hasProductsToShow = (products && products.length > 0);
     let hasFeedsToShow = (feeds && feeds.length > 0);
 
-    if (isWidthUp(breakpoints.md)) {
+    if (themeWidth.isWidthUp.md) {
         return (<AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
             <Grid container alignItems={'center'} justify={'space-between'}>
                 <Grid item xs={1}>
@@ -208,7 +193,7 @@ const Header:React.FunctionComponent<Props> = props => {
                     </Grid>}
                 </Grid>
                 {
-                    (isWidthUp(breakpoints.lg)) ?
+                    (themeWidth.isWidthUp.lg)?
                         <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
 
                             <Grid item>
@@ -217,7 +202,18 @@ const Header:React.FunctionComponent<Props> = props => {
                                     <div className={classes.searchIcon}>
                                         <SearchIcon/>
                                     </div>
-                                    {getInputBar()}
+                                    <Input
+                                        onKeyDown={e =>
+                                            (e.key === 'Enter' && keyword) ? redirectUrl('/search/' + keyword, history) : null
+                                        }
+                                        onChange={e => setKeyword(e.target.value)}
+                                        disableUnderline={true}
+                                        placeholder="Search…"
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput,
+                                        }}
+                                    />
                                 </div>
                             </Grid>
                             {
@@ -225,7 +221,7 @@ const Header:React.FunctionComponent<Props> = props => {
                                     <PopUp
                                         popUp={<DropDownList
                                             data={shoppingCart}
-                                            onDelete={(index:any) => editShoppingCart(index)}
+                                            onDelete={(index: any) => editShoppingCart(index)}
                                         />
                                         }
                                         title={<Button
@@ -243,14 +239,25 @@ const Header:React.FunctionComponent<Props> = props => {
                                     <div className={classes.searchIcon}>
                                         <SearchIcon/>
                                     </div>
-                                    {getInputBar()}
+                                    <Input
+                                        onKeyDown={e =>
+                                            (e.key === 'Enter' && keyword) ? redirectUrl('/search/' + keyword, history) : null
+                                        }
+                                        onChange={e => setKeyword(e.target.value)}
+                                        disableUnderline={true}
+                                        placeholder="Search…"
+                                        classes={{
+                                            root: classes.inputRoot,
+                                            input: classes.inputInput,
+                                        }}
+                                    />
                                 </div>
                             </Grid>
                             <Grid item>
                                 <PopUp
                                     popUp={<DropDownList
                                         data={shoppingCart}
-                                        onDelete={(index:any) => editShoppingCart(index)}
+                                        onDelete={(index: any) => editShoppingCart(index)}
 
                                     />
                                     }
@@ -265,9 +272,7 @@ const Header:React.FunctionComponent<Props> = props => {
 
             </Grid>
         </AppBar>)
-    }
-
-    return <BottomNavigation value={navBar} onChange={(event, value) => setNavBar(value)
+    } else return <BottomNavigation value={navBar} onChange={(event, value) => setNavBar(value)
     } className={classes.root}>
 
         <BottomNavigationAction label="Home" value="Home"

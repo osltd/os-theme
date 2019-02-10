@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 interface Props {
     style?: any
-    onClick: () => void
+    onClick?: () => void
 }
 
 const PrevArrow: React.FunctionComponent<Props> = props => {
