@@ -4,7 +4,6 @@ import {useTheme} from "@material-ui/styles";
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {Theme} from "@material-ui/core";
-import {breakpoints} from "../../../../constants/enum";
 import {Product} from "../../../../interfaces/server/Product";
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 const Slick: React.FunctionComponent<Props> = props => {
-    const theme: Theme = useTheme()
+    const theme: Theme = useTheme();
     const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
 
     const {search, products} = props;
@@ -23,7 +22,7 @@ const Slick: React.FunctionComponent<Props> = props => {
     let keyword = search ? search : '';
     let selectedProducts = (search && products) ? products.filter((n: Product) => n.tags.find(m => m.toLowerCase() === keyword)) : products;
 
-        return <MultiItems data={selectedProducts} />;
+    return <MultiItems data={selectedProducts}/>;
 
 };
 

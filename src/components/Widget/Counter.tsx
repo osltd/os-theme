@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     operator: {
         padding: '10px',
         cursor: 'pointer',
-
         MozUserSelect: '-moz-none',
         KhtmlUserSelect: 'none',
         WebkitUserSelect: 'none',
@@ -18,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     },
     input: {
+
         borderTop: '1px solid ' + theme.palette.secondary.light,
         borderBottom: '1px solid ' + theme.palette.secondary.light,
         maxWidth: '60px',

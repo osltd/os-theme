@@ -1,4 +1,4 @@
-import {Button, Divider,Fab, Grid, Typography} from "@material-ui/core";
+import {Button, Divider, Fab, Grid, Typography} from "@material-ui/core";
 import React, {Fragment} from "react";
 import {formatMoney} from "../../../api/ApiUtils";
 import Counter from "../../Widget/Counter";
@@ -6,51 +6,16 @@ import SocialIcon from '../../Widget/SocialIcon'
 import swal from "@sweetalert/with-react";
 
 let NO_VARIANT_ID = 1;
-const Detail = (props) => {
-    let saveDraftToCart = () => {
-        const {draft, product} = props;
-        let productCount = draft.number ? draft.number : 1;
-        props.dispatchDraftToCart(product, productCount, NO_VARIANT_ID);
-        swal(
-            {
-                content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item>
-                        {false && <span className={'icon-like'}
-
-                                        style={{
-                                            fontSize: '80px',
-                                            color: 'hsla(100,55%,69%,.5)',
-                                            padding: '20px',
-
-                                            display: 'block',
-                                            width: '80px',
-                                            height: '80px',
-                                            border: '4px solid hsla(98,55%,69%,.2)',
-                                            borderRadius: '50%',
-                                            boxSizing: 'content-box',
-                                        }}
-                        />}
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'h4'}>
-                            Congratulation!
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subtitle1'}>
-                            items added! </Typography>
-                    </Grid>
-
-                </Grid>)
-            })
-
-
-    };
+let Detail = (props) => {
 
     const {
-        classes, name, promotePrice,
-        description, variantKeys, variantOptions, product, selectedVariant
-    } = props;
+        classes,
+        selectedVariant,
+        getVariant,
+        saveDraftToCart,
+        name, promotePrice,
+        description, variantKeys, variantOptions, product
+    } = props
     return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
         <Grid item container spacing={16}>
             <Grid item>
@@ -86,6 +51,21 @@ const Detail = (props) => {
                 </Typography>
             </Grid>
 
+            <Grid item>
+
+
+                {
+                    variantKeys.map((n, i) =>
+                        <Fragment key={i}>
+                            <Typography variant={'h6'}>
+                                {n}
+                            </Typography>
+                            {getVariant(n, i, variantOptions)}
+                        </Fragment>
+                    )
+                }
+
+            </Grid>
 
             <Grid item container direction={'row'} spacing={32}>
                 <Grid item>
@@ -98,7 +78,7 @@ const Detail = (props) => {
                 <Grid item>
 
                     <Button variant="extendedFab" color={'secondary'}
-                            onClick={() => saveDraftToCart()}
+                            onClick={saveDraftToCart}
                     >
 
                         <span className={'icon-cart'}/>
@@ -112,19 +92,19 @@ const Detail = (props) => {
         <Grid item container direction={'column'} spacing={16}>
             <Grid item container spacing={16}>
                 <Grid item>
-                    <Fab variant={"extended"} color={'secondary'}>
+                    <Button variant="extendedFab" color={'secondary'}>
                         <span className={'icon-heart'}/>
-                    </Fab>
+                    </Button>
                 </Grid>
                 <Grid item>
-                    <Fab variant={"extended"} color={'secondary'}>
-                    <span className={'icon-mail2'}/>
-                    </Fab>
+                    <Button variant="extendedFab" color={'secondary'}>
+                        <span className={'icon-mail2'}/>
+                    </Button>
                 </Grid>
                 <Grid item>
-                    <Fab variant={"extended"} color={'secondary'}>
-                    <span className={'icon-coin-dollar'}/>
-                    </Fab>
+                    <Button variant="extendedFab" color={'secondary'}>
+                        <span className={'icon-coin-dollar'}/>
+                    </Button>
                 </Grid>
             </Grid>
 

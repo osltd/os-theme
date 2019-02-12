@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import CountryCode from '../Widget/Input/Country'
 import {makeStyles} from "@material-ui/styles";
 import {withSnackbar} from 'notistack';
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const TAX_RATE = 0.07;
 const useStyles = makeStyles(theme => ({
@@ -291,4 +292,4 @@ class ShoppingCartTable extends React.Component {
         )
     }
 }
-export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable))
+export default withStyles(styles)(withSnackbar(connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)))

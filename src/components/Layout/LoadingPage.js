@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from 'react'
 import {CircularProgress, Grid} from '@material-ui/core'
 import {redirectUrl} from "../../api/ApiUtils";

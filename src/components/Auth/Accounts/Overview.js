@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import withWidth from "@material-ui/core/withWidth/index";
 import {connect} from "react-redux";
 import {Grid, Typography} from '@material-ui/core'

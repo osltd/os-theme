@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
-import {withRouter} from 'react-router-dom'
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({

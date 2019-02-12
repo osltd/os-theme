@@ -37,10 +37,8 @@ export const sortData = (
 
 
 export const initFilter = (query: string,
-                           tag: string,
-                           cb: (x: string) => void
 ) => {
     let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
     let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
-    if (isTags && tag !== queryTag) cb(queryTag)
-};
+    return  (isTags )? queryTag:''
+}

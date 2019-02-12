@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import {Button, Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
@@ -202,7 +201,6 @@ const ShoppingCartTable = (props) => {
 
     );
 };
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)

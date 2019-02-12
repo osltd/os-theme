@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Theme} from "@material-ui/core/styles";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
@@ -71,8 +71,6 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
     const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
     const isWidthDown = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.down(breakpoint));
     const classes = useStyle();
-    console.log(props)
-    console.log('---------')
     const {src, name, id, history, category, regPrice, promotePrice} = props;
     let getImg = () => {
         return <div

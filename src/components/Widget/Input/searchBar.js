@@ -1,8 +1,6 @@
 import React from 'react';
 import {Grid, Input} from '@material-ui/core';
 import Button from '../Button/Button.js'
-
-import PropTypes from 'prop-types';
 import {redirectUrl} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
 

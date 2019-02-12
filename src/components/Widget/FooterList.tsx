@@ -1,5 +1,4 @@
 import React from 'react';
-import {History} from 'history'
 import {Theme} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }));
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
 
 }
 
@@ -52,9 +51,9 @@ const FooterList: React.FunctionComponent<Props> = props => {
                             <ListItem className={classes.item} button key={i}>
                                 <Typography variant={'body1'} color={'inherit'}
                                             onClick={() =>
-                                                redirectUrl(`/${n.url}`,history)
-                                            } >
-                                > {n.label}</Typography>
+                                                redirectUrl(`/${n.url}`, history)
+                                            }>
+                                    > {n.label}</Typography>
                             </ListItem>
                     )
                 }

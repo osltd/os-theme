@@ -57,7 +57,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const Media = props => {
-    const [type, setType] = useState('')
+    const [type, setType] = useState('');
 
     let handleChange = name => event => setType(
         event.target.value,
@@ -118,7 +118,7 @@ const Media = props => {
 
     </Grid>
 
-}
+};
 
 //todo(unsafe)
 export default connect(mapStateToProps, mapDispatchToProps)(Media)

@@ -1,7 +1,5 @@
 import React from 'react';
 import {Input} from '@material-ui/core';
-
-import PropTypes from 'prop-types';
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({

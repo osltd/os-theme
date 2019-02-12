@@ -5,14 +5,12 @@ import {fade} from '@material-ui/core/styles/colorManipulator';
 import PopUp from '../Widget/PopUp'
 import SearchIcon from '@material-ui/icons/Search';
 import DropDownList from './Body/ShoppingCartList'
-import {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
-import {breakpoints} from "../../constants/enum";
 import {Product} from "../../interfaces/server/Product";
 import {Feed} from "../../interfaces/server/Feed";
 import {useThemeWidth} from "../../hooks/useThemeWidth";
@@ -120,7 +118,7 @@ const mapDispatchToProps = (dispatch: any) => ({
         })
     }
 
-)
+);
 
 interface notStyledProps {
     products: Array<Product>,
@@ -139,14 +137,14 @@ const Header: React.FunctionComponent<Props> = props => {
     const [navBar, setNavBar] = useState('');
 
 
-    const themeWidth = useThemeWidth()
+    const themeWidth = useThemeWidth();
     const {
         history,
         products,
         feeds,
         shoppingCart,
         editShoppingCart,
-    } = props
+    } = props;
 
 
     let hasProductsToShow = (products && products.length > 0);
@@ -193,7 +191,7 @@ const Header: React.FunctionComponent<Props> = props => {
                     </Grid>}
                 </Grid>
                 {
-                    (themeWidth.isWidthUp.lg)?
+                    (themeWidth.isWidthUp.lg) ?
                         <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
 
                             <Grid item>

@@ -8,10 +8,8 @@ import {ThemeProvider} from '@material-ui/styles'
 import {SnackbarProvider} from 'notistack';
 import App from './components/App'
 import ReactDOM from 'react-dom'
-import Reducer from './store/store'
-import {MuiThemeProvider} from "@material-ui/core";
+import Reducer from './context/Product'
 
-import {BrowserRouter} from "react-router-dom";
 ReactDOM.render(
     //react-router-dom make history global
     <Reducer>

@@ -10,6 +10,7 @@ import withWidth from "@material-ui/core/withWidth/index";
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {breakpoints} from "../../../constants/enum";
+import {useThemeWidth} from "../../../hooks/useThemeWidth";
 
 const useStyles = makeStyles((theme: Theme) => ({
 
@@ -43,9 +44,7 @@ const BodyHeader: React.FunctionComponent<Props> = (props) => {
     const classes = useStyles();
     const {title, history, match} = props;
     const routePath = getRoutePath(match.url);
-    const theme: Theme = useTheme();
-    const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
-
+    const themeWidth = useThemeWidth()
     return <Grid container
                  className={classes.root}
                  direction={'row'}
@@ -53,10 +52,10 @@ const BodyHeader: React.FunctionComponent<Props> = (props) => {
                  justify={'center'}
     >
         <Grid item md={2}/>
-        <Grid item md={5} xs={12} container justify={isWidthUp(breakpoints.md) ? 'flex-start' : 'center'}>
+        <Grid item md={5} xs={12} container justify={themeWidth.isWidthUp.md ? 'flex-start' : 'center'}>
             <Typography variant={'h4'} className={classes.title} color={'primary'}>{title}</Typography>
         </Grid>
-        <Grid item md={3} xs={11} container justify={isWidthUp(breakpoints.md) ? 'flex-end' : 'center'}>
+        <Grid item md={3} xs={11} container justify={themeWidth.isWidthUp.md ? 'flex-end' : 'center'}>
             {routePath.map((n, i) => <Fragment key={i}>
                 <Grid item>
                     <Typography variant={'body1'}
@@ -76,4 +75,4 @@ const BodyHeader: React.FunctionComponent<Props> = (props) => {
 };
 
 
-export default withWidth()(withRouter(BodyHeader))
+export default (withRouter(BodyHeader))

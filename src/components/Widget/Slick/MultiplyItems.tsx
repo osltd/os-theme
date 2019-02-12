@@ -2,15 +2,11 @@ import React from "react";
 import ProductOverviewBox from '../Product/overviewBox'
 import {refactorTextLength} from "../../../api/ApiUtils";
 import Slider from "react-slick";
-import {makeStyles, useTheme} from "@material-ui/styles";
+import {makeStyles} from "@material-ui/styles";
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {Product} from "../../../interfaces/server/Product";
 import {useThemeWidth} from "../../../hooks/useThemeWidth";
-import {Theme} from "@material-ui/core";
-import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
-import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
-import {breakpoints} from "../../../constants/enum";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,8 +21,8 @@ interface Props {
 
 const MultipleItems: React.FunctionComponent<Props> = props => {
     const classes = useStyles();
-    let themeWidth = useThemeWidth()
-    let size =      (themeWidth.isWidthUp.md) ? 4 : (themeWidth.isWidthUp.sm) ? 3 : 2
+    let themeWidth = useThemeWidth();
+    let size = (themeWidth.isWidthUp.md) ? 4 : (themeWidth.isWidthUp.sm) ? 3 : 2;
 
     let settings = {
         dots: true,

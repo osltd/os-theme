@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Typography} from '@material-ui/core'
-import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -24,18 +23,18 @@ const useStyles = makeStyles(theme => ({
 
 const BlackButton = props => {
 
-        const classes = useStyles();
-        const {link, onClick, value, icon2, icon, border} = props;
+    const classes = useStyles();
+    const {link, onClick, value, icon2, icon, border} = props;
 
-        return <Button
-            className={classes.root}
-            variant={'outlined'}
-            onClick={onClick}>
-            <Typography variant={'h6'} color={'inherit'} className={icon}/>
-            <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
-            <Typography variant={'h6'} color={'inherit'} className={icon2}/>
-        </Button>
-}
+    return <Button
+        className={classes.root}
+        variant={'outlined'}
+        onClick={onClick}>
+        <Typography variant={'h6'} color={'inherit'} className={icon}/>
+        <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
+        <Typography variant={'h6'} color={'inherit'} className={icon2}/>
+    </Button>
+};
 
 
 export default (BlackButton);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Button, Grid} from '@material-ui/core';
 import InputBar from '../../Widget/InputBar'
 import {makeStyles} from "@material-ui/styles";

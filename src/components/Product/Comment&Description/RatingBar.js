@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
 import {connect} from "react-redux";
 import {Grid} from '@material-ui/core'

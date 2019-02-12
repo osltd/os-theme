@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
 import {
+    actionType,
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
     CATEGORY_INIT_CATEGORY,
@@ -22,7 +23,7 @@ import {
 } from "../constants/actionType";
 import '../constants/icon/style.css'
 import agent from '../agent'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
 import LoadingPage from './Layout/LoadingPage'
 import SearchPage from './Search/Overview'
@@ -32,8 +33,8 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import {Product} from "../interfaces/server/Product";
-import {Reducer} from "../store/store";
-import Test from './Widget/test'
+import {Reducer} from "../context/Product";
+import {refactorTextLength} from "../api/ApiUtils";
 
 const mapStateToProps = (state: any) => ({
     products: state.product.products,
@@ -133,21 +134,22 @@ const mapDispatchToProps = (dispatch: any) => ({
     }
 );
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     [key: string]: any
 }
 
 const App: React.FunctionComponent<Props> = props => {
     const {state, dispatch} = useContext(Reducer);
-
     let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
         let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
         if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data));
         else {
             dispatch(
                 {
-                    type: INIT_PRODUCTS,
-                    payload: products
+                    type: actionType.INIT_PRODUCTS,
+                    payload:{
+                        products:products
+                    }
                 }
             );
             return products
@@ -179,28 +181,28 @@ const App: React.FunctionComponent<Props> = props => {
         <BrowserRouter>
             <ScrollToTop>
 
-                    <Header/>
-                    <MyCredits/>
+                <Header/>
+                <MyCredits/>
 
-                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : {}}>
-                        <Switch>
-                            <Route exact path={'/'} component={mainPage}/>
-                            <Route exact path={'/404'} component={NotFound}/>
-                            <Route exact path={'/login'} component={Login}/>
-                            <Route exact path={'/register'} component={Register}/>
-                            <Route exact path={'/products'} component={Shop}/>
-                            <Route exact path={'/feeds'} component={Feed}/>
-                            <Route exact path={'/feeds/:id'} component={FeedDetail}/>
-                            <Route exact path={'/products/:id'} component={ProductOverview}/>
-                            <Route exact path={'/checkout'} component={Checkout}/>
-                            <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
-                            <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                            <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                            <Route component={NotFound}/>
+                <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : {}}>
+                    <Switch>
+                        <Route exact path={'/'} component={mainPage}/>
+                        <Route exact path={'/404'} component={NotFound}/>
+                        <Route exact path={'/login'} component={Login}/>
+                        <Route exact path={'/register'} component={Register}/>
+                        <Route exact path={'/products'} component={Shop}/>
+                        <Route exact path={'/feeds'} component={Feed}/>
+                        <Route exact path={'/feeds/:id'} component={FeedDetail}/>
+                        <Route exact path={'/products/:id'} component={ProductOverview}/>
+                        <Route exact path={'/checkout'} component={Checkout}/>
+                        <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                        <Route exact path={'/loadingPage'} component={LoadingPage}/>
+                        <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                        <Route component={NotFound}/>
 
-                        </Switch>
-                    </div>
-                    <Footer/>
+                    </Switch>
+                </div>
+                <Footer/>
             </ScrollToTop>
         </BrowserRouter>
 

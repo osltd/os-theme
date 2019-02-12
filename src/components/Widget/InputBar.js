@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {InputAdornment, TextField} from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import {makeStyles} from "@material-ui/styles";

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {ButtonBase, Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from "react-router-dom";

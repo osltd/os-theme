@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {Context} from '../../context'
+import {Context} from '../../context/Product'
 
 export default function Counter({initialCount}) {
     const {state, dispatch} = useContext(

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core'
-import Slick from './Widget/Slick'
 
 const FEATURED_PRODUCTS = 'featured';
 

@@ -11,29 +11,29 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 const useStyle = makeStyles((theme: Theme) => ({
 
-        root: {
-            minHeight: '450px',
-            paddingBottom: '20px',
-            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-            cursor: 'pointer'
-        },
+    root: {
+        paddingBottom: '20px',
+        width:'270px',
+        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+        cursor: 'pointer'
+    },
 
 
-        title: {
-            cursor: 'pointer',
-            '&:hover': {
-                color: theme.palette.secondary.light,
-            }
-        },
-        content: {},
-        button: {
-            margin: '20px 0'
+    title: {
+        cursor: 'pointer',
+        '&:hover': {
+            color: theme.palette.secondary.light,
         }
+    },
+    content: {},
+    button: {
+        margin: '20px 0'
+    }
 
     })
 );
 
-interface Props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     history: History
     subTitle: string
     title: string
@@ -43,6 +43,7 @@ interface Props extends RouteComponentProps{
     comments: string
     medias: Array<interfaceMedia>
 }
+
 
 const FeedOverviewBox: React.FunctionComponent<Props> = props => {
     const classes = useStyle();
@@ -57,7 +58,7 @@ const FeedOverviewBox: React.FunctionComponent<Props> = props => {
     } = props;
     return (
         <Grid container
-              onClick={() => redirectUrl('/feeds/' + id, history)}
+              onClick={() => redirectUrl('/feeds/' + id, props.history)}
               className={classes.root} alignItems={'center'}
               justify={'center'}
         >
@@ -74,8 +75,7 @@ const FeedOverviewBox: React.FunctionComponent<Props> = props => {
                         variant={'h5'} color={'primary'}>{title}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography
-                        variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
+                    <Typography variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                 </Grid>
                 <Grid item>
                     <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>

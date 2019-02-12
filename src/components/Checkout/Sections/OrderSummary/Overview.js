@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import {Button, Grid, ListItem, Table, Typography} from '@material-ui/core';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatExpiryDate, formatMoney, handleImgValid, redirectUrl, refactorTextLength,} from "../../api/ApiUtils";
+import {formatExpiryDate, formatMoney, handleImgValid, redirectUrl, refactorTextLength,} from "../../../../api/ApiUtils";
 import {connect} from "react-redux";
-import * as styleGuide from '../../constants/styleGuide'
+import * as styleGuide from '../../../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
-import Terms from '../Widget/Terms'
-import agent from '../../agent'
-import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
+import Terms from '../../../Widget/Terms'
+import agent from '../../../../agent'
+import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../../../constants/actionType'
 import swal from '@sweetalert/with-react'
 import {makeStyles} from "@material-ui/styles";
 
@@ -64,25 +63,18 @@ const mapDispatchToProps = dispatch => ({
     }
 );
 
-class OrderSummary extends React.Component {
-    constructor(props) {
-        super(props);
-        // Add some default error states
-        this.state = {
-            checked: false,
-        };
-    }
+const  OrderSummary = props => {
+    const [checked,setChecked] = useState(false)
 
-    getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId) ?
+ let   getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId) ?
         product.product.variants.find(variant => variant.id === product.variantId) : product.product).price * product.number;
 
-    placeOrder = async () => {
+  let  placeOrder = async () => {
 
-        const {billingDetail} = this.props;
+        const {billingDetail} = props;
         const data = {
             "address": billingDetail.address,
-
-            "items": this.props.shoppingCart.map(n => ({
+            "items": props.shoppingCart.map(n => ({
                     id: n.variantId, qty: n.number,
                 })
             )
@@ -105,30 +97,30 @@ class OrderSummary extends React.Component {
         };
         console.log(data);
 
-        redirectUrl('/loadingPage', this.props.history, false);
+        redirectUrl('/loadingPage', props.history, false);
 
         await agent.Checkout.placeOrder(data).then(res => {
-                let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
-                    this.props.billingDetail.shippingOptions.find(
-                        n => n.courier.id === this.props.billingDetail.selectedShippingMethod
+                let selectShippingMethod = (props.billingDetail.shippingOptions && props.billingDetail.shippingOptions.length > 0) ?
+                    props.billingDetail.shippingOptions.find(
+                        n => n.courier.id === props.billingDetail.selectedShippingMethod
                     ) : 'no shipping method provided';
                 if (typeof res.data === 'string') {
-                    this.props.enqueueSnackbar(res.data + ' please log in first'
+                    props.enqueueSnackbar(res.data + ' please log in first'
                         , styleGuide.errorSnackbar);
-                    this.props.history.goBack();
+                    props.history.goBack();
                     return null
                 }
                 if (res.data && res.data.messages && res.data.messages.length > 0) {
                     res.data.messages.map(n =>
-                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                        props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                     );
-                    this.props.history.goBack();
+                    props.history.goBack();
 
                     return null
                 }
                 let result = res.data.data.orders;
                 if (result && result.length > 0) {
-                    //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
+                    //if (!(selectShippingMethod)) {selectShippingMethod = props.billingDetail.shippingOptions[0]}
                     console.log('gooooood');
                     swal({
 
@@ -144,13 +136,13 @@ class OrderSummary extends React.Component {
                             <Grid item>
                                 <Typography variant={'body1'}>
                                     {
-                                        false && " your contact number is " + this.props.billingDetail.phone
+                                        false && " your contact number is " + props.billingDetail.phone
                                     }
                                 </Typography>
                             </Grid>
                             <Grid item>
                                 {
-                                    this.props.shoppingCart.map((n, i) =>
+                                    props.shoppingCart.map((n, i) =>
                                         <ListItem
                                             key={i}
 
@@ -184,7 +176,7 @@ class OrderSummary extends React.Component {
                                 }
                                 {
 
-                                    this.props.billingDetail.coupons && <ListItem
+                                    props.billingDetail.coupons && <ListItem
 
                                     >
                                         <Grid container spacing={16} alignItems={'center'}>
@@ -215,7 +207,7 @@ class OrderSummary extends React.Component {
                                 <Typography variant={'body1'}>
                                     Total amount
                                     is {'$ ' + formatMoney(
-                                    this.getDiscountedPrice(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur),
+                                    getDiscountedPrice(props.shoppingCart.reduce((acc, cur) => acc + getRowPrice(cur),
                                         0), billingDetail.coupons
                                     )
                                 )}
@@ -236,10 +228,10 @@ class OrderSummary extends React.Component {
                             </Grid>
                         </Grid>)
                     });
-                    this.props.emptyShoppingCart();
+                    props.emptyShoppingCart();
 
-                    this.props.emptyBillingDetail();
-                    redirectUrl('/', this.props.history, false)
+                    props.emptyBillingDetail();
+                    redirectUrl('/', props.history, false)
 
                 }
 
@@ -249,9 +241,9 @@ class OrderSummary extends React.Component {
             console.log(err);
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
-                    this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    props.enqueueSnackbar(n, styleGuide.errorSnackbar)
                 );
-                this.props.history.goBack()
+                props.history.goBack()
 
             }
 
@@ -259,11 +251,10 @@ class OrderSummary extends React.Component {
 
     };
 
-    getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
+  let  getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
 
-    render() {
         const classes = useStyles();
-        const {shoppingCart, billingDetail} = this.props;
+        const {shoppingCart, billingDetail} = props;
         const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
             n.product.variants.find(variant => variant.id === n.variantId) : n.product;
         return (
@@ -307,7 +298,7 @@ class OrderSummary extends React.Component {
                             </TableCell>
                             <TableCell className={classes.block} numeric>
                                 {'$ ' + formatMoney(
-                                    this.getDiscountedPrice(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur),
+                                    getDiscountedPrice(props.shoppingCart.reduce((acc, cur) => acc + getRowPrice(cur),
                                         0), billingDetail.coupons
                                     )
                                 )}
@@ -318,23 +309,18 @@ class OrderSummary extends React.Component {
                         <TableRow>
                             <TableCell colSpan={2}>
                                 <Terms
-                                    checked={this.state.checked}
-                                    onChange={() => this.setState(
-                                        {
-                                            checked: !this.state.checked
-
-                                        }
-                                    )}
+                                    checked={checked}
+                                    onChange={() => setChecked(!checked) }
                                 />
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell colSpan={2}>
                                 <Button
-                                    disabled={!this.state.checked}
+                                    disabled={!checked}
                                     className={classes.button}
                                     variant={'outlined'} color={'primary'}
-                                    onClick={this.placeOrder}
+                                    onClick={placeOrder}
                                 >Place Order</Button>
                             </TableCell>
                         </TableRow>
@@ -342,7 +328,6 @@ class OrderSummary extends React.Component {
                 </Table>
             </Paper>
         );
-    }
 }
 
 
