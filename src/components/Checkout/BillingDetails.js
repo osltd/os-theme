@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 import {connect} from "react-redux";
 import {Button, CircularProgress, Grid, Typography} from '@material-ui/core'
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
@@ -7,12 +8,11 @@ import InputBar from '../Widget/InputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
 import CountryCode from '../Widget/Input/Country'
-import {makeStyles} from "@material-ui/styles";
+
 import {withSnackbar} from 'notistack';
-import withStyles from "@material-ui/core/styles/withStyles";
 
 const TAX_RATE = 0.07;
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.secondary.light,
         border: '1px solid ' + theme.palette.primary.dark,
     }
-}));
+});
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -145,9 +145,7 @@ class ShoppingCartTable extends React.Component {
     }
 
     render() {
-        const classes = useStyles();
-
-        const {billingDetail, shoppingCart} = this.props;
+        const {classes, billingDetail, shoppingCart} = this.props;
         return (
             <Grid container spacing={16} className={classes.root}>
 
@@ -292,4 +290,9 @@ class ShoppingCartTable extends React.Component {
         )
     }
 }
-export default withStyles(styles)(withSnackbar(connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)))
+
+ShoppingCartTable.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartTable)))
