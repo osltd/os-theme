@@ -1,9 +1,9 @@
-import {actionType} from "../../constants/actionType";
+import {productActionType} from "./actionType";
 import {State} from "./state";
 import {Product} from "../../interfaces/server/Product";
 
 export interface Action {
-    type: actionType
+    type: productActionType
     payload: {
         products?: Array<Product>
     }
@@ -13,12 +13,11 @@ export interface Action {
 
 const dispatch = (state: State, action: Action): State => {
     switch (action.type) {
-        case actionType.INIT_PRODUCTS: {
-            let fun = (payload?: Array<Product>): State =>({
-                    ...state,
-                    products: payload?payload:[]
-                })
-           return fun(action.payload.products)
+        case productActionType.PRODUCT_INIT_PRODUCTS: {
+            return ({
+                ...state,
+                products: action.payload.products ? action.payload.products : []
+            })
         }
         default:
             return state

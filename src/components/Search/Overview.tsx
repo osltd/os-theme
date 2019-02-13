@@ -12,7 +12,7 @@ import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {makeStyles} from "@material-ui/styles";
 import {Product} from "../../interfaces/server/Product";
 import {Feed} from "../../interfaces/server/Feed";
-import {Reducer} from "../../context/Product";
+import {productContext} from "../../context/Product";
 import {RouteComponentProps} from "react-router";
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +42,7 @@ keyword?:string
     [key:string]:any
 }
 const SearchPage:React.FunctionComponent<Props> = props => {
-    const {state, dispatch} = useContext(Reducer);
+    const {state, dispatch} = useContext(productContext);
 
 const [keyword,setKeyword] = useState(props.match.params?props.match.params:'')
   function   searchData<T>(data:Array<T>):Array<T>{

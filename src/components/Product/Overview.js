@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Grid} from '@material-ui/core';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
@@ -7,6 +7,8 @@ import Detail from './Detail'
 import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 import {makeStyles} from "@material-ui/styles";
+import {productContext} from '../../context/Product/index'
+import NotFound from '../Layout/NotFound'
 
 const useStyles = makeStyles(theme => {
     console.log(theme);
@@ -34,37 +36,32 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const SingleProduct = props => {
+    const {state, dispatch} = useContext(productContext)
     let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
     const classes = useStyles();
     if (!props.products) return <LoadingPage/>;
     const product = props.products.find(n => n.id.toString() === props.match.params.id);
+    if (!product) return <NotFound msg={'sorry this product is no longer exist'}/>
+    //todo(cant pass if not reloaded)
     const variantOptions = getVariantOptions(product.variants);
-
 
     return <Grid container alignItems={'center'} justify={'center'}>
         <Grid item xs={12}>
             <Header
                 title={product.name}
-                route={'HOME/SHOP/SINGLE PRODUCT'}
             />
         </Grid>
         <Grid item xs={10}>
+            <Detail
+                variantOptions={Object.values(variantOptions)}
+                variantKeys={Object.keys(variantOptions)}
+                description={product.description}
+                product={product}
 
-            {
-                <Detail
-                    variantOptions={Object.values(variantOptions)}
-                    variantKeys={Object.keys(variantOptions)}
-                    description={product.description}
-                    product={product}
-
-                />
-            }
-
-
+            />
         </Grid>
         {
             false && <Grid item xs={10} container>
-
                 <CommentDescription
                     content={product.description}
                 />

@@ -75,4 +75,4 @@ const BodyHeader: React.FunctionComponent<Props> = (props) => {
 };
 
 
-export default (withRouter(BodyHeader))
+export default withRouter(BodyHeader)

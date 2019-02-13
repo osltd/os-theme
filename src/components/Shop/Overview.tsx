@@ -1,26 +1,24 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Grid, Theme, Typography} from '@material-ui/core';
+import React, {useContext, useEffect, useState} from 'react'
+import {Grid, Theme, Typography} from '@material-ui/core'
 import LoadingPage from '../Layout/LoadingPage'
-import {Reducer} from '../../context/Product'
 import Pagination from './Sections/Pagination'
-import {initFilter, sortData} from "./Effect";
-import {makeStyles, useTheme} from "@material-ui/styles";
-import {unstable_useMediaQuery as useMediaQuery} from '@material-ui/core/useMediaQuery'
-import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
+import {initFilter, sortData} from "./Effect"
+import {makeStyles} from "@material-ui/styles"
 import Header from '../Layout/Body/Header'
-import {breakpoints, filterOptions, viewModeType} from "../../constants/enum"
+import {filterOptions, viewModeType} from "../../constants/enum"
 import TagList from './Sections/TagList'
-import {arrayToFilter, getTagsCountsArray} from "../../api/ApiUtils";
+import {arrayToFilter, getTagsCountsArray} from "../../api/ApiUtils"
 import classNames from 'classnames'
 import DropDown from '../Widget/DropDown'
 import ProductsList from './Sections/ProductsList'
-import {RouteComponentProps} from "react-router";
-import {useThemeWidth} from "../../hooks/useThemeWidth";
+import {RouteComponentProps} from "react-router"
+import {useThemeWidth} from "../../hooks/useThemeWidth"
+import {reducer} from "../../context";
 
 const useStyles = makeStyles((theme: Theme) => {
-    console.log('this should be the theme');
+    console.log('this should be the theme')
 
-    console.log(theme);
+    console.log(theme)
 
     return ({
         productCategory: {
@@ -44,30 +42,28 @@ const useStyles = makeStyles((theme: Theme) => {
             paddingLeft: '5px',
         }
     })
-});
+})
 type Props = RouteComponentProps
 
 const ShopOverview: React.FunctionComponent<Props> = props => {
-    const {history} = props;
-    const classes = useStyles();
+    const {history} = props
+    const classes = useStyles()
     const themeWidth = useThemeWidth()
-    const [viewMode, setViewMode] = useState(viewModeType.FORM);
-    const [tag, setTag] = useState(initFilter(history.location.search));
-    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC);
-    const [page, setPage] = useState('');
-    const {state, dispatch} = useContext(Reducer);
-    let products = state.products;
-   useEffect(
-       ()=>{
-          console.log(
-              'rerender'
-
-          )
-       }
-   )
-    if (products === undefined) return <LoadingPage/>;
-    let sortedProduct = sortData(products, tag, sortBy);
-    const hasProductsToShow = products.length > 0;
+    const [viewMode, setViewMode] = useState(viewModeType.FORM)
+    const [tag, setTag] = useState(initFilter(history.location.search))
+    useEffect(
+        () => setTag(initFilter(history.location.search)),
+        [props.location.search]
+    )
+    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC)
+    const [page, setPage] = useState('')
+    const reducerContext = useContext(reducer)
+    const {state,dispatch} = reducerContext.product
+    let products = state.products
+   
+    if (products === undefined) return <LoadingPage/>
+    let sortedProduct = sortData(products, tag, sortBy)
+    const hasProductsToShow = products.length > 0
 
     return (
         <Grid container justify={'center'}>
@@ -87,14 +83,14 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         PRODUCT CATEGORIES
                                     </Typography>
                                     <TagList data={getTagsCountsArray(products, (n: string) => {
-                                        console.log(tag);
+                                        console.log(tag)
                                         console.log(n
-                                        );
+                                        )
                                         if (n !== tag) {
                                             setPage('')
 
                                         }
-                                        console.log(`new page is ${page}`);
+                                        console.log(`new page is ${page}`)
                                         setTag(n)
 
                                     })}
@@ -141,7 +137,7 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         <DropDown options={arrayToFilter(
                                             [filterOptions.NAME_ASC, filterOptions.NAME_DES,
                                                 filterOptions.PRICE_ASC, filterOptions.PRICE_DES], (n: filterOptions) => {
-                                                setSortBy(n);
+                                                setSortBy(n)
                                                 setPage('')
                                             })}
                                                   selectedValue={sortBy}
@@ -163,7 +159,7 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
 
             }
         </Grid>
-    );
-};
+    )
+}
 
 export default React.memo(ShopOverview)

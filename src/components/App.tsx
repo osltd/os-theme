@@ -13,7 +13,6 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import {connect} from "react-redux";
 import {
-    actionType,
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
     CATEGORY_INIT_CATEGORY,
@@ -23,7 +22,6 @@ import {
 } from "../constants/actionType";
 import '../constants/icon/style.css'
 import agent from '../agent'
-import {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
 import LoadingPage from './Layout/LoadingPage'
 import SearchPage from './Search/Overview'
@@ -33,8 +31,9 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import {Product} from "../interfaces/server/Product";
-import {Reducer} from "../context/Product";
-import {refactorTextLength} from "../api/ApiUtils";
+import {useThemeWidth} from "../hooks/useThemeWidth";
+import {reducer} from "../context";
+import actionType from "../context/actionType";
 
 const mapStateToProps = (state: any) => ({
     products: state.product.products,
@@ -139,16 +138,17 @@ interface Props extends RouteComponentProps {
 }
 
 const App: React.FunctionComponent<Props> = props => {
-    const {state, dispatch} = useContext(Reducer);
+    const reducerContext = useContext(reducer);
+    const themeWidth = useThemeWidth()
     let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
         let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
         if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data));
         else {
-            dispatch(
+            reducerContext.product.dispatch(
                 {
-                    type: actionType.INIT_PRODUCTS,
-                    payload:{
-                        products:products
+                    type: actionType.product.PRODUCT_INIT_PRODUCTS,
+                    payload: {
+                        products: products
                     }
                 }
             );
@@ -184,7 +184,7 @@ const App: React.FunctionComponent<Props> = props => {
                 <Header/>
                 <MyCredits/>
 
-                <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : {}}>
+                <div style={themeWidth.isWidthUp.md ? {paddingTop: '76px'} : {}}>
                     <Switch>
                         <Route exact path={'/'} component={mainPage}/>
                         <Route exact path={'/404'} component={NotFound}/>

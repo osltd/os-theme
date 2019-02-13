@@ -1,27 +1,12 @@
-import React, {Context, createContext, Dispatch, useReducer} from 'react';
-import reducer, {Action} from './dispatch'
-import initialState, {State} from './state'
+import React, {useReducer} from 'react';
+import reducer from './dispatch'
+import initialState from './state'
+import {Reducer} from "../../interfaces/client/Common";
 
-interface T {
-    state:State
-    dispatch:Dispatch<Action>
-}
-const useReducerInContext = ():T=> {
+
+export function useProductReducer(): Reducer {
     const [state, dispatch] = useReducer(reducer, initialState);
     return {state, dispatch}
 }
-export const Reducer: Context<T> = createContext({
-    state: initialState,
-    dispatch: function hacked(init) {
-        //useless func just for typechecking
-    }
-})
-
-const Provider: React.ComponentType = ({children}) => {
-    return <Reducer.Provider value={useReducerInContext()}>
-        {children}
-    </Reducer.Provider>
-}
 
 
-export default Provider
