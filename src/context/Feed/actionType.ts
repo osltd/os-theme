@@ -1,4 +1,6 @@
 
-export enum feedActionType {
-    PRODUCT_INIT_PRODUCTS = 'PRODUCT_INIT_PRODUCTS',
+enum feedActionType {
+    FEED_INIT_FEEDS = 'FEED_INIT_FEEDS',
 }
+
+export default feedActionType

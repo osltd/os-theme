@@ -27,9 +27,4 @@ export interface RoutePath {
     link: string,
 }
 
-export interface Reducer {
-    state: State
-    dispatch: Dispatch<Action>
-}
-
 

@@ -1,10 +1,14 @@
-import React, {useReducer} from 'react';
-import reducer from './dispatch'
-import initialState from './state'
-import {Reducer} from "../../interfaces/client/Common";
+import React, {Dispatch, useReducer} from 'react';
+import reducer, {Action} from './dispatch'
+import initialState,{State} from './state'
 
 
-export function useProductReducer(): Reducer {
+export interface ProductReducer {
+    state: State
+    dispatch: Dispatch<Action>
+}
+
+export function useProductReducer(): ProductReducer {
     const [state, dispatch] = useReducer(reducer, initialState);
     return {state, dispatch}
 }

@@ -15,12 +15,7 @@ import {RouteComponentProps} from "react-router"
 import {useThemeWidth} from "../../hooks/useThemeWidth"
 import {reducer} from "../../context";
 
-const useStyles = makeStyles((theme: Theme) => {
-    console.log('this should be the theme')
-
-    console.log(theme)
-
-    return ({
+const useStyles = makeStyles((theme: Theme) =>  ({
         productCategory: {
             backgroundColor: '#F7F7F7',
 
@@ -41,8 +36,8 @@ const useStyles = makeStyles((theme: Theme) => {
         array: {
             paddingLeft: '5px',
         }
-    })
-})
+    }))
+
 type Props = RouteComponentProps
 
 const ShopOverview: React.FunctionComponent<Props> = props => {
@@ -57,10 +52,9 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
     )
     const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC)
     const [page, setPage] = useState('')
-    const reducerContext = useContext(reducer)
-    const {state,dispatch} = reducerContext.product
-    let products = state.products
-   
+    const {productReducer} = useContext(reducer)
+    const {products} = productReducer.state
+
     if (products === undefined) return <LoadingPage/>
     let sortedProduct = sortData(products, tag, sortBy)
     const hasProductsToShow = products.length > 0

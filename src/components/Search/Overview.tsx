@@ -1,19 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Grid, Typography} from '@material-ui/core';
-import {connect} from 'react-redux'
-import {handleImgValid, refactorTextLength} from "../../api/ApiUtils";
-import withWidth from "@material-ui/core/withWidth/index";
-import FeedOverviewBox from '../Widget/Feed/overviewBox'
-import ProductOverviewBox from '../Widget/Product/overviewBox'
+import React, {useContext, useState} from 'react';
+import {Grid} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import LoadingPage from '../Layout/LoadingPage'
-import SearchBar from '../Widget/SearchBar/original'
-import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {makeStyles} from "@material-ui/styles";
-import {Product} from "../../interfaces/server/Product";
-import {Feed} from "../../interfaces/server/Feed";
-import {productContext} from "../../context/Product";
 import {RouteComponentProps} from "react-router";
+import {reducer} from "../../context";
 
 const useStyles = makeStyles(theme => ({
     productCategory: {
@@ -37,35 +28,36 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '5px',
     }
 }));
-interface Props extends RouteComponentProps{
-keyword?:string
-    [key:string]:any
+
+interface Props extends RouteComponentProps {
+    keyword?: string
+
+    [key: string]: any
 }
-const SearchPage:React.FunctionComponent<Props> = props => {
-    const {state, dispatch} = useContext(productContext);
 
-const [keyword,setKeyword] = useState(props.match.params?props.match.params:'')
-  function   searchData<T>(data:Array<T>):Array<T>{
-    return  data.filter(n => (props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(props.keyword.toLowerCase()) !== -1) : false);
-  }
+const SearchPage: React.FunctionComponent<Props> = props => {
+    const {productReducer, feedReducer} = useContext(reducer);
+    const [keyword, setKeyword] = useState(props.match.params ? props.match.params : '')
 
+    function searchData<T>(data: Array<T>): Array<T> {
+        return data.filter(n => (props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(props.keyword.toLowerCase()) !== -1) : false);
+    }
+    const classes = useStyles();
 
-        const classes = useStyles();
+    if (!props.products && !props.feeds) return <LoadingPage/>;
+    const products = props.products ? searchData(props.products) : [];
+    const feeds = props.feeds ? searchData(props.feeds) : [];
+    const searchResultCount = products.length + feeds.length;
 
-        if (!props.products && !props.feeds) return <LoadingPage/>;
-        const products = props.products ? searchData(props.products) : [];
-        const feeds = props.feeds ? searchData(props.feeds) : [];
-        const searchResultCount = products.length + feeds.length;
+    return (
+        <Grid container alignItems={'center'} justify={'center'}>
+            <Header
+                title={'Search'}
 
-        return (
-            <Grid container alignItems={'center'} justify={'center'}>
-                <Header
-                    title={'Search'}
+            />
 
-                />
-
-            </Grid>
-        );
+        </Grid>
+    );
 }
 
 export default (SearchPage)

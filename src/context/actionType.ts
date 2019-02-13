@@ -1,7 +1,10 @@
-import {productActionType} from "./Product/actionType";
+import productActionType from "./Product/actionType";
+import feedActionType from "./Feed/actionType";
 
 const actionType= {
-    product:productActionType
+    product:productActionType,
+    feed:feedActionType,
+
 }
 
 

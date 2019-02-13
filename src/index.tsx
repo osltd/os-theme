@@ -8,11 +8,11 @@ import {ThemeProvider} from '@material-ui/styles'
 import {SnackbarProvider} from 'notistack';
 import App from './components/App'
 import ReactDOM from 'react-dom'
-import reducerProvider from './context'
+import ReducerContextProvider from './context'
 
 ReactDOM.render(
     //react-router-dom make history global
-    <reducerProvider>
+    <ReducerContextProvider>
         <Provider store={store}>
 
             <ThemeProvider theme={theme}>
@@ -21,6 +21,6 @@ ReactDOM.render(
                 </SnackbarProvider>
             </ThemeProvider>
         </Provider>
-    </reducerProvider>
+    </ReducerContextProvider>
     , document.getElementById('root'));
 registerServiceWorker();

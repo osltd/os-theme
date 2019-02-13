@@ -1,29 +1,35 @@
-import {useProductReducer} from "./Product";
-import {Reducer} from "../interfaces/client/Common";
+import {ProductReducer, useProductReducer} from "./Product";
+import {FeedReducer, useFeedReducer} from "./Feed";
 import React, {Context, createContext} from "react";
 
 
-interface K {
-    product: Reducer
+interface ContextReducer {
+    productReducer: ProductReducer
+    feedReducer: FeedReducer
 }
 
-
-export const reducer: Context<K> = createContext(
+const initReducer = {
+    state: {}, dispatch: (args: any) => {
+    }
+}
+export const reducer: Context<ContextReducer> = createContext(
     {
-        product: {
-            state: {},
-            dispatch: function hacked(init) {}
-        },
-
+        productReducer: initReducer,
+        feedReducer: initReducer,
     })
 
-const reducerProvider: React.ComponentType = ({children}) => {
-    return <reducer.Provider value={{
-        product:useProductReducer()
-    }}>
-    {children}
+const reducerContextProvider: React.ComponentType = ({children}) => {
+
+    const value = {
+        productReducer: useProductReducer(),
+        feedReducer: useFeedReducer(),
+
+
+    }
+    return <reducer.Provider value={value}>
+        {children}
     </reducer.Provider>
 }
 
 
-export default reducerProvider
+export default reducerContextProvider

@@ -3,12 +3,12 @@ import reducer, {Action} from './dispatch'
 import initialState,{State} from './state'
 
 
-export interface FeedReducer {
+interface ProductReducer {
     state: State
     dispatch: Dispatch<Action>
 }
 
-export function useFeedReducer(): FeedReducer {
+export function useProductReducer(): ProductReducer {
     const [state, dispatch] = useReducer(reducer, initialState);
     return {state, dispatch}
 }

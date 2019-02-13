@@ -138,13 +138,13 @@ interface Props extends RouteComponentProps {
 }
 
 const App: React.FunctionComponent<Props> = props => {
-    const reducerContext = useContext(reducer);
+    const {productReducer,feedReducer} = useContext(reducer)
     const themeWidth = useThemeWidth()
     let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
         let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
         if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data));
         else {
-            reducerContext.product.dispatch(
+            productReducer.dispatch(
                 {
                     type: actionType.product.PRODUCT_INIT_PRODUCTS,
                     payload: {
@@ -168,10 +168,30 @@ const App: React.FunctionComponent<Props> = props => {
     useEffect(
         () => {
             initApp().then(
-                async () =>
-                    props.finishLoadingProducts(
-                        await getAllProducts()
-                    )
+                async () =>{
+                    props.finishLoadingProducts(await getAllProducts())
+
+                    agent.Feeds.initFeeds().then(res =>
+                        feedReducer.dispatch(
+                            {
+                                type: actionType.feed.FEED_INIT_FEEDS,
+                                payload: res.data.data.posts,
+                            }
+                        )
+                    ).catch(err => feedReducer.dispatch(
+                        {
+                            type: actionType.feed.FEED_INIT_FEEDS,
+                            payload:{
+                                feeds:[]
+                            },
+                        }
+                    ));
+
+
+                }
+
+
+
             )
 
         }, []);

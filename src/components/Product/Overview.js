@@ -7,8 +7,8 @@ import Detail from './Detail'
 import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 import {makeStyles} from "@material-ui/styles";
-import {productContext} from '../../context/Product/index'
 import NotFound from '../Layout/NotFound'
+import {reducer} from "../../context";
 
 const useStyles = makeStyles(theme => {
     console.log(theme);
@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const SingleProduct = props => {
-    const {state, dispatch} = useContext(productContext)
+    const {feed} = useContext(reducer)
     let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
     const classes = useStyles();
     if (!props.products) return <LoadingPage/>;

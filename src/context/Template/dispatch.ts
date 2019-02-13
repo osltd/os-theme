@@ -1,12 +1,11 @@
-import actionType from "./actionType";
+import {productActionType} from "./actionType";
 import {State} from "./state";
 import {Product} from "../../interfaces/server/Product";
-import {Feed} from "../../interfaces/server/Feed";
 
 export interface Action {
-    type: actionType
+    type: productActionType
     payload: {
-        feeds?: Array<Feed>
+        products?: Array<Product>
     }
 
 }
@@ -14,10 +13,10 @@ export interface Action {
 
 const dispatch = (state: State, action: Action): State => {
     switch (action.type) {
-        case actionType.FEED_INIT_FEEDS: {
+        case productActionType.PRODUCT_INIT_PRODUCTS: {
             return ({
                 ...state,
-                feeds: action.payload.feeds ? action.payload.feeds : []
+                products: action.payload.products ? action.payload.products : []
             })
         }
         default:

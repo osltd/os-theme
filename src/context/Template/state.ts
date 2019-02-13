@@ -3,7 +3,7 @@ import {Feed} from "../../interfaces/server/Feed";
 
 
 export interface State {
-    feeds?: Array<Feed>
+    products?: Array<Product>
 }
 
 export const state: State = {};
