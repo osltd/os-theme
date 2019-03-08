@@ -9,15 +9,17 @@ import {SnackbarProvider} from 'notistack';
 import App from './components/App'
 import ReactDOM from 'react-dom'
 import ReducerContextProvider from './context'
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
     //react-router-dom make history global
     <ReducerContextProvider>
         <Provider store={store}>
-
             <ThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>
-                    <App/>
+                    <BrowserRouter>
+                        <App/>
+                    </BrowserRouter>
                 </SnackbarProvider>
             </ThemeProvider>
         </Provider>

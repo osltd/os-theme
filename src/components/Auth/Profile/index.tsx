@@ -25,8 +25,6 @@ function ConfirmAddress() {
     const [phone, setPhone] = useState(profile.phone);
     const [name, setName] = useState(profile.name);
     const [edit, setEdit] = useState(true);
-    const [invoiceAddress, setInvoiceAddress] = useState(profile.invoiceAddress);
-    const [deliveryAddress, setDeliveryAddress] = useState(profile.deliveryAddress);
 
     const data = [
         {
@@ -49,16 +47,6 @@ function ConfirmAddress() {
             title: 'Email',
 
             onClick: (e: string) => setEmail(e),
-        }, {
-            value: invoiceAddress,
-            title: '發票地址',
-
-            onClick: (e: string) => setInvoiceAddress(e),
-        }, {
-            value: deliveryAddress,
-            title: '郵寄地址',
-
-            onClick: (e: string) => setDeliveryAddress(e),
         },
     ];
     useEffect(
@@ -69,8 +57,6 @@ function ConfirmAddress() {
                     email: email,
                     phone: phone,
                     name: name,
-                    deliveryAddress: deliveryAddress,
-                    invoiceAddress: invoiceAddress,
                 }
             )
         }, [edit]

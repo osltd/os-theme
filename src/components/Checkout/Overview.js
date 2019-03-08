@@ -133,7 +133,7 @@ const CheckoutOverview = props => {
                     <Grid item container justify={'center'} spacing={32} md={10}>
 
                         {(isWidthUp('md', props.width)) ?
-                            (<Fragment>
+                            (<>
                                 <Grid item xs={6}>
                                     <Typography
                                         className={classes.title}
@@ -160,8 +160,8 @@ const CheckoutOverview = props => {
                                     <Divider/>
                                     <BillingDetails/>
                                 </Grid>
-                            </Fragment>)
-                            : (<Fragment>
+                            </>)
+                            : (<>
                                 <Grid item xs={11}>
                                     <Collapse
                                         arrow={true}
@@ -191,7 +191,7 @@ const CheckoutOverview = props => {
                                     <BillingDetails/>
 
                                 </Grid>
-                            </Fragment>)
+                            </>)
 
                         }
                     </Grid>

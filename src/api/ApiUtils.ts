@@ -3,6 +3,11 @@ import history from 'history'
 import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Common";
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
+import {UserProfile} from "../interfaces/server/Auth";
+import {ShoppingCartItem} from "../interfaces/client/ShoppingCart";
+import agent from "../agent";
+import {AuthReducer} from "../context/Auth";
+import {History} from "history";
 
 export const refactorTextLength = (content: string, length: number = 20): string =>
     content.length > length ? content.slice(0, length).concat('...') : content;
@@ -77,7 +82,6 @@ export const numberToPagination = (length: number, cb: Function): Array<Clickabl
         return [{
             label: '1 - 9',
             onClick: () => cb('1 - 9')
-
         }]
     }
     if (length > itemsPerPage) {
@@ -129,21 +133,21 @@ export const getTagsCountsArray = (products: Array<Product> | null, onClick: Fun
     let result: Array<Clickable> = [{
         label: 'all (' + products.length + ') ',
         onClick: () => onClick(null, products.length)
-    }];
+    }]
     tagsName.map(
         (n, i) => result.push({
             label: n + ' (' + tagsCount[i] + ') ',
             value: n,
             onClick: () => onClick(n, tagsCount[i])
         })
-    );
+    )
     return result
 
 };
 
 //todo('need to rebuild")
 
-export const getVariantOptions = (variants: Array<Variant>): Array<VariantOptions> => {
+export function getVariantOptions(variants: Array<Variant>): Array<VariantOptions> {
     let variantOverview: any = [];
     variants.map(option => {
         option.description.split(',').forEach((opt) => {
@@ -152,21 +156,49 @@ export const getVariantOptions = (variants: Array<Variant>): Array<VariantOption
             variantOverview[splitOpt[0]].indexOf(splitOpt[1]) < 0 && variantOverview[splitOpt[0]].push(splitOpt[1])
         })
     });
-    return variantOverview
-};
-
+    return variantOverview as Array<VariantOptions>
+}
 export const isImgOnlySections = (sections: Array<Section>) => (
     sections && sections[0].medias[0] && sections[0].medias[0].ext !== 'mp4'
     && (sections[0].medias[0].ext.indexOf('product') === -1
     ));
 export const handleImgValid = (img: any): string => img ? img.url ? img.url : img : '/notFound/not-found-image.jpg';
 export const stringToTags = (string?: string): Array<Tag> => (string) ? (string.search(',') !== -1) ? _.uniq(_.split(string, ',')).filter(k => k !== '')
-    .map((n: any, i) =>
-        n = {
-            label: n,
-            value: n,
-        }) : [{label: string, value: string,}] : [];
+    .map((n: any, i) => n = {
+        label: n,
+        value: n,
+    }) : [{label: string, value: string,}] : [];
 
 export const formatExpiryDate = (date: string): string => (date && date.length === 4) ? date.slice(0, 2).concat('/', date.slice(2, 4)) : date;
 export const CounterValidation = (num: number): number => (num > 0) ? num : 1;
 
+export const addToCart = (user:UserProfile,product:Product,history:History)=>{
+    let shoppingCart =  [] as Array<ShoppingCartItem>;
+    const isItemsExists: number = shoppingCart.findIndex(
+        (n: ShoppingCartItem) => (n.productId === product.id && n.selectedVariantId === product.variants[0].id));
+
+    if (isItemsExists !== -1) {
+
+        shoppingCart[isItemsExists] = {
+            ...shoppingCart[isItemsExists],
+            productCount: shoppingCart[isItemsExists].productCount + 1,
+        }
+    } else {
+        shoppingCart.push(
+            {
+                productId: product.id,
+                productCount: 1,
+                selectedVariantId: product.variants[0].id
+
+            }
+        )
+    }
+    agent.Auth.assignProperty({shoppingCart: JSON.stringify({data: shoppingCart})})
+    history.push({
+        pathname:'/confirmPage',
+        state:{
+            msg:'物品已成功加入購物籃'
+        }
+    })
+}
+export const needLoginFirst= (history:History)=> history.push('/login?needAuth=true')

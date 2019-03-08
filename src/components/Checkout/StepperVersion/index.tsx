@@ -5,7 +5,6 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ConfirmAddress from './Steps/Step1'
 import ConfirmContactInfo from './Steps/Step2'
 import EnterVisaInfo from './Steps/Step3'
 import Header from "../../Layout/Body/Header";
@@ -31,7 +30,7 @@ function getSteps() {
 function getStepContent(step: number): ReactNode {
     switch (step) {
         case 0:
-            return <ConfirmAddress/>;
+            return <div/>;
         case 1:
             return <ConfirmContactInfo/>;
         case 2:

@@ -37,11 +37,9 @@ interface Order {
 
 type Props = RouteComponentProps & InjectedNotistackProps & Prop
 const Payment: React.FunctionComponent<Props> = props => {
-    const classes = useStyles();
     const {authReducer} = useContext(reducer);
     const user = authReducer.state.user as UserProfile;
     const profile = user.consumers[0];
-    const [edit, setEdit] = useState(false);
     const [visaNumber, setVisaNumber] = useState('');
     const [cvc, setCvc] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -49,7 +47,6 @@ const Payment: React.FunctionComponent<Props> = props => {
     let placeOrder = async () => {
 
         const data = {
-            "address": profile.deliveryAddress,
             "items": JSON.parse(profile.shoppingCart).data.map((n: ShoppingCartItem) => ({
                     id: n.selectedVariantId, qty: n.productCount,
                 })

@@ -1,5 +1,5 @@
 import React from 'react';
-import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
+import {EDIT_PRODUCT_DETAIL} from "../../../../constants/actionType";
 import {connect} from "react-redux";
 import {Grid} from '@material-ui/core'
 import classNames from 'classnames'

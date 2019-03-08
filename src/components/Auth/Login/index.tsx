@@ -63,7 +63,7 @@ const Login: React.FunctionComponent<Props> = (props) => {
                     return null
                 }
                 if (res.data.result) {
-                    agent.Auth.getAccount().then(user => {
+                    agent.Auth.getAccount().then((user) => {
                         Swal(<Grid container alignItems={'center'} direction={'column'}>
                             {false && <span className={'icon-like'}
                                             style={{

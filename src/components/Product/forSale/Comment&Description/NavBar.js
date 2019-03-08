@@ -2,7 +2,7 @@ import React from 'react';
 import {BottomNavigation} from '@material-ui/core';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import classNames from 'classnames'
-import {EDIT_PRODUCT_DETAIL} from "../../../constants/actionType";
+import {EDIT_PRODUCT_DETAIL} from "../../../../constants/actionType";
 import {connect} from "react-redux";
 import {makeStyles} from "@material-ui/styles";
 
