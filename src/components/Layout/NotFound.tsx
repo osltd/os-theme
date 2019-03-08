@@ -12,8 +12,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+interface Props {
+    msg?: string
+}
 
-const NotFound = props => {
+const NotFound: React.FunctionComponent<Props> = props => {
     const classes = useStyles();
     const {msg} = props;
     return (

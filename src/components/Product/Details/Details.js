@@ -1,9 +1,8 @@
-import {Button, Divider, Fab, Grid, Typography} from "@material-ui/core";
+import {Button, Divider, Grid, Typography} from "@material-ui/core";
 import React, {Fragment} from "react";
 import {formatMoney} from "../../../api/ApiUtils";
 import Counter from "../../Widget/Counter";
 import SocialIcon from '../../Widget/SocialIcon'
-import swal from "@sweetalert/with-react";
 
 let NO_VARIANT_ID = 1;
 let Detail = (props) => {
@@ -15,7 +14,7 @@ let Detail = (props) => {
         saveDraftToCart,
         name, promotePrice,
         description, variantKeys, variantOptions, product
-    } = props
+    } = props;
     return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
         <Grid item container spacing={16}>
             <Grid item>

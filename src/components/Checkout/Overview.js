@@ -3,7 +3,7 @@ import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
-import OrderSummary from './Sections/OrderSummary/Overview'
+import OrderSummary from './Sections/OrderSummary'
 import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
@@ -12,7 +12,7 @@ import {redirectUrl} from "../../api/ApiUtils";
 import PromoCode from './PromoCode'
 import {withSnackbar} from 'notistack'
 import _ from 'lodash'
-import * as styleGuide from "../../constants/styleGuide";
+import * as styleGuide from "../../constants/snackBarGuide";
 import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({

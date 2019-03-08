@@ -18,7 +18,8 @@ const useStyle = makeStyles((theme: Theme) => ({
         color: 'white',
         fontWeight: 900,
         textAlign: 'center',
-    }, iAmDiv: {}
+    },
+    iAmDiv: {}
 }));
 
 interface Props {

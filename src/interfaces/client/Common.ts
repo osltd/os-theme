@@ -1,7 +1,3 @@
-import {State} from "../../context/Product/state";
-import {Dispatch} from "react";
-import {Action} from "../../context/Product/dispatch";
-
 export interface Clickable {
     label: string,
     onClick: Function,
@@ -9,7 +5,8 @@ export interface Clickable {
 }
 
 export interface VariantOptions {
-    [key: string]: Array<string>,
+    [key: string]: Array<string>
+
 }
 
 export interface MaterialUIClasses {

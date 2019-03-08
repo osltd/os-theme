@@ -1,11 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Theme} from "@material-ui/core/styles";
+import {Link, RouteComponentProps, withRouter} from "react-router-dom";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
+import {formatMoney, handleImgValid,} from "../../../api/ApiUtils";
 import {makeStyles, useTheme} from '@material-ui/styles'
 import {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import Img from '../Img'
+
 
 const useStyle = makeStyles((theme: Theme) => ({
     name: {
@@ -71,35 +73,34 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
     const isWidthUp = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.up(breakpoint));
     const isWidthDown = (breakpoint: Breakpoint): boolean => useMediaQuery(theme.breakpoints.down(breakpoint));
     const classes = useStyle();
-    const {src, name, id, history, category, regPrice, promotePrice} = props;
+    const {src, name, id, category, regPrice, promotePrice} = props;
     let getImg = () => {
-        return <div
-            style={{
-                backgroundImage: 'url(' + handleImgValid(src) + ')',
-                backgroundColor: 'transparent',
-            }}
-            onClick={() => id && redirectUrl('/products/' + id, history)}
-            className={classes.divImg}/>;
+        return <Link to={`/products/${id}`}>
+            <Img
+                src={handleImgValid(src)}
+                className={classes.img}
+            /></Link>
         //responsive forbidden
-        if (isWidthDown('xs')) {
-            return <img
-                src={handleImgValid(src)}
-                onClick={() => id && redirectUrl('/products/' + id, history)}
-                className={classes.img}
-            />
-        }
-        return isWidthUp('lg') ? <div
-                style={{
-                    backgroundImage: 'url(' + handleImgValid(src) + ')',
-
-                }}
-                onClick={() => id && redirectUrl('/products/' + id, history)}
-                className={classes.divImg}/> :
-            <img
-                src={handleImgValid(src)}
-                onClick={() => id && redirectUrl('/products/' + id, history)}
-                className={classes.img}
-            />
+        // if (isWidthDown('xs')) {
+        //     return <Img
+        //         src={handleImgValid(src)}
+        //         onClick={() => id && redirectUrl('/products/' + id, history)}
+        //         className={classes.img}
+        //     />
+        // }
+        // return isWidthUp('lg') ? <div
+        //         style={{
+        //             backgroundImage: 'url(' + handleImgValid(src) + ')',
+        //
+        //         }}
+        //
+        //         onClick={() => id && redirectUrl('/products/' + id, history)}
+        //         className={classes.divImg}/> :
+        //     <Img
+        //         src={handleImgValid(src)}
+        //         onClick={() => id && redirectUrl('/products/' + id, history)}
+        //         className={classes.img}
+        //     />
     };
 
 
@@ -109,15 +110,15 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
             {
                 category && <Typography variant={'h5'}
                                         className={classes.category}
-
                                         color={'primary'}>{category && category.join(',')}</Typography>
 
             }
-            <Typography variant={'h6'}
-                        onClick={() => window.location.href = ('/products/' + id)}
-                        className={classes.name}
 
-            >{name}</Typography>
+            <Typography variant={'h6'}
+                        className={classes.name}
+                        onClick={() => props.history.push(`/products/${id}`)}
+            >
+                {name}</Typography>
             {
                 (promotePrice) ?
                     <Grid item container direction={'row'}>
@@ -136,4 +137,4 @@ const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
 
 };
 
-export default withRouter(ProductOverviewBox)
+export default React.memo(withRouter(ProductOverviewBox))

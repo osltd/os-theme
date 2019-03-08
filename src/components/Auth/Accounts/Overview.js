@@ -1,8 +1,7 @@
 import React from 'react';
 import withWidth from "@material-ui/core/withWidth/index";
 import {connect} from "react-redux";
-import {Grid, Typography} from '@material-ui/core'
-import CustomButton from '../../Widget/Button/BlackButton'
+import {Button, Grid, Typography} from '@material-ui/core'
 import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
@@ -99,7 +98,7 @@ const MyAccount = (props) => {
                 </Typography>
             </Grid>
             <Grid item xs={8}>
-                <CustomButton
+                <Button
                     onClick={logout}
                     value={'Logout'}
                 />
@@ -118,7 +117,7 @@ const MyAccount = (props) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <CustomButton
+                    <Button
                         onClick={() => {
                             props.dialog && props.dialog.handleClose();
                             redirectUrl('/login', history)
@@ -129,7 +128,7 @@ const MyAccount = (props) => {
                 <Grid item xs={1}/>
                 <Grid item xs={4}>
 
-                    <CustomButton
+                    <Button
                         onClick={() => {
                             props.dialog && props.dialog.handleClose();
                             redirectUrl('/register', history)

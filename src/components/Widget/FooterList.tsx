@@ -50,8 +50,12 @@ const FooterList: React.FunctionComponent<Props> = props => {
                             /> :
                             <ListItem className={classes.item} button key={i}>
                                 <Typography variant={'body1'} color={'inherit'}
-                                            onClick={() =>
+                                            onClick={() => {
+
                                                 redirectUrl(`/${n.url}`, history)
+
+
+                                            }
                                             }>
                                     > {n.label}</Typography>
                             </ListItem>

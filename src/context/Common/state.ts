@@ -1,11 +1,12 @@
-import {Product} from "../../interfaces/server/Product";
-import {Feed} from "../../interfaces/server/Feed";
+import {SupportedLanguage} from "../../constants/locale";
 
 
 export interface State {
-    products?: Array<Product>
+    locale: SupportedLanguage
 }
 
-export const state: State = {};
+export const state: State = {
+    locale: "zh"
+};
 export default state;
 

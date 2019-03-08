@@ -4,6 +4,7 @@ import {Grid, Typography} from '@material-ui/core'
 import NextArrow from './NextArrow'
 import PrevArrow from './PrevArrow'
 import {makeStyles} from "@material-ui/styles";
+import {redirectUrl} from "../../../api/ApiUtils";
 
 const useStyles = makeStyles(theme => ({
     root: {

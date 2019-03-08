@@ -3,18 +3,17 @@ import Masonry from 'react-masonry-component';
 
 const masonryOptions = {
     transitionDuration: '1s',
-    horizontalOrder:true,
-    gutter:20,
-
+    horizontalOrder: true,
+    gutter: 20,
 
 
 };
 
-const imagesLoadedOptions = { background: '.my-bg-image-el' }
+const imagesLoadedOptions = {background: '.my-bg-image-el'};
 
 class Gallery extends React.Component {
     render() {
-        const childElements = this.props.elements
+        const childElements = this.props.elements;
 
         return (
             <Masonry

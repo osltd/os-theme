@@ -37,11 +37,12 @@ interface Props extends RouteComponentProps {
 
 const SearchPage: React.FunctionComponent<Props> = props => {
     const {productReducer, feedReducer} = useContext(reducer);
-    const [keyword, setKeyword] = useState(props.match.params ? props.match.params : '')
+    const [keyword, setKeyword] = useState(props.match.params ? props.match.params : '');
 
     function searchData<T>(data: Array<T>): Array<T> {
         return data.filter(n => (props.keyword) ? (JSON.stringify(n).toLowerCase().indexOf(props.keyword.toLowerCase()) !== -1) : false);
     }
+
     const classes = useStyles();
 
     if (!props.products && !props.feeds) return <LoadingPage/>;
@@ -58,6 +59,6 @@ const SearchPage: React.FunctionComponent<Props> = props => {
 
         </Grid>
     );
-}
+};
 
 export default (SearchPage)

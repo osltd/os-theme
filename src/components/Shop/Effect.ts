@@ -40,5 +40,5 @@ export const initFilter = (query: string,
 ) => {
     let isTags = (query.slice(_.lastIndexOf(query, '?'), _.lastIndexOf(query, '=') + 1).indexOf('tags') !== -1);
     let queryTag = query.slice(_.lastIndexOf(query, '=') + 1, query.length);
-    return  (isTags )? queryTag:''
-}
+    return (isTags) ? queryTag : ''
+};

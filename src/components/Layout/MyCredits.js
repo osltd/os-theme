@@ -1,5 +1,4 @@
 import React, {useRef} from 'react';
-import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Button, Grid, Typography} from '@material-ui/core'
@@ -129,4 +128,4 @@ const MyCredits = props => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(MyCredits)))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyCredits))

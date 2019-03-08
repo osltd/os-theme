@@ -35,7 +35,6 @@ const SimpleCollapse: React.FunctionComponent<Props> = props => {
     const [checked, setChecked] = useState(false);
     const classes = useStyles();
     const {title, collapse, arrow} = props;
-
     return (
         <Grid container className={classes.root}>
             <Grid item container alignItems={'center'} className={classes.title} onClick={() => setChecked(!checked)}>

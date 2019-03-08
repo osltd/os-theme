@@ -3,7 +3,7 @@ import {Grid} from '@material-ui/core';
 import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import CommentDescription from './Comment&Description/Overview'
-import Detail from './Detail'
+import Detail from '.'
 import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 import {makeStyles} from "@material-ui/styles";
@@ -36,12 +36,12 @@ const mapDispatchToProps = dispatch => ({}
 );
 
 const SingleProduct = props => {
-    const {feed} = useContext(reducer)
+    const {feed} = useContext(reducer);
     let hasValidProduct = () => !!props.products.find(n => n.id.toString() === props.match.params.id);
     const classes = useStyles();
     if (!props.products) return <LoadingPage/>;
     const product = props.products.find(n => n.id.toString() === props.match.params.id);
-    if (!product) return <NotFound msg={'sorry this product is no longer exist'}/>
+    if (!product) return <NotFound msg={'sorry this product is no longer exist'}/>;
     //todo(cant pass if not reloaded)
     const variantOptions = getVariantOptions(product.variants);
 

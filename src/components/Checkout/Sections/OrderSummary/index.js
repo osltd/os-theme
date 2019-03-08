@@ -5,9 +5,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatExpiryDate, formatMoney, handleImgValid, redirectUrl, refactorTextLength,} from "../../../../api/ApiUtils";
+import {
+    formatExpiryDate,
+    formatMoney,
+    handleImgValid,
+    redirectUrl,
+    refactorTextLength,
+} from "../../../../api/ApiUtils";
 import {connect} from "react-redux";
-import * as styleGuide from '../../../../constants/styleGuide'
+import * as styleGuide from '../../../../constants/snackBarGuide'
 import {withSnackbar} from 'notistack';
 import Terms from '../../../Widget/Terms'
 import agent from '../../../../agent'
@@ -63,13 +69,13 @@ const mapDispatchToProps = dispatch => ({
     }
 );
 
-const  OrderSummary = props => {
-    const [checked,setChecked] = useState(false)
+const OrderSummary = props => {
+    const [checked, setChecked] = useState(false);
 
- let   getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId) ?
+    let getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId) ?
         product.product.variants.find(variant => variant.id === product.variantId) : product.product).price * product.number;
 
-  let  placeOrder = async () => {
+    let placeOrder = async () => {
 
         const {billingDetail} = props;
         const data = {
@@ -121,7 +127,6 @@ const  OrderSummary = props => {
                 let result = res.data.data.orders;
                 if (result && result.length > 0) {
                     //if (!(selectShippingMethod)) {selectShippingMethod = props.billingDetail.shippingOptions[0]}
-                    console.log('gooooood');
                     swal({
 
                         content: (<Grid container direction={'column'}>
@@ -251,84 +256,84 @@ const  OrderSummary = props => {
 
     };
 
-  let  getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
+    let getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
 
-        const classes = useStyles();
-        const {shoppingCart, billingDetail} = props;
-        const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
-            n.product.variants.find(variant => variant.id === n.variantId) : n.product;
-        return (
-            <Paper className={classes.root}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.block}>Product</TableCell>
-                            <TableCell className={classes.block} numeric>Price</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+    const classes = useStyles();
+    const {shoppingCart, billingDetail} = props;
+    const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
+        n.product.variants.find(variant => variant.id === n.variantId) : n.product;
+    return (
+        <Paper className={classes.root}>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classes.block}>Product</TableCell>
+                        <TableCell className={classes.block} numeric>Price</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
 
-                        {shoppingCart.map((n, i) =>
-                            <TableRow key={i}>
-                                <TableCell className={classes.block}>
-                                    {refactorTextLength(n.product.name, 20)} X {n.number}( {selectedVariant(n).description})
-                                </TableCell>
-                                <TableCell className={classes.block} numeric>
-                                    {'$ ' + formatMoney(selectedVariant(n).price * n.number)}
-                                </TableCell>
-                            </TableRow>)
-
-                        }
-
-                        {billingDetail.coupons && <TableRow>
+                    {shoppingCart.map((n, i) =>
+                        <TableRow key={i}>
                             <TableCell className={classes.block}>
-                                {billingDetail.coupons.title}
-
+                                {refactorTextLength(n.product.name, 20)} X {n.number}( {selectedVariant(n).description})
                             </TableCell>
                             <TableCell className={classes.block} numeric>
-                                {(billingDetail.coupons.type === 'FIXED') ? '-$ ' + formatMoney(billingDetail.coupons.discount) : `-${billingDetail.coupons.discount}%`}
+                                {'$ ' + formatMoney(selectedVariant(n).price * n.number)}
                             </TableCell>
-                        </TableRow>
+                        </TableRow>)
+
+                    }
+
+                    {billingDetail.coupons && <TableRow>
+                        <TableCell className={classes.block}>
+                            {billingDetail.coupons.title}
+
+                        </TableCell>
+                        <TableCell className={classes.block} numeric>
+                            {(billingDetail.coupons.type === 'FIXED') ? '-$ ' + formatMoney(billingDetail.coupons.discount) : `-${billingDetail.coupons.discount}%`}
+                        </TableCell>
+                    </TableRow>
 
 
-                        }
-                        <TableRow>
-                            <TableCell className={classes.block}>
-                                Total amount
-                            </TableCell>
-                            <TableCell className={classes.block} numeric>
-                                {'$ ' + formatMoney(
-                                    getDiscountedPrice(props.shoppingCart.reduce((acc, cur) => acc + getRowPrice(cur),
-                                        0), billingDetail.coupons
-                                    )
-                                )}
-                            </TableCell>
-                        </TableRow>
+                    }
+                    <TableRow>
+                        <TableCell className={classes.block}>
+                            Total amount
+                        </TableCell>
+                        <TableCell className={classes.block} numeric>
+                            {'$ ' + formatMoney(
+                                getDiscountedPrice(props.shoppingCart.reduce((acc, cur) => acc + getRowPrice(cur),
+                                    0), billingDetail.coupons
+                                )
+                            )}
+                        </TableCell>
+                    </TableRow>
 
 
-                        <TableRow>
-                            <TableCell colSpan={2}>
-                                <Terms
-                                    checked={checked}
-                                    onChange={() => setChecked(!checked) }
-                                />
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell colSpan={2}>
-                                <Button
-                                    disabled={!checked}
-                                    className={classes.button}
-                                    variant={'outlined'} color={'primary'}
-                                    onClick={placeOrder}
-                                >Place Order</Button>
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </Paper>
-        );
-}
+                    <TableRow>
+                        <TableCell colSpan={2}>
+                            <Terms
+                                checked={checked}
+                                onChange={() => setChecked(!checked)}
+                            />
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell colSpan={2}>
+                            <Button
+                                disabled={!checked}
+                                className={classes.button}
+                                variant={'outlined'} color={'primary'}
+                                onClick={placeOrder}
+                            >Place Order</Button>
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </Paper>
+    );
+};
 
 
 export default (withSnackbar(connect(mapStateToProps, mapDispatchToProps)(OrderSummary)))

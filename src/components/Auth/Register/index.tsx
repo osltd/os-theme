@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import {Grid, Typography} from '@material-ui/core';
-import withWidth from "@material-ui/core/withWidth/index";
-import Input from '../../Widget/Input/original'
-import Button from '../../Widget/Button/BlackButton'
-import {withSnackbar} from 'notistack';
-import * as styleGuide from "../../../constants/styleGuide";
+import {Button, Grid, Typography} from '@material-ui/core';
+import {InjectedNotistackProps, withSnackbar} from 'notistack';
+import * as styleGuide from "../../../constants/snackBarGuide";
 import agent from '../../../agent'
-import swal from '@sweetalert/with-react'
+import swal from '../../Widget/Swal'
 import {redirectUrl} from "../../../api/ApiUtils";
 import {makeStyles} from "@material-ui/styles";
+import {RouteComponentProps} from "react-router";
+import InputBar from '../../Widget/InputBarWithTitle'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,9 +27,15 @@ const useStyles = makeStyles(theme => ({
         paddingTop: '20px !important',
     }
 }));
-const Login = props => {
+type Props = InjectedNotistackProps & RouteComponentProps
+const Register: React.FunctionComponent<Props> = props => {
     let register = () => {
         const pwdDidNotMatch = (pwd !== confirmPwd);
+        if (data.filter(n => n.value === '').length > 0) {
+
+            props.enqueueSnackbar('你需要完成填入所有資料以便郵寄', styleGuide.errorSnackbar);
+            return null;
+        }
         if (pwdDidNotMatch) {
             props.enqueueSnackbar('Password does not match', styleGuide.errorSnackbar);
             setPwd('');
@@ -40,8 +45,8 @@ const Login = props => {
 
         agent.Auth.register(
             {
-                first_name: firstName,
-                last_name: lastName,
+                first_name: name,
+                last_name: name,
                 email: email,
                 passwd: pwd,
                 confpasswd: confirmPwd
@@ -52,7 +57,8 @@ const Login = props => {
                 if (
                     !res.data.result
                 ) {
-                    res.data.messages.map(n => props.enqueueSnackbar(n, styleGuide.errorSnackbar));
+                    res.data.messages.map((n: string) =>
+                        props.enqueueSnackbar(n, styleGuide.errorSnackbar));
                     return null
                 }
                 swal({
@@ -95,18 +101,48 @@ const Login = props => {
             }
         ).catch(
             err => (err.response) ? err.response.data.messages.map(
-                n => props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                (n: string) => props.enqueueSnackbar(n, styleGuide.errorSnackbar)
             ) : null
         )
     };
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState('');
+    const [company, setCompany] = useState('');
+    const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
     const [confirmPwd, setConfirmPwd] = useState('');
-    const classes = useStyles();
+    const data = [
+        {
+            value: name,
+            onClick: (e: string) => setName(e),
+            title: `姓名`,
 
+        },
+        {
+
+            value: company,
+            onClick: (e: string) => setCompany(e),
+            title: `公司`
+        }, {
+            value: phone,
+            onClick: (e: string) => setPhone(e),
+            title: `電話`
+        }, {
+            value: email,
+            onClick: (e: string) => setEmail(e),
+            title: `Email`
+        }, {
+            value: pwd,
+            onClick: (e: string) => setPwd(e),
+            title: `密碼`
+        }, {
+            value: confirmPwd,
+            onClick: (e: string) => setConfirmPwd(e),
+            title: `確認密碼`
+        },
+    ];
+    const classes = useStyles();
     return (
 
         <Grid container className={classes.root} justify={'center'} alignItems={'center'}>
@@ -118,48 +154,26 @@ const Login = props => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <Input
-                        placeholder={'First Name'}
-                        value={firstName}
-                        onChange={e => setFirstName(e)}
-                    />
-                </Grid>
-                <Grid item className={classes.paddingTop}>
-                    <Input
-                        placeholder={'Last Name'}
-                        value={lastName}
-                        onChange={e => setLastName(e)}
-                    />
-                </Grid>
-                <Grid item className={classes.paddingTop}>
-                    <Input
+                    {
+                        data.map((n, i) => <InputBar
+                            placeholder={n.value}
+                            key={i} value={n.value} onChange={n.onClick} title={n.title}/>)
+                    }
 
-                        placeholder={'Email'}
-                        value={email}
-                        onChange={e => setEmail(e)}
-                    />
                 </Grid>
-                <Grid item className={classes.paddingTop}>
-                    <Input
-                        type={'Password'}
-                        placeholder={'Password'}
-                        value={pwd}
-                        onChange={e => setPwd(e)}
-                    />
+                <Grid item>
+                    <Typography variant={"subtitle1"}>
+                        A/C No.
+                    </Typography>
                 </Grid>
-                <Grid item className={classes.paddingTop}>
-                    <Input
-                        type={'Password'}
-                        placeholder={'Confirm Password'}
-                        value={confirmPwd}
-                        onChange={e => setConfirmPwd(e)}
-                    />
-                </Grid>
-                <Grid item className={classes.paddingTop}>
+                <Grid item>
                     <Button
                         onClick={register}
-                        value={'Create'}
-                    />
+                        fullWidth={true}
+                        size={"large"}
+                        variant={"outlined"} color={"secondary"}>
+                        建立賬戶
+                    </Button>
                 </Grid>
 
             </Grid>
@@ -167,4 +181,4 @@ const Login = props => {
     );
 };
 
-export default withSnackbar(withWidth()(Login))
+export default withSnackbar(Register)

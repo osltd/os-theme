@@ -75,7 +75,6 @@ class ShoppingCartTable extends React.Component {
     getShippingRate = async () => {
         this.props.editBillingDetail(
             'shippingOptions', await agent.Checkout.getShippingRate({
-
                     items: this.props.shoppingCart.map(n => ({
                             id: n.variantId, qty: n.number,
                         })
@@ -136,7 +135,6 @@ class ShoppingCartTable extends React.Component {
 
     };
 
-
     componentDidUpdate(prevProps, prevState, snapShot) {
 
         if (this.props.billingDetail.shippingOptions === undefined && this.props.billingDetail.address) {
@@ -157,7 +155,6 @@ class ShoppingCartTable extends React.Component {
                         value={billingDetail.firstName}
                     />
                 </Grid>
-
                 <Grid item xs={6}>
                     <InputBar
                         title={'Last Name'}

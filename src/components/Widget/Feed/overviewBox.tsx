@@ -11,24 +11,24 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 
 const useStyle = makeStyles((theme: Theme) => ({
 
-    root: {
-        paddingBottom: '20px',
-        width:'270px',
-        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-        cursor: 'pointer'
-    },
+        root: {
+            paddingBottom: '20px',
+            width: '270px',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+            cursor: 'pointer'
+        },
 
 
-    title: {
-        cursor: 'pointer',
-        '&:hover': {
-            color: theme.palette.secondary.light,
+        title: {
+            cursor: 'pointer',
+            '&:hover': {
+                color: theme.palette.secondary.light,
+            }
+        },
+        content: {},
+        button: {
+            margin: '20px 0'
         }
-    },
-    content: {},
-    button: {
-        margin: '20px 0'
-    }
 
     })
 );
@@ -75,7 +75,8 @@ const FeedOverviewBox: React.FunctionComponent<Props> = props => {
                         variant={'h5'} color={'primary'}>{title}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
+                    <Typography
+                        variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                 </Grid>
                 <Grid item>
                     <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>

@@ -1,6 +1,6 @@
 import React, {Dispatch, useReducer} from 'react';
 import reducer, {Action} from './dispatch'
-import initialState,{State} from './state'
+import initialState, {State} from './state'
 
 
 export interface FeedReducer {

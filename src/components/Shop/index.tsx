@@ -15,49 +15,49 @@ import {RouteComponentProps} from "react-router"
 import {useThemeWidth} from "../../hooks/useThemeWidth"
 import {reducer} from "../../context";
 
-const useStyles = makeStyles((theme: Theme) =>  ({
-        productCategory: {
-            backgroundColor: '#F7F7F7',
+const useStyles = makeStyles((theme: Theme) => ({
+    productCategory: {
+        backgroundColor: '#F7F7F7',
 
-        },
-        toolBar: {
-            padding: '10px',
-            backgroundColor: theme.palette.background.paper,
-        },
-        icon: {
-            padding: '10px',
-            cursor: 'pointer',
-            alignItems: 'center',
-            border: '1px solid black',
+    },
+    toolBar: {
+        padding: '10px',
+        backgroundColor: theme.palette.background.paper,
+    },
+    icon: {
+        padding: '10px',
+        cursor: 'pointer',
+        alignItems: 'center',
+        border: '1px solid black',
 
-        }, listMode: {
-            padding: '20px',
-        },
-        array: {
-            paddingLeft: '5px',
-        }
-    }))
+    }, listMode: {
+        padding: '20px',
+    },
+    array: {
+        paddingLeft: '5px',
+    }
+}));
 
 type Props = RouteComponentProps
 
 const ShopOverview: React.FunctionComponent<Props> = props => {
-    const {history} = props
-    const classes = useStyles()
-    const themeWidth = useThemeWidth()
-    const [viewMode, setViewMode] = useState(viewModeType.FORM)
-    const [tag, setTag] = useState(initFilter(history.location.search))
+    const {history} = props;
+    const classes = useStyles();
+    const themeWidth = useThemeWidth();
+    const [viewMode, setViewMode] = useState(viewModeType.FORM);
+    const [tag, setTag] = useState(initFilter(history.location.search));
     useEffect(
         () => setTag(initFilter(history.location.search)),
         [props.location.search]
-    )
-    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC)
-    const [page, setPage] = useState('')
-    const {productReducer} = useContext(reducer)
-    const {products} = productReducer.state
+    );
+    const [sortBy, setSortBy] = useState(filterOptions.NAME_ASC);
+    const [page, setPage] = useState('');
+    const {productReducer} = useContext(reducer);
+    const {products} = productReducer.state;
 
-    if (products === undefined) return <LoadingPage/>
-    let sortedProduct = sortData(products, tag, sortBy)
-    const hasProductsToShow = products.length > 0
+    if (products === undefined) return <LoadingPage/>;
+    let sortedProduct = sortData(products, tag, sortBy);
+    const hasProductsToShow = products.length > 0;
 
     return (
         <Grid container justify={'center'}>
@@ -77,14 +77,14 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         PRODUCT CATEGORIES
                                     </Typography>
                                     <TagList data={getTagsCountsArray(products, (n: string) => {
-                                        console.log(tag)
+                                        console.log(tag);
                                         console.log(n
-                                        )
+                                        );
                                         if (n !== tag) {
                                             setPage('')
 
                                         }
-                                        console.log(`new page is ${page}`)
+                                        console.log(`new page is ${page}`);
                                         setTag(n)
 
                                     })}
@@ -131,7 +131,7 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
                                         <DropDown options={arrayToFilter(
                                             [filterOptions.NAME_ASC, filterOptions.NAME_DES,
                                                 filterOptions.PRICE_ASC, filterOptions.PRICE_DES], (n: filterOptions) => {
-                                                setSortBy(n)
+                                                setSortBy(n);
                                                 setPage('')
                                             })}
                                                   selectedValue={sortBy}
@@ -154,6 +154,6 @@ const ShopOverview: React.FunctionComponent<Props> = props => {
             }
         </Grid>
     )
-}
+};
 
 export default React.memo(ShopOverview)

@@ -1,14 +1,14 @@
 import React, {Dispatch, useReducer} from 'react';
 import reducer, {Action} from './dispatch'
-import initialState,{State} from './state'
+import initialState, {State} from './state'
 
 
-interface ProductReducer {
+export interface AuthReducer {
     state: State
     dispatch: Dispatch<Action>
 }
 
-export function useProductReducer(): ProductReducer {
+export function useAuthReducer(): AuthReducer {
     const [state, dispatch] = useReducer(reducer, initialState);
     return {state, dispatch}
 }

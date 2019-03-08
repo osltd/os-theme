@@ -1,13 +1,12 @@
 import React, {useContext, useEffect} from 'react';
-import {BrowserRouter, Route, RouteComponentProps, Switch} from 'react-router-dom';
-import ScrollToTop from './Layout/ScrollToTop'
-import mainPage from './MainPage/Overview'
-import ShoppingCart from './Cart/Overview'
+import {Route, RouteComponentProps, Switch} from 'react-router-dom';
+import mainPage from './MainPage'
+import ShoppingCart from './Cart'
 import Header from './Layout/Header'
-import Shop from './Shop/Overview'
+import Shop from './Shop'
 import Footer from './Layout/Footer'
 import Feed from './Feed/Overview'
-import ProductOverview from './Product/Overview'
+import ProductOverview from './Product'
 import FeedDetail from './Feed/Detail'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -24,16 +23,18 @@ import '../constants/icon/style.css'
 import agent from '../agent'
 import Checkout from './Checkout/Overview'
 import LoadingPage from './Layout/LoadingPage'
-import SearchPage from './Search/Overview'
-import _ from 'lodash'
+import SearchPage from './Search'
 import NotFound from './Layout/NotFound'
-import MyCredits from './Layout/MyCredits'
-import Register from './Auth/Register/Overview'
-import Login from './Auth/Login/Overview'
+import Register from './Auth/Register'
+import Login from './Auth/Login'
 import {Product} from "../interfaces/server/Product";
 import {useThemeWidth} from "../hooks/useThemeWidth";
 import {reducer} from "../context";
 import actionType from "../context/actionType";
+import {language} from "../I18N";
+import {getAllProducts} from "./Effect";
+import {isMember} from "../hooks/isMember";
+import MyCredits from "./Layout/MyCredits";
 
 const mapStateToProps = (state: any) => ({
     products: state.product.products,
@@ -86,7 +87,6 @@ const mapDispatchToProps = (dispatch: any) => ({
             agent.Products.initBusiness().then(res => {
 
                     if (res.data.data.shops) {
-                        console.log(res.data.data);
                         dispatch(
                             {
                                 type: CATEGORY_INIT_CATEGORY,
@@ -103,9 +103,7 @@ const mapDispatchToProps = (dispatch: any) => ({
                     }
                 }
             ).catch(err => {
-
                     document.title = 'One Shop';
-
                     dispatch(
                         {
                             type: CATEGORY_INIT_CATEGORY,
@@ -138,93 +136,109 @@ interface Props extends RouteComponentProps {
 }
 
 const App: React.FunctionComponent<Props> = props => {
-    const {productReducer,feedReducer} = useContext(reducer)
-    const themeWidth = useThemeWidth()
-    let getAllProducts = async (page: number = 1, products: Array<Product> = []): Promise<Array<Product>> => {
-        let data: Array<Product> = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => []);
-        if (data.length > 0) return getAllProducts(page + 1, _.concat(products, data));
-        else {
-            productReducer.dispatch(
-                {
-                    type: actionType.product.PRODUCT_INIT_PRODUCTS,
-                    payload: {
-                        products: products
-                    }
-                }
-            );
-            return products
-        }
-
-
-    };
+    const {productReducer, feedReducer, authReducer, commonReducer} = useContext(reducer);
+    const themeWidth = useThemeWidth();
+    const member = isMember();
     let getShoppingCart = (): string => {
 
         let shoppingCart: string | null = localStorage.getItem('shoppingCart');
-        return JSON.parse(shoppingCart !== null ? shoppingCart : '')
+        return JSON.parse((shoppingCart) ? shoppingCart : '{}')
     };
     let initApp = async () => await props.initApp(getShoppingCart());
 
+    useEffect(() => window.scrollTo(0, 0), [props.location]);
 
-    useEffect(
-        () => {
-            initApp().then(
-                async () =>{
-                    props.finishLoadingProducts(await getAllProducts())
+    useEffect(() => {
 
-                    agent.Feeds.initFeeds().then(res =>
-                        feedReducer.dispatch(
-                            {
-                                type: actionType.feed.FEED_INIT_FEEDS,
-                                payload: res.data.data.posts,
-                            }
-                        )
-                    ).catch(err => feedReducer.dispatch(
+        initApp().then(
+            async () => {
+                commonReducer.dispatch(
+                    {
+                        type: actionType.common.COMMON_INIT_I18N,
+                        payload: {locale: language()}
+                    }
+                );
+                await getAllProducts(productReducer);
+                agent.Feeds.initFeeds().then(res =>
+                    feedReducer.dispatch(
                         {
                             type: actionType.feed.FEED_INIT_FEEDS,
-                            payload:{
-                                feeds:[]
-                            },
+                            payload: res.data.data.posts,
                         }
-                    ));
+                    )
+                ).catch(err => feedReducer.dispatch(
+                    {
+                        type: actionType.feed.FEED_INIT_FEEDS,
+                        payload: {
+                            feeds: []
+                        },
+                    }
+                ));
 
 
+            }
+        )
+
+    }, []);
+    useEffect(
+        () => {
+            agent.Auth.getOrder();
+            agent.Auth.getAccount().then((user: any) => {
+                    authReducer.dispatch(
+                        {
+                            type: actionType.auth.AUTH_INIT_USER,
+                            payload: (user.data && user.data.data) ? {
+                                user: user.data.data
+                            } : {},
+
+                        }
+                    );
+                    authReducer.dispatch(
+                        {
+                            type: actionType.auth.AUTH_EDIT_LOADING,
+                            payload: {
+                                loading: false
+                            }
+                        }
+                    )
                 }
+            ).catch((err: any) => authReducer.dispatch(
+                {
+                    type: actionType.auth.AUTH_EDIT_LOADING,
+                    payload: {
+                        loading: false
+                    }
+                }
+            ))
 
 
-
-            )
-
-        }, []);
-
-
+        }, []
+    );
     return (
-        <BrowserRouter>
-            <ScrollToTop>
+        <>
+            <Header/>
+            <MyCredits/>
 
-                <Header/>
-                <MyCredits/>
+            <div style={themeWidth.isWidthUp.md ? {paddingTop: '76px'} : {}}>
+                <Switch>
+                    <Route exact path={'/'} component={mainPage}/>
+                    <Route exact path={'/404'} component={NotFound}/>
+                    <Route exact path={'/login'} component={Login}/>
+                    <Route exact path={'/register'} component={Register}/>
+                    <Route exact path={'/products'} component={Shop}/>
+                    <Route exact path={'/feeds'} component={Feed}/>
+                    <Route exact path={'/feeds/:id'} component={FeedDetail}/>
+                    <Route exact path={'/products/:id'} component={ProductOverview}/>
+                    <Route exact path={'/checkout'} component={Checkout}/>
+                    <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                    <Route exact path={'/loadingPage'} component={LoadingPage}/>
+                    <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                    <Route component={NotFound}/>
 
-                <div style={themeWidth.isWidthUp.md ? {paddingTop: '76px'} : {}}>
-                    <Switch>
-                        <Route exact path={'/'} component={mainPage}/>
-                        <Route exact path={'/404'} component={NotFound}/>
-                        <Route exact path={'/login'} component={Login}/>
-                        <Route exact path={'/register'} component={Register}/>
-                        <Route exact path={'/products'} component={Shop}/>
-                        <Route exact path={'/feeds'} component={Feed}/>
-                        <Route exact path={'/feeds/:id'} component={FeedDetail}/>
-                        <Route exact path={'/products/:id'} component={ProductOverview}/>
-                        <Route exact path={'/checkout'} component={Checkout}/>
-                        <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
-                        <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                        <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                        <Route component={NotFound}/>
-
-                    </Switch>
-                </div>
-                <Footer/>
-            </ScrollToTop>
-        </BrowserRouter>
+                </Switch>
+            </div>
+            <Footer/>
+        </>
 
     )
 

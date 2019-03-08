@@ -33,11 +33,11 @@ export const useThemeWidth = (): result => {
     const isWidthUpSm = isWidthUp(breakpoints.sm);
     const isWidthUpXs = isWidthUp(breakpoints.xs);
 
-    const isWidthDownXl= isWidthDown(breakpoints.xl)
-    const isWidthDownLg= isWidthDown(breakpoints.lg)
-    const isWidthDownMd= isWidthDown(breakpoints.md)
-    const isWidthDownSm= isWidthDown(breakpoints.sm)
-    const isWidthDownXs= isWidthDown(breakpoints.xs)
+    const isWidthDownXl = isWidthDown(breakpoints.xl);
+    const isWidthDownLg = isWidthDown(breakpoints.lg);
+    const isWidthDownMd = isWidthDown(breakpoints.md);
+    const isWidthDownSm = isWidthDown(breakpoints.sm);
+    const isWidthDownXs = isWidthDown(breakpoints.xs);
 
     return {
         isWidthUp: {

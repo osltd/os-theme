@@ -169,7 +169,7 @@ const SingleProductDetail = props => {
         },
         []
     );
-    const classes = useStyles()
+    const classes = useStyles();
 
     const {
         variantOptions, product, variantKeys

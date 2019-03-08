@@ -11,7 +11,7 @@ import InputBar from '../Widget/InputBar'
 import TagsSearchBar from '../Widget/Input/tag'
 import {withRouter} from "react-router-dom";
 import {stringToTags} from '../../api/ApiUtils'
-import * as styleGuide from "../../constants/styleGuide";
+import * as styleGuide from "../../constants/snackBarGuide";
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
 import _ from 'lodash'
 import {makeStyles} from "@material-ui/styles";

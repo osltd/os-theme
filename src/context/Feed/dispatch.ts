@@ -1,6 +1,5 @@
 import actionType from "./actionType";
 import {State} from "./state";
-import {Product} from "../../interfaces/server/Product";
 import {Feed} from "../../interfaces/server/Feed";
 
 export interface Action {
