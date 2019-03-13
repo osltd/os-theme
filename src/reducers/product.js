@@ -28,10 +28,14 @@ export default (state = defaultState, action) => {
 
     switch (action.type) {
         case INIT_PRODUCTS:
+        {
+
+            console.log(action.payload)
             return {
                 ...state,
                 products: action.payload?action.payload:[],
             }
+        }
 
         case EDIT_PRODUCT_VIEW_MODE:
 

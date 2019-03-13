@@ -118,9 +118,9 @@ const Login = (props)=> {
     return (
 
         <Grid container className={classes.root} direction={'column'} alignItems={'center'}>
-            <Grid item container spacing={16} md={8} xs={12} lg={6} direction={'column'}
+            <Grid item container spacing={16} md={8} xs={12} lg={6}
                   className={classes.innerRoot}>
-                <Grid item>
+                <Grid item xs={12}>
                     <Typography className={classes.title} variant={'h4'}>
                         Login
 

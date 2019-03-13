@@ -44,6 +44,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
         initApp: (shoppingCart) => {
             agent.Products.initProducts().then(res =>
+
                 dispatch(
                     {
                         type: INIT_PRODUCTS,
