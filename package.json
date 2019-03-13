@@ -43,6 +43,8 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
+    "rebuild": "react-scripts build && git add . && git commit -m 'rebuild for update prod ver. ' && git push origin master ",
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
