@@ -245,7 +245,7 @@ class ShoppingCartTable extends React.Component {
                                 format: '#### #### #### ####',
                             }
                         }
-                        title={'visa number'}
+                        title={'Card Number'}
                         placeholder={'please enter your visa number'}
                         type="visa"
 
@@ -274,12 +274,12 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         title={'CVC'}
                         placeholder={'XXX'}
-                        validation={
-                            {
-                                format: '###',
-                            }
-                        }
-                        onChange={value => this.props.editBillingDetail('cvc', value)}
+type={"password"}
+
+
+                        onChange={value =>{
+                            if(value.length<=3) this.props.editBillingDetail('cvc', value)
+                        }}
                         value={billingDetail.cvc}
                     />
                 </Grid>

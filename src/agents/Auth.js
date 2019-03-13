@@ -7,6 +7,8 @@ const Auth = {
     getAccount:async ()=> await axios.get('consumers/session'),
     logout:async ()=> await axios.delete('consumers/session'),
     forgetPassword:async (email)=> await axios.post('/verifications',email),
+    getShopInfo: ()=> axios.get(`/shops/session`)
+
 
 }
 export default Auth

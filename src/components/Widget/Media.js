@@ -112,7 +112,7 @@ class Media extends React.Component {
 
                 />
             ) : <Typography variant={'h6'}>
-                there should be product {productId} here, but product {productId} is no longer exist</Typography>
+                {`there should be product ${productId} here, but product ${productId} is no longer exist`}</Typography>
         }
         if (this.props.box && data[0].ext !== 'mp4') {
             return <img src={data[0].url}
@@ -137,7 +137,7 @@ class Media extends React.Component {
     render() {
         const {classes, data, box} = this.props;
 
-
+console.log(data)
         return <Grid container justify={'center'}
         >
             <Grid item xs={12} lg={this.state.type === 'product' && !box ? 6 : 12}>

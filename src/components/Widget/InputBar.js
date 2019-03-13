@@ -47,6 +47,7 @@ const InputBar=props=> {
                     rows={multiline ? 5 : 1}
                     className={classes.input}
                     variant={"outlined"}
+                    type={props.type?props.type:"text"}
                     onChange={e => onChange(e.target.value)}
                     disableUnderline={true}
                     label={title}

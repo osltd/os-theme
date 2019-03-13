@@ -43,6 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
         initApp: (shoppingCart) => {
+            agent.Auth.getShopInfo().then(res=>console.log(res)).catch(err=>console.log(err))
             agent.Products.initProducts().then(res =>
 
                 dispatch(

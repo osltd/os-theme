@@ -42,6 +42,7 @@ const styles = theme => (
 
 const mapStateToProps = state => ({
     feeds: state.feed.feeds,
+    products: state.product.products,
 });
 
 
@@ -62,6 +63,7 @@ const FeedDetail = (props) => {
 
     const {feeds, match, classes, editFeedFilter, history} = props
     const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id))
+    if(!props.products) return <LoadingPage/>
     if (hasValidFeed()) {
         const feed = feeds.find(n => n.id.toString() === match.params.id)
         return (

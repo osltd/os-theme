@@ -8,6 +8,7 @@ import {Image} from "@material-ui/icons";
 export const refactorParaLength = (content: string, length: number = 45): string =>
     content.length > length ? content.replace(/(<([^>]+)>)/ig,"").slice(0, length).concat('...') : content
 
+export const htmlToPlainText = (context:string):string=> context.replace(/(<([^>]+)>)/ig,"")
 export const refactorTextLength = (content: string, length: number = 20): string =>
     content.length > length ? content.slice(0, length).concat('...') : content
 
@@ -74,7 +75,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
     return result
 }
 
-export const redirectUrl = (url: string, history: history.History, reload: boolean = true) => (reload) ? window.location.href = url : history.push(url)
+export const redirectUrl = (url: string, history: history.History, reload: boolean = false) => (reload) ? window.location.href = url : history.push(url)
 
 
 export const numberToPagination = (length: number, cb: Function): Array<Clickable> => {

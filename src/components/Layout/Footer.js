@@ -73,18 +73,18 @@ class Footer extends React.Component {
         const {classes} = this.props;
         return (
             <Grid container justify={'space-between'} className={classes.root}>
-                <Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}
-                >
-                    <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>
-                            NEWSLETTER
-                        </Typography>
-                    </Grid>
+                {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
+                {/*>*/}
+                    {/*<Grid item>*/}
+                        {/*<Typography variant={'h6'} color={'inherit'}>*/}
+                            {/*NEWSLETTER*/}
+                        {/*</Typography>*/}
+                    {/*</Grid>*/}
 
-                    <Grid item>
-                        <SearchBar/>
-                    </Grid>
-                </Grid>
+                    {/*<Grid item>*/}
+                        {/*<SearchBar/>*/}
+                    {/*</Grid>*/}
+                {/*</Grid>*/}
                 <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'h6'} color={'inherit'}>MYSHOP</Typography>

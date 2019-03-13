@@ -22,20 +22,20 @@ class NotFound extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.setState(
-            {
-                timer: setTimeout(
-                    () => redirectUrl('/404', this.props.history), 5000
-                )
-            }
-        )
-
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.state.timer)
-    }
+    // componentDidMount() {
+    //     this.setState(
+    //         {
+    //             timer: setTimeout(
+    //                 () => redirectUrl('/404', this.props.history), 5000
+    //             )
+    //         }
+    //     )
+    //
+    // }
+    //
+    // componentWillUnmount() {
+    //     clearTimeout(this.state.timer)
+    // }
 
     render() {
         const {classes, msg} = this.props;
