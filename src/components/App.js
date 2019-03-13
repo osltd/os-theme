@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
                 dispatch(
                     {
                         type: INIT_PRODUCTS,
-                        payload: res.data.data.products,
+                        payload: res.data.data.merchandises,
                     }
                 )
             ).catch(err => dispatch(
@@ -137,7 +137,7 @@ const mapDispatchToProps = dispatch => ({
 
 const App = props => {
     let getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.products).catch(err => [])
+        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => [])
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
     }
     let initApp = async () => await props.initApp(
