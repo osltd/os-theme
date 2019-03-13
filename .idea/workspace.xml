@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="restructure flow">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Auth/Login/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth/Login/Overview.js" afterDir="false" />
-    </list>
+    <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="restructure flow" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +14,7 @@
         <entry file="file://$PROJECT_DIR$/src/api/ApiUtils.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -118,8 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="403">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -273,6 +270,11 @@
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -348,7 +350,7 @@
     <property name="SearchEverywhereHistoryKey" value="replace&#9;ACTION&#9;Replace&#10;find in path&#9;ACTION&#9;FindInPath&#10;find &#9;ACTION&#9;FindInPath&#10;find in &#9;ACTION&#9;FindInPath&#10;histo&#9;ACTION&#9;Vcs.ShowTabbedFileHistory" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552453863021" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552453967113" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -462,7 +464,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="523379000" />
+    <option name="totallyTimeSpent" value="523674000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -475,9 +477,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.20958512" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.20958512" />
       <window_info id="Structure" order="1" sideWeight="0.5009074" side_tool="true" weight="0.20958512" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -486,15 +487,15 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32880098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32996207" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3275649" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31891224" />
-      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32869786" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.31891224" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3275649" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="13" />
@@ -998,7 +999,7 @@
     <entry file="file://$PROJECT_DIR$/src/api/ApiUtils.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="52" lean-forward="true" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -1027,8 +1028,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="403">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
         </state>
       </provider>
     </entry>
