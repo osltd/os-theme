@@ -22,7 +22,6 @@ const styles = theme => ({
         textAlign: 'center',
     },
     innerRoot: {
-        padding: '0px 120px 60px 120px ',
         margin: '100px 0px',
         backgroundColor: 'white',
     },

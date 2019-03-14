@@ -119,7 +119,7 @@ const MyAccount = (props) => {
                         Log in or sign up to earn rewards today
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item md={4} xs={5}>
                     <CustomButton
                         onClick={() => {
                             props.dialog && props.dialog.handleClose()
@@ -129,7 +129,7 @@ const MyAccount = (props) => {
                         value={'Log In'}/>
                 </Grid>
                 <Grid item xs={1}/>
-                <Grid item xs={4}>
+                <Grid item md={4} xs={5}>
 
                     <CustomButton
                         onClick={() => {
