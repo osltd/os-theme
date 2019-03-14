@@ -13,7 +13,7 @@ import _ from 'lodash'
 const styles = theme => ({
     root: {
         marginTop:'50px',
-        padding: '50px 100px 100px 100px',
+        padding: '50px 10px',
         backgroundColor: 'black',
         color: 'white',
     },
@@ -87,7 +87,9 @@ class Footer extends React.Component {
                         {/*<SearchBar/>*/}
                     {/*</Grid>*/}
                 {/*</Grid>*/}
-                <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
+                <Grid item md={1}/>
+
+                <Grid item xs={12} md={2} container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'h6'} color={'inherit'}>{this.props.shopInfo.name}</Typography>
                     </Grid>
@@ -115,6 +117,7 @@ class Footer extends React.Component {
                     </Grid>
                 </Grid>
                 {this.getTags()}
+            <Grid item md={1}/>
             </Grid>);
     }
 }
