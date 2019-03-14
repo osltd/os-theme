@@ -65,4 +65,4 @@ const FooterList: React.FunctionComponent<Props> = props => {
     )
 }
 
-export default withStyles(styles)(FooterList);
+export default (withStyles(styles)(FooterList))
