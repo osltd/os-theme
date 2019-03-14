@@ -74,7 +74,7 @@ class Footer extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container justify={'space-between'} className={classes.root}>
+            <Grid container justify={'space-between'} spacing={24} className={classes.root}>
                 {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
                 {/*>*/}
                     {/*<Grid item>*/}
