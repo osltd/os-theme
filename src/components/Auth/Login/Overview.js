@@ -26,7 +26,7 @@ const styles = theme => ({
         cursor: 'pointer',
         textAlign: 'center',
         textDecoration: 'underline',
-        color: '#3f51b5',
+        color: '#505050',
         transition: 'color 150ms,background-color 150ms',
         fontSize: '15px',
 

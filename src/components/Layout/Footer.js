@@ -19,6 +19,9 @@ const styles = theme => ({
     },
     emailBar: {
         marginBottom: '30px',
+    },
+    title:{
+        textTransform:'uppercase'
     }
 });
 
@@ -57,7 +60,7 @@ class Footer extends React.Component {
                 }
             }  container direction={'column'} spacing={8}>
                 <Grid item>
-                    <Typography variant={'h6'} color={'inherit'}>TAGS</Typography>
+                    <Typography variant={'h6'} className={this.props.classes.title} color={'inherit'}>tags</Typography>
                 </Grid>
                 <Grid item>
                     {
@@ -117,8 +120,8 @@ class Footer extends React.Component {
                     }
                 } container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>
-                            FIND US ON</Typography>
+                        <Typography className={classes.title} variant={'h6'} color={'inherit'}>
+                           find us on</Typography>
                     </Grid>
                     <Grid item>
                         <FooterList/>
