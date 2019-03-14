@@ -19,13 +19,19 @@ const Validate = props => {
     const {classes} = props
     return (
         <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-            <Typography
+            {
+                (props.location.search==='?state=1')?
+                <Typography
+
                 variant={'subtitle1'}>{'Thanks for your validation, your account has been activated, you can '}
                 <Button variant={"outlined"} onClick={() => redirectUrl('/login', props.history)}>Log in</Button>
                 {' now'}
 
-            </Typography>
+            </Typography>:<Typography
 
+                        variant={'subtitle1'}>{'Failed to validate.'}
+                    </Typography>
+            }
         </Grid>);
 }
 

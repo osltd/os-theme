@@ -118,7 +118,7 @@ const MyCredits = props=>  {
                     opacity={true}
                     ref={dialogRef}
                     title={
-                        <Button className={classes.button}>My Credits</Button>
+                        <Button className={classes.button}>My Account</Button>
                     }
                     dialog={<MyAccount
                         dialog={dialogRef.current}
