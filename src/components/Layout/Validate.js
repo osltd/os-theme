@@ -20,7 +20,7 @@ const Validate = props => {
     return (
         <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
             <Typography
-                variant={'subtitle1'}>{'thanks for your validation, your account has been activated, you can '}
+                variant={'subtitle1'}>{'Thanks for your validation, your account has been activated, you can '}
                 <Button variant={"outlined"} onClick={() => redirectUrl('/login', props.history)}>Log in</Button>
                 {' now'}
 
