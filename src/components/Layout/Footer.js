@@ -98,16 +98,6 @@ class Footer extends React.Component {
                     </Grid>
 
                     <Grid item>
-                        <Typography variant={'subtitle1'} color={'inherit'}>
-                            Email: your@example.com
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subtitle1'} color={'inherit'}>
-                            Phone: +1 123-456-6789
-                        </Typography>
-                    </Grid>
-                    <Grid item>
                         <SocialIcon type={'facebook'}/>
                         <SocialIcon type={'youtube'}/>
                         <SocialIcon type={'twitter'}/>
