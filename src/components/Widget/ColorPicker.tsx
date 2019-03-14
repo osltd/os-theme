@@ -12,6 +12,7 @@ const styles = (theme:Theme) => createStyles({
         display: 'inline-block',
 
     }, color: {
+
         margin: '5px',
         cursor: 'pointer',
         minHeight: '40px',

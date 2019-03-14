@@ -13,14 +13,15 @@ const styles = (theme: Theme) => createStyles({
         margin: '5px',
         fontWeight: 500,
         cursor: 'pointer',
+        boxShadow:'none',
         color: theme.palette.primary.light,
-        background: theme.palette.secondary.light,
+        background: 'rgb(242,242,242)',
         '&:hover': {
-            color: theme.palette.secondary.light,
+            color:'rgb(242,242,242)',
             background: theme.palette.primary.light,
         }
     }, selected: {
-        color: theme.palette.secondary.light,
+        color: 'rgb(242,242,242)',
         background: theme.palette.primary.light,
 
 
