@@ -6,11 +6,12 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Grid, Typography} from '@material-ui/core'
 import CustomButton from '../../Widget/Button/BlackButton'
+import CButton from '../../Widget/Button/Button'
 import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
-
+import {Button} from '@material-ui/core'
 const styles = theme => ({
 
     root: {
@@ -119,26 +120,37 @@ const MyAccount = (props) => {
                         Log in or sign up to earn rewards today
                     </Typography>
                 </Grid>
-                <Grid item md={4} xs={5}>
+                <Grid item md={4} xs={12}>
                     <CustomButton
                         onClick={() => {
                             props.dialog && props.dialog.handleClose()
                             redirectUrl('/login', history)
                         }}
-
                         value={'Log In'}/>
                 </Grid>
-                <Grid item xs={1}/>
-                <Grid item md={4} xs={5}>
+                <br/>
+                <Grid item xs={12} md={1}/>
 
-                    <CustomButton
+                <Grid item md={4} xs={12}>
+
+                    <Button variant={"contained"}
+                            style={
+                                {
+                                    boxShadow:'none',
+                                    padding:'20px',
+                                    borderRadius:0,
+                                }
+                            }
+                            fullWidth={true}
                         onClick={() => {
                             props.dialog && props.dialog.handleClose()
                             redirectUrl('/register', history)
                         }}
 
-                        value={'Register'}
-                    />
+
+                    >
+                      Register
+                    </Button>
                 </Grid>
 
             </Grid>)
