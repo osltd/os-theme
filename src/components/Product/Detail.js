@@ -165,17 +165,7 @@ class ResponsiveDialog extends React.Component {
                     </Typography>
                 </Grid>
                 <Grid item container direction={'row'}>
-                    {promotePrice ? <Fragment>
-                            <Typography variant={'h5'}
-                                        className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
-                            <Typography component={'del'} variant={'subtitle1'}
-                                        color={'secondary'}>$ {formatMoney(
-                                selectedVariant.price)}</Typography>
-                        </Fragment> :
-                        <Typography variant={'h5'}
-                                    className={classes.price}>$ {formatMoney(
-                            selectedVariant.price)}</Typography>
-                    }
+
                 </Grid>
                 <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
@@ -281,7 +271,7 @@ class ResponsiveDialog extends React.Component {
     }
 
     componentDidMount() {
-      if(this.props.variantKeys)  this.initVariant()
+        if (this.props.variantKeys) this.initVariant()
 
     }
 
@@ -295,41 +285,40 @@ class ResponsiveDialog extends React.Component {
         } = this.props
         const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm')
 
-      if  (variantOptions&&variantKeys&&variantOptions.length < 1 && variantKeys.length <1)    {
-          if(product){
+        if (variantOptions && variantKeys && variantOptions.length < 1 && variantKeys.length < 1) {
+            if (product) {
 
-              return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                  {position ? <Detail {...this.props}
-                                      selectedVariant={this.props.product} /> : null}
+                return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                    {position ? <Detail {...this.props}
+                                        selectedVariant={this.props.product}/> : null}
 
-                  <Grid item container xs={10} sm={5}>
-                      <Grid item xs={12}>
-                          <Slick
-                              data={product.photos? product.photos.map(n => ({url: n.url,})):[]}
-                          />
-                      </Grid>
-                  </Grid>
+                    <Grid item container xs={10} sm={5}>
+                        <Grid item xs={12}>
+                            <Slick
+                                data={product.photos ? product.photos.map(n => ({url: n.url,})) : []}
+                            />
+                        </Grid>
+                    </Grid>
 
-                  {!position ? <Detail {...this.props}
-                                       selectedVariant={this.props.product}
-                  /> : null}
+                    {!position ? <Detail {...this.props}
+                                         selectedVariant={this.props.product}
+                    /> : null}
 
-              </Grid>
-          }else  return null
-      }
-        else {
-          const selectedVariant = this.findSelectedVariant()
-          return (
-              selectedVariant ?
-                  <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                      {position ? this.getDetail(selectedVariant) : null}
-                      {this.getSlick(selectedVariant)}
-                      {!position ? this.getDetail(selectedVariant) : null}
-                  </Grid> : <LoadingPage/>
+                </Grid>
+            } else return null
+        } else {
+            const selectedVariant = this.findSelectedVariant()
+            return (
+                selectedVariant ?
+                    <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
+                        {position ? this.getDetail(selectedVariant) : null}
+                        {this.getSlick(selectedVariant)}
+                        {!position ? this.getDetail(selectedVariant) : null}
+                    </Grid> : <LoadingPage/>
 
-          );
+            );
 
-      }
+        }
 
     }
 }

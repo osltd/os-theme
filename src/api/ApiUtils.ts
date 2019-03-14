@@ -118,6 +118,8 @@ export const arrayToFilter = (array: Array<any>, cb: Function): Array<Clickable>
 
 //stack overflow
 export const formatMoney = (n: any, c = 2, d = '.', t = ','): string => {
+    if(n==='not a reg price'|| !n) return 'Free'
+
     let s: string = n < 0 ? "-" : ""
     let i: string = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c)))
     let j: number = i.length > 3 ? i.length % 3 : 0;

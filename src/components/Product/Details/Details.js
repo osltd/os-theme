@@ -71,7 +71,11 @@ const Detail = (props) => {
                             selectedVariant.price)}</Typography>
                     </Fragment> :
                     <Typography variant={'h5'}
-                                className={classes.price}>$ {formatMoney(
+                                className={classes.price}>
+
+                        {
+                            (selectedVariant.price==='not a reg price'|| !selectedVariant.price)?null:'$ '
+                        }{formatMoney(
                         selectedVariant.price)}</Typography>
                 }
             </Grid>
