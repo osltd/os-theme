@@ -34,7 +34,7 @@ import NotFound from './Layout/NotFound'
 import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
-
+import Validate from './Layout/Validate'
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -179,6 +179,7 @@ const App = props => {
                             <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                             <Route exact path={'/loadingPage'} component={LoadingPage}/>
                             <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                            <Route exact path={'/validate/:id'} component={Validate}/>
                             <Route component={NotFound}/>
                         </Switch>
                     </div>
