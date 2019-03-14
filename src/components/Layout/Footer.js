@@ -51,7 +51,11 @@ class Footer extends React.Component {
         console.log(productsTags)
 
         if (productsTags.length > 0) return (
-            <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
+            <Grid item xs={6} md={3} style={
+                {
+                    marginTop:'25px'
+                }
+            }  container direction={'column'} spacing={8}>
                 <Grid item>
                     <Typography variant={'h6'} color={'inherit'}>TAGS</Typography>
                 </Grid>
@@ -74,7 +78,7 @@ class Footer extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container justify={'space-between'} spacing={24} className={classes.root}>
+            <Grid container justify={'space-between'} className={classes.root}>
                 {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
                 {/*>*/}
                     {/*<Grid item>*/}
@@ -107,7 +111,11 @@ class Footer extends React.Component {
                         <SocialIcon type={'whatsapp'}/>
                     </Grid>
                 </Grid>
-                <Grid item xs={6} md={3} container direction={'column'} spacing={8}>
+                <Grid item xs={6} md={3} style={
+                    {
+                     marginTop:'25px'
+                    }
+                } container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography variant={'h6'} color={'inherit'}>
                             FIND US ON</Typography>
