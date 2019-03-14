@@ -27,6 +27,8 @@ const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
+    shopInfo: state.common.shopInfo,
+
 });
 
 
@@ -87,16 +89,11 @@ class Footer extends React.Component {
                 {/*</Grid>*/}
                 <Grid item xs={12} md={3} container direction={'column'} spacing={8}>
                     <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>MYSHOP</Typography>
+                        <Typography variant={'h6'} color={'inherit'}>{this.props.shopInfo.name}</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'caption'} color={'inherit'}>
-
-                            We are a team of designers and developers that create quality Wordpress, Magento,
-                            Prestashop,
-                            Opencarte themes and provided premium and dedicated support to our products.
-
-                            205 Arapahoe St, Schoenchen, KS 69696
+                            {this.props.shopInfo.description}
                         </Typography>
                     </Grid>
 
