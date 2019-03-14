@@ -18,6 +18,9 @@ import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 const styles = theme =>
     (
         {
+            description:{
+whiteSpace:'pre-wrap'
+            },
             name: {
                 color: 'rgba(0, 0, 0)',
                 fontSize: 28,
@@ -176,7 +179,7 @@ class ResponsiveDialog extends React.Component {
                             SKU MH03</Typography></Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant={'body1'}>
+                    <Typography className={classes.description} variant={'body1'}>
                         {description}
                     </Typography>
                 </Grid>
