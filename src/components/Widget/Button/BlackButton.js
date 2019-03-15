@@ -1,9 +1,8 @@
 import React from 'react';
 import {Button, Typography} from '@material-ui/core'
-import {withStyles} from '@material-ui/core/styles';
-import PropTypes from "prop-types";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         textTransform: 'capitalize',
         padding: '16px',
@@ -20,44 +19,22 @@ const styles = theme => ({
 
         }
     },
-})
+}));
 
-class CustomButton extends React.Component {
-    state = {
-        anchor: 'left',
-    };
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
+const BlackButton = props => {
 
-        });
-    };
+    const classes = useStyles();
+    const {link, onClick, value, icon2, icon, border} = props;
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            placeHolder: '',
-        }
-    }
-
-    render() {
-
-        const {classes, link, onClick, value, icon2, icon, border} = this.props
-
-        return <Button
-            className={classes.root}
-            variant={'outlined'}
-            onClick={onClick}>
-            <Typography variant={'h6'} color={'inherit'} className={icon}/>
-            <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
-            <Typography variant={'h6'} color={'inherit'} className={icon2}/>
-        </Button>
-    }
-}
-
-
-CustomButton.propTypes = {
-    classes: PropTypes.object.isRequired,
+    return <Button
+        className={classes.root}
+        variant={'outlined'}
+        onClick={onClick}>
+        <Typography variant={'h6'} color={'inherit'} className={icon}/>
+        <Typography variant={'h6'} color={'inherit'}>{value}</Typography>
+        <Typography variant={'h6'} color={'inherit'} className={icon2}/>
+    </Button>
 };
 
-export default withStyles(styles)(CustomButton);
+
+export default (BlackButton);

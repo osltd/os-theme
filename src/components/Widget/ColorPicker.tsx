@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Fab, Grid} from '@material-ui/core'
-import {withStyles,Theme} from '@material-ui/core/styles';
-import {MaterialUIClasses} from "../../interfaces/client/Common";
-import createStyles from "@material-ui/core/styles/createStyles";
+import {Theme} from '@material-ui/core/styles';
+import {makeStyles} from "@material-ui/styles";
 
-const styles = (theme:Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
         margin: 0,
         padding: '6px 0px',
@@ -19,17 +17,17 @@ const styles = (theme:Theme) => createStyles({
         width: '40px',
         borderRadius: '30px',
     }
-})
+}));
 
 interface Props {
-    onClick:<T extends {}>(x: T) => void,
-    selectedColor?:string,
-    classes:MaterialUIClasses,
-    colors:Array<string>,
+    onClick: <T extends {}>(x: T) => void,
+    selectedColor?: string,
+    colors: Array<string>,
 }
-const ColorPicker :React.FunctionComponent<Props>= props => {
 
-    const {classes, colors, selectedColor, onClick} = props
+const ColorPicker: React.FunctionComponent<Props> = props => {
+    const classes = useStyles();
+    const {colors, selectedColor, onClick} = props;
     return (
         <Grid container>
             {
@@ -58,6 +56,6 @@ const ColorPicker :React.FunctionComponent<Props>= props => {
             }
         </Grid>
     )
-}
+};
 
-export default withStyles(styles)(ColorPicker);
+export default (ColorPicker);

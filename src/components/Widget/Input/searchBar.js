@@ -1,12 +1,10 @@
 import React from 'react';
 import {Grid, Input} from '@material-ui/core';
 import Button from '../Button/Button.js'
-
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {redirectUrl} from "../../../api/ApiUtils";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         padding: '10px',
         backgroundColor: theme.palette.background.paper,
@@ -19,7 +17,7 @@ const styles = theme => ({
         margin: 'auto',
         '&:before': {}
     }
-})
+}));
 
 class SearchBar extends React.Component {
     state = {
@@ -28,11 +26,13 @@ class SearchBar extends React.Component {
         weight: '',
         weightRange: '',
         showPassword: false,
-    }
+    };
 
 
     render() {
-        const {classes, placeholder, value, onChange, onKeyPress} = this.props
+        const classes = useStyles();
+
+        const {placeholder, value, onChange, onKeyPress} = this.props;
 
         return <Grid container alignItems={'center'}>
             <Grid item xs={8}>
@@ -64,8 +64,5 @@ class SearchBar extends React.Component {
     }
 }
 
-SearchBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
-export default withStyles(styles)(SearchBar);
+export default (SearchBar);

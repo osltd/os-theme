@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {History} from 'history'
-import {Theme, withStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {redirectUrl} from "../../api/ApiUtils";
 import Dialog from './Dialog'
 import MyAccount from '../Auth/Accounts/Overview'
 import createStyles from "@material-ui/core/styles/createStyles";
-import {MaterialUIClasses} from "../../interfaces/client/Common";
+import {makeStyles} from "@material-ui/styles";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-const styles = (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         width: '100%',
         maxWidth: 360,
@@ -18,24 +17,22 @@ const styles = (theme: Theme) => createStyles({
         padding: 0,
         color: 'white',
     }
-});
+}));
 
-interface Props {
-    history: History
-    classes: MaterialUIClasses
+interface Props extends RouteComponentProps {
 
 }
 
 const FooterList: React.FunctionComponent<Props> = props => {
-
-    const {classes, history} = props;
+    const classes = useStyles();
+    const {history} = props;
     const items = [
         {label: "Shopping Cart", url: "shoppingcart"}
         , {label: "Checkout", url: "checkout"}
         , {label: "My Account", url: ""}
         , {label: "Login", url: "login"}
         , {label: "Register", url: "register"}
-    ]
+    ];
     return (
         <div className={classes.root}>
             <List component="nav">
@@ -53,8 +50,14 @@ const FooterList: React.FunctionComponent<Props> = props => {
                             /> :
                             <ListItem className={classes.item} button key={i}>
                                 <Typography variant={'body1'} color={'inherit'}
-                                            onClick={() => redirectUrl(`/${n.url}`, history)}
-                                > {n.label}</Typography>
+                                            onClick={() => {
+
+                                                redirectUrl(`/${n.url}`, history)
+
+
+                                            }
+                                            }>
+                                    > {n.label}</Typography>
                             </ListItem>
                     )
                 }
@@ -63,6 +66,6 @@ const FooterList: React.FunctionComponent<Props> = props => {
             </List>
         </div>
     )
-}
+};
 
-export default (withStyles(styles)(FooterList))
+export default withRouter(FooterList)

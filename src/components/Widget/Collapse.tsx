@@ -1,13 +1,10 @@
 import React, {ReactNode, useState} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
-import {MaterialUIClasses} from "../../interfaces/client/Common";
-import {Theme} from "@material-ui/core/styles";
-import createStyles from "@material-ui/core/styles/createStyles";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
         width: '100%'
     },
@@ -25,10 +22,9 @@ const styles = (theme: Theme) => createStyles({
 
     }
 
-});
+}));
 
 interface Props {
-    classes: MaterialUIClasses,
     title: React.ReactNode,
     collapse: ReactNode,
     arrow: boolean,
@@ -36,13 +32,12 @@ interface Props {
 }
 
 const SimpleCollapse: React.FunctionComponent<Props> = props => {
-    const [checked, setChecked] = useState(false)
-
-    const {classes, title, collapse, arrow} = props;
-
+    const [checked, setChecked] = useState(false);
+    const classes = useStyles();
+    const {title, collapse, arrow} = props;
     return (
         <Grid container className={classes.root}>
-            <Grid item container alignItems={'center'} className={classes.title} onClick={()=>setChecked(!checked)}>
+            <Grid item container alignItems={'center'} className={classes.title} onClick={() => setChecked(!checked)}>
                 <Grid item>
                     {title}
                 </Grid>
@@ -53,7 +48,7 @@ const SimpleCollapse: React.FunctionComponent<Props> = props => {
                     </Grid>
                 }
             </Grid>
-            <Grid item xs={11} container justify={'center'} className={classes.collapse}>
+            <Grid item xs={11} container justify={'center'}>
                 <Collapse in={checked}>
                     {collapse}
                 </Collapse>
@@ -61,6 +56,6 @@ const SimpleCollapse: React.FunctionComponent<Props> = props => {
 
         </Grid>
     );
-}
+};
 
-export default withStyles(styles)(SimpleCollapse)
+export default (SimpleCollapse)

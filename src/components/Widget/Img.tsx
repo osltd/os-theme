@@ -21,7 +21,6 @@ export const ImageWrapper: React.FunctionComponent<Props> = props => {
     const [loaded, setLoaded] = useState(false);
     useEffect(
         () => {
-if(document.head){
 
             const exists = document.head.querySelectorAll('[data-gracefulimage]');
 
@@ -33,8 +32,6 @@ if(document.head){
                 document.head.appendChild(styleElement);
                 styleElement.sheet.insertRule(fadeIn, styleElement.sheet.cssRules.length);
             }
-}
-
         }, [loaded]
     );
 

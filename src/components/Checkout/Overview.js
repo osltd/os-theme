@@ -3,8 +3,7 @@ import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {connect} from 'react-redux'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
-import {withStyles} from '@material-ui/core/styles';
-import OrderSummary from './OrderSummary'
+import OrderSummary from './Sections/OrderSummary'
 import BillingDetails from './BillingDetails'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Collapse from '../Widget/Collapse'
@@ -13,9 +12,10 @@ import {redirectUrl} from "../../api/ApiUtils";
 import PromoCode from './PromoCode'
 import {withSnackbar} from 'notistack'
 import _ from 'lodash'
-import * as styleGuide from "../../constants/styleGuide";
+import * as styleGuide from "../../constants/snackBarGuide";
+import {makeStyles} from "@material-ui/styles";
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
 
@@ -42,8 +42,7 @@ const styles = theme => ({
 
     }
 
-})
-
+}));
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
     user: state.auth.user,
@@ -51,43 +50,42 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
 
-        changeViewMode: (mode) =>
-            dispatch({
-                    type: EDIT_PRODUCT_VIEW_MODE,
-                    payload: mode,
-                }
-            )
-        ,
-        editProductSort: (key, value) => dispatch({
-            type: PRODUCT_EDIT_SORT,
-            payload: {
-                key: key,
-                value: value,
-            },
-        }),
-        editProductFilter: (key, value) => dispatch({
-            type: PRODUCT_EDIT_FILTER,
-            payload: {
-                key: key,
-                value: value,
-            },
-        }),
-    })
+    changeViewMode: (mode) =>
+        dispatch({
+                type: EDIT_PRODUCT_VIEW_MODE,
+                payload: mode,
+            }
+        )
+    ,
+    editProductSort: (key, value) => dispatch({
+        type: PRODUCT_EDIT_SORT,
+        payload: {
+            key: key,
+            value: value,
+        },
+    }),
+    editProductFilter: (key, value) => dispatch({
+        type: PRODUCT_EDIT_FILTER,
+        payload: {
+            key: key,
+            value: value,
+        },
+    }),
+});
 
 const CheckoutOverview = props => {
+    const classes = useStyles();
 
-    const {classes} = props
-    const rendering = (!(props.shoppingCart) || props.user === null)
-    const needLogin = (_.isEmpty(props.user))
-    const NoProductsInCart = (props.shoppingCart.length < 1)
+    const rendering = (!(props.shoppingCart) || props.user === null);
+    const needLogin = (_.isEmpty(props.user));
+    const NoProductsInCart = (props.shoppingCart.length < 1);
 
     switch (true) {
         case rendering:
-            return <LoadingPage/>
-        case needLogin:{
-
-            redirectUrl('/login', props.history, false)
-            props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar)
+            return <LoadingPage/>;
+        case needLogin: {
+            redirectUrl('/login', props.history, false);
+            props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar);
             return null
         }
         case NoProductsInCart:
@@ -125,7 +123,7 @@ const CheckoutOverview = props => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>)
+            </Grid>);
         default:
             return (
                 <Grid container justify={'center'}>
@@ -135,7 +133,7 @@ const CheckoutOverview = props => {
                     <Grid item container justify={'center'} spacing={32} md={10}>
 
                         {(isWidthUp('md', props.width)) ?
-                            (<Fragment>
+                            (<>
                                 <Grid item xs={6}>
                                     <Typography
                                         className={classes.title}
@@ -162,8 +160,8 @@ const CheckoutOverview = props => {
                                     <Divider/>
                                     <BillingDetails/>
                                 </Grid>
-                            </Fragment>)
-                            : (<Fragment>
+                            </>)
+                            : (<>
                                 <Grid item xs={11}>
                                     <Collapse
                                         arrow={true}
@@ -193,7 +191,7 @@ const CheckoutOverview = props => {
                                     <BillingDetails/>
 
                                 </Grid>
-                            </Fragment>)
+                            </>)
 
                         }
                     </Grid>
@@ -202,6 +200,6 @@ const CheckoutOverview = props => {
                 </Grid>
             )
     }
-}
+};
 
-export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CheckoutOverview))))
+export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(CheckoutOverview)))

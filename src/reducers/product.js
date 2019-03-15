@@ -24,27 +24,23 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-    let detail = Object.assign({}, state.detail)
+    let detail = Object.assign({}, state.detail);
 
     switch (action.type) {
         case INIT_PRODUCTS:
-        {
-
-            console.log(action.payload)
             return {
                 ...state,
-                products: action.payload?action.payload:[],
-            }
-        }
+                products: action.payload ? action.payload : [],
+            };
 
         case EDIT_PRODUCT_VIEW_MODE:
 
             return {
                 ...state,
                 viewMode: action.payload,
-            }
+            };
         case EDIT_PRODUCT_DETAIL: {
-            detail[action.payload.key] = action.payload.value
+            detail[action.payload.key] = action.payload.value;
 
             return {
                 ...state,
