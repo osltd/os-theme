@@ -1,12 +1,14 @@
 import React from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import PropTypes from "prop-types";
 import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
+import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
+import {redirectUrl} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
-import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles({
+const styles = theme => ({
     listItem: {
         cursor: 'pointer',
     },
@@ -38,82 +40,109 @@ const mapStateToProps = state => ({
 });
 
 
-const ShoppingCartList = props => {
+const mapDispatchToProps = dispatch => ({}
+)
 
-    let selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
-    const classes = useStyles();
-    const {data, onDelete} = props;
-    return (
-        <Grid container className={classes.root}>
-            <Grid item xs={12}>
-                <List className={classes.list} component="nav">
-                    {data.length > 0 ? data.map((n, i) =>
+class ShoppingCartList extends React.Component {
+    state = {
+        anchor: 'left',
+    };
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
 
-                        <ListItem
-                            key={i}
-                            button
-                            onClick={() => redirectUrl('/products/' + n.product.id, props.history)}>
-                            <Tooltip
-                                TransitionComponent={Zoom}
-                                title={selectedData(n).description}>
+        });
+    };
 
-                                <Grid container spacing={16}>
-                                    <Grid item sm={3}>
+    constructor() {
+        super()
+        this.state = {
+            placeHolder: '',
 
-                                        <img
-                                            style={{width: '100%', minWidth: '50px'}}
-                                            src={handleImgValid(n.product.photos[0])}
-                                        />
+        }
+    }
+
+    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product
+
+    render() {
+        const {classes, data, onDelete} = this.props;
+        return (
+            <Grid container className={classes.root}>
+                <Grid item xs={12}>
+                    <List className={classes.list} component="nav">
+                        {data.length > 0 ? data.map((n, i) =>
+
+                            <ListItem
+                                key={i}
+                                button
+
+                                onClick={() => redirectUrl('/products/' + n.product.id, this.props.history)}>
+                                <Tooltip
+                                    TransitionComponent={Zoom}
+                                    title={this.selectedData(n).description}>
+
+                                    <Grid container spacing={16}>
+                                        <Grid item sm={3}>
+
+                                            <img
+                                                style={{width: '100%', minWidth: '50px'}}
+                                                src={handleImgValid(n.product.photos[0])}
+                                            />
+
+                                        </Grid>
+                                        <Grid item sm={9}>
+                                            <Typography variant={'body1'}>
+                                                {refactorTextLength(n.product.name)}
+                                            </Typography>
+                                            <Typography variant={'caption'}>
+                                                {n.number} X
+                                                $ {this.selectedData(n).price
+                                            }
+                                            </Typography>
+                                            <span
+                                                onClick={() => onDelete(i)}
+                                                className={classes.binIcon + ' ' + 'icon-bin'}/>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item sm={9}>
-                                        <Typography variant={'body1'}>
-                                            {refactorTextLength(n.product.name)}
-                                        </Typography>
-                                        <Typography variant={'caption'}>
-                                            {n.number} X
-                                            $ {selectedData(n).price
-                                        }
-                                        </Typography>
-                                        <span
-                                            onClick={() => onDelete(i)}
-                                            className={classes.binIcon + ' ' + 'icon-bin'}/>
-                                    </Grid>
-                                </Grid>
-                            </Tooltip>
+                                </Tooltip>
 
-                        </ListItem>
-                    ) : <ListItem
-                    >
+                            </ListItem>
+                        ) : <ListItem
+                        >
 
-                        <Typography variant={'subtitle1'}>
-                            you haven't put any items in cart
-                        </Typography>
-                    </ListItem>}
+                            <Typography variant={'subtitle1'}>
+                                you haven't put any items in cart
+                            </Typography>
+                        </ListItem>}
 
-                </List>
-            </Grid>
-            <Grid item container justify={'center'} xs={12}>
-                <Grid item>
-                    <Button
-                        className={classes.button}
-                        variant={'outlined'}
-                        onClick={() => redirectUrl('/shoppingCart', props.history)}
-                    >
-                        View Cart
-                    </Button>
+                    </List>
                 </Grid>
-                <Grid item>
-                    <Button variant={'outlined'}
+                <Grid item container justify={'center'} xs={12}>
+                    <Grid item>
+                        <Button
                             className={classes.button}
-                            onClick={() => redirectUrl('/checkout', props.history)}>
-                        Checkout
-                    </Button>
-                </Grid>
+                            variant={'outlined'}
+                            onClick={() => redirectUrl('/shoppingCart', this.props.history)}
+                        >
+                            View Cart
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant={'outlined'}
+                                className={classes.button}
+                                onClick={() => redirectUrl('/checkout', this.props.history)}>
+                            Checkout
+                        </Button>
+                    </Grid>
 
+                </Grid>
             </Grid>
-        </Grid>
-    )
+        )
+    }
+}
+
+ShoppingCartList.propTypes = {
+    classes: PropTypes.object.isRequired,
 };
 
-
-export default withRouter(connect(mapStateToProps, {})(ShoppingCartList))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartList)))

@@ -1,19 +1,22 @@
-import React, {forwardRef, Fragment, ReactNode, useImperativeHandle, useState} from 'react';
+import React, {Fragment, forwardRef, ReactNode, useState, useImperativeHandle} from 'react';
 import {Dialog} from '@material-ui/core';
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import createStyles from "@material-ui/core/styles/createStyles";
+import {MaterialUIClasses} from "../../interfaces/client/Common";
+import {Theme, withStyles} from '@material-ui/core/styles';
 import makeStyles from "@material-ui/styles/makeStyles";
 
 const useStyles = makeStyles({
     dialog: {
         backgroundColor: 'white',
         opacity: 0.91,
-        maxWidth: '100%',
     },
     opacity: {
         opacity: 1,
     }
 
-});
+})
 
 interface Props {
     fullScreen?: boolean
@@ -23,15 +26,15 @@ interface Props {
 
 }
 
-export const ResponsiveDialog: React.FunctionComponent<Props> = forwardRef((props, ref) => {
+const ResponsiveDialog: React.FunctionComponent<Props> = forwardRef((props, ref) => {
     //in parent
     //  innerRef={e => this.popUp = e}
 //this.popUp.handleClose()
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const classes = useStyles()
+    const [open, setOpen] = useState(false)
     const {fullScreen, dialog, opacity, title} = props;
     useImperativeHandle(ref, () => ({
-        handleClose: () => setOpen(false)
+        handleClose:() =>setOpen(false)
     }));
 
     return (
@@ -47,6 +50,5 @@ export const ResponsiveDialog: React.FunctionComponent<Props> = forwardRef((prop
             </Dialog>
         </Fragment>
     );
-});
-
+})
 export default ResponsiveDialog

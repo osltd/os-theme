@@ -4,13 +4,12 @@ import reducer from './reducer';
 import {routerMiddleware} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 
-export const historyRouter = createHistory();
+export const history = createHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
-const myRouterMiddleware = routerMiddleware(historyRouter);
+const myRouterMiddleware = routerMiddleware(history);
 
 const getMiddleware = () => {
-
     if (process.env.NODE_ENV === 'production') {
         return applyMiddleware(myRouterMiddleware,);
     } else {

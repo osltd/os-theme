@@ -1,12 +1,16 @@
 import React, {Fragment} from 'react';
-import {Theme} from '@material-ui/core/styles';
-import {List as CustomList, Typography} from '@material-ui/core'
+import PropTypes from 'prop-types';
+import {Theme, withStyles} from '@material-ui/core/styles';
+import {Typography} from '@material-ui/core'
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import classNames from 'classnames'
-import {Clickable} from "../../interfaces/client/Common";
-import {makeStyles} from "@material-ui/styles";
-
-const useStyles = makeStyles((theme: Theme) => ({
+import {withRouter} from "react-router-dom";
+import {redirectUrl} from "../../api/ApiUtils";
+import createStyles from "@material-ui/core/styles/createStyles";
+import {Clickable, MaterialUIClasses} from "../../interfaces/client/Common";
+import {History} from 'history'
+const styles = (theme: Theme) => createStyles({
     root: {
         width: '100%',
         maxWidth: 360,
@@ -33,29 +37,36 @@ const useStyles = makeStyles((theme: Theme) => ({
         maxHeight: '300px',
         overflow: 'auto',
     }
-}));
+});
 
 interface Props {
-    data: Array<Clickable>
+    classes: MaterialUIClasses
+    data?: Array<Clickable>
     title?: string
     selectedValue?: string
+    history: History
+    link?: string
 }
 
-const List: React.FunctionComponent<Props> = props => {
-    const classes = useStyles();
-    const {data, title, selectedValue} = props;
+const CustomList: React.FunctionComponent<Props> = props => {
+
+    const {classes, data, title, link, history, selectedValue} = props;
 
     let handleListItemClick = (event: any, index: number, cb: Function): void => {
-        cb();
-    };
+        cb()
+        if (link) {
+            redirectUrl(link, history)
+        }
+    }
+console.log(data)
     return (data ? <Fragment>
             {
                 title && <Typography variant={'h6'}>{title}</Typography>
 
             }
-            <CustomList component="nav" className={classes.list}>
+            <List component="nav" className={classes.list}>
 
-                {data.map((n: any, i: any) =>
+                {data.map((n:any, i:any) =>
                     <ListItem
                         key={i}
                         button
@@ -64,13 +75,14 @@ const List: React.FunctionComponent<Props> = props => {
                         ) ? classes.selected : null)}
                         onClick={event => handleListItemClick(event, i, n.onClick)}>
                         <Typography
+
                         >{n.label}</Typography>
                     </ListItem>
                 )}
 
-            </CustomList>
+            </List>
         </Fragment> : null
 
     );
-};
-export default (List)
+}
+export default (withStyles(styles)(CustomList))

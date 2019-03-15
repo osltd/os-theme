@@ -1,5 +1,8 @@
 import React, {ReactNode} from 'react';
+import PropTypes from 'prop-types';
+import {Theme, withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
+import {withRouter} from "react-router-dom";
 import {redirectUrl} from "../../../api/ApiUtils";
 import makeStyles from "@material-ui/styles/makeStyles";
 import {History} from 'history'
@@ -12,17 +15,18 @@ const useStyle = makeStyles(
             marginBottom: 35,
 
         },
-    });
+    })
 
 interface Props {
-    history: History
     left: ReactNode
     right: ReactNode
     link: string
+    history: History
+
 }
 
 const FeedsWall: React.FunctionComponent<Props> = props => {
-    const classes = useStyle();
+    const classes = useStyle()
     const {left, right, link, history} = props;
     return (
         <Grid container alignItems={'center'} className={classes.root}
@@ -35,7 +39,7 @@ const FeedsWall: React.FunctionComponent<Props> = props => {
             </Grid>
         </Grid>
     )
-};
+}
 
 
 export default FeedsWall

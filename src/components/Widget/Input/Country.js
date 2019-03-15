@@ -1,15 +1,22 @@
 import React from 'react';
+import classNames from 'classnames';
 import Select from 'react-select';
-import {makeStyles, useTheme} from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
+import NoSsr from '@material-ui/core/NoSsr';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
-import {emphasize} from '@material-ui/core/styles/colorManipulator';
-import {COUNTRY_CODE} from '../../../constants/constants'
+import CancelIcon from '@material-ui/icons/Cancel';
+import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
-const useStyles = makeStyles(theme => ({
-    root: {},
+import {COUNTRY_CODE} from '../../../constants/constants'
+import withStyles from "@material-ui/core/styles/withStyles";
+
+const styles = theme => ({
+    root: {
+    },
     input: {
         display: 'flex',
         padding: 0,
@@ -20,8 +27,8 @@ const useStyles = makeStyles(theme => ({
 
         flexWrap: 'wrap',
         flex: 1,
-        padding: '14.5px 0',
-        paddingLeft: '5px',
+        padding:'14.5px 0',
+        paddingLeft:'5px',
         alignItems: 'center',
         overflow: 'hidden',
     },
@@ -39,7 +46,7 @@ const useStyles = makeStyles(theme => ({
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     },
     singleValue: {
-        fontWeight: '600',
+        fontWeight:'600',
 
     },
     placeholder: {
@@ -55,9 +62,10 @@ const useStyles = makeStyles(theme => ({
     divider: {
         height: theme.spacing.unit * 2,
     },
-}));
+})
 
-const selectStyles = theme => ({
+
+const selectStyles =theme=> ({
     input: base => ({
         ...base,
         color: theme.palette.text.primary,
@@ -65,7 +73,7 @@ const selectStyles = theme => ({
             font: 'inherit',
         },
     }),
-});
+})
 
 function NoOptionsMessage(props) {
     return (
@@ -79,7 +87,7 @@ function NoOptionsMessage(props) {
     );
 }
 
-function inputComponent({inputRef, ...props}) {
+function inputComponent({ inputRef, ...props }) {
     return <div ref={inputRef} {...props} />;
 }
 
@@ -160,25 +168,24 @@ const components = {
     ValueContainer,
 };
 
-const IntegrationReactSelect = props => {
-    const {value, onChange} = props;
-    const classes = useStyles();
+const IntegrationReactSelect=props=> {
+    const {classes,value,onChange} = props
 
     const theme = useTheme();
 
 
     return (
-        <Select
-            classes={classes}
-            styles={selectStyles}
-            options={COUNTRY_CODE}
-            components={components}
-            value={value}
-            onChange={onChange}
-            placeholder="Search"
-        />
+                <Select
+                    classes={classes}
+                    styles={selectStyles}
+                    options={COUNTRY_CODE}
+                    components={components}
+                    value={value}
+                    onChange={onChange}
+                    placeholder="Search"
+                />
 
     );
-};
+}
 
-export default (IntegrationReactSelect)
+export default withStyles(styles)(IntegrationReactSelect)

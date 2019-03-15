@@ -4,5 +4,5 @@ const Feeds = {
     initFeeds: feedsId => axios.get('/articles'),
 
 
-};
+}
 export default Feeds

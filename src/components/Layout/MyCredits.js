@@ -1,15 +1,18 @@
 import React, {useRef} from 'react';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {Button, Grid, Typography} from '@material-ui/core'
+import CustomButton from '../Widget/Button/BlackButton'
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import Dialog from '../Widget/Dialog'
 import {redirectUrl} from "../../api/ApiUtils";
+import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import MyAccount from '../Auth/Accounts/Overview'
-import {makeStyles} from "@material-ui/styles";
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
 
     root: {
         paddingRight: '50px',
@@ -18,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         height: 0,
         zIndex: 10000,
         '& :hover': {
-            color: theme.palette.primary.main,
+            color: 'black',
 
         }
     }, dialog: {
@@ -27,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         color: 'white',
         transition: '0.2s',
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: 'black',
 
     },
     textAlign: {
@@ -35,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: '20px',
     }
 
-}));
+})
 
 
 const mapStateToProps = state => ({
@@ -59,16 +62,14 @@ const mapDispatchToProps = dispatch => ({
         }),
     }
 
-);
+)
 
-const MyCredits = props => {
+const MyCredits = props=>  {
 
-    let dialogRef = useRef();
-    const classes = useStyles();
+    let dialogRef = useRef()
+    const {classes, width,history} = props;
 
-    const {width, history} = props;
-
-    let logout = () => {
+    let  logout = () => {
         const {history} = props;
 
         swal(
@@ -78,18 +79,19 @@ const MyCredits = props => {
                     <Grid item>
                         {false && <span className={'icon-like'}
 
-                                        style={{
-                                            fontSize: '80px',
-                                            color: 'hsla(100,55%,69%,.5)',
-                                            padding: '20px',
-                                            display: 'block',
-                                            width: '80px',
-                                            height: '80px',
-                                            border: '4px solid hsla(98,55%,69%,.2)',
-                                            borderRadius: '50%',
-                                            boxSizing: 'content-box',
-                                        }}
-                        />}
+                          style={{
+                              fontSize: '80px',
+                              color: 'hsla(100,55%,69%,.5)',
+                              padding: '20px',
+
+                              display: 'block',
+                              width: '80px',
+                              height: '80px',
+                              border: '4px solid hsla(98,55%,69%,.2)',
+                              borderRadius: '50%',
+                              boxSizing: 'content-box',
+                          }}
+                    />}
                     </Grid>
                     <Grid item>
                         <Typography variant={'h4'}>
@@ -102,30 +104,34 @@ const MyCredits = props => {
                     </Grid>
 
                 </Grid>)
-            });
+            })
         setTimeout(
             () => redirectUrl('/', history)
             , 1000
         )
-    };
+    }
 
 
-    return (
-        <Grid container justify={'flex-end'} className={classes.root}>
-            <Dialog
-                opacity={true}
-                ref={dialogRef}
-                title={
-                    <Button className={classes.button}>My Credits</Button>
-                }
-                dialog={<MyAccount
-                    dialog={dialogRef.current}
-                />}
-            />
+        return (
+            <Grid container justify={'flex-end'} className={classes.root}>
+                <Dialog
+                    opacity={true}
+                    ref={dialogRef}
+                    title={
+                        <Button className={classes.button}>My Account</Button>
+                    }
+                    dialog={<MyAccount
+                        dialog={dialogRef.current}
 
-        </Grid>
-    )
-};
+                    />}
+                />
 
+            </Grid>
+        )
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyCredits))
+MyCredits.propTypes = {
+    classes: PropTypes.object.isRequired,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(MyCredits))))

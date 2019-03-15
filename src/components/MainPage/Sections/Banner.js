@@ -7,14 +7,14 @@ import FeedsWall from '../../Widget/FeedsWall/Wrapper'
 const Banner = props => {
 
     const {
-        hasFeedsToShow, latestArticle, feeds, history
-    } = props;
+        hasFeedsToShow,latestArticle,feeds,history
+    }= props
     return hasFeedsToShow && <Fragment>
         <Grid item xs={12}>
             <Carousel
                 data={latestArticle.map(n => n.sections[0].medias[0])}
                 title={latestArticle.map(n => n.sections[0].title) || ''}
-                onClick={() => redirectUrl(`/feeds/${latestArticle.id}`, history)}/>
+                onClick={() => redirectUrl(`/feeds/${latestArticle.id}`,history)}/>
         </Grid>
         <Grid item xs={12} style={{marginTop: 80}}>
             <FeedsWall
@@ -23,7 +23,7 @@ const Banner = props => {
         </Grid>
     </Fragment>
 
-};
+}
 
 
 export default Banner

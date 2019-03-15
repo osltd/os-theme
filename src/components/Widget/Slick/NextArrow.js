@@ -1,7 +1,7 @@
 import React from "react";
-import {makeStyles} from "@material-ui/styles";
+import {withStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
+const style = theme => ({
     root: {
         '&:hover': {
             '&:before': {
@@ -23,22 +23,24 @@ const useStyles = makeStyles(theme => ({
         }
 
     }
-}));
+})
 
-const NextArrow = props => {
-    const classes = useStyles();
-    const {style, onClick} = props;
-    return (
-        <span
-            className={classes.root + ' ' + 'icon-right-16'}
-            style={{...style,}}
-            onClick={onClick}
+class NextArrow extends React.Component {
+    render() {
 
-        />
+        const {classes, className, style, onClick} = this.props;
+        return (
+            <span
+                className={classes.root + ' ' + 'icon-right-16'}
+                style={{...style,}}
+                onClick={onClick}
+
+            />
 
 
-    )
+        )
 
-};
+    }
+}
 
-export default (NextArrow)
+export default withStyles(style)(NextArrow)

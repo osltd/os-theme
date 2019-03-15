@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import {Theme} from '@material-ui/core/styles';
-import {socialIcon} from "../../constants/enum";
-import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
+import PropTypes from 'prop-types';
+import {Theme, withStyles} from '@material-ui/core/styles';
+import {MaterialUIClasses} from "../../interfaces/client/Common";
+
+const styles = (theme:Theme) => ({
     root: {
         padding: '12px',
         border: '1px solid ' + theme.palette.secondary.main,
@@ -88,39 +89,36 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 
     }
-}));
-
+})
 interface Props {
+    classes:MaterialUIClasses,
     label: string
-    onClick: () => void,
-    type: socialIcon
+    onClick: ()=>void,
+    type:string
 
 }
 
-
-const SocialIcon: React.FunctionComponent<Props> = (props) => {
-    const classes = useStyles();
-
-    const {type, onClick} = props;
-    let getIconType = (type: string): string => {
+const SocialIcon:React.FunctionComponent<Props> = (props) => {
+    const {classes, type, onClick} = props
+    let getIconType = (type:string):string => {
         switch (type) {
             case 'reddit':
-                return 'icon-reddit';
+                return 'icon-reddit'
             case 'youtube':
-                return 'icon-youtube';
+                return 'icon-youtube'
             case 'twitter':
-                return 'icon-twitter';
+                return 'icon-twitter'
             case 'facebook':
-                return 'icon-facebook2';
+                return 'icon-facebook2'
             case 'whatsapp':
-                return 'icon-whatsapp';
+                return 'icon-whatsapp'
 
             default:
                 return 'icon-facebook2'
         }
-    };
+    }
     return <div onClick={onClick} className={classNames(classes[type], classes.root, getIconType(type),)}/>
 
-};
+}
 
-export default (SocialIcon);
+export default withStyles(styles)(SocialIcon);

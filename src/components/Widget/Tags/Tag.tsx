@@ -1,11 +1,11 @@
 import React from 'react';
-import {Fab, Theme} from '@material-ui/core'
+import {Button, Fab, Theme} from '@material-ui/core'
+import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames'
 import {MaterialUIClasses} from "../../../interfaces/client/Common";
 import createStyles from "@material-ui/core/es/styles/createStyles";
-import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const styles = (theme: Theme) => createStyles({
     root: {
         display: 'inline-block',
         borderRadius: 0,
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 
     }
-}));
+});
 
 interface Props {
     selected?: boolean,
@@ -36,12 +36,13 @@ interface Props {
 }
 
 const Tag: React.FunctionComponent<Props> = props => {
-    const classes = useStyles();
+
     const {
+        classes,
         value,
         onClick,
         selected
-    } = props;
+    } = props
     return (
         <Fab variant={"extended"}
              onClick={onClick}
@@ -50,6 +51,6 @@ const Tag: React.FunctionComponent<Props> = props => {
         </Fab>
 
     )
-};
+}
 
-export default Tag
+export default withStyles(styles)(Tag);

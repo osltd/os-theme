@@ -1,14 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
+import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {Button, Grid, Typography} from '@material-ui/core'
+import {Grid, Typography} from '@material-ui/core'
+import CustomButton from '../../Widget/Button/BlackButton'
+import CButton from '../../Widget/Button/Button'
 import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
-import {makeStyles} from "@material-ui/styles";
-
-const useStyles = makeStyles(theme => ({
+import {Button} from '@material-ui/core'
+const styles = theme => ({
 
     root: {
         paddingRight: '50px',
@@ -17,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         height: 0,
         zIndex: 10000,
         '& :hover': {
-            color: theme.palette.primary.main,
+            color: 'black',
 
         }
     }, dialog: {
@@ -26,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         color: 'white',
         transition: '0.2s',
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: 'black',
 
     },
     textAlign: {
@@ -34,7 +38,8 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: '20px',
     }
 
-}));
+})
+
 const mapStateToProps = state => ({
     user: state.auth.user,
 });
@@ -72,15 +77,14 @@ const logout = (props) => {
                         </Grid>
 
                     </Grid>)
-                });
+                })
             setTimeout(() => redirectUrl('/', props.history), 1000)
         }
     ).catch(err => console.log(err))
-};
+}
 
 const MyAccount = (props) => {
-    const classes = useStyles();
-    const {width, user, history} = props;
+    const {classes, width, user, history} = props;
     return (!_.isEmpty(user)) ?
 
         <Grid container
@@ -98,7 +102,7 @@ const MyAccount = (props) => {
                 </Typography>
             </Grid>
             <Grid item xs={8}>
-                <Button
+                <CustomButton
                     onClick={logout}
                     value={'Logout'}
                 />
@@ -116,31 +120,45 @@ const MyAccount = (props) => {
                         Log in or sign up to earn rewards today
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
-                    <Button
+                <Grid item md={4} xs={12}>
+                    <CustomButton
                         onClick={() => {
-                            props.dialog && props.dialog.handleClose();
+                            props.dialog && props.dialog.handleClose()
                             redirectUrl('/login', history)
                         }}
-
                         value={'Log In'}/>
                 </Grid>
-                <Grid item xs={1}/>
-                <Grid item xs={4}>
+                <br/>
+                <Grid item xs={12} md={1}/>
 
-                    <Button
+                <Grid item md={4} xs={12}>
+
+                    <Button variant={"contained"}
+                            style={
+                                {
+                                    boxShadow:'none',
+                                    padding:'20px',
+                                    borderRadius:0,
+                                }
+                            }
+                            fullWidth={true}
                         onClick={() => {
-                            props.dialog && props.dialog.handleClose();
+                            props.dialog && props.dialog.handleClose()
                             redirectUrl('/register', history)
                         }}
 
-                        value={'Register'}
-                    />
+
+                    >
+                      Register
+                    </Button>
                 </Grid>
 
             </Grid>)
 
-};
+}
 
+MyAccount.propTypes = {
+    classes: PropTypes.object.isRequired,
+}
 
-export default connect(mapStateToProps, {})((withWidth()(MyAccount)))
+export default connect(mapStateToProps, {})(withRouter(withWidth()(withStyles(styles)(MyAccount))))

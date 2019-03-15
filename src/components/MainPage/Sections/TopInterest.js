@@ -1,26 +1,29 @@
+import {isWidthUp} from "@material-ui/core/withWidth/index";
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import MultiItems from '../../Widget/Slick/MultiplyItems'
-
+import Slick from './Widget/Slick'
 const TopInterest = props => {
-    const {hasProductsToShow, products, search} = props;
-    let keyword = search ? search : '';
-    let selectedProducts = (search && products) ? products.filter((n) => n.tags.find(m => m.toLowerCase() === keyword)) : products;
+
+    const {hasProductsToShow, products, width, classes} = props.self
 
 
-    return (products) ?
-        <Grid container>
-            <Grid item>
-                <Typography variant={'h4'}>
-                    TOP INTERESTING
-                </Typography>
-            </Grid>
-            <Grid item xs={12}>
-                <MultiItems data={selectedProducts}/>
-            </Grid>
-        </Grid> : null
+    return (products)?
+     <section className={classes.section}>
+        <div>
+            <Typography variant={'h4'} className={classes.title}>
+                TOP INTERESTING
+            </Typography>
+        </div>
+        <div>
+            <Slick
+            self={props.self}
 
-};
+            />
+        </div>
+    </section>: null
+
+}
 
 
 export default TopInterest

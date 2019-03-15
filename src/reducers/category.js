@@ -1,7 +1,7 @@
 import {CATEGORY_INIT_CATEGORY} from "../constants/actionType";
 
 const defaultState = {
-    category: []
+    category:[]
 };
 
 export default (state = defaultState, action) => {

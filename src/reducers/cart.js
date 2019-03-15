@@ -18,7 +18,7 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-    let detail = Object.assign({}, state.detail);
+    let detail = Object.assign({}, state.detail)
 
     switch (action.type) {
         case CART_EDIT_VARIANT:
@@ -28,18 +28,18 @@ export default (state = defaultState, action) => {
                     ...state.variant,
                     [action.payload.key]: action.payload.value,
                 }
-            };
+            }
         case CART_SAVE_PRODUCT_TO_CART: {
 
-            let shoppingCart = Array.from(state.shoppingCart);
+            let shoppingCart = Array.from(state.shoppingCart)
             let existedInCart = shoppingCart.find(n => {
                     if (n.variantId === action.payload.variantId) {
-                        n.number += action.payload.number;
+                        n.number += action.payload.number
                         return true
                     }
                     return false
                 }
-            );
+            )
 
             if (!(existedInCart)) {
                 shoppingCart.push(
@@ -51,7 +51,7 @@ export default (state = defaultState, action) => {
                     }
                 )
             }
-            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
 
             return {
                 ...state,
@@ -59,7 +59,7 @@ export default (state = defaultState, action) => {
             }
         }
         case CART_INIT_SHOPPING_CART: {
-            if (!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]));
+            if (!(action.payload)) localStorage.setItem('shoppingCart', JSON.stringify([]))
             return {
                 ...state,
                 shoppingCart: action.payload ? action.payload : []
@@ -72,19 +72,19 @@ export default (state = defaultState, action) => {
             }
         }
         case CART_OPERATE_SHOPPING_CART: {
-            let shoppingCart = Array.from(state.shoppingCart);
+            let shoppingCart = Array.from(state.shoppingCart)
             switch (action.payload.key) {
                 case 'remove':
-                    shoppingCart.splice(action.payload.value, 1);
-                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+                    shoppingCart.splice(action.payload.value, 1)
+                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
                     return {
                         ...state,
                         shoppingCart: shoppingCart,
-                    };
+                    }
                 default:
-                    const {index, count} = action.payload.value;
-                    shoppingCart[index].number = count;
-                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+                    const {index, count} = action.payload.value
+                    shoppingCart[index].number = count
+                    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
                     return {
                         ...state,
                         shoppingCart: shoppingCart,
@@ -92,9 +92,9 @@ export default (state = defaultState, action) => {
             }
         }
         case CART_EDIT_BILLING_DETAIL: {
-            let billingDetail = Object.assign({}, state.billingDetail);
-            const {key, value} = action.payload;
-            billingDetail[key] = value;
+            let billingDetail = Object.assign({}, state.billingDetail)
+            const {key, value} = action.payload
+            billingDetail[key] = value
             return {
                 ...state,
                 billingDetail: billingDetail,

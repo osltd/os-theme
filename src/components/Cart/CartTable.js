@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import {Button, Grid, TableBody, Tooltip, Typography} from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, refactorTextLength} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, refactorTitle} from "../../api/ApiUtils";
 import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -16,11 +18,10 @@ import {
     PRODUCT_EDIT_FILTER,
     PRODUCT_EDIT_SORT
 } from "../../constants/actionType";
-import {makeStyles} from "@material-ui/styles";
 
 const TAX_RATE = 0.07;
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
@@ -45,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     block: {
         //   border: ' 1px solid ' + theme.palette.secondary.light,
     }
-}));
+});
 
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
@@ -83,13 +84,13 @@ const mapDispatchToProps = dispatch => ({
             },
         })
     }
-);
-const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
+)
+const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
 
 const ShoppingCartTable = (props) => {
-    const {shoppingCart} = props;
-    const classes = useStyles();
-    if (shoppingCart === null) return <LoadingPage/>;
+    const {classes, shoppingCart} = props;
+
+    if (shoppingCart === null) return <LoadingPage/>
 
     return (
         shoppingCart.length > 0 ?
@@ -138,7 +139,7 @@ const ShoppingCartTable = (props) => {
                                     title={'( ' + n.product.variants.find(variant => variant.id === n.variantId).description
                                     + ' )'}>
                                     <div>
-                                        {refactorTextLength(n.product.name, 20)
+                                        {refactorTitle(n.product.name)
                                         }</div>
                                 </Tooltip>
 
@@ -200,7 +201,11 @@ const ShoppingCartTable = (props) => {
             </Grid>
 
     );
+}
+
+
+ShoppingCartTable.propTypes = {
+    classes: PropTypes.object.isRequired,
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShoppingCartTable))
