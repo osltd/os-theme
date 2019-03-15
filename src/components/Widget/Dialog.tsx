@@ -1,4 +1,4 @@
-import React, {Fragment, forwardRef, ReactNode, useState, useImperativeMethods} from 'react';
+import React, {Fragment, forwardRef, ReactNode, useState, useImperativeHandle} from 'react';
 import {Dialog} from '@material-ui/core';
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
@@ -33,7 +33,7 @@ const ResponsiveDialog: React.FunctionComponent<Props> = forwardRef((props, ref)
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const {fullScreen, dialog, opacity, title} = props;
-    useImperativeMethods(ref, () => ({
+    useImperativeHandle(ref, () => ({
         handleClose:() =>setOpen(false)
     }));
 
@@ -41,7 +41,6 @@ const ResponsiveDialog: React.FunctionComponent<Props> = forwardRef((props, ref)
         <Fragment>
             <span onClick={() => setOpen(true)}>{title}</span>
             <Dialog
-
                 className={classNames(opacity ? classes.opacity : '', classes.dialog)}
                 fullScreen={(fullScreen)}
                 open={open}
