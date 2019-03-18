@@ -10,6 +10,9 @@ import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
+import {I18nText} from "../../Widget/I18nText";
+import {keyOfI18n} from "../../../constants/locale/interface";
+import {useI18nText} from "../../../hooks/useI18nText";
 
 const styles = theme => ({
 
@@ -67,12 +70,12 @@ const logout = (props) => {
                         </Grid>
                         <Grid item>
                             <Typography variant={'h4'}>
-                                You have successfully logout!
+                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SUCCESSFULLY_LOGOUT}/>
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant={'subtitle1'}>
-                                see you </Typography>
+                               <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
                         </Grid>
 
                     </Grid>)
@@ -97,7 +100,7 @@ const MyAccount = (props) => {
                     {
 
                         ((user['first_name']) && (user['last_name'])) ?
-                            `${user['first_name']} ${user['last_name']} welcome back` : 'welcome back'}
+                            `${user['first_name']} ${user['last_name']} ${useI18nText(keyOfI18n.AUTH_ACCOUNTS_SEE_YOU)} ${useI18nText(keyOfI18n.AUTH_ACCOUNTS_SEE_YOU)}` : 'welcome back'}
                 </Typography>
             </Grid>
             <Grid item xs={8}>

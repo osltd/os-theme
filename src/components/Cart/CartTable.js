@@ -104,7 +104,7 @@ const ShoppingCartTable = (props) => {
                             >Image</TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>useI Product</TableCell>
+                                numeric>Product</TableCell>
                             <TableCell
                                 className={classes.block}
                                 numeric>Price</TableCell>

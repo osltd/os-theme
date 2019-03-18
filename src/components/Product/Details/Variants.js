@@ -4,7 +4,6 @@ import Tag from '../../Widget/Tags/Tag'
 
 let Variants = (props) => {
     const {keyName, index, variantOptions, needRender = true} = props;
-    console.log('variants');
     console.log(props);
     let needInit = !(props.draft[keyName]);
     if (needInit || !needRender) props.editCartVariant(keyName, variantOptions[index][0]);

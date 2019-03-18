@@ -35,6 +35,7 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
+import {zh_HK} from "../constants/locale/zh_HK";
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -144,6 +145,9 @@ const App = props => {
 
     useEffect(
         () => {
+
+
+
             initApp().then(
                 async () =>
                     props.finishLoadingProducts(
