@@ -2,11 +2,11 @@ import React from 'react';
 import {Grid, Typography} from '@material-ui/core'
 import Slick from './Widget/Slick'
 
-const FEATURED_PRODUCTS = 'featured'
+const FEATURED_PRODUCTS = 'featured';
 
 const TopInterest = props => {
 
-    const {hasProductsToShow, products, width, classes} = props.self
+    const {hasProductsToShow, products, width, classes} = props.self;
 
     return (products) ?
         <section className={classes.section}>
@@ -22,7 +22,7 @@ const TopInterest = props => {
             </div>
         </section> : null
 
-}
+};
 
 
 export default TopInterest

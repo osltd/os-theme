@@ -14,14 +14,14 @@ const styles = theme => ({
 });
 
 
-const NotFound =props=> {
-        const {classes, msg} = props;
-        return (
-            <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-                <Typography
-                    variant={'subtitle1'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
-            </Grid>);
-    }
+const NotFound = props => {
+    const {classes, msg} = props;
+    return (
+        <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
+            <Typography
+                variant={'subtitle1'}>{msg ? msg : "cant't find current page due to network problem"}</Typography>
+        </Grid>);
+};
 
 NotFound.propTypes = {
     classes: PropTypes.object.isRequired,

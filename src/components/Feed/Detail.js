@@ -5,14 +5,12 @@ import {connect} from 'react-redux'
 import Header from '../Layout/Body/Header'
 import moment from 'moment'
 import List from '../Widget/List'
-import {getTagsCountsArray,redirectUrl, refactorTextLength} from "../../api/ApiUtils";
+import {getTagsCountsArray, redirectUrl, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
 import classNames from 'classnames'
 import ReactHtmlParser from "react-html-parser";
-
-import * as styleGuide from "../../constants/styleGuide";
 
 const styles = theme => (
     {
@@ -30,14 +28,14 @@ const styles = theme => (
             cursor: 'pointer',
 
         },
-        basicInfo:{
-            paddingBottom:'10px',
+        basicInfo: {
+            paddingBottom: '10px',
         },
-        basicInfoText:{
-            display:"inline-block",
-            paddingLeft:'5px',
+        basicInfoText: {
+            display: "inline-block",
+            paddingLeft: '5px',
         }
-    })
+    });
 
 
 const mapStateToProps = state => ({
@@ -57,22 +55,22 @@ const mapDispatchToProps = dispatch => ({
 
 
     }
-)
+);
 
 const FeedDetail = (props) => {
 
-    const {feeds, match, classes, editFeedFilter, history} = props
-    const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id))
-    if(!props.products) return <LoadingPage/>
+    const {feeds, match, classes, editFeedFilter, history} = props;
+    const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id));
+    if (!props.products) return <LoadingPage/>;
     if (hasValidFeed()) {
-        const feed = feeds.find(n => n.id.toString() === match.params.id)
+        const feed = feeds.find(n => n.id.toString() === match.params.id);
         return (
             <Grid container justify={'center'} className={classes.root}>
                 <Header title={refactorTextLength(feed.sections[0].title)}/>
                 <Grid item container spacing={16} xs={12} lg={10}>
                     {
                         false && <Grid item container alignItems={'center'} xs={12}
-                                       onClick={() => redirectUrl('/feed',history)}
+                                       onClick={() => redirectUrl('/feed', history)}
                                        className={classes.backArrow}>
                             <span
                                 className={classNames('icon-circle-left', classes.backIcon)}/>
@@ -84,7 +82,7 @@ const FeedDetail = (props) => {
                     <Grid item xs={12} md={3}>
                         <List
                             data={getTagsCountsArray(feeds, (tag, number) => {
-                                editFeedFilter('tag', tag)
+                                editFeedFilter('tag', tag);
                                 redirectUrl('/feeds', history, false)
                             })}
                             title={'FEED CATEGORIES'}/>
@@ -100,7 +98,7 @@ const FeedDetail = (props) => {
                               spacing={16} xs={12}>
                             <Grid item>
                                 <span className={'icon-icons8-edit'}/>
-                                 <Typography variant={'subtitle1'} className={classes.basicInfoText}>
+                                <Typography variant={'subtitle1'} className={classes.basicInfoText}>
                                     {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : 'no authors'}
                                 </Typography>
                             </Grid>
@@ -137,7 +135,7 @@ const FeedDetail = (props) => {
     } else {
         return <LoadingPage/>
     }
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FeedDetail))

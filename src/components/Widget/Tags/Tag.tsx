@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Fab, Theme} from '@material-ui/core'
+import {Fab, Theme} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames'
 import {MaterialUIClasses} from "../../../interfaces/client/Common";
@@ -13,11 +13,11 @@ const styles = (theme: Theme) => createStyles({
         margin: '5px',
         fontWeight: 500,
         cursor: 'pointer',
-        boxShadow:'none',
+        boxShadow: 'none',
         color: theme.palette.primary.light,
         background: 'rgb(242,242,242)',
         '&:hover': {
-            color:'rgb(242,242,242)',
+            color: 'rgb(242,242,242)',
             background: theme.palette.primary.light,
         }
     }, selected: {
@@ -42,7 +42,7 @@ const Tag: React.FunctionComponent<Props> = props => {
         value,
         onClick,
         selected
-    } = props
+    } = props;
     return (
         <Fab variant={"extended"}
              onClick={onClick}
@@ -51,6 +51,6 @@ const Tag: React.FunctionComponent<Props> = props => {
         </Fab>
 
     )
-}
+};
 
 export default withStyles(styles)(Tag);

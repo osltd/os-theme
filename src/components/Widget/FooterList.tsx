@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {History} from 'history'
 import {Theme, withStyles} from '@material-ui/core/styles';
 import {List, Typography} from '@material-ui/core';
@@ -35,7 +34,7 @@ const FooterList: React.FunctionComponent<Props> = props => {
         , {label: "My Account", url: ""}
         , {label: "Login", url: "login"}
         , {label: "Register", url: "register"}
-    ]
+    ];
     return (
         <div className={classes.root}>
             <List component="nav">
@@ -63,6 +62,6 @@ const FooterList: React.FunctionComponent<Props> = props => {
             </List>
         </div>
     )
-}
+};
 
 export default (withStyles(styles)(FooterList))

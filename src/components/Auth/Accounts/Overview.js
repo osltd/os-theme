@@ -4,14 +4,13 @@ import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {Grid, Typography} from '@material-ui/core'
+import {Button, Grid, Typography} from '@material-ui/core'
 import CustomButton from '../../Widget/Button/BlackButton'
-import CButton from '../../Widget/Button/Button'
 import {redirectUrl} from "../../../api/ApiUtils";
 import _ from 'lodash'
 import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
-import {Button} from '@material-ui/core'
+
 const styles = theme => ({
 
     root: {
@@ -38,7 +37,7 @@ const styles = theme => ({
         paddingBottom: '20px',
     }
 
-})
+});
 
 const mapStateToProps = state => ({
     user: state.auth.user,
@@ -77,11 +76,11 @@ const logout = (props) => {
                         </Grid>
 
                     </Grid>)
-                })
+                });
             setTimeout(() => redirectUrl('/', props.history), 1000)
         }
     ).catch(err => console.log(err))
-}
+};
 
 const MyAccount = (props) => {
     const {classes, width, user, history} = props;
@@ -123,7 +122,7 @@ const MyAccount = (props) => {
                 <Grid item md={4} xs={12}>
                     <CustomButton
                         onClick={() => {
-                            props.dialog && props.dialog.handleClose()
+                            props.dialog && props.dialog.handleClose();
                             redirectUrl('/login', history)
                         }}
                         value={'Log In'}/>
@@ -136,29 +135,29 @@ const MyAccount = (props) => {
                     <Button variant={"contained"}
                             style={
                                 {
-                                    boxShadow:'none',
-                                    padding:'20px',
-                                    borderRadius:0,
+                                    boxShadow: 'none',
+                                    padding: '20px',
+                                    borderRadius: 0,
                                 }
                             }
                             fullWidth={true}
-                        onClick={() => {
-                            props.dialog && props.dialog.handleClose()
-                            redirectUrl('/register', history)
-                        }}
+                            onClick={() => {
+                                props.dialog && props.dialog.handleClose();
+                                redirectUrl('/register', history)
+                            }}
 
 
                     >
-                      Register
+                        Register
                     </Button>
                 </Grid>
 
             </Grid>)
 
-}
+};
 
 MyAccount.propTypes = {
     classes: PropTypes.object.isRequired,
-}
+};
 
 export default connect(mapStateToProps, {})(withRouter(withWidth()(withStyles(styles)(MyAccount))))

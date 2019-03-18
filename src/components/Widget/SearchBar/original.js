@@ -19,7 +19,7 @@ const styles = theme => ({
         margin: 'auto',
         '&:before': {}
     }
-})
+});
 
 class SearchBar extends React.Component {
     state = {

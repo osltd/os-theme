@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch => ({
 
 
     }
-)
+);
 
 class Media extends React.Component {
     state = {
@@ -67,16 +67,16 @@ class Media extends React.Component {
         });
     };
     getMedia = data => {
-        console.log('-----------')
-        console.log(data)
-        const {classes} = this.props
+        console.log('-----------');
+        console.log(data);
+        const {classes} = this.props;
         if (data.length > 0 && data[0].ext === 'product') {
-            const productId = data[0].url
+            const productId = data[0].url;
 
-            let validProduct = this.props.products.find(n => n.id.toString() === productId)
+            let validProduct = this.props.products.find(n => n.id.toString() === productId);
             if (validProduct && this.state.type !== 'product') this.setState({
                 type: 'product'
-            })
+            });
             return (validProduct) ? (
 
                 <ProductOverviewBox
@@ -87,18 +87,18 @@ class Media extends React.Component {
                     regPrice={validProduct.variants[0] ? validProduct.variants[0].price : 'not a reg price'}
                     promotePrice={validProduct.promotePrice}
                 />
-            ) :null
-                // <Grid container alignItems={'center'} justify={"center"}> <Typography variant={'h6'} >
-                //     there should be product {productId} here,<br/> but product {productId} is no longer exist</Typography></Grid>
-                //
+            ) : null
+            // <Grid container alignItems={'center'} justify={"center"}> <Typography variant={'h6'} >
+            //     there should be product {productId} here,<br/> but product {productId} is no longer exist</Typography></Grid>
+            //
         }
-        if (data.length === 0) return null
+        if (data.length === 0) return null;
         if (data.length > 0 && data[0].ext.indexOf('product://') !== -1) {
-            const productId = data[0].ext.replace(/^\D+/g, '')
-            let validProduct = this.props.products.find(n => n.id.toString() === productId)
+            const productId = data[0].ext.replace(/^\D+/g, '');
+            let validProduct = this.props.products.find(n => n.id.toString() === productId);
             if (validProduct && this.state.type !== 'product') this.setState({
                 type: 'product'
-            })
+            });
             return (validProduct) ? (
 
                 <ProductOverviewBox
@@ -126,18 +126,18 @@ class Media extends React.Component {
                     controls>
                     <source src={data[0].url}
                             type="video/mp4"/>
-                </video>
+                </video>;
             default:
                 return <Slick
                     data={data.map(n => ({url: n.url,}))}
                 />
         }
-    }
+    };
 
     render() {
         const {classes, data, box} = this.props;
 
-console.log(data)
+        console.log(data);
         return <Grid container justify={'center'}
         >
             <Grid item xs={12} lg={this.state.type === 'product' && !box ? 6 : 12}>

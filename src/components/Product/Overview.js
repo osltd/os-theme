@@ -9,7 +9,7 @@ import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
 
 const styles = theme => {
-    console.log(theme)
+    console.log(theme);
 
     return (
         {
@@ -21,26 +21,26 @@ const styles = theme => {
             },
         })
 
-}
+};
 
 
 const mapStateToProps = state => ({
     products: state.product.products,
     feeds: state.feed.feeds,
     category: state.category.category,
-})
+});
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
 class ResponsiveDialog extends React.Component {
-    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id)
+    hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id);
 
     render() {
-        if (!this.props.products) return <LoadingPage/>
-        const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id)
-        const variantOptions = getVariantOptions(product.variants)
+        if (!this.props.products) return <LoadingPage/>;
+        const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id);
+        const variantOptions = getVariantOptions(product.variants);
         return <Grid container alignItems={'center'} justify={'center'}>
             <Grid item xs={12}>
                 <Header
@@ -50,13 +50,13 @@ class ResponsiveDialog extends React.Component {
             </Grid>
             <Grid item xs={10}>
 
-                 <Detail
-                     variantOptions={Object.values(variantOptions)}
-                     variantKeys={Object.keys(variantOptions)}
-                     description={product.description}
-                     product={product}
+                <Detail
+                    variantOptions={Object.values(variantOptions)}
+                    variantKeys={Object.keys(variantOptions)}
+                    description={product.description}
+                    product={product}
 
-                    />
+                />
 
 
             </Grid>

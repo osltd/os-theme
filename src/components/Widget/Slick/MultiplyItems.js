@@ -13,7 +13,7 @@ const style = theme => ({
         margin: '40px',
         width: 'calc(100%-80px)'
     },
-})
+});
 
 class MultipleItems extends Component {
     render() {

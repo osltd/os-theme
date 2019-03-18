@@ -2,17 +2,16 @@ import PropTypes from "prop-types";
 import React from 'react'
 import {Grid, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
-import SearchBar from '../Widget/SearchBar/email'
 import FooterList from '../Widget/FooterList'
 import Tag from '../Widget/Tags/Tag'
 import SocialIcon from '../Widget/SocialIcon'
 import {connect} from "react-redux";
-import {redirectUrl,getTagsCountsArray} from "../../api/ApiUtils";
+import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
 
 const styles = theme => ({
     root: {
-        marginTop:'50px',
+        marginTop: '50px',
         padding: '50px 10px',
         backgroundColor: 'black',
         color: 'white',
@@ -20,8 +19,8 @@ const styles = theme => ({
     emailBar: {
         marginBottom: '30px',
     },
-    title:{
-        textTransform:'uppercase'
+    title: {
+        textTransform: 'uppercase'
     }
 });
 
@@ -36,29 +35,29 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
 class Footer extends React.Component {
 
     getTags = () => {
         //todo(handle err)
-        const {products, feeds} = this.props
-        let productsArr = getTagsCountsArray(products, () => console.log('ggg'))
-        let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
-        delete productsTags[_.indexOf(productsTags, 'all')]
+        const {products, feeds} = this.props;
+        let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
+        let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : [];
+        delete productsTags[_.indexOf(productsTags, 'all')];
         // let feedsArr = getTagsCountsArray(feeds, () => redirectUrl('/', this.props.history))
         // let feedsTags = (feedsArr && feedsArr.length > 0) ? feedsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
         //
         //
         // let allTags =_.uniq(productsTags.concat(feedsTags))
-        console.log(productsTags)
+        console.log(productsTags);
 
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={3} style={
                 {
-                    marginTop:'25px'
+                    marginTop: '25px'
                 }
-            }  container direction={'column'} spacing={8}>
+            } container direction={'column'} spacing={8}>
                 <Grid item>
                     <Typography variant={'h6'} className={this.props.classes.title} color={'inherit'}>tags</Typography>
                 </Grid>
@@ -76,7 +75,7 @@ class Footer extends React.Component {
                 </Grid>
             </Grid>
         )
-    }
+    };
 
     render() {
         const {classes} = this.props;
@@ -84,15 +83,15 @@ class Footer extends React.Component {
             <Grid container justify={'space-between'} className={classes.root}>
                 {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
                 {/*>*/}
-                    {/*<Grid item>*/}
-                        {/*<Typography variant={'h6'} color={'inherit'}>*/}
-                            {/*NEWSLETTER*/}
-                        {/*</Typography>*/}
-                    {/*</Grid>*/}
+                {/*<Grid item>*/}
+                {/*<Typography variant={'h6'} color={'inherit'}>*/}
+                {/*NEWSLETTER*/}
+                {/*</Typography>*/}
+                {/*</Grid>*/}
 
-                    {/*<Grid item>*/}
-                        {/*<SearchBar/>*/}
-                    {/*</Grid>*/}
+                {/*<Grid item>*/}
+                {/*<SearchBar/>*/}
+                {/*</Grid>*/}
                 {/*</Grid>*/}
                 <Grid item md={1}/>
 
@@ -116,19 +115,19 @@ class Footer extends React.Component {
                 </Grid>
                 <Grid item xs={6} md={3} style={
                     {
-                     marginTop:'25px'
+                        marginTop: '25px'
                     }
                 } container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography className={classes.title} variant={'h6'} color={'inherit'}>
-                           find us on</Typography>
+                            find us on</Typography>
                     </Grid>
                     <Grid item>
                         <FooterList/>
                     </Grid>
                 </Grid>
                 {this.getTags()}
-            <Grid item md={1}/>
+                <Grid item md={1}/>
             </Grid>);
     }
 }

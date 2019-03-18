@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
 import withWidth from "@material-ui/core/withWidth/index";
 import Input from '../../Widget/Input/original'
@@ -28,15 +27,15 @@ const styles = theme => ({
     paddingTop: {
         paddingTop: '20px !important',
     }
-})
+});
 
 const Login = props => {
     let register = () => {
-        const pwdDidNotMatch = (pwd !== confirmPwd)
+        const pwdDidNotMatch = (pwd !== confirmPwd);
         if (pwdDidNotMatch) {
-            props.enqueueSnackbar('Password does not match', styleGuide.errorSnackbar)
-            setPwd('')
-            setConfirmPwd('')
+            props.enqueueSnackbar('Password does not match', styleGuide.errorSnackbar);
+            setPwd('');
+            setConfirmPwd('');
             return null
         }
 
@@ -54,7 +53,7 @@ const Login = props => {
                 if (
                     !res.data.result
                 ) {
-                    res.data.messages.map(n => props.enqueueSnackbar(n, styleGuide.errorSnackbar))
+                    res.data.messages.map(n => props.enqueueSnackbar(n, styleGuide.errorSnackbar));
                     return null
                 }
                 swal({
@@ -90,7 +89,7 @@ const Login = props => {
                         </Grid>
 
                     </Grid>)
-                })
+                });
                 setTimeout(
                     () => redirectUrl('/login', props.history), 1000
                 )
@@ -100,16 +99,16 @@ const Login = props => {
                 n => props.enqueueSnackbar(n, styleGuide.errorSnackbar)
             ) : null
         )
-    }
+    };
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [pwd, setPwd] = useState('')
-    const [confirmPwd, setConfirmPwd] = useState('')
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [confirmPwd, setConfirmPwd] = useState('');
 
 
-    const {classes} = props
+    const {classes} = props;
     return (
 
         <Grid container className={classes.root} justify={'center'} alignItems={'center'}>
@@ -168,6 +167,6 @@ const Login = props => {
             </Grid>
         </Grid>
     );
-}
+};
 
 export default withSnackbar(withWidth()(withStyles(styles)(Login)))

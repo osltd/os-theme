@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core'
 import Header from '../Layout/Body/Header'
@@ -10,10 +9,10 @@ const styles = theme => ({
     shoppingCart: {
         paddingBottom: '30px',
     }
-})
+});
 
 const CartOverview = (props) => {
-    const {classes} = props
+    const {classes} = props;
     return <Grid container justify={'center'}>
         <Grid item sm={12}>
             <Header title={'Shopping Cart'}/>
@@ -23,6 +22,6 @@ const CartOverview = (props) => {
         </Grid>
     </Grid>
 
-}
+};
 
 export default (withStyles(styles)(CartOverview))

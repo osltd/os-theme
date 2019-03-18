@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import {withRouter} from 'react-router-dom'
 import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
-import {handleImgValid, refactorTextLength} from "../../../api/ApiUtils";
-import {redirectUrl} from "../../../api/ApiUtils";
+import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
 
 const styles = theme => ({
@@ -41,12 +40,21 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
 class ShoppingCartList extends React.Component {
     state = {
         anchor: 'left',
     };
+
+    constructor() {
+        super();
+        this.state = {
+            placeHolder: '',
+
+        }
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -54,15 +62,7 @@ class ShoppingCartList extends React.Component {
         });
     };
 
-    constructor() {
-        super()
-        this.state = {
-            placeHolder: '',
-
-        }
-    }
-
-    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product
+    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
 
     render() {
         const {classes, data, onDelete} = this.props;

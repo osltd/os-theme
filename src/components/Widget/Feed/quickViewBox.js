@@ -31,25 +31,10 @@ const styles = props => {
     })
 
 
-}
+};
 
 
 class ResponsiveDialog extends React.Component {
-
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
 
     constructor(props) {
         super(props);
@@ -58,6 +43,23 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
+
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    });
+
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
 
     render() {
         const {classes, src, subTitle, title} = this.props;

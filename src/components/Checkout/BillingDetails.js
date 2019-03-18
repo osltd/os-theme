@@ -67,11 +67,11 @@ const mapDispatchToProps = dispatch => ({
         }),
 
     }
-)
+);
 
 class ShoppingCartTable extends React.Component {
 
-    getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
+    getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
     getShippingRate = async () => {
         this.props.editBillingDetail(
             'shippingOptions', await agent.Checkout.getShippingRate({
@@ -83,10 +83,10 @@ class ShoppingCartTable extends React.Component {
                 }
             )
         )
-    }
+    };
     getShippingMethod = () => {
-        const {classes} = this.props
-        let hasValidShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0)
+        const {classes} = this.props;
+        let hasValidShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0);
 
         return <Grid item container justify={'space-between'} xs={12}>
             {hasValidShippingMethod ? <Grid item xs={12}>
@@ -134,7 +134,7 @@ class ShoppingCartTable extends React.Component {
 
         </Grid>
 
-    }
+    };
 
 
     componentDidUpdate(prevProps, prevState, snapShot) {
@@ -274,11 +274,11 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         title={'CVC'}
                         placeholder={'XXX'}
-type={"password"}
+                        type={"password"}
 
 
-                        onChange={value =>{
-                            if(value.length<=3) this.props.editBillingDetail('cvc', value)
+                        onChange={value => {
+                            if (value.length <= 3) this.props.editBillingDetail('cvc', value)
                         }}
                         value={billingDetail.cvc}
                     />

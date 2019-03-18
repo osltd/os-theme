@@ -15,7 +15,7 @@ const styles = {
 };
 
 const Terms = props => {
-    const {classes, checked, onChange,label} = props
+    const {classes, checked, onChange, label} = props;
     return (
         <FormControlLabel
             control={
@@ -29,11 +29,11 @@ const Terms = props => {
                     }}
                 />
             }
-            label={label?label:"I have read and agree to the website terms and conditions."}
+            label={label ? label : "I have read and agree to the website terms and conditions."}
         />
 
     )
-}
+};
 
 Terms.propTypes = {
     checked: PropTypes.bool.isRequired,

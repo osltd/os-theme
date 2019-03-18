@@ -34,19 +34,19 @@ const mapDispatchToProps = dispatch => ({
         })
     }
 
-)
+);
 
 class ConfirmPage extends React.Component {
-    handleChange = (event, value) => {
-        this.setState({value});
-    };
-
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             value: 'recents',
         };
     }
+
+    handleChange = (event, value) => {
+        this.setState({value});
+    };
 
     render() {
         const {classes, width} = this.props;
@@ -72,6 +72,6 @@ class ConfirmPage extends React.Component {
 
 ConfirmPage.propTypes = {
     classes: PropTypes.object.isRequired,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(ConfirmPage))))

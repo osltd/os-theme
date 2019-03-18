@@ -70,13 +70,22 @@ const mapDispatchToProps = dispatch => ({
             type: CART_EMPTY_BILLING_DETAIL,
         })
     }
-)
+);
 
 class OrderSummary extends React.Component {
+    constructor(props) {
+        super(props);
+        // Add some default error states
+        this.state = {
+            checked: false,
+        };
+    }
+
     getRowPrice = product => (product.product.variants.find(variant => variant.id === product.variantId) ?
-        product.product.variants.find(variant => variant.id === product.variantId) : product.product).price * product.number
+        product.product.variants.find(variant => variant.id === product.variantId) : product.product).price * product.number;
+
     placeOrder = async () => {
-        const {billingDetail} = this.props
+        const {billingDetail} = this.props;
         const data = {
 
             "items": this.props.shoppingCart.map(n => ({
@@ -95,39 +104,39 @@ class OrderSummary extends React.Component {
                 "cvc": billingDetail.cvc,
                 "date": formatExpiryDate(billingDetail.expiryDate)
             },
-            "email":billingDetail.email,
-            "phone":billingDetail.phone,
+            "email": billingDetail.email,
+            "phone": billingDetail.phone,
 
             "startPurchase": false,
 
             "shipping": billingDetail.selectedShippingMethod,
-        }
-        const {classes} = this.props
-        redirectUrl('/loadingPage', this.props.history, false)
+        };
+        const {classes} = this.props;
+        redirectUrl('/loadingPage', this.props.history, false);
 
         await agent.Checkout.placeOrder(data).then(res => {
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
-                    ) : 'no shipping method provided'
+                    ) : 'no shipping method provided';
                 if (typeof res.data === 'string') {
                     this.props.enqueueSnackbar(res.data + ' please log in first'
-                        , styleGuide.errorSnackbar)
-                    this.props.history.goBack()
+                        , styleGuide.errorSnackbar);
+                    this.props.history.goBack();
                     return null
                 }
                 if (res.data && res.data.messages && res.data.messages.length > 0) {
                     res.data.messages.map(n =>
                         this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-                    )
-                    this.props.history.goBack()
+                    );
+                    this.props.history.goBack();
 
                     return null
                 }
-                let result = res.data.data.orders
+                let result = res.data.data.orders;
                 if (result && result.length > 0) {
                     //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
-                    console.log('gooooood')
+                    console.log('gooooood');
                     swal({
 
                         content: (<Grid container direction={'column'}>
@@ -234,9 +243,9 @@ class OrderSummary extends React.Component {
                             </Grid>
                         </Grid>)
                     });
-                    this.props.emptyShoppingCart()
+                    this.props.emptyShoppingCart();
 
-                    this.props.emptyBillingDetail()
+                    this.props.emptyBillingDetail();
                     redirectUrl('/', this.props.history, false)
 
                 }
@@ -244,33 +253,25 @@ class OrderSummary extends React.Component {
 
             }
         ).catch(err => {
-            console.log(err)
+            console.log(err);
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
                     this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
-                )
+                );
                 this.props.history.goBack()
 
             }
 
         })
 
-    }
-    getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount
+    };
 
-
-    constructor(props) {
-        super(props);
-        // Add some default error states
-        this.state = {
-            checked: false,
-        };
-    }
+    getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;
 
     render() {
-        const {classes, shoppingCart, billingDetail} = this.props
+        const {classes, shoppingCart, billingDetail} = this.props;
         const selectedVariant = n => n.product.variants.find(variant => variant.id === n.variantId) ?
-            n.product.variants.find(variant => variant.id === n.variantId) : n.product
+            n.product.variants.find(variant => variant.id === n.variantId) : n.product;
         return (
             <Paper className={classes.root}>
                 <Table className={classes.table}>

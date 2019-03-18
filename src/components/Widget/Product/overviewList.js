@@ -1,8 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, refactorParaLength} from "../../../api/ApiUtils";
-import {redirectUrl} from "../../../api/ApiUtils";
+import {formatMoney, redirectUrl, refactorParaLength} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
@@ -47,25 +46,10 @@ const styles = theme => ({
         marginBottom: '10px',
     }
 
-})
+});
 
 
 class ResponsiveDialog extends React.Component {
-
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
 
     constructor(props) {
         super(props);
@@ -74,6 +58,23 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
+
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    });
+
+    handleClickOpen = () => {
+        this.setState({open: true});
+    };
+
+    handleClose = () => {
+
+        this.setState({open: false});
+    };
 
     render() {
         const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;

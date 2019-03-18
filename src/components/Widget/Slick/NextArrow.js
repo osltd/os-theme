@@ -23,7 +23,7 @@ const style = theme => ({
         }
 
     }
-})
+});
 
 class NextArrow extends React.Component {
     render() {

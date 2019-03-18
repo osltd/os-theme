@@ -9,7 +9,7 @@ const style = theme => ({
         margin: '40px',
         width: 'calc(100%-80px)',
     },
-})
+});
 
 class AppendDots extends Component {
     render() {
@@ -65,7 +65,7 @@ class AppendDots extends Component {
 
 
         };
-        const {classes, data} = this.props
+        const {classes, data} = this.props;
         return (
             <div className={classes.root}>
                 <Slider {...settings}  >

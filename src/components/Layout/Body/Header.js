@@ -32,39 +32,39 @@ const styles = theme => ({
 
 });
 
-const BodyHeader =(props)=> {
+const BodyHeader = (props) => {
 
 
-        const {classes, title,width,history,match} = props;
-        const routePath = getRoutePath(match.url)
-        return <Grid container
-                     className={classes.root}
-                     direction={'row'}
-                     alignItems={'center'}
-                     justify={'center'}
-        >
-            <Grid item md={2}/>
-            <Grid item md={5} xs={12} container justify={isWidthUp('md',width) ? 'flex-start' : 'center'}>
-                <Typography variant={'h4'} className={classes.title} color={'primary'}>{title}</Typography>
-            </Grid>
-            <Grid item md={3} xs={11} container justify={isWidthUp('md', width) ? 'flex-end' : 'center'}>
-                {routePath.map((n, i) => <Fragment key={i}>
-                            <Grid item>
-                                <Typography variant={'body1'}
-                                            onClick={() => redirectUrl(n.link, history)}
-                                            className={classes.route} color={'secondary'}>{n.label}</Typography>
-                            </Grid>
-                            {i !== routePath.length - 1 &&
-                            <Grid item>
-                                <Typography variant={'body1'}
-                                            onClick={() => redirectUrl(n.link, history)}
-                                            color={'secondary'}>/</Typography> </Grid>
-                            }
-                        </Fragment>)}
-            </Grid>
-            <Grid item md={2}/>
+    const {classes, title, width, history, match} = props;
+    const routePath = getRoutePath(match.url);
+    return <Grid container
+                 className={classes.root}
+                 direction={'row'}
+                 alignItems={'center'}
+                 justify={'center'}
+    >
+        <Grid item md={2}/>
+        <Grid item md={5} xs={12} container justify={isWidthUp('md', width) ? 'flex-start' : 'center'}>
+            <Typography variant={'h4'} className={classes.title} color={'primary'}>{title}</Typography>
         </Grid>
-    }
+        <Grid item md={3} xs={11} container justify={isWidthUp('md', width) ? 'flex-end' : 'center'}>
+            {routePath.map((n, i) => <Fragment key={i}>
+                <Grid item>
+                    <Typography variant={'body1'}
+                                onClick={() => redirectUrl(n.link, history)}
+                                className={classes.route} color={'secondary'}>{n.label}</Typography>
+                </Grid>
+                {i !== routePath.length - 1 &&
+                <Grid item>
+                    <Typography variant={'body1'}
+                                onClick={() => redirectUrl(n.link, history)}
+                                color={'secondary'}>/</Typography> </Grid>
+                }
+            </Fragment>)}
+        </Grid>
+        <Grid item md={2}/>
+    </Grid>
+};
 
 BodyHeader.propTypes = {
 

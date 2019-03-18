@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
@@ -41,15 +41,15 @@ const styles = theme => ({
 
 const PopUp = props => {
 
-    const [open, setOpen] = useState(false)
-    const [anchorEl, setAnchorEl] = useState(null)
+    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     let handleClickButton = event => {
         setAnchorEl(
             event.currentTarget
-        )
+        );
         setOpen(true)
-    }
+    };
     //in parent
     //                                innerRef={e => this.popUp = e}
 //this.popUp.handleClose()
@@ -83,7 +83,7 @@ const PopUp = props => {
             </Popover>
         </Grid>
     );
-}
+};
 
 PopUp.propTypes = {
     classes: PropTypes.object.isRequired,

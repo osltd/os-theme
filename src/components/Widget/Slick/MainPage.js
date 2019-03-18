@@ -32,7 +32,7 @@ const style = theme => ({
 
     }
 
-})
+});
 
 class SimpleSlider extends React.Component {
     render() {
@@ -48,7 +48,7 @@ class SimpleSlider extends React.Component {
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
         };
-        const {data, classes} = this.props
+        const {data, classes} = this.props;
         return (
             data[0] ?
                 <Slider {...settings} className={classes.root}>

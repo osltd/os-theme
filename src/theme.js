@@ -14,11 +14,8 @@ const theme = createMuiTheme({
         },
     },
     overrides: {
-        MuiOutlinedInput:{
-            root:{
-
-
-            }
+        MuiOutlinedInput: {
+            root: {}
 
         },
         MuiButton: { // Name of the component ⚛️ / style sheet
@@ -67,6 +64,6 @@ const theme = createMuiTheme({
         tonalOffset: 0.2,
 
     },
-})
+});
 
 export default theme

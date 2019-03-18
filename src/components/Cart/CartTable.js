@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -84,13 +84,13 @@ const mapDispatchToProps = dispatch => ({
             },
         })
     }
-)
-const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number
+);
+const getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
 
 const ShoppingCartTable = (props) => {
     const {classes, shoppingCart} = props;
 
-    if (shoppingCart === null) return <LoadingPage/>
+    if (shoppingCart === null) return <LoadingPage/>;
 
     return (
         shoppingCart.length > 0 ?
@@ -104,7 +104,7 @@ const ShoppingCartTable = (props) => {
                             >Image</TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Product</TableCell>
+                                numeric>useI Product</TableCell>
                             <TableCell
                                 className={classes.block}
                                 numeric>Price</TableCell>
@@ -201,7 +201,7 @@ const ShoppingCartTable = (props) => {
             </Grid>
 
     );
-}
+};
 
 
 ShoppingCartTable.propTypes = {

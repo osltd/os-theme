@@ -36,7 +36,7 @@ const styles = theme => ({
         }
     }
 
-})
+});
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -46,46 +46,44 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({}
-)
+);
 
-const Login = (props)=> {
-    const {classes, enqueueSnackbar,history} = props
-    const [email, setEmail] = useState('')
-    const [pwd, setPwd] = useState('')
+const Login = (props) => {
+    const {classes, enqueueSnackbar, history} = props;
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
 
 
     const handleLoginProcess = async () =>
-        await  agent.Auth.login({
+        await agent.Auth.login({
             email: email
             , passwd: pwd
         })
             .then(res => {
                 if (!res.data.result) {
-                    res.data.messages.map(n => enqueueSnackbar(n, styleGuide.errorSnackbar))
+                    res.data.messages.map(n => enqueueSnackbar(n, styleGuide.errorSnackbar));
                     return null
                 }
                 if (res.data.result) {
                     //todo('pass user info to redux')
-                    agent.Auth.getAccount().then(res => console.log(res))
+                    agent.Auth.getAccount().then(res => console.log(res));
                     swal(
                         {
                             content: (<Grid container alignItems={'center'} direction={'column'}>
                                 <Grid item>
-                                    { false &&   <span className={'icon-like'}
-
-                          style={{
-                              fontSize: '80px',
-                              color: 'hsla(100,55%,69%,.5)',
-                              padding: '20px',
-
-                              display: 'block',
-                              width: '80px',
-                              height: '80px',
-                              border: '4px solid hsla(98,55%,69%,.2)',
-                              borderRadius: '50%',
-                              boxSizing: 'content-box',
-                          }}
-                    />}
+                                    {false && <span className={'icon-like'}
+                                                    style={{
+                                                        fontSize: '80px',
+                                                        color: 'hsla(100,55%,69%,.5)',
+                                                        padding: '20px',
+                                                        display: 'block',
+                                                        width: '80px',
+                                                        height: '80px',
+                                                        border: '4px solid hsla(98,55%,69%,.2)',
+                                                        borderRadius: '50%',
+                                                        boxSizing: 'content-box',
+                                                    }}
+                                    />}
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'h4'}>
@@ -94,7 +92,7 @@ const Login = (props)=> {
                                 </Grid>
 
                             </Grid>)
-                        })
+                        });
                     setTimeout(
                         () => redirectUrl('/', history), 1000
                     )
@@ -107,11 +105,11 @@ const Login = (props)=> {
                     if (err.response) {
                         err.response.data.messages.map(n =>
                             enqueueSnackbar(n, styleGuide.errorSnackbar)
-                        )
+                        );
                         setPwd('')
                     }
                 }
-            )
+            );
 
 
     return (
@@ -149,7 +147,7 @@ const Login = (props)=> {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography
-                        onClick={()=>redirectUrl('/register',props.history)}
+                        onClick={() => redirectUrl('/register', props.history)}
                         className={classes.blueUnderline}
                         variant={'h6'}>
                         Dont have your own account yet?
@@ -172,6 +170,6 @@ const Login = (props)=> {
             </Grid>
         </Grid>
     )
-}
+};
 
 export default withSnackbar(withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))))

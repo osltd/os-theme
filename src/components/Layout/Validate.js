@@ -16,41 +16,41 @@ const styles = theme => ({
 
 
 const Validate = props => {
-    const {classes} = props
+    const {classes} = props;
     return (
         <Grid container justify={'center'} alignItems={'center'} direction={"column"} className={classes.root}>
             {
                 (props.location.search === '?state=1') ? <>
-                        <Grid item >
+                        <Grid item>
                             <ImageWrapper src={'/img/init/success.jpg'}/>
                         </Grid>
-                        <Grid item  >
+                        <Grid item>
 
-                        <Typography
+                            <Typography
 
-                            variant={"h4"}>{'Thanks for your validation, your account has been activated, you can '}
-                            <Button variant={"contained"} onClick={() => redirectUrl('/login', props.history)}>Log
-                                in</Button>
-                            {' now'}
+                                variant={"h4"}>{'Thanks for your validation, your account has been activated, you can '}
+                                <Button variant={"contained"} onClick={() => redirectUrl('/login', props.history)}>Log
+                                    in</Button>
+                                {' now'}
 
-                        </Typography>
+                            </Typography>
                         </Grid>
                     </> :
                     <>
-                    <Grid item >
+                        <Grid item>
 
-                    <ImageWrapper src={'/img/init/fail.jpg'}/>
-                    </Grid>
-                        <Grid item >
-                        <Typography
+                            <ImageWrapper src={'/img/init/fail.jpg'}/>
+                        </Grid>
+                        <Grid item>
+                            <Typography
 
-                            variant={'h4'}>{'Failed to validate.'}
-                        </Typography>
+                                variant={'h4'}>{'Failed to validate.'}
+                            </Typography>
                         </Grid>
                     </>
             }
         </Grid>);
-}
+};
 
 
 export default withRouter(withStyles(styles)(Validate))

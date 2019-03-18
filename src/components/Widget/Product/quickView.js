@@ -25,18 +25,10 @@ const styles = props => ({
         fontWeight: '900',
     }
 
-})
+});
 
 
 class ResponsiveDialog extends React.Component {
-
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    })
 
     constructor(props) {
         super(props);
@@ -45,6 +37,14 @@ class ResponsiveDialog extends React.Component {
             open: false,
         }
     }
+
+    styles = theme => ({
+        content: {
+            "padding": this.props.padding,
+            "min-height": "100vh",
+            "background-color": this.props.backgroundColor
+        }
+    });
 
     render() {
         const {classes, src, name, category, regPrice, promotePrice} = this.props;

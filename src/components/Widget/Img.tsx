@@ -21,23 +21,22 @@ export const ImageWrapper: React.FunctionComponent<Props> = props => {
     const [loaded, setLoaded] = useState(false);
     useEffect(
         () => {
-if(document.head){
+            if (document.head) {
 
-            const exists = document.head.querySelectorAll('[data-gracefulimage]');
+                const exists = document.head.querySelectorAll('[data-gracefulimage]');
 
-            if (!exists.length) {
-                const styleElement: any = document.createElement('style');
-                // change exists attribute value to true
-                styleElement.setAttribute('data-gracefulimage', 'exists');
+                if (!exists.length) {
+                    const styleElement: any = document.createElement('style');
+                    // change exists attribute value to true
+                    styleElement.setAttribute('data-gracefulimage', 'exists');
 
-                document.head.appendChild(styleElement);
-                styleElement.sheet.insertRule(fadeIn, styleElement.sheet.cssRules.length);
+                    document.head.appendChild(styleElement);
+                    styleElement.sheet.insertRule(fadeIn, styleElement.sheet.cssRules.length);
+                }
             }
-}
 
         }, [loaded]
     );
-
 
     const {onClick, src, className} = props;
     return <Grid item xs={12}>

@@ -33,20 +33,21 @@ class CustomButton extends React.Component {
     state = {
         anchor: 'left',
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            placeHolder: '',
+
+        }
+    }
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
 
         });
     };
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            placeHolder: '',
-
-        }
-    }
 
     render() {
         const {

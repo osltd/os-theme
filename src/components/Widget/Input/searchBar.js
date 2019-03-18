@@ -19,7 +19,7 @@ const styles = theme => ({
         margin: 'auto',
         '&:before': {}
     }
-})
+});
 
 class SearchBar extends React.Component {
     state = {
@@ -28,11 +28,11 @@ class SearchBar extends React.Component {
         weight: '',
         weightRange: '',
         showPassword: false,
-    }
+    };
 
 
     render() {
-        const {classes, placeholder, value, onChange, onKeyPress} = this.props
+        const {classes, placeholder, value, onChange, onKeyPress} = this.props;
 
         return <Grid container alignItems={'center'}>
             <Grid item xs={8}>
