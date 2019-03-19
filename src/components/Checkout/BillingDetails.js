@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from "react-redux";
 import {Button, CircularProgress, Grid, Typography} from '@material-ui/core'
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
-import InputBar from '../Widget/InputBar'
+import InputBar from '../Widget/inputBar'
 import agent from '../../agent'
 import classNames from 'classnames'
 import CountryCode from '../Widget/Input/Country'
@@ -113,8 +113,7 @@ class ShoppingCartTable extends React.Component {
                                         <I18nText keyOfI18n={keyOfI18n.CHARGE}/>: {n.charge}
                                     </Typography>
                                     <Typography variant={'body1'}>
-                                        <I18nText
-                                            keyOfI18n={keyOfI18n.DELIVERY_TIME}/> :{n.deliveryTime.min}{`${useI18nText(keyOfI18n.DAYS)} ${useI18nText(keyOfI18n.TO)} ${n.deliveryTime.max} ${useI18nText(keyOfI18n.DAYS)}`
+                                        <I18nText keyOfI18n={keyOfI18n.DELIVERY_TIME}/> :{n.deliveryTime.min}{`${<I18nText keyOfI18n={keyOfI18n.DAYS}/>} ${<I18nText keyOfI18n={keyOfI18n.TO}/>} ${n.deliveryTime.max} ${<I18nText keyOfI18n={keyOfI18n.DAYS}/>}`
                                     } </Typography>
                                 </Grid>
 
@@ -154,7 +153,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.FIRST_NAME)}
+                        title={<I18nText keyOfI18n={keyOfI18n.FIRST_NAME}/>}
                         placeholder={useI18nText(keyOfI18n.FIRST_NAME)}
                         onChange={value => this.props.editBillingDetail('firstName', value)}
                         value={billingDetail.firstName}
@@ -163,7 +162,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.LAST_NAME)}
+                        title={<I18nText keyOfI18n={keyOfI18n.LAST_NAME}/>}
                         placeholder={useI18nText(keyOfI18n.LAST_NAME)}
                         onChange={value => this.props.editBillingDetail('lastName', value)}
                         value={billingDetail.lastName}
@@ -174,8 +173,9 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         needValidation={true}
 
-                        title={useI18nText(keyOfI18n.EMAIL_ADDRESS)}
+                        title={<I18nText keyOfI18n={keyOfI18n.EMAIL_ADDRESS}/>}
                         placeholder={useI18nText(keyOfI18n.EMAIL_ADDRESS)}
+
 
                         onChange={value => this.props.editBillingDetail('email', value)}
                         value={billingDetail.email}
@@ -185,7 +185,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.CITY)}
+                        title={<I18nText keyOfI18n={keyOfI18n.CITY}/>}
                         placeholder={useI18nText(keyOfI18n.CITY)}
                         onChange={value => this.props.editBillingDetail('city', value)}
                         value={billingDetail.city}
@@ -193,7 +193,7 @@ class ShoppingCartTable extends React.Component {
 
                 </Grid> <Grid item xs={6}>
                 <InputBar
-                    title={useI18nText(keyOfI18n.COUNTRY)}
+                    title={<I18nText keyOfI18n={keyOfI18n.COUNTRY}/>}
                     placeholder={useI18nText(keyOfI18n.COUNTRY)}
                     onChange={value => this.props.editBillingDetail('country', value)}
                     value={billingDetail.country}
@@ -207,7 +207,7 @@ class ShoppingCartTable extends React.Component {
                                 format: '###-###',
                             }
                         }
-                        title={useI18nText(keyOfI18n.POSTCODE)}
+                        title={<I18nText keyOfI18n={keyOfI18n.POSTCODE}/>}
                         placeholder={useI18nText(keyOfI18n.POSTCODE)}
                         onChange={value => this.props.editBillingDetail('zipCode', value)}
                         value={billingDetail.zipCode}
@@ -234,7 +234,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={12}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS)}
+                        title={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS}/>}
                         placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS)}
                         onChange={value => this.props.editBillingDetail('address', value)}
                         value={billingDetail.address}
@@ -248,7 +248,7 @@ class ShoppingCartTable extends React.Component {
                                 format: '#### #### #### ####',
                             }
                         }
-                        title={useI18nText(keyOfI18n.CARD_NUMBER)}
+                        title={<I18nText keyOfI18n={keyOfI18n.CARD_NUMBER}/>}
                         placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER)}
                         type="visa"
 
@@ -261,7 +261,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.EXPIRED_DATE)}
+                        title={<I18nText keyOfI18n={keyOfI18n.EXPIRED_DATE}/>}
                         placeholder={'MM/YY'}
                         validation={
                             {
@@ -275,18 +275,15 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.CVC)}
+                        title={<I18nText keyOfI18n={keyOfI18n.CVC}/>}
                         placeholder={'XXX'}
                         type={"password"}
-
-
                         onChange={value => {
                             if (value.length <= 3) this.props.editBillingDetail('cvc', value)
                         }}
                         value={billingDetail.cvc}
                     />
                 </Grid>
-
                 {this.getShippingMethod()}
             </Grid>
 

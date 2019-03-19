@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import {connect} from "react-redux";
 import {withSnackbar} from 'notistack';
 import agent from '../../agent'
-import InputBar from '../Widget/InputBar'
+import InputBar from '../Widget/inputBar'
 import TagsSearchBar from '../Widget/Input/tag'
 import {withRouter} from "react-router-dom";
 import {stringToTags} from '../../api/ApiUtils'

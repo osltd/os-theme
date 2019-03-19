@@ -10,9 +10,9 @@ import {CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART
 import LoadingPage from '../Layout/LoadingPage'
 import {withRouter} from 'react-router-dom'
 import swal from '@sweetalert/with-react'
-import Detail from './Details/Details'
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+import {formatMoney} from "../../api/ApiUtils";
 
 const styles = theme =>
     (
@@ -167,8 +167,13 @@ class ResponsiveDialog extends React.Component {
                     </Typography>
                 </Grid>
                 <Grid item container direction={'row'}>
+                    <Typography variant={'h5'}
+                                className={classes.price}>
 
-                </Grid>
+                        {
+                            (selectedVariant.price === 'not a reg price' || !selectedVariant.price) ? null : '$ '
+                        }{formatMoney(
+                        selectedVariant.price)}</Typography> </Grid>
                 <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
                         <Typography variant={'subtitle1'} className={classes.statusLabel}>In Stock</Typography></Grid>
@@ -291,8 +296,7 @@ class ResponsiveDialog extends React.Component {
             if (product) {
 
                 return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    {position ? <Detail {...this.props}
-                                        selectedVariant={this.props.product}/> : null}
+                    {position ? this.getDetail(this.props.product) : null}
 
                     <Grid item container xs={10} sm={5}>
                         <Grid item xs={12}>
@@ -302,9 +306,7 @@ class ResponsiveDialog extends React.Component {
                         </Grid>
                     </Grid>
 
-                    {!position ? <Detail {...this.props}
-                                         selectedVariant={this.props.product}
-                    /> : null}
+                    {!position ? this.getDetail(this.props.product) : null}
 
                 </Grid>
             } else return null

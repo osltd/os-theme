@@ -23,8 +23,8 @@ import agent from '../../agent'
 import {withRouter} from "react-router-dom";
 import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constants/actionType'
 import swal from '@sweetalert/with-react'
-import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
+import {I18nText} from "../Widget/I18nText";
 
 const TAX_RATE = 0.07;
 
@@ -92,8 +92,7 @@ class OrderSummary extends React.Component {
 
             "items": this.props.shoppingCart.map(n => ({
                     id: n.variantId, qty: n.number,
-                })
-            )
+                }))
             ,
             "coupons": billingDetail.coupons ? billingDetail.coupons.code : '',
             "city": billingDetail.city,
@@ -120,7 +119,7 @@ class OrderSummary extends React.Component {
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
-                    ) : useI18nText(keyOfI18n.ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED);
+                    ) : <I18nText keyOfI18n={keyOfI18n.ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED}/>;
                 if (typeof res.data === 'string') {
                     this.props.enqueueSnackbar(res.data + ' please log in first'
                         , styleGuide.errorSnackbar);
@@ -254,7 +253,6 @@ class OrderSummary extends React.Component {
 
             }
         ).catch(err => {
-            console.log(err);
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
                     this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)

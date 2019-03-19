@@ -10,7 +10,6 @@ import Header from '../Layout/Body/Header'
 import LoadingPage from '../Layout/LoadingPage'
 import SearchBar from '../Widget/SearchBar/original'
 import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
-import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
 
@@ -110,7 +109,7 @@ class SearchPage extends React.Component {
                     <Grid item>
                         <Typography variant={'h6'}>
                             {
-                                this.props.keyword && useI18nText(keyOfI18n.FOUND) + ' ' + searchResultCount + ' ' + useI18nText(keyOfI18n.MATCHED_RESULTS)
+                                this.props.keyword && <I18nText keyOfI18n={keyOfI18n.FOUND}/> + ' ' + searchResultCount + ' ' + <I18nText keyOfI18n={keyOfI18n.MATCHED_RESULTS}/>
                             }   </Typography>
                     </Grid>
                 </Grid>
@@ -157,10 +156,9 @@ class SearchPage extends React.Component {
                                 src={n.sections && n.sections.find(section => !!section.medias[0]
                                 ) ? n.sections.find(section => section.medias[0]).medias[0].url :
                                     'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
-
                                 subTitle={refactorParaLength(n.sections[0].description)}
                                 title={n.sections[0].title}
-                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
+                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : <I18nText keyOfI18n={keyOfI18n.NO_AUTHORS}/>}
                                 postDate={n.postDate}
                                 comments={0}
                             />

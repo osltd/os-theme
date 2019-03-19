@@ -22,9 +22,9 @@
     "moment": "^2.22.2",
     "notistack": "^0.3.9",
     "prop-types": "^15.5.10",
-    "react": "^16.8.4",
+    "react": "^16.8.3",
     "react-color": "^2.14.1",
-    "react-dom": "^16.8.4",
+    "react-dom": "^16.8.3",
     "react-html-parser": "^2.0.2",
     "react-masonry-component": "^6.2.1",
     "react-number-format": "^4.0.6",
@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "i18n": "tsc src/i18nScript.ts && node src/i18nScript.js"
+    "i18n": "tsc src/scripts/generateKeyOfI18n.ts && node src/scripts/generateKeyOfI18n.js"
   },
   "eslintConfig": {
     "extends": "react-app"

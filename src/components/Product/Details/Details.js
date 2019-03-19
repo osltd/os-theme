@@ -60,13 +60,13 @@ const Detail = (props) => {
                 </Typography>
             </Grid>
             <Grid item container direction={'row'}>
-                {promotePrice ? <Fragment>
+                {promotePrice ? <>
                         <Typography variant={'h5'}
                                     className={classes.price}>$ {formatMoney(promotePrice)}</Typography>
                         <Typography component={'del'} variant={'subtitle1'}
                                     color={'secondary'}>$ {formatMoney(
                             selectedVariant.price)}</Typography>
-                    </Fragment> :
+                    </> :
                     <Typography variant={'h5'}
                                 className={classes.price}>
 

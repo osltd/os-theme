@@ -1,5 +1,5 @@
 import * as  fs from 'fs'
-import {zh_HK} from "./constants/locale/zh_HK";
+import {zh_HK} from "../constants/locale/zh_HK";
 
 let temp = '';
 let temps = '';

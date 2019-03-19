@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var fs = require("fs");
-var zh_HK_1 = require("./constants/locale/zh_HK");
+var zh_HK_1 = require("../constants/locale/zh_HK");
 var temp = '';
 var temps = '';
 Object.keys(zh_HK_1.zh_HK).map(function (n) {

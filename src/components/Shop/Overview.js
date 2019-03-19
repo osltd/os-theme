@@ -21,7 +21,6 @@ import {sort_by} from '../../api/backup'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
-import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
 
@@ -188,7 +187,7 @@ const ShopOverview = props => {
                 src={handleImgValid(n.photos[0])}
                 name={refactorTextLength(n.name)}
                 category={n.tags}
-                regPrice={n.variants[0] ? n.variants[0].price : useI18nText(keyOfI18n.NOT_A_REG_PRICE)}
+                regPrice={n.variants[0] ? n.variants[0].price : <I18nText keyOfI18n={keyOfI18n.NOT_A_REG_PRICE}/>}
                 promotePrice={n.promotePrice}
                 description={n.description}
                 id={n.id}
@@ -200,12 +199,12 @@ const ShopOverview = props => {
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
     const products = sortData();
-    const filterOptions = [useI18nText(keyOfI18n.SHOP_SORT_NAME_ASC), useI18nText(keyOfI18n.SHOP_SORT_NAME_DES), useI18nText(keyOfI18n.SHOP_SORT_PRICE_ASC), useI18nText(keyOfI18n.SHOP_SORT_PRICE_DES)];
+    const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
                 <Header
-                    title={useI18nText(keyOfI18n.SHOP)}
+                    title={<I18nText keyOfI18n={keyOfI18n.SHOP}/>}
                     route={'home/shop'}
                 />
             </Grid>
@@ -247,7 +246,7 @@ const ShopOverview = props => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                            {useI18nText(keyOfI18n.OF)} {getProductProperty(products, 'length')}
+                                            {<I18nText keyOfI18n={keyOfI18n.OF}/>} {getProductProperty(products, 'length')}
                                         </Typography>
                                     </Grid>
                                 </Grid>
