@@ -121,7 +121,6 @@ class ResponsiveDialog extends React.Component {
                             }
                         }>
                             <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_KEEP_SHOPPING}/>
-                            Keep shopping what you like, thank you!
                         </Typography>
                        </Grid>
                     <Grid item xs={4}>
@@ -142,8 +141,6 @@ class ResponsiveDialog extends React.Component {
                         />}
                         <ImageWrapper src={'/img/popUp/addToCart.png'}/>
                     </Grid>
-
-
                 </Grid>)
             })
 
@@ -190,7 +187,9 @@ class ResponsiveDialog extends React.Component {
                         selectedVariant.price)}</Typography> </Grid>
                 <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
                     <Grid item>
-                        <Typography variant={'subtitle1'} className={classes.statusLabel}>In Stock</Typography></Grid>
+                        <Typography variant={'subtitle1'} className={classes.statusLabel}>
+                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_IN_STOCKS}/>
+                        </Typography></Grid>
                     <Grid item>
 
                         <Typography variant={'h6'}>
@@ -233,7 +232,7 @@ class ResponsiveDialog extends React.Component {
                         >
 
                             <span className={'icon-cart'}/>
-                            &nbsp;&nbsp;Add To Cart
+                            &nbsp;&nbsp;<I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -262,7 +261,7 @@ class ResponsiveDialog extends React.Component {
 
                 <Grid item style={{marginTop: 15}}>
                     <Typography variant={'h6'} style={{fontSize: 15}}>
-                        SHARE THIS PRODUCT:
+                        <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SHARE_THIS_PRODUCT}/>
                     </Typography>
                 </Grid>
                 <Grid item>

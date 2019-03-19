@@ -1,6 +1,7 @@
 import {zh_HK} from './zh_HK'
-
-export type SupportedLanguage = 'zh'
+import {en} from './en'
+export type SupportedLanguage = 'zh' | 'en'
 export default {
-    zh: zh_HK
+    zh: zh_HK,
+    en:en
 }

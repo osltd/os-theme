@@ -276,8 +276,8 @@ class OrderSummary extends React.Component {
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.block}>Product</TableCell>
-                            <TableCell className={classes.block} numeric>Price</TableCell>
+                            <TableCell className={classes.block}><I18nText keyOfI18n={keyOfI18n.PRODUCTS}/></TableCell>
+                            <TableCell className={classes.block} numeric><I18nText keyOfI18n={keyOfI18n.PRICE}/></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -341,7 +341,7 @@ class OrderSummary extends React.Component {
                                     className={classes.button}
                                     variant={'outlined'} color={'primary'}
                                     onClick={this.placeOrder}
-                                >Place Order</Button>
+                                ><I18nText keyOfI18n={keyOfI18n.ORDER_SUMMARY_PLACE_ORDER}/></Button>
                             </TableCell>
                         </TableRow>
                     </TableBody>

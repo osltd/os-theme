@@ -13,6 +13,8 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
+import {useI18nText} from "../../hooks/useI18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme => ({
     logo: {
@@ -139,7 +141,7 @@ const Header = props => {
             }
             onChange={e => setKeyword(e.target.value)}
             disableUnderline={true}
-            placeholder="Search…"
+            placeholder={`${useI18nText(keyOfI18n.SEARCH)}…`}
             classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -169,7 +171,7 @@ const Header = props => {
                         hasProductsToShow && <Grid item>
                             <Button
                                 onClick={() => redirectUrl('/products', history)}
-                                value={'products'}
+                                value={useI18nText(keyOfI18n.PRODUCTS)}
                             />
                         </Grid>
                     }
@@ -178,7 +180,7 @@ const Header = props => {
                         <Grid item>
                             <Button
                                 onClick={() => redirectUrl('/feeds', history)}
-                                value={'feeds'}
+                                value={useI18nText(keyOfI18n.FEEDS)}
                             />
                         </Grid>
                     }
@@ -186,7 +188,7 @@ const Header = props => {
                         <Button
                             onClick={() => redirectUrl('/checkout', history)}
 
-                            value={'checkout'}
+                            value={useI18nText(keyOfI18n.CHECKOUT)}
                         />
                     </Grid>}
                 </Grid>
@@ -212,7 +214,7 @@ const Header = props => {
                                         />
                                         }
                                         title={<Button
-                                            value={'shopping cart'}
+                                            value={useI18nText(keyOfI18n.SHOPPING_CART)}
                                         />}
                                     />
 

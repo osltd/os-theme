@@ -5,7 +5,7 @@ import {I18n} from "./constants/locale/interface";
 // for these different by checking all of them
 export const language = (): SupportedLanguage => {
     let languageWithoutRegionCode = ((navigator.languages && navigator.languages[0]) || navigator.language).toLowerCase().split(/[_-]+/)[0];
-    return (languageWithoutRegionCode in locale) ? <SupportedLanguage>languageWithoutRegionCode : "zh"
+    return (languageWithoutRegionCode in locale) ? <SupportedLanguage>languageWithoutRegionCode : "en"
 };
 
 // Split locales with a region code

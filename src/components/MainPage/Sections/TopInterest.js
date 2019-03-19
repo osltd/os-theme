@@ -1,6 +1,8 @@
 import React from 'react';
 import {Typography} from '@material-ui/core';
 import Slick from './Widget/Slick'
+import {I18nText} from "../../Widget/I18nText";
+import {keyOfI18n} from "../../../constants/locale/interface";
 
 const TopInterest = props => {
 
@@ -11,7 +13,7 @@ const TopInterest = props => {
         <section className={classes.section}>
             <div>
                 <Typography variant={'h4'} className={classes.title}>
-                    TOP INTERESTING
+                 <I18nText keyOfI18n={keyOfI18n.TOP_INTERESTING}/>
                 </Typography>
             </div>
             <div>

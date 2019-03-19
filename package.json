@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "i18n": "tsc src/scripts/generateKeyOfI18n.ts && node src/scripts/generateKeyOfI18n.js"
+    "i18n": "tsc src/scripts/generateKeyOfI18n.ts && node src/scripts/generateKeyOfI18n.js && yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"

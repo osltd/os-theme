@@ -160,9 +160,10 @@ const ShopOverview = props => {
 
 
         if (products.length === 0) {
-            return <Typography variant={'subtitle1'}> there are no products under <strong>{
+            return <Typography variant={'subtitle1'}> <I18nText keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/>
+           <strong>{
                 props.filter.tag
-            }</strong> category yet</Typography>
+            }</strong> <I18nText keyOfI18n={keyOfI18n.CATEGORY_YET}/></Typography>
 
 
         }
@@ -216,7 +217,7 @@ const ShopOverview = props => {
                             isWidthUp('md', props.width) ?
                                 <Grid item md={3}>
                                     <Typography variant={'h6'}>
-                                        PRODUCT CATEGORIES
+                                        <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>
                                     </Typography>
                                     {getTagsList()}
                                 </Grid> : null

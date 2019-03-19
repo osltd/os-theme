@@ -12,6 +12,7 @@ import swal from '@sweetalert/with-react'
 import agent from '../../../agent'
 import {I18nText} from "../../Widget/I18nText";
 import {keyOfI18n} from "../../../constants/locale/interface";
+import {useI18nText} from "../../../hooks/useI18nText";
 
 const styles = theme => ({
 
@@ -99,7 +100,7 @@ const MyAccount = (props) => {
                     {
 
                         ((user.first_name) && (user.last_name)) ?
-                            `${user.first_name} ${user.last_name} ${<I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>} ` : <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>}
+                            `${user.first_name} ${user.last_name} ${useI18nText(keyOfI18n.WELCOME_BACK)} ` : <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>}
                 </Typography>
             </Grid>
             <Grid item xs={8}>

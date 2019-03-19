@@ -12,6 +12,9 @@ import Gallery from './Gallery'
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import _ from 'lodash'
 import LoadingPage from '../Layout/LoadingPage'
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
+import {useI18nText} from "../../hooks/useI18nText";
 
 const styles = theme => {
     return (
@@ -77,19 +80,18 @@ class ResponsiveDialog extends React.Component {
             <Grid container justify={'center'}>
                 <Grid item xs={12}>
                     <Header
-                        title={'BLOG'} route={'HOME/BLOG'}
                     />
                 </Grid>
                 <Grid item container justify={'center'} xs={12} lg={11} spacing={16}>
                     <Grid item lg={3} container direction={'column'} spacing={16} xs={11}>
                         <Grid item>
-                            <Typography variant={'h6'}>SEARCH</Typography>
+                            <Typography variant={'h6'}><I18nText keyOfI18n={keyOfI18n.SEARCH}/></Typography>
                         </Grid>
                         <Grid item>
                             <SearchBar
                                 value={this.props.filter.keyword}
                                 onChange={value => this.onChange(value)}
-                                placeholder={'type keywords'}/>
+                                placeholder={useI18nText(keyOfI18n.TYPE_KEYWORDS)}/>
                         </Grid>
                         <Grid item>
                             <List
@@ -97,7 +99,7 @@ class ResponsiveDialog extends React.Component {
                                     this.props.editFeedFilter('tag', tag)
                                 })}
                                 selectedValue={this.props.filter.tag}
-                                title={'FEED CATEGORIES'}/></Grid>
+                                title={useI18nText(keyOfI18n.FEED_CATEGORY)}/></Grid>
 
                     </Grid>
                     <Grid item lg={9} spacing={32} xs={11}>
@@ -112,13 +114,13 @@ class ResponsiveDialog extends React.Component {
 
                                         subTitle={refactorParaLength(n.sections[0].description)}
                                         title={n.sections[0].title}
-                                        author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
+                                        author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
                                         postDate={n.time}
                                         comments={0}
                                     />) :
 
 
-                                <Typography variant={'subtitle1'}> there are no posts available yet</Typography>
+                                <Typography variant={'subtitle1'}><I18nText keyOfI18n={keyOfI18n.NO_POST_AVAILABLE}/></Typography>
 
 
                                 : <LoadingPage/>}

@@ -6,7 +6,7 @@ export interface State {
 }
 
 export const state: State = {
-    locale: "zh"
+    locale: "en"
 };
 export default state;
 

@@ -16,6 +16,9 @@ import {stringToTags} from '../../api/ApiUtils'
 import * as styleGuide from "../../constants/styleGuide";
 import {CART_EDIT_BILLING_DETAIL} from "../../constants/actionType";
 import _ from 'lodash'
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
+import {useI18nText} from "../../hooks/useI18nText";
 
 const TAX_RATE = 0.07;
 
@@ -139,13 +142,13 @@ const PromoCode = props => {
                                                     if (!(new Date(data['start_time']).getTime() <
                                                         Date.now() <
                                                         new Date(data['end_time']).getTime())) {
-                                                        props.enqueueSnackbar(`Promo Code you provide is not in vaild Date `, styleGuide.errorSnackbar);
+                                                        props.enqueueSnackbar(useI18nText(keyOfI18n.PROMO_CODE_SNAKE_BAR_EXCEED_EXPIRED_DATE), styleGuide.errorSnackbar);
                                                         setPromoCode('');
 
                                                         return null
                                                     }
 
-                                                    props.enqueueSnackbar('Promo Code valid', styleGuide.successSnackbar);
+                                                    props.enqueueSnackbar(useI18nText( keyOfI18n.PROMO_CODE_SNAKE_BAR_VALID), styleGuide.successSnackbar);
 
                                                     setCoupons(res.data.data.discounts[0])
 
@@ -180,12 +183,11 @@ const PromoCode = props => {
                             <Typography
                                 variant={'body1'} color={'primary'}
                             >
-                                {(coupons) ?
-                                    `
+                                <I18nText keyOfI18n={
+                                    (coupons) ?
 
-                                                                   Promo Code valid
-                           ` : 'no Promo code available'
-                                }
+                                        keyOfI18n.PROMO_CODE_SNAKE_BAR_VALID :
+                                        keyOfI18n.PROMO_CODE_NO_PROMO_CODE_AVAILABLE}/>
                             </Typography>
                         </TableCell>
 

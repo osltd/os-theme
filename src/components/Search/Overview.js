@@ -12,6 +12,7 @@ import SearchBar from '../Widget/SearchBar/original'
 import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
+import {useI18nText} from "../../hooks/useI18nText";
 
 const styles = theme => ({
     productCategory: {
@@ -103,7 +104,7 @@ class SearchPage extends React.Component {
                         <SearchBar
                             value={this.props.keyword}
                             onChange={value => this.onChange(value)}
-                            placeholder={'please type keyword'}
+                            placeholder={useI18nText(keyOfI18n.TYPE_KEYWORDS)}
                         />
                     </Grid>
                     <Grid item>

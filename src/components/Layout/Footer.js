@@ -8,6 +8,8 @@ import SocialIcon from '../Widget/SocialIcon'
 import {connect} from "react-redux";
 import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme => ({
     root: {
@@ -59,7 +61,7 @@ class Footer extends React.Component {
                 }
             } container direction={'column'} spacing={8}>
                 <Grid item>
-                    <Typography variant={'h6'} className={this.props.classes.title} color={'inherit'}>tags</Typography>
+                    <Typography variant={'h6'} className={this.props.classes.title} color={'inherit'}><I18nText keyOfI18n={keyOfI18n.TAGS}/></Typography>
                 </Grid>
                 <Grid item>
                     {
@@ -120,7 +122,7 @@ class Footer extends React.Component {
                 } container direction={'column'} spacing={8}>
                     <Grid item>
                         <Typography className={classes.title} variant={'h6'} color={'inherit'}>
-                            find us on</Typography>
+                           <I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/></Typography>
                     </Grid>
                     <Grid item>
                         <FooterList/>

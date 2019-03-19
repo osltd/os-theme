@@ -8,6 +8,8 @@ import Dialog from './Dialog'
 import MyAccount from '../Auth/Accounts/Overview'
 import createStyles from "@material-ui/core/styles/createStyles";
 import {MaterialUIClasses} from "../../interfaces/client/Common";
+import {useI18nText} from "../../hooks/useI18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -29,11 +31,11 @@ const FooterList: React.FunctionComponent<Props> = props => {
 
     const {classes, history} = props;
     const items = [
-        {label: "Shopping Cart", url: "shoppingcart"}
-        , {label: "Checkout", url: "checkout"}
-        , {label: "My Account", url: ""}
-        , {label: "Login", url: "login"}
-        , {label: "Register", url: "register"}
+        {label: useI18nText(keyOfI18n.SHOPPING_CART), url: "shoppingcart"}
+        , {label: useI18nText(keyOfI18n.CHECKOUT), url: "checkout"}
+        , {label: useI18nText(keyOfI18n.MY_ACCOUNT), url: ""}
+        , {label: useI18nText(keyOfI18n.LOGIN), url: "login"}
+        , {label: useI18nText(keyOfI18n.REGISTER), url: "register"}
     ];
     return (
         <div className={classes.root}>
@@ -64,4 +66,4 @@ const FooterList: React.FunctionComponent<Props> = props => {
     )
 };
 
-export default (withStyles(styles)(FooterList))
+export default withStyles(styles)(FooterList)

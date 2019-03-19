@@ -16,6 +16,7 @@ import _ from 'lodash'
 import * as styleGuide from "../../constants/styleGuide";
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
+import {useI18nText} from "../../hooks/useI18nText";
 
 const styles = theme => ({
     productCategory: {
@@ -132,7 +133,7 @@ const CheckoutOverview = props => {
             return (
                 <Grid container justify={'center'}>
                     <Grid item sm={12}>
-                        <Header title={'Checkout'}/>
+                        <Header title={useI18nText(keyOfI18n.CHECKOUT)}/>
                     </Grid>
                     <Grid item container justify={'center'} spacing={32} md={10}>
 
@@ -159,7 +160,6 @@ const CheckoutOverview = props => {
                                         className={classes.title}
                                         variant={'h4'}>
                                         <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
-
                                     </Typography>
                                     <Divider/>
                                     <BillingDetails/>
@@ -180,7 +180,6 @@ const CheckoutOverview = props => {
                                         </Fragment>}
                                         collapse={
                                             <OrderSummary/>
-
                                         }
                                     />
                                 </Grid>

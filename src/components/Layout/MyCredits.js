@@ -10,6 +10,8 @@ import Dialog from '../Widget/Dialog'
 import {redirectUrl} from "../../api/ApiUtils";
 import swal from '@sweetalert/with-react'
 import MyAccount from '../Auth/Accounts/Overview'
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme => ({
 
@@ -94,12 +96,12 @@ const MyCredits = props => {
                     </Grid>
                     <Grid item>
                         <Typography variant={'h4'}>
-                            You have successfully logout!
+                            <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SUCCESSFULLY_LOGOUT}/>
                         </Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'subtitle1'}>
-                            see you </Typography>
+                           <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
                     </Grid>
 
                 </Grid>)
@@ -117,11 +119,10 @@ const MyCredits = props => {
                 opacity={true}
                 ref={dialogRef}
                 title={
-                    <Button className={classes.button}>My Account</Button>
+                    <Button className={classes.button}><I18nText keyOfI18n={keyOfI18n.MY_ACCOUNT}/></Button>
                 }
                 dialog={<MyAccount
                     dialog={dialogRef.current}
-
                 />}
             />
 

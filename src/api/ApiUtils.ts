@@ -3,6 +3,8 @@ import history from 'history'
 import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Common";
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
+import {useI18nText} from "../hooks/useI18nText";
+import {keyOfI18n} from "../constants/locale/interface";
 
 export const refactorParaLength = (content: string, length: number = 45): string =>
     content.length > length ? content.replace(/(<([^>]+)>)/ig, "").slice(0, length).concat('...') : content;
@@ -22,7 +24,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
             case n === "":
                 if (i === 0) result.push(
                     {
-                        label: 'home',
+                        label: useI18nText(keyOfI18n.HOME),
                         link: '/',
                     }
                 );
@@ -30,26 +32,26 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
 
             case n === 'feeds':
                 result.push({
-                    label: n,
+                    label: useI18nText(keyOfI18n.FEEDS),
                     link: '/feeds',
 
                 });
                 break;
             case n === 'products':
                 result.push({
-                    label: n,
+                    label: useI18nText(keyOfI18n.PRODUCTS),
                     link: '/products'
                 });
                 break;
             case n === 'checkout':
                 result.push({
-                    label: n,
+                    label: useI18nText(keyOfI18n.CHECKOUT),
                     link: '/checkout'
                 });
                 break;
             case n === 'shoppingCart'.toLowerCase():
                 result.push({
-                    label: n,
+                    label: useI18nText(keyOfI18n.SHOPPING_CART) ,
                     link: '/shoppingCart'
                 });
                 break;
@@ -57,14 +59,14 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
                 if (url[i - 1] === 'products')
                     result.push({
 
-                            label: 'singleProduct',
+                            label: useI18nText(keyOfI18n.SINGLE_PRODUCT),
                             link: '/products/' + n
                         }
                     );
                 if (url[i - 1] === 'feeds')
                     result.push({
 
-                            label: 'currentFeeds',
+                            label: useI18nText(keyOfI18n.CURR_FEED),
                             link: '/feeds/' + n
                         }
                     )
@@ -117,8 +119,7 @@ export const arrayToFilter = (array: Array<any>, cb: Function): Array<Clickable>
 
 //stack overflow
 export const formatMoney = (n: any, c = 2, d = '.', t = ','): string => {
-    if (n === 'not a reg price' || !n) return 'Free';
-
+    if (n === useI18nText(keyOfI18n.NOT_A_REG_PRICE) || !n) return useI18nText(keyOfI18n.FREE);
     let s: string = n < 0 ? "-" : "";
     let i: string = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c)));
     let j: number = i.length > 3 ? i.length % 3 : 0;
