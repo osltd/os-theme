@@ -58,7 +58,7 @@ const InputBar: React.FunctionComponent<Props> = props => {
         className={classes.input}
         variant={"outlined"}
         onChange={e => onChange(e.target.value)}
-        //  only for hk-copier project disable label={title}
+       label={title}
         type={type ? type : 'value'}
         placeholder={placeholder}
         InputProps={validation ? {

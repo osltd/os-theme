@@ -13,6 +13,9 @@ import swal from '@sweetalert/with-react'
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import {formatMoney} from "../../api/ApiUtils";
+import ImageWrapper from "../Widget/Img";
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme =>
     (
@@ -102,8 +105,26 @@ class ResponsiveDialog extends React.Component {
         this.props.dispatchDraftToCart(product, productCount, selectedVariantId);
         swal(
             {
+                buttons: {
+                    success: 'got it',
+                },
                 content: (<Grid container alignItems={'center'} direction={'column'}>
+                    <Grid item>    <Typography variant={'h4'}>
+                        items added! </Typography>
+
+                    </Grid>
                     <Grid item>
+
+                        <Typography variant={"subtitle1"} style={
+                            {
+                                color:'grey'
+                            }
+                        }>
+                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_KEEP_SHOPPING}/>
+                            Keep shopping what you like, thank you!
+                        </Typography>
+                       </Grid>
+                    <Grid item xs={4}>
                         {false && <span className={'icon-like'}
 
                                         style={{
@@ -119,16 +140,9 @@ class ResponsiveDialog extends React.Component {
                                             boxSizing: 'content-box',
                                         }}
                         />}
+                        <ImageWrapper src={'/img/popUp/addToCart.png'}/>
                     </Grid>
-                    <Grid item>
-                        <Typography variant={'h4'}>
-                            Congratulation!
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'subtitle1'}>
-                            items added! </Typography>
-                    </Grid>
+
 
                 </Grid>)
             })

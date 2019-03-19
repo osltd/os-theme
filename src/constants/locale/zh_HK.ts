@@ -85,7 +85,7 @@ export const zh_HK: props = {
     CHECKOUT_YOUR_ORDER_SUMMARY: 'Your Order Summary',
     CHECKOUT_PROMO_CODE: 'promo code',
     CHECKOUT_BILLING_DETAIL: 'Billing Details',
-
+    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART:'You haven\'t put any items in cart',
 
     PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: 'Type your promo code here',
     PROMO_CODE_SNACK_BAR_PLEASE_TYPE_IN_PROMO_CODE_FIRST: 'Please Type in Promo Code First',
@@ -107,6 +107,7 @@ export const zh_HK: props = {
 
     FOOTER_FIND_US_ON: 'find us on',
 
+    PRODUCT_DETAILS_KEEP_SHOPPING:'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: 'Congratulation!',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: 'items added! ',
     PRODUCT_DETAILS_IN_STOCKS: 'in stock',

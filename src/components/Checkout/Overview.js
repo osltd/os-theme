@@ -101,14 +101,14 @@ const CheckoutOverview = props => {
                     <Grid item>
 
                         <Typography variant={'h6'} color={'primary'}>
-                            You haven't put any items in cart
+                           <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/> 
                         </Typography>
                     </Grid>
 
                     <Grid item container alignItems={'center'} spacing={16}>
                         <Grid item>
                             <Typography variant={'subtitle1'} color={'primary'}>
-                                go to
+                                <I18nText keyOfI18n={keyOfI18n.GOTO}/>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -117,12 +117,12 @@ const CheckoutOverview = props => {
                                 onClick={() => redirectUrl('/products', props.history)}
 
                             >
-                                Products
+                                <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
                             </Button>
                         </Grid>
                         <Grid item>
                             <Typography variant={'subtitle1'} color={'primary'}>
-                                to buy some
+                             <I18nText keyOfI18n={keyOfI18n.CHECKOUT_TO_BUY_SOME}/>
                             </Typography>
                         </Grid>
                     </Grid>
@@ -142,14 +142,14 @@ const CheckoutOverview = props => {
                                     <Typography
                                         className={classes.title}
                                         variant={'h4'}>
-                                        Your Order Summary
+                                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
                                     </Typography>
                                     <Divider/>
                                     <OrderSummary/>
                                     <Typography
                                         className={classes.title}
                                         variant={'h4'}>
-                                        Promo Code
+                                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PROMO_CODE}/>
                                     </Typography>
                                     <Divider/>
                                     <PromoCode/>
@@ -158,7 +158,7 @@ const CheckoutOverview = props => {
                                     <Typography
                                         className={classes.title}
                                         variant={'h4'}>
-                                        Billing Details
+                                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
 
                                     </Typography>
                                     <Divider/>
@@ -173,7 +173,7 @@ const CheckoutOverview = props => {
                                             <Typography
                                                 className={classes.title}
                                                 variant={'h4'}>
-                                                Your Order Summary
+                                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
                                             </Typography>
 
                                             <Divider/>

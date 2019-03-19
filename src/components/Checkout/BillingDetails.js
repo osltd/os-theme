@@ -261,7 +261,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={<I18nText keyOfI18n={keyOfI18n.EXPIRED_DATE}/>}
+                        title={useI18nText(keyOfI18n.EXPIRED_DATE)}
                         placeholder={'MM/YY'}
                         validation={
                             {
@@ -275,7 +275,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={6}>
                     <InputBar
-                        title={<I18nText keyOfI18n={keyOfI18n.CVC}/>}
+                        title={useI18nText(keyOfI18n.CVC)}
                         placeholder={'XXX'}
                         type={"password"}
                         onChange={value => {

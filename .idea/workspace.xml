@@ -2,29 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="restructure flow">
-      <change afterPath="$PROJECT_DIR$/src/components/Widget/inputBar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/useI18nText.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/popUp/addToCart.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Auth/Accounts/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth/Accounts/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Checkout/PromoCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/PromoCode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Product/Comment&amp;Description/CommentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Comment&amp;Description/CommentForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Checkout/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/Overview.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Product/Detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Product/Details/Details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Details/Details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Product/Details/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Product/Details/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Search/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Search/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/I18nText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/I18nText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Widget/InputBar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/locale/interface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/interface.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/locale/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useI18nText.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18nScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/generateKeyOfI18n.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18nScript.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/scripts/generateKeyOfI18n.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Widget/inputBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Widget/inputBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/Style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +25,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="308">
-                    <caret line="98" selection-start-line="98" selection-end-line="98" />
+                  <state relative-caret-position="151">
+                    <caret line="109" column="33" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="33" />
                   </state>
                 </provider>
               </entry>
@@ -53,11 +38,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/Product/Detail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3893">
-              <caret line="255" selection-start-line="255" selection-end-line="255" />
+            <state relative-caret-position="378">
+              <caret line="126" column="36" selection-end-line="379" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/agent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Widget/inputBar.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -66,10 +83,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/icon/style.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/Style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/enum.ts">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/Overview.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2924">
-              <caret line="189" column="13" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
+            <state relative-caret-position="231">
+              <caret line="179" column="52" lean-forward="true" selection-start-line="179" selection-start-column="52" selection-end-line="179" selection-end-column="52" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -80,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/BillingDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
+            <state relative-caret-position="268">
+              <caret line="251" column="47" selection-start-line="251" selection-start-column="47" selection-end-line="251" selection-end-column="47" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#707#1483#0" />
@@ -91,75 +127,8 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="140" column="49" lean-forward="true" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widget/I18nText.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widget/Collapse.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widget/ColorPicker.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Widget/Dialog.tsx">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/public/img/popUp/addToCart.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -176,7 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>load</find>
       <find>Loa</find>
       <find>n.product.variants.find(variant =&gt; variant.id === n.variantId)</find>
       <find>INIT_PRODUCTS</find>
@@ -206,6 +174,7 @@
       <find>las</find>
       <find>last</find>
       <find>getDetail</find>
+      <find>ADD</find>
     </findStrings>
     <replaceStrings>
       <replace>redirectUrl(</replace>
@@ -242,7 +211,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/Widget/Feed/overviewBox.js" />
         <option value="$PROJECT_DIR$/src/reducers/product.js" />
         <option value="$PROJECT_DIR$/src/components/Widget/InputBar.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/LoadingPage.js" />
@@ -272,11 +240,9 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/I18N.ts" />
         <option value="$PROJECT_DIR$/src/components/Cart/CartTable.js" />
-        <option value="$PROJECT_DIR$/src/components/Checkout/Overview.js" />
         <option value="$PROJECT_DIR$/src/i18nScript.js" />
         <option value="$PROJECT_DIR$/src/i18nScript.ts" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
-        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
         <option value="$PROJECT_DIR$/src/constants/locale/interface.ts" />
         <option value="$PROJECT_DIR$/src/scripts/generateKeyOfI18n.js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -285,14 +251,17 @@
         <option value="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" />
         <option value="$PROJECT_DIR$/src/components/Search/Overview.js" />
         <option value="$PROJECT_DIR$/src/components/Product/Details/Details.js" />
-        <option value="$PROJECT_DIR$/src/components/Product/Detail.js" />
         <option value="$PROJECT_DIR$/src/hooks/useI18nText.ts" />
         <option value="$PROJECT_DIR$/src/components/Widget/I18nText.tsx" />
         <option value="$PROJECT_DIR$/src/hooks/useI18nText.tsx" />
         <option value="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" />
-        <option value="$PROJECT_DIR$/src/components/Widget/inputBar.tsx" />
-        <option value="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" />
         <option value="$PROJECT_DIR$/src/components/Auth/Login/Overview.js" />
+        <option value="$PROJECT_DIR$/src/components/Widget/inputBar.tsx" />
+        <option value="$PROJECT_DIR$/src/components/Checkout/Overview.js" />
+        <option value="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" />
+        <option value="$PROJECT_DIR$/src/constants/Style.css" />
+        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
+        <option value="$PROJECT_DIR$/src/components/Product/Detail.js" />
       </list>
     </option>
   </component>
@@ -373,7 +342,28 @@
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Product" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Widget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Widget" type="462c0819:PsiDirectoryNode" />
+              <item name="Product" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
@@ -399,7 +389,7 @@
     <property name="SearchEverywhereHistoryKey" value="replace&#9;ACTION&#9;Replace&#10;find in path&#9;ACTION&#9;FindInPath&#10;find &#9;ACTION&#9;FindInPath&#10;find in &#9;ACTION&#9;FindInPath&#10;histo&#9;ACTION&#9;Vcs.ShowTabbedFileHistory" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552980530396" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552983977998" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -418,19 +408,19 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/img/popUp" />
+      <recent name="$PROJECT_DIR$/src/hooks" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/components/Widget" />
+      <recent name="$PROJECT_DIR$/src/constants" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/scripts" />
       <recent name="$PROJECT_DIR$/src/components/Auth/" />
       <recent name="$PROJECT_DIR$/public/img/category" />
       <recent name="$PROJECT_DIR$/src/components/Widget/Button" />
       <recent name="$PROJECT_DIR$/public/Header" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/hooks" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/components/Widget" />
-      <recent name="$PROJECT_DIR$/src/constants" />
-      <recent name="$PROJECT_DIR$/src/interfaces" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -519,12 +509,12 @@
       <workItem from="1552881063731" duration="490000" />
       <workItem from="1552881556271" duration="100000" />
       <workItem from="1552881685039" duration="31331000" />
-      <workItem from="1552980054410" duration="446000" />
+      <workItem from="1552980054410" duration="3629000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="585738000" />
+    <option name="totallyTimeSpent" value="588921000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -679,88 +669,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/node/fs.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="1316" column="13" selection-start-line="1316" selection-start-column="13" selection-end-line="1316" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/actionType.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/icon/Read Me.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Layout/Footer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-791">
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="62" column="91" selection-start-line="62" selection-start-column="91" selection-end-line="62" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Cart/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/FeedsWall/SmallFeedBox.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="97" column="2855" selection-start-line="97" selection-start-column="2855" selection-end-line="97" selection-end-column="2855" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scripts/generateKeyOfI18n.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -825,16 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="164" column="16" lean-forward="true" selection-start-line="164" selection-start-column="16" selection-end-line="179" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Shop/Overview.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3808">
@@ -875,17 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="73" column="27" selection-start-line="69" selection-start-column="16" selection-end-line="75" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Product/Detail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1253">
-          <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-            <element signature="e#10365#11989#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -977,26 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Checkout/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="189" column="13" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/inputBar.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Widget/I18nText.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1035,23 +902,40 @@
     <entry file="file://$PROJECT_DIR$/src/components/Widget/Dialog.tsx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+    <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Checkout/BillingDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="284" column="20" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="20" />
+        <state relative-caret-position="196">
+          <caret line="161" column="41" selection-start-line="161" selection-start-column="41" selection-end-line="161" selection-end-column="41" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#707#1483#0" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hooks/useThemeWidth.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/checkout/coupon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/init/photo2.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/init/photo1.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/default/logo.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/init/photo3.jpeg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1063,10 +947,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
+    <entry file="file://$PROJECT_DIR$/public/img/init/success.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="140" column="49" lean-forward="true" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
+        <state relative-caret-position="391">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/icon/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/popUp/addToCart.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Checkout/BillingDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="251" column="47" selection-start-line="251" selection-start-column="47" selection-end-line="251" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#707#1483#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/agent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/enum.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Checkout/Overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="179" column="52" lean-forward="true" selection-start-line="179" selection-start-column="52" selection-end-line="179" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/Style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Widget/inputBar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="109" column="33" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Product/Detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="126" column="36" selection-end-line="379" selection-end-column="5" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
