@@ -120,7 +120,7 @@ class OrderSummary extends React.Component {
                 let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
                     this.props.billingDetail.shippingOptions.find(
                         n => n.courier.id === this.props.billingDetail.selectedShippingMethod
-                    ) :useI18nText(keyOfI18n.ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED)
+                    ) : useI18nText(keyOfI18n.ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED);
                 if (typeof res.data === 'string') {
                     this.props.enqueueSnackbar(res.data + ' please log in first'
                         , styleGuide.errorSnackbar);

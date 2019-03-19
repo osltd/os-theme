@@ -1,6 +1,6 @@
 import axios from "axios/index";
 
-export const REACT_APP_S3_API_HOST = 'https://s3-ap-southeast-1.amazonaws.com/assets.oneshop.cloud'
+export const REACT_APP_S3_API_HOST = 'https://s3-ap-southeast-1.amazonaws.com/assets.oneshop.cloud';
 
 export interface Signature {
     fileName: string

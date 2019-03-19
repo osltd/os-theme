@@ -1,6 +1,6 @@
 import axios from "axios/index";
 
-const sendGridBaseUrl = 'https://so2die-dev1228330.appspot.com'
+const sendGridBaseUrl = 'https://so2die-dev1228330.appspot.com';
 //http://localhost:8080
 //https://so2die-dev1228330.appspot.com
 interface sendGrid {

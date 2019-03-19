@@ -75,7 +75,7 @@ const logout = (props) => {
                         </Grid>
                         <Grid item>
                             <Typography variant={'subtitle1'}>
-                               <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
+                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
                         </Grid>
 
                     </Grid>)

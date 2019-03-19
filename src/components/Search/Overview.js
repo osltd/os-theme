@@ -110,7 +110,7 @@ class SearchPage extends React.Component {
                     <Grid item>
                         <Typography variant={'h6'}>
                             {
-                                this.props.keyword && useI18nText(keyOfI18n.FOUND)+' ' + searchResultCount + ' '+useI18nText(keyOfI18n.MATCHED_RESULTS)
+                                this.props.keyword && useI18nText(keyOfI18n.FOUND) + ' ' + searchResultCount + ' ' + useI18nText(keyOfI18n.MATCHED_RESULTS)
                             }   </Typography>
                     </Grid>
                 </Grid>
@@ -160,7 +160,7 @@ class SearchPage extends React.Component {
 
                                 subTitle={refactorParaLength(n.sections[0].description)}
                                 title={n.sections[0].title}
-                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last :useI18nText(keyOfI18n.NO_AUTHORS)}
+                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
                                 postDate={n.postDate}
                                 comments={0}
                             />

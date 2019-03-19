@@ -1,4 +1,4 @@
-import { Canceler } from "axios";
+import {Canceler} from "axios";
 
 export type ApiSucessfulResponse = {
     result: boolean,
@@ -57,7 +57,7 @@ export type RemoveFeedResponse = {
 } & any
 
 export type PostFeedBody = {
-    shops: string | {[key:string]: string | number}, //TODO: Verify 'shops' type later when API is stable
+    shops: string | { [key: string]: string | number }, //TODO: Verify 'shops' type later when API is stable
     tags?: string,
     status?: 'Draft' | 'Published'
     createdTime?: string,

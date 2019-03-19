@@ -200,7 +200,7 @@ const ShopOverview = props => {
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
     const products = sortData();
-    const filterOptions = [useI18nText(keyOfI18n.SHOP_SORT_NAME_ASC),useI18nText(keyOfI18n.SHOP_SORT_NAME_DES),useI18nText(keyOfI18n.SHOP_SORT_PRICE_ASC), useI18nText(keyOfI18n.SHOP_SORT_PRICE_DES)];
+    const filterOptions = [useI18nText(keyOfI18n.SHOP_SORT_NAME_ASC), useI18nText(keyOfI18n.SHOP_SORT_NAME_DES), useI18nText(keyOfI18n.SHOP_SORT_PRICE_ASC), useI18nText(keyOfI18n.SHOP_SORT_PRICE_DES)];
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
@@ -255,7 +255,7 @@ const ShopOverview = props => {
 
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                         <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
+                                            <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -280,7 +280,8 @@ const ShopOverview = props => {
                                                 <Grid container alignItems={'center'}>
                                                     <Typography variant={'body1'}>
                                                         {props.filter.tag ? <Typography
-                                                            variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>}
+                                                                variant={'body1'}>{'tags:' + props.filter.tag}</Typography> :
+                                                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>}
                                                     </Typography>
                                                     <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                                 </Grid>
@@ -300,7 +301,8 @@ const ShopOverview = props => {
                         </Grid>
                     </Grid> :
 
-                    <Typography variant={'subtitle1'}><I18nText keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/></Typography>
+                    <Typography variant={'subtitle1'}><I18nText
+                        keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/></Typography>
 
 
             }
