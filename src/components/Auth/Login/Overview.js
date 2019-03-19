@@ -10,6 +10,9 @@ import agent from '../../../agent'
 import swal from '@sweetalert/with-react'
 import {withSnackbar} from 'notistack';
 import * as styleGuide from "../../../constants/styleGuide";
+import {I18nText} from "../../Widget/I18nText";
+import {keyOfI18n} from "../../../constants/locale/interface";
+import {useI18nText} from "../../../hooks/useI18nText";
 
 const styles = theme => ({
     root: {},
@@ -87,7 +90,7 @@ const Login = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={'h4'}>
-                                        Welcome back!
+                                        <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>!
                                     </Typography>
                                 </Grid>
 
@@ -119,13 +122,13 @@ const Login = (props) => {
                   className={classes.innerRoot}>
                 <Grid item xs={12}>
                     <Typography className={classes.title} variant={'h4'}>
-                        Login
+                        <I18nText keyOfI18n={keyOfI18n.LOGIN}/>
 
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Input
-                        placeholder={'email'}
+                        placeholder={useI18nText(keyOfI18n.EMAIL)}
                         value={email}
                         onChange={e => setEmail(e)}
                     />
@@ -133,7 +136,7 @@ const Login = (props) => {
                 <Grid item xs={12}>
                     <Input
                         type={'password'}
-                        placeholder={'password'}
+                        placeholder={useI18nText(keyOfI18n.PASSWORD)}
                         value={pwd}
                         onChange={e => setPwd(e)}
                     />
@@ -142,7 +145,7 @@ const Login = (props) => {
                     <Typography
                         className={classes.blueUnderline}
                         variant={'h6'}>
-                        Forgot your password?
+                        <I18nText keyOfI18n={keyOfI18n.AUTH_LOGIN_FORGOT_YOUR_PASSWORD}/>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -150,7 +153,7 @@ const Login = (props) => {
                         onClick={() => redirectUrl('/register', props.history)}
                         className={classes.blueUnderline}
                         variant={'h6'}>
-                        Dont have your own account yet?
+                        <I18nText keyOfI18n={keyOfI18n.AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET}/>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -164,7 +167,7 @@ const Login = (props) => {
                     <Typography
                         onClick={() => redirectUrl('/', history)}
                         className={classes.blueUnderline} variant={'h6'}>
-                        Return to Store
+                        <I18nText keyOfI18n={keyOfI18n.AUTH_LOGIN_RETURN_TO_STORE}/>
                     </Typography>
                 </Grid>
             </Grid>

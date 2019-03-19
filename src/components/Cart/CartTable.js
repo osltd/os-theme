@@ -18,6 +18,8 @@ import {
     PRODUCT_EDIT_FILTER,
     PRODUCT_EDIT_SORT
 } from "../../constants/actionType";
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const TAX_RATE = 0.07;
 
@@ -101,22 +103,22 @@ const ShoppingCartTable = (props) => {
                             <TableCell
                                 className={classes.block}
 
-                            >Image</TableCell>
+                            ><I18nText keyOfI18n={keyOfI18n.IMAGE}/></TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Product</TableCell>
+                                numeric><I18nText keyOfI18n={keyOfI18n.PRODUCT}/></TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Price</TableCell>
+                                numeric><I18nText keyOfI18n={keyOfI18n.PRICE}/></TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Quantity</TableCell>
+                                numeric><I18nText keyOfI18n={keyOfI18n.QUANTITY}/></TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Total</TableCell>
+                                numeric><I18nText keyOfI18n={keyOfI18n.TOTAL}/></TableCell>
                             <TableCell
                                 className={classes.block}
-                                numeric>Remove</TableCell>
+                                numeric><I18nText keyOfI18n={keyOfI18n.REMOVE}/></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -184,7 +186,7 @@ const ShoppingCartTable = (props) => {
                                 <Button variant={'outlined'}
                                         className={classes.button}
                                         href={'/checkout'}>
-                                    Checkout
+                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
                                 </Button>
                             </TableCell>
 
@@ -195,7 +197,7 @@ const ShoppingCartTable = (props) => {
                 <span className={'icon-tongue'}/>
                 <Grid item>
                     <Typography variant={'h6'}>
-                        there is no items in shopping cart
+                        <I18nText keyOfI18n={keyOfI18n.CART_NO_ITEMS_TO_SHOW}/>
                     </Typography>
                 </Grid>
             </Grid>

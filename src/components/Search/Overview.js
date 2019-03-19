@@ -10,6 +10,9 @@ import Header from '../Layout/Body/Header'
 import LoadingPage from '../Layout/LoadingPage'
 import SearchBar from '../Widget/SearchBar/original'
 import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
+import {useI18nText} from "../../hooks/useI18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
+import {I18nText} from "../Widget/I18nText";
 
 const styles = theme => ({
     productCategory: {
@@ -107,7 +110,7 @@ class SearchPage extends React.Component {
                     <Grid item>
                         <Typography variant={'h6'}>
                             {
-                                this.props.keyword && 'found ' + searchResultCount + ' matched results'
+                                this.props.keyword && useI18nText(keyOfI18n.FOUND)+' ' + searchResultCount + ' '+useI18nText(keyOfI18n.MATCHED_RESULTS)
                             }   </Typography>
                     </Grid>
                 </Grid>
@@ -118,7 +121,7 @@ class SearchPage extends React.Component {
                         <Grid item xs={12}>
                             <Typography variant={'h6'}>
 
-                                Products ({products.length})
+                                <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/> ({products.length})
                             </Typography></Grid>
 
                     }
@@ -142,7 +145,7 @@ class SearchPage extends React.Component {
                         <Grid item xs={12}>
                             <Typography variant={'h6'}>
 
-                                Feeds ({feeds.length})
+                                <I18nText keyOfI18n={keyOfI18n.FEEDS}/> ({feeds.length})
                             </Typography>
                         </Grid>
                     }
@@ -157,7 +160,7 @@ class SearchPage extends React.Component {
 
                                 subTitle={refactorParaLength(n.sections[0].description)}
                                 title={n.sections[0].title}
-                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : 'no authors'}
+                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last :useI18nText(keyOfI18n.NO_AUTHORS)}
                                 postDate={n.postDate}
                                 comments={0}
                             />

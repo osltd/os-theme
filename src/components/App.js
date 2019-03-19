@@ -145,9 +145,6 @@ const App = props => {
 
     useEffect(
         () => {
-
-
-
             initApp().then(
                 async () =>
                     props.finishLoadingProducts(

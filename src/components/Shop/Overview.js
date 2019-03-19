@@ -21,6 +21,9 @@ import {sort_by} from '../../api/backup'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import PopUp from '../Widget/PopUp'
+import {useI18nText} from "../../hooks/useI18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
+import {I18nText} from "../Widget/I18nText";
 
 const styles = theme => ({
     productCategory: {
@@ -92,18 +95,18 @@ const ShopOverview = props => {
         data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true);
         let sortBy = () => {
             switch (props.sort.sortBy) {
-                case 'Name A-Z':
+                case keyOfI18n.SHOP_SORT_NAME_ASC:
                     return data.sort(sort_by('name', null));
-                case 'Name Z-A':
+                case keyOfI18n.SHOP_SORT_NAME_DES:
                     return data.sort(sort_by('name', null, true));
-                case 'Price Low to High':
+                case keyOfI18n.SHOP_SORT_PRICE_ASC:
                     return data.sort((a, b) => {
                             let priceA = a.variants[0] ? a.variants[0].price : 0;
                             let priceB = b.variants[0] ? b.variants[0].price : 0;
                             return (priceA < priceB) ? -1 : 1
                         }
                     );
-                case       'Price High to Low':
+                case keyOfI18n.SHOP_SORT_PRICE_DES:
                     return data.sort((a, b) => {
                             let priceA = a.variants[0] ? a.variants[0].price : 0;
                             let priceB = b.variants[0] ? b.variants[0].price : 0;
@@ -185,7 +188,7 @@ const ShopOverview = props => {
                 src={handleImgValid(n.photos[0])}
                 name={refactorTextLength(n.name)}
                 category={n.tags}
-                regPrice={n.variants[0] ? n.variants[0].price : 'not a reg price'}
+                regPrice={n.variants[0] ? n.variants[0].price : useI18nText(keyOfI18n.NOT_A_REG_PRICE)}
                 promotePrice={n.promotePrice}
                 description={n.description}
                 id={n.id}
@@ -197,12 +200,12 @@ const ShopOverview = props => {
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
     const products = sortData();
-    const filterOptions = ['Name A-Z', 'Name Z-A', 'Price Low to High', 'Price High to Low'];
+    const filterOptions = [useI18nText(keyOfI18n.SHOP_SORT_NAME_ASC),useI18nText(keyOfI18n.SHOP_SORT_NAME_DES),useI18nText(keyOfI18n.SHOP_SORT_PRICE_ASC), useI18nText(keyOfI18n.SHOP_SORT_PRICE_DES)];
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
                 <Header
-                    title={'shop'}
+                    title={useI18nText(keyOfI18n.SHOP)}
                     route={'home/shop'}
                 />
             </Grid>
@@ -234,7 +237,7 @@ const ShopOverview = props => {
                                 <Grid item xs={3} container alignItems={'center'} direction={'row'}>
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                            Items
+                                            <I18nText keyOfI18n={keyOfI18n.ITEMS}/>
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -244,7 +247,7 @@ const ShopOverview = props => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                            of {getProductProperty(products, 'length')}
+                                            {useI18nText(keyOfI18n.OF)} {getProductProperty(products, 'length')}
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -252,7 +255,7 @@ const ShopOverview = props => {
 
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                            sort by
+                                         <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -277,7 +280,7 @@ const ShopOverview = props => {
                                                 <Grid container alignItems={'center'}>
                                                     <Typography variant={'body1'}>
                                                         {props.filter.tag ? <Typography
-                                                            variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : 'Product Category'}
+                                                            variant={'body1'}>{'tags:' + props.filter.tag}</Typography> : <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>}
                                                     </Typography>
                                                     <span className={classes.array + ' ' + 'icon-circle-down'}/>
                                                 </Grid>
@@ -297,7 +300,7 @@ const ShopOverview = props => {
                         </Grid>
                     </Grid> :
 
-                    <Typography variant={'subtitle1'}> there are no products available yet</Typography>
+                    <Typography variant={'subtitle1'}><I18nText keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/></Typography>
 
 
             }

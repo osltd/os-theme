@@ -14,6 +14,8 @@ import PromoCode from './PromoCode'
 import {withSnackbar} from 'notistack'
 import _ from 'lodash'
 import * as styleGuide from "../../constants/styleGuide";
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme => ({
     productCategory: {
@@ -186,8 +188,7 @@ const CheckoutOverview = props => {
                                     <Typography
                                         className={classes.title}
                                         variant={'h4'}>
-                                        Billing Details
-
+                                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
                                     </Typography>
                                     <Divider/>
                                     <BillingDetails/>

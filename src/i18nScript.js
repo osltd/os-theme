@@ -6,13 +6,10 @@ var temp = '';
 var temps = '';
 Object.keys(zh_HK_1.zh_HK).map(function (n) {
     temp += n + " = '" + n + "',\n                    ";
-    temps += n + ":string  ";
+    temps += n + ":string;  ";
 });
-console.log(temp);
-console.log(temps);
 var t = 'export enum keyOfI18n{' + temp + '}' +
     '' + 'export interface I18n{' + temps + '}';
-fs.unlinkSync('src/constants/locale/interface.ts');
 fs.writeFile('src/constants/locale/interface.ts', t, function (err) {
     if (err)
         console.log(err);

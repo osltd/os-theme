@@ -99,14 +99,14 @@ const MyAccount = (props) => {
                 <Typography>
                     {
 
-                        ((user['first_name']) && (user['last_name'])) ?
-                            `${user['first_name']} ${user['last_name']} ${useI18nText(keyOfI18n.AUTH_ACCOUNTS_SEE_YOU)} ${useI18nText(keyOfI18n.AUTH_ACCOUNTS_SEE_YOU)}` : 'welcome back'}
+                        ((user.first_name) && (user.last_name)) ?
+                            `${user.first_name} ${user.last_name} ${useI18nText(keyOfI18n.WELCOME_BACK)} ` : useI18nText(keyOfI18n.WELCOME_BACK)}
                 </Typography>
             </Grid>
             <Grid item xs={8}>
                 <CustomButton
                     onClick={logout}
-                    value={'Logout'}
+                    value={useI18nText(keyOfI18n.AUTH_ACCOUNTS_LOGOUT)}
                 />
             </Grid>
         </Grid>
@@ -119,7 +119,7 @@ const MyAccount = (props) => {
             >
                 <Grid item xs={12} className={classes.textAlign}>
                     <Typography>
-                        Log in or sign up to earn rewards today
+                        <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_TITLE_WHEN_NOT_LOGIN}/>
                     </Typography>
                 </Grid>
                 <Grid item md={4} xs={12}>
@@ -128,7 +128,7 @@ const MyAccount = (props) => {
                             props.dialog && props.dialog.handleClose();
                             redirectUrl('/login', history)
                         }}
-                        value={'Log In'}/>
+                        value={keyOfI18n.LOGIN}/>
                 </Grid>
                 <br/>
                 <Grid item xs={12} md={1}/>
@@ -151,7 +151,7 @@ const MyAccount = (props) => {
 
 
                     >
-                        Register
+                        <I18nText keyOfI18n={keyOfI18n.REGISTER}/>
                     </Button>
                 </Grid>
 

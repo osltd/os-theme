@@ -10,6 +10,9 @@ import classNames from 'classnames'
 import CountryCode from '../Widget/Input/Country'
 
 import {withSnackbar} from 'notistack';
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
+import {useI18nText} from "../../hooks/useI18nText";
 
 const TAX_RATE = 0.07;
 const styles = theme => ({
@@ -91,8 +94,7 @@ class ShoppingCartTable extends React.Component {
         return <Grid item container justify={'space-between'} xs={12}>
             {hasValidShippingMethod ? <Grid item xs={12}>
                 <Typography variant={'h6'}>
-                    Shipping Options
-                </Typography>
+                    <I18nText keyOfI18n={keyOfI18n.SHIPPING_OPTIONS}/> </Typography>
             </Grid> : null}
             {
                 hasValidShippingMethod ? this.props.billingDetail.shippingOptions.map((n, i) => {
@@ -105,14 +107,15 @@ class ShoppingCartTable extends React.Component {
                                 <Grid item>
 
                                     <Typography variant={'body1'}>
-                                        name: {n.courier.name}
+                                        <I18nText keyOfI18n={keyOfI18n.NAME}/>: {n.courier.name}
                                     </Typography>
                                     <Typography variant={'body1'}>
-                                        charge: {n.charge}
+                                        <I18nText keyOfI18n={keyOfI18n.CHARGE}/>: {n.charge}
                                     </Typography>
                                     <Typography variant={'body1'}>
-                                        delivery time :{n.deliveryTime.min} days to {n.deliveryTime.max} days
-                                    </Typography>
+                                        <I18nText
+                                            keyOfI18n={keyOfI18n.DELIVERY_TIME}/> :{n.deliveryTime.min}{`${useI18nText(keyOfI18n.DAYS)} ${useI18nText(keyOfI18n.TO)} ${n.deliveryTime.max} ${useI18nText(keyOfI18n.DAYS)}`
+                                    } </Typography>
                                 </Grid>
 
 
@@ -122,7 +125,7 @@ class ShoppingCartTable extends React.Component {
                                         className={classes.button}
                                         variant={'outlined'} color={'primary'}
                                         onClick={() => this.props.editBillingDetail('selectedShippingMethod', n.courier.id)}
-                                    >selected</Button>
+                                    ><I18nText keyOfI18n={keyOfI18n.SELECTED}/></Button>
                                 </Grid>
                             </Grid>)
                     }
@@ -151,8 +154,8 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={'First Name'}
-                        placeholder={'First Name'}
+                        title={useI18nText(keyOfI18n.FIRST_NAME)}
+                        placeholder={useI18nText(keyOfI18n.FIRST_NAME)}
                         onChange={value => this.props.editBillingDetail('firstName', value)}
                         value={billingDetail.firstName}
                     />
@@ -160,8 +163,8 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={'Last Name'}
-                        placeholder={'Last Name'}
+                        title={useI18nText(keyOfI18n.LAST_NAME)}
+                        placeholder={useI18nText(keyOfI18n.LAST_NAME)}
                         onChange={value => this.props.editBillingDetail('lastName', value)}
                         value={billingDetail.lastName}
 
@@ -171,8 +174,8 @@ class ShoppingCartTable extends React.Component {
                     <InputBar
                         needValidation={true}
 
-                        title={'Email Address'}
-                        placeholder={'Email Address'}
+                        title={useI18nText(keyOfI18n.EMAIL_ADDRESS)}
+                        placeholder={useI18nText(keyOfI18n.EMAIL_ADDRESS)}
 
                         onChange={value => this.props.editBillingDetail('email', value)}
                         value={billingDetail.email}
@@ -182,16 +185,16 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={'City'}
-                        placeholder={'City'}
+                        title={useI18nText(keyOfI18n.CITY)}
+                        placeholder={useI18nText(keyOfI18n.CITY)}
                         onChange={value => this.props.editBillingDetail('city', value)}
                         value={billingDetail.city}
                     />
 
                 </Grid> <Grid item xs={6}>
                 <InputBar
-                    title={'Country'}
-                    placeholder={'Country'}
+                    title={useI18nText(keyOfI18n.COUNTRY)}
+                    placeholder={useI18nText(keyOfI18n.COUNTRY)}
                     onChange={value => this.props.editBillingDetail('country', value)}
                     value={billingDetail.country}
                 />
@@ -204,8 +207,8 @@ class ShoppingCartTable extends React.Component {
                                 format: '###-###',
                             }
                         }
-                        title={'Postcode/ZIP'}
-                        placeholder={'Postcode/ZIP'}
+                        title={useI18nText(keyOfI18n.POSTCODE)}
+                        placeholder={useI18nText(keyOfI18n.POSTCODE)}
                         onChange={value => this.props.editBillingDetail('zipCode', value)}
                         value={billingDetail.zipCode}
                     />
@@ -219,7 +222,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={6}>
                     <InputBar
-                        placeholder={'please enter ur phone number for contact'}
+                        placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER)}
                         validation={
                             {
                                 prefix: `${billingDetail.countryCode.value}`,
@@ -231,8 +234,8 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={12}>
                     <InputBar
-                        title={'Street Address'}
-                        placeholder={'Street Address'}
+                        title={useI18nText(keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS)}
+                        placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS)}
                         onChange={value => this.props.editBillingDetail('address', value)}
                         value={billingDetail.address}
                     />
@@ -245,8 +248,8 @@ class ShoppingCartTable extends React.Component {
                                 format: '#### #### #### ####',
                             }
                         }
-                        title={'Card Number'}
-                        placeholder={'please enter your visa number'}
+                        title={useI18nText(keyOfI18n.CARD_NUMBER)}
+                        placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER)}
                         type="visa"
 
                         onChange={value => this.props.editBillingDetail('visaNumber', value)}
@@ -258,7 +261,7 @@ class ShoppingCartTable extends React.Component {
 
                 <Grid item xs={6}>
                     <InputBar
-                        title={'Expire Date'}
+                        title={useI18nText(keyOfI18n.EXPIRED_DATE)}
                         placeholder={'MM/YY'}
                         validation={
                             {
@@ -272,7 +275,7 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={6}>
                     <InputBar
-                        title={'CVC'}
+                        title={useI18nText(keyOfI18n.CVC)}
                         placeholder={'XXX'}
                         type={"password"}
 

@@ -1,7 +1,10 @@
-interface I18n {
-    
+import {I18n} from "./interface";
+
+interface props extends I18n{
+    [key:string]:string
 }
-export const zh_HK: I18n = {
+
+export const zh_HK:props = {
     PASSWORD: 'password',
     EMAIL: 'email',
     LOGIN: 'log in',
@@ -37,10 +40,22 @@ export const zh_HK: I18n = {
     SHOPPING_CART:'shopping cart',
     ADD_TO_CART:'add to cart',
     WELCOME_BACK:'welcome back',
+    IMAGE:'image',
+    SHIPPING_OPTIONS:'shipping options',
+    DAYS:'days',
+    TO:'to',
+    ITEMS:'items',
+    OF:'of',
+    SORT_BY:'sort by',
+    FOUND:'found',
+    MATCHED_RESULTS:'matched results',
     AUTH_ACCOUNTS_SUCCESSFULLY_LOGOUT: 'You have successfully logout!',
     AUTH_ACCOUNTS_SEE_YOU: 'see you',
     AUTH_ACCOUNTS_TITLE_WHEN_NOT_LOGIN: 'Log in or sign up to earn rewards today',
     AUTH_ACCOUNTS_LOGOUT: 'logout',
+    FEEDS:'feeds',
+    NO_AUTHORS:'no authors',
+
 
 
     AUTH_LOGIN_RETURN_TO_STORE: 'return to store',
@@ -50,14 +65,23 @@ export const zh_HK: I18n = {
 
 
     AUTH_REGISTER_CREATE_YOUR_ACCOUNT: 'Create your account',
-
+    AUTH_ACCOUNT_CREATED:'Account created!',
+    AUTH_YOU_CAN_LOGIN_NOW:'You can Login now!',
 
     CART_NO_ITEMS_TO_SHOW: 'there is no items in shopping cart',
+
+
+
+
+
     CHECKOUT_BILLING_DETAILS_SHIPPING_DETAILS: 'Shipping Options',
     CHECKOUT_BILLING_STREET_ADDRESS: 'Street Address',
+    CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER:'please enter your phone number for contact',
+    CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER:'please enter your visa number',
+
 
     ORDER_SUMMARY_PLACE_ORDER: 'place order',
-
+ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED:'no shipping method provided',
     SNACK_BAR_PLEASE_LOGIN_FIRST_IN_ORDER_TO_CHECKOUT_YOUR_PRODUCTS: 'please log in first in order to checkout your products'
     ,
     GOTO:'go to',
@@ -101,6 +125,5 @@ export const zh_HK: I18n = {
     SHOP_SORT_PRICE_DES:'Price High to Low',
     SHOP:'shop',
     PRODUCT_CATEGORY:'product categories',
-    OF:'of',
 };
 

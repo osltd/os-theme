@@ -9,6 +9,9 @@ import * as styleGuide from "../../../constants/styleGuide";
 import agent from '../../../agent'
 import swal from '@sweetalert/with-react'
 import {redirectUrl} from "../../../api/ApiUtils";
+import {I18nText} from "../../Widget/I18nText";
+import {keyOfI18n} from "../../../constants/locale/interface";
+import {useI18nText} from "../../../hooks/useI18nText";
 
 
 const styles = theme => ({
@@ -78,14 +81,16 @@ const Login = props => {
                         </Grid>
                         <Grid item>
                             <Typography variant={'h4'}>
-                                Congratulation!
+                                <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION}/>!
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant={'subtitle1'}>
-                                Account created!</Typography>
+                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNT_CREATED}/>
+                            </Typography>
                             <Typography variant={'subtitle1'}>
-                                You can Login now!</Typography>
+                                <I18nText keyOfI18n={keyOfI18n.AUTH_YOU_CAN_LOGIN_NOW}/>
+                            </Typography>
                         </Grid>
 
                     </Grid>)
@@ -116,19 +121,19 @@ const Login = props => {
                   className={classes.innerRoot}>
                 <Grid item>
                     <Typography className={classes.title} variant={'h4'}>
-                        Create your account
+                        <I18nText keyOfI18n={keyOfI18n.AUTH_REGISTER_CREATE_YOUR_ACCOUNT}/>
                     </Typography>
                 </Grid>
                 <Grid item>
                     <Input
-                        placeholder={'First Name'}
+                        placeholder={useI18nText(keyOfI18n.FIRST_NAME)}
                         value={firstName}
                         onChange={e => setFirstName(e)}
                     />
                 </Grid>
                 <Grid item className={classes.paddingTop}>
                     <Input
-                        placeholder={'Last Name'}
+                        placeholder={useI18nText(keyOfI18n.LAST_NAME)}
                         value={lastName}
                         onChange={e => setLastName(e)}
                     />
@@ -136,7 +141,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
 
-                        placeholder={'Email'}
+                        placeholder={useI18nText(keyOfI18n.EMAIL)}
                         value={email}
                         onChange={e => setEmail(e)}
                     />
@@ -144,7 +149,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
                         type={'Password'}
-                        placeholder={'Password'}
+                        placeholder={useI18nText(keyOfI18n.PASSWORD)}
                         value={pwd}
                         onChange={e => setPwd(e)}
                     />
@@ -152,7 +157,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
                         type={'Password'}
-                        placeholder={'Confirm Password'}
+                        placeholder={useI18nText(keyOfI18n.CONFIRM_PASSWORD)}
                         value={confirmPwd}
                         onChange={e => setConfirmPwd(e)}
                     />
@@ -160,7 +165,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Button
                         onClick={register}
-                        value={'Create'}
+                        value={useI18nText(keyOfI18n.CREATE)}
                     />
                 </Grid>
 
