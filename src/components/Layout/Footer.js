@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, {useContext} from 'react'
 import {Grid, Typography} from '@material-ui/core'
 import {withStyles} from '@material-ui/core/styles';
@@ -10,10 +9,9 @@ import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
 import _ from 'lodash'
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
-import Button from "@material-ui/core/Button";
 import {reducer} from "../../context";
-import actionType from "../../context/actionType";
-
+import FooterLanguageBar from '../Widget/FooterLanguageBar'
+import {useThemeWidth} from "../../hooks/useThemeWidth";
 const styles = theme => ({
     root: {
         marginTop: '50px',
@@ -25,6 +23,7 @@ const styles = theme => ({
         marginBottom: '30px',
     },
     title: {
+        color:'white',
         textTransform: 'uppercase'
     }
 });
@@ -42,9 +41,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 );
 
-const  Footer =props=> {
-const {commonReducer}= useContext(reducer)
- const   getTags = () => {
+const Footer = props => {
+    const {commonReducer} = useContext(reducer)
+    const themeWidth = useThemeWidth()
+
+    const getTags = () => {
         //todo(handle err)
         const {products, feeds} = props;
         let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
@@ -59,12 +60,13 @@ const {commonReducer}= useContext(reducer)
 
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={2} style={
-                {
+              themeWidth.isWidthDown.md?  {
                     marginTop: '25px'
-                }
+                }:{}
             } container direction={'column'} spacing={8}>
                 <Grid item>
-                    <Typography variant={'h6'} className={props.classes.title} color={'inherit'}><I18nText keyOfI18n={keyOfI18n.TAGS}/></Typography>
+                    <Typography variant={'h6'} className={props.classes.title} color={'inherit'}><I18nText
+                        keyOfI18n={keyOfI18n.TAGS}/></Typography>
                 </Grid>
                 <Grid item>
                     {
@@ -82,81 +84,65 @@ const {commonReducer}= useContext(reducer)
         )
     };
 
-        const {classes} = props;
-        return (
-            <Grid container justify={'space-between'} className={classes.root}>
-                {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
-                {/*>*/}
-                {/*<Grid item>*/}
-                {/*<Typography variant={'h6'} color={'inherit'}>*/}
-                {/*NEWSLETTER*/}
-                {/*</Typography>*/}
-                {/*</Grid>*/}
+    const {classes} = props;
+    return (
+        <Grid container justify={'space-between'} className={classes.root}>
+            {/*<Grid item container lg={12} direction={'column'} spacing={16} className={classes.emailBar}*/}
+            {/*>*/}
+            {/*<Grid item>*/}
+            {/*<Typography variant={'h6'} color={'inherit'}>*/}
+            {/*NEWSLETTER*/}
+            {/*</Typography>*/}
+            {/*</Grid>*/}
 
-                {/*<Grid item>*/}
-                {/*<SearchBar/>*/}
-                {/*</Grid>*/}
-                {/*</Grid>*/}
-                <Grid item md={1}/>
+            {/*<Grid item>*/}
+            {/*<SearchBar/>*/}
+            {/*</Grid>*/}
+            {/*</Grid>*/}
+            <Grid item md={1}/>
 
-                <Grid item xs={12} md={2} container direction={'column'} spacing={8}>
-                    <Grid item>
-                        <Typography variant={'h6'} color={'inherit'}>{props.shopInfo.name}</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'caption'} color={'inherit'}>
-                            {props.shopInfo.description}
-                        </Typography>
-                    </Grid>
-
-                    <Grid item>
-                        <SocialIcon type={'facebook'}/>
-                        <SocialIcon type={'youtube'}/>
-                        <SocialIcon type={'twitter'}/>
-                        <SocialIcon type={'reddit'}/>
-                        <SocialIcon type={'whatsapp'}/>
-                    </Grid>
+            <Grid item xs={12} md={2} container direction={'column'} spacing={8}>
+                <Grid item>
+                    <Typography variant={'h6'} color={'inherit'}>{props.shopInfo.name}</Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant={'caption'} color={'inherit'}>
+                        {props.shopInfo.description}
+                    </Typography>
                 </Grid>
 
-                <Grid item xs={6} md={3} style={
-                    {
-                        marginTop: '25px'
-                    }
-                } container direction={'column'} spacing={8}>
-                    <Grid item>
-                        <Typography className={classes.title} variant={'h6'} color={'inherit'}>
-                           <I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/>
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <FooterList/>
-                    </Grid>
+                <Grid item>
+                    <SocialIcon type={'facebook'}/>
+                    <SocialIcon type={'youtube'}/>
+                    <SocialIcon type={'twitter'}/>
+                    <SocialIcon type={'reddit'}/>
+                    <SocialIcon type={'whatsapp'}/>
                 </Grid>
-                {getTags()}
-                <Grid item xs={12} md={1}>
+            </Grid>
 
-                    <Grid item>
-                        <Typography variant={'h6'} className={props.classes.title} color={'inherit'}><I18nText keyOfI18n={keyOfI18n.LANGUAGE}/></Typography>
-                    </Grid>
-                    <Grid item> <Tag
-                                    value={commonReducer.state.locale==='en'?'English':'繁体中文'}
-                                    onClick={()=>{
-
-                                        commonReducer.dispatch(
-                                            {
-                                                type: actionType.common.COMMON_INIT_I18N,
-                                                payload: {locale: commonReducer.state.locale==='en'?'zh':'en'}
-                                            }
-                                        );
-
-                                    }}
-                                />
-
-                    </Grid>
+            <Grid item xs={6} md={3} style={
+                themeWidth.isWidthDown.md?  {
+                    marginTop: '25px'
+                }:{}
+            } container direction={'column'} spacing={8}>
+                <Grid item>
+                    <Typography className={classes.title} variant={'h6'} color={'inherit'}>
+                        <I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/>
+                    </Typography>
                 </Grid>
+                <Grid item>
+                    <FooterList/>
+                </Grid>
+            </Grid>
+            {getTags()}
+            <Grid item xs={12} md={1}>
 
-                <Grid item md={1}/>
-            </Grid>);
+
+                <FooterLanguageBar/>
+            </Grid>
+
+            <Grid item md={1}/>
+        </Grid>);
 }
 
 

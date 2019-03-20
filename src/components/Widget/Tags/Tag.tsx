@@ -32,7 +32,7 @@ interface Props {
     selected?: boolean,
     classes: MaterialUIClasses,
     value: string,
-    onClick: () => void,
+    onClick: (event:React.MouseEvent)=>void,
 }
 
 const Tag: React.FunctionComponent<Props> = props => {

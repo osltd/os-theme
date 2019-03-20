@@ -26,6 +26,7 @@ interface Props {
     labelExtra?: string,
     options: Array<Clickable>,
     selectedValue?: string,
+    hideSelected?:boolean
 }
 
 const DropDown: React.FunctionComponent<Props> = props => {
@@ -44,7 +45,8 @@ const DropDown: React.FunctionComponent<Props> = props => {
         classes, icon,
         icon2, label,
         labelExtra, options,
-        selectedValue
+        selectedValue,
+        hideSelected
     } = props;
 
 
@@ -59,7 +61,7 @@ const DropDown: React.FunctionComponent<Props> = props => {
                     {label}{labelExtra}
                 </Typography>
                 <Typography variant={'body1'}>
-                    {selectedValue ? selectedValue : options[selectedIndex].label}
+                    {selectedValue&&!hideSelected ? selectedValue : options[selectedIndex].label}
                 </Typography>
                 {icon2 && <span className={classes.icon + ' ' + icon2}/>}
             </ListItem>
