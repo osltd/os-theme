@@ -30,6 +30,7 @@ interface Props {
 const FooterList: React.FunctionComponent<Props> = props => {
 
     const {classes, history} = props;
+
     const items = [
         {label: useI18nText(keyOfI18n.SHOPPING_CART), url: "shoppingcart"}
         , {label: useI18nText(keyOfI18n.CHECKOUT), url: "checkout"}

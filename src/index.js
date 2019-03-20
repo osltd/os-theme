@@ -7,13 +7,17 @@ import {MuiThemeProvider} from '@material-ui/core'
 import {store} from './store';
 import {Provider} from 'react-redux';
 import {SnackbarProvider} from 'notistack';
+import ReducerContextProvider from './context'
 
 ReactDOM.render(
-    <Provider store={store}>
-        <MuiThemeProvider theme={theme}>
-            <SnackbarProvider maxSnack={3}>
-                <App/>
-            </SnackbarProvider>
-        </MuiThemeProvider>
-    </Provider>, document.getElementById('root'));
+    <ReducerContextProvider>
+        <Provider store={store}>
+            <MuiThemeProvider theme={theme}>
+                <SnackbarProvider maxSnack={3}>
+                    <App/>
+                </SnackbarProvider>
+            </MuiThemeProvider>
+        </Provider>
+    </ReducerContextProvider>
+    , document.getElementById('root'));
 registerServiceWorker();

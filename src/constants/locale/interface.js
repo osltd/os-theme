@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var keyOfI18n;
 (function (keyOfI18n) {
+    keyOfI18n["LANGUAGE"] = "LANGUAGE";
     keyOfI18n["PASSWORD"] = "PASSWORD";
     keyOfI18n["EMAIL"] = "EMAIL";
     keyOfI18n["LOGIN"] = "LOGIN";
@@ -59,6 +60,8 @@ var keyOfI18n;
     keyOfI18n["PLACE_ORDER"] = "PLACE_ORDER";
     keyOfI18n["TERM_AND_CONDITIONS"] = "TERM_AND_CONDITIONS";
     keyOfI18n["FREE"] = "FREE";
+    keyOfI18n["CURR_FEED"] = "CURR_FEED";
+    keyOfI18n["SINGLE_PRODUCT"] = "SINGLE_PRODUCT";
     keyOfI18n["AUTH_LOGIN_RETURN_TO_STORE"] = "AUTH_LOGIN_RETURN_TO_STORE";
     keyOfI18n["AUTH_LOGIN_SIGN_IN"] = "AUTH_LOGIN_SIGN_IN";
     keyOfI18n["AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET"] = "AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET";

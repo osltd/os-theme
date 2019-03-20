@@ -6,15 +6,12 @@ var futch = function (xhr, url, opts, onProgress, onAbort, callback, endpoint) {
 
     xhr.open(opts.method || 'get', url);
     xhr.onload = function (e) {
-        console.log("=====> xhr.onload: ", e);
         callback && callback({response: e, endpoint: endpoint}, null);
     };
     xhr.onerror = function (e) {
-        console.log("=====> xhr.onerror : ", e);
         callback && callback({}, {error: e})
     };
     xhr.onabort = () => {
-        console.log("=====> onabort: ", onabort);
         onAbort && onAbort();
     };
     xhr.upload.onprogress = onProgress;

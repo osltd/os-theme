@@ -74,10 +74,7 @@ const mapDispatchToProps = dispatch => ({
 
 const PromoCode = props => {
     const [promoCode, setPromoCode] = useState('');
-    let itemsOf = product => {
-
-        return product.number
-    };
+    let itemsOf = product => product.number
     let getRowPrice = product => product.product.variants.find(variant => variant.id === product.variantId).price * product.number;
 
     const {classes, shoppingCart, setCoupons, coupons} = props;
@@ -90,7 +87,7 @@ const PromoCode = props => {
                             <InputBar
                                 disabled={(coupons)}
 
-                                placeholder={'Type your promo code here'}
+                                placeholder={useI18nText(keyOfI18n.PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE)}
                                 onChange={value => setPromoCode(value)}
                                 value={promoCode}
                             />

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
@@ -35,6 +35,9 @@ import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
+import actionType from "../context/actionType";
+import {language} from "../I18N";
+import {reducer} from "../context";
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -43,6 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
         initApp: (shoppingCart) => {
+
             agent.Products.initProducts().then(res =>
                 dispatch(
                     {
@@ -87,7 +91,6 @@ const mapDispatchToProps = dispatch => ({
             agent.Products.initBusiness().then(res => {
 
                     if (res.data.data.shops) {
-                        console.log(res.data.data);
                         dispatch(
                             {
                                 type: CATEGORY_INIT_CATEGORY,
@@ -133,6 +136,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const App = props => {
+    const {commonReducer}= useContext(reducer)
     let getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => []);
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
@@ -141,9 +145,18 @@ const App = props => {
         JSON.parse(localStorage.getItem('shoppingCart')),
         //todo(init to [] storage)
     );
+    useEffect(()=>{
+        commonReducer.dispatch(
+            {
+                type: actionType.common.COMMON_INIT_I18N,
+                payload: {locale: language()}
+            }
+        );
+    },[])
 
     useEffect(
         () => {
+
             initApp().then(
                 async () =>
                     props.finishLoadingProducts(
@@ -152,7 +165,6 @@ const App = props => {
             );
             return null
         }, []);
-
 
     return (
         <BrowserRouter>

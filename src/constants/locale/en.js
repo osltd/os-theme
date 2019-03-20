@@ -1,11 +1,7 @@
-import {I18n} from "./interface";
-import {zh_HK} from "./zh_HK";
-
-interface props extends I18n {
-}
-
-export const en: props ={
-    LANGUAGE:'language',
+"use strict";
+exports.__esModule = true;
+exports.en = {
+    LANGUAGE: 'language',
     PASSWORD: 'password',
     EMAIL: 'email',
     LOGIN: 'log in',
@@ -41,10 +37,10 @@ export const en: props ={
     SHOPPING_CART: 'shopping cart',
     ADD_TO_CART: 'add to cart',
     WELCOME_BACK: 'welcome back',
-    FEATURE_PRODUCTS:'FEATURE PRODUCTS',
-    TOP_INTERESTING:'TOP INTERESTING',
-    TAGS:'tags',
-    MY_ACCOUNT:'my account',
+    FEATURE_PRODUCTS: 'FEATURE PRODUCTS',
+    TOP_INTERESTING: 'TOP INTERESTING',
+    TAGS: 'tags',
+    MY_ACCOUNT: 'my account',
     IMAGE: 'image',
     SHIPPING_OPTIONS: 'shipping options',
     DAYS: 'days',
@@ -60,41 +56,32 @@ export const en: props ={
     AUTH_ACCOUNTS_LOGOUT: 'logout',
     FEEDS: 'feeds',
     NO_AUTHORS: 'no authors',
-    PLACE_ORDER:'Place Order',
-    TERM_AND_CONDITIONS:'I have read and agree to the website terms and conditions',
-    FREE:'free',
-    CURR_FEED:'currentFeeds',
-    SINGLE_PRODUCT:'singleProduct',
+    PLACE_ORDER: 'Place Order',
+    TERM_AND_CONDITIONS: 'I have read and agree to the website terms and conditions',
+    FREE: 'free',
+    CURR_FEED: 'currentFeeds',
+    SINGLE_PRODUCT: 'singleProduct',
     AUTH_LOGIN_RETURN_TO_STORE: 'return to store',
     AUTH_LOGIN_SIGN_IN: 'sign in',
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: 'Dont have your own account yet?',
     AUTH_LOGIN_FORGOT_YOUR_PASSWORD: 'Forgot your password?',
-
-
     AUTH_REGISTER_CREATE_YOUR_ACCOUNT: 'Create your account',
     AUTH_ACCOUNT_CREATED: 'Account created!',
     AUTH_YOU_CAN_LOGIN_NOW: 'You can Login now!',
-
     CART_NO_ITEMS_TO_SHOW: 'there is no items in shopping cart',
-    CHECK:'check',
-
     CHECKOUT_BILLING_DETAILS_SHIPPING_DETAILS: 'Shipping Options',
     CHECKOUT_BILLING_STREET_ADDRESS: 'Street Address',
     CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER: 'please enter your phone number for contact',
     CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER: 'please enter your visa number',
-
-
     ORDER_SUMMARY_PLACE_ORDER: 'place order',
     ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED: 'no shipping method provided',
-    SNACK_BAR_PLEASE_LOGIN_FIRST_IN_ORDER_TO_CHECKOUT_YOUR_PRODUCTS: 'please log in first in order to checkout your products'
-    ,
+    SNACK_BAR_PLEASE_LOGIN_FIRST_IN_ORDER_TO_CHECKOUT_YOUR_PRODUCTS: 'please log in first in order to checkout your products',
     GOTO: 'go to',
     CHECKOUT_TO_BUY_SOME: 'to buy some',
     CHECKOUT_YOUR_ORDER_SUMMARY: 'Your Order Summary',
     CHECKOUT_PROMO_CODE: 'promo code',
     CHECKOUT_BILLING_DETAIL: 'Billing Details',
-    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART:'You haven\'t put any items in cart',
-
+    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART: 'You haven\'t put any items in cart',
     PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: 'Type your promo code here',
     PROMO_CODE_SNACK_BAR_PLEASE_TYPE_IN_PROMO_CODE_FIRST: 'Please Type in Promo Code First',
     PROMO_CODE_SNAKE_BAR_PROMO_CODE_DOES_NOT_EXIST: 'Promo Code does not exist',
@@ -104,19 +91,13 @@ export const en: props ={
     PROMO_CODE_SNAKE_BAR_VALID: 'Promo Code valid',
     PROMO_CODE_SNAKE_BAR_UNKNOWN_ERROR: 'Something wrong, please refresh and try again',
     PROMO_CODE_NO_PROMO_CODE_AVAILABLE: 'no Promo code available',
-
     FEED_DETAIL_BACK_TO_FEED_LIST: 'back to feed',
     FEED_NO_FEED: 'there are no posts available yet',
-
-
     CONFIRM_PAGE_YOUR_REF_NUM_IS: ' your reference number is',
     CONFIRM_PAGE_SHIPPING_REQ_SUCCESSFULLY: 'Shipping request successfully.',
-
-    NO_POST_AVAILABLE:'there are no posts available yet',
-
+    NO_POST_AVAILABLE: 'there are no posts available yet',
     FOOTER_FIND_US_ON: 'find us on',
-
-    PRODUCT_DETAILS_KEEP_SHOPPING:'Keep shopping what you like, thank you!',
+    PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: 'Congratulation!',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: 'items added! ',
     PRODUCT_DETAILS_IN_STOCKS: 'in stock',
@@ -124,12 +105,10 @@ export const en: props ={
     THERE_ARE_NO_PRODUCTS_UNDER: 'there are no products under',
     CATEGORY_YET: 'category yet',
     NOT_A_REG_PRICE: 'not a reg price',
-
     SHOP_SORT_NAME_ASC: 'Name A-Z',
     SHOP_SORT_NAME_DES: 'Name Z-A',
     SHOP_SORT_PRICE_ASC: 'Price Low to High',
     SHOP_SORT_PRICE_DES: 'Price High to Low',
     SHOP: 'shop',
-    PRODUCT_CATEGORY: 'product categories',
+    PRODUCT_CATEGORY: 'product categories'
 };
-

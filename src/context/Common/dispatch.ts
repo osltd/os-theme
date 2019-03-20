@@ -14,9 +14,11 @@ export interface Action {
 const dispatch = (state: State, action: Action): State => {
     switch (action.type) {
         case commonActionType.COMMON_INIT_I18N: {
+            localStorage.setItem('locale', action.payload.locale ? action.payload.locale : "en")
+
             return ({
                 ...state,
-                locale: action.payload.locale ? action.payload.locale : "zh"
+                locale: action.payload.locale ? action.payload.locale : "en"
             })
         }
         default:
