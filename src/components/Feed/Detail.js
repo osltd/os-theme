@@ -22,7 +22,8 @@ const styles = theme => (
             margin: '20px 0',
         },
         backIcon: {
-            fontSize: '30px'
+            fontSize: '30px',
+            marginRight:'5px',
         },
         backArrow: {
             cursor: 'pointer',
@@ -68,9 +69,8 @@ const FeedDetail = (props) => {
             <Grid container justify={'center'} className={classes.root}>
                 <Header title={refactorTextLength(feed.sections[0].title)}/>
                 <Grid item container spacing={16} xs={12} lg={10}>
-                    {
-                        false && <Grid item container alignItems={'center'} xs={12}
-                                       onClick={() => redirectUrl('/feed', history)}
+                 <Grid item container alignItems={'center'} xs={12}
+                                       onClick={() => redirectUrl('/feeds', history)}
                                        className={classes.backArrow}>
                             <span
                                 className={classNames('icon-circle-left', classes.backIcon)}/>
@@ -78,7 +78,7 @@ const FeedDetail = (props) => {
                                 back to feed
                             </Typography>
                         </Grid>
-                    }
+
                     <Grid item xs={12} md={3}>
                         <List
                             data={getTagsCountsArray(feeds, (tag, number) => {
