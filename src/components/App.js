@@ -163,7 +163,6 @@ const App = props => {
                         await getAllProducts()
                     )
             );
-            return null
         }, []);
 
     return (

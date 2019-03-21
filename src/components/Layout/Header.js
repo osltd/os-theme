@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button/Button'
@@ -15,6 +15,9 @@ import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constant
 import {redirectUrl} from "../../api/ApiUtils";
 import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
+import DropDown from "../Widget/DropDown";
+import actionType from "../../context/actionType";
+import {reducer} from "../../context";
 
 const styles = theme => ({
     logo: {
@@ -123,6 +126,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const Header = props => {
+    const {commonReducer} = useContext(reducer)
     const [keyword, setKeyword] = useState('');
     const [navBar, setNavBar] = useState('');
     const {
@@ -195,7 +199,44 @@ const Header = props => {
                 {
                     (isWidthUp('lg', width)) ?
                         <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
+                            <Grid item>
+                                <DropDown
+                                    selectedValue={commonReducer.state.locale==='en'?'English':'繁體中文'}
+                                    options={
 
+                                        [
+                                            {
+                                                label: 'English',
+                                                value: 'en',
+                                                onClick: () => {
+                                                    commonReducer.dispatch(
+                                                        {
+                                                            type: actionType.common.COMMON_INIT_I18N,
+                                                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+                                                        }
+                                                    );
+                                                }
+
+                                            },
+                                            {
+                                                label: '繁體中文',
+                                                value: 'zh',
+
+                                                onClick: () => {
+                                                    commonReducer.dispatch(
+                                                        {
+                                                            type: actionType.common.COMMON_INIT_I18N,
+                                                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        ]
+
+                                    }
+                                />
+
+                            </Grid>
                             <Grid item>
                                 <div className={classes.grow}/>
                                 <div className={classes.search}>
@@ -230,6 +271,22 @@ const Header = props => {
                                     </div>
                                     {getInputBar()}
                                 </div>
+                            </Grid>
+
+
+                            <Grid item>
+                                <PopUp
+                                    popUp={<DropDownList
+                                        data={shoppingCart}
+                                        onDelete={index => editShoppingCart(index)}
+
+                                    />
+                                    }
+                                    title={<Button
+                                        icon={'icon-cart'}
+                                    />}
+                                />
+
                             </Grid>
                             <Grid item>
                                 <PopUp

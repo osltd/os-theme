@@ -23,7 +23,7 @@ interface Props {
     classes: MaterialUIClasses,
 }
 
-const DropDown: React.FunctionComponent<Props> = props => {
+const FooterLanguageBar: React.FunctionComponent<Props> = props => {
     const {classes} = props
     const [anchorEl, setAnchorEl]: [any, any] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -99,4 +99,4 @@ const DropDown: React.FunctionComponent<Props> = props => {
 };
 
 //todo(need to improve)
-export default withStyles(styles)(DropDown);
+export default withStyles(styles)(FooterLanguageBar);
