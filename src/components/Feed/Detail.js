@@ -13,6 +13,7 @@ import classNames from 'classnames'
 import ReactHtmlParser from "react-html-parser";
 import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
+import {I18nText} from "../Widget/I18nText";
 
 const styles = theme => (
     {
@@ -77,7 +78,7 @@ const FeedDetail = (props) => {
                             <span
                                 className={classNames('icon-circle-left', classes.backIcon)}/>
                             <Typography variant={'h6'}>
-                                back to feed
+                              <I18nText keyOfI18n={keyOfI18n.FEED_DETAIL_BACK_TO_FEED_LIST}/>
                             </Typography>
                         </Grid>
 
