@@ -136,7 +136,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const App = props => {
-    const {commonReducer}= useContext(reducer)
+    const {commonReducer} = useContext(reducer)
     let getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => []);
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
@@ -145,17 +145,23 @@ const App = props => {
         JSON.parse(localStorage.getItem('shoppingCart')),
         //todo(init to [] storage)
     );
-    useEffect(()=>{
-        commonReducer.dispatch(
-            {
-                type: actionType.common.COMMON_INIT_I18N,
-                payload: {locale: language()}
-            }
-        );
-    },[])
+
 
     useEffect(
         () => {
+            let storedLocale = localStorage.getItem('locale')
+            console.log(storedLocale)
+            if (storedLocale === 'en' || storedLocale === 'zh') {
+
+                commonReducer.dispatch(
+                    {
+                        type: actionType.common.COMMON_INIT_I18N,
+                        payload: {
+                            locale: storedLocale
+                        }
+                    }
+                )
+            }
 
             initApp().then(
                 async () =>

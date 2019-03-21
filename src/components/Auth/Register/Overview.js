@@ -28,6 +28,19 @@ const styles = theme => ({
     },
     paddingTop: {
         paddingTop: '20px !important',
+    },
+    blueUnderline:{
+        cursor: 'pointer',
+        textAlign: 'center',
+        textDecoration: 'underline',
+        color: '#505050',
+        transition: 'color 150ms,background-color 150ms',
+        fontSize: '15px',
+
+
+        '&:hover': {
+            color: '#6a6561',
+        }
     }
 });
 
@@ -166,25 +179,15 @@ const Login = props => {
                         onClick={register}
                         value={useI18nText(keyOfI18n.CREATE)}
                     />
+                    <Typography
+                        onClick={() => {
+                            redirectUrl('/login', props.history)
+                        }}
 
-                    <MaterialButton variant={"contained"}
-                            style={
-                                {
-                                    boxShadow: 'none',
-                                    padding: '20px',
-                                    borderRadius: 0,
-                                }
-                            }
-                            fullWidth={true}
-                            onClick={() => {
-                                props.dialog && props.dialog.handleClose();
-                                redirectUrl('/login', props.history)
-                            }}
+                        className={classes.blueUnderline}
+                        variant={'h6'}>                        <I18nText keyOfI18n={keyOfI18n.LOGIN}/>
 
-
-                    >
-                        <I18nText keyOfI18n={keyOfI18n.LOGIN}/>
-                    </MaterialButton>
+                    </Typography>
                 </Grid>
             </Grid>
         </Grid>
