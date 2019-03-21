@@ -274,20 +274,7 @@ const Header = props => {
                             </Grid>
 
 
-                            <Grid item>
-                                <PopUp
-                                    popUp={<DropDownList
-                                        data={shoppingCart}
-                                        onDelete={index => editShoppingCart(index)}
 
-                                    />
-                                    }
-                                    title={<Button
-                                        icon={'icon-cart'}
-                                    />}
-                                />
-
-                            </Grid>
                             <Grid item>
                                 <PopUp
                                     popUp={<DropDownList

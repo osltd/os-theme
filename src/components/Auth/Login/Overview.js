@@ -159,7 +159,7 @@ const Login = (props) => {
                 <Grid item xs={12}>
                     <Button
                         onClick={handleLoginProcess}
-                        value={keyOfI18n.AUTH_LOGIN_SIGN_IN}
+                        value={useI18nText(keyOfI18n.AUTH_LOGIN_SIGN_IN)}
                     />
                 </Grid>
 

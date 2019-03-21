@@ -10,7 +10,6 @@ const styles = theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
-        minWidth: 480,
         width: '100%',
     },
     items: {

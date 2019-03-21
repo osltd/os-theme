@@ -110,7 +110,7 @@ const MainPageOverview = props => {
                 hasCategoryToShow && <Grid item container alignItems={'center'} justify={'center'}
                                            className={classes.productCategory}>
 
-                    <Grid item xs={12} md={10} lg={10}>
+                    <Grid item xs={10} md={10} lg={10}>
                         <CategoryOverviewBox
 
                             category={category}

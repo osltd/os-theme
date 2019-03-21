@@ -11,6 +11,8 @@ import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
 import classNames from 'classnames'
 import ReactHtmlParser from "react-html-parser";
+import {useI18nText} from "../../hooks/useI18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 const styles = theme => (
     {
@@ -85,7 +87,7 @@ const FeedDetail = (props) => {
                                 editFeedFilter('tag', tag);
                                 redirectUrl('/feeds', history, false)
                             })}
-                            title={'FEED CATEGORIES'}/>
+                            title={useI18nText(keyOfI18n.FEED_CATEGORY)}/>
 
 
                     </Grid>
@@ -99,7 +101,7 @@ const FeedDetail = (props) => {
                             <Grid item>
                                 <span className={'icon-icons8-edit'}/>
                                 <Typography variant={'subtitle1'} className={classes.basicInfoText}>
-                                    {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : 'no authors'}
+                                    {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
                                 </Typography>
                             </Grid>
                             <Grid item>

@@ -11,8 +11,8 @@ import swal from '@sweetalert/with-react'
 import {redirectUrl} from "../../../api/ApiUtils";
 import {I18nText} from "../../Widget/I18nText";
 import {keyOfI18n} from "../../../constants/locale/interface";
-
-
+import {useI18nText} from "../../../hooks/useI18nText";
+import {Button as MaterialButton} from '@material-ui/core'
 const styles = theme => ({
     root: {
 
@@ -125,14 +125,14 @@ const Login = props => {
                 </Grid>
                 <Grid item>
                     <Input
-                        placeholder={<I18nText keyOfI18n={keyOfI18n.FIRST_NAME}/>}
+                        placeholder={useI18nText(keyOfI18n.FIRST_NAME)}
                         value={firstName}
                         onChange={e => setFirstName(e)}
                     />
                 </Grid>
                 <Grid item className={classes.paddingTop}>
                     <Input
-                        placeholder={<I18nText keyOfI18n={keyOfI18n.LAST_NAME}/>}
+                        placeholder={useI18nText(keyOfI18n.LAST_NAME)}
                         value={lastName}
                         onChange={e => setLastName(e)}
                     />
@@ -140,7 +140,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
 
-                        placeholder={<I18nText keyOfI18n={keyOfI18n.EMAIL}/>}
+                        placeholder={useI18nText(keyOfI18n.EMAIL)}
                         value={email}
                         onChange={e => setEmail(e)}
                     />
@@ -148,7 +148,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
                         type={'Password'}
-                        placeholder={<I18nText keyOfI18n={keyOfI18n.PASSWORD}/>}
+                        placeholder={useI18nText(keyOfI18n.PASSWORD)}
                         value={pwd}
                         onChange={e => setPwd(e)}
                     />
@@ -156,7 +156,7 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Input
                         type={'Password'}
-                        placeholder={<I18nText keyOfI18n={keyOfI18n.CONFIRM_PASSWORD}/>}
+                        placeholder={useI18nText(keyOfI18n.CONFIRM_PASSWORD)}
                         value={confirmPwd}
                         onChange={e => setConfirmPwd(e)}
                     />
@@ -164,8 +164,27 @@ const Login = props => {
                 <Grid item className={classes.paddingTop}>
                     <Button
                         onClick={register}
-                        value={<I18nText keyOfI18n={keyOfI18n.CREATE}/>}
+                        value={useI18nText(keyOfI18n.CREATE)}
                     />
+
+                    <MaterialButton variant={"contained"}
+                            style={
+                                {
+                                    boxShadow: 'none',
+                                    padding: '20px',
+                                    borderRadius: 0,
+                                }
+                            }
+                            fullWidth={true}
+                            onClick={() => {
+                                props.dialog && props.dialog.handleClose();
+                                redirectUrl('/login', props.history)
+                            }}
+
+
+                    >
+                        <I18nText keyOfI18n={keyOfI18n.LOGIN}/>
+                    </MaterialButton>
                 </Grid>
             </Grid>
         </Grid>

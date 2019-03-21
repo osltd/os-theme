@@ -6,6 +6,8 @@ import {Button, Grid, List, Tooltip, Typography, Zoom} from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import {handleImgValid, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {connect} from "react-redux";
+import {I18nText} from "../../Widget/I18nText";
+import {keyOfI18n} from "../../../constants/locale/interface";
 
 const styles = theme => ({
     listItem: {
@@ -111,7 +113,7 @@ class ShoppingCartList extends React.Component {
                         >
 
                             <Typography variant={'subtitle1'}>
-                                you haven't put any items in cart
+                                <I18nText keyOfI18n={keyOfI18n.CART_NO_ITEMS_TO_SHOW}/>
                             </Typography>
                         </ListItem>}
 
@@ -124,14 +126,13 @@ class ShoppingCartList extends React.Component {
                             variant={'outlined'}
                             onClick={() => redirectUrl('/shoppingCart', this.props.history)}
                         >
-                            View Cart
-                        </Button>
+                            <I18nText keyOfI18n={keyOfI18n.VIEW_CART}/> </Button>
                     </Grid>
                     <Grid item>
                         <Button variant={'outlined'}
                                 className={classes.button}
                                 onClick={() => redirectUrl('/checkout', this.props.history)}>
-                            Checkout
+                            <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
                         </Button>
                     </Grid>
 

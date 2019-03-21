@@ -23,6 +23,8 @@ export const en: props ={
     CHECKOUT: 'Checkout',
     NAME: 'name',
     CHARGE: 'charge',
+    VIEW_CART:'view cart',
+
     DELIVERY_TIME: 'delivery time',
     SELECTED: 'selected',
     EMAIL_ADDRESS: 'Email Address',

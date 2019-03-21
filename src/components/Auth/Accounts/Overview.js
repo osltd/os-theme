@@ -128,7 +128,7 @@ const MyAccount = (props) => {
                             props.dialog && props.dialog.handleClose();
                             redirectUrl('/login', history)
                         }}
-                        value={keyOfI18n.LOGIN}/>
+                        value={useI18nText(keyOfI18n.LOGIN)}/>
                 </Grid>
                 <br/>
                 <Grid item xs={12} md={1}/>
