@@ -161,9 +161,9 @@ const ShopOverview = props => {
 
         if (products.length === 0) {
             return <Typography variant={'subtitle1'}> <I18nText keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/>
-           <strong>{
-                props.filter.tag
-            }</strong> <I18nText keyOfI18n={keyOfI18n.CATEGORY_YET}/></Typography>
+                <strong>{
+                    props.filter.tag
+                }</strong> <I18nText keyOfI18n={keyOfI18n.CATEGORY_YET}/></Typography>
 
 
         }
@@ -200,7 +200,9 @@ const ShopOverview = props => {
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
     const products = sortData();
-    const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
+    const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>,
+        <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>,
+        <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>
@@ -226,7 +228,7 @@ const ShopOverview = props => {
                             <Grid item container xs={12} alignItems={'center'} justify={'space-between'}
                                   direction={'row'}
                                   className={classes.toolBar}>
-                                <Grid item xs={2}>
+                                <Grid item xs={6} md={2}>
                                 <span
                                     onClick={() => props.changeViewMode('form')}
                                     className={classNames(classes.icon, 'icon-table')}/>
@@ -234,7 +236,7 @@ const ShopOverview = props => {
                                         onClick={() => props.changeViewMode('list')}
                                         className={classNames('icon-list', classes.icon)}/>
                                 </Grid>
-                                <Grid item xs={3} container alignItems={'center'} direction={'row'}>
+                                <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
                                     <Grid item>
                                         <Typography variant={'body1'}>
                                             <I18nText keyOfI18n={keyOfI18n.ITEMS}/>
@@ -247,11 +249,12 @@ const ShopOverview = props => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant={'body1'}>
-                                            {<I18nText keyOfI18n={keyOfI18n.OF}/>} {getProductProperty(products, 'length')}
+                                            {<I18nText
+                                                keyOfI18n={keyOfI18n.OF}/>} {getProductProperty(products, 'length')}
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={3} container alignItems={'center'} direction={'row'}>
+                                <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
 
                                     <Grid item>
                                         <Typography variant={'body1'}>
@@ -273,7 +276,7 @@ const ShopOverview = props => {
                                     </Grid>
                                 </Grid>
                                 {
-                                    isWidthUp('md', props.width) ? null : <Grid item>
+                                    isWidthUp('md', props.width) ? null : <Grid xs={6} item>
                                         <PopUp
                                             innerRef={e => popUp = e}
                                             title={
@@ -293,6 +296,7 @@ const ShopOverview = props => {
                                     </Grid>
                                 }
                             </Grid>
+
                             <Grid item container className={classes.listMode}>
                                 {
                                     getProductsList(products)

@@ -19,7 +19,7 @@ const styles = theme => ({
     root: {
         paddingRight: '50px',
         position: 'sticky',
-        top: '95vh',
+        top: '90%',
         height: 0,
         zIndex: 10000,
         '& :hover': {
