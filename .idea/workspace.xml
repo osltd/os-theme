@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="restructure flow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/en.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/interface.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/zh_HK.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="38" column="9" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="38" selection-end-column="9" />
+            <state relative-caret-position="434">
+              <caret line="166" column="31" lean-forward="true" selection-start-line="166" selection-start-column="31" selection-end-line="166" selection-end-column="31" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -42,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/Feed/Detail.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="318">
-              <caret line="87" column="59" lean-forward="true" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+              <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -64,10 +68,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/constants/locale/en.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="71" column="45" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="45" />
+              <caret line="72" selection-start-line="72" selection-end-line="73" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -75,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="147" column="2" selection-start-line="147" selection-start-column="2" selection-end-line="147" selection-end-column="2" />
+            <state relative-caret-position="286">
+              <caret line="147" selection-start-line="147" selection-end-line="147" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -102,28 +124,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Auth/Register/Overview.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="190" selection-start-line="190" selection-end-line="190" />
+            <state relative-caret-position="433">
+              <caret line="184" column="98" selection-start-line="184" selection-start-column="98" selection-end-line="184" selection-end-column="98" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Layout/ErrorHandling.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Shop/Overview.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="285" column="83" selection-start-line="285" selection-start-column="83" selection-end-line="285" selection-end-column="83" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-                <element signature="e#10056#11246#0" />
               </folding>
             </state>
           </provider>
@@ -143,8 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find</find>
-      <find>WELCOME</find>
       <find>WELCOM</find>
       <find>welcome</find>
       <find>this.</find>
@@ -173,6 +175,8 @@
       <find>AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET</find>
       <find>setItem</find>
       <find>COMMON_INIT_I18N</find>
+      <find>have</find>
+      <find>?</find>
     </findStrings>
     <replaceStrings>
       <replace>redirectUrl(</replace>
@@ -246,10 +250,6 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/components/Widget/FooterLanguageBar.tsx" />
         <option value="$PROJECT_DIR$/src/constants/locale/zh-HK.ts" />
-        <option value="$PROJECT_DIR$/src/components/Auth/Login/Overview.js" />
-        <option value="$PROJECT_DIR$/src/constants/locale/en.ts" />
-        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
-        <option value="$PROJECT_DIR$/src/constants/locale/interface.ts" />
         <option value="$PROJECT_DIR$/src/components/Layout/Body/ShoppingCartList.js" />
         <option value="$PROJECT_DIR$/src/components/MainPage/Overview.js" />
         <option value="$PROJECT_DIR$/src/components/Widget/CategoryOverviewBox.js" />
@@ -258,9 +258,13 @@
         <option value="$PROJECT_DIR$/src/components/Auth/Accounts/Overview.js" />
         <option value="$PROJECT_DIR$/src/components/Layout/MyCredits.js" />
         <option value="$PROJECT_DIR$/src/components/Feed/Detail.js" />
-        <option value="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" />
         <option value="$PROJECT_DIR$/src/context/Common/dispatch.ts" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
+        <option value="$PROJECT_DIR$/src/components/Auth/Login/Overview.js" />
+        <option value="$PROJECT_DIR$/src/constants/locale/en.ts" />
+        <option value="$PROJECT_DIR$/src/constants/locale/interface.ts" />
+        <option value="$PROJECT_DIR$/src/components/Auth/Register/Overview.js" />
+        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
       </list>
     </option>
   </component>
@@ -370,28 +374,32 @@
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="context" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="context" type="462c0819:PsiDirectoryNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
+              <item name="locale" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="context" type="462c0819:PsiDirectoryNode" />
-              <item name="Feed" type="462c0819:PsiDirectoryNode" />
+              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
               <item name="os-theme" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="context" type="462c0819:PsiDirectoryNode" />
-              <item name="Product" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -528,12 +536,12 @@
       <workItem from="1552987608014" duration="26603000" />
       <workItem from="1553073018438" duration="4984000" />
       <workItem from="1553155537081" duration="4131000" />
-      <workItem from="1553162531979" duration="3417000" />
+      <workItem from="1553162531979" duration="3966000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="631650000" />
+    <option name="totallyTimeSpent" value="632199000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -910,13 +918,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/locale/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -944,13 +945,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="112" column="61" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -1039,7 +1033,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/Feed/Detail.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
-          <caret line="87" column="59" lean-forward="true" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+          <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1057,36 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/locale/en.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="71" column="45" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="38" column="9" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="38" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Auth/Register/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="190" selection-start-line="190" selection-end-line="190" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/context/Common/dispatch.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -1099,11 +1063,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="147" column="2" selection-start-line="147" selection-start-column="2" selection-end-line="147" selection-end-column="2" />
+        <state relative-caret-position="286">
+          <caret line="147" selection-start-line="147" selection-end-line="147" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Auth/Login/Overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="166" column="31" lean-forward="true" selection-start-line="166" selection-start-column="31" selection-end-line="166" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/en.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="72" selection-start-line="72" selection-end-line="73" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Auth/Register/Overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="184" column="98" selection-start-line="184" selection-start-column="98" selection-end-line="184" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
         </state>
       </provider>
     </entry>

@@ -70,6 +70,7 @@ export const en: props ={
     AUTH_LOGIN_RETURN_TO_STORE: 'return to store',
     AUTH_LOGIN_SIGN_IN: 'sign in',
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: 'Dont have your own account yet?',
+    AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN: 'Have your own account? Login now',
     AUTH_LOGIN_FORGOT_YOUR_PASSWORD: 'Forgot your password?',
 
 

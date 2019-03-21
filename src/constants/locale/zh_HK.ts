@@ -10,6 +10,7 @@ export const zh_HK: props ={
     LOGIN: '登入',
     REGISTER: '註冊',
     VIEW_CART:'查看購物車',
+    AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN: '已有賬戶？立刻登錄！',
 
     CREATE: '建立',
     FIRST_NAME: '名字',

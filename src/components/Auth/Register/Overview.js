@@ -30,6 +30,7 @@ const styles = theme => ({
         paddingTop: '20px !important',
     },
     blueUnderline:{
+        padding:'15px 0',
         cursor: 'pointer',
         textAlign: 'center',
         textDecoration: 'underline',
@@ -175,19 +176,20 @@ const Login = props => {
                     />
                 </Grid>
                 <Grid item className={classes.paddingTop}>
-                    <Button
-                        onClick={register}
-                        value={useI18nText(keyOfI18n.CREATE)}
-                    />
                     <Typography
                         onClick={() => {
                             redirectUrl('/login', props.history)
                         }}
 
                         className={classes.blueUnderline}
-                        variant={'h6'}>                        <I18nText keyOfI18n={keyOfI18n.LOGIN}/>
+                        variant={'h6'}>                        <I18nText keyOfI18n={keyOfI18n.AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN}/>
 
                     </Typography>
+                    <Button
+                        onClick={register}
+                        value={useI18nText(keyOfI18n.CREATE)}
+                    />
+
                 </Grid>
             </Grid>
         </Grid>
