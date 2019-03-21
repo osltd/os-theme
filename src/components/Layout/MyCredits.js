@@ -17,9 +17,8 @@ const styles = theme => ({
 
     root: {
         paddingRight: '50px',
-        position: 'sticky',
-        top: '90%',
-        height: 0,
+        position: 'fixed',
+        bottom: '40px', height: 0,
         zIndex: 10000,
         '& :hover': {
             color: 'black',
@@ -101,7 +100,7 @@ const MyCredits = props => {
                     </Grid>
                     <Grid item>
                         <Typography variant={'subtitle1'}>
-                           <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
+                            <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
                     </Grid>
 
                 </Grid>)

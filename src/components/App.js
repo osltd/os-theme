@@ -170,7 +170,6 @@ const App = props => {
             <ScrollToTop>
                 <ErrorBoundary>
                     <Header/>
-                    <MyCredits/>
                     <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : null}>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
@@ -190,6 +189,8 @@ const App = props => {
                             <Route component={NotFound}/>
                         </Switch>
                     </div>
+                    <MyCredits/>
+
                     <Footer/>
                 </ErrorBoundary>
             </ScrollToTop>
