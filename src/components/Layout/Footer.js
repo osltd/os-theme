@@ -56,7 +56,6 @@ const Footer = props => {
         //
         //
         // let allTags =_.uniq(productsTags.concat(feedsTags))
-        console.log(productsTags);
 
         if (productsTags.length > 0) return (
             <Grid item xs={6} md={2} style={
@@ -120,11 +119,7 @@ const Footer = props => {
                 </Grid>
             </Grid>
 
-            <Grid item xs={6} md={3} style={
-                themeWidth.isWidthDown.md?  {
-                    marginTop: '25px'
-                }:{}
-            } container direction={'column'} spacing={8}>
+            <Grid item xs={6} md={3} style={themeWidth.isWidthDown.md?  {marginTop: '25px'}:{}} container direction={'column'} spacing={8}>
                 <Grid item>
                     <Typography className={classes.title} variant={'h6'} color={'inherit'}>
                         <I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/>
@@ -136,8 +131,6 @@ const Footer = props => {
             </Grid>
             {getTags()}
             <Grid item xs={12} md={1}>
-
-
                 <FooterLanguageBar/>
             </Grid>
 

@@ -23,7 +23,6 @@ const promiseMiddleware = store => next => action => {
                 if (!skipTracking && currentState.viewChangeCounter !== currentView) {
                     return
                 }
-                console.log('ERROR', error);
                 action.error = true;
                 action.payload = error.response.body;
                 if (!action.skipTracking) {

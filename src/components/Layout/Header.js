@@ -101,7 +101,6 @@ const styles = theme => ({
 const mapStateToProps = state => ({
     shoppingCart: state.cart.shoppingCart,
     keyword: state.common.searchBar,
-
     products: state.product.products,
     feeds: state.feed.feeds,
     icon: state.common.shopInfo.icon,
@@ -212,7 +211,9 @@ const Header = props => {
                                                     commonReducer.dispatch(
                                                         {
                                                             type: actionType.common.COMMON_INIT_I18N,
-                                                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+                                                            payload: {
+                                                                locale:'en'
+                                                            }
                                                         }
                                                     );
                                                 }
@@ -226,7 +227,9 @@ const Header = props => {
                                                     commonReducer.dispatch(
                                                         {
                                                             type: actionType.common.COMMON_INIT_I18N,
-                                                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+                                                            payload: {
+                                                                locale:'zh'
+                                                            }
                                                         }
                                                     );
                                                 }

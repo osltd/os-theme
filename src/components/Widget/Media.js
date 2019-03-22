@@ -67,8 +67,6 @@ class Media extends React.Component {
         });
     };
     getMedia = data => {
-        console.log('-----------');
-        console.log(data);
         const {classes} = this.props;
         if (data.length > 0 && data[0].ext === 'product') {
             const productId = data[0].url;
@@ -136,8 +134,6 @@ class Media extends React.Component {
 
     render() {
         const {classes, data, box} = this.props;
-
-        console.log(data);
         return <Grid container justify={'center'}
         >
             <Grid item xs={12} lg={this.state.type === 'product' && !box ? 6 : 12}>

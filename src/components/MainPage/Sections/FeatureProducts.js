@@ -9,7 +9,6 @@ const FEATURED_PRODUCTS = 'featured';
 const TopInterest = props => {
 
     const {hasProductsToShow, products, width, classes} = props.self;
-console.log(keyOfI18n)
     return (products) ?
         <section className={classes.section}>
             <Grid item>

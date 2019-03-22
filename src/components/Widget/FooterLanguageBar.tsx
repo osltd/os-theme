@@ -34,20 +34,21 @@ const FooterLanguageBar: React.FunctionComponent<Props> = props => {
         cb()
     };
     let options =
-        [
-            {
-                label: 'English',
-                value: 'en',
-                onClick: () => {
-                    commonReducer.dispatch(
-                        {
-                            type: actionType.common.COMMON_INIT_I18N,
-                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+        [           {
+            label: 'English',
+            value: 'en',
+            onClick: () => {
+                commonReducer.dispatch(
+                    {
+                        type: actionType.common.COMMON_INIT_I18N,
+                        payload: {
+                            locale:'en'
                         }
-                    );
-                }
+                    }
+                );
+            }
 
-            },
+        },
             {
                 label: '繁體中文',
                 value: 'zh',
@@ -56,7 +57,9 @@ const FooterLanguageBar: React.FunctionComponent<Props> = props => {
                     commonReducer.dispatch(
                         {
                             type: actionType.common.COMMON_INIT_I18N,
-                            payload: {locale: commonReducer.state.locale === 'en' ? 'zh' : 'en'}
+                            payload:{
+                                locale:'zh'
+                            }
                         }
                     );
                 }
