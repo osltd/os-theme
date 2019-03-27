@@ -13,6 +13,7 @@ import {I18nText} from "../../Widget/I18nText";
 import {keyOfI18n} from "../../../constants/locale/interface";
 import {useI18nText} from "../../../hooks/useI18nText";
 import {Button as MaterialButton} from '@material-ui/core'
+import {SwalContent} from "../../Layout/SwalContent";
 const styles = theme => ({
     root: {
 
@@ -74,39 +75,14 @@ const Login = props => {
                 }
                 swal({
 
-                    content: (<Grid container alignItems={'center'} direction={'column'}>
-                        <Grid item>
-                            {
-                                false && <span className={'icon-like'}
-                                               style={{
-                                                   fontSize: '80px',
-                                                   color: 'hsla(100,55%,69%,.5)',
-                                                   padding: '20px',
+                    content: (<SwalContent title={<>
+                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION}/>!</>
 
-                                                   display: 'block',
-                                                   width: '80px',
-                                                   height: '80px',
-                                                   border: '4px solid hsla(98,55%,69%,.2)',
-                                                   borderRadius: '50%',
-                                                   boxSizing: 'content-box',
-                                               }}
-                                />}
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'h4'}>
-                                <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION}/>!
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'subtitle1'}>
-                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNT_CREATED}/>
-                            </Typography>
-                            <Typography variant={'subtitle1'}>
-                                <I18nText keyOfI18n={keyOfI18n.AUTH_YOU_CAN_LOGIN_NOW}/>
-                            </Typography>
-                        </Grid>
+                        } subTitle={
+                            <I18nText keyOfI18n={keyOfI18n.AUTH_YOU_CAN_LOGIN_NOW}/>
 
-                    </Grid>)
+                        }/>
+)
                 });
                 setTimeout(
                     () => redirectUrl('/login', props.history), 1000

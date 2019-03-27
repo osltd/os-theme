@@ -17,7 +17,9 @@
     "@types/react-router-dom": "^4.3.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "dotenv": "^7.0.0",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.19.1",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "notistack": "^0.3.9",
@@ -59,7 +61,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://myshop.prod.ocs.zone/",
   "devDependencies": {
     "ts-node": "^8.0.3"
   }

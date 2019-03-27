@@ -13,6 +13,7 @@ import * as styleGuide from "../../../constants/styleGuide";
 import {I18nText} from "../../Widget/I18nText";
 import {keyOfI18n} from "../../../constants/locale/interface";
 import {useI18nText} from "../../../hooks/useI18nText";
+import {SwalContent} from "../../Layout/SwalContent";
 
 const styles = theme => ({
     root: {},
@@ -72,30 +73,16 @@ const Login = (props) => {
                     agent.Auth.getAccount().then(res => console.log(res));
                     swal(
                         {
-                            content: (<Grid container alignItems={'center'} direction={'column'}>
-                                <Grid item>
-                                    {false && <span className={'icon-like'}
-                                                    style={{
-                                                        fontSize: '80px',
-                                                        color: 'hsla(100,55%,69%,.5)',
-                                                        padding: '20px',
-                                                        display: 'block',
-                                                        width: '80px',
-                                                        height: '80px',
-                                                        border: '4px solid hsla(98,55%,69%,.2)',
-                                                        borderRadius: '50%',
-                                                        boxSizing: 'content-box',
-                                                    }}
-                                    />}
-                                </Grid>
-                                <Grid item>
-                                    <Typography variant={'h4'}>
-                                        <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>!
-                                    </Typography>
-                                </Grid>
+                            content: (
+                                <SwalContent title={
+                                    <>
 
-                            </Grid>)
-                        });
+                                    <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>!</>
+                                } subTitle={''}
+
+                                img={'img/snackBar/log_in.png'}
+                                />
+                        )})
                     setTimeout(
                         () => redirectUrl('/', history), 1000
                     )

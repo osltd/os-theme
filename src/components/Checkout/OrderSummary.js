@@ -88,6 +88,7 @@ class OrderSummary extends React.Component {
 
     placeOrder = async () => {
         const {billingDetail} = this.props;
+
         const data = {
 
             "items": this.props.shoppingCart.map(n => ({
@@ -112,7 +113,9 @@ class OrderSummary extends React.Component {
 
             "shipping": billingDetail.selectedShippingMethod,
         };
+
         const {classes} = this.props;
+
         redirectUrl('/loadingPage', this.props.history, false);
 
         await agent.Checkout.placeOrder(data).then(res => {
@@ -251,8 +254,7 @@ class OrderSummary extends React.Component {
                 }
 
 
-            }
-        ).catch(err => {
+            }).catch(err => {
             if (err.response && err.response.data.messages.length > 0) {
                 err.response.data.messages.map(n =>
                     this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
@@ -262,7 +264,6 @@ class OrderSummary extends React.Component {
             }
 
         })
-
     };
 
     getDiscountedPrice = (amount, coupon) => coupon ? ((coupon.type === 'FIXED') ? amount - coupon.discount : amount * (1 - coupon.discount * .01)) : amount;

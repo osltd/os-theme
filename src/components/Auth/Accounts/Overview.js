@@ -13,6 +13,7 @@ import agent from '../../../agent'
 import {I18nText} from "../../Widget/I18nText";
 import {keyOfI18n} from "../../../constants/locale/interface";
 import {useI18nText} from "../../../hooks/useI18nText";
+import {SwalContent} from "../../Layout/SwalContent";
 
 const styles = theme => ({
 
@@ -50,34 +51,14 @@ const logout = (props) => {
         res => {
             swal(
                 {
-                    content: (<Grid container alignItems={'center'} direction={'column'}>
-                        <Grid item>
-                            {false && <span
-                                className={'icon-like'}
-                                style={{
-                                    fontSize: '80px',
-                                    color: 'hsla(100,55%,69%,.5)',
-                                    padding: '20px',
-                                    display: 'block',
-                                    width: '80px',
-                                    height: '80px',
-                                    border: '4px solid hsla(98,55%,69%,.2)',
-                                    borderRadius: '50%',
-                                    boxSizing: 'content-box',
-                                }}
-                            />}
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'h4'}>
-                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SUCCESSFULLY_LOGOUT}/>
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'subtitle1'}>
-                                <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/> </Typography>
-                        </Grid>
+                    content: (<SwalContent title={<I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SUCCESSFULLY_LOGOUT}/>
+                        } subTitle={
+                            <I18nText keyOfI18n={keyOfI18n.AUTH_ACCOUNTS_SEE_YOU}/>
 
-                    </Grid>)
+                        }
+                                           img={'img/snackBar/log_out.png'}
+                        />
+                    )
                 });
             setTimeout(() => redirectUrl('/', props.history), 1000)
         }
@@ -99,7 +80,8 @@ const MyAccount = (props) => {
                     {
 
                         ((user.first_name) && (user.last_name)) ?
-                            `${user.first_name} ${user.last_name} ${useI18nText(keyOfI18n.WELCOME_BACK)} ` : <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>}
+                            `${user.first_name} ${user.last_name} ${useI18nText(keyOfI18n.WELCOME_BACK)} ` :
+                            <I18nText keyOfI18n={keyOfI18n.WELCOME_BACK}/>}
                 </Typography>
             </Grid>
             <Grid item xs={8}>

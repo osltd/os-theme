@@ -136,6 +136,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const App = props => {
+
     const {commonReducer} = useContext(reducer)
     let getAllProducts = async (page = 1, products = []) => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => []);
@@ -149,6 +150,7 @@ const App = props => {
 
     useEffect(
         () => {
+         //   setInterval(()=>agent.Auth.test(),100)
             let storedLocale = localStorage.getItem('locale')
             console.log(storedLocale)
             if (storedLocale === 'en' || storedLocale === 'zh') {

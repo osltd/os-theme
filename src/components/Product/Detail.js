@@ -13,9 +13,9 @@ import swal from '@sweetalert/with-react'
 import Slick from '../Widget/Slick/Products'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import {formatMoney} from "../../api/ApiUtils";
-import ImageWrapper from "../Widget/Img";
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
+import {SwalContent} from "../Layout/SwalContent";
 
 const styles = theme =>
     (
@@ -106,42 +106,10 @@ class ResponsiveDialog extends React.Component {
         swal(
             {
                 buttons: {
-                    success: 'got it',
+                    success: 'Got it',
                 },
-                content: (<Grid container alignItems={'center'} direction={'column'}>
-                    <Grid item>    <Typography variant={'h4'}>
-                        items added! </Typography>
-
-                    </Grid>
-                    <Grid item>
-
-                        <Typography variant={"subtitle1"} style={
-                            {
-                                color:'grey'
-                            }
-                        }>
-                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_KEEP_SHOPPING}/>
-                        </Typography>
-                       </Grid>
-                    <Grid item xs={4}>
-                        {false && <span className={'icon-like'}
-
-                                        style={{
-                                            fontSize: '80px',
-                                            color: 'hsla(100,55%,69%,.5)',
-                                            padding: '20px',
-
-                                            display: 'block',
-                                            width: '80px',
-                                            height: '80px',
-                                            border: '4px solid hsla(98,55%,69%,.2)',
-                                            borderRadius: '50%',
-                                            boxSizing: 'content-box',
-                                        }}
-                        />}
-                        <ImageWrapper src={'/img/popUp/addToCart.png'}/>
-                    </Grid>
-                </Grid>)
+                content: (<SwalContent title={'items added!'}
+                />)
             })
 
 
