@@ -11,7 +11,11 @@ interface Props {
 export const SwalContent: React.FunctionComponent<Props> = props => {
     const {title, subTitle, img} = props
     console.log(props)
-    return (<Grid container alignItems={'center'} spacing={16} direction={'column'}>
+    return (<Grid  style={
+        {
+       padding:'20px'
+        }
+    } container alignItems={'center'} spacing={16} direction={'column'}>
         <Grid item> <Typography variant={'h5'}>
 
             {title}
@@ -22,7 +26,7 @@ export const SwalContent: React.FunctionComponent<Props> = props => {
 
             <Typography variant={"subtitle1"} style={
                 {
-                    color: 'grey'
+                    color: '#C6C6C6'
                 }
             }>
 

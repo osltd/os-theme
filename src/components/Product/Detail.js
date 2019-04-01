@@ -109,6 +109,7 @@ class ResponsiveDialog extends React.Component {
                     success: 'Got it',
                 },
                 content: (<SwalContent title={'items added!'}
+                                       subTitle={'Keep shopping what you like, thank you !'}
                 />)
             })
 
