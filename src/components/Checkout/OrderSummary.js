@@ -156,7 +156,7 @@ class OrderSummary extends React.Component {
                             borderTopLeftRadius: '5px',
                             borderTopRightRadius: '5px',
                             background: 'black ',
-                            color: 'white '
+                            color: 'white'
                         }
                         } container alignItems={'center'}>
                             <Grid item xs={2}>
