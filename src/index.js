@@ -16,7 +16,6 @@ ReactDOM.render(
     <ReducerContextProvider>
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-
             <MuiThemeProvider theme={theme}>
                 <SnackbarProvider maxSnack={3}>
                     <App/>

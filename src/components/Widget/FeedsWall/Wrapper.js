@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {Grid, Typography} from '@material-ui/core';
 import BigFeedBox from './BigFeedBox'
 import SmallFeedBox from './SmallFeedBox'
-import {htmlToPlainText, refactorTitle} from "../../../api/ApiUtils";
+import {htmlToPlainText, refactorTextLength} from "../../../api/ApiUtils";
 
 const styles = theme => ({
     root: {},
@@ -45,7 +45,7 @@ class FeedsWall extends React.Component {
                     link={'/feeds/' + data[0].id}
 
                     backgroundImg={data[0].sections[0].medias[0].url}
-                    title={refactorTitle(data[0].sections[0].title)}
+                    title={refactorTextLength(data[0].sections[0].title)}
 
                 />
                 {data[1] && <SmallFeedBox
@@ -103,7 +103,7 @@ class FeedsWall extends React.Component {
                 />}
                 {data[3] && <BigFeedBox
                     link={'/feeds/' + data[3].id}
-                    title={refactorTitle(data[3].sections[0].title)}
+                    title={refactorTextLength(data[3].sections[0].title)}
                     backgroundImg={data[3].sections[0].medias[0].url}
 
                 />}

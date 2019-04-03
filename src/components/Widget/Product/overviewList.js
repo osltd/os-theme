@@ -1,7 +1,7 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, redirectUrl, refactorParaLength} from "../../../api/ApiUtils";
+import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({
@@ -102,7 +102,7 @@ class ResponsiveDialog extends React.Component {
                     >{name}</Typography>
 
                     <Typography className={classes.description}
-                                variant={'caption'}>{refactorParaLength(description, 200)}</Typography>
+                                variant={'caption'}>{refactorTextLength(description, 200)}</Typography>
                     {
                         promotePrice ?
                             <Grid item container direction={'row'}>

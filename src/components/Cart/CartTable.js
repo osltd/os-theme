@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {formatMoney, handleImgValid, refactorTitle} from "../../api/ApiUtils";
+import {formatMoney, handleImgValid, refactorTextLength} from "../../api/ApiUtils";
 import Counter from '../Widget/Counter'
 import {connect} from "react-redux";
 import classNames from 'classnames'
@@ -141,7 +141,7 @@ const ShoppingCartTable = (props) => {
                                     title={'( ' + n.product.variants.find(variant => variant.id === n.variantId).description
                                     + ' )'}>
                                     <div>
-                                        {refactorTitle(n.product.name)
+                                        {refactorTextLength(n.product.name)
                                         }</div>
                                 </Tooltip>
 

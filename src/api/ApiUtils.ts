@@ -1,21 +1,17 @@
 import _ from 'lodash'
-import history from 'history'
+import history, {History} from 'history'
 import {Clickable, RoutePath, Tag, VariantOptions} from "../interfaces/client/Common";
 import {Product, Variant} from "../interfaces/server/Product";
 import {Section} from "../interfaces/server/Feed";
-import {useI18nText} from "../hooks/useI18nText";
-import {keyOfI18n} from "../constants/locale/interface";
-
-export const refactorParaLength = (content: string, length: number = 45): string =>
-    content.length > length ? content.replace(/(<([^>]+)>)/ig, "").slice(0, length).concat('...') : content;
+import {UserProfile} from "../interfaces/server/Auth";
+import {ShoppingCartItem} from "../interfaces/client/ShoppingCart";
+import agent from "../agent";
 
 export const htmlToPlainText = (context: string): string => context.replace(/(<([^>]+)>)/ig, "");
+
 export const refactorTextLength = (content: string, length: number = 20): string =>
     content.length > length ? content.slice(0, length).concat('...') : content;
-
-export const refactorTitle = (content: string, length: number = 22): string =>
-    content.length > length ? content.slice(0, length).concat('...') : content;
-
+// which account what serial what number
 export const getRoutePath = (url: string): Array<RoutePath> => {
     let result: Array<RoutePath> = [];
     let urlArray = url.split('/');
@@ -24,7 +20,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
             case n === "":
                 if (i === 0) result.push(
                     {
-                        label: useI18nText(keyOfI18n.HOME),
+                        label: 'home',
                         link: '/',
                     }
                 );
@@ -32,26 +28,26 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
 
             case n === 'feeds':
                 result.push({
-                    label: useI18nText(keyOfI18n.FEEDS),
+                    label: n,
                     link: '/feeds',
 
                 });
                 break;
             case n === 'products':
                 result.push({
-                    label: useI18nText(keyOfI18n.PRODUCTS),
+                    label: n,
                     link: '/products'
                 });
                 break;
             case n === 'checkout':
                 result.push({
-                    label: useI18nText(keyOfI18n.CHECKOUT),
+                    label: n,
                     link: '/checkout'
                 });
                 break;
             case n === 'shoppingCart'.toLowerCase():
                 result.push({
-                    label: useI18nText(keyOfI18n.SHOPPING_CART) ,
+                    label: n,
                     link: '/shoppingCart'
                 });
                 break;
@@ -59,14 +55,14 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
                 if (url[i - 1] === 'products')
                     result.push({
 
-                            label: useI18nText(keyOfI18n.SINGLE_PRODUCT),
+                            label: 'singleProduct',
                             link: '/products/' + n
                         }
                     );
                 if (url[i - 1] === 'feeds')
                     result.push({
 
-                            label: useI18nText(keyOfI18n.CURR_FEED),
+                            label: 'currentFeeds',
                             link: '/feeds/' + n
                         }
                     )
@@ -76,8 +72,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
     return result
 };
 
-export const redirectUrl = (url: string, history: history.History, reload: boolean = false) => (history === undefined || reload) ? window.location.href = url : history.push(url);
-
+export const redirectUrl = (url: string, history: history.History, reload: boolean = false) => (reload) ? window.location.href = url : history.push(url);
 
 export const numberToPagination = (length: number, cb: Function): Array<Clickable> => {
     let result: Array<Clickable> = [];
@@ -86,7 +81,6 @@ export const numberToPagination = (length: number, cb: Function): Array<Clickabl
         return [{
             label: '1 - 9',
             onClick: () => cb('1 - 9')
-
         }]
     }
     if (length > itemsPerPage) {
@@ -113,13 +107,11 @@ export const numberToPagination = (length: number, cb: Function): Array<Clickabl
 
 };
 
-
 export const arrayToFilter = (array: Array<any>, cb: Function): Array<Clickable> =>
     array.map((n, i) => ({label: n, onClick: () => cb(n)}));
 
 //stack overflow
 export const formatMoney = (n: any, c = 2, d = '.', t = ','): string => {
-    if (n === useI18nText(keyOfI18n.NOT_A_REG_PRICE) || !n) return useI18nText(keyOfI18n.FREE);
     let s: string = n < 0 ? "-" : "";
     let i: string = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c)));
     let j: number = i.length > 3 ? i.length % 3 : 0;
@@ -153,7 +145,7 @@ export const getTagsCountsArray = (products: Array<Product> | null, onClick: Fun
 
 //todo('need to rebuild")
 
-export const getVariantOptions = (variants: Array<Variant>): Array<VariantOptions> => {
+export function getVariantOptions(variants: Array<Variant>): Array<VariantOptions> {
     let variantOverview: any = [];
     variants.map(option => {
         option.description.split(',').forEach((opt) => {
@@ -162,8 +154,8 @@ export const getVariantOptions = (variants: Array<Variant>): Array<VariantOption
             variantOverview[splitOpt[0]].indexOf(splitOpt[1]) < 0 && variantOverview[splitOpt[0]].push(splitOpt[1])
         })
     });
-    return variantOverview
-};
+    return variantOverview as Array<VariantOptions>
+}
 
 export const isImgOnlySections = (sections: Array<Section>) => (
     sections && sections[0].medias[0] && sections[0].medias[0].ext !== 'mp4'
@@ -171,11 +163,39 @@ export const isImgOnlySections = (sections: Array<Section>) => (
     ));
 export const handleImgValid = (img: any): string => img ? img.url ? img.url : img : '/notFound/not-found-image.jpg';
 export const stringToTags = (string?: string): Array<Tag> => (string) ? (string.search(',') !== -1) ? _.uniq(_.split(string, ',')).filter(k => k !== '')
-    .map((n: any, i) =>
-        n = {
-            label: n,
-            value: n,
-        }) : [{label: string, value: string,}] : [];
+    .map((n: any, i) => n = {
+        label: n,
+        value: n,
+    }) : [{label: string, value: string,}] : [];
 
 export const formatExpiryDate = (date: string): string => (date && date.length === 4) ? date.slice(0, 2).concat('/', date.slice(2, 4)) : date;
 export const CounterValidation = (num: number): number => (num > 0) ? num : 1;
+
+export const addToCart = (user: UserProfile, product: Product, history: History) => {
+    let shoppingCart = user.consumers[0].shoppingCart ? JSON.parse(user.consumers[0].shoppingCart).data : [] as Array<ShoppingCartItem>;
+    const isItemsExists: number = shoppingCart.findIndex(
+        (n: ShoppingCartItem) => (n.productId === product.id && n.selectedVariantId === product.variants[0].id));
+    if (isItemsExists !== -1) {
+        shoppingCart[isItemsExists] = {
+            ...shoppingCart[isItemsExists],
+            productCount: shoppingCart[isItemsExists].productCount + 1,
+        }
+    } else {
+
+        shoppingCart.push(
+            {
+                productId: product.id,
+                productCount: 1,
+                selectedVariantId: product.variants[0].id
+            }
+        )
+    }
+    agent.Auth.assignProperty({shoppingCart: JSON.stringify({data: shoppingCart})});
+    history.push({
+        pathname: '/confirmPage',
+        state: {
+            msg: '物品已成功加入購物籃'
+        }
+    })
+};
+export const needLoginFirst = (history: History) => history.push('/login?needAuth=true');
