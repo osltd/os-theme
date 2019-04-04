@@ -28,8 +28,7 @@ export const reducer: Context<ContextReducer> = createContext(
         authReducer: initReducer,
         commonReducer: {
             state: commonInitState,
-            dispatch: (args: any) => {
-            }
+            dispatch: (args: any) => {}
         }
 
     });

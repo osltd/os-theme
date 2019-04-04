@@ -93,19 +93,20 @@ const ShopOverview = props => {
         let data = Array.from(props.products);
         data = data.filter(n => (props.filter.tag) ? !!n.tags.find(k => k === props.filter.tag) : true);
         let sortBy = () => {
-            switch (props.sort.sortBy) {
-                case keyOfI18n.SHOP_SORT_NAME_ASC:
-                    return data.sort(sort_by('name', null));
-                case keyOfI18n.SHOP_SORT_NAME_DES:
-                    return data.sort(sort_by('name', null, true));
-                case keyOfI18n.SHOP_SORT_PRICE_ASC:
+            const sort = filterOptions.NAME_ASC
+            switch (sort) {
+                case filterOptions.NAME_ASC:
+                    return data.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+                case filterOptions.NAME_DES:
+                    return data.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0) * -1);
+                case filterOptions.PRICE_ASC:
                     return data.sort((a, b) => {
                             let priceA = a.variants[0] ? a.variants[0].price : 0;
                             let priceB = b.variants[0] ? b.variants[0].price : 0;
                             return (priceA < priceB) ? -1 : 1
                         }
                     );
-                case keyOfI18n.SHOP_SORT_PRICE_DES:
+                case filterOptions.PRICE_DES:
                     return data.sort((a, b) => {
                             let priceA = a.variants[0] ? a.variants[0].price : 0;
                             let priceB = b.variants[0] ? b.variants[0].price : 0;
