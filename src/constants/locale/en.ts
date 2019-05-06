@@ -33,7 +33,7 @@ export const en: props ={
     POSTCODE: 'Postcode/ZIP',
     CARD_NUMBER: 'Card Number',
     EXPIRED_DATE: 'Expire Date',
-    CVC: 'CVC',
+    CSC: 'CSC',
     BLOG: 'blog',
     HOME: 'home',
     FEED_CATEGORY: 'feed category',

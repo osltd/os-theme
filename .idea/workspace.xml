@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5acf1eb-117b-46c6-b2f5-4486c1753bc2" name="Default" comment="restructure flow">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/agents/Feeds.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/agents/Feeds.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.415c0641.chunk.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/2.415c0641.chunk.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/3.3ba8aa2b.chunk.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/3.3ba8aa2b.chunk.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/4.abbc7961.chunk.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/4.abbc7961.chunk.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.94d4a8f0.chunk.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/main.94d4a8f0.chunk.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.94d4a8f0.chunk.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/build/static/js/main.94d4a8f0.chunk.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/BillingDetails.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Checkout/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Checkout/Overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop/Overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop/Overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/en.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,33 +21,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/agents/Checkout.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="63" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/setupProxy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -66,14 +42,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="145" selection-start-line="145" selection-end-line="145" />
+            <state relative-caret-position="-271">
+              <caret line="309" column="40" selection-start-line="309" selection-start-column="37" selection-end-line="309" selection-end-column="40" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#6269#9592#0" />
                 <element signature="e#16639#20166#0" />
                 <element signature="e#11475#15377#0" />
               </folding>
@@ -93,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Checkout/BillingDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="66" column="25" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+            <state relative-caret-position="233">
+              <caret line="277" column="55" selection-start-line="277" selection-start-column="53" selection-end-line="277" selection-end-column="56" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#2087#2417#0" />
@@ -107,12 +82,42 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducer.js">
+        <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/I18N.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#60#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/locale/en.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="38" column="26" lean-forward="true" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -144,9 +149,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>there is no items in shopping cart</find>
-      <find>CART_NO_ITEMS_TO_SHOW</find>
-      <find>{&lt;I18nText keyOfI18n={</find>
       <find>no authors</find>
       <find>FEED CATEGORIES</find>
       <find>minWidth</find>
@@ -174,6 +176,9 @@
       <find>sort_by</find>
       <find>placeOrder</find>
       <find>filterOptions</find>
+      <find>&quot;cvc&quot;</find>
+      <find>CVC</find>
+      <find>cvc</find>
     </findStrings>
     <replaceStrings>
       <replace>redirectUrl(</replace>
@@ -195,6 +200,9 @@
       <replace>}/&gt;}</replace>
       <replace>{useI18nText(</replace>
       <replace>refactorTextLength</replace>
+      <replace>&quot;csc&quot;</replace>
+      <replace>CSC</replace>
+      <replace>csc</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/components/Layout</dir>
@@ -226,9 +234,6 @@
         <option value="$PROJECT_DIR$/src/components/Layout/MyCredits.js" />
         <option value="$PROJECT_DIR$/src/components/Feed/Detail.js" />
         <option value="$PROJECT_DIR$/src/context/Common/dispatch.ts" />
-        <option value="$PROJECT_DIR$/src/constants/locale/en.ts" />
-        <option value="$PROJECT_DIR$/src/constants/locale/interface.ts" />
-        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
         <option value="$PROJECT_DIR$/src/middleware.js" />
         <option value="$PROJECT_DIR$/src/materialUIInstall.ts" />
         <option value="$PROJECT_DIR$/src/components/Widget/Media.js" />
@@ -263,6 +268,9 @@
         <option value="$PROJECT_DIR$/src/agents/Checkout.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
         <option value="$PROJECT_DIR$/src/components/Checkout/OrderSummary.js" />
+        <option value="$PROJECT_DIR$/src/constants/locale/interface.ts" />
+        <option value="$PROJECT_DIR$/src/constants/locale/en.ts" />
+        <option value="$PROJECT_DIR$/src/constants/locale/zh_HK.ts" />
       </list>
     </option>
   </component>
@@ -345,6 +353,31 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Checkout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
+              <item name="locale" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hooks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
+              <item name="os-theme" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="os-theme" type="b2602c69:ProjectViewProjectNode" />
@@ -499,7 +532,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="680163000" />
+    <option name="totallyTimeSpent" value="680932000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -512,9 +545,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.30114448" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49909255" visible="true" weight="0.30114448" />
       <window_info id="Structure" order="1" sideWeight="0.5009074" side_tool="true" weight="0.20958512" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -530,7 +562,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49570817" weight="0.32650602" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49713877" visible="true" weight="0.25180724" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49713877" visible="true" weight="0.25180724" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32650602" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50429183" side_tool="true" weight="0.32650602" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
@@ -648,34 +680,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/context/actionType.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewBox.js" />
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/quickView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Widget/Product/overviewList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Widget/DropDown.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -970,7 +974,7 @@
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -1009,10 +1013,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-271">
+          <caret line="309" column="40" selection-start-line="309" selection-start-column="37" selection-end-line="309" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#16639#20166#0" />
+            <element signature="e#11475#15377#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Checkout/BillingDetails.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="66" column="25" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="25" />
+        <state relative-caret-position="233">
+          <caret line="277" column="55" selection-start-line="277" selection-start-column="53" selection-end-line="277" selection-end-column="56" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#2087#2417#0" />
@@ -1023,16 +1039,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Checkout/OrderSummary.js">
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/interface.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        <state relative-caret-position="437">
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/I18N.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#6269#9592#0" />
-            <element signature="e#16639#20166#0" />
-            <element signature="e#11475#15377#0" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/en.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/locale/zh_HK.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="38" column="26" lean-forward="true" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
         </state>
       </provider>
     </entry>

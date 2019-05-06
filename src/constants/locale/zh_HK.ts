@@ -33,7 +33,7 @@ export const zh_HK: props ={
     POSTCODE: '郵政編號',
     CARD_NUMBER: '信用卡號碼',
     EXPIRED_DATE: '到期日',
-    CVC: '安全碼',
+    CSC: '安全碼',
     BLOG: '文章',
     HOME: '首頁',
     FEED_CATEGORY: '文章類別',

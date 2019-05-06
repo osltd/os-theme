@@ -106,7 +106,7 @@ class OrderSummary extends React.Component {
 
                     }, "payment": {
                         "number": billingDetail.visaNumber,
-                        "cvc": billingDetail.cvc,
+                        "csc": billingDetail.csc,
                         "date": formatExpiryDate(billingDetail.expiryDate)
                     },
                     "items": this.props.shoppingCart.map(n => ({
@@ -307,7 +307,7 @@ class OrderSummary extends React.Component {
             },
             "payment": {
                 "number": billingDetail.visaNumber,
-                "cvc": billingDetail.cvc,
+                "csc": billingDetail.csc,
                 "date": formatExpiryDate(billingDetail.expiryDate)
             },
         };

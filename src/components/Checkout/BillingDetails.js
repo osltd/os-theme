@@ -275,13 +275,13 @@ class ShoppingCartTable extends React.Component {
                 </Grid>
                 <Grid item xs={6}>
                     <InputBar
-                        title={useI18nText(keyOfI18n.CVC)}
+                        title={useI18nText(keyOfI18n.CSC)}
                         placeholder={'XXX'}
                         type={"password"}
                         onChange={value => {
-                            if (value.length <= 3) this.props.editBillingDetail('cvc', value)
+                            if (value.length <= 3) this.props.editBillingDetail('csc', value)
                         }}
-                        value={billingDetail.cvc}
+                        value={billingDetail.csc}
                     />
                 </Grid>
                 {this.getShippingMethod()}
