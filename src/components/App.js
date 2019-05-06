@@ -178,7 +178,8 @@ const App = props => {
             <ScrollToTop>
                 <ErrorBoundary>
                     <Header/>
-                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px'} : null}>
+                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px',
+                       minHeight: 'calc(100vh - 373px)'} : { minHeight: 'calc(100vh - 373px)'}}>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/404'} component={NotFound}/>

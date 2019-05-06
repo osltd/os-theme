@@ -24,10 +24,12 @@ import PopUp from '../Widget/PopUp'
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
 
+const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>,
+    <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>,
+    <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
 const styles = theme => ({
     productCategory: {
         backgroundColor: '#F7F7F7',
-
     },
     toolBar: {
         padding: '10px',
@@ -201,9 +203,7 @@ const ShopOverview = props => {
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
     const products = sortData();
-    const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>,
-        <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>,
-        <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
+
     return (
         <Grid container justify={'center'}>
             <Grid item xs={12}>

@@ -87,12 +87,12 @@ const CheckoutOverview = props => {
     switch (true) {
         case rendering:
             return <LoadingPage/>;
-        case needLogin: {
-
-            redirectUrl('/login', props.history, false);
-            props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar);
-            return null
-        }
+        // case needLogin: {
+        //
+        //     redirectUrl('/login', props.history, false);
+        //     props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar);
+        //     return null
+        // }
         case NoProductsInCart:
             return (<Grid container alignItems={'center'} justify={'center'}>
 

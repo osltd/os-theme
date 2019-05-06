@@ -7,13 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {
-    formatExpiryDate,
-    formatMoney,
-    handleImgValid,
-    redirectUrl,
-    refactorTextLength,
-} from "../../api/ApiUtils";
+import {formatExpiryDate, formatMoney, handleImgValid, redirectUrl, refactorTextLength,} from "../../api/ApiUtils";
 import {connect} from "react-redux";
 import * as styleGuide from '../../constants/styleGuide'
 import {withSnackbar} from 'notistack';
@@ -24,6 +18,7 @@ import {CART_EMPTY_BILLING_DETAIL, CART_INIT_SHOPPING_CART} from '../../constant
 import swal from '@sweetalert/with-react'
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
+import _ from 'lodash';
 
 const TAX_RATE = 0.07;
 
@@ -67,6 +62,7 @@ const styles = theme => ({
 const mapStateToProps = state => ({
     billingDetail: state.cart.billingDetail,
     shoppingCart: state.cart.shoppingCart,
+    auth: state.auth,
 });
 
 
@@ -94,32 +90,227 @@ class OrderSummary extends React.Component {
 
     placeOrder = async () => {
         const {billingDetail} = this.props;
+        console.log(this.props);
 
+        if (_.isEmpty(this.props.auth.user)) {
+
+            redirectUrl('/loadingPage', this.props.history, false);
+
+            agent.Checkout.placeOrderWithoutLogin(
+                {
+                    "contact": {
+                        "email": billingDetail.email,
+                        "phone": billingDetail.countryCode.value + billingDetail.phone,
+
+                        "first_name": billingDetail.firstName, "last_name": billingDetail.lastName,
+
+                    }, "payment": {
+                        "number": billingDetail.visaNumber,
+                        "cvc": billingDetail.cvc,
+                        "date": formatExpiryDate(billingDetail.expiryDate)
+                    },
+                    "items": this.props.shoppingCart.map(n => ({
+                        id: n.variantId, qty: n.number.toString(),
+                    }))
+                }
+            ).then(res => {
+                let selectShippingMethod = (this.props.billingDetail.shippingOptions && this.props.billingDetail.shippingOptions.length > 0) ?
+                    this.props.billingDetail.shippingOptions.find(
+                        n => n.courier.id === this.props.billingDetail.selectedShippingMethod
+                    ) : <I18nText keyOfI18n={keyOfI18n.ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED}/>;
+                if (typeof res.data === 'string') {
+                    this.props.enqueueSnackbar(res.data + ' please log in first'
+                        , styleGuide.errorSnackbar);
+                    this.props.history.goBack();
+                    return null
+                }
+                if (res.data && res.data.messages && res.data.messages.length > 0) {
+                    res.data.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    );
+                    this.props.history.goBack();
+
+                    return null
+                }
+                let result = res.data.data.rows[0];
+                console.log(result);
+                if (result.result === false) {
+                    result.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    );
+                    this.props.history.goBack();
+
+                    return null
+                }
+                if (result.id) {
+                    //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
+                    swal({
+                        content: (<Grid container direction={'column'}>
+                            <Grid item style={
+                                {
+                                    padding: '5px 0',
+                                    borderTopLeftRadius: '5px',
+                                    borderTopRightRadius: '5px',
+                                    background: 'black ',
+                                    color: 'white'
+                                }
+                            } container alignItems={'center'}>
+                                <Grid item xs={2}>
+
+                                    <img
+                                        style={{width: '50px', zIndex: 10000}}
+                                        src={'img/snackBar/checkout.png'}
+                                    /></Grid>
+                                <Grid item xs={10} container alignItems={"center"} justify={'center'}>
+
+                                    <Typography color={"inherit"} variant={'h6'}>
+                                        {
+                                            "Thank you so much"
+                                        }
+                                    </Typography>
+                                    <Typography color={"inherit"} variant={'h6'}>
+                                        {
+                                            "Your contact id is " + result.id
+
+                                        }
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                            <Grid item>
+                                {
+                                    this.props.shoppingCart.map((n, i) =>
+                                        <ListItem
+                                            key={i}
+
+                                        >
+                                            <Grid container spacing={16} alignItems={'center'}>
+                                                <Grid item sm={3}>
+
+                                                    <img
+                                                        style={{width: '100%', minWidth: '50px'}}
+                                                        src={handleImgValid(n.product.photos[0])}
+                                                    />
+
+                                                </Grid>
+                                                <Grid item sm={9}>
+                                                    <Typography variant={'body1'}>
+                                                        {refactorTextLength(n.product.name)}
+                                                    </Typography>
+                                                    <Typography variant={'caption'}>
+                                                        {n.number} X
+                                                        $ {n.product.variants.find(variant => variant.id === n.variantId).price
+                                                    }
+                                                    </Typography>
+                                                    <Typography variant={'caption'}>
+
+                                                        {n.product.variants.find(variant => variant.id === n.variantId).description}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                        </ListItem>)
+
+                                }
+                                {
+
+                                    this.props.billingDetail.coupons && <ListItem
+
+                                    >
+                                        <Grid container spacing={16} alignItems={'center'}>
+                                            <Grid item sm={3}>
+
+                                                <img
+                                                    style={{width: '100%', minWidth: '50px'}}
+                                                    src={'/img/checkout/coupon.png'}
+                                                />
+
+                                            </Grid>
+                                            <Grid item sm={9}>
+                                                <Typography variant={'body1'}>
+                                                    {billingDetail.coupons.title}
+                                                </Typography>
+
+                                                <Typography variant={'caption'}>
+
+                                                    {(billingDetail.coupons.type === 'FIXED') ? '-$ ' + formatMoney(billingDetail.coupons.discount) :
+                                                        `-${billingDetail.coupons.discount}%`}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </ListItem>
+                                }
+                            </Grid>
+                            <Grid item>
+                                <Typography variant={'body1'}>
+                                    Total amount
+                                    is {'$ ' + formatMoney(
+                                    this.getDiscountedPrice(this.props.shoppingCart.reduce((acc, cur) => acc + this.getRowPrice(cur),
+                                        0), billingDetail.coupons
+                                    )
+                                )}
+                                </Typography>
+                                {/*<Typography variant={'body1'}>*/}
+                                {/*thanks for choosing {*/}
+                                {/*selectShippingMethod.courier.name*/}
+                                {/*}.</Typography>*/}
+                                {/*<Typography variant={'body1'}>*/}
+
+                                {/*the items will be there in {*/}
+                                {/*selectShippingMethod.deliveryTime.min*/}
+
+                                {/*} to {*/}
+                                {/*selectShippingMethod.deliveryTime.max*/}
+
+                                {/*} days</Typography>*/}
+                            </Grid>
+                        </Grid>)
+                    });
+                    this.props.emptyShoppingCart();
+
+                    this.props.emptyBillingDetail();
+                    redirectUrl('/', this.props.history, false)
+                }
+            }).catch(err => {
+                if (err.response && err.response.data.messages.length > 0) {
+                    err.response.data.messages.map(n =>
+                        this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                    );
+                    this.props.history.goBack()
+                }
+
+            })
+            return null
+
+
+        }
         const data = {
 
             "items": this.props.shoppingCart.map(n => ({
-                id: n.variantId, qty: n.number,
+                id: n.variantId, qty: n.number.toString(),
             }))
             ,
             "coupons": billingDetail.coupons ? billingDetail.coupons.code : '',
-            "city": billingDetail.city,
-            "zipCode": billingDetail.zipCode,
-            "country": billingDetail.country,
-            "first_name": billingDetail.firstName, "last_name": billingDetail.lastName,
-            "address": billingDetail.address,
+            "contact": {
+
+                "city": billingDetail.city,
+                "zipCode": billingDetail.zipCode,
+                "country": billingDetail.country,
+                "first_name": billingDetail.firstName,
+                "last_name": billingDetail.lastName,
+                "address": billingDetail.address,
+
+                "email": billingDetail.email,
+                "phone": billingDetail.countryCode.value + billingDetail.phone,
+
+                "startPurchase": false,
+
+                "shipping": billingDetail.selectedShippingMethod,
+            },
             "payment": {
                 "number": billingDetail.visaNumber,
                 "cvc": billingDetail.cvc,
                 "date": formatExpiryDate(billingDetail.expiryDate)
             },
-            "email": billingDetail.email,
-            "phone": billingDetail.phone,
-
-            "startPurchase": false,
-
-            "shipping": billingDetail.selectedShippingMethod,
         };
-
         const {classes} = this.props;
 
         redirectUrl('/loadingPage', this.props.history, false);
@@ -143,20 +334,28 @@ class OrderSummary extends React.Component {
 
                 return null
             }
-            let result = res.data.data.orders;
-            if (result && result.length > 0) {
+            let result = res.data.data.rows[0];
+
+            if (result.result === false) {
+                result.messages.map(n =>
+                    this.props.enqueueSnackbar(n, styleGuide.errorSnackbar)
+                );
+                this.props.history.goBack();
+
+                return null
+            }
+            if (result.id) {
                 //if (!(selectShippingMethod)) {selectShippingMethod = this.props.billingDetail.shippingOptions[0]}
                 swal({
-
                     content: (<Grid container direction={'column'}>
                         <Grid item style={
                             {
-                            padding: '5px 0',
-                            borderTopLeftRadius: '5px',
-                            borderTopRightRadius: '5px',
-                            background: 'black ',
-                            color: 'white'
-                        }
+                                padding: '5px 0',
+                                borderTopLeftRadius: '5px',
+                                borderTopRightRadius: '5px',
+                                background: 'black ',
+                                color: 'white'
+                            }
                         } container alignItems={'center'}>
                             <Grid item xs={2}>
 
@@ -164,7 +363,7 @@ class OrderSummary extends React.Component {
                                     style={{width: '50px', zIndex: 10000}}
                                     src={'img/snackBar/checkout.png'}
                                 /></Grid>
-                            <Grid item xs={10} container alignItems={"flex-start"}>
+                            <Grid item xs={10} container alignItems={"center"} justify={'center'}>
 
                                 <Typography color={"inherit"} variant={'h6'}>
                                     {
@@ -173,7 +372,7 @@ class OrderSummary extends React.Component {
                                 </Typography>
                                 <Typography color={"inherit"} variant={'h6'}>
                                     {
-                                        "Your contact id is " + result[0].id
+                                        "Your contact id is " + result.id
 
                                     }
                                 </Typography>
