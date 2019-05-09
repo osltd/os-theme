@@ -112,7 +112,6 @@ const MainPageOverview = props => {
 
                     <Grid item xs={10} md={10} lg={10}>
                         <CategoryOverviewBox
-
                             category={category}
                         />
                     </Grid>

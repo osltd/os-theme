@@ -64,8 +64,10 @@ const mapDispatchToProps = dispatch => ({
 const FeedDetail = (props) => {
 
     const {feeds, match, classes, editFeedFilter, history} = props;
+    console.log(feeds);
     const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id));
     if (!props.products) return <LoadingPage/>;
+
     if (hasValidFeed()) {
         const feed = feeds.find(n => n.id.toString() === match.params.id);
         return (
@@ -102,7 +104,7 @@ const FeedDetail = (props) => {
                             <Grid item>
                                 <span className={'icon-icons8-edit'}/>
                                 <Typography variant={'subtitle1'} className={classes.basicInfoText}>
-                                    {feed.authors.length > 0 ? feed.authors[0].name.first + ' ' + feed.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
+                                    {(feed.reactor &&feed.reactor.length > 0) ? feed.reactor[0].name.first + ' ' + feed.reactor[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
                                 </Typography>
                             </Grid>
                             <Grid item>

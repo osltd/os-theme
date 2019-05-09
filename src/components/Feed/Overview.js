@@ -114,7 +114,7 @@ class ResponsiveDialog extends React.Component {
 
                                         subTitle={refactorTextLength(n.sections[0].description)}
                                         title={n.sections[0].title}
-                                        author={n.authors.length > 0 ? n.authors[0].name.first + ' ' + n.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
+                                        author={(n.reactor && n.reactor.length > 0 )? n.authors[0].name.first + ' ' + n.authors[0].name.last : useI18nText(keyOfI18n.NO_AUTHORS)}
                                         postDate={n.time}
                                         comments={0}
                                     />) :

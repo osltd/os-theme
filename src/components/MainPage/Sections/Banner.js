@@ -9,7 +9,7 @@ const Banner = props => {
     const {
         hasFeedsToShow, latestArticle, feeds, history
     } = props;
-    return hasFeedsToShow && <Fragment>
+    return hasFeedsToShow && <>
         <Grid item xs={12}>
             <Carousel
                 data={latestArticle.map(n => n.sections[0].medias[0])}
@@ -17,11 +17,9 @@ const Banner = props => {
                 onClick={() => redirectUrl(`/feeds/${latestArticle.id}`, history)}/>
         </Grid>
         <Grid item xs={12} style={{marginTop: 80}}>
-            <FeedsWall
-                data={feeds.filter((n, i) => isImgOnlySections(n.sections))}
-            />
+            <FeedsWall data={feeds.filter((n, i) => isImgOnlySections(n.sections))} />
         </Grid>
-    </Fragment>
+    </>
 
 };
 

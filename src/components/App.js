@@ -36,7 +36,6 @@ import Register from './Auth/Register/Overview'
 import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
 import actionType from "../context/actionType";
-import {language} from "../I18N";
 import {reducer} from "../context";
 
 const mapStateToProps = state => ({
@@ -61,19 +60,25 @@ const mapDispatchToProps = dispatch => ({
                 }
             ));
 
-            agent.Feeds.initFeeds().then(res =>
+            agent.Feeds.initFeeds().then(res => {
+                    console.log(res.data.data.posts)
+                    dispatch(
+                        {
+                            type: INIT_FEEDS,
+                            payload: res.data.data.posts,
+                        }
+                    )
+                }
+            ).catch(err => {
+                console.log(err)
                 dispatch(
+
                     {
                         type: INIT_FEEDS,
-                        payload: res.data.data.posts,
+                        payload: [],
                     }
                 )
-            ).catch(err => dispatch(
-                {
-                    type: INIT_FEEDS,
-                    payload: [],
-                }
-            ));
+            });
             agent.Auth.getAccount().then(user =>
                 dispatch(
                     {
@@ -150,7 +155,7 @@ const App = props => {
 
     useEffect(
         () => {
-         //   setInterval(()=>agent.Auth.test(),100)
+            //   setInterval(()=>agent.Auth.test(),100)
             let storedLocale = localStorage.getItem('locale')
             console.log(storedLocale)
             if (storedLocale === 'en' || storedLocale === 'zh') {
@@ -178,8 +183,10 @@ const App = props => {
             <ScrollToTop>
                 <ErrorBoundary>
                     <Header/>
-                    <div style={(isWidthUp('md', props.width)) ? {paddingTop: '76px',
-                       minHeight: 'calc(100vh - 373px)'} : { minHeight: 'calc(100vh - 373px)'}}>
+                    <div style={(isWidthUp('md', props.width)) ? {
+                        paddingTop: '76px',
+                        minHeight: 'calc(100vh - 373px)'
+                    } : {minHeight: 'calc(100vh - 373px)'}}>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/404'} component={NotFound}/>

@@ -87,11 +87,12 @@ export const numberToPagination = (length: number, cb: Function): Array<Clickabl
         new Array(Math.floor(length / itemsPerPage)).fill(1).map(
             (n, i) => {
                 let label = (1 + i * itemsPerPage) + ' - ' + ((i + 1) * itemsPerPage);
-                result.push({
-                    label: label,
-                    onClick: () => cb(label)
-
-                })
+                result.push(
+                    {
+                        label: label,
+                        onClick: () => cb(label),
+                    }
+                )
             }
         )
     }
