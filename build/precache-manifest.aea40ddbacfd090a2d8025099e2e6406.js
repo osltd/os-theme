@@ -48,12 +48,12 @@ self.__precacheManifest = [
     "url": "/static/media/slick.f97e3bbf.svg"
   },
   {
-    "revision": "f910481c02957d30e48f4ec6a30840de",
-    "url": "/static/media/icomoon.f910481c.eot"
-  },
-  {
     "revision": "6d599a1b512c22b286114958bd2b4183",
     "url": "/static/media/icomoon.6d599a1b.ttf"
+  },
+  {
+    "revision": "f910481c02957d30e48f4ec6a30840de",
+    "url": "/static/media/icomoon.f910481c.eot"
   },
   {
     "revision": "da3ae86565f79c63c9ae65b14a5b0d1c",
