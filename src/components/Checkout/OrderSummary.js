@@ -105,9 +105,9 @@ class OrderSummary extends React.Component {
                         "first_name": billingDetail.firstName, "last_name": billingDetail.lastName,
 
                     }, "payment": {
-                        "number": billingDetail.visaNumber,
+                       "card": billingDetail.visaNumber,
                         "csc": billingDetail.csc,
-                        "date": formatExpiryDate(billingDetail.expiryDate)
+                       "exp_date": formatExpiryDate(billingDetail.expiryDate)
                     },
                     "items": this.props.shoppingCart.map(n => ({
                         id: n.variantId, qty: n.number.toString(),
@@ -306,9 +306,9 @@ class OrderSummary extends React.Component {
                 "shipping": billingDetail.selectedShippingMethod,
             },
             "payment": {
-                "number": billingDetail.visaNumber,
+               "card": billingDetail.visaNumber,
                 "csc": billingDetail.csc,
-                "date": formatExpiryDate(billingDetail.expiryDate)
+               "exp_date": formatExpiryDate(billingDetail.expiryDate)
             },
         };
         const {classes} = this.props;
