@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import createStyles from "@material-ui/core/styles/createStyles";
 import {Clickable} from "../../interfaces/client/Common";
 import {makeStyles} from "@material-ui/styles";
+import ImageWrapper from './Img';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {},

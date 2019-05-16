@@ -1,17 +1,20 @@
-import {I18n} from "./interface";
-import {zh_HK} from "./zh_HK";
+import { I18n } from "./interface";
+import { zh_HK } from "./zh_HK";
 
 interface props extends I18n {
 }
 
-export const en: props ={
-    LANGUAGE:'language',
+export const en: props = {
+    GOT_IT: 'got it ',
+    ITEMS_ADDED: 'item added!',
+    ADD_TO_CART_CONFIRM_INFO: 'Keep shopping what you like, thank you !',
+    LANGUAGE: 'language',
     PASSWORD: 'password',
     EMAIL: 'email',
     LOGIN: 'log in',
     REGISTER: 'register',
     CREATE: 'create',
-    FIRST_NAME: 'first name',
+    FIRST_NAME: 'First Name',
     LAST_NAME: 'Last Name',
     CONFIRM_PASSWORD: 'Confirm Password',
     PRODUCT: 'product',
@@ -23,7 +26,7 @@ export const en: props ={
     CHECKOUT: 'Checkout',
     NAME: 'name',
     CHARGE: 'charge',
-    VIEW_CART:'view cart',
+    VIEW_CART: 'view cart',
 
     DELIVERY_TIME: 'delivery time',
     SELECTED: 'selected',
@@ -43,10 +46,10 @@ export const en: props ={
     SHOPPING_CART: 'shopping cart',
     ADD_TO_CART: 'add to cart',
     WELCOME_BACK: 'welcome back',
-    FEATURE_PRODUCTS:'FEATURE PRODUCTS',
-    TOP_INTERESTING:'TOP INTERESTING',
-    TAGS:'tags',
-    MY_ACCOUNT:'my account',
+    FEATURE_PRODUCTS: 'FEATURE PRODUCTS',
+    TOP_INTERESTING: 'TOP INTERESTING',
+    TAGS: 'tags',
+    MY_ACCOUNT: 'my account',
     IMAGE: 'image',
     SHIPPING_OPTIONS: 'shipping options',
     DAYS: 'days',
@@ -62,11 +65,11 @@ export const en: props ={
     AUTH_ACCOUNTS_LOGOUT: 'logout',
     FEEDS: 'feeds',
     NO_AUTHORS: 'no authors',
-    PLACE_ORDER:'Place Order',
-    TERM_AND_CONDITIONS:'I have read and agree to the website terms and conditions',
-    FREE:'free',
-    CURR_FEED:'currentFeeds',
-    SINGLE_PRODUCT:'singleProduct',
+    PLACE_ORDER: 'Place Order',
+    TERM_AND_CONDITIONS: 'I have read and agree to the website terms and conditions',
+    FREE: 'free',
+    CURR_FEED: 'currentFeeds',
+    SINGLE_PRODUCT: 'singleProduct',
     AUTH_LOGIN_RETURN_TO_STORE: 'return to store',
     AUTH_LOGIN_SIGN_IN: 'sign in',
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: 'Dont have your own account yet?',
@@ -79,7 +82,7 @@ export const en: props ={
     AUTH_YOU_CAN_LOGIN_NOW: 'You can Login now!',
 
     CART_NO_ITEMS_TO_SHOW: 'there is no items in shopping cart',
-    CHECK:'check',
+    CHECK: 'check',
 
     CHECKOUT_BILLING_DETAILS_SHIPPING_DETAILS: 'Shipping Options',
     CHECKOUT_BILLING_STREET_ADDRESS: 'Street Address',
@@ -96,7 +99,7 @@ export const en: props ={
     CHECKOUT_YOUR_ORDER_SUMMARY: 'Your Order Summary',
     CHECKOUT_PROMO_CODE: 'promo code',
     CHECKOUT_BILLING_DETAIL: 'Billing Details',
-    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART:'You haven\'t put any items in cart',
+    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART: 'You haven\'t put any items in cart',
 
     PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: 'Type your promo code here',
     PROMO_CODE_SNACK_BAR_PLEASE_TYPE_IN_PROMO_CODE_FIRST: 'Please Type in Promo Code First',
@@ -115,11 +118,11 @@ export const en: props ={
     CONFIRM_PAGE_YOUR_REF_NUM_IS: ' your reference number is',
     CONFIRM_PAGE_SHIPPING_REQ_SUCCESSFULLY: 'Shipping request successfully.',
 
-    NO_POST_AVAILABLE:'there are no posts available yet',
+    NO_POST_AVAILABLE: 'there are no posts available yet',
 
     FOOTER_FIND_US_ON: 'find us on',
 
-    PRODUCT_DETAILS_KEEP_SHOPPING:'Keep shopping what you like, thank you!',
+    PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: 'Congratulation!',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: 'items added! ',
     PRODUCT_DETAILS_IN_STOCKS: 'in stock',

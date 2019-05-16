@@ -1,18 +1,18 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
-import {connect} from 'react-redux'
-import {withStyles} from '@material-ui/core/styles';
-import {handleImgValid, refactorTextLength} from "../../api/ApiUtils";
+import { Grid, Typography } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles';
+import { handleImgValid, refactorTextLength } from "../../api/ApiUtils";
 import withWidth from "@material-ui/core/withWidth/index";
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import ProductOverviewBox from '../Widget/Product/overviewBox'
 import Header from '../Layout/Body/Header'
 import LoadingPage from '../Layout/LoadingPage'
 import SearchBar from '../Widget/SearchBar/original'
-import {COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
-import {keyOfI18n} from "../../constants/locale/interface";
-import {I18nText} from "../Widget/I18nText";
-import {useI18nText} from "../../hooks/useI18nText";
+import { COMMON_EDIT_SEARCH_BAR } from "../../constants/actionType";
+import { keyOfI18n } from "../../constants/locale/interface";
+import { I18nText } from "../Widget/I18nText";
+import { useI18nText } from "../../hooks/useI18nText";
 
 const styles = theme => ({
     productCategory: {
@@ -45,15 +45,15 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-        editSearchBar: (keyword = null) => dispatch({
-            type: COMMON_EDIT_SEARCH_BAR,
-            payload: keyword
-        })
-    }
+    editSearchBar: (keyword = null) => dispatch({
+        type: COMMON_EDIT_SEARCH_BAR,
+        payload: keyword
+    })
+}
 );
 
 class SearchPage extends React.Component {
-    constructor(props) {
+    constructor (props) {
         super(props);
         this.state = {
             timer: () => null
@@ -87,8 +87,8 @@ class SearchPage extends React.Component {
 
     render() {
 
-        const {classes} = this.props;
-        if (!this.props.products && !this.props.feeds) return <LoadingPage/>;
+        const { classes } = this.props;
+        if (!this.props.products && !this.props.feeds) return <LoadingPage />;
         const products = this.props.products ? this.searchData(this.props.products) : [];
         const feeds = this.props.feeds ? this.searchData(this.props.feeds) : [];
         const searchResultCount = products.length + feeds.length;
@@ -110,7 +110,7 @@ class SearchPage extends React.Component {
                     <Grid item>
                         <Typography variant={'h6'}>
                             {
-                                this.props.keyword && <I18nText keyOfI18n={keyOfI18n.FOUND}/> + ' ' + searchResultCount + ' ' + <I18nText keyOfI18n={keyOfI18n.MATCHED_RESULTS}/>
+                                this.props.keyword && `${useI18nText(keyOfI18n.FOUND)} ${searchResultCount}  ${useI18nText(keyOfI18n.MATCHED_RESULTS)}`
                             }   </Typography>
                     </Grid>
                 </Grid>
@@ -121,7 +121,7 @@ class SearchPage extends React.Component {
                         <Grid item xs={12}>
                             <Typography variant={'h6'}>
 
-                                <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/> ({products.length})
+                                <I18nText keyOfI18n={keyOfI18n.PRODUCTS} /> ({products.length})
                             </Typography></Grid>
 
                     }
@@ -145,7 +145,7 @@ class SearchPage extends React.Component {
                         <Grid item xs={12}>
                             <Typography variant={'h6'}>
 
-                                <I18nText keyOfI18n={keyOfI18n.FEEDS}/> ({feeds.length})
+                                <I18nText keyOfI18n={keyOfI18n.FEEDS} /> ({feeds.length})
                             </Typography>
                         </Grid>
                     }
@@ -159,7 +159,7 @@ class SearchPage extends React.Component {
                                     'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
                                 subTitle={refactorTextLength(n.sections[0].description)}
                                 title={n.sections[0].title}
-                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : <I18nText keyOfI18n={keyOfI18n.NO_AUTHORS}/>}
+                                author={n.authors[0] ? n.authors[0].name.first + ' ' + n.authors[0].name.last : <I18nText keyOfI18n={keyOfI18n.NO_AUTHORS} />}
                                 postDate={n.postDate}
                                 comments={0}
                             />

@@ -4,6 +4,7 @@ import {formatMoney} from "../../../api/ApiUtils";
 import Counter from "../../Widget/Counter";
 import SocialIcon from '../../Widget/SocialIcon'
 import swal from "@sweetalert/with-react";
+import { I18nText } from "../../Widget/I18nText";
 
 let NO_VARIANT_ID = 1;
 const Detail = (props) => {
@@ -38,7 +39,8 @@ const Detail = (props) => {
                     </Grid>
                     <Grid item>
                         <Typography variant={'subtitle1'}>
-                            items added! </Typography>
+                            items added! 
+                            </Typography>
                     </Grid>
 
                 </Grid>)

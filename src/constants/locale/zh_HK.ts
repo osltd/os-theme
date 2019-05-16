@@ -1,18 +1,20 @@
-import {I18n} from "./interface";
+import { I18n } from "./interface";
 
 interface props extends I18n {
 }
 
-export const zh_HK: props ={
-    LANGUAGE:'語言',
+export const zh_HK: props = {
+    ADD_TO_CART_CONFIRM_INFO: '感謝您的購買',
+    LANGUAGE: '語言',
     PASSWORD: '密碼',
     EMAIL: '電郵地址',
     LOGIN: '登入',
     REGISTER: '註冊',
-    VIEW_CART:'查看購物車',
+    VIEW_CART: '查看購物車',
     AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN: '已有賬戶？立刻登錄！',
-
+    ITEMS_ADDED: '商品已添加入購物車',
     CREATE: '建立',
+    GOT_IT: '了解',
     FIRST_NAME: '名字',
     LAST_NAME: '姓氏',
     CONFIRM_PASSWORD: '確認密碼',
@@ -43,10 +45,10 @@ export const zh_HK: props ={
     SHOPPING_CART: '購物車',
     ADD_TO_CART: '加入購物車',
     WELCOME_BACK: '歡迎回來',
-    FEATURE_PRODUCTS:'推介產品',
-    TOP_INTERESTING:'熱門產品',
-    TAGS:'標籤',
-    MY_ACCOUNT:'我的帳戶',
+    FEATURE_PRODUCTS: '推介產品',
+    TOP_INTERESTING: '熱門產品',
+    TAGS: '標籤',
+    MY_ACCOUNT: '我的帳戶',
     IMAGE: '圖片',
     SHIPPING_OPTIONS: '送貨選項',
     DAYS: '日',
@@ -62,11 +64,11 @@ export const zh_HK: props ={
     AUTH_ACCOUNTS_LOGOUT: '登出',
     FEEDS: '文章',
     NO_AUTHORS: '匿名',
-    PLACE_ORDER:'下單',
-    TERM_AND_CONDITIONS:'我已閱讀並同意此網站之使用條款',
-    FREE:'免費',
-    CURR_FEED:'currentFeeds',
-    SINGLE_PRODUCT:'singleProduct',
+    PLACE_ORDER: '下單',
+    TERM_AND_CONDITIONS: '我已閱讀並同意此網站之使用條款',
+    FREE: '免費',
+    CURR_FEED: 'currentFeeds',
+    SINGLE_PRODUCT: 'singleProduct',
     AUTH_LOGIN_RETURN_TO_STORE: '回到商店',
     AUTH_LOGIN_SIGN_IN: '登入',
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: '未成為會員？',
@@ -78,7 +80,7 @@ export const zh_HK: props ={
     AUTH_YOU_CAN_LOGIN_NOW: '立即登入您的帳戶',
 
     CART_NO_ITEMS_TO_SHOW: '您的購物車中並沒有任何產品',
-    CHECK:'檢查',
+    CHECK: '檢查',
 
     CHECKOUT_BILLING_DETAILS_SHIPPING_DETAILS: '送貨選項',
     CHECKOUT_BILLING_STREET_ADDRESS: '送貨地址',
@@ -95,7 +97,7 @@ export const zh_HK: props ={
     CHECKOUT_YOUR_ORDER_SUMMARY: '下單總結',
     CHECKOUT_PROMO_CODE: '折扣碼',
     CHECKOUT_BILLING_DETAIL: '帳單細節',
-    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART:'您的購物車並沒有任何項目',
+    CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART: '您的購物車並沒有任何項目',
 
     PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: '輸入折扣碼',
     PROMO_CODE_SNACK_BAR_PLEASE_TYPE_IN_PROMO_CODE_FIRST: '請先輸入折扣碼',
@@ -114,11 +116,11 @@ export const zh_HK: props ={
     CONFIRM_PAGE_YOUR_REF_NUM_IS: ' 參考編號為',
     CONFIRM_PAGE_SHIPPING_REQ_SUCCESSFULLY: '送貨請求成功',
 
-    NO_POST_AVAILABLE:'現在並沒有任何文章',
+    NO_POST_AVAILABLE: '現在並沒有任何文章',
 
     FOOTER_FIND_US_ON: '網站連結',
 
-    PRODUCT_DETAILS_KEEP_SHOPPING:'Keep shopping what you like, thank you!',
+    PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: '恭喜',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: '產品已加入! ',
     PRODUCT_DETAILS_IN_STOCKS: '有現貨',

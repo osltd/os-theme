@@ -9,7 +9,7 @@ interface Props {
     keyOfI18n: keyOfI18n
 }
 
-export const I18nText: React.FunctionComponent<Props> = (props) => {
+export const I18nText: React.FunctionComponent<Props> = (props: Props) => {
     const {keyOfI18n} = props;
     let locale = localStorage.getItem('locale')  as SupportedLanguage
     if ( locale!=='en'&& locale!=='zh') locale='en'
