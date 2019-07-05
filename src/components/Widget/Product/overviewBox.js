@@ -1,9 +1,9 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
-import {Grid, Typography} from '@material-ui/core';
-import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
-import {withRouter} from "react-router-dom";
-import withWidth, {isWidthDown, isWidthUp} from "@material-ui/core/withWidth/index";
+import { withStyles } from "@material-ui/core/styles/index";
+import { Grid, Typography } from '@material-ui/core';
+import { formatMoney, handleImgValid, redirectUrl, } from "../../../api/ApiUtils";
+import { withRouter } from "react-router-dom";
+import withWidth, { isWidthDown, isWidthUp } from "@material-ui/core/withWidth/index";
 
 const styles = theme => ({
     name: {
@@ -66,7 +66,7 @@ const ProductOverviewBox = (props) => {
     });
 
 
-    const {classes, src, name, id, width, category, regPrice, promotePrice, history} = props;
+    const { classes, src, name, id, width, category, regPrice, promotePrice, history } = props;
 
 
     let getImg = () => {
@@ -76,7 +76,7 @@ const ProductOverviewBox = (props) => {
                 backgroundColor: 'transparent',
             }}
             onClick={() => id && redirectUrl('/products/' + id, history)}
-            className={classes.divImg}/>;
+            className={classes.divImg} />;
         //responsive forbidden
         if (isWidthDown('xs', width)) {
             return <img
@@ -86,12 +86,12 @@ const ProductOverviewBox = (props) => {
             />
         }
         return isWidthUp('lg', width) ? <div
-                style={{
-                    backgroundImage: 'url(' + handleImgValid(src) + ')',
+            style={{
+                backgroundImage: 'url(' + handleImgValid(src) + ')',
 
-                }}
-                onClick={() => id && redirectUrl('/products/' + id, history)}
-                className={classes.divImg}/> :
+            }}
+            onClick={() => id && redirectUrl('/products/' + id, history)}
+            className={classes.divImg} /> :
             <img
                 src={handleImgValid(src)}
                 onClick={() => id && redirectUrl('/products/' + id, history)}
@@ -105,26 +105,26 @@ const ProductOverviewBox = (props) => {
             {getImg()}
             {
                 category && <Typography variant={'h5'}
-                                        className={classes.category}
+                    className={classes.category}
 
-                                        color={'primary'}>{category && category.join(',')}</Typography>
+                    color={'primary'}>{category && category.join(',')}</Typography>
 
             }
             <Typography variant={'h6'}
-                        onClick={() => window.location.href = ('/products/' + id)}
-                        className={classes.name}
+                onClick={() => window.location.href = ('/products/' + id)}
+                className={classes.name}
 
             >{name}</Typography>
             {
                 (promotePrice) ?
                     <Grid item container direction={'row'}>
                         <Typography component={'del'} variant={'subtitle1'}
-                                    className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
+                            className={classes.oldPrice}>$ {formatMoney(regPrice)}</Typography>
                         <Typography variant={'caption'}
-                                    className={classes.price}>${formatMoney(promotePrice)}</Typography>
+                            className={classes.price}>${formatMoney(promotePrice)}</Typography>
                     </Grid>
                     : <Typography variant={'caption'}
-                                  className={classes.price}>$ {formatMoney(regPrice)}</Typography>
+                        className={classes.price}>$ {formatMoney(regPrice)}</Typography>
 
             }
 
