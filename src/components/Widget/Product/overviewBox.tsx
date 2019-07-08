@@ -1,23 +1,25 @@
 import React from 'react';
-import { withStyles } from "@material-ui/core/styles/index";
-import { Grid, Typography } from '@material-ui/core';
-import { formatMoney, handleImgValid, redirectUrl, } from "../../../api/ApiUtils";
-import { withRouter } from "react-router-dom";
-import withWidth, { isWidthDown, isWidthUp } from "@material-ui/core/withWidth/index";
+import {Grid, Typography} from '@material-ui/core';
+import {formatMoney, handleImgValid, redirectUrl,} from "../../../api/ApiUtils";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {makeStyles} from "@material-ui/styles";
+import {useThemeWidth} from "../../../hooks/useThemeWidth";
+import {Theme} from "@material-ui/core/es";
 
-const styles = theme => ({
+const useStyles = makeStyles(
+    (theme: Theme) => ({
     name: {
         textTransform: 'uppercase',
         fontSize: '17px',
         cursor: 'pointer',
         marginBottom: '15px',
-        color: "green", //theme.palette.primary.dark,
-
+        color: "green",
+        //theme.palette.primary.dark,
         '&:hover': {
             color: theme.palette.secondary.dark,
-
         }
-    }, category: {
+    },
+        category: {
         fontSize: '13px',
         color: theme.palette.secondary.light,
         marginTop: '15px',
@@ -52,21 +54,24 @@ const styles = theme => ({
         lineHeight: 1,
     }
 
-});
+    }));
+
+interface Props extends RouteComponentProps {
+    src: string,
+    name: string,
+    category: Array<string>,
+    id: number,
+    regPrice: number,
+    promotePrice?: number,
+    description: string
+}
 
 
-const ProductOverviewBox = (props) => {
+const ProductOverviewBox: React.FunctionComponent<Props> = (props) => {
 
-    let styles = theme => ({
-        content: {
-            "padding": props.padding,
-            "min-height": "100vh",
-            "background-color": props.backgroundColor
-        }
-    });
-
-
-    const { classes, src, name, id, width, category, regPrice, promotePrice, history } = props;
+    const classes = useStyles();
+    const themeWidth = useThemeWidth();
+    const {src, name, id, category, regPrice, promotePrice, history} = props;
 
 
     let getImg = () => {
@@ -78,14 +83,14 @@ const ProductOverviewBox = (props) => {
             onClick={() => id && redirectUrl('/products/' + id, history)}
             className={classes.divImg} />;
         //responsive forbidden
-        if (isWidthDown('xs', width)) {
+        if (themeWidth.isWidthDown.xs) {
             return <img
                 src={handleImgValid(src)}
                 onClick={() => id && redirectUrl('/products/' + id, history)}
                 className={classes.img}
             />
         }
-        return isWidthUp('lg', width) ? <div
+        return themeWidth.isWidthUp.lg ? <div
             style={{
                 backgroundImage: 'url(' + handleImgValid(src) + ')',
 
@@ -133,4 +138,4 @@ const ProductOverviewBox = (props) => {
 
 };
 
-export default withWidth()(withRouter(withStyles(styles)(ProductOverviewBox)))
+export default (withRouter(ProductOverviewBox))

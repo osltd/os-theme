@@ -1,90 +1,78 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core/styles/index";
 import {Grid, Typography} from '@material-ui/core';
 import {formatMoney, redirectUrl, refactorTextLength} from "../../../api/ApiUtils";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {makeStyles} from "@material-ui/styles";
+import {Theme} from "@material-ui/core/es";
 
-const styles = theme => ({
-    name: {
-        textTransform: 'uppercase',
-        fontSize: '17px',
-        color: theme.palette.primary.dark,
+const useStyles = makeStyles(
+    (theme: Theme) => ({
+        name: {
+            textTransform: 'uppercase',
+            fontSize: '17px',
+            color: theme.palette.primary.dark,
 
-        cursor: 'pointer',
-        marginBottom: '15px',
+            cursor: 'pointer',
+            marginBottom: '15px',
 
-        '&:hover': {
-            color: theme.palette.secondary.dark,
+            '&:hover': {
+                color: theme.palette.secondary.dark,
 
+            }
+        }, category: {
+            fontSize: '13px',
+            color: theme.palette.secondary.light,
+            marginTop: '15px',
+        },
+
+        root: {
+            padding: '10px',
+
+        },
+        img: {
+            cursor: 'pointer',
+            width: '100%',
+            maxHeight: '255px !important',
+        },
+
+        oldPrice: {},
+        price: {
+            color: '#333333',
+            fontFamily: 'arial',
+            lineHeight: 1,
+        },
+        description: {
+            lineHeight: '25px',
+            color: '#333',
+            fontSize: '15px',
+            marginBottom: '10px',
         }
-    }, category: {
-        fontSize: '13px',
-        color: theme.palette.secondary.light,
-        marginTop: '15px',
-    },
+    })
+);
 
-    root: {
-        padding: '10px',
+interface Props extends RouteComponentProps {
+    src: string,
+    name: string,
+    category: Array<string>,
+    id: number,
+    regPrice: number,
+    promotePrice?: number,
+    description: string
+}
 
-    },
-    img: {
-        cursor: 'pointer',
-        width: '100%',
-        maxHeight: '255px !important',
-    },
+const OverviewList: React.FunctionComponent<Props> = props => {
 
-    oldPrice: {},
-    price: {
-        color: '#333333',
-        fontFamily: 'arial',
-        lineHeight: 1,
-    },
-    description: {
-        lineHeight: '25px',
-        color: '#333',
-        fontSize: '15px',
-        marginBottom: '10px',
-    }
-
-});
+    const classes = useStyles();
 
 
-class ResponsiveDialog extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-        this.state = {
-            open: false,
-        }
-    }
-
-    styles = theme => ({
-        content: {
-            "padding": this.props.padding,
-            "min-height": "100vh",
-            "background-color": this.props.backgroundColor
-        }
-    });
-
-    handleClickOpen = () => {
-        this.setState({open: true});
-    };
-
-    handleClose = () => {
-
-        this.setState({open: false});
-    };
-
-    render() {
-        const {classes, src, name, category, id, regPrice, promotePrice, description} = this.props;
+    const {src, name, category, id, regPrice, promotePrice, description} = props;
 
         return (
             <Grid container spacing={16} alignItems={'center'} className={classes.root}>
                 <Grid item xs={4}>
                     <img src={src}
 
-                         onClick={() => redirectUrl('/products/' + id, this.props.history)}
+                         onClick={() => redirectUrl('/products/' + id, props.history)}
 
                          className={classes.img}/>
                 </Grid>
@@ -97,7 +85,7 @@ class ResponsiveDialog extends React.Component {
 
                     }
                     <Typography variant={'h6'}
-                                onClick={() => redirectUrl('/products/' + id, this.props.history)}
+                                onClick={() => redirectUrl('/products/' + id, props.history)}
                                 className={classes.name}
                     >{name}</Typography>
 
@@ -119,9 +107,9 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
             </Grid>
         );
-    }
-
-}
 
 
-export default withRouter(withStyles(styles)(ResponsiveDialog))
+};
+
+
+export default withRouter(OverviewList)

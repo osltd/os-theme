@@ -61,10 +61,9 @@ const NotToner: React.FunctionComponent<Props> = props => {
 
             default:
                 return products.map((n, i) =>
-                    <Grid item xs={12} sm={4} md={3} key={i}
-                    >
-
+                    <Grid item xs={12} sm={4} md={3} key={i}>
                         <ProductOverviewBox
+                            description={n.description}
                             name={refactorTextLength(n.name, 20)}
                             id={n.id}
                             src={handleImgValid(n.photos[0])}
