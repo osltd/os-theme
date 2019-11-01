@@ -40,13 +40,18 @@ class ResponsiveDialog extends React.Component {
         if (!this.props.products) return <LoadingPage/>;
         const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id);
         const variantOptions = getVariantOptions(product.variants);
-        return <Grid container alignItems={'center'} justify={'center'}>
-            <Grid item xs={12}>
-                <Header
-                    title={product.name}
-                    route={'HOME/SHOP/SINGLE PRODUCT'}
-                />
-            </Grid>
+        return <div>
+            <Header
+                title={product.name}
+                route={'HOME/SHOP/SINGLE PRODUCT'}
+            />
+            
+            
+
+
+
+
+
             <Grid item xs={10}>
 
                 <Detail
@@ -67,8 +72,7 @@ class ResponsiveDialog extends React.Component {
                 </Grid>
             }
 
-        </Grid>
-
+        </div>;
     }
 
 
