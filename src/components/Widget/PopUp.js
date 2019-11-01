@@ -50,21 +50,16 @@ const PopUp = props => {
         );
         setOpen(true)
     };
-    //in parent
-    //                                innerRef={e => this.popUp = e}
-//this.popUp.handleClose()
+    
 
     const {classes, popUp, title,} = props;
 
     return (
-
-        <Grid
-
-            container alignItems={'center'}>
-
-            <Grid item className={classes.button} onClick={handleClickButton}>
-                {title}
-            </Grid>
+        <div>
+            <div
+                className={classes.button}
+                onClick={handleClickButton}
+            >{title}</div>
             <Popover
                 open={open}
                 anchorEl={anchorEl}
@@ -81,7 +76,7 @@ const PopUp = props => {
             >
                 {popUp}
             </Popover>
-        </Grid>
+        </div>
     );
 };
 
