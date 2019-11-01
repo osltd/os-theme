@@ -30,11 +30,22 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center'
     },
+
     menu: {
         flex: 1,
         display: 'flex',
         padding: '0 50px'
     },
+    item: {
+        borderWidth: 0,
+        backgroundColor: 'transparent',
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        fontSize: 14,
+        fontWeight: 600,
+        textTransform: 'uppercase',
+        cursor: 'pointer'
+    },
+
     tools: {
         display: 'flex',
         alignItems: 'center'
@@ -198,30 +209,21 @@ const Header = props => {
         return <div
             className={classes.menu}
         >
-            {
-                hasFeedsToShow &&
-                <Grid item>
-                    <Button
-                        onClick={() => redirectUrl('/articles', history)}
-                        value={useI18nText(keyOfI18n.FEEDS)}
-                    />
-                </Grid>
-            }
-            {
-                hasProductsToShow && <Grid item>
-                    <Button
-                        onClick={() => redirectUrl('/products', history)}
-                        value={useI18nText(keyOfI18n.PRODUCTS)}
-                    />
-                </Grid>
-            }
-            {(hasProductsToShow) && <Grid item>
-                <Button
-                    onClick={() => redirectUrl('/checkout', history)}
-
-                    value={useI18nText(keyOfI18n.CHECKOUT)}
-                />
-            </Grid>}
+            {hasFeedsToShow && <button
+                type="button"
+                className={classes.item}
+                onClick={() => redirectUrl('/articles', history)}
+            >{useI18nText(keyOfI18n.FEEDS)}</button>}
+            {hasProductsToShow && <button
+                type="button"
+                className={classes.item}
+                onClick={() => redirectUrl('/products', history)}
+            >{useI18nText(keyOfI18n.PRODUCTS)}</button>}
+            {hasProductsToShow && <button
+                type="button"
+                className={classes.item}
+                onClick={() => redirectUrl('/checkout', history)}
+            >{useI18nText(keyOfI18n.CHECKOUT)}</button>}
         </div>;
     };
     const renderTools = () => {
