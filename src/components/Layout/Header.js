@@ -286,11 +286,11 @@ const Header = props => {
                         popUp={<DropDownList
                             data={shoppingCart}
                             onDelete={index => editShoppingCart(index)}
-                        />
-                        }
-                        title={<Button
-                            value={useI18nText(keyOfI18n.SHOPPING_CART)}
                         />}
+                        title={<button
+                            type="button"
+                            className={classes.item}
+                        >{useI18nText(keyOfI18n.SHOPPING_CART)}</button>}
                     />
 
             </div>}
