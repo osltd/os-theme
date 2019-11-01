@@ -100,7 +100,7 @@ const mapDispatchToProps = dispatch => ({
                 }
             ));
 
-            
+
             agent.Products.initBusiness().then(res => {
 
                     if (res.data.data.rows) {
@@ -195,10 +195,12 @@ const App = props => {
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/404'} component={NotFound}/>
+                            
+                            <Route exact path={'/articles'} component={Feed}/>
+
                             {/* <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/register'} component={Register}/>
                             <Route exact path={'/products'} component={Shop}/>
-                            <Route exact path={'/articles'} component={Feed}/>
                             <Route exact path={'/articles/:id'} component={FeedDetail}/>
                             <Route exact path={'/products/:id'} component={Product}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
