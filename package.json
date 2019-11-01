@@ -30,6 +30,7 @@
     "react-color": "^2.14.1",
     "react-dom": "^16.8.6",
     "react-html-parser": "^2.0.2",
+    "react-jss": "^10.0.0",
     "react-masonry-component": "^6.2.1",
     "react-number-format": "^4.0.6",
     "react-redux": "^5.0.7",

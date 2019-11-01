@@ -63,6 +63,7 @@ const mapDispatchToProps = dispatch => ({
                 }
             ));
 
+
             agent.Feeds.initFeeds().then(res => {
                     console.log(res.data.data.posts)
                     dispatch(
@@ -82,6 +83,8 @@ const mapDispatchToProps = dispatch => ({
                     }
                 )
             });
+
+
             agent.Auth.getAccount().then(user =>
                 dispatch(
                     {
@@ -96,6 +99,8 @@ const mapDispatchToProps = dispatch => ({
 
                 }
             ));
+
+            
             agent.Products.initBusiness().then(res => {
 
                     if (res.data.data.rows) {

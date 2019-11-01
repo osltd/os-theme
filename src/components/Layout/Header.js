@@ -1,5 +1,9 @@
 import React, {useContext, useState} from 'react';
+import {createUseStyles} from 'react-jss';
+import {connect} from 'react-redux';
+
 import PropTypes from 'prop-types';
+
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
@@ -10,7 +14,6 @@ import DropDownList from './Body/ShoppingCartList'
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {redirectUrl} from "../../api/ApiUtils";
 import {useI18nText} from "../../hooks/useI18nText";
@@ -19,7 +22,8 @@ import DropDown from "../Widget/DropDown";
 import actionType from "../../context/actionType";
 import {reducer} from "../../context";
 
-const styles = theme => ({
+
+const styles = createUseStyles({
     appBar: {
         backgroundColor: 'white',
         color: 'black',
@@ -73,10 +77,10 @@ const styles = theme => ({
     },
     root: {
         backgroundColor: 'white',
-        borderBottom: '1px solid ' + theme.palette.secondary.light,
+        // borderBottom: '1px solid ' + theme.palette.secondary.light,
     },
     icon: {
-        color: theme.palette.primary.main,
+        // color: theme.palette.primary.main,
         textDecoration: 'none',
         fontSize: '30px',
     },
@@ -86,26 +90,26 @@ const styles = theme => ({
     },
     title: {
         display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
+        // [theme.breakpoints.up('sm')]: {
+        //     display: 'block',
+        // },
     },
     search: {
         position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
+        // borderRadius: theme.shape.borderRadius,
+        // backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
+            // backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
         width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing.unit,
-            width: 'auto',
-        },
+        // [theme.breakpoints.up('sm')]: {
+        //     marginLeft: theme.spacing.unit,
+        //     width: 'auto',
+        // },
     },
     searchIcon: {
-        width: theme.spacing.unit * 9,
+        // width: theme.spacing.unit * 9,
         height: '100%',
         position: 'absolute',
         pointerEvents: 'none',
@@ -117,20 +121,20 @@ const styles = theme => ({
         color: 'inherit',
         width: '100%',
     },
-    inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 120,
-            '&:focus': {
-                width: 200,
-            },
-        },
-    },
+    // inputInput: {
+    //     paddingTop: theme.spacing.unit,
+    //     paddingRight: theme.spacing.unit,
+    //     paddingBottom: theme.spacing.unit,
+    //     paddingLeft: theme.spacing.unit * 10,
+    //     transition: theme.transitions.create('width'),
+    //     width: '100%',
+    //     [theme.breakpoints.up('sm')]: {
+    //         width: 120,
+    //         '&:focus': {
+    //             width: 200,
+    //         },
+    //     },
+    // },
 
 });
 
@@ -162,12 +166,12 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const Header = props => {
+    const classes = styles();
     const {commonReducer} = useContext(reducer)
     const [keyword, setKeyword] = useState('');
     const [navBar, setNavBar] = useState('');
     const {
         history,
-        classes,
         width,
         products,
         feeds,
@@ -363,4 +367,4 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(withStyles(styles)(Header))))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withWidth()(Header)))

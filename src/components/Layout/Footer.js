@@ -1,7 +1,11 @@
 import React, {useContext} from 'react';
-import {connect} from "react-redux";
+import {createUseStyles} from 'react-jss';
+import {connect} from 'react-redux';
 import _ from 'lodash';
-import {Grid, Typography} from '@material-ui/core'
+
+
+
+
 import {withStyles} from '@material-ui/core/styles';
 import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
 
@@ -17,6 +21,8 @@ import {keyOfI18n} from "../../constants/locale/interface";
 import {reducer} from "../../context";
 import FooterLanguageBar from '../Widget/FooterLanguageBar'
 import {useThemeWidth} from "../../hooks/useThemeWidth";
+
+
 const styles = theme => ({
     root: {
         marginTop: '50px',
