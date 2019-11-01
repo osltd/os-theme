@@ -20,6 +20,30 @@ import actionType from "../../context/actionType";
 import {reducer} from "../../context";
 
 const styles = theme => ({
+    appBar: {
+        backgroundColor: 'white',
+        color: 'black',
+        width: '100%',
+        padding: '10px',
+    },
+    container: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    menu: {
+        flex: 1,
+        display: 'flex',
+        padding: '0 50px'
+    },
+    tools: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+
+
+
+
+
     logo: {
         cursor: 'pointer',
         height: 50,
@@ -36,12 +60,6 @@ const styles = theme => ({
     root: {
         backgroundColor: 'white',
         borderBottom: '1px solid ' + theme.palette.secondary.light,
-    },
-    appBar: {
-        backgroundColor: 'white',
-        color: 'black',
-        width: '100%',
-        padding: '10px',
     },
     icon: {
         color: theme.palette.primary.main,
@@ -141,8 +159,14 @@ const Header = props => {
         feeds,
         shoppingCart,
         editShoppingCart,
+        shopInfo
     } = props;
-    console.log();
+
+
+    let hasProductsToShow = (products && products.length > 0);
+    let hasFeedsToShow = (feeds && feeds.length > 0);
+
+
     let getInputBar = () =>
         <Input
             onKeyDown={e =>
@@ -156,155 +180,161 @@ const Header = props => {
                 input: classes.inputInput,
             }}
         />;
+    const renderLogo = () => {
+        return <div>
+            {
+                shopInfo ? <button
+                    className={classes.logo}
+                    onClick={() => redirectUrl('/', history)}
+                    style={shopInfo.logo ? {
+                        backgroundImage: 'url(' + shopInfo.logo.replace('.cloud/','.cloud/70x70/') + ')',
+                        paddingLeft: 45
+                    } : {}}
+                >{shopInfo.name}</button> : null
+            }
+        </div>;
+    };
+    const renderMenu = () => {
+        return <div
+            className={classes.menu}
+        >
+            {
+                hasFeedsToShow &&
+                <Grid item>
+                    <Button
+                        onClick={() => redirectUrl('/articles', history)}
+                        value={useI18nText(keyOfI18n.FEEDS)}
+                    />
+                </Grid>
+            }
+            {
+                hasProductsToShow && <Grid item>
+                    <Button
+                        onClick={() => redirectUrl('/products', history)}
+                        value={useI18nText(keyOfI18n.PRODUCTS)}
+                    />
+                </Grid>
+            }
+            {(hasProductsToShow) && <Grid item>
+                <Button
+                    onClick={() => redirectUrl('/checkout', history)}
+
+                    value={useI18nText(keyOfI18n.CHECKOUT)}
+                />
+            </Grid>}
+        </div>;
+    };
+    const renderTools = () => {
+        return (isWidthUp('lg', width)) ?
+        <div
+            className={classes.tools}
+        >
+            <Grid item>
+                <DropDown
+                    selectedValue={commonReducer.state.locale==='en'?'English':'繁體中文'}
+                    options={
+
+                        [
+                            {
+                                label: 'English',
+                                value: 'en',
+                                onClick: () => {
+                                    commonReducer.dispatch(
+                                        {
+                                            type: actionType.common.COMMON_INIT_I18N,
+                                            payload: {
+                                                locale:'en'
+                                            }
+                                        }
+                                    );
+                                }
+
+                            },
+                            {
+                                label: '繁體中文',
+                                value: 'zh',
+
+                                onClick: () => {
+                                    commonReducer.dispatch(
+                                        {
+                                            type: actionType.common.COMMON_INIT_I18N,
+                                            payload: {
+                                                locale:'zh'
+                                            }
+                                        }
+                                    );
+                                }
+                            }
+                        ]
+
+                    }
+                />
+
+            </Grid>
+            <Grid item>
+                <div className={classes.grow}/>
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon/>
+                    </div>
+                    {getInputBar()}
+                </div>
+            </Grid>
+            {
+                hasProductsToShow && <Grid item>
+                    <PopUp
+                        popUp={<DropDownList
+                            data={shoppingCart}
+                            onDelete={index => editShoppingCart(index)}
+                        />
+                        }
+                        title={<Button
+                            value={useI18nText(keyOfI18n.SHOPPING_CART)}
+                        />}
+                    />
+
+                </Grid>
+            }
+        </div> : <div
+            className={classes.tools}
+        >
+
+            <Grid item>
+                <div className={classes.grow}/>
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon/>
+                    </div>
+                    {getInputBar()}
+                </div>
+            </Grid>
 
 
-    let hasProductsToShow = (products && products.length > 0);
-    let hasFeedsToShow = (feeds && feeds.length > 0);
+
+            <Grid item>
+                <PopUp
+                    popUp={<DropDownList
+                        data={shoppingCart}
+                        onDelete={index => editShoppingCart(index)}
+
+                    />
+                    }
+                    title={<Button
+                        icon={'icon-cart'}
+                    />}
+                />
+
+            </Grid>
+        </div>;
+    };
 
     if (isWidthUp('md', width)) {
         return (<AppBar position="fixed" className={classes.appBar} style={{boxShadow: 'none'}}>
-            <Grid container alignItems={'center'} justify={'space-between'}>
-                <Grid item xs={1}>
-                    {
-                        props.shopInfo ? <button
-                            className={classes.logo}
-                            onClick={() => redirectUrl('/', history)}
-                            style={props.shopInfo.logo ? {
-                                backgroundImage: 'url(' + props.shopInfo.logo.replace('.cloud/','.cloud/70x70/') + ')',
-                                paddingLeft: 45
-                            } : {}}
-                        >{props.shopInfo.name}</button> : null
-
-                    }
-
-                </Grid>
-                <Grid item xs={6} container>
-                    {
-                        hasProductsToShow && <Grid item>
-                            <Button
-                                onClick={() => redirectUrl('/products', history)}
-                                value={useI18nText(keyOfI18n.PRODUCTS)}
-                            />
-                        </Grid>
-                    }
-                    {
-                        hasFeedsToShow &&
-                        <Grid item>
-                            <Button
-                                onClick={() => redirectUrl('/articles', history)}
-                                value={useI18nText(keyOfI18n.FEEDS)}
-                            />
-                        </Grid>
-                    }
-                    {(hasProductsToShow) && <Grid item>
-                        <Button
-                            onClick={() => redirectUrl('/checkout', history)}
-
-                            value={useI18nText(keyOfI18n.CHECKOUT)}
-                        />
-                    </Grid>}
-                </Grid>
-                {
-                    (isWidthUp('lg', width)) ?
-                        <Grid item xs={4} container alignItems={'center'} justify={'flex-end'}>
-                            <Grid item>
-                                <DropDown
-                                    selectedValue={commonReducer.state.locale==='en'?'English':'繁體中文'}
-                                    options={
-
-                                        [
-                                            {
-                                                label: 'English',
-                                                value: 'en',
-                                                onClick: () => {
-                                                    commonReducer.dispatch(
-                                                        {
-                                                            type: actionType.common.COMMON_INIT_I18N,
-                                                            payload: {
-                                                                locale:'en'
-                                                            }
-                                                        }
-                                                    );
-                                                }
-
-                                            },
-                                            {
-                                                label: '繁體中文',
-                                                value: 'zh',
-
-                                                onClick: () => {
-                                                    commonReducer.dispatch(
-                                                        {
-                                                            type: actionType.common.COMMON_INIT_I18N,
-                                                            payload: {
-                                                                locale:'zh'
-                                                            }
-                                                        }
-                                                    );
-                                                }
-                                            }
-                                        ]
-
-                                    }
-                                />
-
-                            </Grid>
-                            <Grid item>
-                                <div className={classes.grow}/>
-                                <div className={classes.search}>
-                                    <div className={classes.searchIcon}>
-                                        <SearchIcon/>
-                                    </div>
-                                    {getInputBar()}
-                                </div>
-                            </Grid>
-                            {
-                                hasProductsToShow && <Grid item>
-                                    <PopUp
-                                        popUp={<DropDownList
-                                            data={shoppingCart}
-                                            onDelete={index => editShoppingCart(index)}
-                                        />
-                                        }
-                                        title={<Button
-                                            value={useI18nText(keyOfI18n.SHOPPING_CART)}
-                                        />}
-                                    />
-
-                                </Grid>
-                            }
-                        </Grid> : <Grid item xs={4} container alignItems={'center'} justify={'center'}>
-
-                            <Grid item>
-                                <div className={classes.grow}/>
-                                <div className={classes.search}>
-                                    <div className={classes.searchIcon}>
-                                        <SearchIcon/>
-                                    </div>
-                                    {getInputBar()}
-                                </div>
-                            </Grid>
-
-
-
-                            <Grid item>
-                                <PopUp
-                                    popUp={<DropDownList
-                                        data={shoppingCart}
-                                        onDelete={index => editShoppingCart(index)}
-
-                                    />
-                                    }
-                                    title={<Button
-                                        icon={'icon-cart'}
-                                    />}
-                                />
-
-                            </Grid>
-                        </Grid>
-                }
-
-            </Grid>
+            <div className={classes.container}>
+                {renderLogo()}
+                {renderMenu()}
+                {renderTools()}
+            </div>
         </AppBar>)
     }
 

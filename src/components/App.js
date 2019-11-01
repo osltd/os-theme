@@ -157,7 +157,7 @@ const App = props => {
         () => {
             //   setInterval(()=>agent.Auth.test(),100)
             let storedLocale = localStorage.getItem('locale')
-            console.log(storedLocale)
+            // console.log(storedLocale)
             if (storedLocale === 'en' || storedLocale === 'zh') {
 
                 commonReducer.dispatch(
