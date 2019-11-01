@@ -36,7 +36,6 @@ const styles = theme => ({
 
 
 const FeedOverviewBox = props => {
-    const isMobile = !isWidthUp('sm', width);
     const {
         classes,
         width,
@@ -49,6 +48,7 @@ const FeedOverviewBox = props => {
         comments,
         medias
     } = props;
+    const isMobile = !isWidthUp('sm', width);
     return <button
         type="button"
         onClick={() => redirectUrl('/articles/' + id, props.history)}

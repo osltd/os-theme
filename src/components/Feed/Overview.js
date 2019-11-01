@@ -36,7 +36,8 @@ const styles = theme => ({
         fontSize: 20,
         fontWeight: 400,
         padding: 0,
-        marginTop: 0
+        marginTop: 0,
+        backgroundColor: 'transparent'
     },
 
     list: {

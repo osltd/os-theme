@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 
     list: {
-        padding: 0
+        padding: 0,
+        flexDirection: 'column'
     },
     item: {
         listStyle: 'none',
