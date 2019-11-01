@@ -231,7 +231,7 @@ const Header = props => {
         <div
             className={classes.tools}
         >
-            <Grid item>
+            <div>
                 <DropDown
                     selectedValue={commonReducer.state.locale==='en'?'English':'繁體中文'}
                     options={
@@ -271,9 +271,8 @@ const Header = props => {
 
                     }
                 />
-
-            </Grid>
-            <Grid item>
+            </div>
+            <div>
                 <div className={classes.grow}/>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -281,9 +280,8 @@ const Header = props => {
                     </div>
                     {getInputBar()}
                 </div>
-            </Grid>
-            {
-                hasProductsToShow && <Grid item>
+            </div>
+            {hasProductsToShow && <div>
                     <PopUp
                         popUp={<DropDownList
                             data={shoppingCart}
@@ -295,8 +293,7 @@ const Header = props => {
                         />}
                     />
 
-                </Grid>
-            }
+            </div>}
         </div> : <div
             className={classes.tools}
         >
