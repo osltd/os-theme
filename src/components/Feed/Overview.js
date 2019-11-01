@@ -25,6 +25,7 @@ import LoadingPage from '../Layout/LoadingPage'
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {useI18nText} from "../../hooks/useI18nText";
+import {redirectUrl} from "../../api/ApiUtils";
 
 
 
@@ -243,6 +244,7 @@ const ResponsiveDialog = props => {
                 key={i}
                 type="button"
                 className={classes.item}
+                onClick={() => redirectUrl('/articles/' + n.id, props.history)}
             >
                 test
             </button>)

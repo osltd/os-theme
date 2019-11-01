@@ -65,11 +65,11 @@ const mapDispatchToProps = dispatch => ({
 
 
             agent.Feeds.initFeeds().then(res => {
-                    console.log(res.data.data.posts)
+                    // console.log(res.data.data.rows)
                     dispatch(
                         {
                             type: INIT_FEEDS,
-                            payload: res.data.data.posts,
+                            payload: res.data.data.rows,
                         }
                     )
                 }
@@ -197,11 +197,11 @@ const App = props => {
                             <Route exact path={'/404'} component={NotFound}/>
                             
                             <Route exact path={'/articles'} component={Feed}/>
+                            <Route exact path={'/articles/:id'} component={FeedDetail}/>
 
                             {/* <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/register'} component={Register}/>
                             <Route exact path={'/products'} component={Shop}/>
-                            <Route exact path={'/articles/:id'} component={FeedDetail}/>
                             <Route exact path={'/products/:id'} component={Product}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
                             <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
