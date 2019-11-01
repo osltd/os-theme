@@ -65,6 +65,21 @@ const styles = createUseStyles({
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
+    // for mobile
+    '@media (max-width: 600px)': {
+        wrapper: {
+            display: 'block',
+            padding: '0 5%'
+        },
+        menu: {
+            width: '100%'
+        },
+        content: {
+            width: '100%',
+            marginLeft: 0
+        }
+    },
+
 
 
 
@@ -134,7 +149,7 @@ const FeedDetail = (props) => {
     if (feeds == undefined) return <LoadingPage/>;
     if (!feed) return null;
 
-    
+
     const renderMenu = () => <div className={classes.menu}>
         <div>
             <h3 className={classes.menuTitle}>
@@ -157,7 +172,10 @@ const FeedDetail = (props) => {
             </div>
         </div>
         <div>
-            {feed.sections.map((n, i) => <section className={classes.section}>
+            {feed.sections.map((n, i) => <section
+                key={i}
+                className={classes.section}
+            >
                 {i ? <h2 className={classes.title}>{n.title}</h2> : null}
                 <Media data={feed.sections[i].medias}/>
                 <p className={classes.description}>{ReactHtmlParser(n.description)}</p>
