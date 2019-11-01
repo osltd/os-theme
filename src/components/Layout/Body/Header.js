@@ -53,6 +53,7 @@ const styles = theme => ({
 
 const BodyHeader = (props) => {
     const {classes, title, width, history, match} = props;
+    const isMobile = !isWidthUp('sm', width);
     const routePath = getRoutePath(match.url);
     return <div
         className={classes.root}
@@ -63,7 +64,7 @@ const BodyHeader = (props) => {
         <div
             className={classes.title}
         >{title}</div>
-        <div
+        {!isMobile && <div
             className={classes.path}
         >
             {routePath.map((n, i) => <Fragment
@@ -79,7 +80,7 @@ const BodyHeader = (props) => {
                     >{n.label}</b>
                 </button>
             </Fragment>)}
-        </div>
+        </div>}
     </div>
 };
 

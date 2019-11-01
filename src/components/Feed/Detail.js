@@ -3,7 +3,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
 import moment from 'moment';
-import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
+import withWidth, {isWidthUp, isWidthDown} from '@material-ui/core/withWidth/index';
 
 
 import Header from '../Layout/Body/Header';
@@ -105,8 +105,9 @@ const mapDispatchToProps = dispatch => ({
 );
 
 const FeedDetail = (props) => {
-
     const {feeds, match, classes, editFeedFilter, history, width} = props;
+    const isMobile = !isWidthUp('sm', width);
+
     const hasValidFeed = () => (feeds && !!feeds.find(n => n.id.toString() === match.params.id));
     if (!props.products) return <LoadingPage/>;
 
@@ -139,9 +140,9 @@ const FeedDetail = (props) => {
                         </button>
                     </div>
                     <div
-                        className={classes.container}
+                        className={isWidthUp('sm', width) ? classes.container : ''}
                     >
-                        <div
+                        {!isMobile && <div
                             className={classes.menu}
                         >
                             <List
@@ -150,9 +151,9 @@ const FeedDetail = (props) => {
                                     redirectUrl('/articles', history, false)
                                 })}
                                 title={useI18nText(keyOfI18n.FEED_CATEGORY)}/>
-                        </div>
+                        </div>}
                         <div
-                            className={classes.content}
+                            className={isMobile ? '' : classes.content}
                         >
                             <div
                                 className={classes.head}

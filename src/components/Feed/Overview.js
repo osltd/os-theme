@@ -1,8 +1,11 @@
 import React from 'react';
-import {Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+
+
 
 
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
@@ -20,41 +23,30 @@ import {keyOfI18n} from "../../constants/locale/interface";
 import {useI18nText} from "../../hooks/useI18nText";
 
 
-const styles = theme => {
-    return {
-        menu: {
-            width: '25%'
-        },
-        searchBar: {
-            marginBottom: 35
-        },
-        searchTitle: {
-            fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-            fontSize: 20,
-            fontWeight: 400,
-            padding: 0,
-            marginTop: 0
-        },
+const styles = theme => ({
+    menu: {
+        width: '25%'
+    },
+    searchBar: {
+        marginBottom: 35
+    },
+    menuTitle: {
+        flex: 1,
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        fontSize: 20,
+        fontWeight: 400,
+        padding: 0,
+        marginTop: 0
+    },
 
-        list: {
-            width: 'calc(75% - 35px)',
-            marginLeft: 35
-        },
-        placeholder: {
-            fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
-        },
-
-
-
-        productCategory: {
-            backgroundColor: theme.palette.background.paper
-        },
-        toolBar: {
-            backgroundColor: ''
-        },
+    list: {
+        width: 'calc(75% - 35px)',
+        marginLeft: 35
+    },
+    placeholder: {
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     }
-
-};
+});
 
 
 const mapStateToProps = state => ({
@@ -90,23 +82,25 @@ class ResponsiveDialog extends React.Component {
         this.setState(
             {
                 timer: setTimeout(() => this.props.editFeedFilter('keyword', value), 500)
-
             }
         )
     };
 
 
     renderMenu() {
-        const {classes} = this.props;
+        const {classes, width} = this.props;
+        const isMobile = !isWidthUp('sm', width);
         return <div
-            className={classes.menu}
+            className={isMobile ? '' : classes.menu}
         >
             <div
                 className={classes.searchBar}
             >
                 <h3
-                    className={classes.searchTitle}
-                ><I18nText keyOfI18n={keyOfI18n.SEARCH}/></h3>
+                    className={classes.menuTitle}
+                >
+                    <I18nText keyOfI18n={keyOfI18n.SEARCH}/>
+                </h3>
                 <div>
                     <SearchBar
                         value={this.props.filter.keyword}
@@ -115,27 +109,56 @@ class ResponsiveDialog extends React.Component {
                 </div>
             </div>
             <div>
+                <div style={{
+                    display: 'flex'
+                }}>
+                    <h3
+                        className={classes.menuTitle}
+                    >
+                        <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
+                    </h3>
+                    {isMobile && <div>
+                        <button
+                            type="button"
+                            onClick={() => this.setState({
+                                showCategories: !this.state.showCategories
+                            })}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                borderWidth: 0,
+                                backgroundColor: 'transparent',
+                                display: 'flex',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {this.state.showCategories ? <ExpandMoreIcon/> : <ExpandLessIcon/>}
+                        </button>
+                    </div>}
+                </div>
                 <List
                     data={getTagsCountsArray(this.props.feeds, (tag, number) => {
                         this.props.editFeedFilter('tag', tag)
                     })}
                     selectedValue={this.props.filter.tag}
-                    title={useI18nText(keyOfI18n.FEED_CATEGORY)}/>
+                    closed={this.state.showCategories == undefined ? isMobile : !this.state.showCategories}
+                />
             </div>
         </div>;
     }
     renderList() {
-        const {classes, feeds} = this.props;
+        const {classes, feeds, width} = this.props;
+        const isMobile = !isWidthUp('sm', width);
         return <div
-            className={classes.list}
+            className={isMobile ? '' : classes.list}
         >
             <Gallery
                 elements={feeds == undefined ? <LoadingPage/> : (
                     feeds.length > 0 ? feeds.map((n, i) => <FeedOverviewBox
                         id={n.id}
-                        medias={n.sections[0].medias}
-                        src={n.sections && n.sections.find(section => !!section.medias[0]
-                        ) ? n.sections.find(section => section.medias[0]).medias[0].url :
+                        medias={n.sections[0].media}
+                        src={n.sections && n.sections.find(section => !!section.media[0]
+                        ) ? n.sections.find(section => section.media[0]).media[0].url :
                             'https://www.freeiconspng.com/uploads/no-image-icon-15.png'}
 
                         subTitle={refactorTextLength(n.sections[0].description)}
@@ -156,11 +179,16 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         const {width} = this.props;
+        const isMobile = !isWidthUp('sm', width);
         return <div>
-                <Header/>
+                {!isMobile && <Header/>}
                 <div
                     style={{
-                        display: 'flex',
+                        ...(isMobile ? {
+                            marginTop: 25
+                        } : {
+                            display: 'flex'
+                        }),
                         padding: `0 ${isWidthUp('lg', width) ? 9 : 5}%`
                     }}
                 >
