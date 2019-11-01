@@ -20,9 +20,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
     list: {
         padding: 0,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        margin: 0,
+        backgroundColor: 'transparent'
     },
     item: {
+        color: '#000',
         listStyle: 'none',
         borderBottom: '1px solid ' + theme.palette.secondary.light,
         textTransform: 'uppercase',

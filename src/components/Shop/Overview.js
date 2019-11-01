@@ -28,6 +28,29 @@ const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>,
     <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>,
     <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
 const styles = theme => ({
+    menu: {
+        width: '25%'
+    },
+    menuTitle: {
+        flex: 1,
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        fontSize: 20,
+        fontWeight: 400,
+        padding: 0,
+        marginTop: 0,
+        backgroundColor: 'transparent'
+    },
+
+    list: {
+        width: 'calc(75% - 35px)',
+        marginLeft: 35
+    },
+
+
+
+
+
+
     productCategory: {
         backgroundColor: '#F7F7F7',
     },
@@ -137,13 +160,6 @@ const ShopOverview = props => {
         }
     };
     let initPageNumber = length => props.editProductSort('page', numberToPagination(length, null)[0].label);
-    let getTagsList = () => <List
-        data={getTagsCountsArray(props.products, (tag, number) => {
-            props.editProductFilter('tag', tag);
-            initPageNumber(number)
-        })}
-        selectedValue={props.filter.tag}
-    />;
 
     let getPagination = (products) => {
         if (products.length === 0) return null;
@@ -202,117 +218,125 @@ const ShopOverview = props => {
     useEffect(() => initFilter());
     const {classes} = props;
     if (props.products === null) return <LoadingPage/>;
+
+
     const products = sortData();
+    const isMobile = !isWidthUp('sm', props.width);
 
-    return (
-        <Grid container justify={'center'}>
-            <Grid item xs={12}>
-                <Header
-                    title={<I18nText keyOfI18n={keyOfI18n.SHOP}/>}
-                    route={'home/shop'}
-                />
-            </Grid>
-
-            {
-                props.products.length > 0 ?
-                    <Grid item lg={10} spacing={isWidthUp('md', props.width) ? 16 : 0} container>
-                        {
-                            isWidthUp('md', props.width) ?
-                                <Grid item md={3}>
-                                    <Typography variant={'h6'}>
-                                        <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>
-                                    </Typography>
-                                    {getTagsList()}
-                                </Grid> : null
-                        }
-                        <Grid item xs={12} md={9}>
-                            <Grid item container xs={12} alignItems={'center'} justify={'space-between'}
-                                  direction={'row'}
-                                  className={classes.toolBar}>
-                                <Grid item xs={6} md={2}>
-                                <span
-                                    onClick={() => props.changeViewMode('form')}
-                                    className={classNames(classes.icon, 'icon-table')}/>
-                                    <span
-                                        onClick={() => props.changeViewMode('list')}
-                                        className={classNames('icon-list', classes.icon)}/>
-                                </Grid>
-                                <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
-                                    <Grid item>
-                                        <Typography variant={'body1'}>
-                                            <I18nText keyOfI18n={keyOfI18n.ITEMS}/>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                        {
-                                            getPagination(products)
-                                        }
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant={'body1'}>
-                                            {<I18nText
-                                                keyOfI18n={keyOfI18n.OF}/>} {getProductProperty(products, 'length')}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
-
-                                    <Grid item>
-                                        <Typography variant={'body1'}>
-                                            <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item>
-
-                                        <WhiteDropDown
-                                            options={
-                                                arrayToFilter(
-                                                    filterOptions, value => {
-                                                        props.editProductSort('sortBy', value);
-                                                        initPageNumber(getProductProperty(sortData(), 'length'))
-                                                    }
-                                                )}
-                                            selectedValue={props.sort.sortBy}
-                                        />
-                                    </Grid>
-                                </Grid>
-                                {
-                                    isWidthUp('md', props.width) ? null : <Grid xs={6} item>
-                                        <PopUp
-                                            innerRef={e => popUp = e}
-                                            title={
-                                                <Grid container alignItems={'center'}>
-                                                    <Typography variant={'body1'}>
-                                                        {props.filter.tag ? <Typography
-                                                                variant={'body1'}>{'tags:' + props.filter.tag}</Typography> :
-                                                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>}
-                                                    </Typography>
-                                                    <span className={classes.array + ' ' + 'icon-circle-down'}/>
-                                                </Grid>
-
-                                            }
-                                            popUp={getTagsList()}
-                                        />
-
-                                    </Grid>
-                                }
-                            </Grid>
-
-                            <Grid item container className={classes.listMode}>
-                                {
-                                    getProductsList(products)
-                                }
-                            </Grid>
+    return <div>
+        <Header
+            title={<I18nText keyOfI18n={keyOfI18n.SHOP}/>}
+            route={'home/shop'}
+        />
+        <div
+            style={{
+                ...(isMobile ? {
+                    marginTop: 25
+                } : {
+                    display: 'flex'
+                }),
+                padding: `0 ${isWidthUp('lg', props.width) ? 9 : 5}%`
+            }}
+        >
+            <div className={isMobile ? '' : classes.menu}>
+                <div>
+                    <h3
+                        className={classes.menuTitle}
+                    >
+                        <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
+                    </h3>
+                </div>
+                <div>
+                    <List
+                        data={getTagsCountsArray(props.products, (tag, number) => {
+                            props.editProductFilter('tag', tag);
+                            initPageNumber(number)
+                        })}
+                        selectedValue={props.filter.tag}
+                    />
+                </div>
+            </div>
+            <div className={isMobile ? '' : classes.list}>
+                <Grid item container xs={12} alignItems={'center'} justify={'space-between'}
+                        direction={'row'}
+                        className={classes.toolBar}>
+                    <Grid item xs={6} md={2}>
+                    <span
+                        onClick={() => props.changeViewMode('form')}
+                        className={classNames(classes.icon, 'icon-table')}/>
+                        <span
+                            onClick={() => props.changeViewMode('list')}
+                            className={classNames('icon-list', classes.icon)}/>
+                    </Grid>
+                    <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
+                        <Grid item>
+                            <Typography variant={'body1'}>
+                                <I18nText keyOfI18n={keyOfI18n.ITEMS}/>
+                            </Typography>
                         </Grid>
-                    </Grid> :
+                        <Grid item>
+                            {
+                                getPagination(products)
+                            }
+                        </Grid>
+                        <Grid item>
+                            <Typography variant={'body1'}>
+                                {<I18nText
+                                    keyOfI18n={keyOfI18n.OF}/>} {getProductProperty(products, 'length')}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={6} md={3} container alignItems={'center'} direction={'row'}>
 
-                    <Typography variant={'subtitle1'}><I18nText
-                        keyOfI18n={keyOfI18n.THERE_ARE_NO_PRODUCTS_UNDER}/></Typography>
+                        <Grid item>
+                            <Typography variant={'body1'}>
+                                <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
+                            </Typography>
+                        </Grid>
+                        <Grid item>
 
+                            <WhiteDropDown
+                                options={
+                                    arrayToFilter(
+                                        filterOptions, value => {
+                                            props.editProductSort('sortBy', value);
+                                            initPageNumber(getProductProperty(sortData(), 'length'))
+                                        }
+                                    )}
+                                selectedValue={props.sort.sortBy}
+                            />
+                        </Grid>
+                    </Grid>
+                    {
+                        isWidthUp('md', props.width) ? null : <Grid xs={6} item>
+                            <PopUp
+                                innerRef={e => popUp = e}
+                                title={
+                                    <Grid container alignItems={'center'}>
+                                        <Typography variant={'body1'}>
+                                            {props.filter.tag ? <Typography
+                                                    variant={'body1'}>{'tags:' + props.filter.tag}</Typography> :
+                                                <I18nText keyOfI18n={keyOfI18n.PRODUCT_CATEGORY}/>}
+                                        </Typography>
+                                        <span className={classes.array + ' ' + 'icon-circle-down'}/>
+                                    </Grid>
 
-            }
-        </Grid>
-    );
+                                }
+                                // popUp={getTagsList()}
+                            />
+
+                        </Grid>
+                    }
+                </Grid>
+
+                <Grid item container className={classes.listMode}>
+                    {
+                        getProductsList(products)
+                    }
+                </Grid>
+            </div>
+        </div>
+    </div>;
 };
 
 export default withWidth()(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShopOverview)))

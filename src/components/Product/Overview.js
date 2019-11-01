@@ -2,11 +2,14 @@ import React from 'react';
 import {Grid} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux'
+import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
+
 import Header from '../Layout/Body/Header'
 import CommentDescription from './Comment&Description/Overview'
 import Detail from './Detail'
 import {getVariantOptions} from "../../api/ApiUtils"
 import LoadingPage from '../Layout/LoadingPage'
+
 
 const styles = theme => {
 
@@ -38,13 +41,14 @@ class ResponsiveDialog extends React.Component {
 
     render() {
         if (!this.props.products) return <LoadingPage/>;
+        const isMobile = !isWidthUp('sm', this.props.width);
         const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id);
         const variantOptions = getVariantOptions(product.variants);
         return <div>
-            <Header
+            {!isMobile && <Header
                 title={product.name}
                 route={'HOME/SHOP/SINGLE PRODUCT'}
-            />
+            />}
             
             
 
@@ -79,4 +83,4 @@ class ResponsiveDialog extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withWidth()(ResponsiveDialog)))
