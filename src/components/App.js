@@ -1,5 +1,15 @@
 import React, {useContext, useEffect} from 'react';
+import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import _ from 'lodash';
+
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+
+import '../constants/icon/style.css'
+import '../constants/Style.css'
+
+
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'
@@ -10,9 +20,6 @@ import Footer from './Layout/Footer'
 import Feed from './Feed/Overview'
 import Product from './Product/Overview'
 import FeedDetail from './Feed/Detail'
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import {connect} from "react-redux";
 import {
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
@@ -21,15 +28,11 @@ import {
     INIT_FEEDS,
     INIT_PRODUCTS
 } from "../constants/actionType";
-import '../constants/icon/style.css'
 import agent from '../agent'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import Checkout from './Checkout/Overview'
 import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
-import '../constants/Style.css'
 import SearchPage from './Search/Overview'
-import _ from 'lodash'
 import NotFound from './Layout/NotFound'
 import MyCredits from './Layout/MyCredits'
 import Register from './Auth/Register/Overview'
@@ -183,13 +186,11 @@ const App = props => {
             <ScrollToTop>
                 <ErrorBoundary>
                     <Header/>
-                    <div style={(isWidthUp('md', props.width)) ? {
-                        paddingTop: 70,
-                    } : {}}>
+                    <div>
                         <Switch>
                             <Route exact path={'/'} component={mainPage}/>
                             <Route exact path={'/404'} component={NotFound}/>
-                            <Route exact path={'/login'} component={Login}/>
+                            {/* <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/register'} component={Register}/>
                             <Route exact path={'/products'} component={Shop}/>
                             <Route exact path={'/articles'} component={Feed}/>
@@ -200,21 +201,18 @@ const App = props => {
                             <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                             <Route exact path={'/loadingPage'} component={LoadingPage}/>
                             <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                            <Route exact path={'/validate/:id'} component={Validate}/>
+                            <Route exact path={'/validate/:id'} component={Validate}/> */}
                             <Route component={NotFound}/>
                         </Switch>
                     </div>
+
                     <MyCredits/>
 
                     <Footer/>
                 </ErrorBoundary>
             </ScrollToTop>
         </BrowserRouter>
-
     )
-
 };
 
-//todo('add in stock logic')
-
-export default connect(mapStateToProps, mapDispatchToProps)(withWidth()(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)
