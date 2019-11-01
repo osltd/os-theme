@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {withStyles} from "@material-ui/core/styles/index";
+
 import Masonry from 'react-masonry-component';
 
 const masonryOptions = {
@@ -11,22 +13,34 @@ const masonryOptions = {
 
 const imagesLoadedOptions = {background: '.my-bg-image-el'};
 
+
+
+const styles = theme => ({
+
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    }
+
+});
+
 class Gallery extends React.Component {
     render() {
         const childElements = this.props.elements;
+        const classes = this.props.classes;
 
         return (
-            <Masonry
-                className={'my-gallery-class'} // default ''
-                options={masonryOptions} // default {}
-                disableImagesLoaded={false} // default false
-                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                imagesLoadedOptions={imagesLoadedOptions} // default {}
+            <div
+                className={classes.root} // default ''
+                // options={masonryOptions} // default {}
+                // disableImagesLoaded={false} // default false
+                // updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                // imagesLoadedOptions={imagesLoadedOptions} // default {}
             >
                 {childElements}
-            </Masonry>
+            </div>
         );
     }
 }
 
-export default Gallery;
+export default withStyles(styles)(Gallery);

@@ -22,8 +22,13 @@ import {reducer} from "../../context";
 const styles = theme => ({
     logo: {
         cursor: 'pointer',
-
-        height: '50px'
+        height: 50,
+        backgroundSize: 35,
+        borderWidth: 0,
+        backgroundColor: 'transparent',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center left',
+        textTransform: 'uppercase'
     },
     grow: {
         flexGrow: 1,
@@ -103,7 +108,7 @@ const mapStateToProps = state => ({
     keyword: state.common.searchBar,
     products: state.product.products,
     feeds: state.feed.feeds,
-    icon: state.common.shopInfo.icon,
+    shopInfo: state.common.shopInfo,
 });
 
 
@@ -137,6 +142,7 @@ const Header = props => {
         shoppingCart,
         editShoppingCart,
     } = props;
+    console.log();
     let getInputBar = () =>
         <Input
             onKeyDown={e =>
@@ -160,11 +166,14 @@ const Header = props => {
             <Grid container alignItems={'center'} justify={'space-between'}>
                 <Grid item xs={1}>
                     {
-                        props.icon ? <img
+                        props.shopInfo ? <button
                             className={classes.logo}
                             onClick={() => redirectUrl('/', history)}
-                            src={props.icon}
-                        /> : null
+                            style={props.shopInfo.logo ? {
+                                backgroundImage: 'url(' + props.shopInfo.logo.replace('.cloud/','.cloud/70x70/') + ')',
+                                paddingLeft: 45
+                            } : {}}
+                        >{props.shopInfo.name}</button> : null
 
                     }
 
@@ -182,7 +191,7 @@ const Header = props => {
                         hasFeedsToShow &&
                         <Grid item>
                             <Button
-                                onClick={() => redirectUrl('/feeds', history)}
+                                onClick={() => redirectUrl('/articles', history)}
                                 value={useI18nText(keyOfI18n.FEEDS)}
                             />
                         </Grid>
@@ -311,8 +320,8 @@ const Header = props => {
 
                                 icon={<span className={classNames(classes.icon, 'icon-gift')}/>}/>
 
-        <BottomNavigationAction label="Feeds" value="Feeds"
-                                onClick={() => redirectUrl('/feeds', history)}
+        <BottomNavigationAction label="Articles" value="Articles"
+                                onClick={() => redirectUrl('/articles', history)}
                                 icon={<span className={classNames(classes.icon, 'icon-file-text')}/>}/>
         <BottomNavigationAction label="Checkout" value="Checkout"
                                 onClick={() => redirectUrl('/checkout', history)}

@@ -53,10 +53,10 @@ const FooterList: React.FunctionComponent<Props> = props => {
                                     </ListItem>}
                                 dialog={<MyAccount/>}
                             /> :
-                            <ListItem className={classes.item} button key={i}>
-                                <Typography variant={'body1'} color={'inherit'}
-                                            onClick={() => redirectUrl(`/${n.url}`, history)}
-                                > {n.label}</Typography>
+                            <ListItem className={classes.item} button key={i}
+                                onClick={() => redirectUrl(`/${n.url}`, history)}
+                            >
+                                <Typography variant={'body1'} color={'inherit'}>{n.label}</Typography>
                             </ListItem>
                     )
                 }

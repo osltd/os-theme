@@ -42,14 +42,14 @@ class FeedsWall extends React.Component {
         return (data.length) ? <Grid container alignItems={'stretch'} className={classes.root}>
             <Grid item md={6} className={classes.left}>
                 <BigFeedBox
-                    link={'/feeds/' + data[0].id}
+                    link={'/articles/' + data[0].id}
 
                     backgroundImg={data[0].sections[0].medias[0].url}
                     title={refactorTextLength(data[0].sections[0].title)}
 
                 />
                 {data[1] && <SmallFeedBox
-                    link={'/feeds/' + data[1].id}
+                    link={'/articles/' + data[1].id}
 
                     left={<div style={{
                         height: '300px',
@@ -76,7 +76,7 @@ class FeedsWall extends React.Component {
             </Grid>
             <Grid item md={6} className={classes.right}>
                 {data[2] && <SmallFeedBox
-                    link={'/feeds/' + data[2].id}
+                    link={'/articles/' + data[2].id}
 
                     right={<div style={{
                         height: '300px',
@@ -102,7 +102,7 @@ class FeedsWall extends React.Component {
 
                 />}
                 {data[3] && <BigFeedBox
-                    link={'/feeds/' + data[3].id}
+                    link={'/articles/' + data[3].id}
                     title={refactorTextLength(data[3].sections[0].title)}
                     backgroundImg={data[3].sections[0].medias[0].url}
 

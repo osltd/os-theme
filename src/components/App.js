@@ -50,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
                 dispatch(
                     {
                         type: INIT_PRODUCTS,
-                        payload: res.data.data.merchandises,
+                        payload: res.data.data.rows,
                     }
                 )
             ).catch(err => dispatch(
@@ -95,25 +95,25 @@ const mapDispatchToProps = dispatch => ({
             ));
             agent.Products.initBusiness().then(res => {
 
-                    if (res.data.data.shops) {
+                    if (res.data.data.rows) {
                         dispatch(
                             {
                                 type: CATEGORY_INIT_CATEGORY,
-                                payload: res.data.data.shops[0].tags.split(','),
+                                payload: res.data.data.rows[0].tags.split(','),
                             }
                         );
                         dispatch(
                             {
                                 type: COMMON_INIT_SHOP_INFO,
-                                payload: res.data.data.shops[0],
+                                payload: res.data.data.rows[0],
                             }
                         );
-                        document.title = res.data.data.shops[0].name
+                        // document.title = res.data.data.rows[0].name
                     }
                 }
             ).catch(err => {
 
-                    document.title = 'One Shop';
+                    // document.title = 'One Shop';
 
                     dispatch(
                         {
@@ -193,8 +193,8 @@ const App = props => {
                             <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/register'} component={Register}/>
                             <Route exact path={'/products'} component={Shop}/>
-                            <Route exact path={'/feeds'} component={Feed}/>
-                            <Route exact path={'/feeds/:id'} component={FeedDetail}/>
+                            <Route exact path={'/articles'} component={Feed}/>
+                            <Route exact path={'/articles/:id'} component={FeedDetail}/>
                             <Route exact path={'/products/:id'} component={Product}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
                             <Route exact path={'/shoppingCart'} component={ShoppingCart}/>

@@ -14,7 +14,7 @@ const Banner = props => {
             <Carousel
                 data={latestArticle.map(n => n.sections[0].medias[0])}
                 title={latestArticle.map(n => n.sections[0].title) || ''}
-                onClick={() => redirectUrl(`/feeds/${latestArticle.id}`, history)}/>
+                onClick={() => redirectUrl(`/articles/${latestArticle.id}`, history)}/>
         </Grid>
         <Grid item xs={12} style={{marginTop: 80}}>
             <FeedsWall data={feeds.filter((n, i) => isImgOnlySections(n.sections))} />

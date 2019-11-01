@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import moment from 'moment'
+import moment from 'moment';
+import h2p from 'html2plaintext';
 import {withStyles} from "@material-ui/core/styles/index";
 import {withRouter} from "react-router-dom";
 import Media from '../../Widget/Media'
@@ -10,9 +11,11 @@ const styles = theme => ({
 
     root: {
         paddingBottom: '20px',
-        width: '350px',
+        width: 'calc(25% - 30px)',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        flexBasis: 'auto',
+        margin: 15
     },
 
 
@@ -43,15 +46,15 @@ const FeedOverviewBox = props => {
     } = props;
     return (
         <Grid container
-              onClick={() => redirectUrl('/feeds/' + id, props.history)}
+              onClick={() => redirectUrl('/articles/' + id, props.history)}
               className={classes.root} alignItems={'center'}
               justify={'center'}
         >
-            <Grid item xs={12}>
+            {(medias || []).length > 0 && <Grid item xs={12}>
                 <Media
                     box={true}
                     data={medias}/>
-            </Grid>
+            </Grid>}
 
             <Grid item direction={'column'} container spacing={8} xs={12} md={11} className={classes.content}>
                 <Grid item>
@@ -64,7 +67,7 @@ const FeedOverviewBox = props => {
                         variant={'caption'}>{'By ' + author + ' / ' + moment(postDate).format('ll') + ' / ' + comments + ' comments'}</Typography>
                 </Grid>
                 <Grid item>
-                    <Typography variant={'body1'} color={'secondary'}>{subTitle}</Typography>
+                    <Typography variant={'body1'} color={'secondary'}>{h2p(subTitle)}</Typography>
                 </Grid>
 
             </Grid>

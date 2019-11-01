@@ -71,7 +71,7 @@ class Media extends React.Component {
         if (data.length > 0 && data[0].ext === 'product') {
             const productId = data[0].url;
 
-            let validProduct = this.props.products.find(n => n.id.toString() === productId);
+            let validProduct = this.props.products ? this.props.products.find(n => n.id.toString() === productId) : null;
             if (validProduct && this.state.type !== 'product') this.setState({
                 type: 'product'
             });
@@ -93,7 +93,7 @@ class Media extends React.Component {
         if (data.length === 0) return null;
         if (data.length > 0 && data[0].ext.indexOf('product://') !== -1) {
             const productId = data[0].ext.replace(/^\D+/g, '');
-            let validProduct = this.props.products.find(n => n.id.toString() === productId);
+            let validProduct = this.props.products ? this.props.products.find(n => n.id.toString() === productId) : null;
             if (validProduct && this.state.type !== 'product') this.setState({
                 type: 'product'
             });
