@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         textTransform: 'uppercase',
         '&:first-child': {
             borderTop: '1px solid rgb(169, 169, 169)'
-        }
+        },
+        backgroundColor: 'transparent',
+        margin: 0,
+        padding: 0
     },
     selected: {
         '& > button': {
