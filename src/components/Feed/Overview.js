@@ -1,7 +1,10 @@
 import React from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
+
 import _ from 'lodash';
+import moment from 'moment';
+import h2p from 'html2plaintext';
 
 
 
@@ -15,6 +18,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import FeedOverviewBox from '../Widget/Feed/overviewBox'
 import Header from '../Layout/Body/Header'
+import Media from '../Widget/Media'
 import List from '../Widget/List'
 import SearchBar from '../Widget/SearchBar/original'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
@@ -240,14 +244,27 @@ const ResponsiveDialog = props => {
         {feeds == undefined ? <LoadingPage/> : (
             feeds.length < 1 ? <p className={classes.placeholder}>
                     <I18nText keyOfI18n={keyOfI18n.NO_POST_AVAILABLE}/>
-            </p> : feeds.map((n, i) => <button
-                key={i}
-                type="button"
-                className={classes.item}
-                onClick={() => redirectUrl('/articles/' + n.id, props.history)}
-            >
-                test
-            </button>)
+            </p> : feeds.map((n, i) => {
+                const desc = h2p(n.sections[0].description);
+                const short = desc.substr(0, 150);
+                return <button
+                    key={i}
+                    type="button"
+                    className={classes.item}
+                    onClick={() => redirectUrl('/articles/' + n.id, props.history)}
+                >
+                    {(n.media || []).length > 0 && <Media
+                        box={true}
+                        data={n.media}
+                    />}
+                    <h5>{n.sections[0].title}</h5>
+                    <div>{moment(n.time).format('ll')}</div>
+                    <p style={{
+                        margin: 0,
+                        padding: 15
+                    }}>{short == desc ? short : `${short}...`}</p>
+                </button>;
+            })
         )}
     </div>;
 
