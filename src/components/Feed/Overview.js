@@ -72,13 +72,15 @@ class ResponsiveDialog extends React.Component {
         const feeds = (this.props.feeds) ?
             this.props.feeds.filter(n =>
                 (((this.props.filter.tag) ? !!n.tags.find(k => k === this.props.filter.tag) : true) && ((this.props.filter.keyword) ? !!n.sections.find(section => _.includes(section.title.toLowerCase(), this.props.filter.keyword)) : true))) : null;
-        return (
+        return <div>
+                <Header/>
 
-            <Grid container justify={'center'}>
-                <Grid item xs={12}>
-                    <Header
-                    />
-                </Grid>
+
+
+
+
+
+
                 <Grid item container justify={'center'} xs={12} lg={11} spacing={16}>
                     <Grid item lg={3} container direction={'column'} spacing={16} xs={11}>
                         <Grid item>
@@ -124,9 +126,7 @@ class ResponsiveDialog extends React.Component {
                         />
                     </Grid>
                 </Grid>
-            </Grid>
-
-        );
+        </div>;
     }
 }
 

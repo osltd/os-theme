@@ -24,11 +24,14 @@ const styles = theme => ({
         backgroundColor: 'white',
         color: 'black',
         width: '100%',
-        padding: '10px',
+        height: 70,
+        display: 'flex',
+        justifyContent: 'center'
     },
     container: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: '0 15px'
     },
 
     menu: {
@@ -46,7 +49,7 @@ const styles = theme => ({
         cursor: 'pointer'
     },
 
-    tools: {
+    toolbar: {
         display: 'flex',
         alignItems: 'center'
     },
@@ -226,10 +229,10 @@ const Header = props => {
             >{useI18nText(keyOfI18n.CHECKOUT)}</button>}
         </div>;
     };
-    const renderTools = () => {
+    const renderToolbar = () => {
         return (isWidthUp('lg', width)) ?
         <div
-            className={classes.tools}
+            className={classes.toolbar}
         >
             <div>
                 <DropDown
@@ -282,23 +285,21 @@ const Header = props => {
                 </div>
             </div>
             {hasProductsToShow && <div>
-                    <PopUp
-                        popUp={<DropDownList
-                            data={shoppingCart}
-                            onDelete={index => editShoppingCart(index)}
-                        />}
-                        title={<button
-                            type="button"
-                            className={classes.item}
-                        >{useI18nText(keyOfI18n.SHOPPING_CART)}</button>}
-                    />
-
+                <PopUp
+                    popUp={<DropDownList
+                        data={shoppingCart}
+                        onDelete={index => editShoppingCart(index)}
+                    />}
+                    title={<button
+                        type="button"
+                        className={classes.item}
+                    >{useI18nText(keyOfI18n.SHOPPING_CART)}</button>}
+                />
             </div>}
         </div> : <div
-            className={classes.tools}
+            className={classes.toolbar}
         >
-
-            <Grid item>
+            <div>
                 <div className={classes.grow}/>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -306,24 +307,21 @@ const Header = props => {
                     </div>
                     {getInputBar()}
                 </div>
-            </Grid>
-
-
-
-            <Grid item>
+            </div>
+            <div>
                 <PopUp
                     popUp={<DropDownList
                         data={shoppingCart}
                         onDelete={index => editShoppingCart(index)}
 
-                    />
-                    }
-                    title={<Button
-                        icon={'icon-cart'}
                     />}
+                    title={<button
+                        className={classes.item}
+                    >
+                        <span className={'icon-cart'}/>
+                    </button>}
                 />
-
-            </Grid>
+            </div>
         </div>;
     };
 
@@ -332,7 +330,7 @@ const Header = props => {
             <div className={classes.container}>
                 {renderLogo()}
                 {renderMenu()}
-                {renderTools()}
+                {renderToolbar()}
             </div>
         </AppBar>)
     }

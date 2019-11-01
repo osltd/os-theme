@@ -68,9 +68,17 @@ const FeedDetail = (props) => {
 
     if (hasValidFeed()) {
         const feed = feeds.find(n => n.id.toString() === match.params.id);
-        return (
-            <Grid container justify={'center'} className={classes.root}>
+        return <div>
                 <Header title={refactorTextLength(feed.sections[0].title)}/>
+
+
+
+
+
+
+
+
+                
                 <Grid item container spacing={16} xs={12} lg={10}>
                     <Grid item container alignItems={'center'} xs={12}
                                     onClick={() => redirectUrl('/articles', history)}
@@ -132,8 +140,7 @@ const FeedDetail = (props) => {
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        )
+        </div>
     } else {
         return <LoadingPage/>
     }
