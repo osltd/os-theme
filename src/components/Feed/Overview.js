@@ -5,14 +5,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import moment from 'moment';
 import h2p from 'html2plaintext';
-
-
-
-
-import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-
+import classNames from 'classnames';
 
 
 
@@ -97,10 +90,10 @@ const styles = createUseStyles({
         display: 'none',
         transform: 'rotate(90deg)',
         padding: 0,
-        margin: 0,
+        margin: '-18px 18px 0 0',
         borderWidth: 0,
         width: 25,
-        height: 25,
+        height: 60,
         cursor: 'pointer',
         backgroundColor: 'transparent'
     },
@@ -149,7 +142,8 @@ const styles = createUseStyles({
 
         menuTool: {
             display: 'block',
-            transform: 'rotate(270deg)'
+            transform: 'rotate(270deg)',
+            paddingTop: 45
         }
     }
 });
@@ -199,20 +193,26 @@ const ResponsiveDialog = props => {
                 </h3>
                 <button
                     type="button"
-                    className={classes.menuTool}
+                    className={classNames(classes.menuTool, 'icon-play3')}
                     onClick={e => {
-                        const categoryList = e.target.parentNode.parentNode.nextSibling;
-                        const btn = e.target.nodeName == 'I' ? e.target.parentNode : e.target;
+                        const btn = e.target;
+                        const categoryList = btn.parentNode.nextSibling;
                         const value = window.getComputedStyle(categoryList).getPropertyValue('display') == 'none' ? 'block' : 'none';
                         categoryList.style.display = value;
                         btn.classList[{
                             none: 'remove',
                             block: 'add'
                         }[value]](classes.opened);
+                        btn.style['padding' + {
+                            none: 'Top',
+                            block: 'Bottom'
+                        }[value]] = '45px';
+                        btn.style['padding' + {
+                            none: 'Bottom',
+                            block: 'Top'
+                        }[value]] = 0;
                     }}
-                >
-                    <i className={'icon-play3'}/>
-                </button>
+                ></button>
             </div>
             <ul className={classes.categoryList}>
                 {getTagsCountsArray(feeds, tag => props.editFeedFilter('tag', tag)).map((t, i) => <li
