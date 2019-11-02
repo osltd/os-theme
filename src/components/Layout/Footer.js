@@ -1,40 +1,26 @@
 import React, {useContext} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
+
 import _ from 'lodash';
 
-
-
-
-import {withStyles} from '@material-ui/core/styles';
-import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
-
-
-
-
-import FooterList from '../Widget/FooterList'
-import Tag from '../Widget/Tags/Tag'
 import SocialIcon from '../Widget/SocialIcon'
-import {getTagsCountsArray, redirectUrl} from "../../api/ApiUtils";
+import {redirectUrl} from "../../api/ApiUtils";
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {reducer} from "../../context";
-import FooterLanguageBar from '../Widget/FooterLanguageBar'
-import {useThemeWidth} from "../../hooks/useThemeWidth";
 
 
-const styles = theme => ({
+const styles = createUseStyles({
     root: {
         marginTop: '50px',
         backgroundColor: 'black',
         color: 'white',
         display: 'flex',
+        flexDirection: 'row-reverse',
+        padding: '35px 9%',
         '& > div': {
             flex: 1
-        },
-        '& > div:last-child': {
-            display: 'flex',
-            justifyContent: 'flex-end'
         }
     },
 
@@ -52,16 +38,11 @@ const styles = theme => ({
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
-
-
-
-
-    emailBar: {
-        marginBottom: '30px',
-    },
-    title: {
-        color:'white',
-        textTransform: 'uppercase'
+    // for mobile
+    '@media (max-width: 600px)': {
+        root: {
+            display: 'block'
+        }
     }
 });
 
@@ -78,50 +59,19 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({}
 );
 
+
+const shortcuts = [
+    {label: 'SHOPPING_CART', url: "shoppingcart"}
+    , {label: 'CHECKOUT', url: "checkout"}
+    , {label: 'MY_ACCOUNT', url: ""}
+    , {label: 'LOGIN', url: "login"}
+    , {label: 'REGISTER', url: "register"}
+];
+
+
 const Footer = props => {
-    const {commonReducer} = useContext(reducer)
-    const themeWidth = useThemeWidth()
-
-    // const getTags = () => {
-    //     //todo(handle err)
-    //     const {products, feeds} = props;
-    //     let productsArr = getTagsCountsArray(products, () => console.log('ggg'));
-    //     let productsTags = (productsArr && productsArr.length > 0) ? productsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : [];
-    //     delete productsTags[_.indexOf(productsTags, 'all')];
-    //     // let feedsArr = getTagsCountsArray(feeds, () => redirectUrl('/', props.history))
-    //     // let feedsTags = (feedsArr && feedsArr.length > 0) ? feedsArr.map(n => n.label.slice(0, _.indexOf(n.label, ' '))) : []
-    //     //
-    //     //
-    //     // let allTags =_.uniq(productsTags.concat(feedsTags))
-
-    //     if (productsTags.length > 0) return (
-    //         <Grid item xs={6} md={2} style={
-    //           themeWidth.isWidthDown.md?  {
-    //                 marginTop: '25px'
-    //             }:{}
-    //         } container direction={'column'} spacing={8}>
-    //             <Grid item>
-    //                 <Typography variant={'h6'} className={props.classes.title} color={'inherit'}><I18nText
-    //                     keyOfI18n={keyOfI18n.TAGS}/></Typography>
-    //             </Grid>
-    //             <Grid item>
-    //                 {
-    //                     productsTags.map(
-    //                         (n, i) => <Tag
-    //                             key={i}
-    //                             value={n}
-    //                             onClick={() => redirectUrl(`/products?tags=${n}`, props.history)}
-    //                         />
-    //                     )
-    //                 }
-
-    //             </Grid>
-    //         </Grid>
-    //     )
-    // };
-
-    const {classes, width} = props;
-
+    const {commonReducer} = useContext(reducer);
+    const classes = styles();
 
 
     const renderShopInfo = () => <div>
@@ -137,28 +87,23 @@ const Footer = props => {
             <SocialIcon type={'whatsapp'}/>
         </div>
     </div>;
+    const renderShortcuts = () => <div>
+        <div><I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/></div>
+        <ul>
+            {shortcuts.map((s, i) => <li
+                key={i}
+            >
+                <I18nText keyOfI18n={keyOfI18n[s.label]}/>
+            </li>)}
+        </ul>
+    </div>;
 
 
-
-
-    return <div
-        className={classes.root}
-        style={{
-            padding: `25px ${isWidthUp('lg', width) ? 9 : 5}%`
-        }}
-    >
+    return <div className={classes.root}>
+        {renderShortcuts()}
         {renderShopInfo()}
-        
-        <div>
-            <div><I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/></div>
-            <FooterList/>
-        </div>
-
-        <div>
-            <FooterLanguageBar/>
-        </div>
     </div>;
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withWidth()(Footer)))
+export default connect(mapStateToProps, mapDispatchToProps)(Footer)
