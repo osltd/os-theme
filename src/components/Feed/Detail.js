@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
@@ -23,7 +23,7 @@ const styles = createUseStyles({
         padding: '0 9%'
     },
     navigator: {
-        marginBottom: 35
+        marginBottom: 45
     },
     viewer: {
         display: 'flex'
@@ -36,29 +36,63 @@ const styles = createUseStyles({
         marginLeft: 50
     },
 
+    categoryList: {
+        display: 'block',
+        listStyle: 'none',
+        padding: 0,
+        margin: 0,
+        '& > li:first-child > button': {
+            borderTop: '1px solid rgb(169, 169, 169)'
+        }
+    },
+
     backArrow: {
         cursor: 'pointer',
         backgroundColor: 'transparent',
         borderWidth: 0,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 0
     },
     backIcon: {
-        fontSize: 23,
-        marginRight: 8
+        fontSize: 20,
+        marginRight: 5
     },
     backText: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
+    menuHead: {
+        display: 'flex'
+    },
     menuTitle: {
         flex: 1,
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: 400,
         padding: 0,
         marginTop: 0,
         backgroundColor: 'transparent'
+    },
+    menuItem: {
+        width: '100%',
+        color: '#000',
+        listStyle: 'none',
+        borderBottom: '1px solid rgb(169, 169, 169)',
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderTopWidth: 0,
+        textTransform: 'uppercase',
+        backgroundColor: 'transparent',
+        margin: 0,
+        cursor: 'pointer',
+        padding: 10,
+        textAlign: 'left',
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        fontSize: 14,
+        '&:hover': {
+            backgroundColor: '#f4f4f4'
+        }
     },
 
     head: {
@@ -94,7 +128,7 @@ const styles = createUseStyles({
             display: 'block'
         },
         menu: {
-            width: '100%'
+            display: 'none'
         },
         content: {
             width: '100%',
@@ -124,7 +158,7 @@ const mapDispatchToProps = dispatch => ({
 const FeedDetail = (props) => {
     const classes = styles();
 
-    const {feeds, match, editFeedFilter, history, width} = props;
+    const {feeds, match, editFeedFilter, history} = props;
     const feed = feeds ? feeds.find(n => n.id.toString() === match.params.id) : null;
 
     if (feeds == undefined) return <LoadingPage/>;
@@ -133,12 +167,19 @@ const FeedDetail = (props) => {
 
     const renderMenu = () => <div className={classes.menu}>
         <div>
-            <h3 className={classes.menuTitle}>
-                <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
-            </h3>
-            <div>
-                test
+            <div className={classes.menuHead}>
+                <h3 className={classes.menuTitle}>
+                    <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
+                </h3>
             </div>
+            <ul className={classes.categoryList}>
+                {getTagsCountsArray(feeds, tag => editFeedFilter('tag', tag)).map((t, i) => <li key={i}>
+                    <button
+                        type="button"
+                        className={classes.menuItem}
+                    >{t.label}</button>
+                </li>)}
+            </ul>
         </div>
     </div>;
     const renderContent = () => <div className={classes.content}>

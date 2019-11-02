@@ -61,10 +61,13 @@ const styles = createUseStyles({
         }
     },
 
+    menuHead: {
+        display: 'flex'
+    },
     menuTitle: {
         flex: 1,
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: 400,
         padding: 0,
         marginTop: 0,
@@ -89,6 +92,20 @@ const styles = createUseStyles({
         '&:hover': {
             backgroundColor: '#f4f4f4'
         }
+    },
+    menuTool: {
+        display: 'none',
+        transform: 'rotate(90deg)',
+        padding: 0,
+        margin: 0,
+        borderWidth: 0,
+        width: 25,
+        height: 25,
+        cursor: 'pointer',
+        backgroundColor: 'transparent'
+    },
+    opened: {
+        transform: 'rotate(90deg) !important'
     },
 
     placeholder: {
@@ -123,6 +140,16 @@ const styles = createUseStyles({
         list: {
             width: '100%',
             marginLeft: 0
+        },
+
+        categoryList: {
+            display: 'none',
+            marginBottom: 20
+        },
+
+        menuTool: {
+            display: 'block',
+            transform: 'rotate(270deg)'
         }
     }
 });
@@ -166,9 +193,27 @@ const ResponsiveDialog = props => {
             </div>
         </div>
         <div>
-            <h3 className={classes.menuTitle}>
-                <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
-            </h3>
+            <div className={classes.menuHead}>
+                <h3 className={classes.menuTitle}>
+                    <I18nText keyOfI18n={keyOfI18n.FEED_CATEGORY}/>
+                </h3>
+                <button
+                    type="button"
+                    className={classes.menuTool}
+                    onClick={e => {
+                        const categoryList = e.target.parentNode.parentNode.nextSibling;
+                        const btn = e.target.nodeName == 'I' ? e.target.parentNode : e.target;
+                        const value = window.getComputedStyle(categoryList).getPropertyValue('display') == 'none' ? 'block' : 'none';
+                        categoryList.style.display = value;
+                        btn.classList[{
+                            none: 'remove',
+                            block: 'add'
+                        }[value]](classes.opened);
+                    }}
+                >
+                    <i className={'icon-play3'}/>
+                </button>
+            </div>
             <ul className={classes.categoryList}>
                 {getTagsCountsArray(feeds, tag => props.editFeedFilter('tag', tag)).map((t, i) => <li
                     key={i}
