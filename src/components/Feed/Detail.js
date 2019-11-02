@@ -20,8 +20,13 @@ import {I18nText} from "../Widget/I18nText";
 const styles = createUseStyles({
     // for desktop & tablet
     wrapper: {
-        display: 'flex',
         padding: '0 9%'
+    },
+    navigator: {
+        marginBottom: 35
+    },
+    viewer: {
+        display: 'flex'
     },
     menu: {
         width: '25%'
@@ -29,6 +34,21 @@ const styles = createUseStyles({
     content: {
         width: 'calc(75% - 50px)',
         marginLeft: 50
+    },
+
+    backArrow: {
+        cursor: 'pointer',
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    backIcon: {
+        fontSize: 23,
+        marginRight: 8
+    },
+    backText: {
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
     menuTitle: {
@@ -78,51 +98,12 @@ const styles = createUseStyles({
             width: '100%',
             marginLeft: 0
         }
-    },
-
-
-
-
-
-
-        backArrow: {
-            cursor: 'pointer',
-            backgroundColor: 'transparent',
-            borderWidth: 0,
-            display: 'flex',
-            alignItems: 'center'
-        },
-        backIcon: {
-            fontSize: 23,
-            marginRight: 8
-        },
-        backText: {
-            fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
-        },
-
-        container: {
-            display: 'flex',
-            flexWrap: 'wrap'
-        },
-
-        
-        
-
-
-
-
-        basicInfo: {
-            paddingBottom: '10px',
-        },
-        basicInfoText: {
-            display: "inline-block",
-            paddingLeft: '5px',
-        }
+    }  
 });
 
 
 const mapStateToProps = state => ({
-    feeds: state.feed.feeds,
+    feeds   : state.feed.feeds,
     products: state.product.products,
 });
 
@@ -134,9 +115,7 @@ const mapDispatchToProps = dispatch => ({
                 key: key,
                 value: value,
             },
-        }),
-
-
+        })
     }
 );
 
@@ -187,64 +166,22 @@ const FeedDetail = (props) => {
     return <div>
         <Header title={refactorTextLength(feed.sections[0].title)}/>
         <div className={classes.wrapper}>
-            {renderMenu()}
-            {renderContent()}
+            <div className={classes.navigator}>
+                <button
+                    type="button"
+                    className={classes.backArrow}
+                    onClick={() => redirectUrl('/articles', history)}
+                >
+                    <i className={classNames('icon-circle-left', classes.backIcon)}/>&nbsp;
+                    <b><I18nText keyOfI18n={keyOfI18n.FEED_DETAIL_BACK_TO_FEED_LIST}/></b>
+                </button>
+            </div>
+            <div className={classes.viewer}>
+                {renderMenu()}
+                {renderContent()}
+            </div>
         </div>
     </div>;
-
-
-    // const isMobile = !isWidthUp('sm', width);
-
-    // 
-    // if (!props.products) return <LoadingPage/>;
-
-    // if (hasValidFeed()) {
-    //     const feed = feeds.find(n => n.id.toString() === match.params.id);
-    //     return <div>
-    //             <Header title={refactorTextLength(feed.sections[0].title)}/>
-    //             <div
-    //                 style={{
-    //                     padding: `0 ${isWidthUp('lg', width) ? 9 : 5}%`
-    //                 }}
-    //             >
-    //                 <div style={{
-    //                     marginBottom: 55
-    //                 }}>
-    //                     <button
-    //                         type="button"
-    //                         onClick={() => redirectUrl('/articles', history)}
-    //                         className={classes.backArrow}
-    //                     >
-    //                         <i
-    //                             className={classNames('icon-circle-left', classes.backIcon)}
-    //                         />
-    //                         <b
-    //                             className={classes.backText}
-    //                         >
-    //                             <I18nText keyOfI18n={keyOfI18n.FEED_DETAIL_BACK_TO_FEED_LIST}/>
-    //                         </b>
-
-    //                     </button>
-    //                 </div>
-    //                 <div
-    //                     className={isWidthUp('sm', width) ? classes.container : ''}
-    //                 >
-    //                     {!isMobile && <div
-    //                         className={classes.menu}
-    //                     >
-    //                         <List
-    //                             data={getTagsCountsArray(feeds, (tag, number) => {
-    //                                 editFeedFilter('tag', tag);
-    //                                 redirectUrl('/articles', history, false)
-    //                             })}
-    //                             title={useI18nText(keyOfI18n.FEED_CATEGORY)}/>
-    //                     </div>}
-    //                 </div>
-    //             </div>
-    //     </div>
-    // } else {
-    //     return <LoadingPage/>
-    // }
 };
 
 
