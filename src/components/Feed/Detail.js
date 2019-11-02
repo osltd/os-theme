@@ -88,8 +88,10 @@ const styles = createUseStyles({
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
-            display: 'block',
             padding: '0 5%'
+        },
+        viewer: {
+            display: 'block'
         },
         menu: {
             width: '100%'
