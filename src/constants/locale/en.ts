@@ -41,7 +41,7 @@ export const en: props = {
     HOME: 'home',
     FEED_CATEGORY: 'Categories',
     SEARCH: 'Search',
-    TYPE_KEYWORDS: 'type keywords',
+    TYPE_KEYWORDS: 'Enter keywords...',
     CONFIRM_PAGE: 'confirm page',
     SHOPPING_CART: 'Shopping Cart',
     ADD_TO_CART: 'add to cart',
@@ -120,7 +120,7 @@ export const en: props = {
 
     NO_POST_AVAILABLE: 'there are no posts available yet',
 
-    FOOTER_FIND_US_ON: 'find us on',
+    FOOTER_FIND_US_ON: 'Quick Links',
 
     PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: 'Congratulation!',

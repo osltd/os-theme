@@ -1,18 +1,21 @@
 import React, {Fragment} from 'react';
+import {createUseStyles} from 'react-jss';
+
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import {withRouter} from 'react-router-dom';
-import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
 
 import {getRoutePath, redirectUrl} from '../../../api/ApiUtils';
 
-const styles = theme => ({
+
+const styles = createUseStyles({
     root: {
         marginBottom: '50px',
         minHeight: '100px',
         background: '#f7f7f7',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '0 9%',
+        marginTop: 70
     },
     title: {
         textTransform: 'uppercase',
@@ -45,47 +48,47 @@ const styles = theme => ({
     text: {
         fontWeight: 400,
         '&:hover': {
-            color: theme.palette.primary.light,
             cursor: 'pointer',
+        }
+    },
+
+    // for mobile
+    '@media (max-width: 600px)': {
+        root: {
+            padding: '0 5%',
+            marginTop: 0
+        },
+        path: {
+            display: 'none'
         }
     }
 });
 
+
 const BodyHeader = (props) => {
-    const {classes, title, width, history, match} = props;
-    const isMobile = !isWidthUp('sm', width);
+    const classes = styles();
+    const {title, history, match} = props;
     const routePath = getRoutePath(match.url);
-    return <div
-        className={classes.root}
-        style={{
-            padding: `0 ${isWidthUp('lg', width) ? 9 : 5}%`
-        }}
-    >
-        <div
-            className={classes.title}
-        >{title}</div>
-        {!isMobile && <div
-            className={classes.path}
-        >
-            {routePath.map((n, i) => <Fragment
-                key={i}
-            >
+    return <div className={classes.root}>
+        <div className={classes.title}>{title}</div>
+        <div className={classes.path}>
+            {routePath.map((n, i) => <Fragment key={i}>
                 <button
                     type="button"
                     className={classes.route}
                     onClick={() => redirectUrl(n.link, history)}
                 >
-                    <b
-                        className={classes.text}
-                    >{n.label}</b>
+                    <b className={classes.text}>{n.label}</b>
                 </button>
             </Fragment>)}
-        </div>}
+        </div>
     </div>
 };
+
 
 BodyHeader.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withWidth()(withRouter(withStyles(styles)(BodyHeader)))
+
+export default withRouter(BodyHeader)

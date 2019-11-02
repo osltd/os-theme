@@ -1,17 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
 import moment from 'moment';
+import classNames from 'classnames';
+import ReactHtmlParser from 'react-html-parser';
+import {Carousel} from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import Header from '../Layout/Body/Header';
-import List from '../Widget/List'
 import {getTagsCountsArray, redirectUrl, refactorTextLength} from "../../api/ApiUtils";
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import Media from '../Widget/Media'
-import classNames from 'classnames'
-import ReactHtmlParser from "react-html-parser";
 import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
@@ -155,6 +156,7 @@ const mapDispatchToProps = dispatch => ({
     }
 );
 
+
 const FeedDetail = (props) => {
     const classes = styles();
 
@@ -199,7 +201,11 @@ const FeedDetail = (props) => {
                 className={classes.section}
             >
                 {i ? <h2 className={classes.title}>{n.title}</h2> : null}
-                <Media data={feed.sections[i].medias}/>
+                <Carousel showThumbs={false}>
+                    {(feed.sections[i].media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext)).map((m, i) => <div key={i}>
+                        <img src={m.url}/>
+                    </div>)}
+                </Carousel>
                 <p className={classes.description}>{ReactHtmlParser(n.description)}</p>
             </section>)}
         </div>

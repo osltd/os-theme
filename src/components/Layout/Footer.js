@@ -28,7 +28,7 @@ const styles = createUseStyles({
         marginBottom: 15
     },
     shopName: {
-        margin: 0,
+        margin: '0 0 8px',
         padding: 0,
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
@@ -38,10 +38,37 @@ const styles = createUseStyles({
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
+    shortcuts: {
+
+    },
+    shortcutsTitle: {
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        marginBottom: 7,
+        fontWeight: 600
+    },
+    shortcutLinks: {
+        padding: 0,
+        margin: 0,
+        listStyle: 'none'
+    },
+    shortcutLink: {
+        
+    },
+    shortcutLinkButton: {
+        backgroundColor: 'transparent',
+        color: '#fff',
+        borderWidth: 0,
+        cursor: 'pointer',
+        fontSize: 15
+    },
+
     // for mobile
     '@media (max-width: 600px)': {
         root: {
             display: 'block'
+        },
+        shortcuts: {
+            marginBottom: 35
         }
     }
 });
@@ -87,13 +114,21 @@ const Footer = props => {
             <SocialIcon type={'whatsapp'}/>
         </div>
     </div>;
-    const renderShortcuts = () => <div>
-        <div><I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/></div>
-        <ul>
+    const renderShortcuts = () => <div className={classes.shortcuts}>
+        <div className={classes.shortcutsTitle}>
+            <I18nText keyOfI18n={keyOfI18n.FOOTER_FIND_US_ON}/>
+        </div>
+        <ul className={classes.shortcutLinks}>
             {shortcuts.map((s, i) => <li
                 key={i}
+                className={classes.shortcutLink}
             >
-                <I18nText keyOfI18n={keyOfI18n[s.label]}/>
+                <button
+                    type="button"
+                    className={classes.shortcutLinkButton}
+                >
+                    <I18nText keyOfI18n={keyOfI18n[s.label]}/>
+                </button>
             </li>)}
         </ul>
     </div>;

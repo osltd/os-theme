@@ -7,16 +7,10 @@ import moment from 'moment';
 import h2p from 'html2plaintext';
 import classNames from 'classnames';
 
-
-
-import FeedOverviewBox from '../Widget/Feed/overviewBox'
-import Header from '../Layout/Body/Header'
-import Media from '../Widget/Media'
-import List from '../Widget/List'
+import Header from '../Layout/Body/Header';
 import SearchBar from '../Widget/SearchBar/original'
 import {getTagsCountsArray, refactorTextLength} from "../../api/ApiUtils";
 
-import Gallery from './Gallery'
 import {FEED_EDIT_FILTER} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import {I18nText} from "../Widget/I18nText";
@@ -25,9 +19,11 @@ import {useI18nText} from "../../hooks/useI18nText";
 import {redirectUrl} from "../../api/ApiUtils";
 
 
-
 const styles = createUseStyles({
     // for desktop & tablet
+    feeds: {
+        
+    },
     wrapper: {
         display: 'flex',
         padding: '0 9%'
@@ -112,7 +108,14 @@ const styles = createUseStyles({
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
         margin: 15,
-        padding: 0
+        padding: 0,
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    media: {
+        '& > img': {
+            width: '100%'
+        }
     },
     
     '@media (max-width: 1279px)': {
@@ -123,6 +126,12 @@ const styles = createUseStyles({
 
     // for mobile
     '@media (max-width: 600px)': {
+        feeds: {
+            paddingTop: 25,
+            '& > div:first-child': {
+                display: 'none'
+            }
+        },
         wrapper: {
             display: 'block',
             padding: '0 5%'
@@ -233,16 +242,16 @@ const ResponsiveDialog = props => {
             </p> : feeds.map((n, i) => {
                 const desc = h2p(n.sections[0].description);
                 const short = desc.substr(0, 150);
+                const media = (n.sections[0].media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
                 return <button
                     key={i}
                     type="button"
                     className={classes.item}
                     onClick={() => redirectUrl('/articles/' + n.id, props.history)}
                 >
-                    {(n.sections[0].media || []).length > 0 && <Media
-                        box={true}
-                        data={n.sections[0].media}
-                    />}
+                    {media.length > 0 && <div className={classes.media}>
+                        <img src={media[0].url}/> 
+                    </div>}
                     <h5>{n.sections[0].title}</h5>
                     <div>{moment(n.time).format('ll')}</div>
                     <p style={{
@@ -254,7 +263,7 @@ const ResponsiveDialog = props => {
         )}
     </div>;
 
-    return <div>
+    return <div className={classes.feeds}>
         <Header/>
         <div className={classes.wrapper}>
             {renderMenu()}
