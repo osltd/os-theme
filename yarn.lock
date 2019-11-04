@@ -9142,10 +9142,10 @@ react-masonry-component@^6.2.1:
     masonry-layout "^4.2.0"
     prop-types "^15.5.8"
 
-react-number-format@^4.0.6:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.0.8.tgz#f0a0dfbeded9a746f4d8b309926cf55d7effebb2"
-  integrity sha512-A7Gi4BSkdgnyY1DO98lwFvWujcyxZCOfNP6tkiOKkwMY6oFP+JTQhd/vQ9dXXs6TpyXfl1eBJdueokM7o98YTQ==
+react-number-format@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.3.1.tgz#eccfc851d88d74c894ba463620ccb467defbdefb"
+  integrity sha512-ze6Lp7SGM71Jr0uZhUaN6grthv08NKTfJezS26zAWZq63ubmJ++FOX7ueGSK27EvpT7/e3ce9L3jlqr1YMFS7Q==
   dependencies:
     prop-types "^15.7.2"
 

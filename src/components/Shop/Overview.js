@@ -2,20 +2,21 @@ import React, {useEffect, useRef} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
-
+import NumberFormat from 'react-number-format';
+import _ from 'lodash';
+import classNames from 'classnames';
 
 
 
 import {Grid, Typography} from '@material-ui/core';
 import List from '../Widget/List'
 import Header from '../Layout/Body/Header'
-import classNames from 'classnames';
 
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
 import WhiteDropDown from '../Widget/DropDown'
 import LoadingPage from '../Layout/LoadingPage'
-import _ from 'lodash'
+
 import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {
     arrayToFilter,
@@ -159,7 +160,8 @@ const styles = createUseStyles({
     tags: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         fontSize: 13,
-        color: 'rgb(169, 169, 169)'
+        color: 'rgb(169, 169, 169)',
+        wordBreak: 'break-word'
     },
     name: {
         margin: '3px 0 15px',
@@ -172,15 +174,49 @@ const styles = createUseStyles({
         }
     },
     price: {
-        fontSize: 12,
-        color: '#333'
+        '& > span > b': {
+            fontWeight: 400,
+            fontSize: 12,
+            color: '#333'
+        }
     },
 
 
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
+            display: 'block',
             padding: '0 5%'
+        },
+        menu: {
+            width: '100%'
+        },
+        list: {
+            width: '100%',
+            marginLeft: 0
+        },
+
+        topbar: {
+            display: 'none'
+        },
+
+        categoryList: {
+            display: 'none',
+            marginBottom: 20
+        },
+
+        menuTool: {
+            display: 'block',
+            transform: 'rotate(270deg)',
+            paddingTop: 45
+        },
+
+        item: {
+            width: 'calc(50% - 50px)',
+            padding: 0
+        },
+        name: {
+            fontSize: 14
         }
     },
 
@@ -448,7 +484,31 @@ const ShopOverview = props => {
                     </div>
                     <div className={classes.tags}>{n.tags.join(',')}</div>
                     <h5 className={classes.name}>{n.name}</h5>
-                    <div className={classes.price}>HK${prices.length > 1 ? `${prices[0]} - HK$${prices[prices.length - 1]}` : prices[0]}</div>
+                    <div className={classes.price}>{prices.length > 1 ? <span>
+                        <NumberFormat
+                            value={prices[0]}
+                            thousandSeparator={true}
+                            prefix={'HK$'}
+                            displayType={'text'}
+                            renderText={v => <b>{v}</b>}
+                        />&nbsp;
+                        -&nbsp;
+                        <NumberFormat
+                            value={prices[prices.length - 1]}
+                            thousandSeparator={true}
+                            prefix={'HK$'}
+                            displayType={'text'}
+                            renderText={v => <b>{v}</b>}
+                        />
+                    </span> : <span>
+                        <NumberFormat
+                            value={prices[0]}
+                            thousandSeparator={true}
+                            prefix={'HK$'}
+                            displayType={'text'}
+                            renderText={v => <b>{v}</b>}
+                        />
+                    </span>}</div>
                 </button>;
             })}
         </div>
