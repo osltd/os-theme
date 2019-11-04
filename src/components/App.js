@@ -199,10 +199,10 @@ const App = props => {
                             <Route exact path={'/articles/:id'} component={FeedDetail}/>
                             
                             <Route exact path={'/products'} component={Shop}/>
+                            <Route exact path={'/products/:id'} component={Product}/>
 
                             {/* <Route exact path={'/login'} component={Login}/>
                             <Route exact path={'/register'} component={Register}/>
-                            <Route exact path={'/products/:id'} component={Product}/>
                             <Route exact path={'/checkout'} component={Checkout}/>
                             <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
                             <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
