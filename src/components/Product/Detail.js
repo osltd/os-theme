@@ -43,7 +43,8 @@ const styles = createUseStyles({
         width: '35%'
     },
     detail: {
-        width: '65%'
+        width: '65%',
+        marginRight: 100
     },
 
     backArrow: {
@@ -64,7 +65,8 @@ const styles = createUseStyles({
 
     description: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-        color: '#555'
+        color: '#555',
+        fontSize: 15
     },
     addBtn: {
         marginTop: 10,
@@ -84,7 +86,8 @@ const styles = createUseStyles({
             width: '100%'
         },
         detail: {
-            width: '100%'
+            width: '100%',
+            marginRight: 0
         },
         content: {
             display: 'block'
