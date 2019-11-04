@@ -1,357 +1,247 @@
-import React, { Fragment } from 'react';
-import { Button, Divider, Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
-import SocialIcon from '../Widget/SocialIcon'
-import ColorPick from '../Widget/ColorPicker.tsx'
-import Counter from '../Widget/Counter'
-import Tag from '../Widget/Tags/Tag'
-import { CART_EDIT_VARIANT, CART_EMPTY_PRODUCT_VARIANT, CART_SAVE_PRODUCT_TO_CART } from "../../constants/actionType";
-import LoadingPage from '../Layout/LoadingPage'
-import { withRouter } from 'react-router-dom'
-import swal from '@sweetalert/with-react'
-import Slick from '../Widget/Slick/Products'
-import withWidth, { isWidthUp } from "@material-ui/core/withWidth/index";
-import { formatMoney } from "../../api/ApiUtils";
+import React from 'react';
+import {createUseStyles} from 'react-jss';
+import {connect} from 'react-redux';
+
+import classNames from 'classnames';
+import NumberFormat from 'react-number-format';
+import {Carousel} from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import {redirectUrl} from "../../api/ApiUtils";
+
 import { I18nText } from "../Widget/I18nText";
 import { keyOfI18n } from "../../constants/locale/interface";
-import { SwalContent } from "../Layout/SwalContent";
-import { useI18nText } from '../../hooks/useI18nText';
+import SocialIcon from '../Widget/SocialIcon';
 
-const styles = theme =>
-    (
-        {
-            description: {
-                whiteSpace: 'pre-wrap'
-            },
-            name: {
-                color: 'rgba(0, 0, 0)',
-                fontSize: 28,
-                fontWeight: 600
-            },
-            productCategory: {
-                backgroundColor: theme.palette.background.paper
-            },
-            toolBar: {
-                backgroundColor: ''
-            },
-            price: {
-                color: 'green',
-                fontSize: '30px',
-            },
-            statusLabel: {
-                color: 'green',
-                fontWeight: '600',
-            }
-        });
+import Header from '../Layout/Body/Header';
+import LoadingPage from '../Layout/LoadingPage';
 
 
-const mapStateToProps = state => ({
-    draft: state.cart.variant,
-    shoppingCart: state.cart.shoppingCart,
+
+
+import {Grid} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
+
+
+import CommentDescription from './Comment&Description/Overview'
+import Detail from './Detail'
+
+
+const styles = createUseStyles({
+    wrapper: {
+        padding: '0 9%'
+    },
+    navigator: {
+        marginBottom: 45
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'row-reverse'
+    },
+    viewer: {
+        width: '35%'
+    },
+    detail: {
+        width: '65%'
+    },
+
+    backArrow: {
+        cursor: 'pointer',
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+        display: 'flex',
+        alignItems: 'center',
+        padding: 0
+    },
+    backIcon: {
+        fontSize: 20,
+        marginRight: 5
+    },
+    backText: {
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
+    },
+
+    // for mobile
+    '@media (max-width: 600px)': {
+        wrapper: {
+            padding: '0 5%'
+        },
+        viewer: {
+            width: '100%'
+        },
+        detail: {
+            width: '100%'
+        },
+        content: {
+            display: 'block'
+        },
+    }
+
+    // productCategory: {
+    //     backgroundColor: theme.palette.background.paper
+    // },
+    // toolBar: {
+    //     backgroundColor: ''
+    // },
+
 });
 
 
-const mapDispatchToProps = dispatch => ({
-    editCartVariant: (key, value) => dispatch(
-        {
-            type: CART_EDIT_VARIANT,
-            payload: {
-                key: key,
-                value: value,
-            }
-        }
-    ),
-    dispatchDraftToCart: (product, number, variantId) => dispatch({
-        type: CART_SAVE_PRODUCT_TO_CART,
-        payload: {
-            product: product,
-            number: number,
-            variantId: variantId,
-        }
-    }
-    ),
+const mapStateToProps = state => ({
+    products: state.product.products,
+    feeds: state.feed.feeds,
+    category: state.category.category,
+});
 
-    emptyCartVariant: () => dispatch({
-        type: CART_EMPTY_PRODUCT_VARIANT,
-    }),
 
-}
+const mapDispatchToProps = dispatch => ({}
 );
 
-class ResponsiveDialog extends React.Component {
 
-    getVariant = (keyName, index, variantOptions, needRender = true) => {
-        let needInit = !(this.props.draft[keyName]);
-        if (needInit || !needRender) this.props.editCartVariant(keyName, variantOptions[index][0]);
-        return needRender ? (keyName === 'color') ?
-            <ColorPick
-                colors={variantOptions[index]}
-                onClick={color => this.props.editCartVariant(keyName, color)}
-                selectedColor={this.props.draft[keyName]}
-            /> :
-            variantOptions[index].map((options, k) => <Tag
-                key={k}
-                value={options}
-                onClick={() => this.props.editCartVariant(keyName, options)}
-                selected={(this.props.draft[keyName] === options)}
-            />
-            ) : null
+// class ResponsiveDialog extends React.Component {
+//     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id);
 
-    };
-    saveDraftToCart = () => {
-        const { draft, product } = this.props;
-        let productCount = draft.number ? draft.number : 1;
-        let selectedVariantId = this.findSelectedVariant().id;
-        this.props.dispatchDraftToCart(product, productCount, selectedVariantId);
-        swal(
-            {
-                buttons: {
-                    success: useI18nText(keyOfI18n.GOT_IT),
-                },
-                content: (<SwalContent title={
-                    <I18nText
-                        keyOfI18n={keyOfI18n.ITEMS_ADDED}
-                    />
-                }
-                    subTitle={
-                        <I18nText
-                            keyOfI18n={keyOfI18n.ADD_TO_CART_CONFIRM_INFO}
-                        />
-                    }
-                />)
-            })
+//     render() {
+//         if (!this.props.products) return <LoadingPage/>;
+//         const isMobile = !isWidthUp('sm', this.props.width);
+//         const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id);
+//         const variantOptions = getVariantOptions(product.variants);
+//         return <div>
+//             {!isMobile && <Header
+//                 title={product.name}
+//                 route={'HOME/SHOP/SINGLE PRODUCT'}
+//             />}
+
+            
 
 
-    };
-
-    findSelectedVariant = () => {
-        const { draft, product } = this.props;
-        let key = Object.keys(draft);
-        let value = Object.values(draft);
-        let selectedDescription = [];
-        key.map((keyName, index) => (keyName !== 'number') ? selectedDescription.push(keyName + ':' + value[index]) : null);
-        const isSelectedProduct = variants => (!selectedDescription.map(description => variants.description.split(',').includes(description)).includes(false));
-        return product.variants.find(n => isSelectedProduct(n))
-
-    };
-    initVariant = () => {
-        const { variantKeys, variantOptions } = this.props;
-        this.props.emptyCartVariant();
-        variantKeys.map((n, i) => this.getVariant(n, i, variantOptions, false));
-        this.props.editCartVariant('number', 1)
-    };
-    getDetail = (selectedVariant) => {
-
-        const {
-            classes, name, promotePrice,
-            description, variantKeys, variantOptions, product
-        } = this.props;
-        return <Grid item xs={12} sm={7} container direction={'column'} spacing={40}>
-            <Grid item container spacing={16}>
-                <Grid item>
-                    <Typography
-                        variant={'h3'}
-                        className={classes.name}>{name}
-                    </Typography>
-                </Grid>
-                <Grid item container direction={'row'}>
-                    <Typography variant={'h5'}
-                        className={classes.price}>
-
-                        {
-                            (selectedVariant.price === 'not a reg price' || !selectedVariant.price) ? null : '$ '
-                        }{formatMoney(
-                            selectedVariant.price)}</Typography> </Grid>
-                <Grid item container spacing={8} direction={'column'} alignItems={'flex-start'}>
-                    <Grid item>
-                        <Typography variant={'subtitle1'} className={classes.statusLabel}>
-                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_IN_STOCKS} />
-                        </Typography></Grid>
-                    <Grid item>
-
-                        <Typography variant={'h6'}>
-                            SKU MH03</Typography></Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography className={classes.description} variant={'body1'}>
-                        {description}
-                    </Typography>
-                </Grid>
-
-                <Grid item>
 
 
-                    {
-                        variantKeys.map((n, i) =>
-                            <Fragment key={i}>
-                                <Typography variant={'h6'}>
-                                    {n}
-                                </Typography>
-                                {this.getVariant(n, i, variantOptions)}
-                            </Fragment>
-                        )
-                    }
-
-                </Grid>
-
-                <Grid item container direction={'row'} spacing={32}>
-                    <Grid item>
-                        <Counter
-                            number={this.props.draft.number}
-                            onChange={number => this.props.editCartVariant('number', number)}
-                        />
-
-                    </Grid>
-                    <Grid item>
-
-                        <Button variant="extendedFab" color={'secondary'}
-                            onClick={this.saveDraftToCart}
-                        >
-
-                            <span className={'icon-cart'} />
-                            &nbsp;&nbsp;<I18nText keyOfI18n={keyOfI18n.ADD_TO_CART} />
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <Divider />
-            <Grid item container direction={'column'} spacing={16}>
-                <Grid item container spacing={16}>
-                    <Grid item>
-                        <Button variant="extendedFab" color={'secondary'}>
-                            <span className={'icon-heart'} />
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="extendedFab" color={'secondary'}>
-                            <span className={'icon-mail2'} />
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="extendedFab" color={'secondary'}>
-                            <span className={'icon-coin-dollar'} />
-                        </Button>
-                    </Grid>
-                </Grid>
+            
+            
 
 
-                <Grid item style={{ marginTop: 15 }}>
-                    <Typography variant={'h6'} style={{ fontSize: 15 }}>
-                        <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SHARE_THIS_PRODUCT} />
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <SocialIcon type={'whatsapp'}
-                        onClick={() => window.open('https://web.whatsapp.com/send?text=' + window.location.href)} />
-                    <SocialIcon type={'facebook'}
-                        onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href)} />
-
-                </Grid>
-            </Grid>
-        </Grid>
-    };
-    getSlick = (selectedVariant) => {
-
-        const {
-            classes, name, promotePrice,
-            description, variantKeys, variantOptions, product
-        } = this.props;
-        return <Grid item container xs={10} sm={5}>
-            <Grid item xs={12}>
-                <Slick
-                    data={(selectedVariant.photos.length > 0 ? selectedVariant : product).photos.map(n => ({ url: n.url, }))}
-
-                />
-            </Grid>
-        </Grid>
-    };
-
-    componentDidMount() {
-        if (this.props.variantKeys) this.initVariant()
-
-    }
-
-    componentDidUpdate(prevProps, prevState, snap) {
-        if (this.props.location.pathname !== prevProps.location.pathname) this.initVariant()
-    }
-
-    render() {
-        const {
-            variantOptions, product, variantKeys
-        } = this.props;
-        const position = (isWidthUp('sm', this.props.width) || this.props.width === 'sm');
-
-        if (variantOptions && variantKeys && variantOptions.length < 1 && variantKeys.length < 1) {
-            if (product) {
-
-                return <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                    {position ? this.getDetail(this.props.product) : null}
-
-                    <Grid item container xs={10} sm={5}>
-                        <Grid item xs={12}>
-                            <Slick
-                                data={product.photos ? product.photos.map(n => ({ url: n.url, })) : []}
-                            />
-                        </Grid>
-                    </Grid>
-
-                    {!position ? this.getDetail(this.props.product) : null}
-
-                </Grid>
-            } else return null
-        } else {
-            const selectedVariant = this.findSelectedVariant();
-            return (
-                selectedVariant ?
-                    <Grid container spacing={16} alignItems={'flex-start'} justify={'center'}>
-                        {position ? this.getDetail(selectedVariant) : null}
-                        {this.getSlick(selectedVariant)}
-                        {!position ? this.getDetail(selectedVariant) : null}
-                    </Grid> : <LoadingPage />
-
-            );
-
-        }
-
-    }
-}
 
 
-export default withWidth()(withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ResponsiveDialog))))
-// <Dialog
-// innerRef={e => this.dialog = e}
-// title={}
-// dialog={
-// <Grid
-//     style={
-//         {
-//             padding: '20px',
-//         }
+
+//             <Grid item xs={10}>
+
+//                 <Detail
+//                     variantOptions={Object.values(variantOptions)}
+//                     variantKeys={Object.keys(variantOptions)}
+//                     description={product.description}
+//                     product={product}
+
+//                 />
+
+
+//             </Grid>
+//             {
+//                 false && <Grid item xs={10} container>
+//                     <CommentDescription
+//                         content={product.description}
+//                     />
+//                 </Grid>
+//             }
+
+//         </div>;
 //     }
-//     container direction={'column'} spacing={32} alignItems={'center'}>
-//     <Grid item>
-//         <Typography variant={'h6'}>
-//             do u want to add to cart?
-//         </Typography>
-//     </Grid>
-//     <Grid item container spacing={32} justify={'center'}>
-//         <Grid item>
-//             <Button variant="extendedFab"
-//                     onClick={this.saveDraftToCart}
-//
-//             >
-//                 yes
-//             </Button>
-//         </Grid>
-//         <Grid item>
-//             <Button variant="extendedFab"
-//                     onClick={() => this.dialog.handleClose()}>
-//                 no
-//             </Button>
-//         </Grid>
-//     </Grid>
-// </Grid>
+
+
 // }
-// />
+
+
+
+const ResponsiveDialog = props => {
+    const classes = styles();
+    const {products, match, history} = props;
+    const product = products ? products.find(n => n.id.toString() === match.params.id) : null;
+
+    if (products == undefined) return <LoadingPage/>;
+    if (!product) return null;
+
+    return <div>
+        <Header
+            title={product.name}
+        />
+        <div className={classes.wrapper}>
+            <div className={classes.navigator}>
+                <button
+                    type="button"
+                    className={classes.backArrow}
+                    onClick={() => redirectUrl('/products', history)}
+                >
+                    <i className={classNames('icon-circle-left', classes.backIcon)}/>&nbsp;
+                    <b><I18nText keyOfI18n={keyOfI18n.FEED_DETAIL_BACK_TO_FEED_LIST}/></b>
+                </button>
+            </div>
+            <div className={classes.content}>
+                <div className={classes.viewer}>
+                    <Carousel>
+                        {product.media.map((m, i) => <div key={i}>
+                            <img src={m.url}/>
+                        </div>)}
+                    </Carousel>
+                </div>
+                <div className={classes.detail}>
+                    <div className={classes.price}>
+                        <NumberFormat
+                            value={product.variants[0].price}
+                            thousandSeparator={true}
+                            prefix={'HK$'}
+                            displayType={'text'}
+                            renderText={v => <b>{v}</b>}
+                        />
+                    </div>
+                    <div className={classes.stock}>{product.variants[0].stock > 0 ? 'in stock' : 'out of stock'}</div>
+                    <div className={classes.sku}>{product.variants[0].sku}</div>
+                    <p className={classes.description}>{product.description}</p>
+                    <div className={classes.form}>
+                        <div className={classes.qtyGroup}>
+                            <input type="number" defaultValue={1}/>
+                            <button type="button">
+                                <i className={'icon-cart'}/>&nbsp;&nbsp;
+                                <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
+                            </button>
+                        </div>
+                    </div>
+                    <div className={classes.tools}>
+                        <button
+                            type="button"
+                        >
+                            <span className={'icon-heart'} />
+                        </button>
+                        <button
+                            type="button"
+                        >
+                            <span className={'icon-mail2'} />
+                        </button>
+                        <button
+                            type="button"
+                        >
+                            <span className={'icon-coin-dollar'} />
+                        </button>
+                    </div>
+                    <div className={classes.shares}>
+                        <h6>
+                            <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SHARE_THIS_PRODUCT}/>
+                        </h6>
+                        <div className={classes.shareIcons}>
+                            <SocialIcon
+                                type={'whatsapp'}
+                                onClick={() => window.open('https://web.whatsapp.com/send?text=' + window.location.href)}
+                            />
+                            <SocialIcon
+                                type={'facebook'}
+                                onClick={() => window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResponsiveDialog)

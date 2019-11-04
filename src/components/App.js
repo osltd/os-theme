@@ -18,7 +18,7 @@ import Header from './Layout/Header'
 import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
 import Feed from './Feed/Overview'
-import Product from './Product/Overview'
+import Product from './Product/Detail'
 import FeedDetail from './Feed/Detail'
 import {
     AUTH_INIT_USER_PROFILE,

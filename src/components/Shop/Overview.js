@@ -131,6 +131,12 @@ const styles = createUseStyles({
             marginLeft: 0
         }
     },
+    icon: {
+        padding: 10,
+        cursor: 'pointer',
+        alignItems: 'center',
+        border: '1px solid black',
+    },
     status: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         textAlign: 'center',
@@ -230,25 +236,25 @@ const styles = createUseStyles({
 
 
 
-    productCategory: {
-        backgroundColor: '#F7F7F7',
-    },
-    toolBar: {
-        padding: '10px',
-        // backgroundColor: theme.palette.background.paper,
-    },
-    icon: {
-        padding: '10px',
-        cursor: 'pointer',
-        alignItems: 'center',
-        border: '1px solid black',
+    // productCategory: {
+    //     backgroundColor: '#F7F7F7',
+    // },
+    // toolBar: {
+    //     padding: '10px',
+    //     // backgroundColor: theme.palette.background.paper,
+    // },
+    // icon: {
+    //     padding: '10px',
+    //     cursor: 'pointer',
+    //     alignItems: 'center',
+    //     border: '1px solid black',
 
-    }, listMode: {
-        padding: '20px',
-    },
-    array: {
-        paddingLeft: '5px',
-    }
+    // }, listMode: {
+    //     padding: '20px',
+    // },
+    // array: {
+    //     paddingLeft: '5px',
+    // }
 });
 
 
