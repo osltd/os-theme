@@ -62,6 +62,19 @@ const styles = createUseStyles({
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
+    description: {
+        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
+        color: '#555'
+    },
+    addBtn: {
+        marginTop: 10,
+        '& > button': {
+            backgroundColor: '#f9f9f9',
+            border: '1px solid #dfdfdf',
+            padding: '10px 20px'
+        }
+    },
+
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
@@ -200,28 +213,18 @@ const ResponsiveDialog = props => {
                     <div className={classes.form}>
                         <div className={classes.qtyGroup}>
                             <input type="number" defaultValue={1}/>
+                            <button
+                                type="button"
+                            >
+                                <span className={'icon-heart'} />
+                            </button>
+                        </div>
+                        <div className={classes.addBtn}>
                             <button type="button">
                                 <i className={'icon-cart'}/>&nbsp;&nbsp;
                                 <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
                             </button>
                         </div>
-                    </div>
-                    <div className={classes.tools}>
-                        <button
-                            type="button"
-                        >
-                            <span className={'icon-heart'} />
-                        </button>
-                        <button
-                            type="button"
-                        >
-                            <span className={'icon-mail2'} />
-                        </button>
-                        <button
-                            type="button"
-                        >
-                            <span className={'icon-coin-dollar'} />
-                        </button>
                     </div>
                     <div className={classes.shares}>
                         <h6>
