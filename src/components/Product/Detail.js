@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
+import Cookies from 'universal-cookie';
 import classNames from 'classnames';
 import NumberFormat from 'react-number-format';
 import {Carousel} from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+
+import agent from '../../agent';
 import {redirectUrl} from "../../api/ApiUtils";
 
 import { I18nText } from "../Widget/I18nText";
@@ -168,18 +171,68 @@ const mapDispatchToProps = dispatch => ({}
 // }
 
 
+const cookies = new Cookies();
+
 
 const ResponsiveDialog = props => {
     const classes = styles();
     const {products, match, history} = props;
     const product = products ? products.find(n => n.id.toString() === match.params.id) : null;
 
+
+    let options = {}, variants = {};
+    ((product || {}).variants || []).forEach(v => (v.description||'').split(',').forEach(desc => {
+        let optr = desc.indexOf(':');
+        const key = desc.substr(0, optr);
+        const value = desc.substring(optr + 1);
+        options[key] = (options[key] || []).concat([value]).filter((val, i, a) => a.indexOf(val) == i);
+        variants[v.id] = (variants[v.id] || []).concat([desc]);
+    }));
+
+
+    const [form, setForm] = useState({
+        qty: 1
+    });
+
+
     if (products == undefined) return <LoadingPage/>;
     if (!product) return null;
+
+
+    const addToCart = async function() {
+        // get variant
+        let selectedVariant = Object.keys(form.variant || {}).map(o => `${o}:${form.variant[o]}`);
+        selectedVariant = Object.keys(variants).filter(id => variants[id].length == variants[id].filter(v => selectedVariant.indexOf(v) >= 0).length)[0];
+
+        if (!selectedVariant) {
+            alert('Please select a variant first.');
+        } else {
+            // get shopping cart
+            let cart = cookies.get('cart'), result = null;
+            // no shopping cart
+            if (!cart) {
+                result = await agent.Checkout.getCart();
+                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
+                if (cart) cookies.set('cart', cart);
+            }
+            // add item
+            result = await agent.Checkout.addItem(cart, {
+                id: selectedVariant,
+                qty: form.qty
+            });
+            if (!((result || {}).data || {}).result) {
+                alert((((result || {}).data || {}).messages || []).join("\n") || 'Failed.');
+            } else {
+                alert('Item added.');
+            }
+        }
+    }
+
 
     return <div>
         <Header
             title={product.name}
+            classes={{}}
         />
         <div className={classes.wrapper}>
             <div className={classes.navigator}>
@@ -214,8 +267,36 @@ const ResponsiveDialog = props => {
                     <div className={classes.sku}>{product.variants[0].sku}</div>
                     <p className={classes.description}>{product.description}</p>
                     <div className={classes.form}>
+                        {Object.keys(options).map((o, oi) => <div
+                            key={oi}
+                        >
+                            {o}:{options[o].map((v, vi) => <label
+                                key={vi}
+                            >
+                                <input
+                                    type="radio"
+                                    name={o}
+                                    value={v}
+                                    onChange={e => setForm({
+                                        ...form,
+                                        variant: {
+                                            ...form.variant,
+                                            [e.target.name]: e.target.value
+                                        }
+                                    })}
+                                />
+                                {v}
+                            </label>)}
+                        </div>)}
                         <div className={classes.qtyGroup}>
-                            <input type="number" defaultValue={1}/>
+                            <input
+                                type="number"
+                                defaultValue={form.qty || 1}
+                                onChange={e => setForm({
+                                    ...form,
+                                    qty: e.target.value
+                                })}
+                            />
                             <button
                                 type="button"
                             >
@@ -223,7 +304,10 @@ const ResponsiveDialog = props => {
                             </button>
                         </div>
                         <div className={classes.addBtn}>
-                            <button type="button">
+                            <button
+                                type="button"
+                                onClick={e => addToCart()}
+                            >
                                 <i className={'icon-cart'}/>&nbsp;&nbsp;
                                 <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
                             </button>

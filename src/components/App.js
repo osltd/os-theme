@@ -84,6 +84,26 @@ const mapDispatchToProps = dispatch => ({
             });
 
 
+            // agent.Checkout.initCart().then(res => {
+            //         dispatch(
+            //             {
+            //                 type: INIT_FEEDS,
+            //                 payload: res.data.data.rows,
+            //             }
+            //         )
+            //     }
+            // ).catch(err => {
+            //     console.log(err)
+            //     dispatch(
+
+            //         {
+            //             type: INIT_FEEDS,
+            //             payload: [],
+            //         }
+            //     )
+            // });
+
+
             agent.Auth.getAccount().then(user =>
                 dispatch(
                     {

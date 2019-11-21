@@ -161,8 +161,7 @@ const styles = createUseStyles({
 const mapStateToProps = state => ({
     feeds: state.feed.feeds,
     sort: state.feed.sort,
-    filter: state.feed.filter,
-
+    filter: state.feed.filter
 });
 
 
