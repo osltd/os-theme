@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
@@ -186,12 +186,21 @@ const ResponsiveDialog = props => {
         const key = desc.substr(0, optr);
         const value = desc.substring(optr + 1);
         options[key] = (options[key] || []).concat([value]).filter((val, i, a) => a.indexOf(val) == i);
-        variants[v.id] = (variants[v.id] || []).concat([desc]);
+        variants[v.id] = variants[v.id] || {
+            id: v.id,
+            media: v.media,
+            price: v.price,
+            stock: v.stock,
+            sku: v.sku,
+            description: []
+        };
+        variants[v.id].description.push(desc);
     }));
 
-
+    
     const [form, setForm] = useState({
-        qty: 1
+        qty: 1,
+        variant: null
     });
 
 
@@ -199,11 +208,15 @@ const ResponsiveDialog = props => {
     if (!product) return null;
 
 
+    const getSelectedVariant = function() {
+        // get variant
+        let variant = Object.keys(form.variant || {}).map(o => `${o}:${form.variant[o]}`);
+        return variants[Object.keys(variants).filter(id => variants[id].description.length == variants[id].description.filter(v => variant.indexOf(v) >= 0).length)[0]];
+    };
     const addToCart = async function() {
         // get variant
-        let selectedVariant = Object.keys(form.variant || {}).map(o => `${o}:${form.variant[o]}`);
-        selectedVariant = Object.keys(variants).filter(id => variants[id].length == variants[id].filter(v => selectedVariant.indexOf(v) >= 0).length)[0];
-
+        let selectedVariant = getSelectedVariant();
+        // no selected variant
         if (!selectedVariant) {
             alert('Please select a variant first.');
         } else {
@@ -217,7 +230,7 @@ const ResponsiveDialog = props => {
             }
             // add item
             result = await agent.Checkout.addItem(cart, {
-                id: selectedVariant,
+                id: selectedVariant.id,
                 qty: form.qty
             });
             if (!((result || {}).data || {}).result) {
@@ -227,6 +240,16 @@ const ResponsiveDialog = props => {
             }
         }
     }
+
+
+    form.variant = form.variant || ((((product || {}).variants || [])[0] || {}).description || '').split(/ *, */).filter(v => v).reduce((container, v) => {
+        const optr = v.indexOf(':');
+        return {
+            ...container,
+            [v.substr(0, optr)]: v.substring(optr + 1)
+        };
+    }, {});
+    const variant = getSelectedVariant();
 
 
     return <div>
@@ -248,7 +271,7 @@ const ResponsiveDialog = props => {
             <div className={classes.content}>
                 <div className={classes.viewer}>
                     <Carousel>
-                        {product.media.map((m, i) => <div key={i}>
+                        {(variant.media || product.media).map((m, i) => <div key={i}>
                             <img src={m.url}/>
                         </div>)}
                     </Carousel>
@@ -256,15 +279,15 @@ const ResponsiveDialog = props => {
                 <div className={classes.detail}>
                     <div className={classes.price}>
                         <NumberFormat
-                            value={product.variants[0].price}
+                            value={variant.price}
                             thousandSeparator={true}
                             prefix={'HK$'}
                             displayType={'text'}
                             renderText={v => <b>{v}</b>}
                         />
                     </div>
-                    <div className={classes.stock}>{product.variants[0].stock > 0 ? 'in stock' : 'out of stock'}</div>
-                    <div className={classes.sku}>{product.variants[0].sku}</div>
+                    <div className={classes.stock}>{variant.stock > 0 ? 'in stock' : 'out of stock'}</div>
+                    <div className={classes.sku}>{variant.sku}</div>
                     <p className={classes.description}>{product.description}</p>
                     <div className={classes.form}>
                         {Object.keys(options).map((o, oi) => <div
@@ -277,6 +300,7 @@ const ResponsiveDialog = props => {
                                     type="radio"
                                     name={o}
                                     value={v}
+                                    checked={(variant.description || []).indexOf(`${o}:${v}`) >= 0}
                                     onChange={e => setForm({
                                         ...form,
                                         variant: {
