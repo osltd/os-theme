@@ -37,7 +37,7 @@ const styles = theme => ({
 });
 
 const mapStateToProps = state => ({
-    shoppingCart: state.cart.shoppingCart,
+    items: state.cart.items,
 });
 
 
@@ -64,15 +64,15 @@ class ShoppingCartList extends React.Component {
         });
     };
 
-    selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
+    // selectedData = n => n.product.variants.find(variant => variant.id === n.variantId) ? n.product.variants.find(variant => variant.id === n.variantId) : n.product;
 
     render() {
-        const {classes, data, onDelete} = this.props;
+        const {classes, items, onDelete} = this.props;
         return (
             <Grid container className={classes.root}>
                 <Grid item xs={12}>
                     <List className={classes.list} component="nav">
-                        {data.length > 0 ? data.map((n, i) =>
+                        {items.length > 0 ? items.map((n, i) =>
 
                             <ListItem
                                 key={i}
@@ -81,24 +81,24 @@ class ShoppingCartList extends React.Component {
                                 onClick={() => redirectUrl('/products/' + n.product.id, this.props.history)}>
                                 <Tooltip
                                     TransitionComponent={Zoom}
-                                    title={this.selectedData(n).description}>
+                                    title={n.name}>
 
                                     <Grid container spacing={16}>
                                         <Grid item sm={3}>
 
                                             <img
                                                 style={{width: '100%', minWidth: '50px'}}
-                                                src={handleImgValid(n.product.photos[0])}
+                                                src={handleImgValid(n.media[0])}
                                             />
 
                                         </Grid>
                                         <Grid item sm={9}>
                                             <Typography variant={'body1'}>
-                                                {refactorTextLength(n.product.name)}
+                                                {refactorTextLength(n.name)}
                                             </Typography>
                                             <Typography variant={'caption'}>
                                                 {n.number} X
-                                                $ {this.selectedData(n).price
+                                                $ {n.price
                                             }
                                             </Typography>
                                             <span

@@ -86,9 +86,9 @@ const BodyHeader = (props) => {
 };
 
 
-BodyHeader.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
+// BodyHeader.propTypes = {
+//     classes: PropTypes.object.isRequired,
+// };
 
 
 export default withRouter(BodyHeader)

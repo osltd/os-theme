@@ -140,7 +140,7 @@ const styles = createUseStyles({
 
 
 const mapStateToProps = state => ({
-    shoppingCart: state.cart.shoppingCart,
+    shoppingCart: state.cart.items,
     keyword: state.common.searchBar,
     products: state.product.products,
     feeds: state.feed.feeds,

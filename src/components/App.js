@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import _ from 'lodash';
 
+import Cookies from 'universal-cookie';
+
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
@@ -26,7 +28,8 @@ import {
     CATEGORY_INIT_CATEGORY,
     COMMON_INIT_SHOP_INFO,
     INIT_FEEDS,
-    INIT_PRODUCTS
+    INIT_PRODUCTS,
+    INIT_CART
 } from "../constants/actionType";
 import agent from '../agent'
 import Checkout from './Checkout/Overview'
@@ -40,6 +43,10 @@ import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
 import actionType from "../context/actionType";
 import {reducer} from "../context";
+
+
+const cookies = new Cookies();
+
 
 const mapStateToProps = state => ({
     products: state.product.products,
@@ -84,24 +91,19 @@ const mapDispatchToProps = dispatch => ({
             });
 
 
-            // agent.Checkout.initCart().then(res => {
-            //         dispatch(
-            //             {
-            //                 type: INIT_FEEDS,
-            //                 payload: res.data.data.rows,
-            //             }
-            //         )
-            //     }
-            // ).catch(err => {
-            //     console.log(err)
-            //     dispatch(
+            // get cart items
+            agent.Checkout.initCart(shoppingCart).then(res => dispatch(
+                {
+                    type: INIT_CART,
+                    payload: res.data.data.rows,
+                }
+            )).catch(err => dispatch(
 
-            //         {
-            //             type: INIT_FEEDS,
-            //             payload: [],
-            //         }
-            //     )
-            // });
+                {
+                    type: INIT_CART,
+                    payload: [],
+                }
+            ));
 
 
             agent.Auth.getAccount().then(user =>
@@ -151,10 +153,10 @@ const mapDispatchToProps = dispatch => ({
                 }
             );
 
-            dispatch({
-                type: CART_INIT_SHOPPING_CART,
-                payload: shoppingCart,
-            })
+            // dispatch({
+            //     type: CART_INIT_SHOPPING_CART,
+            //     payload: shoppingCart,
+            // })
         },
         finishLoadingProducts: products =>
             dispatch(
@@ -174,9 +176,9 @@ const App = props => {
         let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => []);
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
     };
+    
     let initApp = async () => await props.initApp(
-        JSON.parse(localStorage.getItem('shoppingCart')),
-        //todo(init to [] storage)
+        cookies.get('cart')
     );
 
 
@@ -210,28 +212,28 @@ const App = props => {
             <ScrollToTop>
                 <ErrorBoundary>
                     <Header/>
-                    <div>
-                        <Switch>
-                            <Route exact path={'/'} component={mainPage}/>
-                            <Route exact path={'/404'} component={NotFound}/>
-                            
-                            <Route exact path={'/articles'} component={Feed}/>
-                            <Route exact path={'/articles/:id'} component={FeedDetail}/>
-                            
-                            <Route exact path={'/products'} component={Shop}/>
-                            <Route exact path={'/products/:id'} component={Product}/>
+                    <Switch>
+                        <Route exact path={'/'} component={mainPage}/>
+                        <Route exact path={'/404'} component={NotFound}/>
+                        
+                        <Route exact path={'/articles'} component={Feed}/>
+                        <Route exact path={'/articles/:id'} component={FeedDetail}/>
+                        
+                        <Route exact path={'/products'} component={Shop}/>
+                        <Route exact path={'/products/:id'} component={Product}/>
 
-                            {/* <Route exact path={'/login'} component={Login}/>
-                            <Route exact path={'/register'} component={Register}/>
-                            <Route exact path={'/checkout'} component={Checkout}/>
-                            <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
-                            <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
-                            <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                            <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                            <Route exact path={'/validate/:id'} component={Validate}/> */}
-                            <Route component={NotFound}/>
-                        </Switch>
-                    </div>
+                        <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+
+                        {/* <Route exact path={'/login'} component={Login}/>
+                        <Route exact path={'/register'} component={Register}/>
+                        <Route exact path={'/checkout'} component={Checkout}/>
+                        
+                        <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
+                        <Route exact path={'/loadingPage'} component={LoadingPage}/>
+                        <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                        <Route exact path={'/validate/:id'} component={Validate}/> */}
+                        <Route component={NotFound}/>
+                    </Switch>
 
                     <MyCredits/>
 

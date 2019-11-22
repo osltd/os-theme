@@ -20,15 +20,9 @@ import Header from '../Layout/Body/Header';
 import LoadingPage from '../Layout/LoadingPage';
 
 
-
-
-import {Grid} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
-import withWidth, {isWidthUp} from '@material-ui/core/withWidth/index';
-
-
-import CommentDescription from './Comment&Description/Overview'
-import Detail from './Detail'
+import {
+    INIT_CART
+} from "../../constants/actionType";
 
 
 const styles = createUseStyles({
@@ -114,61 +108,46 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch => ({}
-);
-
-
-// class ResponsiveDialog extends React.Component {
-//     hasValidProduct = () => !!this.props.products.find(n => n.id.toString() === this.props.match.params.id);
-
-//     render() {
-//         if (!this.props.products) return <LoadingPage/>;
-//         const isMobile = !isWidthUp('sm', this.props.width);
-//         const product = this.props.products.find(n => n.id.toString() === this.props.match.params.id);
-//         const variantOptions = getVariantOptions(product.variants);
-//         return <div>
-//             {!isMobile && <Header
-//                 title={product.name}
-//                 route={'HOME/SHOP/SINGLE PRODUCT'}
-//             />}
-
+const mapDispatchToProps = dispatch => ({
+    addToCart: async (selectedVariant, qty) => {
+        // no selected variant
+        if (!selectedVariant) {
+            alert('Please select a variant first.');
+        } else {
+            // get shopping cart
+            let cart = cookies.get('cart'), result = null;
+            // no shopping cart
+            if (!cart) {
+                result = await agent.Checkout.getCart();
+                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
+                if (cart) cookies.set('cart', cart);
+            }
+            // add item
+            result = await agent.Checkout.addItem(cart, {
+                id: selectedVariant.id,
+                qty
+            });
+            if (!((result || {}).data || {}).result) {
+                alert((((result || {}).data || {}).messages || []).join("\n") || 'Failed.');
+            } else {
+                // reload items
+                agent.Checkout.initCart(cart).then(res => dispatch(
+                    {
+                        type: INIT_CART,
+                        payload: res.data.data.rows,
+                    }
+                )).catch(err => dispatch(
             
-
-
-
-
-            
-            
-
-
-
-
-
-//             <Grid item xs={10}>
-
-//                 <Detail
-//                     variantOptions={Object.values(variantOptions)}
-//                     variantKeys={Object.keys(variantOptions)}
-//                     description={product.description}
-//                     product={product}
-
-//                 />
-
-
-//             </Grid>
-//             {
-//                 false && <Grid item xs={10} container>
-//                     <CommentDescription
-//                         content={product.description}
-//                     />
-//                 </Grid>
-//             }
-
-//         </div>;
-//     }
-
-
-// }
+                    {
+                        type: INIT_CART,
+                        payload: [],
+                    }
+                ))
+                alert('Item added.');
+            }
+        }
+    }
+});
 
 
 const cookies = new Cookies();
@@ -203,7 +182,6 @@ const ResponsiveDialog = props => {
         variant: null
     });
 
-
     if (products == undefined) return <LoadingPage/>;
     if (!product) return null;
 
@@ -213,33 +191,6 @@ const ResponsiveDialog = props => {
         let variant = Object.keys(form.variant || {}).map(o => `${o}:${form.variant[o]}`);
         return variants[Object.keys(variants).filter(id => variants[id].description.length == variants[id].description.filter(v => variant.indexOf(v) >= 0).length)[0]];
     };
-    const addToCart = async function() {
-        // get variant
-        let selectedVariant = getSelectedVariant();
-        // no selected variant
-        if (!selectedVariant) {
-            alert('Please select a variant first.');
-        } else {
-            // get shopping cart
-            let cart = cookies.get('cart'), result = null;
-            // no shopping cart
-            if (!cart) {
-                result = await agent.Checkout.getCart();
-                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
-                if (cart) cookies.set('cart', cart);
-            }
-            // add item
-            result = await agent.Checkout.addItem(cart, {
-                id: selectedVariant.id,
-                qty: form.qty
-            });
-            if (!((result || {}).data || {}).result) {
-                alert((((result || {}).data || {}).messages || []).join("\n") || 'Failed.');
-            } else {
-                alert('Item added.');
-            }
-        }
-    }
 
 
     form.variant = form.variant || ((((product || {}).variants || [])[0] || {}).description || '').split(/ *, */).filter(v => v).reduce((container, v) => {
@@ -330,7 +281,7 @@ const ResponsiveDialog = props => {
                         <div className={classes.addBtn}>
                             <button
                                 type="button"
-                                onClick={e => addToCart()}
+                                onClick={e => props.addToCart(getSelectedVariant(), form.qty)}
                             >
                                 <i className={'icon-cart'}/>&nbsp;&nbsp;
                                 <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
