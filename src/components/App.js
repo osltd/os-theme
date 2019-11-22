@@ -1,6 +1,10 @@
 import React, {useContext, useEffect} from 'react';
 import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { withCookies } from 'react-cookie';
+
+
+
 import _ from 'lodash';
 
 import Cookies from 'universal-cookie';
@@ -244,4 +248,4 @@ const App = props => {
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(App))

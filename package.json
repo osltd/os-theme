@@ -28,6 +28,7 @@
     "prop-types": "^15.5.10",
     "react": "^16.8.6",
     "react-color": "^2.14.1",
+    "react-cookie": "^4.0.1",
     "react-dom": "^16.8.6",
     "react-html-parser": "^2.0.2",
     "react-jss": "^10.0.0",
