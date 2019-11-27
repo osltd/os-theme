@@ -394,11 +394,11 @@ const CheckoutOverview = props => {
                                     className={classes.formInput}
                                     placeholder="Expiry Date"
                                     mask={['M', 'M', 'Y', 'Y']}
-                                    onValueChange={({value}) => props.updateOrder({
+                                    onValueChange={({formattedValue}) => props.updateOrder({
                                         ...props.order,
                                         payment: {
                                             ...(props.order || {}).payment,
-                                            exp_date: value
+                                            exp_date: formattedValue
                                         }
                                     })}
                                 />
