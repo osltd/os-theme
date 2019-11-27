@@ -7,8 +7,6 @@ import { withCookies } from 'react-cookie';
 
 import _ from 'lodash';
 
-import Cookies from 'universal-cookie';
-
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
@@ -47,9 +45,6 @@ import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
 import actionType from "../context/actionType";
 import {reducer} from "../context";
-
-
-const cookies = new Cookies();
 
 
 const mapStateToProps = state => ({
@@ -182,7 +177,7 @@ const App = props => {
     };
     
     let initApp = async () => await props.initApp(
-        cookies.get('cart')
+        props.cookies.get('cart')
     );
 
 
@@ -227,10 +222,11 @@ const App = props => {
                         <Route exact path={'/products/:id'} component={Product}/>
 
                         <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                        <Route exact path={'/checkout'} component={Checkout}/>
+
 
                         {/* <Route exact path={'/login'} component={Login}/>
                         <Route exact path={'/register'} component={Register}/>
-                        <Route exact path={'/checkout'} component={Checkout}/>
                         
                         <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
                         <Route exact path={'/loadingPage'} component={LoadingPage}/>

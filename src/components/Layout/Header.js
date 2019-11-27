@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
 import Button from '../Widget/Button/Button'
 import {fade} from '@material-ui/core/styles/colorManipulator';
@@ -336,6 +339,7 @@ const Header = props => {
                 {renderMenu()}
                 {renderToolbar()}
             </div>
+            <ToastContainer/>
         </AppBar>)
     }
 

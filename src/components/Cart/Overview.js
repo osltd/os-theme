@@ -1,10 +1,11 @@
 import React from 'react';
-import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
+import {createUseStyles} from 'react-jss';
 import {withCookies} from 'react-cookie';
 
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
+import { toast } from 'react-toastify';
 
 import {handleImgValid} from "../../api/ApiUtils";
 import agent from "../../agent";
@@ -37,6 +38,13 @@ const styles = createUseStyles({
     },
     footerColumn: {
         borderTop: '1px solid rgb(224, 224, 224)'
+    },
+    placeholder: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        padding: '35px 0'
     }
 });
 
@@ -70,8 +78,14 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             // failed
             if (!res.data.result) {
                 // return error
-                alert((res.data.messages || []).join("\n"));
+                toast.error((res.data.messages || []).join("\n"), {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             } else {
+                // return message
+                toast.success('Item deleted.', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
                 // delete timer
                 if (timers[id]) {
                     clearTimeout(timers[id]);
@@ -81,7 +95,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         })
         .catch(err => {
             // return error
-            alert(err.message);
+            toast.error(err.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
         });
     },
     updateItemQty: async (id, qty) => {
@@ -110,12 +126,21 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
                 // failed
                 if (!res.data.result) {
                     // return error
-                    alert((res.data.messages || []).join("\n"));
+                    toast.error((res.data.messages || []).join("\n"), {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                } else {
+                    // return message
+                    toast.success('Item updated.', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                 }
             })
             .catch(err => {
                 // return error
-                alert(err.message);
+                toast.error(err.message, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             })
         }, 550);
     }
@@ -128,8 +153,6 @@ const ShoppingCartTable = props => {
     const {items, history} = props;
 
     if (items === null) return <LoadingPage/>;
-
-    console.log(history);
 
     return <div>
         <Header
@@ -149,7 +172,7 @@ const ShoppingCartTable = props => {
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((item, idx) => <tr
+                    {items.length > 0 ? items.map((item, idx) => <tr
                         key={idx}
                     >
                         <td>
@@ -194,9 +217,28 @@ const ShoppingCartTable = props => {
                                 onClick={e => props.deleteItem(item.id)}
                             />
                         </td>
-                    </tr>)}
+                    </tr>) : <tr>
+                        <td colSpan="6">
+                            <div className={classes.placeholder}>
+                                <div>
+                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/>
+                                </div>
+                                <div>
+                                    <I18nText keyOfI18n={keyOfI18n.GOTO}/>
+                                    &nbsp;
+                                    <button
+                                        type='button'
+                                        onClick={e => props.history.push('/products')}
+
+                                    >
+                                        <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>}
                 </tbody>
-                <tfoot>
+                {items.length > 0 && <tfoot>
                     <tr>
                         <td colSpan="4" className={classes.footerColumn}>
                             <I18nText keyOfI18n={keyOfI18n.TOTAL}/>
@@ -218,7 +260,7 @@ const ShoppingCartTable = props => {
                             </button>
                         </td>
                     </tr>
-                </tfoot>
+                </tfoot>}
             </table>
         </div>
     </div>;
@@ -228,7 +270,9 @@ const ShoppingCartTable = props => {
 ShoppingCartTable.defaultProps = {};
 
 
-ShoppingCartTable.propTypes = {};
+ShoppingCartTable.propTypes = {
+    //classes: PropTypes.object.isRequired,
+};
 
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable))

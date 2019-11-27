@@ -43,12 +43,12 @@
     "react-select": "^2.3.0",
     "react-slick": "^0.23.2",
     "react-text-mask": "^5.4.3",
+    "react-toastify": "^5.4.1",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
     "slick-carousel": "^1.8.1",
     "sweetalert": "^2.1.2",
-    "typescript": "^3.2.2",
-    "universal-cookie": "^4.0.2"
+    "typescript": "^3.2.2"
   },
   "scripts": {
     "rebuild": "react-scripts build && git add . && git commit -m 'rebuild for update prod ver. ' && git push origin master ",
