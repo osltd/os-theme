@@ -3,8 +3,11 @@ import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
 
 import Cookies from 'universal-cookie';
+
 import classNames from 'classnames';
 import NumberFormat from 'react-number-format';
+import { toast } from 'react-toastify';
+
 import {Carousel} from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
@@ -143,7 +146,10 @@ const mapDispatchToProps = dispatch => ({
                         payload: [],
                     }
                 ))
-                alert('Item added.');
+                // return result
+                toast.success('Item added.', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             }
         }
     }
