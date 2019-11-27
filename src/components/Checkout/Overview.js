@@ -1,17 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {createUseStyles} from 'react-jss';
+import {withCookies} from 'react-cookie';
+
+import NumberFormat from 'react-number-format';
+import { toast } from 'react-toastify';
 
 
 
 
+import agent from "../../agent";
 
 
 
 
 import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
-import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
+import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT, INIT_CART, CART_UPDATE_ORDER_INFO} from "../../constants/actionType";
 import {withStyles} from '@material-ui/core/styles';
 import OrderSummary from './OrderSummary'
 import BillingDetails from './BillingDetails'
@@ -81,11 +86,55 @@ const styles = createUseStyles({
 });
 
 const mapStateToProps = state => ({
-    shoppingCart: state.cart.shoppingCart,
-    user: state.auth.user,
+    items: state.cart.items,
+    order: state.cart.order
 
+    // user: state.auth.user,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    placeOrder: async order => {
+        try {
+            // get shopping cart
+            let cart = ownProps.cookies.get('cart'), result = null;
+            // no shopping cart
+            if (!cart) {
+                result = await agent.Checkout.getCart();
+                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
+                if (cart) ownProps.cookies.set('cart', cart);
+            }
+            // add item
+            result = await agent.Checkout.placeOrderWithoutLogin({
+                ...order,
+                items: cart
+            });
+            if (((result || {}).data || {}).result) {
+                // remove cart
+                ownProps.cookies.remove('cart');
+                // clear items
+                dispatch(
+            
+                    {
+                        type: INIT_CART,
+                        payload: [],
+                    }
+                );
+                // return error
+                toast.success('Order successed.', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            }
+        } catch (error) {
+            // return error
+            toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    },
+    updateOrder: info => dispatch({
+        type: CART_UPDATE_ORDER_INFO,
+        payload: info,
+    }),
+
 
     changeViewMode: (mode) =>
         dispatch({
@@ -112,7 +161,7 @@ const mapDispatchToProps = dispatch => ({
 
 const CheckoutOverview = props => {
     const classes = styles();
-    const {form, setForm} = useState({});
+    const {items, order} = props;
 
     return <div>
         <Header title={useI18nText(keyOfI18n.CHECKOUT)}/>
@@ -135,20 +184,41 @@ const CheckoutOverview = props => {
                             </tr>
                         </thead>
                         <tbody>
-
+                            {(items || []).map((item, idx) => <tr key={idx}>
+                                <td>{`${item.name} x ${item.qty}(${item.variant})`}</td>
+                                <td>
+                                    <NumberFormat
+                                        value={item.price*item.qty}
+                                        thousandSeparator={true}
+                                        prefix={'HK$'}
+                                        displayType={'text'}
+                                    />
+                                </td>
+                            </tr>)}
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td>Total Amount</td>
-                                <td>HK$0</td>
+                                <td>
+                                    <NumberFormat
+                                        value={(items || []).reduce((total, item) => total += item.qty*item.price, 0)}
+                                        thousandSeparator={true}
+                                        prefix={'HK$'}
+                                        displayType={'text'}
+                                    />
+                                </td>
                             </tr>
                             <tr>
-                                <td colSpan="2">I have</td>
+                                <td colSpan="2">
+                                    <input id="agree" type="checkbox"/>
+                                    <label htmlFor="agree">I have</label>
+                                </td>
                             </tr>
                             <tr>
                                 <td colSpan="2">
                                     <button
                                         type="button"
+                                        onClick={e => props.placeOrder(props.order)}
                                     >Place Order</button>
                                 </td>
                             </tr>
@@ -199,14 +269,36 @@ const CheckoutOverview = props => {
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="First Name"/>
+                                <input
+                                    type="text"
+                                    className={classes.formInput}
+                                    placeholder="First Name"
+                                    onChange={e => props.updateOrder({
+                                        ...props.order,
+                                        contact: {
+                                            ...(props.order || {}).contact,
+                                            first_name: e.target.value
+                                        }
+                                    })}
+                                />
                             </div>
                             <div
                                 style={{
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="Last Name"/>
+                                <input
+                                    type="text"
+                                    className={classes.formInput}
+                                    placeholder="Last Name"
+                                    onChange={e => props.updateOrder({
+                                        ...props.order,
+                                        contact: {
+                                            ...(props.order || {}).contact,
+                                            last_name: e.target.value
+                                        }
+                                    })}
+                                />
                             </div>
                         </div>
                         <div
@@ -219,23 +311,67 @@ const CheckoutOverview = props => {
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="Email Address"/>
+                                <input
+                                    type="text"
+                                    className={classes.formInput}
+                                    placeholder="Email Address"
+                                    onChange={e => props.updateOrder({
+                                        ...props.order,
+                                        contact: {
+                                            ...(props.order || {}).contact,
+                                            email: e.target.value
+                                        }
+                                    })}
+                                />
                             </div>
                             <div
                                 style={{
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="Phone"/>
+                                <input
+                                    type="text"
+                                    className={classes.formInput}
+                                    placeholder="Phone"
+                                    onChange={e => props.updateOrder({
+                                        ...props.order,
+                                        contact: {
+                                            ...(props.order || {}).contact,
+                                            phone: e.target.value
+                                        }
+                                    })}
+                                />
                             </div>
                         </div>
                         <div>
-                            <input type="text" className={classes.formInput} placeholder="Shipping Address"/>
+                            <input
+                                type="text"
+                                className={classes.formInput}
+                                placeholder="Shipping Address"
+                                onChange={e => props.updateOrder({
+                                    ...props.order,
+                                    shipping: {
+                                        ...(props.order || {}).shipping,
+                                        address: e.target.value
+                                    }
+                                })}
+                            />
                         </div>
                     </div>
                     <div>
                         <div>
-                            <input type="text" className={classes.formInput} placeholder="Card Number"/>
+                            <NumberFormat
+                                format="#### #### #### ####"
+                                className={classes.formInput}
+                                placeholder="Card Number"
+                                onValueChange={({value}) => props.updateOrder({
+                                    ...props.order,
+                                    payment: {
+                                        ...(props.order || {}).payment,
+                                        card: value
+                                    }
+                                })}
+                            />
                         </div>
                         <div
                             style={{
@@ -247,14 +383,37 @@ const CheckoutOverview = props => {
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="Expiry Date"/>
+                                <NumberFormat
+                                    format="##/##"
+                                    className={classes.formInput}
+                                    placeholder="Expiry Date"
+                                    mask={['M', 'M', 'Y', 'Y']}
+                                    onValueChange={({value}) => props.updateOrder({
+                                        ...props.order,
+                                        payment: {
+                                            ...(props.order || {}).payment,
+                                            exp_date: value
+                                        }
+                                    })}
+                                />
                             </div>
                             <div
                                 style={{
                                     flex: 1
                                 }}
                             >
-                                <input type="text" className={classes.formInput} placeholder="CVC"/>
+                                <NumberFormat
+                                    format="###"
+                                    className={classes.formInput}
+                                    placeholder="CVC"
+                                    onValueChange={({value}) => props.updateOrder({
+                                        ...props.order,
+                                        payment: {
+                                            ...(props.order || {}).payment,
+                                            csc: value
+                                        }
+                                    })}
+                                />
                             </div>
                         </div>
                     </div>
@@ -363,4 +522,4 @@ const CheckoutOverview = props => {
     // }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutOverview)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(CheckoutOverview));

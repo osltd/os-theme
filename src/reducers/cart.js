@@ -2,6 +2,7 @@ import {
     INIT_CART,
     CART_DELETE_ITEM,
     CART_UPDATE_ITEM,
+    CART_UPDATE_ORDER_INFO,
 
     CART_EDIT_BILLING_DETAIL,
     CART_EDIT_VARIANT,
@@ -14,7 +15,8 @@ import {
 
 
 const defaultState = {
-    items: null
+    items: null,
+    order: {}
 };
 
 
@@ -44,6 +46,11 @@ export default (state = defaultState, action) => {
                     }
                     return n;
                 }) : state.items
+            }
+        case CART_UPDATE_ORDER_INFO:
+            return {
+                ...state,
+                order: action.payload || {}
             }
         default:
             return state
