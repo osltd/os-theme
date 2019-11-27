@@ -3,37 +3,22 @@ import {connect} from 'react-redux';
 import {createUseStyles} from 'react-jss';
 import {withCookies} from 'react-cookie';
 
+import _ from 'lodash';
 import NumberFormat from 'react-number-format';
 import { toast } from 'react-toastify';
 import classNames from 'classnames';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
-
-
-
 import agent from "../../agent";
 
-
-
-
-import {Button, Divider, Grid, Typography} from '@material-ui/core';
 import Header from '../Layout/Body/Header'
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT, INIT_CART, CART_UPDATE_ORDER_INFO} from "../../constants/actionType";
-import {withStyles} from '@material-ui/core/styles';
-import OrderSummary from './OrderSummary'
-import BillingDetails from './BillingDetails'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
-import Collapse from '../Widget/Collapse'
-import LoadingPage from '../Layout/LoadingPage'
-import {redirectUrl} from "../../api/ApiUtils";
-import PromoCode from './PromoCode'
-import {withSnackbar} from 'notistack'
-import _ from 'lodash'
-import * as styleGuide from "../../constants/styleGuide";
+
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {useI18nText} from "../../hooks/useI18nText";
+
 
 const styles = createUseStyles({
     wrapper: {
@@ -79,42 +64,46 @@ const styles = createUseStyles({
         '& > div > input': {
             width: '100%'
         }
+    },
+
+
+
+    // for tablet
+    '@media (max-width: 1200px)': {
+        inputGroup: {
+            display: 'block'
+        },
+        inputSet: {
+            '&:last-child': {
+                marginTop: 30
+            }
+        }
+    },
+
+
+
+    // for mobile
+    '@media (max-width: 600px)': {
+        wrapper: {
+            display: 'block'
+        },
+        formGroup: {
+            margin: 0,
+            '&:last-child': {
+                marginTop: 60
+            }
+        },
+        inputGroup: {
+            display: 'block'
+        },
+        inputSet: {
+            '&:last-child': {
+                marginTop: 30
+            }
+        }
     }
-
-
-
-
-
-
-
-
-    // productCategory: {
-    //     backgroundColor: '#F7F7F7',
-
-    // },
-    // toolBar: {
-    //     padding: '10px',
-    //     backgroundColor: theme.palette.background.paper,
-    // },
-    // icon: {
-    //     padding: '10px',
-    //     cursor: 'pointer',
-    //     alignItems: 'center',
-    //     border: '1px solid black',
-
-    // }, listMode: {
-    //     padding: '20px',
-    // }, title: {
-    //     padding: '30px'
-    // },
-    // form: {
-    //     margin: '40px',
-    //     padding: '40px',
-    //     border: '1px solid ' + theme.palette.secondary.light,
-
-    // }
-
 });
+
 
 const mapStateToProps = state => ({
     items: state.cart.items,
@@ -124,56 +113,98 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
     placeOrder: async order => {
-        try {
-            // get shopping cart
-            let cart = ownProps.cookies.get('cart'), result = null;
-            // no shopping cart
-            if (!cart) {
-                result = await agent.Checkout.getCart();
-                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
-                if (cart) ownProps.cookies.set('cart', cart);
-            }
-            // add item
-            result = await agent.Checkout.placeOrderWithoutLogin({
-                ...order,
-                items: cart
+        if (!order.agree) {
+            // return error
+            toast.error('Please accept the terms and conditions to continue your action.', {
+                position: toast.POSITION.TOP_RIGHT
             });
-            if (((result || {}).data || {}).result) {
-                // remove cart
-                ownProps.cookies.remove('cart');
-                // clear items
-                dispatch(
-            
-                    {
-                        type: INIT_CART,
-                        payload: [],
-                    }
-                );
+        } else {
+            try {
+                // get shopping cart
+                let cart = ownProps.cookies.get('cart'), result = null;
+                // no shopping cart
+                if (!cart) {
+                    result = await agent.Checkout.getCart();
+                    cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
+                    if (cart) ownProps.cookies.set('cart', cart);
+                }
+                // add item
+                result = await agent.Checkout.placeOrderWithoutLogin({
+                    ...order,
+                    items: cart
+                });
+                if (((result || {}).data || {}).result) {
+                    // remove cart
+                    ownProps.cookies.remove('cart');
+                    // clear items
+                    dispatch(
+                
+                        {
+                            type: INIT_CART,
+                            payload: [],
+                        }
+                    );
+                    // return result
+                    toast.success('Order successed.', {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+                }
+            } catch (error) {
                 // return error
-                toast.success('Order successed.', {
+                toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
                     position: toast.POSITION.TOP_RIGHT
                 });
             }
-        } catch (error) {
-            // return error
-            toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
-                position: toast.POSITION.TOP_RIGHT
-            });
         }
     },
     updateOrder: info => dispatch({
         type: CART_UPDATE_ORDER_INFO,
         payload: info,
     }),
-
-
-    changeViewMode: (mode) =>
-        dispatch({
-                type: EDIT_PRODUCT_VIEW_MODE,
-                payload: mode,
+    checkCoupons: async codes => {
+        if (codes.length < 1) {
+            // return error
+            toast.error('Please enter the coupon code(s).', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } else {
+            try {
+                // check coupons
+                var result = await agent.Checkout.getPromoCode(codes);
+                // success
+                if (((result || {}).data || {}).result) {
+                    var errors = [];
+                    var coupons = ((result.data.data || {}).rows || []).reduce((container, coupon) => {
+                        container[coupon.code] = coupon;
+                        return container;
+                    }, {});
+                    codes.split(/ *, */).filter(c => c).forEach(coupon => {
+                        if (!coupons[coupon]) {
+                            errors.push(`${coupon} is invalid.`);
+                        }
+                    });
+                    if (errors.length > 0) {
+                        // return result
+                        toast.error(errors.join("\n"), {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                    } else {
+                        // return result
+                        toast.success('All coupons are valid.', {
+                            position: toast.POSITION.TOP_RIGHT
+                        });
+                    }
+                }
+            } catch (error) {
+                // return error
+                toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
+                    position: toast.POSITION.TOP_RIGHT
+                });
             }
-        )
-    ,
+        }
+    },
+
+
     editProductSort: (key, value) => dispatch({
         type: PRODUCT_EDIT_SORT,
         payload: {
@@ -199,7 +230,9 @@ const CheckoutOverview = props => {
         <div className={classes.wrapper}>
             <div className={classes.formGroup}>
                 <div>
-                    <h3>Order Summary</h3>
+                    <h3>
+                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
+                    </h3>
                     <table
                         style={{
                             width: '100%',
@@ -210,8 +243,12 @@ const CheckoutOverview = props => {
                     >
                         <thead>
                             <tr>
-                                <td>Product</td>
-                                <td>Price</td>
+                                <td>
+                                    <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
+                                </td>
+                                <td>
+                                    <I18nText keyOfI18n={keyOfI18n.PRICE}/>
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -228,7 +265,7 @@ const CheckoutOverview = props => {
                             </tr>)}
                             {(items || []).length < 1 && <tr>
                                 <td>
-                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/>
+                                    <I18nText keyOfI18n={keyOfI18n.CART_NO_ITEMS_TO_SHOW}/>
                                 </td>    
                             </tr>}
                         </tbody>
@@ -246,7 +283,14 @@ const CheckoutOverview = props => {
                             </tr>
                             <tr>
                                 <td colSpan="2">
-                                    <input id="agree" type="checkbox"/>
+                                    <input
+                                        id="agree"
+                                        type="checkbox"
+                                        onChange={e => props.updateOrder({
+                                            ...props.order,
+                                            agree: e.target.checked
+                                        })}
+                                    />
                                     <label htmlFor="agree">
                                         <I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/>
                                     </label>
@@ -257,14 +301,19 @@ const CheckoutOverview = props => {
                                     <button
                                         type="button"
                                         onClick={e => props.placeOrder(props.order)}
-                                    >Place Order</button>
+                                    >
+                                        <I18nText keyOfI18n={keyOfI18n.ORDER_SUMMARY_PLACE_ORDER}/>
+                                    </button>
                                 </td>
                             </tr>
                         </tfoot>}
                     </table>
                 </div>
+                <br/>
                 <div>
-                    <h3>Promo Code</h3>
+                    <h3>
+                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PROMO_CODE}/>
+                    </h3>
                     <table
                         style={{
                             width: '100%',
@@ -276,25 +325,38 @@ const CheckoutOverview = props => {
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" placeholder="Enter your promo code here"/>
+                                    <input
+                                        type="text"
+                                        placeholder={useI18nText(keyOfI18n.PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE)}
+                                        style={{
+                                            padding: '0 10px',
+                                            borderRadius: 5,
+                                            border: '1px solid #dadada',
+                                            minHeight: 40
+                                        }}
+                                        onChange={e => props.updateOrder({
+                                            ...props.order,
+                                            coupons: e.target.value
+                                        })}
+                                    />
                                 </td>
                                 <td>
                                     <button
                                         type="button"
-                                    >Check</button>
+                                        onClick={e => props.checkCoupons((props.order || {}).coupons || '')}
+                                    >
+                                        <I18nText keyOfI18n={keyOfI18n.PROMO_CODE_CHECK_BTN}/>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan="2">promo code status</td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
             <div className={classes.formGroup}>
-                <h3>Billing Details</h3>
+                <h3>
+                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
+                </h3>
                 <div>
                     <div className={classes.inputSet}>
                         <div className={classes.inputGroup}>
@@ -302,7 +364,7 @@ const CheckoutOverview = props => {
                                 <input
                                     type="text"
                                     className={classes.formInput}
-                                    placeholder="First Name"
+                                    placeholder={useI18nText(keyOfI18n.FIRST_NAME)}
                                     onChange={e => props.updateOrder({
                                         ...props.order,
                                         contact: {
@@ -316,7 +378,7 @@ const CheckoutOverview = props => {
                                 <input
                                     type="text"
                                     className={classes.formInput}
-                                    placeholder="Last Name"
+                                    placeholder={useI18nText(keyOfI18n.LAST_NAME)}
                                     onChange={e => props.updateOrder({
                                         ...props.order,
                                         contact: {
@@ -332,7 +394,7 @@ const CheckoutOverview = props => {
                                 <input
                                     type="text"
                                     className={classes.formInput}
-                                    placeholder="Email Address"
+                                    placeholder={useI18nText(keyOfI18n.EMAIL_ADDRESS)}
                                     onChange={e => props.updateOrder({
                                         ...props.order,
                                         contact: {
@@ -346,7 +408,7 @@ const CheckoutOverview = props => {
                                 <PhoneInput
                                     type="text"
                                     className={classNames(classes.formInput,classes.phoneInput)}
-                                    placeholder="Phone"
+                                    placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER)}
                                     onChange={value => props.updateOrder({
                                         ...props.order,
                                         contact: {
@@ -361,7 +423,7 @@ const CheckoutOverview = props => {
                             <input
                                 type="text"
                                 className={classes.formInput}
-                                placeholder="Shipping Address"
+                                placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_STREET_ADDRESS)}
                                 onChange={e => props.updateOrder({
                                     ...props.order,
                                     shipping: {
@@ -377,7 +439,7 @@ const CheckoutOverview = props => {
                             <NumberFormat
                                 format="#### #### #### ####"
                                 className={classes.formInput}
-                                placeholder="Card Number"
+                                placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER)}
                                 onValueChange={({value}) => props.updateOrder({
                                     ...props.order,
                                     payment: {
@@ -392,7 +454,7 @@ const CheckoutOverview = props => {
                                 <NumberFormat
                                     format="##/##"
                                     className={classes.formInput}
-                                    placeholder="Expiry Date"
+                                    placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_EXPIRY_DATE)}
                                     mask={['M', 'M', 'Y', 'Y']}
                                     onValueChange={({formattedValue}) => props.updateOrder({
                                         ...props.order,
@@ -407,7 +469,7 @@ const CheckoutOverview = props => {
                                 <NumberFormat
                                     format="###"
                                     className={classes.formInput}
-                                    placeholder="CVC"
+                                    placeholder={useI18nText(keyOfI18n.CHECKOUT_BILLING_CVC)}
                                     onValueChange={({value}) => props.updateOrder({
                                         ...props.order,
                                         payment: {

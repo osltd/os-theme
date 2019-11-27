@@ -85,9 +85,11 @@ export const en: props = {
     CHECK: 'check',
 
     CHECKOUT_BILLING_DETAILS_SHIPPING_DETAILS: 'Shipping Options',
-    CHECKOUT_BILLING_STREET_ADDRESS: 'Street Address',
-    CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER: 'please enter your phone number for contact',
-    CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER: 'please enter your visa number',
+    CHECKOUT_BILLING_STREET_ADDRESS: 'Shipping Address',
+    CHECKOUT_BILLING_EXPIRY_DATE: 'Expiry Date',
+    CHECKOUT_BILLING_CVC: 'CVC',
+    CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER: 'Phone number',
+    CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER: 'Card number',
 
 
     ORDER_SUMMARY_PLACE_ORDER: 'place order',
@@ -101,7 +103,8 @@ export const en: props = {
     CHECKOUT_BILLING_DETAIL: 'Billing Details',
     CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART: 'You haven\'t put any items in cart',
 
-    PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: 'Type your promo code here',
+    PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE: 'Enter your promo code here',
+    PROMO_CODE_CHECK_BTN: 'Check',
     PROMO_CODE_SNACK_BAR_PLEASE_TYPE_IN_PROMO_CODE_FIRST: 'Please Type in Promo Code First',
     PROMO_CODE_SNAKE_BAR_PROMO_CODE_DOES_NOT_EXIST: 'Promo Code does not exist',
     PROMO_CODE_SNAKE_BAR_YOUR_NEED_TO_BUY_MORE_TO_REACH_ITEMS_REQUIREMENT: 'You need to buy more to reach items requirement',
