@@ -5,6 +5,9 @@ import { withCookies } from 'react-cookie';
 
 import _ from 'lodash';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
@@ -208,6 +211,7 @@ const App = props => {
         <BrowserRouter>
             <ScrollToTop>
                 <ErrorBoundary>
+                    <ToastContainer/>
                     <Header/>
                     <Switch>
                         <Route exact path={'/'} component={mainPage}/>

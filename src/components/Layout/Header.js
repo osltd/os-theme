@@ -6,9 +6,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import 'animate.css/animate.min.css';
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 import {I18nText} from "../Widget/I18nText";
 import {redirectUrl} from "../../api/ApiUtils";
 
@@ -271,7 +268,6 @@ const Header = props => {
     };
 
     return <div className={classes.topbar}>
-        <ToastContainer/>
         <div className={classes.nav}>
             <div className={classes.openMenu}>
                 <button type="button" onClick={props.openMobileMenu}>
