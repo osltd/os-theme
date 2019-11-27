@@ -5,7 +5,7 @@ interface props extends I18n {
 
 export const zh_HK: props = {
     ADD_TO_CART_CONFIRM_INFO: '感謝您的購買',
-    LANGUAGE: '語言',
+    LANGUAGE: '繁體中文',
     PASSWORD: '密碼',
     EMAIL: '電郵地址',
     LOGIN: '登入',

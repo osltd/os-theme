@@ -124,7 +124,7 @@ class ShoppingCartList extends React.Component {
                         <Button
                             className={classes.button}
                             variant={'outlined'}
-                            onClick={() => redirectUrl('/shoppingCart', this.props.history)}
+                            onClick={() => redirectUrl('/shopping-cart', this.props.history)}
                         >
                             <I18nText keyOfI18n={keyOfI18n.VIEW_CART}/> </Button>
                     </Grid>

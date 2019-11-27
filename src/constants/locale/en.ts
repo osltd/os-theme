@@ -8,7 +8,7 @@ export const en: props = {
     GOT_IT: 'got it ',
     ITEMS_ADDED: 'item added!',
     ADD_TO_CART_CONFIRM_INFO: 'Keep shopping what you like, thank you !',
-    LANGUAGE: 'language',
+    LANGUAGE: 'English',
     PASSWORD: 'password',
     EMAIL: 'email',
     LOGIN: 'Login',

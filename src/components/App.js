@@ -3,8 +3,6 @@ import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { withCookies } from 'react-cookie';
 
-
-
 import _ from 'lodash';
 
 import "slick-carousel/slick/slick.css"
@@ -13,11 +11,12 @@ import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
 import '../constants/Style.css'
 
+import ShoppingCart from './Cart/Overview'
+import Checkout from './Checkout/Overview'
 
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 import mainPage from './MainPage/Overview'
-import ShoppingCart from './Cart/Overview'
 import Header from './Layout/Header'
 import Shop from './Shop/Overview'
 import Footer from './Layout/Footer'
@@ -34,7 +33,6 @@ import {
     INIT_CART
 } from "../constants/actionType";
 import agent from '../agent'
-import Checkout from './Checkout/Overview'
 import ConfirmPage from './Layout/ConfirmPage'
 import LoadingPage from './Layout/LoadingPage'
 import SearchPage from './Search/Overview'
@@ -221,7 +219,7 @@ const App = props => {
                         <Route exact path={'/products'} component={Shop}/>
                         <Route exact path={'/products/:id'} component={Product}/>
 
-                        <Route exact path={'/shoppingCart'} component={ShoppingCart}/>
+                        <Route exact path={'/shopping-cart'} component={ShoppingCart}/>
                         <Route exact path={'/checkout'} component={Checkout}/>
 
 

@@ -48,7 +48,7 @@ export const getRoutePath = (url: string): Array<RoutePath> => {
             case n === 'shoppingCart'.toLowerCase():
                 result.push({
                     label: n,
-                    link: '/shoppingCart'
+                    link: '/shopping-cart'
                 });
                 break;
             case !isNaN(parseInt(n)):
