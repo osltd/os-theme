@@ -34,6 +34,7 @@
     "react-jss": "^10.0.0",
     "react-masonry-component": "^6.2.1",
     "react-number-format": "^4.3.1",
+    "react-phone-number-input": "^2.4.1",
     "react-redux": "^5.0.7",
     "react-responsive-carousel": "^3.1.51",
     "react-router": "^5.0.1",

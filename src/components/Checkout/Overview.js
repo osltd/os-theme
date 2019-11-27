@@ -5,6 +5,9 @@ import {withCookies} from 'react-cookie';
 
 import NumberFormat from 'react-number-format';
 import { toast } from 'react-toastify';
+import classNames from 'classnames';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 
 
@@ -35,12 +38,17 @@ import {useI18nText} from "../../hooks/useI18nText";
 const styles = createUseStyles({
     wrapper: {
         padding: '0 9%',
-        display: 'flex',
-        margin: '0 -10px'
+        display: 'flex'
     },
     formGroup: {
         flex: 1,
-        margin: '0 10px'
+        margin: '0 10px',
+        '&:first-child': {
+            marginLeft: 0
+        },
+        '&:last-child': {
+            marginRight: 0
+        }
     },
     formInput: {
         width: '100%',
@@ -48,6 +56,29 @@ const styles = createUseStyles({
         borderRadius: 5,
         border: '1px solid #dadada',
         padding: '0 15px'
+    },
+    inputSet: {
+        margin: '15px -5px -5px',
+        '&:first-child': {
+            marginTop: -5
+        }
+    },
+    inputGroup: {
+        display: 'flex'
+    },
+    inputWrapper: {
+        display: 'flex',
+        flex: 1,
+        margin: 5
+    },
+    phoneInput: {
+        display: 'flex',
+        '& > div': {
+            flex: 1
+        },
+        '& > div > input': {
+            width: '100%'
+        }
     }
 
 
@@ -195,8 +226,13 @@ const CheckoutOverview = props => {
                                     />
                                 </td>
                             </tr>)}
+                            {(items || []).length < 1 && <tr>
+                                <td>
+                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/>
+                                </td>    
+                            </tr>}
                         </tbody>
-                        <tfoot>
+                        {(items || []).length > 0 && <tfoot>
                             <tr>
                                 <td>Total Amount</td>
                                 <td>
@@ -211,7 +247,9 @@ const CheckoutOverview = props => {
                             <tr>
                                 <td colSpan="2">
                                     <input id="agree" type="checkbox"/>
-                                    <label htmlFor="agree">I have</label>
+                                    <label htmlFor="agree">
+                                        <I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/>
+                                    </label>
                                 </td>
                             </tr>
                             <tr>
@@ -222,7 +260,7 @@ const CheckoutOverview = props => {
                                     >Place Order</button>
                                 </td>
                             </tr>
-                        </tfoot>
+                        </tfoot>}
                     </table>
                 </div>
                 <div>
@@ -256,19 +294,11 @@ const CheckoutOverview = props => {
                 </div>
             </div>
             <div className={classes.formGroup}>
+                <h3>Billing Details</h3>
                 <div>
-                    <h3>Billing Details</h3>
-                    <div>
-                        <div
-                            style={{
-                                display: 'flex'
-                            }}
-                        >
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
+                    <div className={classes.inputSet}>
+                        <div className={classes.inputGroup}>
+                            <div className={classes.inputWrapper}>
                                 <input
                                     type="text"
                                     className={classes.formInput}
@@ -282,11 +312,7 @@ const CheckoutOverview = props => {
                                     })}
                                 />
                             </div>
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
+                            <div className={classes.inputWrapper}>
                                 <input
                                     type="text"
                                     className={classes.formInput}
@@ -301,16 +327,8 @@ const CheckoutOverview = props => {
                                 />
                             </div>
                         </div>
-                        <div
-                            style={{
-                                display: 'flex'
-                            }}
-                        >
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
+                        <div className={classes.inputGroup}>
+                            <div className={classes.inputWrapper}>
                                 <input
                                     type="text"
                                     className={classes.formInput}
@@ -324,26 +342,22 @@ const CheckoutOverview = props => {
                                     })}
                                 />
                             </div>
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
-                                <input
+                            <div className={classes.inputWrapper}>
+                                <PhoneInput
                                     type="text"
-                                    className={classes.formInput}
+                                    className={classNames(classes.formInput,classes.phoneInput)}
                                     placeholder="Phone"
-                                    onChange={e => props.updateOrder({
+                                    onChange={value => props.updateOrder({
                                         ...props.order,
                                         contact: {
                                             ...(props.order || {}).contact,
-                                            phone: e.target.value
+                                            phone: value
                                         }
                                     })}
                                 />
                             </div>
                         </div>
-                        <div>
+                        <div className={classes.inputWrapper}>
                             <input
                                 type="text"
                                 className={classes.formInput}
@@ -358,8 +372,8 @@ const CheckoutOverview = props => {
                             />
                         </div>
                     </div>
-                    <div>
-                        <div>
+                    <div className={classes.inputSet}>
+                        <div className={classes.inputWrapper}>
                             <NumberFormat
                                 format="#### #### #### ####"
                                 className={classes.formInput}
@@ -373,16 +387,8 @@ const CheckoutOverview = props => {
                                 })}
                             />
                         </div>
-                        <div
-                            style={{
-                                display: 'flex'
-                            }}
-                        >
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
+                        <div className={classes.inputGroup}>
+                            <div className={classes.inputWrapper}>
                                 <NumberFormat
                                     format="##/##"
                                     className={classes.formInput}
@@ -397,11 +403,7 @@ const CheckoutOverview = props => {
                                     })}
                                 />
                             </div>
-                            <div
-                                style={{
-                                    flex: 1
-                                }}
-                            >
+                            <div className={classes.inputWrapper}>
                                 <NumberFormat
                                     format="###"
                                     className={classes.formInput}
