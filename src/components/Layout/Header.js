@@ -62,7 +62,10 @@ const styles = createUseStyles({
         alignItems: 'center',
         justifyContent: 'center',
         '& > button': {
-            display: 'block'
+            display: 'block',
+            borderWidth: 0,
+            color: '#fff',
+            backgroundColor: 'transparent'
         }
     },
     openMenu: {
@@ -111,6 +114,7 @@ const styles = createUseStyles({
             fontWeight: 600,
             fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
             textTransform: 'uppercase',
+            cursor: 'pointer',
             '&:focus': {
                 outline: 0
             }
