@@ -6,29 +6,16 @@ import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-
-
-import {Grid, Typography} from '@material-ui/core';
-import List from '../Widget/List'
 import Header from '../Layout/Body/Header'
 
 import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT} from "../../constants/actionType";
-import {withStyles} from '@material-ui/core/styles';
-import WhiteDropDown from '../Widget/DropDown'
 import LoadingPage from '../Layout/LoadingPage'
 
-import ProductOverviewListForm from '../Widget/Product/overviewList'
 import {
-    arrayToFilter,
     getTagsCountsArray,
     redirectUrl,
-    handleImgValid,
-    numberToPagination,
-    refactorTextLength,
-
 } from "../../api/ApiUtils";
-import ProductOverviewBox from '../Widget/Product/overviewBox'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
+
 import PopUp from '../Widget/PopUp'
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
