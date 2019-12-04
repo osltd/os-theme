@@ -341,7 +341,7 @@ const ShopOverview = props => {
                 >
                     <div className={classes.media}>
                         <LazyLoad>
-                            <img src={media.length > 0 ? media[0].url : '/notFound/not-found-image.jpg'} width="100%"/>
+                            <img src={media.length > 0 ? media[0].url.replace('.cloud/','.cloud/380xAUTO/') : '/notFound/not-found-image.jpg'} width="100%"/>
                         </LazyLoad>
                     </div>
                     <div className={classes.tags}>{n.tags.join(',')}</div>

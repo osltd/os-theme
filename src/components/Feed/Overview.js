@@ -251,7 +251,7 @@ const ResponsiveDialog = props => {
                 >
                     {media.length > 0 && <div className={classes.media}>
                         <LazyLoad>
-                            <img src={media[0].url} width="100%"/> 
+                            <img src={media[0].url.replace('.cloud/','.cloud/380xAUTO/')} width="100%"/> 
                         </LazyLoad>
                     </div>}
                     <h5>{n.sections[0].title}</h5>
