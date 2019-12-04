@@ -281,7 +281,7 @@ const Header = props => {
 
             {(logo.length > 0 || name.length > 0) && <div className={classes.logo}>
                 <button type="button" onClick={e => redirectUrl('/', history)}>
-                    {logo.length > 0 && <img src={shopInfo.logo} height={30}/>}
+                    {logo.length > 0 && <img src={shopInfo.logo.replace('.cloud/','.cloud/AUTOx50/')} height={30}/>}
                     {name.length > 0 && <b>{shopInfo.name}</b>}
                 </button>
             </div>}
