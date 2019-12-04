@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {lazy, Suspense, useContext, useEffect} from 'react';
 import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { withCookies } from 'react-cookie';
@@ -14,18 +14,11 @@ import "slick-carousel/slick/slick-theme.css"
 import '../constants/icon/style.css'
 import '../constants/Style.css'
 
-import ShoppingCart from './Cart/Overview'
-import Checkout from './Checkout/Overview'
+
 
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
-import mainPage from './MainPage/Overview'
-import Header from './Layout/Header'
-import Shop from './Shop/Overview'
-import Footer from './Layout/Footer'
-import Feed from './Feed/Overview'
-import Product from './Product/Detail'
-import FeedDetail from './Feed/Detail'
+
 import {
     AUTH_INIT_USER_PROFILE,
     CART_INIT_SHOPPING_CART,
@@ -46,6 +39,27 @@ import Login from './Auth/Login/Overview'
 import Validate from './Layout/Validate'
 import actionType from "../context/actionType";
 import {reducer} from "../context";
+
+
+
+
+
+
+
+
+
+const Header = lazy(() => import('./Layout/Header'))
+const Footer = lazy(() => import('./Layout/Footer'))
+
+const mainPage = lazy(() => import('./MainPage/Overview'))
+const Feeds = lazy(() => import('./Feed/Overview'))
+const Feed = lazy(() => import('./Feed/Detail'))
+
+const ProductsScreen = lazy(() => import('./Shop/Overview'))
+const ProductScreen = lazy(() => import('./Product/Detail'))
+
+const ShoppingCart = lazy(() => import('./Cart/Overview'))
+const Checkout = lazy(() => import('./Checkout/Overview'))
 
 
 const mapStateToProps = state => ({
@@ -211,35 +225,37 @@ const App = props => {
         <BrowserRouter>
             <ScrollToTop>
                 <ErrorBoundary>
-                    <ToastContainer/>
-                    <Header/>
-                    <Switch>
-                        <Route exact path={'/'} component={mainPage}/>
-                        <Route exact path={'/404'} component={NotFound}/>
-                        
-                        <Route exact path={'/articles'} component={Feed}/>
-                        <Route exact path={'/articles/:id'} component={FeedDetail}/>
-                        
-                        <Route exact path={'/products'} component={Shop}/>
-                        <Route exact path={'/products/:id'} component={Product}/>
+                    <Suspense fallback={() => {}}>
+                        <ToastContainer/>
+                        <Header/>
+                            <Switch>
+                                <Route exact path={'/'} component={mainPage}/>
+                                <Route exact path={'/404'} component={NotFound}/>
+                                
+                                <Route exact path={'/articles'} component={Feeds}/>
+                                <Route exact path={'/articles/:id'} component={Feed}/>
+                                
+                                <Route exact path={'/products'} component={ProductsScreen}/>
+                                <Route exact path={'/products/:id'} component={ProductScreen}/>
 
-                        <Route exact path={'/shopping-cart'} component={ShoppingCart}/>
-                        <Route exact path={'/checkout'} component={Checkout}/>
+                                <Route exact path={'/shopping-cart'} component={ShoppingCart}/>
+                                <Route exact path={'/checkout'} component={Checkout}/>
 
 
-                        {/* <Route exact path={'/login'} component={Login}/>
-                        <Route exact path={'/register'} component={Register}/>
-                        
-                        <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
-                        <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                        <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                        <Route exact path={'/validate/:id'} component={Validate}/> */}
-                        <Route component={NotFound}/>
-                    </Switch>
+                                {/* <Route exact path={'/login'} component={Login}/>
+                                <Route exact path={'/register'} component={Register}/>
+                                
+                                <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
+                                <Route exact path={'/loadingPage'} component={LoadingPage}/>
+                                <Route exact path={'/search/:keyword'} component={SearchPage}/>
+                                <Route exact path={'/validate/:id'} component={Validate}/> */}
+                                <Route component={NotFound}/>
+                            </Switch>
 
-                    <MyCredits/>
+                        <MyCredits/>
 
-                    <Footer/>
+                        <Footer/>
+                    </Suspense>
                 </ErrorBoundary>
             </ScrollToTop>
         </BrowserRouter>
