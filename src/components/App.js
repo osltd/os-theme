@@ -52,10 +52,10 @@ const Header = lazy(() => import('./Layout/Header'))
 const Footer = lazy(() => import('./Layout/Footer'))
 
 const mainPage = lazy(() => import('./MainPage/Overview'))
-const Feeds = lazy(() => import('./Feed/Overview'))
+const FeedsScreen = lazy(() => import('./Feed/Overview'))
 const Feed = lazy(() => import('./Feed/Detail'))
 
-const ProductsScreen = lazy(() => import('./Shop/Overview'))
+const ProductsScreen = lazy(() => import('./Product/Overview'))
 const ProductScreen = lazy(() => import('./Product/Detail'))
 
 const ShoppingCart = lazy(() => import('./Cart/Overview'))
@@ -232,7 +232,7 @@ const App = props => {
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/404'} component={NotFound}/>
                                 
-                                <Route exact path={'/articles'} component={Feeds}/>
+                                <Route exact path={'/articles'} component={FeedsScreen}/>
                                 <Route exact path={'/articles/:id'} component={Feed}/>
                                 
                                 <Route exact path={'/products'} component={ProductsScreen}/>
