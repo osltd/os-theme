@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import classNames from 'classnames';
+import LazyLoad from 'react-lazy-load';
 
 
 
@@ -339,7 +340,9 @@ const ShopOverview = props => {
                     onClick={() => redirectUrl('/products/' + n.id, props.history)}
                 >
                     <div className={classes.media}>
-                        <img src={media.length > 0 ? media[0].url : '/notFound/not-found-image.jpg'}/> 
+                        <LazyLoad>
+                            <img src={media.length > 0 ? media[0].url : '/notFound/not-found-image.jpg'} width="100%"/>
+                        </LazyLoad>
                     </div>
                     <div className={classes.tags}>{n.tags.join(',')}</div>
                     <h5 className={classes.name}>{n.name}</h5>

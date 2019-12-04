@@ -6,6 +6,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import h2p from 'html2plaintext';
 import classNames from 'classnames';
+import LazyLoad from 'react-lazy-load';
 
 import Header from '../Layout/Body/Header';
 import SearchBar from '../Widget/SearchBar/original'
@@ -249,7 +250,9 @@ const ResponsiveDialog = props => {
                     onClick={() => redirectUrl('/articles/' + n.id, props.history)}
                 >
                     {media.length > 0 && <div className={classes.media}>
-                        <img src={media[0].url}/> 
+                        <LazyLoad>
+                            <img src={media[0].url} width="100%"/> 
+                        </LazyLoad>
                     </div>}
                     <h5>{n.sections[0].title}</h5>
                     <div>{moment(n.time).format('ll')}</div>
