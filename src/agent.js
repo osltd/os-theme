@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Feeds from './agents/Feeds'
 import Products from './agents/Products'
+import Collections from './agents/Collections'
 import Checkout from './agents/Checkout'
 import Auth from './agents/Auth'
 
@@ -13,5 +14,6 @@ export default {
     Feeds,
     Products,
     Checkout,
+    Collections,
     Auth
 };

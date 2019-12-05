@@ -24,6 +24,7 @@ import {
     CART_INIT_SHOPPING_CART,
     CATEGORY_INIT_CATEGORY,
     COMMON_INIT_SHOP_INFO,
+    COLLECTION_INIT_ITEMS,
     INIT_FEEDS,
     INIT_PRODUCTS,
     INIT_CART
@@ -70,39 +71,42 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
         initApp: (shoppingCart) => {
 
-            agent.Products.initProducts().then(res =>
-                dispatch(
+            try {
+                agent.Products.initProducts().then(res => dispatch({
+                    type: INIT_PRODUCTS,
+                    payload: res.data.data.rows,
+                })).catch(err => dispatch(
                     {
                         type: INIT_PRODUCTS,
-                        payload: res.data.data.rows,
-                    }
-                )
-            ).catch(err => dispatch(
-                {
-                    type: INIT_PRODUCTS,
-                    payload: [],
-                }
-            ));
-
-
-            agent.Feeds.initFeeds().then(res => {
-                    dispatch(
-                        {
-                            type: INIT_FEEDS,
-                            payload: res.data.data.rows,
-                        }
-                    )
-                }
-            ).catch(err => {
-                console.log(err)
-                dispatch(
-
-                    {
-                        type: INIT_FEEDS,
                         payload: [],
                     }
-                )
-            });
+                ));
+            } catch(e) {
+                
+            }
+
+            try {
+                agent.Feeds.initFeeds().then(res => {
+                        dispatch(
+                            {
+                                type: INIT_FEEDS,
+                                payload: res.data.data.rows,
+                            }
+                        )
+                    }
+                ).catch(err => {
+                    console.log(err)
+                    dispatch(
+
+                        {
+                            type: INIT_FEEDS,
+                            payload: [],
+                        }
+                    )
+                });
+            } catch(e) {
+                    
+            }
 
 
             // get cart items
@@ -166,6 +170,40 @@ const mapDispatchToProps = dispatch => ({
                     )
                 }
             );
+
+            try {
+                agent.Collections.initCollections('?tags=featured')
+                .then(res => {
+                    let collection = ((res.data.data || {}).rows || []).shift();
+                    if (collection) {
+                        agent.Collections.getItems(collection.id, '?types=merchandise')
+                        .then(res => {
+                            dispatch(
+                                {
+                                    type: COLLECTION_INIT_ITEMS,
+                                    payload: (res.data.data || {}).rows || []
+                                }
+                            )
+                        })
+                        .catch(err => {
+                            dispatch(
+                                {
+                                    type: COLLECTION_INIT_ITEMS,
+                                    payload: []
+                                }
+                            )
+                        });
+                    }
+                })
+                .catch(err => {
+                    dispatch({
+                        type: COLLECTION_INIT_ITEMS,
+                        payload: []
+                    })
+                });
+            } catch(e) {
+    
+            }
 
             // dispatch({
             //     type: CART_INIT_SHOPPING_CART,
