@@ -14,8 +14,7 @@ const styles = createUseStyles({
         background: '#f7f7f7',
         display: 'flex',
         alignItems: 'center',
-        padding: '0 9%',
-        marginTop: 70
+        padding: '0 9%'
     },
     title: {
         textTransform: 'uppercase',

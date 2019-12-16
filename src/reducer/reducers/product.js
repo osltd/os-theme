@@ -1,7 +1,10 @@
 import {
+    INIT_PRODUCTS,
+    MERCHANDISE_INIT_FEATURED,
+
+
     EDIT_PRODUCT_DETAIL,
     EDIT_PRODUCT_VIEW_MODE,
-    INIT_PRODUCTS,
     PRODUCT_EDIT_FILTER,
     PRODUCT_EDIT_SORT
 } from "../../constants/actionType";
@@ -34,6 +37,17 @@ export default (state = defaultState, action) => {
                 products: action.payload ? action.payload : [],
             }
         }
+        case MERCHANDISE_INIT_FEATURED: {
+
+            return {
+                ...state,
+                featuredMerchandises: action.payload ? action.payload : [],
+            }
+        }
+
+
+
+
 
         case EDIT_PRODUCT_VIEW_MODE:
 
