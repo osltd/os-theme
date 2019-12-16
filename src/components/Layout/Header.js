@@ -9,14 +9,6 @@ import 'animate.css/animate.min.css';
 import {I18nText} from "../Widget/I18nText";
 import {redirectUrl} from "../../api/ApiUtils";
 
-import {AppBar, BottomNavigation, BottomNavigationAction, Grid, Input} from '@material-ui/core';
-import Button from '../Widget/Button/Button'
-import {fade} from '@material-ui/core/styles/colorManipulator';
-import {withStyles} from '@material-ui/core/styles';
-import PopUp from '../Widget/PopUp'
-import SearchIcon from '@material-ui/icons/Search';
-import DropDownList from './Body/ShoppingCartList'
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth/index";
 import classNames from "classnames";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
 import {useI18nText} from "../../hooks/useI18nText";
@@ -65,7 +57,9 @@ const styles = createUseStyles({
             display: 'block',
             borderWidth: 0,
             color: '#fff',
-            backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            margin: '15px 0',
+            cursor: 'pointer'
         }
     },
     openMenu: {
@@ -170,6 +164,14 @@ const styles = createUseStyles({
     searchBar: {
         margin: '0 10px'
     },
+    shoppingCart: {
+        display: 'none',
+        '& > button': {
+            borderWidth: 0,
+            backgroundColor: 'transparent',
+            cursor: 'pointer'
+        }
+    },
 
 
 
@@ -202,6 +204,11 @@ const styles = createUseStyles({
         },
         toolbar: {
             display: 'none'
+        },
+        shoppingCart: {
+            display: 'block',
+            right: 0,
+            position: 'absolute'
         }
     }
 });
@@ -323,6 +330,13 @@ const Header = props => {
                     </button>
                 </div>}
             </div>
+            {(products || []).length > 0 && <div
+                className={classes.shoppingCart}
+            >
+                <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
+                    <i className="icon-cart"/>
+                </button>
+            </div>}
         </div>
         <div className={classes.toolbar}>
             <div className={classes.languages}>

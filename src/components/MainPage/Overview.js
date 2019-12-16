@@ -11,11 +11,30 @@ import {
     MERCHANDISE_INIT_FEATURED
 } from '../../constants/actionType';
 import agent from '../../agent';
+import { strict } from 'assert';
 
 
 const styles = createUseStyles({
+    tips: {
+        padding: '0 3%',
+        marginTop: 50
+    },
+    tipsWrapper: {
+        margin: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        padding: 0
+    },
+    tipsItem: {
+        display: 'flex',
+        width: 'calc(50% - 20px)',
+        backgroundColor: '#f7f7f7',
+        margin: 10
+    },
+
     featuredMerchandises: {
-        padding: '0 3%'
+        padding: '0 3%',
+        marginTop: 50
     },
     featuredMerchandisesWrapper: {
         display: 'flex',
@@ -30,20 +49,18 @@ const styles = createUseStyles({
         cursor: 'pointer'
     },
 
-    tips: {
-        padding: '0 3%'
-    },
-    tipsWrapper: {
-        margin: 0,
-        display: 'flex',
-        flexWrap: 'wrap',
-        padding: 0
-    },
-    tipsItem: {
-        display: 'flex',
-        width: 'calc(50% - 20px)',
-        backgroundColor: '#f7f7f7',
-        margin: 10
+    // for mobile
+    '@media (max-width: 600px)': {
+        tipsItem: {
+            display: 'block',
+            width: 'calc(100% - 20px)'
+        },
+        featuredMerchandisesWrapper: {
+            display: 'block'
+        },
+        featuredMerchandisesItem: {
+            width: 'calc(100% - 20px)'
+        }
     }
     
     // section: {
@@ -131,6 +148,9 @@ const mapDispatchToProps = dispatch => ({
         } catch(err) {
 
         }
+    },
+    substring: str => {
+        return `${str.substr(0, 130)}...`;
     }
 });
 
@@ -172,8 +192,6 @@ const MainPageOverview = props => {
             </li>)}
         </div>
 
-        <br/><br/><br/><br/>
-
         <div className={classes.tips}>
             <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>Latest Information</h2>
             <ul className={classes.tipsWrapper}>
@@ -205,13 +223,11 @@ const MainPageOverview = props => {
                                 margin: 0
                             }}
                         >{article.sections[0].title}</h5>
-                        <p>{h2p(article.sections[0].description)}</p>
+                        <p>{props.substring(h2p(article.sections[0].description))}</p>
                     </div>
                 </li>)}
             </ul>
         </div>
-
-        <br/><br/><br/><br/>
         
         <div className={classes.featuredMerchandises}>
             <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>Featured Products</h2>
