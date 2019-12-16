@@ -1,21 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createUseStyles} from 'react-jss';
 import {connect} from 'react-redux';
-import { redirectUrl } from '../../api/ApiUtils';
+import {withRouter} from 'react-router-dom';
 
+import h2p from 'html2plaintext';
 
-
-
-// import Carousel from '../Widget/Slick/SingleItem'
-// import CategoryOverviewBox from '../Widget/CategoryOverviewBox'
-// import {isImgOnlySections} from "../../api/ApiUtils";
-// import LoadingPage from '../Layout/LoadingPage'
-
-
-// const SectionBanner = lazy(() => import('./Sections/Banner'));
-// const SectionTopInterest = lazy(() => import('./Sections/TopInterest'));
-// const SectionFeatureProducts = lazy(() => import('./Sections/FeatureProducts'));
-// const FEATURED_PRODUCTS = 'featured';
+import {
+    ARTICLE_INIT_FEATURED,
+    ARTICLE_INIT_TIPS
+} from '../../constants/actionType';
+import agent from '../../agent';
 
 
 const styles = createUseStyles({
@@ -54,45 +48,128 @@ const styles = createUseStyles({
 
 const mapStateToProps = state => ({
     featuredItems: state.collection.items,
+    featuredArticles: state.feed.featuredArticles,
+    tips: state.feed.tips
 });
 
 
 const mapDispatchToProps = dispatch => ({
+    initFeaturedArticles: () => {
+        try {
+            agent.Feeds.getFeaturedArticles()
+            .then(res => {
+                dispatch({
+                    type    : ARTICLE_INIT_FEATURED,
+                    payload : res.data.data.rows || []
+                })
+            })
+            .catch(err => {
 
+            })
+        } catch(err) {
+
+        }
+    },
+    initTips: () => {
+        try {
+            agent.Feeds.getTips()
+            .then(res => {
+                dispatch({
+                    type    : ARTICLE_INIT_TIPS,
+                    payload : res.data.data.rows || []
+                })
+            })
+            .catch(err => {
+
+            })
+        } catch(err) {
+
+        }
+    }
 });
 
 
 const MainPageOverview = props => {
     const classes = styles();
-    const {featuredItems, history} = props;
+    const {featuredItems, featuredArticles, tips, history} = props;
 
+    useEffect(() => {
+        if (featuredArticles === undefined) props.initFeaturedArticles();
+        if (tips === undefined) props.initTips();
+        return () => {
 
-    // const {feeds, products, history, category} = props;
-    // let getDataFromAPI = (feeds === null && products === null);
-    // if (getDataFromAPI) return <LoadingPage/>;
-    
-    // let latestArticle = feeds && feeds.filter((n, i) => isImgOnlySections(n.sections)).filter((n, i) => i < 3);
-    // let hasProductsToShow = (products && products.length > 0);
-    // let hasFeedsToShow = (feeds && feeds.length > 0);
-    // let hasCategoryToShow = (category.length > 0);
-    // let hasSelectedProductsToShow = hasProductsToShow && products
-    //     .filter(n => n.tags.find(m => m.toLowerCase() === FEATURED_PRODUCTS)).length > 0;
-
-
+        };
+    }, [featuredArticles, tips]);
 
     return <div>
+        <div>
+            {(featuredArticles || []).map((article, idx) => <li
+                key={idx}
+                style={{
+                    backgroundImage: `url(${article.sections[0].media[0].url})`,
+                    backgroundSize: 'cover',
+                    height: 390
+                }}
+            >
+                
+            </li>)}
+        </div>
+        <br/><br/><br/>
+        <ul
+            style={{
+                padding: '0 3%',
+                margin: 0,
+                display: 'flex',
+                flexWrap: 'wrap'
+            }}
+        >
+            {(tips || []).map((article, idx) => <li
+                key={idx}
+                style={{
+                    display: 'flex',
+                    width: 'calc(50% - 20px)',
+                    backgroundColor: '#f7f7f7',
+                    margin: 10
+                }}
+            >
+                {(article.sections[0] || {}).media.length > 0 && <div
+                    style={{
+                        flex: 4,
+                        height: 250,
+                        backgroundImage: `url(${article.sections[0].media[0].url})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    }}
+                />}
+                <div
+                    style={{
+                        flex: 6,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        padding: 25,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    <h5
+                        style={{
+                            margin: 0
+                        }}
+                    >{article.sections[0].title}</h5>
+                    <p>{h2p(article.sections[0].description)}</p>
+                </div>
+            </li>)}
+        </ul>
+        <br/><br/><br/>
         <div className={classes.featuredItems}>
             {featuredItems.map((item, idx) => <button
                 key={idx}
                 type="button"
-                onClick={() => redirectUrl(`/products/${item.id}`, history)}
-            >
-                {item.name}
-            </button>)}
+                onClick={() => history.push(`/products/${item.id}`)}
+            >{item.name}</button>)}
         </div>
-        
     </div>;
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPageOverview)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPageOverview))
