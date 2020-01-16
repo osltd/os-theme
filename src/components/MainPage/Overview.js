@@ -11,7 +11,9 @@ import {
     MERCHANDISE_INIT_FEATURED
 } from '../../constants/actionType';
 import agent from '../../agent';
-import { strict } from 'assert';
+
+import {I18nText} from "../Widget/I18nText";
+import {keyOfI18n} from "../../constants/locale/interface";
 
 
 const styles = createUseStyles({
@@ -193,7 +195,9 @@ const MainPageOverview = props => {
         </div>
 
         <div className={classes.tips}>
-            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>Latest Information</h2>
+            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>
+                <I18nText keyOfI18n={keyOfI18n.LATEST_INFO}/>
+            </h2>
             <ul className={classes.tipsWrapper}>
                 {(tips || []).slice(0, 4).map((article, idx) => <li
                     key={idx}
@@ -230,7 +234,9 @@ const MainPageOverview = props => {
         </div>
         
         <div className={classes.featuredMerchandises}>
-            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>Featured Products</h2>
+            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>
+                <I18nText keyOfI18n={keyOfI18n.FEATURED_PRODUCTS}/>
+            </h2>
             <ul className={classes.featuredMerchandisesWrapper}>
                 {(featuredMerchandises || []).map((item, idx) => <button
                     key={idx}

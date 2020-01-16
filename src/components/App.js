@@ -225,7 +225,7 @@ const App = props => {
 
     const {commonReducer} = useContext(reducer)
     let getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.merchandises).catch(err => []);
+        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.rows).catch(err => []);
         return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
     };
     

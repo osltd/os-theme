@@ -112,6 +112,11 @@ export const zh_HK: props = {
     PROMO_CODE_SNAKE_BAR_UNKNOWN_ERROR: '未知錯誤，請稍後再試',
     PROMO_CODE_NO_PROMO_CODE_AVAILABLE: '沒有可用折扣碼',
 
+
+    LATEST_INFO: '最新資訊',
+    FEATURED_PRODUCTS: '推介商品',
+
+
     FEED_DETAIL_BACK_TO_FEED_LIST: '回到文章',
     FEED_NO_FEED: '現在並沒有任何文章',
 

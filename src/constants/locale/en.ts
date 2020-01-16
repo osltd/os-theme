@@ -114,6 +114,11 @@ export const en: props = {
     PROMO_CODE_SNAKE_BAR_UNKNOWN_ERROR: 'Something wrong, please refresh and try again',
     PROMO_CODE_NO_PROMO_CODE_AVAILABLE: 'no Promo code available',
 
+
+    LATEST_INFO: 'Latest Information',
+    FEATURED_PRODUCTS: 'Featured Products',
+
+
     FEED_DETAIL_BACK_TO_FEED_LIST: 'Back to list',
     FEED_NO_FEED: 'there are no posts available yet',
 
