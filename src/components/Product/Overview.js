@@ -318,6 +318,7 @@ const ShopOverview = props => {
         <div className={classes.context}>
             {products == undefined ? <LoadingPage/> : products.map((n, i) => {
                 const media = (n.media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
+                const variants = n.variants || [];
                 const prices = [n.price].concat(n.variants.map(v => v.price)).filter((p, i, a) => a.indexOf(p) == i).sort((a, b) => a - b);
                 return <button
                     key={i}
@@ -326,7 +327,22 @@ const ShopOverview = props => {
                     onClick={() => redirectUrl('/products/' + n.id, props.history)}
                 >
                     <div className={classes.media}>
-                        <img src={media.length > 0 ? media[0].url.replace('.cloud/','.cloud/380xAUTO/') : '/notFound/not-found-image.jpg'} width="100%"/>
+                        <img src={(function(){
+                                    // preset thumbnail url
+                                    var thumbnail = '/notFound/not-found-image.jpg';
+                                    // has media?
+                                    if(media.length && media[0].url){
+                                        thumbnail = media[0].url.replace('.cloud/','.cloud/380xAUTO/');
+                                    } else {
+                                        // get from variants
+                                        variants.forEach(v => {
+                                            if(v.media.length > 0 && thumbnail == '/notFound/not-found-image.jpg'){
+                                                thumbnail = v.media[0].url;
+                                            }
+                                        });
+                                    }
+                                    return thumbnail;
+                                })()} width="100%"/>
                     </div>
                     <div className={classes.tags}>{n.tags.join(',')}</div>
                     <h5 className={classes.name}>{n.name}</h5>

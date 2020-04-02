@@ -6,8 +6,8 @@ import {MaterialUIClasses} from "../../interfaces/client/Common";
 const styles = (theme: Theme) => ({
     root: {
         padding: '12px',
-        border: '1px solid ' + theme.palette.secondary.main,
-        margin: '3px',
+        //border: '1px solid ' + theme.palette.secondary.main,
+        marginRight: '3px',
         borderRadius: '5px',
         cursor: 'pointer',
         display: 'inline-block',

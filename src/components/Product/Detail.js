@@ -28,6 +28,7 @@ import {
 } from "../../constants/actionType";
 
 
+
 const styles = createUseStyles({
     wrapper: {
         padding: '0 9%'
@@ -71,12 +72,43 @@ const styles = createUseStyles({
     addBtn: {
         marginTop: 10,
         '& > button': {
-            backgroundColor: '#f9f9f9',
-            border: '1px solid #dfdfdf',
-            padding: '10px 20px'
+            backgroundColor : "transparent",
+            border: "1px black solid",
+            padding: '10px 20px',
+            borderRadius : "3px",
+            cursor : "pointer"
         }
     },
+    addBtnDisabled : {
+        marginTop: 10,
+        '& > button': {
+            backgroundColor : "transparent",
+            border: "1px #DDD solid",
+            borderRadius : "3px",
+            padding: '10px 20px',
+            opacity : "0.6"
+        }
+    },
+    stock : {
+        padding : "10px 0px",
+        fontSize : "13px"
+    },
+    sku : {
+        fontSize : "13px"
+    },
+    form : {
+        marginTop : "35px",
+        marginBottom : "15px"
+    },  
 
+    qtyGroup : {
+        padding : "15px 0px"
+    },
+    qtyInput : {
+        height : "30px",
+        border : "0.5px #DDD solid",
+        transform : "border 0.3s"
+    },
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
@@ -164,6 +196,7 @@ const ResponsiveDialog = props => {
     const {products, match, history} = props;
     const product = products ? products.find(n => n.id.toString() === match.params.id) : null;
 
+    console.log("=====> ", product)
 
     let options = {}, variants = {};
     ((product || {}).variants || []).forEach(v => (v.description||'').split(',').forEach(desc => {
@@ -234,6 +267,10 @@ const ResponsiveDialog = props => {
                     </Carousel>
                 </div>
                 <div className={classes.detail}>
+                    <p className={classes.description}>
+                        <h3>Description:</h3>
+                        {product.description}
+                    </p>
                     <div className={classes.price}>
                         <NumberFormat
                             value={variant.price}
@@ -243,34 +280,40 @@ const ResponsiveDialog = props => {
                             renderText={v => <b>{v}</b>}
                         />
                     </div>
-                    <div className={classes.stock}>{variant.stock > 0 ? 'in stock' : 'out of stock'}</div>
-                    <div className={classes.sku}>{variant.sku}</div>
-                    <p className={classes.description}>{product.description}</p>
+                    <div className={classes.stock}>
+                        {
+                            variant.stock > 0 ? 
+                            <span style={{color:"#1fa141"}}>In stock</span>
+                            :
+                            <span style={{color:"#e0674f"}}>Out of stock</span>
+                        }
+                    </div>
+                    <div className={classes.sku}>SKU: {variant.sku || "--"}</div>
                     <div className={classes.form}>
-                        {Object.keys(options).map((o, oi) => <div
-                            key={oi}
-                        >
-                            {o}:{options[o].map((v, vi) => <label
-                                key={vi}
-                            >
-                                <input
-                                    type="radio"
-                                    name={o}
-                                    value={v}
-                                    checked={(variant.description || []).indexOf(`${o}:${v}`) >= 0}
-                                    onChange={e => setForm({
-                                        ...form,
-                                        variant: {
-                                            ...form.variant,
-                                            [e.target.name]: e.target.value
-                                        }
-                                    })}
-                                />
-                                {v}
-                            </label>)}
-                        </div>)}
+                        {
+                            Object.keys(options).map((o, oi) => <div key={oi}>
+                                <span>{o}</span> :
+                                {options[o].map((v, vi) => <label key={vi} >
+                                    <input
+                                        type="radio"
+                                        name={o}
+                                        value={v}
+                                        checked={(variant.description || []).indexOf(`${o}:${v}`) >= 0}
+                                        onChange={e => setForm({
+                                            ...form,
+                                            variant: {
+                                                ...form.variant,
+                                                [e.target.name]: e.target.value
+                                            }
+                                        })}
+                                    />
+                                    {v}
+                                </label>)}
+                            </div>)
+                        }
                         <div className={classes.qtyGroup}>
                             <input
+                                className={classes.qtyInput}
                                 type="number"
                                 defaultValue={form.qty || 1}
                                 onChange={e => setForm({
@@ -278,16 +321,17 @@ const ResponsiveDialog = props => {
                                     qty: e.target.value
                                 })}
                             />
-                            <button
+                            {/* <button
                                 type="button"
                             >
                                 <span className={'icon-heart'} />
-                            </button>
+                            </button> */}
                         </div>
-                        <div className={classes.addBtn}>
+                        <div className={variant.stock > 0 ? classes.addBtn : classes.addBtnDisabled}>
                             <button
                                 type="button"
                                 onClick={e => props.addToCart(getSelectedVariant(), form.qty)}
+                                disabled={!variant.stock}
                             >
                                 <i className={'icon-cart'}/>&nbsp;&nbsp;
                                 <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
