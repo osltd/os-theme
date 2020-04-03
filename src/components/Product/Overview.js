@@ -391,7 +391,7 @@ const mapDispatchToProps = dispatch => ({
         type: PRODUCT_EDIT_FILTER,
         payload: {
             key: key,
-            value: value,
+            value: value
         }
     }),
 
@@ -412,7 +412,7 @@ const ShopOverview = props => {
     const classes = styles();
     var products = [...(props.products || [])];
 
-    // has sorting?
+    // ----------- has sorting?
     if(props.sort.sortBy && props.sort.sortBy.length && !/^clear$/.test(props.sort.sortBy)){
         products = products.sort((a, b) => {
             if(/^nameAsc$/.test(props.sort.sortBy)){
@@ -431,6 +431,11 @@ const ShopOverview = props => {
     } else {
         // filter cleared, clone original array
         products = [...(props.products || [])];
+    }
+
+    // ----------- has filter?
+    if(props.filter.tag){
+        products = products.filter(p => p.tags.includes(props.filter.tag));
     }
 
     // ----------------------------------------------------------------  Menu ----------------------------------------------------------------
@@ -464,12 +469,15 @@ const ShopOverview = props => {
                 ></button>
             </div>
             <ul className={classes.categoryList}>
-                {getTagsCountsArray(products, tag => props.editProductFilter('tag', tag)).map((t, i) => <li key={i}>
-                    <button
-                        type="button"
-                        className={classes.menuItem}
-                    >{t.label}</button>
-                </li>)}
+                {getTagsCountsArray(props.products || []).map((t, i) => {
+                    return <li key={i}>
+                        <button
+                            type="button"
+                            className={classes.menuItem}
+                            onClick={() => { props.editProductFilter('tag', t.value); }}
+                        >{t.label}</button>
+                    </li>
+                })}
             </ul>
         </div>
     </div>;
@@ -493,8 +501,8 @@ const ShopOverview = props => {
                 />
             </div>
             <div className={classes.status}>
-                <I18nText keyOfI18n={keyOfI18n.ITEMS}/>&nbsp;
-                <I18nText keyOfI18n={keyOfI18n.OF}/>
+                {/* <I18nText keyOfI18n={keyOfI18n.ITEMS}/>&nbsp;
+                <I18nText keyOfI18n={keyOfI18n.OF}/> */}
             </div>
             <div className={classes.sortSelect}>
                 <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
