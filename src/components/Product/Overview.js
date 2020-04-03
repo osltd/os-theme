@@ -112,7 +112,8 @@ const styles = createUseStyles({
         '& > button': {
             marginLeft: 5,
             border: '1px solid #eee',
-            backgroundColor: '#f7f7f7'
+            backgroundColor: 'transparent',
+            border : "none"
         },
         '& > button:first-child': {
             marginLeft: 0
@@ -127,12 +128,12 @@ const styles = createUseStyles({
     status: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         textAlign: 'center',
-        textTransform: 'uppercase'
+        //textTransform: 'uppercase'
     },
     sort: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         textAlign: 'right',
-        textTransform: 'uppercase'
+        //textTransform: 'uppercase'
     },
     context: {
         display: 'flex',
@@ -185,6 +186,64 @@ const styles = createUseStyles({
         textTransform : 'uppercase',
     },
 
+
+    rowItem: {
+        display : 'flex',
+        flexDirection : "row",
+        width: 'calc(100% - 50px)',
+        backgroundColor: 'transparent',
+        flexBasis: 'auto',
+        margin: 25,
+        flexWrap : 'wrap',
+        padding: '10px 15px',
+        cursor: 'pointer',
+        border: 'none',
+        transition : "opacity 0.3s",
+        '&:hover': {
+            opacity : 0.6
+        }
+    },
+    rowItemInfo : {
+        display : 'flex',
+        flexDirection : 'column',
+        padding : 10,
+        flexWrap : 'wrap',
+        minWidth : 200,
+        flex : 1,
+        alignItems : "flex-start",
+        justifyContent : "center"
+    },
+    rowItemMedia: {
+        flex : 1,
+        marginBottom: 15,
+        height : 180,
+        '& > img': {
+            width: '100%',
+            height : "100%",
+            objectFit : "cover"
+        }
+    },
+    rowItemName: {
+        textAlign : "left",
+        margin: '3px 0px 5px 0px',
+        padding: 0,
+        fontSize : 18,
+        color : "#333"
+    },
+    rowItemDescription : {
+        textAlign : "left",
+        color : "#666",
+        fontSize : 13
+    },
+    rowItemPrice: {
+        textAlign : "left",
+        margin: '3px 0px 5px 0px',
+        color : "#333"
+    },
+
+
+
+
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
@@ -219,6 +278,14 @@ const styles = createUseStyles({
         },
         name: {
             fontSize: 14
+        },
+
+        rowItem : {
+            alignItems : 'center',
+            justifyContent : 'center'
+        },
+        rowItemDescription : {
+            display : 'none'
         }
     }
 });
@@ -259,9 +326,12 @@ const mapDispatchToProps = dispatch => ({
 
 
 const ShopOverview = props => {
+    console.log("=====> props.viewMode", props.viewMode);
     const classes = styles();
     const products = props.products;
 
+
+    // ----------------------------------------------------------------  Menu ----------------------------------------------------------------
     const renderMenu = () => <div className={classes.menu}>
         <div>
             <div className={classes.menuHead}>
@@ -301,18 +371,22 @@ const ShopOverview = props => {
             </ul>
         </div>
     </div>;
-    const renderList = () => <div className={classes.list}>
+    // ----------------------------------------------------------------  /Menu ----------------------------------------------------------------
+
+
+    // ----------------------------------------------------------------  Product List ----------------------------------------------------------------
+    const renderProductList = () => <div className={classes.list}>
         {/* ------------------ Top bar ------------------ */}
         <div className={classes.topbar}>
             <div className={classes.modes}>
                 <button
                     type="button"
-                    // onClick={() => props.changeViewMode('form')}
+                    onClick={() => props.changeViewMode('form')}
                     className={classNames(classes.icon, 'icon-table')}
                 />
                 <button
                     type="button"
-                    // onClick={() => props.changeViewMode('list')}
+                    onClick={() => props.changeViewMode('list')}
                     className={classNames('icon-list', classes.icon)}
                 />
             </div>
@@ -329,87 +403,187 @@ const ShopOverview = props => {
 
         {/* ------------------ product list ------------------ */}
         <div className={classes.context}>
-            {(function(){
-                // not finish loading yet
-                if(products == undefined){
-                    return <LoadingPage/>;
-                } else 
-                // render product
-                {
-                    return products.map((n, i) => {
-                        const media = (n.media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
-                        const variants = n.variants || [];
-                        const prices = [n.price].concat(n.variants.map(v => v.price)).filter((p, i, a) => a.indexOf(p) == i).sort((a, b) => a - b);
-                        
-                        return <button
-                            key={i}
-                            type="button"
-                            className={classes.item}
-                            onClick={() => redirectUrl('/products/' + n.id, props.history)}
-                        >
-                            <div className={classes.media}>
-                                <img src={(function(){
-                                    // preset thumbnail url
-                                    var thumbnail = '/notFound/not-found-image.jpg';
-                                    // has media?
-                                    if(media.length && media[0].url){
-                                        thumbnail = media[0].url.replace('.cloud/','.cloud/380xAUTO/');
-                                    } else {
-                                        // get from variants
-                                        variants.forEach(v => {
-                                            if(v.media.length > 0 && thumbnail == '/notFound/not-found-image.jpg'){
-                                                thumbnail = v.media[0].url;
-                                            }
-                                        });
+            {/^form$/.test(props.viewMode) ? renderProductGrids() : renderProductRows()}
+        </div>
+        {/* ------------------ /product list ------------------ */}
+    </div>;
+
+    
+
+    const renderProductRows = function(){
+        // not finish loading yet
+        if(products == undefined){
+            return <LoadingPage/>;
+        } else 
+        // render product
+        {
+            return products.map((n, i) => {
+                const media = (n.media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
+                const variants = n.variants || [];
+                const prices = [n.price].concat(n.variants.map(v => v.price)).filter((p, i, a) => a.indexOf(p) == i).sort((a, b) => a - b);
+                
+                return <button
+                    key={i}
+                    type="button"
+                    className={classes.rowItem}
+                    onClick={() => redirectUrl('/products/' + n.id, props.history)}
+                >
+                    <div className={classes.media}>
+                        <img src={(function(){
+                            // preset thumbnail url
+                            var thumbnail = '/notFound/not-found-image.jpg';
+                            // has media?
+                            if(media.length && media[0].url){
+                                thumbnail = media[0].url.replace('.cloud/','.cloud/380xAUTO/');
+                            } else {
+                                // get from variants
+                                variants.forEach(v => {
+                                    if(v.media.length > 0 && thumbnail == '/notFound/not-found-image.jpg'){
+                                        thumbnail = v.media[0].url;
                                     }
-                                    return thumbnail;
-                                })()} width="100%"/>
-                            </div>
-                            <div className={classes.name}>
-                                {n.name}
-                            </div>
-                            <div className={classes.price}>
-                                {(function(){
-                                    if(prices.length > 1){
-                                        return (
-                                            <span>
-                                                <NumberFormat
-                                                    value={prices[0]}
-                                                    thousandSeparator={true}
-                                                    prefix={'HK$'}
-                                                    displayType={'text'}
-                                                    renderText={v => v}
-                                                /> -&nbsp;
-                                                <NumberFormat
-                                                    value={prices[prices.length - 1]}
-                                                    thousandSeparator={true}
-                                                    prefix={'HK$'}
-                                                    displayType={'text'}
-                                                    renderText={v => v}
-                                                />
-                                            </span>
-                                        );
-                                    } else {
-                                        return <span>
+                                });
+                            }
+                            return thumbnail;
+                        })()} width="100%"/>
+                    </div>
+                    <div className={classes.rowItemInfo}>
+                        <div className={classes.rowItemName}>
+                            {n.name}
+                        </div>
+                        <div className={classes.rowItemPrice}>
+                            {(function(){
+                                if(prices.length > 1){
+                                    return (
+                                        <span>
                                             <NumberFormat
                                                 value={prices[0]}
                                                 thousandSeparator={true}
                                                 prefix={'HK$'}
                                                 displayType={'text'}
                                                 renderText={v => v}
+                                            /> -&nbsp;
+                                            <NumberFormat
+                                                value={prices[prices.length - 1]}
+                                                thousandSeparator={true}
+                                                prefix={'HK$'}
+                                                displayType={'text'}
+                                                renderText={v => v}
                                             />
                                         </span>
+                                    );
+                                } else {
+                                    return <span>
+                                        <NumberFormat
+                                            value={prices[0]}
+                                            thousandSeparator={true}
+                                            prefix={'HK$'}
+                                            displayType={'text'}
+                                            renderText={v => v}
+                                        />
+                                    </span>
+                                }
+                            })()}
+                        </div>
+                        <div className={classes.rowItemDescription}>
+                            {(function(){
+                                return  (n.description || "").length > 80 ? n.description.substr(0,100) + "..." : n.description;
+                            })()}
+                        </div>
+                        {n.tags.length ? <div className={classes.tags}>#{n.tags.join(' #')}</div> : null}
+                    </div>
+                </button>;
+            });
+        }
+    };
+
+
+
+    const renderProductGrids = function(){
+        // not finish loading yet
+        if(products == undefined){
+            return <LoadingPage/>;
+        } else 
+        // render product
+        {
+            return products.map((n, i) => {
+                const media = (n.media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
+                const variants = n.variants || [];
+                const prices = [n.price].concat(n.variants.map(v => v.price)).filter((p, i, a) => a.indexOf(p) == i).sort((a, b) => a - b);
+                
+                return <button
+                    key={i}
+                    type="button"
+                    className={classes.item}
+                    onClick={() => redirectUrl('/products/' + n.id, props.history)}
+                >
+                    <div className={classes.media}>
+                        <img src={(function(){
+                            // preset thumbnail url
+                            var thumbnail = '/notFound/not-found-image.jpg';
+                            // has media?
+                            if(media.length && media[0].url){
+                                thumbnail = media[0].url.replace('.cloud/','.cloud/380xAUTO/');
+                            } else {
+                                // get from variants
+                                variants.forEach(v => {
+                                    if(v.media.length > 0 && thumbnail == '/notFound/not-found-image.jpg'){
+                                        thumbnail = v.media[0].url;
                                     }
-                                })()}
-                            </div>
-                            {n.tags.length ? <div className={classes.tags}>#{n.tags.join(' #')}</div> : null}
-                        </button>;
-                    });
-                }
-            })()}
-        </div>
-        {/* ------------------ /product list ------------------ */}
-    </div>;
+                                });
+                            }
+                            return thumbnail;
+                        })()} width="100%"/>
+                    </div>
+                    <div className={classes.name}>
+                        {n.name}
+                    </div>
+                    <div className={classes.price}>
+                        {(function(){
+                            if(prices.length > 1){
+                                return (
+                                    <span>
+                                        <NumberFormat
+                                            value={prices[0]}
+                                            thousandSeparator={true}
+                                            prefix={'HK$'}
+                                            displayType={'text'}
+                                            renderText={v => v}
+                                        /> -&nbsp;
+                                        <NumberFormat
+                                            value={prices[prices.length - 1]}
+                                            thousandSeparator={true}
+                                            prefix={'HK$'}
+                                            displayType={'text'}
+                                            renderText={v => v}
+                                        />
+                                    </span>
+                                );
+                            } else {
+                                return <span>
+                                    <NumberFormat
+                                        value={prices[0]}
+                                        thousandSeparator={true}
+                                        prefix={'HK$'}
+                                        displayType={'text'}
+                                        renderText={v => v}
+                                    />
+                                </span>
+                            }
+                        })()}
+                    </div>
+                    {n.tags.length ? <div className={classes.tags}>#{n.tags.join(' #')}</div> : null}
+                </button>;
+            });
+        }
+    };
+
+
+
+    // ----------------------------------------------------------------  Product List ----------------------------------------------------------------
+
+
+
+    
 
 
     return <div>
@@ -419,7 +593,7 @@ const ShopOverview = props => {
         />
         <div className={classes.wrapper}>
             {renderMenu()}
-            {renderList()}
+            {renderProductList()}
         </div>
     </div>;
 };
