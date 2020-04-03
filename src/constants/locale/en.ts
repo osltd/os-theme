@@ -143,6 +143,7 @@ export const en: props = {
     SHOP_SORT_NAME_DES: 'Name Z-A',
     SHOP_SORT_PRICE_ASC: 'Price Low to High',
     SHOP_SORT_PRICE_DES: 'Price High to Low',
+    SHOP_SORT_CLEAR : 'Clear Filter',
     SHOP: 'shop',
     PRODUCT_CATEGORY: 'Categories',
 };

@@ -20,9 +20,28 @@ import PopUp from '../Widget/PopUp'
 import {keyOfI18n} from "../../constants/locale/interface";
 import {I18nText} from "../Widget/I18nText";
 
-const filterOptions = [<I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>,
-    <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>, <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>,
-    <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>];
+const filterOptions = [
+    {
+        key : 'nameAsc',
+        element : <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_ASC}/>
+    },
+    {
+        key : 'nameDes',
+        element : <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_NAME_DES}/>
+    },
+    {
+        key : 'priceAsc',
+        element : <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_ASC}/>
+    },
+    {
+        key : 'priceDes',
+        element : <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_PRICE_DES}/>
+    },
+    {
+        key : 'clear',
+        element : <I18nText keyOfI18n={keyOfI18n.SHOP_SORT_CLEAR}/>
+    },
+];
 
 
 const styles = createUseStyles({
@@ -99,7 +118,7 @@ const styles = createUseStyles({
         display: 'flex',
         borderTop: '1px solid rgb(169, 169, 169)',
         borderBottom: '1px solid rgb(169, 169, 169)',
-        padding: '5px 0',
+        padding: '5px 15px',
         alignItems: 'center',
         '& > div': {
             flex: 1
@@ -245,6 +264,58 @@ const styles = createUseStyles({
 
 
 
+    sortSelect: {
+        position: 'relative',
+        display : 'flex',
+        justifyContent : 'flex-end',
+        minWidth: 100,
+        '& > div > button': {
+            display: 'block',
+            cursor: 'pointer',
+            borderWidth: 0,
+            backgroundColor: 'transparent',
+            fontSize: 14,
+            '&:focus': {
+                outline: 0
+            }
+        }
+    },
+    sortOptions: {
+        width: '100%',
+        position: 'absolute',
+        display: 'none',
+        marginTop: 35,
+        padding: 0,
+        boxShadow: '0 3px 8px 3px rgba(92, 92, 92, 0.2)',
+        '&:before': {
+            content: '""',
+            position: 'absolute',
+            borderColor: 'transparent transparent #f3f3f3',
+            borderStyle: 'solid',
+            borderWidth: '10px 15px',
+            top: -20,
+            left: 'calc(90% - 15px)'
+        },
+        '& > li': {
+            listStyle: 'none'
+        },
+        '& > li > button': {
+            display: 'block',
+            width: '100%',
+            borderWidth: 0,
+            backgroundColor: '#f3f3f3',
+            cursor: 'pointer',
+            padding: '5px 0',
+            fontSize: 15,
+            '&:focus': {
+                outline: 0
+            }
+        }
+    },
+
+
+
+
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
@@ -309,27 +380,58 @@ const mapDispatchToProps = dispatch => ({
             }
         )
     ,
-    editProductSort: (key, value) => dispatch({
+    editProductSort: (key) => dispatch({
         type: PRODUCT_EDIT_SORT,
         payload: {
-            key: key,
-            value: value,
-        },
+            key : "sortBy",
+            value : key
+        }
     }),
     editProductFilter: (key, value) => dispatch({
         type: PRODUCT_EDIT_FILTER,
         payload: {
             key: key,
             value: value,
-        },
+        }
     }),
+
+    closeSortOptions: e => {
+        var parent = e.target;
+        while (parent && !/^sortSelect-/i.test(parent.className)) parent = parent.parentNode;
+        if (parent) {
+            var target = Object.values(parent.childNodes).filter(c => /^sortOptions-/i.test(c.className))[0];
+            if (target) target.style.display = !/^block$/i.test(target.style.display) ? 'block' : 'none';
+        }
+    },
+
+
 });
 
 
 const ShopOverview = props => {
     const classes = styles();
-    const products = props.products;
+    var products = [...(props.products || [])];
 
+    // has sorting?
+    if(props.sort.sortBy && props.sort.sortBy.length && !/^clear$/.test(props.sort.sortBy)){
+        products = products.sort((a, b) => {
+            if(/^nameAsc$/.test(props.sort.sortBy)){
+                return a.name > b.name;
+            } else 
+            if(/^nameDes$/.test(props.sort.sortBy)){
+                return a.name < b.name;
+            } else 
+            if(/^priceAsc$/.test(props.sort.sortBy)){
+                return a.price > b.price;
+            } else 
+            if(/^priceDes$/.test(props.sort.sortBy)){
+                return a.price < b.price;
+            }
+        });
+    } else {
+        // filter cleared, clone original array
+        products = [...(props.products || [])];
+    }
 
     // ----------------------------------------------------------------  Menu ----------------------------------------------------------------
     const renderMenu = () => <div className={classes.menu}>
@@ -394,8 +496,25 @@ const ShopOverview = props => {
                 <I18nText keyOfI18n={keyOfI18n.ITEMS}/>&nbsp;
                 <I18nText keyOfI18n={keyOfI18n.OF}/>
             </div>
-            <div className={classes.sort}>
-                <I18nText keyOfI18n={keyOfI18n.SORT_BY}/>
+            <div className={classes.sortSelect}>
+                <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                    {props.sort.sortBy && !/^clear$/.test(props.sort.sortBy) ? filterOptions.filter(o => o.key == props.sort.sortBy)[0].element : null}
+                    <button type="button" 
+                            onClick={props.closeSortOptions} 
+                            className={classNames('icon-filter', classes.icon)} >
+                    </button>
+                </div>
+                <ul className={classes.sortOptions}>
+                    {filterOptions.map(o => (<li>
+                        <button type="button" onClick={(e) => {
+                            props.editProductSort(o.key); 
+                            // close
+                            props.closeSortOptions(e);
+                        }}>
+                            {o.element}
+                        </button>
+                    </li>))}
+                </ul>
             </div>
         </div>
         {/* ------------------ /Top bar ------------------ */}

@@ -141,6 +141,7 @@ export const zh_HK: props = {
     SHOP_SORT_NAME_DES: '名稱 Z-A',
     SHOP_SORT_PRICE_ASC: '價格 低至高',
     SHOP_SORT_PRICE_DES: '價格 高至低',
+    SHOP_SORT_CLEAR : '重設條件',
     SHOP: '購物',
     PRODUCT_CATEGORY: '產品分類',
 };
