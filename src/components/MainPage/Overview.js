@@ -14,7 +14,7 @@ import agent from '../../agent';
 
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
-
+import {redirectUrl} from "../../api/ApiUtils";
 
 const styles = createUseStyles({
     tips: {
@@ -25,13 +25,18 @@ const styles = createUseStyles({
         margin: 0,
         display: 'flex',
         flexWrap: 'wrap',
-        padding: 0
+        padding: 0,
     },
     tipsItem: {
         display: 'flex',
         width: 'calc(50% - 20px)',
         backgroundColor: '#f7f7f7',
-        margin: 10
+        margin: 10,
+        cursor : "pointer",
+        transition : "box-shadow 0.3s",
+        "&:hover" : {
+            boxShadow : "3px 3px 15px #EFEFEF"
+        }
     },
 
     featuredMerchandises: {
@@ -46,9 +51,23 @@ const styles = createUseStyles({
     featuredMerchandisesItem: {
         width: 'calc(20% - 20px)',
         margin: 10,
+        padding : 15,
         backgroundColor: 'transparent',
         borderWidth: 0,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        transition : "box-shadow 0.3s",
+        "&:hover" : {
+            boxShadow : "3px 3px 15px #EFEFEF"
+        }
+    },
+    itemName : {
+        fontSize : 17,
+        fontWeight : 300
+    },
+    itemPrice : {
+        marginTop : 10,
+        fontSize : 14,
+        fontWeight : 600
     },
 
     // for mobile
@@ -175,20 +194,30 @@ const MainPageOverview = props => {
             {(featuredArticles || []).map((article, idx) => <li
                 key={idx}
                 style={{
-                    backgroundImage: `url(${article.sections[0].media[0].url})`,
-                    backgroundSize: 'cover',
                     height: 390,
                     display: 'flex',
                     alignItems: 'flex-end',
-                    justifyContent: 'flex-end'
+                    justifyContent: 'flex-end',
+                    cursor : "pointer"
                 }}
+                onClick={() => redirectUrl('/articles/' + article.id, props.history)}
             >
+                <img
+                    style={{
+                        objectFit : "cover",
+                        width : "100%",
+                        height : "100%"
+                    }} 
+                    src={article.sections[0].media[0].url}
+                />
                 <span
                     style={{
+                        position : "absolute",
                         textShadow: '0px 1px 4px #000',
                         color: '#fff',
                         fontSize: 15,
-                        margin: 15
+                        margin: 15,
+                        fontSize : "2em"
                     }}
                 >{article.sections[0].title}</span>
             </li>)}
@@ -202,6 +231,7 @@ const MainPageOverview = props => {
                 {(tips || []).slice(0, 4).map((article, idx) => <li
                     key={idx}
                     className={classes.tipsItem}
+                    onClick={() => redirectUrl('/articles/' + article.id, props.history)}
                 >
                     {(article.sections[0] || {}).media.length > 0 && <div
                         style={{
@@ -209,7 +239,8 @@ const MainPageOverview = props => {
                             height: 250,
                             backgroundImage: `url(${article.sections[0].media[0].url})`,
                             backgroundSize: 'cover',
-                            backgroundPosition: 'center'
+                            backgroundPosition: 'center',
+                            cursor : "pointer"
                         }}
                     />}
                     <div
@@ -254,8 +285,8 @@ const MainPageOverview = props => {
                     />
                     <br/>
                     <div>
-                        <div>{item.name}</div>
-                        <div>{`${item.price} ${shopInfo.currency.toUpperCase()}`}</div>
+                        <div className={classes.itemName}>{item.name}</div>
+                        <div className={classes.itemPrice}>{`${shopInfo.currency.toUpperCase()} ${item.price}`}</div>
                     </div>
                 </button>)}
             </ul>

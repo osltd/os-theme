@@ -107,14 +107,40 @@ const styles = createUseStyles({
         flexBasis: 'auto',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
-        margin: 15,
+        margin : 15,
         padding: 0,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        transition : "box-shadow 0.3s",
+        "&:hover" : {
+            boxShadow: '3px 3px 15px rgba(0, 0, 0, 0.1)',
+        }
+    },
+    feedTitle : {
+        textAlign : "left",
+        padding : "0px 15px",
+        margin : "10px 0px"
+    },
+    timestamp : {
+        textAlign : "left",
+        padding : "0px 15px",
+        "& > i" : {
+            textAlign : "left",
+            fontSize : "12px",
+            color : "#666"
+        }
+    },
+    feedDesc : {
+        textAlign : "left",
+        padding : "0px 15px",
+        fontSize : "14px",
+        color : "#333"
     },
     media: {
         '& > img': {
-            width: '100%'
+            width: '100%',
+            height : "150px",
+            objectFit : "cover"
         }
     },
     
@@ -240,7 +266,7 @@ const ResponsiveDialog = props => {
                     <I18nText keyOfI18n={keyOfI18n.NO_POST_AVAILABLE}/>
             </p> : feeds.map((n, i) => {
                 const desc = h2p(n.sections[0].description);
-                const short = desc.substr(0, 150);
+                const short = desc.substr(0, 70);
                 const media = (n.sections[0].media || []).filter(m => /^(jpe?g|png|gif|bmp|mp4|qt|mov)$/i.test(m.ext));
                 return <button
                     key={i}
@@ -251,12 +277,11 @@ const ResponsiveDialog = props => {
                     {media.length > 0 && <div className={classes.media}>
                         <img src={media[0].url.replace('.cloud/','.cloud/380xAUTO/')} width="100%"/> 
                     </div>}
-                    <h5>{n.sections[0].title}</h5>
-                    <div>{moment(n.time).format('ll')}</div>
-                    <p style={{
-                        margin: 0,
-                        padding: 15
-                    }}>{short == desc ? short : `${short}...`}</p>
+                    <h5 className={classes.feedTitle}>{n.sections[0].title}</h5>
+                    <div className={classes.timestamp}>
+                        <i>{moment(n.time).format('ll')}</i>
+                    </div>
+                    <p className={classes.feedDesc}>{short == desc ? short : `${short}...`}</p>
                 </button>;
             })
         )}

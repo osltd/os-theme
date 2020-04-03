@@ -146,6 +146,7 @@ const styles = createUseStyles({
         padding: '10px 15px',
         cursor: 'pointer',
         border: '1px solid #fff',
+        transition : "border-color 0.3",
         '&:hover': {
             borderColor: '#ededed'
         }
