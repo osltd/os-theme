@@ -22,6 +22,7 @@ import SocialIcon from '../Widget/SocialIcon';
 import Header from '../Layout/Body/Header';
 import LoadingPage from '../Layout/LoadingPage';
 
+import ReactSelect from 'react-select';
 
 import {
     INIT_CART
