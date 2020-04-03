@@ -18,7 +18,7 @@ export const en: props = {
     LAST_NAME: 'Last Name',
     CONFIRM_PASSWORD: 'Confirm Password',
     PRODUCT: 'product',
-    PRODUCTS: 'products',
+    PRODUCTS: 'Products',
     PRICE: 'price',
     QUANTITY: 'Quantity',
     TOTAL: 'Total',

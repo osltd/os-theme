@@ -35,6 +35,7 @@ const styles = createUseStyles({
     },
     logo: {
         display: 'flex',
+        marginLeft : 15,
         '& > button': {
             borderWidth: 0,
             backgroundColor: 'transparent',
@@ -46,6 +47,12 @@ const styles = createUseStyles({
                 outline: 'none'
             }
         }
+    },
+    shopLogo : {
+        marginRight : 10
+    },
+    shopName : {
+        fontWeight : 600
     },
 
     mobileMenu: {
@@ -69,7 +76,7 @@ const styles = createUseStyles({
             cursor: 'pointer',
             borderWidth: 0,
             backgroundColor: 'transparent',
-            textTransform: 'uppercase',
+            //textTransform: 'uppercase',
             '&:focus': {
                 outline: 'none'
             }
@@ -85,11 +92,12 @@ const styles = createUseStyles({
         '& button': {
             cursor: 'pointer',
             fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-            fontWeight: 600,
-            fontSize: 14,
+            fontWeight: 300,
+            fontSize: 16,
+            margin : "0px 5px",
             borderWidth: 0,
             backgroundColor: 'transparent',
-            textTransform: 'uppercase',
+            //textTransform: 'uppercase',
             cursor: 'pointer',
             '&:focus': {
                 outline: 'none'
@@ -104,10 +112,10 @@ const styles = createUseStyles({
         '& > div:last-child > button': {
             borderWidth: 0,
             backgroundColor: 'transparent',
-            fontSize: 15,
-            fontWeight: 600,
+            fontSize: 17,
+            fontWeight: 300,
+            marginRight : 25,
             fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-            textTransform: 'uppercase',
             cursor: 'pointer',
             '&:focus': {
                 outline: 0
@@ -162,7 +170,15 @@ const styles = createUseStyles({
         }
     },
     searchBar: {
-        margin: '0 10px'
+        height : 20,
+        fontSize : 14,
+        padding : 5,
+        border : "1px #DDD solid",
+        borderRadius : 3,
+        transition : "border 0.3s",
+        "&:focus" : {
+            border : "1px black solid",
+        }
     },
     shoppingCart: {
         display: 'none',
@@ -279,6 +295,9 @@ const Header = props => {
     };
 
     return <div className={classes.topbar}>
+
+
+        {/* --------------------------- Left topbar --------------------------- */}
         <div className={classes.nav}>
             <div className={classes.openMenu}>
                 <button type="button" onClick={props.openMobileMenu}>
@@ -288,11 +307,12 @@ const Header = props => {
 
             {(logo.length > 0 || name.length > 0) && <div className={classes.logo}>
                 <button type="button" onClick={e => redirectUrl('/', history)}>
-                    {logo.length > 0 && <img src={shopInfo.logo.replace('.cloud/','.cloud/AUTOx50/')} height={30}/>}
-                    {name.length > 0 && <b>{shopInfo.name}</b>}
+                    {logo.length > 0 && <img className={classes.shopLogo} src={shopInfo.logo.replace('.cloud/','.cloud/AUTOx50/')} height={30}/>}
+                    {name.length > 0 && <span className={classes.shopName}>{shopInfo.name}</span>}
                 </button>
             </div>}
 
+            {/* --------------- Mobile menu  --------------- */}
             <div className={classNames(classes.mobileMenu, 'animated', 'fadeIn', 'faster')}>
                 {config.showArticles && <button type="button" onClick={e => {
                     redirectUrl('/articles', history);
@@ -315,6 +335,8 @@ const Header = props => {
                 <button type="button" onClick={props.closeMobileMenu}>X</button>
             </div>
 
+
+            {/* --------------- Desktop menu  --------------- */}
             <div className={classes.desktopMenu}>
                 {config.showArticles && <div>
                     <button type="button" onClick={e => redirectUrl('/articles', history)}>
@@ -330,15 +352,28 @@ const Header = props => {
                     </button>
                 </div>}
             </div>
-            {(products || []).length > 0 && <div
-                className={classes.shoppingCart}
-            >
-                <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
-                    <i className="icon-cart"/>
-                </button>
-            </div>}
+            {
+                (products || []).length > 0 && 
+                <div className={classes.shoppingCart} >
+                    <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
+                        <i className="icon-cart"/>
+                    </button>
+                </div>
+            }
         </div>
+
+
+        {/* --------------------------- Right topbar --------------------------- */}
         <div className={classes.toolbar}>
+            {/* ---- search bar ---- */}
+            <div>
+                <input
+                    type="text"
+                    className={classes.searchBar}
+                    placeholder={`${useI18nText(keyOfI18n.SEARCH)}…`}
+                />
+            </div>
+            {/* ---- Language selector ---- */}
             <div className={classes.languages}>
                 <div>
                     <button type="button" onClick={props.closeLanguageOptions}>
@@ -370,15 +405,11 @@ const Header = props => {
                     </li>
                 </ul>
             </div>
-            <div className={classes.searchBar}>
-                <input
-                    type="text"
-                    placeholder={`${useI18nText(keyOfI18n.SEARCH)}…`}
-                />
-            </div>
+            {/* ---- Shoppin cart ---- */}
             {(products || []).length > 0 && <div>
                 <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
-                    <I18nText keyOfI18n={keyOfI18n.SHOPPING_CART}/>
+                    {/* <I18nText keyOfI18n={keyOfI18n.SHOPPING_CART}/> */}
+                    <i className="icon-cart"/>
                 </button>
             </div>}
         </div>
