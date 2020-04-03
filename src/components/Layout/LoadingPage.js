@@ -42,7 +42,9 @@ class NotFound extends React.Component {
         return (
 
             <Grid container justify={'center'} alignItems={'center'} className={classes.root}>
-                <CircularProgress size={400}/>
+                <div style={{height:400}}>
+                    <CircularProgress size={40} color="#DDD"/>
+                </div>
             </Grid>);
     }
 }

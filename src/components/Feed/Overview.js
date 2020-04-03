@@ -118,12 +118,10 @@ const styles = createUseStyles({
     },
     feedTitle : {
         textAlign : "left",
-        //padding : "0px 15px",
         margin : "10px 0px"
     },
-    timestamp : {
+    feedTimestamp : {
         textAlign : "left",
-        //padding : "0px 15px",
         "& > i" : {
             textAlign : "left",
             fontSize : "12px",
@@ -132,7 +130,6 @@ const styles = createUseStyles({
     },
     feedDesc : {
         textAlign : "left",
-        //padding : "0px 15px",
         fontSize : "14px",
         color : "#333"
     },
@@ -278,7 +275,7 @@ const ResponsiveDialog = props => {
                         <img src={media[0].url.replace('.cloud/','.cloud/380xAUTO/')} width="100%"/> 
                     </div>}
                     <h5 className={classes.feedTitle}>{n.sections[0].title}</h5>
-                    <div className={classes.timestamp}>
+                    <div className={classes.feedTimestamp}>
                         <i>{moment(n.time).format('ll')}</i>
                     </div>
                     <p className={classes.feedDesc}>{short == desc ? short : `${short}...`}</p>
