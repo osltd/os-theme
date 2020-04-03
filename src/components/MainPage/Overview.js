@@ -51,7 +51,6 @@ const styles = createUseStyles({
     featuredMerchandisesItem: {
         width: 'calc(20% - 20px)',
         margin: 10,
-        padding : 15,
         backgroundColor: 'transparent',
         borderWidth: 0,
         cursor: 'pointer',
@@ -61,13 +60,19 @@ const styles = createUseStyles({
         }
     },
     itemName : {
+        textAlign : "left",
+        paddingBottom : 7,
         fontSize : 17,
-        fontWeight : 300
+        fontWeight : 300,
+        color : "#666"
     },
     itemPrice : {
-        marginTop : 10,
-        fontSize : 14,
-        fontWeight : 600
+        textAlign : "left",
+        paddingBottom : 15,
+        fontSize : 17,
+        fontWeight : 300,
+        textAlign : "left",
+        color : "#666"
     },
 
     // for mobile
@@ -224,7 +229,7 @@ const MainPageOverview = props => {
         </div>
 
         <div className={classes.tips}>
-            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>
+            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', paddingLeft : "15px"}}>
                 <I18nText keyOfI18n={keyOfI18n.LATEST_INFO}/>
             </h2>
             <ul className={classes.tipsWrapper}>
@@ -265,7 +270,7 @@ const MainPageOverview = props => {
         </div>
         
         <div className={classes.featuredMerchandises}>
-            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>
+            <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', paddingLeft : "15px" }}>
                 <I18nText keyOfI18n={keyOfI18n.FEATURED_PRODUCTS}/>
             </h2>
             <ul className={classes.featuredMerchandisesWrapper}>

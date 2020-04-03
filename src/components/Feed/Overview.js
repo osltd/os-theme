@@ -105,10 +105,10 @@ const styles = createUseStyles({
         backgroundColor: 'transparent',
         borderWidth: 0,
         flexBasis: 'auto',
-        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+        //boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         cursor: 'pointer',
         margin : 15,
-        padding: 0,
+        padding: 15,
         display: 'flex',
         flexDirection: 'column',
         transition : "box-shadow 0.3s",
@@ -118,12 +118,12 @@ const styles = createUseStyles({
     },
     feedTitle : {
         textAlign : "left",
-        padding : "0px 15px",
+        //padding : "0px 15px",
         margin : "10px 0px"
     },
     timestamp : {
         textAlign : "left",
-        padding : "0px 15px",
+        //padding : "0px 15px",
         "& > i" : {
             textAlign : "left",
             fontSize : "12px",
@@ -132,7 +132,7 @@ const styles = createUseStyles({
     },
     feedDesc : {
         textAlign : "left",
-        padding : "0px 15px",
+        //padding : "0px 15px",
         fontSize : "14px",
         color : "#333"
     },
