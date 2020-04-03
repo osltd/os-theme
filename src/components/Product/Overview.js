@@ -209,18 +209,19 @@ const styles = createUseStyles({
         padding : 10,
         flexWrap : 'wrap',
         minWidth : 200,
-        flex : 1,
+        flex : 2,
         alignItems : "flex-start",
         justifyContent : "center"
     },
     rowItemMedia: {
         flex : 1,
+        minWidth : 180,
         marginBottom: 15,
         height : 180,
         '& > img': {
             width: '100%',
             height : "100%",
-            objectFit : "cover"
+            objectFit : "contain"
         }
     },
     rowItemName: {
@@ -233,7 +234,7 @@ const styles = createUseStyles({
     rowItemDescription : {
         textAlign : "left",
         color : "#666",
-        fontSize : 13
+        fontSize : 13,
     },
     rowItemPrice: {
         textAlign : "left",
@@ -326,7 +327,6 @@ const mapDispatchToProps = dispatch => ({
 
 
 const ShopOverview = props => {
-    console.log("=====> props.viewMode", props.viewMode);
     const classes = styles();
     const products = props.products;
 
@@ -428,7 +428,7 @@ const ShopOverview = props => {
                     className={classes.rowItem}
                     onClick={() => redirectUrl('/products/' + n.id, props.history)}
                 >
-                    <div className={classes.media}>
+                    <div className={classes.rowItemMedia}>
                         <img src={(function(){
                             // preset thumbnail url
                             var thumbnail = '/notFound/not-found-image.jpg';
@@ -447,9 +447,11 @@ const ShopOverview = props => {
                         })()} width="100%"/>
                     </div>
                     <div className={classes.rowItemInfo}>
+                        {/* ---- Name ----- */}
                         <div className={classes.rowItemName}>
                             {n.name}
                         </div>
+                        {/* ---- media ----- */}
                         <div className={classes.rowItemPrice}>
                             {(function(){
                                 if(prices.length > 1){
@@ -484,11 +486,11 @@ const ShopOverview = props => {
                                 }
                             })()}
                         </div>
-                        <div className={classes.rowItemDescription}>
-                            {(function(){
-                                return  (n.description || "").length > 80 ? n.description.substr(0,100) + "..." : n.description;
-                            })()}
-                        </div>
+                        {/* ---- Description ----- */}
+                        {(n.description || "").trim().length ? <div className={classes.rowItemDescription}>
+                            {(n.description || "").length > 80 ? n.description.substr(0,100) + "..." : n.description}
+                        </div> : null}
+                        {/* ---- tags ----- */}
                         {n.tags.length ? <div className={classes.tags}>#{n.tags.join(' #')}</div> : null}
                     </div>
                 </button>;
