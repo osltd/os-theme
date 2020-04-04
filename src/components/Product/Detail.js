@@ -44,7 +44,10 @@ const styles = createUseStyles({
     detail: {
         flex : 1,
         paddingTop : 30,
-        borderTop : "0.5px #DDD solid"
+        borderTop : "0.5px #DDD solid",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
     },
     detailWrapper : {
         display : 'flex',
