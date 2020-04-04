@@ -39,14 +39,31 @@ const styles = createUseStyles({
     },
     content: {
         display: 'flex',
-        flexDirection: 'row-reverse'
-    },
-    viewer: {
-        width: '35%'
+        flexDirection: 'column'
     },
     detail: {
-        width: '65%',
-        marginRight: 100
+        flex : 1,
+        paddingTop : 30,
+        borderTop : "0.5px #DDD solid"
+    },
+    detailWrapper : {
+        display : 'flex',
+        flexWrap : 'wrap',
+        flex : 1,
+        maxWidth : 1200,
+        flexDirection : 'row'
+    },
+    leftCol : {
+        display : 'flex',
+        flex : 2,
+        flexDirection : 'column',
+        minWidth : 250
+    },
+    rightCol : {
+        display : 'flex',
+        flex : 1,
+        flexDirection : 'column',
+        minWidth : 250
     },
 
     backArrow: {
@@ -65,14 +82,32 @@ const styles = createUseStyles({
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
 
-    description: {
-        fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
-        color: '#555',
-        fontSize: 15
+
+    viewer: {
+        display : 'flex',
+        flex : 1,
+        justifyContent : 'center',
+        alignItems : 'center',
+        borderBottom : '0.5 #DDD solid'
     },
+    slideImageWrapper : {
+        width : '100%',
+        //maxWidth : 1200,
+        maxHeight : 600,
+        backgroundColor : 'white'
+    },
+    slideImage : {
+        width : '100%',
+        maxHeight : 600,
+        objectFit : 'contain'
+    },
+
+    
     addBtn: {
         marginTop: 10,
+        width : '100%',
         '& > button': {
+            width : '100%',
             backgroundColor : "transparent",
             border: "1px black solid",
             padding: '10px 20px',
@@ -82,7 +117,9 @@ const styles = createUseStyles({
     },
     addBtnDisabled : {
         marginTop: 10,
+        width : '100%',
         '& > button': {
+            width : '100%',
             backgroundColor : "transparent",
             border: "1px #DDD solid",
             borderRadius : "3px",
@@ -90,25 +127,79 @@ const styles = createUseStyles({
             opacity : "0.6"
         }
     },
+
+
+    title : {
+        fontSize : 29,
+        fontWeight : 300,
+        color : '#333',
+        marginTop : 0
+    },
+    description: {
+        color : '#333',
+        fontSize: 16,
+        lineHeight : '150%',
+        marginBottom : 35
+    },
+    stockPriceWrapper : {
+        display:'flex', 
+        flexDirection: 'row',
+        alignItems : 'center'
+    },
     stock : {
         padding : "10px 0px",
-        fontSize : "13px"
+        '& > span > i' : {
+            fontSize : 12
+        }
     },
-    sku : {
-        fontSize : "13px"
+    price : {
+        fontSize : 20,
+        fontWeight : 300,
+        marginRight : 6
     },
     form : {
-        marginTop : "35px",
         marginBottom : "15px"
     },  
+    optionSelectorsWrapper : {
+        marginBottom : "10px"
+    },
+    optionSelector : {
+        //maxWidth : 400,
+        width : "100%",
+        marginBottom : 20
+    },
+    optionTitle : {
+        fontSize : 12,
+        marginBottom : 5
+    },
 
     qtyGroup : {
-        padding : "15px 0px"
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : 'center',
+        height : 50,
+        marginBottom : 15
     },
-    qtyInput : {
-        height : "30px",
-        border : "0.5px #DDD solid",
-        transform : "border 0.3s"
+    qtyBtn : {
+        border : 'none',
+        backgroundColor : 'transparent',
+        width : 55,
+        '&:hover' : {
+            opacity : 0.6
+        },
+        '&:disabled' : {
+            opacity : 0.3
+        },
+        height : 50
+    },
+    qtyValue : {
+        fontSize : 24,
+        marginLeft : 50,
+        marginRight : 50
+    },
+    qtyValueLabel : {
+        fontSize : 12,
     },
     // for mobile
     '@media (max-width: 600px)': {
@@ -119,8 +210,7 @@ const styles = createUseStyles({
             width: '100%'
         },
         detail: {
-            width: '100%',
-            marginRight: 0
+            width: '100%'
         },
         content: {
             display: 'block'
@@ -259,86 +349,149 @@ const ResponsiveDialog = props => {
                     <b><I18nText keyOfI18n={keyOfI18n.FEED_DETAIL_BACK_TO_FEED_LIST}/></b>
                 </button>
             </div>
+            {/* --------------------------- content --------------------------- */}
             <div className={classes.content}>
+
+                {/* --------------------------- Image slider --------------------------- */}
                 <div className={classes.viewer}>
-                    <Carousel>
-                        {(variant.media || product.media).map((m, i) => <div key={i}>
-                            <img src={m.url}/>
+                    <Carousel
+                        showStatus={false}
+                        emulateTouch={true}
+                        useKeyboardArrows={true}
+                        autoPlay={true}
+                        centerMode={(variant.media || product.media).length > 2}
+                        showThumbs={(variant.media || product.media).length > 1}
+                        showIndicators={(variant.media || product.media).length > 1}
+                    >
+                        {(variant.media || product.media).map((m, i) => <div className={classes.slideImageWrapper} key={i}>
+                            <img className={classes.slideImage} src={m.url}/>
                         </div>)}
                     </Carousel>
                 </div>
+                {/* --------------------------- /Image slider --------------------------- */}
+
+
+                {/* --------------------------- Product detail --------------------------- */}
                 <div className={classes.detail}>
-                    <p className={classes.description}>
-                        <h3>Description:</h3>
-                        {product.description}
-                    </p>
-                    <div className={classes.price}>
-                        <NumberFormat
-                            value={variant.price}
-                            thousandSeparator={true}
-                            prefix={'HK$'}
-                            displayType={'text'}
-                            renderText={v => <b>{v}</b>}
-                        />
-                    </div>
-                    <div className={classes.stock}>
-                        {
-                            variant.stock > 0 ? 
-                            <span style={{color:"#1fa141"}}>In stock</span>
-                            :
-                            <span style={{color:"#e0674f"}}>Out of stock</span>
-                        }
-                    </div>
-                    <div className={classes.sku}>SKU: {variant.sku || "--"}</div>
-                    <div className={classes.form}>
-                        {
-                            Object.keys(options).map((o, oi) => <div key={oi}>
-                                <span>{o}</span> :
-                                {options[o].map((v, vi) => <label key={vi} >
-                                    <input
-                                        type="radio"
-                                        name={o}
-                                        value={v}
-                                        checked={(variant.description || []).indexOf(`${o}:${v}`) >= 0}
-                                        onChange={e => setForm({
-                                            ...form,
-                                            variant: {
-                                                ...form.variant,
-                                                [e.target.name]: e.target.value
-                                            }
-                                        })}
+                    <div className={classes.detailWrapper}>
+
+                        {/* ------------------ Left col ------------------ */}
+                        <div className={classes.leftCol}>
+                            
+                            <h1 className={classes.title}>
+                                {product.name}
+                            </h1>
+                            <div className={classes.stockPriceWrapper}>
+                                <div className={classes.price}>
+                                    <NumberFormat
+                                        value={variant.price}
+                                        thousandSeparator={true}
+                                        prefix={'HK$'}
+                                        displayType={'text'}
+                                        renderText={v => v}
                                     />
-                                    {v}
-                                </label>)}
-                            </div>)
-                        }
-                        <div className={classes.qtyGroup}>
-                            <input
-                                className={classes.qtyInput}
-                                type="number"
-                                defaultValue={form.qty || 1}
-                                onChange={e => setForm({
-                                    ...form,
-                                    qty: e.target.value
-                                })}
-                            />
-                            {/* <button
-                                type="button"
-                            >
-                                <span className={'icon-heart'} />
-                            </button> */}
+                                </div>
+                                <div className={classes.stock}>
+                                    {variant.stock > 0 ? 
+                                    <span style={{color:"#1fa141"}}><i>In Stock</i></span> :
+                                    <span style={{color:"#e0674f"}}><i>Out of Stock</i></span>}
+                                </div>
+                            </div>
+                            <p className={classes.description}>
+                                {product.description}
+                            </p>
                         </div>
-                        <div className={variant.stock > 0 ? classes.addBtn : classes.addBtnDisabled}>
-                            <button
-                                type="button"
-                                onClick={e => props.addToCart(getSelectedVariant(), form.qty)}
-                                disabled={!variant.stock}
-                            >
-                                <i className={'icon-cart'}/>&nbsp;&nbsp;
-                                <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
-                            </button>
+                        {/* ------------------ /Left col ------------------ */}
+
+
+                        <div style={{width:"50px"}}></div> {/* ----gap---- */}
+
+                        {/* ------------------ Right col ------------------ */}
+                        <div className={classes.rightCol}>
+                            {/* ------------------ Option select ------------------ */}
+                            <div className={classes.optionSelectorsWrapper}>
+                                {(function(){
+                                    return Object.keys(options).map((o, oi) => <div className={classes.optionSelector} key={oi}>
+                                        <div className={classes.optionTitle}>
+                                            {o.toUpperCase()}
+                                        </div>
+                                        <ReactSelect
+                                            placeholder={o}
+                                            name={o}
+                                            value={(function(){
+                                                var selectOptionObj = (variant.description || []).reduce((o, c) => {
+                                                    var selecteOptionPair = c.split(":");
+                                                    return Object.assign(o, { [selecteOptionPair[0]] : selecteOptionPair[1] });
+                                                }, {});
+                                                return {
+                                                    label : selectOptionObj[o]
+                                                };
+                                            })()}
+                                            onChange={v => setForm({
+                                                ...form,
+                                                variant: {
+                                                    ...form.variant,
+                                                    [o]: v.value
+                                                }
+                                            })}
+                                            options={options[o].map((v, vi) => ({
+                                                value : v,
+                                                label : v
+                                            }))}
+                                        />
+                                    </div>)
+                                })()}
+                            </div>
+                            {/* ------------------ /Option select ------------------ */}
+                            
+                            <div className={classes.form}>
+                                <div className={classes.qtyValueLabel}>QUANTITY</div>
+                                <div className={classes.qtyGroup}>
+                                    <button className={classes.qtyBtn} 
+                                            onClick={() => {
+                                                if(form.qty > 1){
+                                                    setForm({
+                                                        ...form,
+                                                        qty: form.qty-1
+                                                    });
+                                                }
+                                            }}
+                                            disabled={form.qty <= 1 || !variant.stock}
+                                    >
+                                        <i className="icon-minus"></i>
+                                    </button>
+                                    <span className={classes.qtyValue}>{variant.stock == 0 ? 0 : form.qty}</span>
+                                    <button className={classes.qtyBtn} 
+                                            onClick={() => {
+                                                if(form.qty < variant.stock){
+                                                    setForm({
+                                                        ...form,
+                                                        qty: form.qty+1
+                                                    });
+                                                }
+                                            }}
+                                            disabled={form.qty == variant.stock || !variant.stock}
+                                    >
+                                        <i className="icon-plus"></i>
+                                    </button>
+                                </div>
+                                <div className={variant.stock > 0 ? classes.addBtn : classes.addBtnDisabled}>
+                                    <button
+                                        type="button"
+                                        onClick={e => props.addToCart(getSelectedVariant(), form.qty)}
+                                        disabled={!variant.stock}
+                                    >
+                                        <i className={'icon-cart'}/>&nbsp;&nbsp;
+                                        <I18nText keyOfI18n={keyOfI18n.ADD_TO_CART}/>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                        {/* ------------------ /Right col ------------------ */}
                     </div>
+
+
+
                     <div className={classes.shares}>
                         <h6>
                             <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SHARE_THIS_PRODUCT}/>
@@ -354,7 +507,10 @@ const ResponsiveDialog = props => {
                             />
                         </div>
                     </div>
+
+
                 </div>
+                {/* --------------------------- Product detail --------------------------- */}
             </div>
         </div>
     </div>;
