@@ -43,7 +43,7 @@ const styles = createUseStyles({
     },
     detail: {
         flex : 1,
-        paddingTop : 30,
+        paddingTop : 60,
         borderTop : "0.5px #DDD solid",
         display: "flex",
         flexDirection: "column",
@@ -54,7 +54,8 @@ const styles = createUseStyles({
         flexWrap : 'wrap',
         flex : 1,
         maxWidth : 1200,
-        flexDirection : 'row'
+        flexDirection : 'row',
+        width : "100%"
     },
     leftCol : {
         display : 'flex',
@@ -91,7 +92,8 @@ const styles = createUseStyles({
         flex : 1,
         justifyContent : 'center',
         alignItems : 'center',
-        borderBottom : '0.5 #DDD solid'
+        borderBottom : '0.5 #DDD solid',
+        marginBottom : 40
     },
     slideImageWrapper : {
         width : '100%',
