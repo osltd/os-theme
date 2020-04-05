@@ -96,7 +96,11 @@ export const zh_HK: props = {
 
     GOTO: '連至',
     CHECKOUT_TO_BUY_SOME: '購物',
-    CHECKOUT_YOUR_ORDER_SUMMARY: '下單總結',
+    CHECKOUT_YOUR_ORDER_SUMMARY: '個人資訊',
+    CHECKOUT_PAYMENT_INFOFORMATION : '付款資訊',
+    CHECKOUT_SUBTOTAL: '小計',
+    CHECKOUT_SHIPPING_FEE: '運費',
+    CONTINUE_SHIPPING: '計算運費',
     CHECKOUT_PROMO_CODE: '折扣碼',
     CHECKOUT_BILLING_DETAIL: '帳單細節',
     CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART: '您的購物車並沒有任何項目',

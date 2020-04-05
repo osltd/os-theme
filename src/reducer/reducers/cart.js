@@ -3,6 +3,7 @@ import {
     CART_DELETE_ITEM,
     CART_UPDATE_ITEM,
     CART_UPDATE_ORDER_INFO,
+    SHIPPING_RATES,
 
     CART_EDIT_BILLING_DETAIL,
     CART_EDIT_VARIANT,
@@ -16,7 +17,8 @@ import {
 
 const defaultState = {
     items: null,
-    order: {}
+    order: {},
+    rates : []
 };
 
 
@@ -26,6 +28,11 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 items: action.payload ? action.payload : []
+            }
+        case SHIPPING_RATES:
+            return {
+                ...state,
+                rates: action.payload || []
             }
         case CART_DELETE_ITEM:
             return {

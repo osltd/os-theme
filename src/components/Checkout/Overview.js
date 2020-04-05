@@ -13,8 +13,8 @@ import 'react-phone-number-input/style.css';
 import agent from "../../agent";
 
 import Header from '../Layout/Body/Header'
-import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT, INIT_CART, CART_UPDATE_ORDER_INFO} from "../../constants/actionType";
-
+import {EDIT_PRODUCT_VIEW_MODE, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT, INIT_CART, CART_UPDATE_ORDER_INFO, SHIPPING_RATES} from "../../constants/actionType";
+import Select from 'react-select';
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {useI18nText} from "../../hooks/useI18nText";
@@ -38,9 +38,13 @@ const styles = createUseStyles({
     formInput: {
         width: '100%',
         height: 40,
-        borderRadius: 5,
-        border: '1px solid #dadada',
-        padding: '0 15px'
+        borderRadius: 2,
+        border: '1px #dadada solid',
+        padding: '0 15px',
+        transition : "border 0.3s",
+        '&:focus' : {
+            border: '1px black solid',
+        }
     },
     inputSet: {
         margin: '15px -5px -5px',
@@ -66,7 +70,107 @@ const styles = createUseStyles({
         }
     },
 
-
+    item : {
+        display : 'flex',
+        flexDirection : 'row',
+        flexWrap : 'wrap',
+        width : "calc(100% - 30)",
+        padding : 15
+    },
+    itemThumb : {
+        padding : "0px 10px",
+        width : 50,
+        height : 50,
+        objectFit : 'contain'
+    },
+    itemInfo : {
+        display : 'flex',
+        flex : 1,
+        flexDirection : 'row',
+        alignItems : 'center',
+        flexWrap : 'wrap'
+    },
+    itemName : {
+        flex : 1,
+        minWidth : 200,
+        fontSize : 16,
+        '& > span' : {
+            fontSize : 14,
+            color : '#333'
+        }
+    },
+    itemPrice : {
+        padding : "15px 0px",
+        fontSize : 14,
+        '& > span' : {
+            fontSize : 14
+        }
+    },
+    couponForm : {
+        width : "100%",
+        display : 'flex',
+        flexDirection : 'row',
+        flexWrap : 'wrap',
+        margin : "15px 0px",
+        '& > div' : {
+            flex : 3,
+            //minWidth : 200
+        },
+        '& > input' : {
+            minWidth : 200,
+            height: 30,
+            borderRadius : 3
+        }
+    },
+    checkCouponBtn : {
+        backgroundColor : 'transparent',
+        border : 'none',
+        cursor : "pointer",
+        transition : "opacity 0.3s",
+        fontSize : 14,
+        '&:hover' : {
+            opacity : 0.6
+        }
+    },
+    summary : {
+        padding : 15
+    },
+    summaryRow : {
+        display : 'flex',
+        flexDirection : 'row',
+        flexWrap : 'wrap',
+        justifyContent : 'space-between',
+        padding : "5px 0px",
+        fontSize : 14,
+        '& > *' : {
+            fontSize : 14
+        }
+    },
+    actionBtn : {
+        backgroundColor : 'transparent',
+        border : 'none',
+        display : 'flex',
+        width : "100%",
+        justifyContent : 'center',
+        alignItems : 'center',
+        fontSize : 14,
+        border : '1px black solid',
+        transition : 'opacity 0.3s',
+        borderRadius : 3,
+        padding : 10,
+        cursor : 'pointer',
+        '&:hover, &:disabled' : {
+            opacity : 0.6,
+            border : '1px #BBB solid',
+        }
+    },
+    termsnConditions : {
+        paddingTop : 25,
+        '& > span' : {
+            color : "#777",
+            fontSize : 12
+        }
+    },
 
     // for tablet
     '@media (max-width: 1200px)': {
@@ -107,55 +211,75 @@ const styles = createUseStyles({
 
 const mapStateToProps = state => ({
     items: state.cart.items,
-    order: state.cart.order
-
+    order: state.cart.order,
+    rates : state.cart.rates || []
     // user: state.auth.user,
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    placeOrder: async order => {
-        if (!order.agree) {
-            // return error
-            toast.error('Please accept the terms and conditions to continue your action.', {
-                position: toast.POSITION.TOP_RIGHT
+    quoteShippingFee : async (items, address) => {
+        var result = await agent.Checkout.getShippingRate({
+            items : items.map(i => ({ id : i.id, qty : i.qty})),
+            shipping : {
+                address : address,
+                country : "HK"
+            }
+        });
+        if((result || []).length){
+            console.log(result);
+            return dispatch({
+                type : SHIPPING_RATES,
+                payload : result
             });
         } else {
-            try {
-                // get shopping cart
-                let cart = ownProps.cookies.get('cart'), result = null;
-                // no shopping cart
-                if (!cart) {
-                    result = await agent.Checkout.getCart();
-                    cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
-                    if (cart) ownProps.cookies.set('cart', cart);
-                }
-                // add item
-                result = await agent.Checkout.placeOrderWithoutLogin({
-                    ...order,
-                    items: cart
-                });
-                if (((result || {}).data || {}).result) {
-                    // remove cart
-                    ownProps.cookies.remove('cart');
-                    // clear items
-                    dispatch(
-                
-                        {
-                            type: INIT_CART,
-                            payload: [],
-                        }
-                    );
-                    // return result
-                    toast.success('Order successed.', {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
-                }
-            } catch (error) {
-                // return error
-                toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
+            // return error
+            toast.error('Failed to calculate shipping fee', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    },
+    placeOrder: async order => {
+        // if (!order.agree) {
+        //     // return error
+        //     toast.error('Please accept the terms and conditions to continue your action.', {
+        //         position: toast.POSITION.TOP_RIGHT
+        //     });
+        // } else {
+        try {
+            // get shopping cart
+            let cart = ownProps.cookies.get('cart'), result = null;
+            // no shopping cart
+            if (!cart) {
+                result = await agent.Checkout.getCart();
+                cart = (((((result || {}).data || {}).data || {}).rows || []).shift() || {}).id;
+                if (cart) ownProps.cookies.set('cart', cart);
+            }
+            // add item
+            result = await agent.Checkout.placeOrderWithoutLogin({
+                ...order,
+                items: cart
+            });
+            if (((result || {}).data || {}).result) {
+                // remove cart
+                ownProps.cookies.remove('cart');
+                // clear items
+                dispatch(
+                    {
+                        type: INIT_CART,
+                        payload: [],
+                    }
+                );
+                // return result
+                toast.success('Order successed.', {
                     position: toast.POSITION.TOP_RIGHT
                 });
             }
+        } catch (error) {
+            // return error
+            toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }
+        //}
     },
     updateOrder: info => dispatch({
         type: CART_UPDATE_ORDER_INFO,
@@ -202,160 +326,34 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
                 });
             }
         }
-    },
-
-
-    editProductSort: (key, value) => dispatch({
-        type: PRODUCT_EDIT_SORT,
-        payload: {
-            key: key,
-            value: value,
-        },
-    }),
-    editProductFilter: (key, value) => dispatch({
-        type: PRODUCT_EDIT_FILTER,
-        payload: {
-            key: key,
-            value: value,
-        },
-    }),
+    }
 });
 
 const CheckoutOverview = props => {
     const classes = styles();
-    const {items, order} = props;
+    const {items, order, rates} = props;
+    const isFormValid = (function(){
+        let order = props.order || {
+            contact : {},
+            shipping : {},
+            payment : {}
+        };
+        // return ((order.contact || {}).first_name || "").length && 
+        //        ((order.contact || {}).last_name || "").length && 
+        //        ((order.contact || {}).phone || "").length && 
+        //        ((order.shipping || {}).address || "").length && 
+        //        ((order.payment || {}).card || "").length && 
+        //        ((order.payment || {}).exp_date || "").length && 
+        //        ((order.payment || {}).csc || "").length;
+        return ((order.shipping || {}).address || "").length
+    })();
 
     return <div>
         <Header title={useI18nText(keyOfI18n.CHECKOUT)}/>
         <div className={classes.wrapper}>
-            <div className={classes.formGroup}>
-                <div>
-                    <h3>
-                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
-                    </h3>
-                    <table
-                        style={{
-                            width: '100%',
-                            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)',
-                            borderRadius: 4,
-                            backgroundColor: '#f7f7f7',
-                            padding:"15px"
-                        }}
-                    >
-                        <thead>
-                            <tr>
-                                <td>
-                                    <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
-                                </td>
-                                <td>
-                                    <I18nText keyOfI18n={keyOfI18n.PRICE}/>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {(items || []).map((item, idx) => <tr key={idx}>
-                                <td>{`${item.name} x ${item.qty}(${item.variant})`}</td>
-                                <td>
-                                    <NumberFormat
-                                        value={item.price*item.qty}
-                                        thousandSeparator={true}
-                                        prefix={'HK$'}
-                                        displayType={'text'}
-                                    />
-                                </td>
-                            </tr>)}
-                            {(items || []).length < 1 && <tr>
-                                <td>
-                                    <I18nText keyOfI18n={keyOfI18n.CART_NO_ITEMS_TO_SHOW}/>
-                                </td>    
-                            </tr>}
-                        </tbody>
-                        {(items || []).length > 0 && <tfoot>
-                            <tr>
-                                <td>Total Amount</td>
-                                <td>
-                                    <NumberFormat
-                                        value={(items || []).reduce((total, item) => total += item.qty*item.price, 0)}
-                                        thousandSeparator={true}
-                                        prefix={'HK$'}
-                                        displayType={'text'}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan="2">
-                                    <input
-                                        id="agree"
-                                        type="checkbox"
-                                        onChange={e => props.updateOrder({
-                                            ...props.order,
-                                            agree: e.target.checked
-                                        })}
-                                    />
-                                    <label htmlFor="agree">
-                                        <I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colSpan="2">
-                                    <button
-                                        type="button"
-                                        onClick={e => props.placeOrder(props.order)}
-                                    >
-                                        <I18nText keyOfI18n={keyOfI18n.ORDER_SUMMARY_PLACE_ORDER}/>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tfoot>}
-                    </table>
-                </div>
-                <br/>
-                <div>
-                    <h3>
-                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PROMO_CODE}/>
-                    </h3>
-                    <table
-                        style={{
-                            width: '100%',
-                            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)',
-                            borderRadius: 4,
-                            backgroundColor: '#f7f7f7',
-                            padding:"15px"
-                        }}
-                    >
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input
-                                        type="text"
-                                        placeholder={useI18nText(keyOfI18n.PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE)}
-                                        style={{
-                                            padding: '0 10px',
-                                            borderRadius: 5,
-                                            border: '1px solid #dadada',
-                                            minHeight: 40
-                                        }}
-                                        onChange={e => props.updateOrder({
-                                            ...props.order,
-                                            coupons: e.target.value
-                                        })}
-                                    />
-                                </td>
-                                <td>
-                                    <button
-                                        type="button"
-                                        onClick={e => props.checkCoupons((props.order || {}).coupons || '')}
-                                    >
-                                        <I18nText keyOfI18n={keyOfI18n.PROMO_CODE_CHECK_BTN}/>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div className={classes.formGroup}>
+
+            {/* ------------------------- Left col ------------------------- */}
+            <div className={classes.formGroup} style={{flex : 3}}>
                 <h3>
                     <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
                 </h3>
@@ -436,6 +434,10 @@ const CheckoutOverview = props => {
                             />
                         </div>
                     </div>
+                    {/* -------- payment -------- */}
+                    <h3 style={{paddingTop : "15px"}}>
+                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PAYMENT_INFOFORMATION}/>
+                    </h3>
                     <div className={classes.inputSet}>
                         <div className={classes.inputWrapper}>
                             <NumberFormat
@@ -483,109 +485,154 @@ const CheckoutOverview = props => {
                             </div>
                         </div>
                     </div>
+                    {/* -------- /payment -------- */}                                    
                 </div>
             </div>
+            {/* ------------------------- /Left col ------------------------- */}
+
+
+            {/* ------------------------- Right col ------------------------- */}
+            <div className={classes.formGroup} style={{flex : 2}}>
+                <div>
+                    <h3>
+                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
+                    </h3>
+                    
+                    <div style={{
+                        width: 'calc(100% - 30px)',
+                        border: '1px #dadada solid',
+                        borderRadius: 2,
+                        padding:"15px"
+                    }}>
+                        {/* ----- Items list ----- */}
+                        {(items || []).map((item, idx) => (
+                            <div key={`item-${idx}`} className={classes.item}>
+                                <img className={classes.itemThumb} src={(item.media || [])[0]} />
+                                <div className={classes.itemInfo}>
+                                    <div className={classes.itemName}>
+                                        {item.name}<br/>
+                                        <span>{item.variant}</span>
+                                    </div>
+                                    <div className={classes.itemPrice}>
+                                        <NumberFormat
+                                            value={item.price}
+                                            thousandSeparator={true}
+                                            prefix={'HK$'}
+                                            displayType={'text'}
+                                        /> x {item.qty}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {/* ----- Items list ----- */}
+
+                        <div style={{height : 0.5, backgroundColor:'#dadada' }}></div> {/* --- seperation line --- */}
+
+                        {/* ----- coupon code ----- */}
+                        <div className={classes.couponForm}>
+                            <div className={classes.inputWrapper}>
+                                <input
+                                    type="text"
+                                    className={classes.formInput}
+                                    placeholder={useI18nText(keyOfI18n.PROMO_CODE_TYPE_YOUR_PROMO_CODE_HERE)}
+                                    onChange={e => props.updateOrder({
+                                        ...props.order,
+                                        coupons: e.target.value
+                                    })}
+                                />
+                            </div>
+                            <div style={{display:'flex', justifyContent:'center', flex : 1}}>
+                                <button type="button"
+                                        className={classes.checkCouponBtn}
+                                        onClick={e => props.checkCoupons((props.order || {}).coupons || '')}
+                                        disabled={!((order || {}).coupons || "").length}
+                                >
+                                    <I18nText keyOfI18n={keyOfI18n.PROMO_CODE_CHECK_BTN}/>
+                                </button>
+                            </div>
+                        </div>
+                        {/* ----- /coupon code ----- */}
+
+                        <div style={{height : 0.5, backgroundColor:'#dadada' }}></div> {/* --- seperation line --- */}
+
+                        {/* ----- Summary ----- */}
+                        <div className={classes.summary}>
+                            {/* --- sub total --- */}
+                            <div className={classes.summaryRow}>
+                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SUBTOTAL}/>
+                                <NumberFormat
+                                    value={(items || []).reduce((total, item) => total += item.qty*item.price, 0)}
+                                    thousandSeparator={true}
+                                    prefix={'HK$'}
+                                    displayType={'text'}
+                                />
+                            </div>
+                            {/* --- shipping fee --- */}
+                            <div className={classes.summaryRow}>
+                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_FEE}/>
+                                <NumberFormat
+                                    value={(() => {
+                                        var shopId = Object.keys((props.order || {}).shippings || {})[0] || '';
+                                        var courierId = ((props.order || {}).shippings || {})[shopId];
+                                        var selectedCourier = rates.filter(r => r.id == courierId)[0] || {};
+                                        return (selectedCourier.rates || {})[shopId];
+                                    })() || '-'}
+                                    thousandSeparator={true}
+                                    prefix={'HK$'}
+                                    displayType={'text'}
+                                />
+                            </div>
+                        </div>
+                        {/* ----- /Summary ----- */}
+
+                        <div style={{height : 0.5, backgroundColor:'#dadada' }}></div> {/* --- seperation line --- */}
+
+                        {/* ----- Buttons ----- */}
+                        <div className={classes.summary}>
+                            {   
+                                rates.length ? 
+                                <div>
+                                    <Select 
+                                        placeholder={"Select Courier"}
+                                        onChange={({value}) => props.updateOrder({
+                                            ...props.order,
+                                            shippings : {
+                                                [value.split(":")[0]] : value.split(":")[1]
+                                            }
+                                        })}
+                                        options={rates.map(r => ({
+                                            value : `${Object.keys(r.rates)[0]}:${r.id}`,
+                                            label : `${r.name} - HK$${Object.values(r.rates)[0]}`
+                                        }))}
+                                    />
+                                    <div className={classes.termsnConditions}>
+                                        <span><I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/></span>
+                                    </div>
+                                    <button className={classes.actionBtn} 
+                                            style={{marginTop:15}}
+                                            onClick={e => {
+                                                props.placeOrder(props.order);
+                                            }}
+                                            disabled={!isFormValid || !Object.keys(order.shippings || {}).length}>
+                                        <I18nText keyOfI18n={keyOfI18n.PLACE_ORDER}/>
+                                    </button>
+                                </div> : 
+                                <button className={classes.actionBtn}
+                                    onClick={e =>props.quoteShippingFee(items, props.order.shipping.address)}
+                                    disabled={!isFormValid}>
+                                    <I18nText keyOfI18n={keyOfI18n.CONTINUE_SHIPPING}/>
+                                </button>
+                            }
+                        </div>
+                        {/* ----- /Buttons ----- */}
+                    </div>
+                    
+                </div>
+            </div>
+            {/* ------------------------- /Right col ------------------------- */}
+
         </div>
     </div>;
-
-    // const rendering = (!(props.shoppingCart) || props.user === null);
-    // const needLogin = (_.isEmpty(props.user));
-    // const NoProductsInCart = (props.shoppingCart.length < 1);
-
-    // switch (true) {
-    //     case rendering:
-    //         return <LoadingPage/>;
-    //     // case needLogin: {
-    //     //
-    //     //     redirectUrl('/login', props.history, false);
-    //     //     props.enqueueSnackbar('please log in first in order to checkout your products', styleGuide.warningSnackbar);
-    //     //     return null
-    //     // }
-    //     case NoProductsInCart:
-    //         return (<Grid container alignItems={'center'} justify={'center'}>
-
-    //             <Header
-    //                 title={'confirmPage'}/>
-    //             <Grid item container xs={6} spacing={16} className={classes.form}>
-    //                 <Grid item>
-
-    //                     <Typography variant={'h6'} color={'primary'}>
-    //                        <I18nText keyOfI18n={keyOfI18n.CART_NO_ITEMS_TO_SHOW}/> 
-    //                     </Typography>
-    //                 </Grid>
-
-    //                 <Grid item container alignItems={'center'} spacing={16}>
-    //                     <Grid item>
-    //                         <Typography variant={'subtitle1'} color={'primary'}>
-    //                             <I18nText keyOfI18n={keyOfI18n.GOTO}/>
-    //                         </Typography>
-    //                     </Grid>
-    //                     <Grid item>
-    //                         <Button
-    //                             variant='outlined'
-    //                             onClick={() => redirectUrl('/products', props.history)}
-
-    //                         >
-    //                             <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
-    //                         </Button>
-    //                     </Grid>
-    //                     <Grid item>
-    //                         <Typography variant={'subtitle1'} color={'primary'}>
-    //                          <I18nText keyOfI18n={keyOfI18n.CHECKOUT_TO_BUY_SOME}/>
-    //                         </Typography>
-    //                     </Grid>
-    //                 </Grid>
-    //             </Grid>
-    //         </Grid>);
-    //     default:
-    //         return (
-    //             <Grid container justify={'center'}>
-    //                 <Grid item sm={12}>
-    //                     <Header title={useI18nText(keyOfI18n.CHECKOUT)}/>
-    //                 </Grid>
-    //                 <Grid item container justify={'center'} spacing={32} md={10}>
-
-    //                     {(isWidthUp('md', props.width)) ?
-    //                         (<Fragment>
-    
-    //                         </Fragment>)
-    //                         : (<Fragment>
-    //                             <Grid item xs={11}>
-    //                                 <Collapse
-    //                                     arrow={true}
-    //                                     title={<Fragment>
-    //                                         <Typography
-    //                                             className={classes.title}
-    //                                             variant={'h4'}>
-    //                                             <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOUR_ORDER_SUMMARY}/>
-    //                                         </Typography>
-
-    //                                         <Divider/>
-    //                                     </Fragment>}
-    //                                     collapse={
-    //                                         <OrderSummary/>
-    //                                     }
-    //                                 />
-    //                             </Grid>
-    //                             <Grid item xs={11}>
-    //                                 <Typography
-    //                                     className={classes.title}
-    //                                     variant={'h4'}>
-    //                                     <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
-    //                                 </Typography>
-    //                                 <Divider/>
-    //                                 <BillingDetails/>
-
-    //                             </Grid>
-    //                         </Fragment>)
-
-    //                     }
-    //                 </Grid>
-
-
-    //             </Grid>
-    //         )
-    // }
 };
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(CheckoutOverview));
