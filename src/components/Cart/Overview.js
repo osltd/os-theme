@@ -29,9 +29,9 @@ const styles = createUseStyles({
     },
     table: {
         width: '100%',
-        backgroundColor: '#f7f7f7',
-        boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)',
-        borderRadius: 4,
+        //backgroundColor: '#f7f7f7',
+        //boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)',
+        //borderRadius: 4,
         padding : "15px"
     },
     headerColumn: {
@@ -45,7 +45,130 @@ const styles = createUseStyles({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        padding: '35px 0'
+        padding: '35px 0',
+        fontSize : 24
+    },
+
+    itemList : {
+        display : 'flex',
+        flexDirection : 'column',
+        width : "100%",
+        alignItems : 'center'
+    },
+    itemWrapper : {
+        display : 'flex',
+        flexDirection : 'row',
+        width : "100%",
+        flex : 1,
+        flexWrap : 'wrap',
+        alignItems : 'center',
+        borderBottom : '1px #DDD solid',
+        paddingBottom : 15,
+        '& > input' : {
+            height : 30
+        },
+        maxWidth : 1000
+    },
+    thumbnail : {
+        paddingRight : 15,
+        paddingLeft : 15,
+        minWidth : 150,
+        '& > img' : {
+            objectFit : 'contain',
+            width : "100%",
+            maxWidth : 150,
+            height : "auto"
+        },
+    },
+    infoWrapper : {
+        flex : 2,
+        padding : 15,
+        flexWrap : 'wrap',
+        minWidth : 250
+    },
+    name : {
+        fontSize : 18,
+        paddingBottom : 5
+    },
+    variant : {
+        '& > i' : {
+            fontSize : 14,
+            color : "#666"   
+        }
+    },
+    price : {
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems : 'center',
+        padding : "0px 15px",
+        flex : 1
+    },
+    qtyBtns : {
+        display : 'flex',
+        flexDirection : 'column'
+    },
+    qtyBtn : {
+        border : 'none',
+        backgroundColor : 'transparent',
+        width : 50,
+        cursor : "pointer",
+        transition : "opacity 0.3s",
+        '&:hover' : {
+            opacity : 0.6
+        },
+        '&:disabled' : {
+            opacity : 0.3
+        },
+        height : 25
+    },
+    qtyValue : {
+        fontSize : 18
+    },
+    subTotal : {
+        fontSize : 18,
+        fontWeight : 600,
+        flex : 1,
+        minWidth : 100
+    },
+    removeBtn : {
+        '& > button' : {
+            backgroundColor : 'transparent',
+            border : 'none'
+        }
+    },
+    summary : {
+        display : 'flex',
+        flexDirection : 'column',
+        alignItems : 'flex-end',
+        justifyContent : 'center',
+        flexWrap : 'wrap',
+        maxWidth : 1000,
+        width : "100%"
+    },
+    grandTotal : {
+        fontSize : 24,
+        padding : "15px 15px",
+        '& > span' : {
+            fontSize : 24
+        }
+    },
+    checkoutBtn : {
+        cursor : "pointer",
+        display : 'flex',
+        padding : "10px 30px",
+        alignItems : 'center',
+        justifyContent : 'center',
+        border : '1px black solid',
+        borderRadius : 3,
+        minWidth : 250,
+        maxWidth : 350,
+        width : "100%",
+        backgroundColor : 'transparent',
+        transition : "background-color 0.3s, color 0.3s",
+        '&:hover' : {
+            backgroundColor : 'black',
+            color : 'white'
+        }
     }
 });
 
@@ -161,108 +284,114 @@ const ShoppingCartTable = props => {
             classes={{}}
         />
         <div className={classes.wrapper}>
-            <table className={classes.table}>
-                <thead>
-                    <tr>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.IMAGE}/></td>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.PRODUCT}/></td>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.PRICE}/></td>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.QUANTITY}/></td>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.TOTAL}/></td>
-                        <td className={classes.headerColumn}><I18nText keyOfI18n={keyOfI18n.REMOVE}/></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.length > 0 ? items.map((item, idx) => <tr
-                        key={idx}
-                    >
-                        <td>
-                            <img
-                                src={handleImgValid(item.media[0])}
-                                className={classes.img}
-                                height="65"
-                            />    
-                        </td>
-                        <td>
-                            <div>{item.name}</div>
-                            <div>{item.variant}</div>
-                        </td>
-                        <td>
-                            <NumberFormat
-                                value={item.price}
-                                thousandSeparator={true}
-                                prefix={'HK$'}
-                                displayType={'text'}
-                            />
-                        </td>
-                        <td>
-                            <input
-                                type="number"
-                                name={item.id}
-                                value={item.qty}
-                                onChange={e => props.updateItemQty(e.target.name, e.target.value)}
-                            />    
-                        </td>
-                        <td>
-                            <NumberFormat
-                                value={item.qty*item.price}
-                                thousandSeparator={true}
-                                prefix={'HK$'}
-                                displayType={'text'}
-                            />
-                        </td>
-                        <td>
-                            <button
-                                type="button"
-                                className={classes.binIcon + ' ' + 'icon-bin'}
-                                onClick={e => props.deleteItem(item.id)}
-                            />
-                        </td>
-                    </tr>) : <tr>
-                        <td colSpan="6">
-                            <div className={classes.placeholder}>
-                                <div>
-                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/>
+            {/* ------------------------- list ------------------------- */}
+            <div className={classes.itemList}>
+                {
+                    items.length  > 0 ? items.map((item, idx) => {
+                        return (
+                            <div className={classes.itemWrapper}>
+                                <div className={classes.thumbnail}>
+                                    <img
+                                        src={handleImgValid(item.media[0])}
+                                        className={classes.img}
+                                    />
                                 </div>
-                                <div>
-                                    <I18nText keyOfI18n={keyOfI18n.GOTO}/>
-                                    &nbsp;
+                                <div className={classes.infoWrapper}>
+                                    <div className={classes.name}>{item.name}</div>
+                                    <div className={classes.variant}><i>{item.variant}</i></div>
+                                </div>
+                                <div className={classes.price}>
+                                    <div className={classes.qtyValue}>
+                                        <NumberFormat
+                                            value={item.price}
+                                            thousandSeparator={true}
+                                            prefix={'HK$'}
+                                            displayType={'text'}
+                                        />
+                                        &nbsp;x&nbsp;
+                                        {item.qty}
+                                    </div>
+                                    <div className={classes.qtyBtns}>
+                                        <button className={classes.qtyBtn} 
+                                                onClick={() => {
+                                                    props.updateItemQty(item.id, item.qty+1);
+                                                }}
+                                        >
+                                            <i className="icon-arrow-up"></i>
+                                        </button>
+                                        <button className={classes.qtyBtn} 
+                                                onClick={() => {
+                                                    if(item.qty > 1){
+                                                        props.updateItemQty(item.id, item.qty-1);
+                                                    } else if(item.qty == 1){
+                                                        // remove
+                                                        props.deleteItem(item.id);
+                                                    }
+                                                }}
+                                        >
+                                            <i className="icon-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className={classes.subTotal}>
+                                    <NumberFormat
+                                        value={item.price*item.qty}
+                                        thousandSeparator={true}
+                                        prefix={'HK$'}
+                                        displayType={'text'}
+                                    />
+                                </div>
+                                
+                                <div className={classes.removeBtn}>
                                     <button
-                                        type='button'
-                                        onClick={e => props.history.push('/products')}
-
-                                    >
-                                        <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
-                                    </button>
-                                </div>
+                                        type="button"
+                                        className={classes.binIcon + ' ' + 'icon-bin'}
+                                        onClick={e => props.deleteItem(item.id)}
+                                    />
+                                </div>  
                             </div>
-                        </td>
-                    </tr>}
-                </tbody>
-                {items.length > 0 && <tfoot>
-                    <tr>
-                        <td colSpan="4" className={classes.footerColumn}>
-                            <I18nText keyOfI18n={keyOfI18n.TOTAL}/>
-                        </td>
-                        <td className={classes.footerColumn}>
-                            <NumberFormat
-                                value={items.reduce((total, item) => total + (item.price * item.qty), 0)}
-                                thousandSeparator={true}
-                                prefix={'HK$'}
-                                displayType={'text'}
-                            />
-                        </td>
-                        <td className={classes.footerColumn}>
+                        )
+                    }) :
+                    <div className={classes.placeholder}>
+                        <div style={{fontSize:24}}>
+                            <I18nText keyOfI18n={keyOfI18n.CHECKOUT_YOU_HAVE_NOT_PUT_ANY_ITEMS_IN_CART}/>
+                        </div>
+                        <div style={{fontSize:24, display : 'flex', flexDirection : 'row', alignItems : 'center', padding : "5px 0px"}}>
+                            <I18nText keyOfI18n={keyOfI18n.GOTO}/>
+                            &nbsp;
                             <button
-                                type="button"
-                                onClick={e => history.push('/checkout')}
+                                type='button'
+                                style={{fontSize:24, border : 'none', backgroundColor : 'transparent', textDecoration:'underline', cursor : 'pointer'}}
+                                onClick={e => props.history.push('/products')}
                             >
-                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
+                                <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
                             </button>
-                        </td>
-                    </tr>
-                </tfoot>}
-            </table>
+                        </div>
+                    </div>
+                }
+                {/* ------------------------- /Summary ------------------------- */}
+                {items.length > 0 && <div className={classes.summary}>
+                    <div className={classes.grandTotal}>
+                        <I18nText keyOfI18n={keyOfI18n.TOTAL}/> 
+                        : 
+                        <NumberFormat
+                            value={items.reduce((total, item) => total + (item.price * item.qty), 0)}
+                            thousandSeparator={true}
+                            prefix={'HK$'}
+                            displayType={'text'}
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        className={classes.checkoutBtn}
+                        onClick={e => history.push('/checkout')}
+                    >
+                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
+                    </button>
+                </div>}
+                {/* ------------------------- /Summary ------------------------- */}
+            </div>
+            {/* ------------------------- /list ------------------------- */}
         </div>
     </div>;
 };

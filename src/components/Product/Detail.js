@@ -206,6 +206,11 @@ const styles = createUseStyles({
     qtyValueLabel : {
         fontSize : 12,
     },
+    shares : {
+        width : '100%'
+    },
+
+
     // for mobile
     '@media (max-width: 600px)': {
         wrapper: {
@@ -364,7 +369,6 @@ const ResponsiveDialog = props => {
                         emulateTouch={true}
                         useKeyboardArrows={true}
                         autoPlay={true}
-                        centerMode={(variant.media || product.media).length > 2}
                         showThumbs={(variant.media || product.media).length > 1}
                         showIndicators={(variant.media || product.media).length > 1}
                     >
@@ -498,13 +502,13 @@ const ResponsiveDialog = props => {
 
 
                     <div className={classes.shares}>
-                        <h6>
+                        <h6 style={{fontWeight : 100}}>
                             <I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAILS_SHARE_THIS_PRODUCT}/>
                         </h6>
                         <div className={classes.shareIcons}>
                             <SocialIcon
                                 type={'whatsapp'}
-                                onClick={() => window.open('https://web.whatsapp.com/send?text=' + window.location.href)}
+                                onClick={() => window.open('https://api.whatsapp.com/send?text=' + window.location.href)}
                             />
                             <SocialIcon
                                 type={'facebook'}
