@@ -95,7 +95,7 @@ export const en: props = {
     CHECKOUT_SELECT_COURIER : 'Choose Courier Service',
     CHKECOUT_SHIPPING_METHOD_SELFPICKUP : 'Self Pickup',
     CHKECOUT_SHIPPING_METHOD_SHIP : 'Arrange Shipment',
-    CHECKOUT_SHIPPING_METHOD: 'Shpping Method',
+    CHECKOUT_SHIPPING_METHOD: 'Shipping Method',
 
     ORDER_SUMMARY_PLACE_ORDER: 'place order',
     ORDER_SUMMARY_NO_SHIPPING_METHOD_PROVIDED: 'no shipping method provided',
