@@ -179,6 +179,13 @@ const styles = createUseStyles({
         padding: '35px 0',
         fontSize : 24
     },
+    pickupmsg : {
+        fontSize : 14,
+        padding : 15,
+        backgroundColor : '#EFEFEF',
+        borderRadius : 3,
+        marginTop : 15
+    },
 
     // for tablet
     '@media (max-width: 1200px)': {
@@ -252,9 +259,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         //         position: toast.POSITION.TOP_RIGHT
         //     });
         // } else {
+        
+        var payload = {...order};
+
         try {
             // get shopping cart
             let cart = ownProps.cookies.get('cart'), result = null;
+            // self pickip
+            if(/^selfpickup$/i.test(payload.shippingMethod)){
+                payload.shippings = undefined;
+                payload.shipping = undefined;
+                payload.notes = '------------------\nSELF PICKUP\n--------------------';
+            }
             // no shopping cart
             if (!cart) {
                 result = await agent.Checkout.getCart();
@@ -263,7 +279,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             }
             // add item
             result = await agent.Checkout.placeOrderWithoutLogin({
-                ...order,
+                ...payload,
                 items: cart
             });
             if (((result || {}).data || {}).result) {
@@ -346,13 +362,14 @@ const CheckoutOverview = props => {
             shipping : {},
             payment : {}
         };
-        return ((order.contact || {}).first_name || "").length && 
-               ((order.contact || {}).last_name || "").length && 
-               ((order.contact || {}).phone || "").length && 
-               ((order.shipping || {}).address || "").length && 
-               ((order.payment || {}).card || "").length && 
-               ((order.payment || {}).exp_date || "").length && 
-               ((order.payment || {}).csc || "").length;
+        return true;
+        // return ((order.contact || {}).first_name || "").length && 
+        //        ((order.contact || {}).last_name || "").length && 
+        //        ((order.contact || {}).phone || "").length && 
+        //        ((order.shipping || {}).address || "").length && 
+        //        ((order.payment || {}).card || "").length && 
+        //        ((order.payment || {}).exp_date || "").length && 
+        //        ((order.payment || {}).csc || "").length;
     })();
 
 
@@ -580,11 +597,17 @@ const CheckoutOverview = props => {
                             <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_FEE}/>
                             <NumberFormat
                                 value={(() => {
-                                    var shopId = Object.keys((props.order || {}).shippings || {})[0] || '';
-                                    var courierId = ((props.order || {}).shippings || {})[shopId];
-                                    var selectedCourier = rates.filter(r => r.id == courierId)[0] || {};
-                                    return (selectedCourier.rates || {})[shopId];
-                                })() || '-'}
+                                    if(/^selfpickup$/i.test(order.shippingMethod || '')){
+                                        return 0;
+                                    } else if(/^ship$/i.test(order.shippingMethod || '')){
+                                        var shopId = Object.keys((props.order || {}).shippings || {})[0] || '';
+                                        var courierId = ((props.order || {}).shippings || {})[shopId];
+                                        var selectedCourier = rates.filter(r => r.id == courierId)[0] || {};
+                                        return (selectedCourier.rates || {})[shopId];
+                                    } else {
+                                        return '-';
+                                    }
+                                })()}
                                 thousandSeparator={true}
                                 prefix={'HK$'}
                                 displayType={'text'}
@@ -600,19 +623,50 @@ const CheckoutOverview = props => {
                         {   
                             rates.length ? 
                             <div>
+                                <div style={{fontSize:13, textTransform:'uppercase', paddingBottom:"7px"}}>
+                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_METHOD}/>
+                                </div>
                                 <Select 
-                                    placeholder={"Select Courier"}
-                                    onChange={({value}) => props.updateOrder({
-                                        ...props.order,
-                                        shippings : {
-                                            [value.split(":")[0]] : value.split(":")[1]
-                                        }
-                                    })}
-                                    options={rates.map(r => ({
-                                        value : `${Object.keys(r.rates)[0]}:${r.id}`,
-                                        label : `${r.name} - HK$${Object.values(r.rates)[0]}`
-                                    }))}
+                                    placeholder={"Select Shipping Method"}
+                                    onChange={({value}) => {
+                                        props.updateOrder({
+                                            ...props.order,
+                                            shippingMethod : value,
+                                            shippings : /^selfpickup$/i.test(value) ? undefined : order.shippings
+                                        });
+                                    }}
+                                    options={[
+                                        { value : "selfpickup", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SELFPICKUP}/>},
+                                        { value : "ship", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SHIP}/>}
+                                    ]}
                                 />
+                                {function(){
+                                    // self pickup?
+                                    if(/^selfpickup$/i.test(order.shippingMethod || '')){
+                                        return <div className={classes.pickupmsg}>
+                                            <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PICKUP_MSG}/>
+                                        </div>
+                                    } else if(/^ship$/i.test(order.shippingMethod || '')){
+                                        return <div>
+                                            <div style={{fontSize:13, textTransform:'uppercase', padding:"15px 0px 7px 0px"}}>
+                                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>
+                                            </div>
+                                            <Select 
+                                                placeholder={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>}
+                                                onChange={({value}) => props.updateOrder({
+                                                    ...props.order,
+                                                    shippings : {
+                                                        [value.split(":")[0]] : value.split(":")[1]
+                                                    }
+                                                })}
+                                                options={rates.map(r => ({
+                                                    value : `${Object.keys(r.rates)[0]}:${r.id}`,
+                                                    label : `${r.name} - HK$${Object.values(r.rates)[0]}`
+                                                }))}
+                                            />
+                                        </div>
+                                    }
+                                }()}
                                 <div className={classes.termsnConditions}>
                                     <span><I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/></span>
                                 </div>
@@ -621,12 +675,12 @@ const CheckoutOverview = props => {
                                         onClick={e => {
                                             props.placeOrder(props.order);
                                         }}
-                                        disabled={!isFormValid || !Object.keys(order.shippings || {}).length}>
+                                        disabled={!isFormValid || !order.shippingMethod || (/^ship$/i.test(order.shippingMethod || '') && !Object.keys(order.shippings || {}).length)}>
                                     <I18nText keyOfI18n={keyOfI18n.PLACE_ORDER}/>
                                 </button>
                             </div> : 
                             <button className={classes.actionBtn}
-                                onClick={e =>props.quoteShippingFee(items, props.order.shipping.address)}
+                                onClick={e => props.quoteShippingFee(items, props.order.shipping.address)}
                                 disabled={!isFormValid}>
                                 <I18nText keyOfI18n={keyOfI18n.CONTINUE_SHIPPING}/>
                             </button>
