@@ -261,25 +261,19 @@ const mapDispatchToProps = dispatch => ({
             if (target) target.style.display = !/^block$/i.test(target.style.display) ? 'block' : 'none';
         }
     },
+    editShoppingCart: (index) => dispatch({
+        type: CART_OPERATE_SHOPPING_CART,
+        payload: {
+            key: 'remove',
+            value: index,
 
-
-
-
-        editShoppingCart: (index) => dispatch({
-            type: CART_OPERATE_SHOPPING_CART,
-            payload: {
-                key: 'remove',
-                value: index,
-
-            }
-        }),
-        editSearchBar: (keyword = null) => dispatch({
-            type: COMMON_EDIT_SEARCH_BAR,
-            payload: keyword
-        })
-    }
-
-);
+        }
+    }),
+    editSearchBar: (keyword = null) => dispatch({
+        type: COMMON_EDIT_SEARCH_BAR,
+        payload: keyword
+    })
+});
 
 const Header = props => {
     const classes = styles();
