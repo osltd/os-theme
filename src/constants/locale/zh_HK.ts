@@ -26,8 +26,8 @@ export const zh_HK: props = {
     REMOVE: '移除',
     CHECKOUT: '結帳',
     NAME: '名字',
-    CHARGE: 'charge',
-    DELIVERY_TIME: 'delivery time',
+    CHARGE: '收費',
+    DELIVERY_TIME: '預計送達時間',
     SELECTED: '已選',
     EMAIL_ADDRESS: '電郵地址',
     CITY: '城市',
@@ -137,6 +137,8 @@ export const zh_HK: props = {
 
     FOOTER_FIND_US_ON: '網站連結',
 
+    PRODUCT_DETAIL_IN_STOCK: '有存貨',
+    PRODUCT_DETAIL_OUT_OF_STOCK: '暫無存貨',
     PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: '恭喜',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: '產品已加入! ',

@@ -187,7 +187,7 @@ const styles = createUseStyles({
     },
     name: {
         textAlign : "left",
-        margin: '3px 0px 10px 0px',
+        marginTop: 3,
         padding: 0,
         fontSize : 18,
         color : "#333"
@@ -245,7 +245,7 @@ const styles = createUseStyles({
     },
     rowItemName: {
         textAlign : "left",
-        margin: '3px 0px 5px 0px',
+        marginTop: 5,
         padding: 0,
         fontSize : 18,
         color : "#333"
@@ -260,7 +260,14 @@ const styles = createUseStyles({
         margin: '3px 0px 5px 0px',
         color : "#333"
     },
-
+    stockStatus : {
+        fontSize:12, 
+        margin : "5px 0px",
+        textAlign : 'left',
+        '& > span > i' : {
+            fontSize:12
+        }
+    },
 
 
 
@@ -485,6 +492,7 @@ const ShopOverview = props => {
 
 
     // ----------------------------------------------------------------  Product List ----------------------------------------------------------------
+
     const renderProductList = () => <div className={classes.list}>
         {/* ------------------ Top bar ------------------ */}
         <div className={classes.topbar}>
@@ -537,6 +545,13 @@ const ShopOverview = props => {
 
     
 
+
+    /**
+     * 
+     *  ------------------------------- LIST -------------------------------
+     *  @function renderProductRows
+     * 
+     */
     const renderProductRows = function(){
         // not finish loading yet
         if(products == undefined){
@@ -577,6 +592,18 @@ const ShopOverview = props => {
                         {/* ---- Name ----- */}
                         <div className={classes.rowItemName}>
                             {n.name}
+                        </div>
+                        {/* ----- stock status ------ */}
+                        <div className={classes.stockStatus}>
+                            {function(){
+                                var hasStock = (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) > 0;
+                                var stockColor = hasStock ? "#1fa141" : "#e0674f";
+                                return <span style={{ color : stockColor }}>
+                                    <i>
+                                        <I18nText keyOfI18n={hasStock ? keyOfI18n.PRODUCT_DETAIL_IN_STOCK : keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/>
+                                    </i>
+                                </span>
+                            }()}
                         </div>
                         {/* ---- media ----- */}
                         <div className={classes.rowItemPrice}>
@@ -627,6 +654,11 @@ const ShopOverview = props => {
 
 
 
+    /**
+     * 
+     *  ------------------------------- GRID -------------------------------
+     * 
+     */
     const renderProductGrids = function(){
         // not finish loading yet
         if(products == undefined){
@@ -665,6 +697,18 @@ const ShopOverview = props => {
                     </div>
                     <div className={classes.name}>
                         {n.name}
+                    </div>
+                    {/* ----- stock status ------ */}
+                    <div className={classes.stockStatus}>
+                        {function(){
+                            var hasStock = (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) > 0;
+                            var stockColor = hasStock ? "#1fa141" : "#e0674f";
+                            return <span style={{ color : stockColor }}>
+                                <i>
+                                    <I18nText keyOfI18n={hasStock ? keyOfI18n.PRODUCT_DETAIL_IN_STOCK : keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/>
+                                </i>
+                            </span>
+                        }()}
                     </div>
                     <div className={classes.price}>
                         {(function(){

@@ -139,6 +139,8 @@ export const en: props = {
 
     FOOTER_FIND_US_ON: 'Quick Links',
 
+    PRODUCT_DETAIL_IN_STOCK: 'In Stock',
+    PRODUCT_DETAIL_OUT_OF_STOCK: 'Out of Stock',
     PRODUCT_DETAILS_KEEP_SHOPPING: 'Keep shopping what you like, thank you!',
     PRODUCT_DETAILS_SNACK_BAR_CONGRATULATION: 'Congratulation!',
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: 'items added! ',

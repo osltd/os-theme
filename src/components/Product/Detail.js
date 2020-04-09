@@ -401,9 +401,16 @@ const ResponsiveDialog = props => {
                                     />
                                 </div>
                                 <div className={classes.stock}>
-                                    {variant.stock > 0 ? 
-                                    <span style={{color:"#1fa141"}}><i>In Stock</i></span> :
-                                    <span style={{color:"#e0674f"}}><i>Out of Stock</i></span>}
+                                    {
+                                        variant.stock > 0 ? 
+                                        <span style={{color:"#1fa141"}}>
+                                            <i><I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAIL_IN_STOCK}/></i>
+                                        </span>
+                                        :
+                                        <span style={{color:"#e0674f"}}>
+                                            <i><I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/></i>
+                                        </span>
+                                    }
                                 </div>
                             </div>
                             <p className={classes.description}>
