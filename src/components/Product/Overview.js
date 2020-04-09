@@ -603,15 +603,13 @@ const ShopOverview = props => {
                         </div>
                         {/* ----- stock status ------ */}
                         <div className={classes.stockStatus}>
-                            {function(){
-                                var hasStock = (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) > 0;
-                                var stockColor = hasStock ? "#1fa141" : "#e0674f";
-                                return <span style={{ color : stockColor }}>
-                                    <i>
-                                        <I18nText keyOfI18n={hasStock ? keyOfI18n.PRODUCT_DETAIL_IN_STOCK : keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/>
-                                    </i>
-                                </span>
-                            }()}
+                            {
+                                (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) <= 0 ?
+                                <span style={{ color : "#e0674f" }}>
+                                    <i><I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/></i>
+                                </span> :
+                                null
+                            }
                         </div>
                         {/* ---- media ----- */}
                         <div className={classes.rowItemPrice}>
@@ -708,15 +706,13 @@ const ShopOverview = props => {
                     </div>
                     {/* ----- stock status ------ */}
                     <div className={classes.stockStatus}>
-                        {function(){
-                            var hasStock = (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) > 0;
-                            var stockColor = hasStock ? "#1fa141" : "#e0674f";
-                            return <span style={{ color : stockColor }}>
-                                <i>
-                                    <I18nText keyOfI18n={hasStock ? keyOfI18n.PRODUCT_DETAIL_IN_STOCK : keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/>
-                                </i>
-                            </span>
-                        }()}
+                        <span style={{ color : "#e0674f" }}>
+                            {
+                                (n.variants || []).map(v => v.stock).reduce((c, o) => (c+o), 0) <= 0 ?
+                                <i><I18nText keyOfI18n={keyOfI18n.PRODUCT_DETAIL_OUT_OF_STOCK}/></i> :
+                                <i>&nbsp;</i>
+                            }
+                        </span>
                     </div>
                     <div className={classes.price}>
                         {(function(){
