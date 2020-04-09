@@ -132,7 +132,11 @@ const styles = createUseStyles({
             marginLeft: 5,
             border: '1px solid #eee',
             backgroundColor: 'transparent',
-            border : "none"
+            border : "none",
+            transition : "opacity 0.3s",
+            '&:hover' : {
+                opacity : 0.6
+            }
         },
         '& > button:first-child': {
             marginLeft: 0
@@ -282,8 +286,12 @@ const styles = createUseStyles({
             borderWidth: 0,
             backgroundColor: 'transparent',
             fontSize: 14,
+            transition : 'opacity 0.3s',
             '&:focus': {
                 outline: 0
+            },
+            '&:hover' : {
+                opacity : 0.6
             }
         }
     },
