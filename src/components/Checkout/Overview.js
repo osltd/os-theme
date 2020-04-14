@@ -656,7 +656,8 @@ const CheckoutOverview = props => {
                                                 onChange={({value}) => props.updateOrder({
                                                     ...props.order,
                                                     shippings : {
-                                                        [value.split(":")[0]] : value.split(":")[1]
+                                                        [value.split(":")[0]] : value.split(":")[1],
+                                                        country : 'HK'
                                                     }
                                                 })}
                                                 options={rates.map(r => ({
