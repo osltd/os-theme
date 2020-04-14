@@ -362,14 +362,13 @@ const CheckoutOverview = props => {
             shipping : {},
             payment : {}
         };
-        return true;
-        // return ((order.contact || {}).first_name || "").length && 
-        //        ((order.contact || {}).last_name || "").length && 
-        //        ((order.contact || {}).phone || "").length && 
-        //        ((order.shipping || {}).address || "").length && 
-        //        ((order.payment || {}).card || "").length && 
-        //        ((order.payment || {}).exp_date || "").length && 
-        //        ((order.payment || {}).csc || "").length;
+        return ((order.contact || {}).first_name || "").length && 
+               ((order.contact || {}).last_name || "").length && 
+               ((order.contact || {}).phone || "").length && 
+               ((order.shipping || {}).address || "").length && 
+               ((order.payment || {}).card || "").length && 
+               ((order.payment || {}).exp_date || "").length && 
+               ((order.payment || {}).csc || "").length;
     })();
 
 
@@ -453,7 +452,8 @@ const CheckoutOverview = props => {
                                 ...props.order,
                                 shipping: {
                                     ...(props.order || {}).shipping,
-                                    address: e.target.value
+                                    address: e.target.value,
+                                    country : "HK"
                                 }
                             })}
                         />
@@ -656,8 +656,7 @@ const CheckoutOverview = props => {
                                                 onChange={({value}) => props.updateOrder({
                                                     ...props.order,
                                                     shippings : {
-                                                        [value.split(":")[0]] : value.split(":")[1],
-                                                        country : 'HK'
+                                                        [value.split(":")[0]] : value.split(":")[1]
                                                     }
                                                 })}
                                                 options={rates.map(r => ({
