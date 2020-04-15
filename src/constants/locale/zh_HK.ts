@@ -88,7 +88,7 @@ export const zh_HK: props = {
     CHECKOUT_BILLING_CVC: '安全碼',
     CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER: '輸入您的聯絡電話',
     CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER: '輸入您的信用卡號碼',
-    CHECKOUT_PICKUP_MSG: '請親臨門市提取貨品，我們的地址是',
+    CHECKOUT_PICKUP_MSG: '我們將會聯絡你安排提取貨品，請確定你輸入的聯絡電話和電郵地址正確無誤。',
     CHECKOUT_SELECT_SHIPPING_METHOD : '請選擇收貨方式',
     CHECKOUT_SELECT_COURIER : '請選擇物流服務',
     CHKECOUT_SHIPPING_METHOD_SELFPICKUP : '自行提取',

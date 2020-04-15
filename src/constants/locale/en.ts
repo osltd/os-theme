@@ -90,7 +90,7 @@ export const en: props = {
     CHECKOUT_BILLING_CVC: 'CVC',
     CHECKOUT_BILLING_DETAIL_PHONE_PLACEHOLDER: 'Phone number',
     CHECKOUT_BILLING_DETAIL_VISA_PLACEHOLDER: 'Card number',
-    CHECKOUT_PICKUP_MSG: 'We will contact you to arrange the pickup, make sure you entered the phone number and email address correctly',
+    CHECKOUT_PICKUP_MSG: 'We will contact you to arrange the pickup, please make sure you entered the phone number and email address correctly.',
     CHECKOUT_SELECT_SHIPPING_METHOD : 'Choose Shipping Method',
     CHECKOUT_SELECT_COURIER : 'Choose Courier Service',
     CHKECOUT_SHIPPING_METHOD_SELFPICKUP : 'Self Pickup',
