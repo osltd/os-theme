@@ -203,7 +203,8 @@ const MainPageOverview = props => {
                     display: 'flex',
                     alignItems: 'flex-end',
                     justifyContent: 'flex-end',
-                    cursor : "pointer"
+                    cursor : "pointer",
+                    position: 'relative'
                 }}
                 onClick={() => redirectUrl('/articles/' + article.id, props.history)}
             >
@@ -221,19 +222,20 @@ const MainPageOverview = props => {
                         textShadow: '0px 1px 4px #000',
                         color: '#fff',
                         fontSize: 15,
-                        margin: 15,
-                        fontSize : "2em"
+                        fontSize : "2em",
+                        bottom: 10,
+                        right: 15
                     }}
                 >{article.sections[0].title}</span>
             </li>)}
         </div>
 
-        <div className={classes.tips}>
+        {(tips||[]).length > 0 && <div className={classes.tips}>
             <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', paddingLeft : "15px"}}>
                 <I18nText keyOfI18n={keyOfI18n.LATEST_INFO}/>
             </h2>
             <ul className={classes.tipsWrapper}>
-                {(tips || []).slice(0, 4).map((article, idx) => <li
+                {tips.slice(0, 4).map((article, idx) => <li
                     key={idx}
                     className={classes.tipsItem}
                     onClick={() => redirectUrl('/articles/' + article.id, props.history)}
@@ -267,14 +269,14 @@ const MainPageOverview = props => {
                     </div>
                 </li>)}
             </ul>
-        </div>
+        </div>}
         
-        <div className={classes.featuredMerchandises}>
+        {(featuredMerchandises || []).length > 0 && <div className={classes.featuredMerchandises}>
             <h2 style={{ fontSize: 21, fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif', paddingLeft : "15px" }}>
                 <I18nText keyOfI18n={keyOfI18n.FEATURED_PRODUCTS}/>
             </h2>
             <ul className={classes.featuredMerchandisesWrapper}>
-                {(featuredMerchandises || []).map((item, idx) => <button
+                {featuredMerchandises.map((item, idx) => <button
                     key={idx}
                     type="button"
                     className={classes.featuredMerchandisesItem}
@@ -282,7 +284,7 @@ const MainPageOverview = props => {
                 >
                     <div
                         style={{
-                            backgroundImage: `url(${item.media[0].url})`,
+                            backgroundImage: `url(${((((item.variants||[])[0]||{}).media||[])[0]||{}).url})`,
                             backgroundPosition: 'top center',
                             backgroundSize: 'cover',
                             height: 280
@@ -291,11 +293,11 @@ const MainPageOverview = props => {
                     <br/>
                     <div>
                         <div className={classes.itemName}>{item.name}</div>
-                        <div className={classes.itemPrice}>{`${shopInfo.currency.toUpperCase()} ${item.price}`}</div>
+                        <div className={classes.itemPrice}>{`${shopInfo.currency.toUpperCase()} ${[((item.variants||[])[0]||{}).price,((item.variants||[])[(item.variants||[]).length-1]||{}).price].join('-')}`}</div>
                     </div>
                 </button>)}
             </ul>
-        </div>
+        </div>}
     </div>;
 };
 
