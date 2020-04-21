@@ -165,7 +165,6 @@ const styles = createUseStyles({
         }
     },
     termsnConditions : {
-        paddingTop : 25,
         '& > span' : {
             color : "#777",
             fontSize : 12
@@ -356,6 +355,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const CheckoutOverview = props => {
     const classes = styles();
     const {items, order, rates} = props;
+    const shippingRequired = (items || []).filter(item => item.type=='physical').length > 0;
     const isFormValid = (function(){
         let order = props.order || {
             contact : {},
@@ -365,7 +365,7 @@ const CheckoutOverview = props => {
         return ((order.contact || {}).first_name || "").length && 
                ((order.contact || {}).last_name || "").length && 
                ((order.contact || {}).phone || "").length && 
-               ((order.shipping || {}).address || "").length && 
+               (!shippingRequired || ((order.shipping || {}).address || "").length) && 
                ((order.payment || {}).card || "").length && 
                ((order.payment || {}).exp_date || "").length && 
                ((order.payment || {}).csc || "").length;
@@ -443,7 +443,7 @@ const CheckoutOverview = props => {
                             />
                         </div>
                     </div>
-                    <div className={classes.inputWrapper}>
+                    {shippingRequired && <div className={classes.inputWrapper}>
                         <input
                             type="text"
                             className={classes.formInput}
@@ -457,7 +457,7 @@ const CheckoutOverview = props => {
                                 }
                             })}
                         />
-                    </div>
+                    </div>}
                 </div>
                 {/* -------- payment -------- */}
                 <h3 style={{paddingTop : "15px"}}>
@@ -593,7 +593,7 @@ const CheckoutOverview = props => {
                             />
                         </div>
                         {/* --- shipping fee --- */}
-                        <div className={classes.summaryRow}>
+                        {shippingRequired && <div className={classes.summaryRow}>
                             <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_FEE}/>
                             <NumberFormat
                                 value={(() => {
@@ -612,7 +612,7 @@ const CheckoutOverview = props => {
                                 prefix={'HK$'}
                                 displayType={'text'}
                             />
-                        </div>
+                        </div>}
                     </div>
                     {/* ----- /Summary ----- */}
 
@@ -621,52 +621,54 @@ const CheckoutOverview = props => {
                     {/* ----- Buttons ----- */}
                     <div className={classes.summary}>
                         {   
-                            rates.length ? 
+                            !shippingRequired || rates.length ? 
                             <div>
-                                <div style={{fontSize:13, textTransform:'uppercase', paddingBottom:"7px"}}>
-                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_METHOD}/>
-                                </div>
-                                <Select 
-                                    placeholder={"Select Shipping Method"}
-                                    onChange={({value}) => {
-                                        props.updateOrder({
-                                            ...props.order,
-                                            shippingMethod : value,
-                                            shippings : /^selfpickup$/i.test(value) ? undefined : order.shippings
-                                        });
-                                    }}
-                                    options={[
-                                        { value : "selfpickup", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SELFPICKUP}/>},
-                                        { value : "ship", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SHIP}/>}
-                                    ]}
-                                />
-                                {function(){
-                                    // self pickup?
-                                    if(/^selfpickup$/i.test(order.shippingMethod || '')){
-                                        return <div className={classes.pickupmsg}>
-                                            <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PICKUP_MSG}/>
-                                        </div>
-                                    } else if(/^ship$/i.test(order.shippingMethod || '')){
-                                        return <div>
-                                            <div style={{fontSize:13, textTransform:'uppercase', padding:"15px 0px 7px 0px"}}>
-                                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>
+                                {shippingRequired && <div style={{marginBottom: 25}}>
+                                    <div style={{fontSize:13, textTransform:'uppercase', paddingBottom:"7px"}}>
+                                        <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_METHOD}/>
+                                    </div>
+                                    <Select 
+                                        placeholder={"Select Shipping Method"}
+                                        onChange={({value}) => {
+                                            props.updateOrder({
+                                                ...props.order,
+                                                shippingMethod : value,
+                                                shippings : /^selfpickup$/i.test(value) ? undefined : order.shippings
+                                            });
+                                        }}
+                                        options={[
+                                            { value : "selfpickup", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SELFPICKUP}/>},
+                                            { value : "ship", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SHIP}/>}
+                                        ]}
+                                    />
+                                    {function(){
+                                        // self pickup?
+                                        if(/^selfpickup$/i.test(order.shippingMethod || '')){
+                                            return <div className={classes.pickupmsg}>
+                                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PICKUP_MSG}/>
                                             </div>
-                                            <Select 
-                                                placeholder={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>}
-                                                onChange={({value}) => props.updateOrder({
-                                                    ...props.order,
-                                                    shippings : {
-                                                        [value.split(":")[0]] : value.split(":")[1]
-                                                    }
-                                                })}
-                                                options={rates.map(r => ({
-                                                    value : `${Object.keys(r.rates)[0]}:${r.id}`,
-                                                    label : `${r.name} - HK$${Object.values(r.rates)[0]}`
-                                                }))}
-                                            />
-                                        </div>
-                                    }
-                                }()}
+                                        } else if(/^ship$/i.test(order.shippingMethod || '')){
+                                            return <div>
+                                                <div style={{fontSize:13, textTransform:'uppercase', padding:"15px 0px 7px 0px"}}>
+                                                    <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>
+                                                </div>
+                                                <Select 
+                                                    placeholder={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>}
+                                                    onChange={({value}) => props.updateOrder({
+                                                        ...props.order,
+                                                        shippings : {
+                                                            [value.split(":")[0]] : value.split(":")[1]
+                                                        }
+                                                    })}
+                                                    options={rates.map(r => ({
+                                                        value : `${Object.keys(r.rates)[0]}:${r.id}`,
+                                                        label : `${r.name} - HK$${Object.values(r.rates)[0]}`
+                                                    }))}
+                                                />
+                                            </div>
+                                        }
+                                    }()}
+                                </div>}
                                 <div className={classes.termsnConditions}>
                                     <span><I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/></span>
                                 </div>
@@ -675,7 +677,7 @@ const CheckoutOverview = props => {
                                         onClick={e => {
                                             props.placeOrder(props.order);
                                         }}
-                                        disabled={!isFormValid || !order.shippingMethod || (/^ship$/i.test(order.shippingMethod || '') && !Object.keys(order.shippings || {}).length)}>
+                                        disabled={!isFormValid || (shippingRequired && (!order.shippingMethod || (/^ship$/i.test(order.shippingMethod || '') && !Object.keys(order.shippings || {}).length)))}>
                                     <I18nText keyOfI18n={keyOfI18n.PLACE_ORDER}/>
                                 </button>
                             </div> : 
