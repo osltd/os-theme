@@ -146,6 +146,7 @@ export const en: props = {
     PRODUCT_DETAILS_SNACK_BAR_ITEMS_ADDED: 'items added! ',
     PRODUCT_DETAILS_IN_STOCKS: 'in stock',
     PRODUCT_DETAILS_SHARE_THIS_PRODUCT: 'SHARE THIS PRODUCT:',
+    BEST_SELLERS : 'Best Sellers',
     THERE_ARE_NO_PRODUCTS_UNDER: 'there are no products under',
     CATEGORY_YET: 'category yet',
     NOT_A_REG_PRICE: 'not a reg price',

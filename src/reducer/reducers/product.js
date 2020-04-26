@@ -7,7 +7,8 @@ import {
     EDIT_PRODUCT_DETAIL,
     EDIT_PRODUCT_VIEW_MODE,
     PRODUCT_EDIT_FILTER,
-    PRODUCT_EDIT_SORT
+    PRODUCT_EDIT_SORT,
+    LOAD_BEST_SELLERS
 } from "../../constants/actionType";
 
 
@@ -53,6 +54,12 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 products: action.payload ? action.payload : [],
+            }
+        }
+        case LOAD_BEST_SELLERS : {
+            return {
+                ...state,
+                bestSellers : action.payload ? action.payload : [],
             }
         }
         case MERCHANDISE_INIT_FEATURED: {

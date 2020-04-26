@@ -286,8 +286,6 @@ const ResponsiveDialog = props => {
     const {products, match, history} = props;
     const product = products ? products.find(n => n.id.toString() === match.params.id) : null;
 
-    console.log("=====> ", product)
-
     let options = {}, variants = {};
     ((product || {}).variants || []).forEach(v => (v.description||'').split(',').forEach(desc => {
         let optr = desc.indexOf(':');

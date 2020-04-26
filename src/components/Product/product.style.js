@@ -17,6 +17,10 @@ const styles = createUseStyles({
         alignItems : 'center',
         overflow : 'scroll',
         padding: 15,
+        "-ms-overflow-style" : "none",
+        '&::-webkit-scrollbar' : {
+            display : "none"
+        },
         '& > button' : {
             fontSize : 13,
             padding : "10px 20px",
@@ -98,6 +102,7 @@ const styles = createUseStyles({
         padding: '10px 15px',
         cursor: 'pointer',
         border: 'none',
+        alignItems : 'center',
         transition : "opacity 0.3s",
         '&:hover': {
             opacity : 0.6

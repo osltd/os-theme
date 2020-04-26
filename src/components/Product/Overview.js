@@ -8,7 +8,6 @@ import Header from '../Layout/Body/Header'
 import {EDIT_PRODUCT_VIEW_MODE, LOAD_PRODUCTS, PRODUCT_EDIT_FILTER, PRODUCT_EDIT_SORT, PRODUCT_IS_LOADING} from "../../constants/actionType";
 import LoadingPage from '../Layout/LoadingPage'
 import styles from './product.style';
-import {CircularProgress} from '@material-ui/core';
 import {
     getTagsCountsArray,
     redirectUrl,

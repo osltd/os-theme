@@ -145,6 +145,7 @@ export const zh_HK: props = {
     PRODUCT_DETAILS_IN_STOCKS: '有現貨',
     PRODUCT_DETAILS_SHARE_THIS_PRODUCT: '分享此產品:',
     THERE_ARE_NO_PRODUCTS_UNDER: '並沒有任何產品於',
+    BEST_SELLERS : '熱賣產品',
     CATEGORY_YET: '分類',
     NOT_A_REG_PRICE: 'not a reg price',
 
