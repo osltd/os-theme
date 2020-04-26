@@ -20,7 +20,7 @@ import { INIT_CART } from "../../constants/actionType";
 
 
 const mapStateToProps = state => ({
-    products: [...state.product.products, ...state.product.bestSellers],
+    products: [...((state.product || {}).products || []), ...((state.product || {}).bestSellers || [])],
     feeds: state.feed.feeds,
     category: state.category.category,
 });
