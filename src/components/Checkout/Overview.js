@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {createUseStyles} from 'react-jss';
+import styles from './checkout.styles';
 import {withCookies} from 'react-cookie';
 
 import _ from 'lodash';
@@ -18,259 +19,55 @@ import Select from 'react-select';
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
 import {useI18nText} from "../../hooks/useI18nText";
+import { CircularProgress } from '@material-ui/core';
 
-
-const styles = createUseStyles({
-    wrapper: {
-        padding: '0 9%',
-        display: 'flex'
-    },
-    formGroup: {
-        flex: 1,
-        margin: '0 10px',
-        '&:first-child': {
-            marginLeft: 0
-        },
-        '&:last-child': {
-            marginRight: 0
-        }
-    },
-    formInput: {
-        width: '100%',
-        height: 40,
-        borderRadius: 2,
-        border: '1px #dadada solid',
-        padding: '0 15px',
-        transition : "border 0.3s",
-        '&:focus' : {
-            border: '1px black solid',
-        }
-    },
-    inputSet: {
-        margin: '15px -5px -5px',
-        '&:first-child': {
-            marginTop: -5
-        }
-    },
-    inputGroup: {
-        display: 'flex'
-    },
-    inputWrapper: {
-        display: 'flex',
-        flex: 1,
-        margin: 5
-    },
-    phoneInput: {
-        display: 'flex',
-        '& > div': {
-            flex: 1
-        },
-        '& > div > input': {
-            width: '100%'
-        }
-    },
-
-    item : {
-        display : 'flex',
-        flexDirection : 'row',
-        flexWrap : 'wrap',
-        width : "calc(100% - 30)",
-        padding : 15
-    },
-    itemThumb : {
-        padding : "0px 10px",
-        width : 50,
-        height : 50,
-        objectFit : 'contain'
-    },
-    itemInfo : {
-        display : 'flex',
-        flex : 1,
-        flexDirection : 'row',
-        alignItems : 'center',
-        flexWrap : 'wrap'
-    },
-    itemName : {
-        flex : 1,
-        minWidth : 200,
-        fontSize : 16,
-        '& > span' : {
-            fontSize : 14,
-            color : '#333'
-        }
-    },
-    itemPrice : {
-        padding : "15px 0px",
-        fontSize : 14,
-        '& > span' : {
-            fontSize : 14
-        }
-    },
-    couponForm : {
-        width : "100%",
-        display : 'flex',
-        flexDirection : 'row',
-        flexWrap : 'wrap',
-        margin : "15px 0px",
-        '& > div' : {
-            flex : 3,
-            //minWidth : 200
-        },
-        '& > input' : {
-            minWidth : 200,
-            height: 30,
-            borderRadius : 3
-        }
-    },
-    checkCouponBtn : {
-        backgroundColor : 'transparent',
-        border : 'none',
-        cursor : "pointer",
-        transition : "opacity 0.3s",
-        fontSize : 14,
-        '&:hover' : {
-            opacity : 0.6
-        }
-    },
-    summary : {
-        padding : 15
-    },
-    summaryRow : {
-        display : 'flex',
-        flexDirection : 'row',
-        flexWrap : 'wrap',
-        justifyContent : 'space-between',
-        padding : "5px 0px",
-        fontSize : 14,
-        '& > *' : {
-            fontSize : 14
-        }
-    },
-    actionBtn : {
-        backgroundColor : 'transparent',
-        border : 'none',
-        display : 'flex',
-        width : "100%",
-        justifyContent : 'center',
-        alignItems : 'center',
-        fontSize : 14,
-        border : '1px black solid',
-        transition : 'opacity 0.3s',
-        borderRadius : 3,
-        padding : 10,
-        cursor : 'pointer',
-        '&:hover, &:disabled' : {
-            opacity : 0.6,
-            border : '1px #BBB solid',
-        }
-    },
-    termsnConditions : {
-        paddingTop : 25,
-        '& > span' : {
-            color : "#777",
-            fontSize : 12
-        }
-    },
-    placeholder : {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        padding: '35px 0',
-        fontSize : 24
-    },
-    pickupmsg : {
-        fontSize : 14,
-        padding : 15,
-        backgroundColor : '#EFEFEF',
-        borderRadius : 3,
-        marginTop : 15
-    },
-
-    // for tablet
-    '@media (max-width: 1200px)': {
-        inputGroup: {
-            display: 'block'
-        },
-        inputSet: {
-            '&:last-child': {
-                marginTop: 30
-            }
-        }
-    },
-
-
-
-    // for mobile
-    '@media (max-width: 600px)': {
-        wrapper: {
-            display: 'block'
-        },
-        formGroup: {
-            margin: 0,
-            '&:last-child': {
-                marginTop: 60
-            }
-        },
-        inputGroup: {
-            display: 'block'
-        },
-        inputSet: {
-            '&:last-child': {
-                marginTop: 30
-            }
-        }
-    }
-});
 
 
 const mapStateToProps = state => ({
     items: state.cart.items,
     order: state.cart.order,
-    rates : state.cart.rates || []
+    rates : state.cart.rates || [],
+    shop : state.common.shopInfo || {}
     // user: state.auth.user,
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    quoteShippingFee : async (items, address) => {
-        var result = await agent.Checkout.getShippingRate({
-            items : items.map(i => ({ id : i.id, qty : i.qty})),
-            shipping : {
-                address : address,
-                country : "HK"
-            }
-        });
-        if((result || []).length){
-            console.log(result);
-            return dispatch({
-                type : SHIPPING_RATES,
-                payload : result
-            });
-        } else {
-            // return error
-            toast.error('Failed to calculate shipping fee', {
-                position: toast.POSITION.TOP_RIGHT
-            });
+    getShippingMethods : async (shop, address, cb) => {
+        let autoShopOptions = [];
+        // allows auto ship?
+        if(shop.auto_ship){
+            // fetch auto ship options
+            autoShopOptions = await agent.Checkout.getShippingRate({
+                cart : ownProps.cookies.get('cart'),
+                shipping : {
+                    address : address,
+                    country : "HK"
+                }
+            }).map(r => ({
+                id               : r.id,
+                title            : r.name,
+                charge           : Object.values(r.rates)[0],
+                address_required : true,
+            }));
         }
+        let customShipOptions = (((await agent.Checkout.getShippingMethods())[0] || {}).shipping_methods || []).map(r => ({
+            id               : r.code,
+            title            : r.title,
+            charge           : r.charge,
+            address_required : r.shipping_address_required
+        }));
+        // summarize
+        dispatch({
+            type : SHIPPING_RATES,
+            payload : [...autoShopOptions, ...customShipOptions]
+        });
+        // callback
+        cb && cb();
     },
-    placeOrder: async order => {
-        // if (!order.agree) {
-        //     // return error
-        //     toast.error('Please accept the terms and conditions to continue your action.', {
-        //         position: toast.POSITION.TOP_RIGHT
-        //     });
-        // } else {
-        
+    placeOrder: async (order, cb) => {
         var payload = {...order};
-
         try {
             // get shopping cart
             let cart = ownProps.cookies.get('cart'), result = null;
-            // self pickip
-            if(/^selfpickup$/i.test(payload.shippingMethod)){
-                payload.shippings = undefined;
-                payload.shipping = undefined;
-                payload.notes = '------------------\nSELF PICKUP\n--------------------';
-            }
             // no shopping cart
             if (!cart) {
                 result = await agent.Checkout.getCart();
@@ -286,24 +83,25 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
                 // remove cart
                 ownProps.cookies.remove('cart');
                 // clear items
-                dispatch(
-                    {
-                        type: INIT_CART,
-                        payload: [],
-                    }
-                );
+                dispatch({
+                    type: INIT_CART,
+                    payload: [],
+                });
                 // return result
-                toast.success('Order successed.', {
+                toast.success('Order placed successfully!', {
                     position: toast.POSITION.TOP_RIGHT
                 });
+                // callback
+                cb && cb();
             }
         } catch (error) {
             // return error
             toast.error(((error.response.data || {}).messages || []).join("\n") || error.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
+            // callback
+            cb && cb();
         }
-        //}
     },
     updateOrder: info => dispatch({
         type: CART_UPDATE_ORDER_INFO,
@@ -355,8 +153,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 const CheckoutOverview = props => {
     const classes = styles();
-    const {items, order, rates} = props;
-    const isFormValid = (function(){
+    const {items, order, rates, shop} = props;
+    const isShippingAddressRequired = (function(){
+        return order.shippings != undefined && 
+        rates.filter(r => r.id == Object.values(order.shippings)[0])[0].address_required === true;
+    })();
+    const isValidToShip = (function(){
         let order = props.order || {
             contact : {},
             shipping : {},
@@ -365,11 +167,29 @@ const CheckoutOverview = props => {
         return ((order.contact || {}).first_name || "").length && 
                ((order.contact || {}).last_name || "").length && 
                ((order.contact || {}).phone || "").length && 
-               ((order.shipping || {}).address || "").length && 
                ((order.payment || {}).card || "").length && 
                ((order.payment || {}).exp_date || "").length && 
                ((order.payment || {}).csc || "").length;
     })();
+    const isValidToPlaceOrder = (function(){
+        const { shippings } = order;
+        if(
+            shippings != undefined && 
+           (Object.keys(shippings) || []).length > 0 &&
+           Object.keys(shippings)[0] == shop.id &&
+           isValidToShip
+        ){
+            if(!isShippingAddressRequired){
+                return true;
+            } else if( isShippingAddressRequired && ((order.shipping || {}).address || '').length > 0 ){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    })()
 
 
 
@@ -378,9 +198,7 @@ const CheckoutOverview = props => {
 
         {/* ------------------------- Left col ------------------------- */}
         <div className={classes.formGroup} style={{flex : 3}}>
-            <h3>
-                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/>
-            </h3>
+            <h3><I18nText keyOfI18n={keyOfI18n.CHECKOUT_BILLING_DETAIL}/></h3>
             <div>
                 <div className={classes.inputSet}>
                     <div className={classes.inputGroup}>
@@ -396,6 +214,7 @@ const CheckoutOverview = props => {
                                         first_name: e.target.value
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                         <div className={classes.inputWrapper}>
@@ -410,6 +229,7 @@ const CheckoutOverview = props => {
                                         last_name: e.target.value
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                     </div>
@@ -426,6 +246,7 @@ const CheckoutOverview = props => {
                                         email: e.target.value
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                         <div className={classes.inputWrapper}>
@@ -440,9 +261,11 @@ const CheckoutOverview = props => {
                                         phone: value
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                     </div>
+                    {isShippingAddressRequired &&
                     <div className={classes.inputWrapper}>
                         <input
                             type="text"
@@ -456,8 +279,9 @@ const CheckoutOverview = props => {
                                     country : "HK"
                                 }
                             })}
+                            disabled={order.processing === true}
                         />
-                    </div>
+                    </div>}
                 </div>
                 {/* -------- payment -------- */}
                 <h3 style={{paddingTop : "15px"}}>
@@ -476,6 +300,7 @@ const CheckoutOverview = props => {
                                     card: value
                                 }
                             })}
+                            disabled={order.processing === true}
                         />
                     </div>
                     <div className={classes.inputGroup}>
@@ -492,6 +317,7 @@ const CheckoutOverview = props => {
                                         exp_date: formattedValue
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                         <div className={classes.inputWrapper}>
@@ -506,6 +332,7 @@ const CheckoutOverview = props => {
                                         csc: value
                                     }
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                     </div>
@@ -564,6 +391,7 @@ const CheckoutOverview = props => {
                                     ...props.order,
                                     coupons: e.target.value
                                 })}
+                                disabled={order.processing === true}
                             />
                         </div>
                         <div style={{display:'flex', justifyContent:'center', flex : 1}}>
@@ -597,15 +425,10 @@ const CheckoutOverview = props => {
                             <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_FEE}/>
                             <NumberFormat
                                 value={(() => {
-                                    if(/^selfpickup$/i.test(order.shippingMethod || '')){
-                                        return 0;
-                                    } else if(/^ship$/i.test(order.shippingMethod || '')){
-                                        var shopId = Object.keys((props.order || {}).shippings || {})[0] || '';
-                                        var courierId = ((props.order || {}).shippings || {})[shopId];
-                                        var selectedCourier = rates.filter(r => r.id == courierId)[0] || {};
-                                        return (selectedCourier.rates || {})[shopId];
-                                    } else {
+                                    if(order.shippings == undefined){
                                         return '-';
+                                    } else {
+                                        return rates.filter(r => r.id == Object.values(order.shippings)[0])[0].charge;
                                     }
                                 })()}
                                 thousandSeparator={true}
@@ -621,69 +444,71 @@ const CheckoutOverview = props => {
                     {/* ----- Buttons ----- */}
                     <div className={classes.summary}>
                         {   
-                            rates.length ? 
+                            order.processing === true ? 
+                            <div style={{ width : "100%", display : "flex", justifyContent : "center"}}>
+                                <CircularProgress size={15} color="#000" />
+                            </div>
+                            :
+                            (rates.length ? 
+                            // select a shippings method
                             <div>
                                 <div style={{fontSize:13, textTransform:'uppercase', paddingBottom:"7px"}}>
                                     <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SHIPPING_METHOD}/>
                                 </div>
-                                <Select 
-                                    placeholder={"Select Shipping Method"}
-                                    onChange={({value}) => {
-                                        props.updateOrder({
+                                <div>
+                                    <Select 
+                                        placeholder={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>}
+                                        onChange={({value}) => props.updateOrder({
                                             ...props.order,
-                                            shippingMethod : value,
-                                            shippings : /^selfpickup$/i.test(value) ? undefined : order.shippings
-                                        });
-                                    }}
-                                    options={[
-                                        { value : "selfpickup", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SELFPICKUP}/>},
-                                        { value : "ship", label : <I18nText keyOfI18n={keyOfI18n.CHKECOUT_SHIPPING_METHOD_SHIP}/>}
-                                    ]}
-                                />
-                                {function(){
-                                    // self pickup?
-                                    if(/^selfpickup$/i.test(order.shippingMethod || '')){
-                                        return <div className={classes.pickupmsg}>
-                                            <I18nText keyOfI18n={keyOfI18n.CHECKOUT_PICKUP_MSG}/>
-                                        </div>
-                                    } else if(/^ship$/i.test(order.shippingMethod || '')){
-                                        return <div>
-                                            <div style={{fontSize:13, textTransform:'uppercase', padding:"15px 0px 7px 0px"}}>
-                                                <I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>
-                                            </div>
-                                            <Select 
-                                                placeholder={<I18nText keyOfI18n={keyOfI18n.CHECKOUT_SELECT_COURIER}/>}
-                                                onChange={({value}) => props.updateOrder({
-                                                    ...props.order,
-                                                    shippings : {
-                                                        [value.split(":")[0]] : value.split(":")[1]
-                                                    }
-                                                })}
-                                                options={rates.map(r => ({
-                                                    value : `${Object.keys(r.rates)[0]}:${r.id}`,
-                                                    label : `${r.name} - HK$${Object.values(r.rates)[0]}`
-                                                }))}
-                                            />
-                                        </div>
-                                    }
-                                }()}
+                                            shippings : {
+                                                [value.split(":")[0]] : value.split(":")[1]
+                                            }
+                                        })}
+                                        options={rates.map(r => ({
+                                            value : `${shop.id}:${r.id}`,
+                                            label : `${r.title} - HK$${r.charge}`
+                                        }))}
+                                    />
+                                </div>
+                               
                                 <div className={classes.termsnConditions}>
                                     <span><I18nText keyOfI18n={keyOfI18n.TERM_AND_CONDITIONS}/></span>
                                 </div>
                                 <button className={classes.actionBtn} 
                                         style={{marginTop:15}}
                                         onClick={e => {
-                                            props.placeOrder(props.order);
+                                            props.updateOrder({
+                                                ...props.order,
+                                                processing : true
+                                            });
+                                            props.placeOrder(props.order, () => {
+                                                props.updateOrder({
+                                                    ...props.order,
+                                                    processing : false
+                                                });
+                                            });
                                         }}
-                                        disabled={!isFormValid || !order.shippingMethod || (/^ship$/i.test(order.shippingMethod || '') && !Object.keys(order.shippings || {}).length)}>
+                                        disabled={!isValidToShip || !isValidToPlaceOrder}>
                                     <I18nText keyOfI18n={keyOfI18n.PLACE_ORDER}/>
                                 </button>
-                            </div> : 
+                            </div> :
+                            // click to load rates and shippings methods
                             <button className={classes.actionBtn}
-                                onClick={e => props.quoteShippingFee(items, props.order.shipping.address)}
-                                disabled={!isFormValid}>
+                                onClick={e => {
+                                    props.updateOrder({
+                                        ...props.order,
+                                        processing : true
+                                    });
+                                    props.getShippingMethods(shop, ((props.order || {}).shipping || {}).address, () => {
+                                        props.updateOrder({
+                                            ...props.order,
+                                            processing : false
+                                        });
+                                    });
+                                }}
+                                disabled={!isValidToShip}>
                                 <I18nText keyOfI18n={keyOfI18n.CONTINUE_SHIPPING}/>
-                            </button>
+                            </button>)
                         }
                     </div>
                     {/* ----- /Buttons ----- */}

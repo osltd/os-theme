@@ -73,7 +73,7 @@ export const zh_HK: props = {
     AUTH_LOGIN_SIGN_IN: '登入',
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: '未成為會員？',
     AUTH_LOGIN_FORGOT_YOUR_PASSWORD: '忘記密碼？',
-
+    LOAD_MORE : '更多',
 
     AUTH_REGISTER_CREATE_YOUR_ACCOUNT: '建立帳戶',
     AUTH_ACCOUNT_CREATED: '帳戶已建立',

@@ -133,7 +133,9 @@ export enum keyOfI18n {
     AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN = 'AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN',
     PRODUCT_CATEGORY = 'PRODUCT_CATEGORY',
     GOT_IT = 'GOT_IT',
+    LOAD_MORE = 'LOAD_MORE'
 } export interface I18n {
+    LOAD_MORE : string,
     GOT_IT: string;
     LANGUAGE: string;
     ADD_TO_CART_CONFIRM_INFO: string;

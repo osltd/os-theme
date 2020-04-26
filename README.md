@@ -3,7 +3,7 @@ This is the default theme of Oneshop's Website Sales Channel.
 
 ## Configuartion
 1. Clone/Fork the project as your own repository.
-2. Edit .env file, replace the API endpoint from 'https://myshop.oneshop.host/' to your shop's domain
+2. Edit .env file, replace the API endpoint from 'https://starter.oneshop.host/' to your shop's domain
 3. Then in your terminal, cd into your project and type `npm start` to start your project.
 
 ## To deploy the project to your website

@@ -1,8 +1,9 @@
 import {
     INIT_PRODUCTS,
     MERCHANDISE_INIT_FEATURED,
-
-
+    LOAD_PRODUCTS,
+    PRODUCT_CATEGORY_IS_LOADING,
+    PRODUCT_IS_LOADING,
     EDIT_PRODUCT_DETAIL,
     EDIT_PRODUCT_VIEW_MODE,
     PRODUCT_EDIT_FILTER,
@@ -31,7 +32,24 @@ export default (state = defaultState, action) => {
 
     switch (action.type) {
         case INIT_PRODUCTS: {
-
+            return {
+                ...state,
+                products: action.payload ? action.payload : [],
+            }
+        }
+        case PRODUCT_IS_LOADING:{
+            return {
+                ...state,
+                productIsLoading : action.payload
+            }
+        }
+        case PRODUCT_CATEGORY_IS_LOADING : {
+            return {
+                ...state,
+                productCategoryIsLoading : action.payload
+            }
+        }
+        case LOAD_PRODUCTS : {
             return {
                 ...state,
                 products: action.payload ? action.payload : [],
@@ -44,13 +62,7 @@ export default (state = defaultState, action) => {
                 featuredMerchandises: action.payload ? action.payload : [],
             }
         }
-
-
-
-
-
         case EDIT_PRODUCT_VIEW_MODE:
-
             return {
                 ...state,
                 viewMode: action.payload,

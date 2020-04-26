@@ -12,8 +12,6 @@ const defaultState = {
         sortBy: null,
 
     }
-    ,
-
 };
 
 export default (state = defaultState, action) => {
@@ -36,15 +34,6 @@ export default (state = defaultState, action) => {
                 tips: action.payload ? action.payload : [],
             }
         }
-
-
-
-
-
-
-
-
-
         case FEED_EDIT_SORT: {
             return {
                 ...state,

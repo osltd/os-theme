@@ -75,7 +75,7 @@ export const en: props = {
     AUTH_LOGIN_DONT_HAVE_YOUR_OWN_ACCOUNT_YET: 'Dont have your own account yet?',
     AUTH_LOGIN_HAVE_YOUR_OWN_ACCOUNT_LOGIN: 'Have your own account? Login now',
     AUTH_LOGIN_FORGOT_YOUR_PASSWORD: 'Forgot your password?',
-
+    LOAD_MORE : 'LOAD MORE',
 
     AUTH_REGISTER_CREATE_YOUR_ACCOUNT: 'Create your account',
     AUTH_ACCOUNT_CREATED: 'Account created!',

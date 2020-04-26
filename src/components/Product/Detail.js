@@ -227,13 +227,6 @@ const styles = createUseStyles({
         },
     }
 
-    // productCategory: {
-    //     backgroundColor: theme.palette.background.paper
-    // },
-    // toolBar: {
-    //     backgroundColor: ''
-    // },
-
 });
 
 
@@ -267,18 +260,14 @@ const mapDispatchToProps = dispatch => ({
                 alert((((result || {}).data || {}).messages || []).join("\n") || 'Failed.');
             } else {
                 // reload items
-                agent.Checkout.initCart(cart).then(res => dispatch(
-                    {
-                        type: INIT_CART,
-                        payload: res.data.data.rows,
-                    }
-                )).catch(err => dispatch(
-            
-                    {
-                        type: INIT_CART,
-                        payload: [],
-                    }
-                ))
+                agent.Checkout.initCart(cart).then(res => dispatch({
+                    type: INIT_CART,
+                    payload: res.data.data.rows,
+                }))
+                .catch(err => dispatch({
+                    type: INIT_CART,
+                    payload: [],
+                }))
                 // return result
                 toast.success('Item added.', {
                     position: toast.POSITION.TOP_RIGHT

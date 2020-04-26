@@ -12,13 +12,13 @@ import {reducer} from "../../context";
 
 
 const styles = createUseStyles({
-    root: {
+    footer: {
         marginTop: '50px',
-        backgroundColor: 'black',
-        color: 'white',
+        backgroundColor: '#fafafa',
+        color: 'black',
         display: 'flex',
         flexDirection: 'row-reverse',
-        padding: '35px 9%',
+        padding: '60px 9%',
         '& > div': {
             flex: 1
         }
@@ -30,6 +30,8 @@ const styles = createUseStyles({
     shopName: {
         margin: '0 0 8px',
         padding: 0,
+        fontWeight : 100,
+        fontSize : 30,
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif'
     },
     shopDesc: {
@@ -44,7 +46,7 @@ const styles = createUseStyles({
     shortcutsTitle: {
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         marginBottom: 7,
-        fontWeight: 600
+        fontWeight: 600,
     },
     shortcutLinks: {
         padding: 0,
@@ -52,19 +54,20 @@ const styles = createUseStyles({
         listStyle: 'none'
     },
     shortcutLink: {
-        
+        padding : "5px 0px"
     },
     shortcutLinkButton: {
         backgroundColor: 'transparent',
-        color: '#fff',
+        color: 'gray',
         borderWidth: 0,
         cursor: 'pointer',
-        fontSize: 15
+        fontSize: 15,
+        padding : 0
     },
 
     // for mobile
     '@media (max-width: 600px)': {
-        root: {
+        footer: {
             display: 'block'
         },
         shortcuts: {
@@ -134,7 +137,7 @@ const Footer = props => {
     </div>;
 
 
-    return <div className={classes.root}>
+    return <div className={classes.footer}>
         {renderShortcuts()}
         {renderShopInfo()}
     </div>;

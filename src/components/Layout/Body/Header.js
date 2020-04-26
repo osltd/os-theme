@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react';
 import {createUseStyles} from 'react-jss';
-
-import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
 import {getRoutePath, redirectUrl} from '../../../api/ApiUtils';
@@ -10,7 +8,7 @@ import {getRoutePath, redirectUrl} from '../../../api/ApiUtils';
 const styles = createUseStyles({
     root: {
         marginBottom: '50px',
-        minHeight: '100px',
+        minHeight: '70px',
         background: '#f7f7f7',
         display: 'flex',
         alignItems: 'center',
@@ -21,10 +19,10 @@ const styles = createUseStyles({
         fontWeight: '700',
         fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif',
         flex: 1,
-        fontSize: 22
+        fontSize: 15
     },
     path: {
-        display: 'flex'
+        display: 'flex',
     },
     route: {
         textTransform: 'uppercase',
@@ -46,6 +44,7 @@ const styles = createUseStyles({
     },
     text: {
         fontWeight: 400,
+        fontSize : 14,
         '&:hover': {
             cursor: 'pointer',
         }
@@ -83,11 +82,6 @@ const BodyHeader = (props) => {
         </div>
     </div>
 };
-
-
-// BodyHeader.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
 
 
 export default withRouter(BodyHeader)

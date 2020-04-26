@@ -2,20 +2,13 @@ import React, {lazy, Suspense, useContext, useEffect} from 'react';
 import {connect} from "react-redux";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { withCookies } from 'react-cookie';
-
 import _ from 'lodash';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-
 import '../constants/icon/style.css'
 import '../constants/Style.css'
-
-
-
 import ErrorBoundary from "./Layout/ErrorHandling";
 import ScrollToTop from './Layout/ScrollToTop'
 
@@ -42,13 +35,9 @@ import actionType from "../context/actionType";
 import {reducer} from "../context";
 
 
-
-
-
-
-
-
-
+/**
+ *  -------------------- Load components --------------------
+ */
 const Header = lazy(() => import('./Layout/Header'))
 const Footer = lazy(() => import('./Layout/Footer'))
 
@@ -61,6 +50,10 @@ const ProductScreen = lazy(() => import('./Product/Detail'))
 
 const ShoppingCart = lazy(() => import('./Cart/Overview'))
 const Checkout = lazy(() => import('./Checkout/Overview'))
+/**
+ *  -------------------- Load components --------------------
+ */
+
 
 
 const mapStateToProps = state => ({
@@ -70,46 +63,21 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
         initApp: (shoppingCart) => {
-
+            
+            // ---------------------- load feeds ----------------------
             try {
-                agent.Products.initProducts().then(res => dispatch({
-                    type: INIT_PRODUCTS,
+                agent.Feeds.initFeeds().then(res => dispatch({
+                    type: INIT_FEEDS,
                     payload: res.data.data.rows,
-                })).catch(err => dispatch(
-                    {
-                        type: INIT_PRODUCTS,
-                        payload: [],
-                    }
-                ));
-            } catch(e) {
-                
-            }
-
-            try {
-                agent.Feeds.initFeeds().then(res => {
-                        dispatch(
-                            {
-                                type: INIT_FEEDS,
-                                payload: res.data.data.rows,
-                            }
-                        )
-                    }
-                ).catch(err => {
-                    console.log(err)
-                    dispatch(
-
-                        {
-                            type: INIT_FEEDS,
-                            payload: [],
-                        }
-                    )
-                });
-            } catch(e) {
-                    
-            }
+                })).catch(err => dispatch({
+                    type: INIT_FEEDS,
+                    payload: []
+                }));
+            } catch(e) {}
+            // ---------------------- /load feeds ----------------------
 
 
-            // get cart items
+            // ---------------------- get cart items ----------------------
             agent.Checkout.initCart(shoppingCart).then(res => dispatch(
                 {
                     type: INIT_CART,
@@ -122,8 +90,10 @@ const mapDispatchToProps = dispatch => ({
                     payload: [],
                 }
             ));
+            // ---------------------- get cart items ----------------------
 
 
+            // ---------------------- Get Account Info ----------------------
             agent.Auth.getAccount().then(user =>
                 dispatch(
                     {
@@ -138,39 +108,30 @@ const mapDispatchToProps = dispatch => ({
 
                 }
             ));
+            // ---------------------- Get Account Info ----------------------
 
 
+            // ----------------------- Get shop info -----------------------
             agent.Products.initBusiness().then(res => {
-
                     if (res.data.data.rows) {
-                        dispatch(
-                            {
-                                type: CATEGORY_INIT_CATEGORY,
-                                payload: res.data.data.rows[0].tags.split(','),
-                            }
-                        );
-                        dispatch(
-                            {
-                                type: COMMON_INIT_SHOP_INFO,
-                                payload: res.data.data.rows[0],
-                            }
-                        );
-                        // document.title = res.data.data.rows[0].name
+                        dispatch({
+                            type: CATEGORY_INIT_CATEGORY,
+                            payload: res.data.data.rows[0].tags.split(','),
+                        });
+                        dispatch({
+                            type: COMMON_INIT_SHOP_INFO,
+                            payload: res.data.data.rows[0],
+                        });
                     }
                 }
-            ).catch(err => {
+            )
+            .catch(err => dispatch({
+                type: CATEGORY_INIT_CATEGORY,
+                payload: []
+            }));
+            // ----------------------- /Get shop info -----------------------
 
-                    // document.title = 'One Shop';
-
-                    dispatch(
-                        {
-                            type: CATEGORY_INIT_CATEGORY,
-                            payload: []
-                        }
-                    )
-                }
-            );
-
+            // ------------------------ Get collections ------------------------
             try {
                 agent.Collections.initCollections('?tags=featured')
                 .then(res => {
@@ -201,33 +162,27 @@ const mapDispatchToProps = dispatch => ({
                         payload: []
                     })
                 });
-            } catch(e) {
-    
-            }
-
-            // dispatch({
-            //     type: CART_INIT_SHOPPING_CART,
-            //     payload: shoppingCart,
-            // })
+            } catch(e) {}
+            // ------------------------ /Get collections ------------------------
         },
-        finishLoadingProducts: products =>
-            dispatch(
-                {
-                    type: INIT_PRODUCTS,
-                    payload: products,
-                }
-            )
-
+        finishLoadingProducts: products => dispatch({
+            type: INIT_PRODUCTS,
+            payload: products,
+        })
     }
 );
+
+
+
 
 const App = props => {
 
     const {commonReducer} = useContext(reducer)
-    let getAllProducts = async (page = 1, products = []) => {
-        let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.rows).catch(err => []);
-        return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
-    };
+    
+    // let getAllProducts = async (page = 1, products = []) => {
+    //     let data = await agent.Products.initProducts(`?page=${page}`).then(res => res.data.data.rows).catch(err => []);
+    //     return (data && data.length > 0) ? getAllProducts(page + 1, _.concat(products, data)) : products
+    // };
     
     let initApp = async () => await props.initApp(
         props.cookies.get('cart')
@@ -240,7 +195,6 @@ const App = props => {
             let storedLocale = localStorage.getItem('locale')
             // console.log(storedLocale)
             if (storedLocale === 'en' || storedLocale === 'zh') {
-
                 commonReducer.dispatch(
                     {
                         type: actionType.common.COMMON_INIT_I18N,
@@ -250,11 +204,10 @@ const App = props => {
                     }
                 )
             }
-
             initApp().then(
                 async () =>
                     props.finishLoadingProducts(
-                        await getAllProducts()
+                        // await getAllProducts()
                     )
             );
         }, []);
@@ -266,32 +219,20 @@ const App = props => {
                     <Suspense fallback={() => {}}>
                         <ToastContainer/>
                         <Header/>
+                        <div style={{paddingTop:"66px"}}>
                             <Switch>
                                 <Route exact path={'/'} component={mainPage}/>
                                 <Route exact path={'/404'} component={NotFound}/>
-                                
                                 <Route exact path={'/articles'} component={FeedsScreen}/>
                                 <Route exact path={'/articles/:id'} component={Feed}/>
-                                
                                 <Route exact path={'/products'} component={ProductsScreen}/>
                                 <Route exact path={'/products/:id'} component={ProductScreen}/>
-
                                 <Route exact path={'/shopping-cart'} component={ShoppingCart}/>
                                 <Route exact path={'/checkout'} component={Checkout}/>
-
-
-                                {/* <Route exact path={'/login'} component={Login}/>
-                                <Route exact path={'/register'} component={Register}/>
-                                
-                                <Route exact path={'/confirmPage/:orderId'} component={ConfirmPage}/>
-                                <Route exact path={'/loadingPage'} component={LoadingPage}/>
-                                <Route exact path={'/search/:keyword'} component={SearchPage}/>
-                                <Route exact path={'/validate/:id'} component={Validate}/> */}
                                 <Route component={NotFound}/>
                             </Switch>
-
+                        </div>
                         <MyCredits/>
-
                         <Footer/>
                     </Suspense>
                 </ErrorBoundary>

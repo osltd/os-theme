@@ -120,7 +120,7 @@ export const formatMoney = (n: any, c = 2, d = '.', t = ','): string => {
 };
 
 
-export const getTagsCountsArray = (products: Array<Product> | null, onClick: Function): Array<Clickable> => {
+export const getTagsCountsArray = (products: Array<Product> | null, needCount: Boolean ,onClick: Function): Array<Clickable> => {
     let tagsArray: Array<string> = [];
     if (!products) return [];
     products.map(n => (n.tags.length > 0) ? n.tags.map((k: string): void => {
@@ -130,12 +130,12 @@ export const getTagsCountsArray = (products: Array<Product> | null, onClick: Fun
     let tagsName = Object.keys(tagsObject);
     let tagsCount = Object.values(tagsObject);
     let result: Array<Clickable> = [{
-        label: 'all (' + products.length + ') ',
+        label: needCount ? `all (${products.length})` : `all`,
         onClick: () => onClick(null, products.length)
     }];
     tagsName.map(
         (n, i) => result.push({
-            label: n + ' (' + tagsCount[i] + ') ',
+            label: needCount ? `${n} (${tagsCount[i]})` : n,
             value: n,
             onClick: () => onClick(n, tagsCount[i])
         })

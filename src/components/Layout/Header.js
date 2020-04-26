@@ -11,9 +11,7 @@ import {redirectUrl} from "../../api/ApiUtils";
 
 import classNames from "classnames";
 import {CART_OPERATE_SHOPPING_CART, COMMON_EDIT_SEARCH_BAR} from "../../constants/actionType";
-import {useI18nText} from "../../hooks/useI18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
-import DropDown from "../Widget/DropDown";
 import actionType from "../../context/actionType";
 import {reducer} from "../../context";
 
@@ -24,7 +22,10 @@ const styles = createUseStyles({
         justifyContent: 'space-between',
         borderBottom: '1px solid #eee',
         minHeight: 65,
-        padding: '0 15px'
+        backgroundColor : "white",
+        position : "fixed",
+        width : "100%",
+        zIndex : 9990
     },
     nav: {
         display: 'flex',
@@ -71,7 +72,7 @@ const styles = createUseStyles({
     },
     openMenu: {
         position: 'absolute',
-        left: 0,
+        left: 15,
         '& button': {
             cursor: 'pointer',
             borderWidth: 0,
@@ -188,8 +189,32 @@ const styles = createUseStyles({
             cursor: 'pointer'
         }
     },
-
-
+    shoppingCartCounter : {
+        position : 'absolute',
+        top : 16,
+        right : 20,
+        border : "1px solid white",
+        height : 15,
+        width : 15,
+        borderRadius : 8.5,
+        color : "white",
+        backgroundColor : "black",
+        lineHeight : "15px",
+        fontSize : 9
+    },
+    shoppingCartCounterMobile : {
+        position : 'absolute',
+        top : "-9px",
+        right : "-3px",
+        border : "1px solid white",
+        height : 15,
+        width : 15,
+        borderRadius : 8.5,
+        color : "white",
+        backgroundColor : "black",
+        lineHeight : "15px",
+        fontSize : 9
+    },
 
 
 
@@ -209,7 +234,7 @@ const styles = createUseStyles({
                 left: 0,
                 right: 0,
                 backgroundColor: 'rgba(50,50,50,.9)',
-                zIndex: 99999
+                zIndex: 9997
             },
             '& > $openMenu': {
                 display: 'block'
@@ -223,7 +248,7 @@ const styles = createUseStyles({
         },
         shoppingCart: {
             display: 'block',
-            right: 0,
+            right: 15,
             position: 'absolute'
         }
     }
@@ -277,16 +302,11 @@ const mapDispatchToProps = dispatch => ({
 
 const Header = props => {
     const classes = styles();
-    const {feeds, products, history, shopInfo} = props;
+    const {history, shopInfo, shoppingCart} = props;
     const {commonReducer} = useContext(reducer);
 
     const logo = (shopInfo || {}).logo || '';
     const name = (shopInfo || {}).name || '';
-
-    const config = {
-        showArticles: (feeds || []).length > 0,
-        showShop: (products || []).length > 0,
-    };
 
     return <div className={classes.topbar}>
 
@@ -308,65 +328,57 @@ const Header = props => {
 
             {/* --------------- Mobile menu  --------------- */}
             <div className={classNames(classes.mobileMenu, 'animated', 'fadeIn', 'faster')}>
-                {config.showArticles && <button type="button" onClick={e => {
+                <button type="button" onClick={e => {
                     redirectUrl('/articles', history);
                     props.closeMobileMenu(e);
                 }}>
                     <I18nText keyOfI18n={keyOfI18n.FEEDS}/>
-                </button>}
-                {config.showShop && <button type="button" onClick={e => {
+                </button>
+                <button type="button" onClick={e => {
                     redirectUrl('/products', history);
                     props.closeMobileMenu(e);
                 }}>
                     <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
-                </button>}
-                {config.showShop && <button type="button" onClick={e => {
+                </button>
+                <button type="button" onClick={e => {
                     redirectUrl('/checkout', history);
                     props.closeMobileMenu(e);
                 }}>
                     <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
-                </button>}
+                </button>
                 <button type="button" onClick={props.closeMobileMenu}>X</button>
             </div>
 
 
             {/* --------------- Desktop menu  --------------- */}
             <div className={classes.desktopMenu}>
-                {config.showArticles && <div>
+                <div>
                     <button type="button" onClick={e => redirectUrl('/articles', history)}>
                         <I18nText keyOfI18n={keyOfI18n.FEEDS}/>
                     </button>
-                </div>}
-                {config.showShop && <div>
+                </div>
+                <div>
                     <button type="button" onClick={e => redirectUrl('/products', history)}>
                         <I18nText keyOfI18n={keyOfI18n.PRODUCTS}/>
                     </button>
                     <button type="button" onClick={e => redirectUrl('/checkout', history)}>
                         <I18nText keyOfI18n={keyOfI18n.CHECKOUT}/>
                     </button>
-                </div>}
-            </div>
-            {
-                (products || []).length > 0 && 
-                <div className={classes.shoppingCart} >
-                    <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
-                        <i className="icon-cart"/>
-                    </button>
                 </div>
-            }
+            </div>
+            <div className={classes.shoppingCart}>
+                <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
+                    <i className="icon-cart"/>
+                    {(shoppingCart || []).length > 0 && <div className={classes.shoppingCartCounterMobile}>
+                        {(shoppingCart || []).length}
+                    </div>}
+                </button>
+            </div>
         </div>
 
 
         {/* --------------------------- Right topbar --------------------------- */}
         <div className={classes.toolbar}>
-            {/* ---- search bar ---- */}
-            <div>
-                <input
-                    type="text"
-                    className={classes.searchBar}
-                    placeholder={`${useI18nText(keyOfI18n.SEARCH)}…`}
-                />
-            </div>
             {/* ---- Language selector ---- */}
             <div className={classes.languages}>
                 <div>
@@ -400,12 +412,14 @@ const Header = props => {
                 </ul>
             </div>
             {/* ---- Shoppin cart ---- */}
-            {(products || []).length > 0 && <div>
+            <div>
                 <button type="button" onClick={() => redirectUrl('/shopping-cart', history)}>
-                    {/* <I18nText keyOfI18n={keyOfI18n.SHOPPING_CART}/> */}
                     <i className="icon-cart"/>
+                    {(shoppingCart || []).length > 0 && <div className={classes.shoppingCartCounter}>
+                        {(shoppingCart || []).length}
+                    </div>}
                 </button>
-            </div>}
+            </div>
         </div>
     </div>;
 };
