@@ -1,4 +1,5 @@
 import {createUseStyles} from 'react-jss';
+import { callbackify } from 'util';
 
 export default createUseStyles({
     tips: {
@@ -60,6 +61,13 @@ export default createUseStyles({
         fontWeight : 300,
         textAlign : "left",
         color : "#666"
+    },
+
+    placeholder : {
+        display : 'flex',
+        height : "calc(100vh - 288px)",
+        alignItems : 'center',
+        justifyContent : 'center'
     },
 
     // for mobile

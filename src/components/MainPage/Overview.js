@@ -13,8 +13,6 @@ import {redirectUrl} from "../../api/ApiUtils";
 
 const mapStateToProps = state => ({
     featuredMerchandises: state.product.featuredMerchandises,
-    featuredArticles: state.feed.featuredArticles,
-    tips: state.feed.tips,
     shopInfo: state.common.shopInfo,
     bestSellers: state.product.bestSellers,
     feeds : state.feed.feeds
@@ -22,13 +20,12 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    initBestSellers: () => {
-        agent.Products.getBestSellers()
-        .then(res => dispatch({
+    initBestSellers: async () => {
+        // fetch products
+        dispatch({
             type    : LOAD_BEST_SELLERS,
-            payload : res.data.data.rows || []
-        }))
-        .catch(err => {})
+            payload : (await agent.Products.getBestSellers()).data.data.rows || []
+        });
     },
     substring: str => {
         return `${str.substr(0, 130)}...`;
@@ -39,17 +36,19 @@ const mapDispatchToProps = dispatch => ({
 const MainPageOverview = props => {
 
     const classes = styles();
-    const {featuredMerchandises, featuredArticles, tips, history, shopInfo, bestSellers, feeds} = props;
-
-    let [refreshing, setRefreshing] = useState(false);
+    const {featuredMerchandises, history, shopInfo, bestSellers, feeds} = props;
 
     useEffect(() => {
         if( bestSellers === undefined) props.initBestSellers();
         return () => {};
-    }, [featuredArticles, tips, featuredMerchandises]);
+    }, [featuredMerchandises]);
 
-    return <div>
-
+    return bestSellers == undefined ? 
+    <div className={classes.placeholder}>
+        <CircularProgress size={30} color={"#000"}/>
+    </div> 
+    :
+    <div>
         {/* --------------------- HEADLINE ------------------------ */}
         {(function(){
             if((feeds || []).length > 0){
@@ -198,7 +197,6 @@ const MainPageOverview = props => {
                 </button>)}
             </ul>
         </div>}
-        
     </div>;
 };
 

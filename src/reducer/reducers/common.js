@@ -1,4 +1,4 @@
-import {COMMON_EDIT_SEARCH_BAR, COMMON_INIT_SHOP_INFO} from "../../constants/actionType";
+import {COMMON_EDIT_SEARCH_BAR, COMMON_INIT_SHOP_INFO, LOADING_HOME_PAGE} from "../../constants/actionType";
 
 
 const defaultState = {
