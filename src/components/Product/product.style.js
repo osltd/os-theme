@@ -118,7 +118,7 @@ const styles = createUseStyles({
         }
     },
     name: {
-        textAlign : "left",
+        textAlign : "center",
         marginTop: 3,
         padding: 0,
         fontSize : 18,
