@@ -141,6 +141,7 @@ const styles = createUseStyles({
     languageOptions: {
         width: '100%',
         position: 'absolute',
+        zIndex: 999,
         display: 'none',
         marginTop: 15,
         padding: 0,

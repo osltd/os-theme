@@ -110,11 +110,9 @@ const Footer = props => {
             <p className={classes.shopDesc}>{props.shopInfo.description}</p>
         </div>
         <div>
-            <SocialIcon type={'facebook'}/>
-            <SocialIcon type={'youtube'}/>
-            <SocialIcon type={'twitter'}/>
-            <SocialIcon type={'reddit'}/>
-            <SocialIcon type={'whatsapp'}/>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank"><SocialIcon type={'facebook'}/></a>
+            <a href={`https://twitter.com/share?url=${window.location.href}`} target="_blank"><SocialIcon type={'twitter'}/></a>
+            <a href={`https://wa.me/?text=${window.location.href}`} target="_blank"><SocialIcon type={'whatsapp'}/></a>
         </div>
     </div>;
     const renderShortcuts = () => <div className={classes.shortcuts}>
