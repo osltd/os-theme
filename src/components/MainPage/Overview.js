@@ -4,12 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import h2p from 'html2plaintext';
 import {CircularProgress} from '@material-ui/core';
-import {
-    ARTICLE_INIT_FEATURED,
-    ARTICLE_INIT_TIPS,
-    MERCHANDISE_INIT_FEATURED,
-    LOAD_BEST_SELLERS
-} from '../../constants/actionType';
+import { LOAD_BEST_SELLERS } from '../../constants/actionType';
 import agent from '../../agent';
 import {I18nText} from "../Widget/I18nText";
 import {keyOfI18n} from "../../constants/locale/interface";
@@ -56,42 +51,48 @@ const MainPageOverview = props => {
     return <div>
 
         {/* --------------------- HEADLINE ------------------------ */}
-        {
-            (feeds || []).length > 0 && 
-            <div>
-                <li
-                    style={{
-                        height: 500,
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        justifyContent: 'flex-end',
-                        cursor : "pointer",
-                        position: 'relative'
-                    }}
-                    onClick={() => redirectUrl('/articles/' + feeds[0].id, props.history)}
-                >
-                    <img
+        {(function(){
+            if((feeds || []).length > 0){
+                // get feed
+                const f = feeds[0];
+                return <div>
+                    <div
                         style={{
-                            objectFit : "cover",
-                            width : "100%",
-                            height : "100%"
-                        }} 
-                        src={feeds[0].sections[0].media[0].url}
-                    />
-                    <span
-                        style={{
-                            position : "absolute",
-                            textShadow: '0px 1px 4px #000',
-                            color: '#fff',
-                            fontSize: 15,
-                            fontSize : "2em",
-                            bottom: 10,
-                            right: 15
+                            height: 500,
+                            display: 'flex',
+                            alignItems: 'flex-end',
+                            justifyContent: 'flex-end',
+                            cursor : "pointer",
+                            position: 'relative'
                         }}
-                    >{feeds[0].sections[0].title}</span>
-                </li>
-            </div>
-        }
+                        onClick={() => redirectUrl('/articles/' + f.id, props.history)}
+                    >   
+                        <img
+                            style={{
+                                objectFit : "cover",
+                                width : "100%",
+                                height : "100%"
+                            }} 
+                            src={f.sections[0].media[0].url}
+                        />
+                        <span
+                            style={{
+                                position : "absolute",
+                                textShadow: '0px 1px 4px #000',
+                                color: '#fff',
+                                fontSize: 15,
+                                fontSize : "2em",
+                                bottom: 20,
+                                right: 25,
+                                marginLeft : 15
+                            }}
+                        >{f.sections[0].title}</span>
+                    </div>
+                </div>
+            } else {
+                return null;
+            }
+        })()}
         
 
         {/* --------------------- ARTICLES ------------------------ */}
@@ -197,7 +198,6 @@ const MainPageOverview = props => {
                 </button>)}
             </ul>
         </div>}
-
         
     </div>;
 };

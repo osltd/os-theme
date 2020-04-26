@@ -49,9 +49,9 @@ export default createUseStyles({
     itemName : {
         textAlign : "left",
         paddingBottom : 7,
-        fontSize : 17,
-        fontWeight : 300,
-        color : "#666"
+        fontSize : 19,
+        fontWeight : 500,
+        color : "#000"
     },
     itemPrice : {
         textAlign : "left",
