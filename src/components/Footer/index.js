@@ -73,7 +73,7 @@ function Footer(props){
             </div>
         </div>
         <div className="copyright">
-            Copyright@{new Date().getFullYear()} {shop.name}
+            <span>Copyright@{new Date().getFullYear()} {shop.name}</span>
         </div>
     </div>
 

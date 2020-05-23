@@ -2,11 +2,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     padding: 50px 0px 25px 0px;
     flex-wrap: wrap;
     background-color: #f7f7f7;
-    flex-direction: column;
 }
 
 .footer .cols{
@@ -19,13 +19,23 @@
     flex-wrap: wrap;
 }
 
+.footer .copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 30px);
+    max-width: 1100px;
+    margin-top:15px;
+    font-size: 12px;
+    color: #666;
+}
+
 .footer .cols .col{
     display: flex;
     flex : 1;
     flex-direction: column;
     min-width: 200px;
     padding: 30px 15px;
-    width: calc(100% - 30px);
 }
 
 .footer .cols .col .shop-title {
@@ -62,11 +72,4 @@
 
 .footer .cols .col.links a:hover{
     opacity: 0.7;
-}
-
-.footer .copyright{
-    margin-top:15px;
-    font-size: 12px;
-    color: #666;
-
 }
