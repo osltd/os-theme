@@ -6,12 +6,10 @@ import './widget.article.tile.css';
 import Oneshop from 'oneshop.web';
 import { MoonLoader } from 'react-spinners';
 import Carousel from 'react-grid-carousel';
-import parser from 'html-react-parser';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
-    shop        : state.shop.session,
     ...ownProps
 });
 
@@ -28,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
 function Article(props){
 
     // get cached
-    const { setHomeContext, homeContext, id, shop } = props;
+    const { setHomeContext, homeContext, id } = props;
     // get oneshop instance
     const OS = new Oneshop();
 
@@ -64,9 +62,11 @@ function Article(props){
                 <Carousel.Item  key={`slide-image-${idx}`}>
                     <Link to={`/blogs/${a.id}`}>
                         <div className="article-grid">
-                            <img src={articleInfoExtractor(a).thumbnail} />
+                            <div className="thumb">
+                                <img src={articleInfoExtractor(a).thumbnail} />
+                            </div>
                             <div className="title">{articleInfoExtractor(a).title}</div>
-                            <div className="desc">{parser(articleInfoExtractor(a).description)}</div>
+                            <div className="desc">{articleInfoExtractor(a).description.replace(/<[^>]*>?/gm, '').substr(0, 70) + "..."}</div>
                         </div>
                     </Link>
                 </Carousel.Item>

@@ -59,7 +59,8 @@ module.exports = {
                     tags : "",
                     ordering : "",
                     ids : "",
-                    numberToShow : 4,
+                    rows : 1,
+                    cols : 4,
                     // title
                     title : "Latest",
                     type : "sale",
