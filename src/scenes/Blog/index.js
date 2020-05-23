@@ -5,7 +5,7 @@ import './blog.css';
 import { connect } from 'react-redux';
 import actions from '../../helpers/actions';
 import { MoonLoader } from 'react-spinners';
-import parseHTML from 'html-react-parser';
+// import parseHTML from 'html-react-parser';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -113,7 +113,7 @@ function Blog(props){
                             </div>
                             <div className="info">
                                 <div className="title">{captionExtractor(a).title}</div>
-                                <div className="description">{parseHTML(captionExtractor(a).description) || ""}</div>
+                                <div className="description">{`${(captionExtractor(a).description || "").replace(/<[^>]*>?/gm, '').substr(0, 100)}...`}</div>
                             </div>
                         </div>
                     </Link>
