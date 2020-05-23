@@ -1,0 +1,70 @@
+.user-register {
+    display: flex;
+    flex : 1;
+    width : 100%;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.user-register .user-register-wrapper {
+    display: flex;
+    flex : 1;
+    width : 100%;
+    min-height: 100vh;
+    max-width: 1200px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-register .user-register-wrapper .form {
+    display: flex;
+    flex-direction: column;
+    width:350px;
+}
+
+.user-register .user-register-wrapper .form .form-group {
+    padding: 10px 0px;
+    display: flex;
+    flex : 1;
+    flex-direction: column;
+}
+
+.user-register .user-register-wrapper .form .form-group label{
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.user-register .user-register-wrapper .form .form-group input {
+    border : none;
+    border-bottom: 1px solid #AAAAAA;
+    height: 35px;
+    font-size: 18px;
+}
+
+.user-register .user-register-wrapper .form button {
+    margin-top: 15px;
+    display: flex;
+    background-color: black;
+    color: white;
+    border: none;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.user-register .user-register-wrapper .form button:hover {
+    background-color: #AAAAAA;
+}
+
+.user-register .user-register-wrapper .form .register{
+    padding: 20px 0px;
+}
+
+.user-register .user-register-wrapper .form .register a{
+    color: black;
+}

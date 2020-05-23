@@ -1,0 +1,41 @@
+.home .widget-banner{
+    width: 100%;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.home .widget-banner  .each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.home .widget-banner  .each-slide > div span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+}
+
+
+.home .widget-banner  .each-slide > div h1 {
+    position: absolute;
+    bottom: 15px;
+    left: 25px;
+    color: white;
+    padding: 15px 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+}
+
+.home .widget-banner  .each-slide > div a {
+    text-decoration: none;
+    color: black;
+}

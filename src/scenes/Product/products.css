@@ -1,0 +1,80 @@
+.products {
+    width: 100%;
+    min-height: calc(100vh - 100px);
+}
+
+.products h1 {
+    font-weight: 300;
+    padding-left: 30px;
+}
+
+.products .list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.products .list .item {
+    flex : 1;
+    max-width: 325px;
+}
+
+.products .list .item a {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    width: 100%;
+    max-width: 270px;
+    padding: 0px 15px;
+    height: 500px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.products .list .item a .item-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 15px;
+    height: 100%;
+}
+
+.products .list .item a .item-wrapper .thumbnail{
+    display: flex;
+    flex : 6;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.products .list .item a .item-wrapper .thumbnail img {
+    flex:1;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.products .list .item a .item-wrapper .thumbnail:hover {
+    box-shadow: 3px 3px 15px #AAAAAA;
+}
+
+.products .list .item a .item-wrapper .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex : 1;
+    padding: 15px 0px;
+    
+}
+
+.products .list .item a .item-wrapper .info .name {
+    font-size: 0.9em;
+}
+
+.products .list .item a .item-wrapper .info .price {
+    padding: 5px 0px;
+    font-weight: 500;
+}
+

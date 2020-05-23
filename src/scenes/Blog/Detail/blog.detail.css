@@ -1,0 +1,78 @@
+.article-detail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0px;
+    min-height: calc(100vh - 100px);
+}
+
+.article-detail .article-detail-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 15px;
+}
+
+
+.article-detail .article-detail-wrapper .back-button-wrapper {
+
+}
+
+.article-detail .article-detail-wrapper .back-button-wrapper a{
+    text-decoration: none;
+    color: black;
+    transition: 0.3s opacity;
+}
+
+.article-detail .article-detail-wrapper .back-button-wrapper a:hover{
+    opacity: 0.5;
+}
+
+.article-detail .article-detail-wrapper .back-button-wrapper a i{
+    margin-right: 10px;
+}
+
+
+
+.article-detail .article-detail-wrapper .content .section {
+    padding: 20px 0px;
+}
+
+.article-detail .article-detail-wrapper .content .section .slide-container{
+    flex:1;
+    margin: auto;
+}
+
+.article-detail .article-detail-wrapper .content .section h1 {
+    font-size: 35px;
+    font-weight: 300;
+}
+
+.article-detail .article-detail-wrapper .content .section h2 {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.article-detail .article-detail-wrapper .content .section p{
+    font-size: 18px;
+}
+
+.article-detail .article-detail-wrapper .content .slide-container .each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 500px;
+    flex-wrap: wrap;
+}
+
+.article-detail .article-detail-wrapper .content .slide-container .each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background: #efefef;
+    text-align: center;
+}
+
+

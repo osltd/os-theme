@@ -1,0 +1,10 @@
+export default {
+    SET_SHOP         : 'SET_SHOP',
+    SET_USER         : 'SET_USER',
+    SET_PRODUCTS     : 'SET_PRODUCTS',
+    ADD_BEST_SELLERS : 'ADD_BEST_SELLERS',
+    SET_ARTICLES     : 'SET_ARTICLES'   ,
+    INIT_CART        : 'INIT_CART',
+    SET_CART_ITEMS   : 'SET_CART_ITEMS',
+    SET_HOME_CONTEXT : 'SET_HOME_CONTEXT'
+}

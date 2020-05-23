@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import './index.css';
+import App from './scenes/App';
+import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './helpers/reducers';
 
-import registerServiceWorker from './registerServiceWorker';
-import {store} from './store';
-import ReducerContextProvider from './context';
-
-import App from './components/App';
-
+const store = createStore(reducer);
 
 ReactDOM.render(
-    <ReducerContextProvider>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </ReducerContextProvider>,
+    <Provider store={store}>
+        <App />
+    </Provider>, 
     document.getElementById('root')
 );
 
-
-registerServiceWorker();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

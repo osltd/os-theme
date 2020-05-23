@@ -1,0 +1,6 @@
+.home {
+    width: calc(100% - 30px);
+    min-height: calc(100vh - 100px);
+    padding:0px 15px;
+    padding-bottom: 50px;
+}

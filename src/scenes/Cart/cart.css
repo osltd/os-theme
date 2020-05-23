@@ -1,0 +1,214 @@
+.cart {
+    width: 100%;
+    min-height: calc(100vh - 250px);
+    position: relative;
+}
+
+.cart h1 {
+    font-weight: 300;
+    padding-left: 30px;
+}
+
+.cart .list {
+    position: relative;
+    width: calc(100% - 60px);
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.cart .loading-mask {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.cart .placeholder {
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart .placeholder i{
+    font-size: 70px;
+}
+
+.cart .placeholder .message {
+    padding: 15px 0px 30px 0px;
+    font-size: 25px;
+}
+
+.cart .placeholder a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme);
+    color: white;
+    width: calc(100% - 45px);
+    border: none;
+    border-radius: 3px;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: opacity 0.3s;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    text-decoration: none;
+    transition: 0.3s opacity;
+}
+
+.cart .placeholder a:hover{
+    opacity: 0.7;
+}
+
+
+
+
+.cart .list .items {
+    width: calc(100% - 30px);
+    padding: 15px;
+    border: 0.5px solid #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart .list .items .item {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 30px);
+    padding: 15px;
+    flex-wrap: wrap;
+}
+
+.cart .list .items .item .thumbnail {
+    height: 100px;
+}
+
+.cart .list .items .item .thumbnail img{
+    width: 100%;
+    height: 100%;
+}
+
+.cart .list .items .item .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.cart .list .items .item .info .name{
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.cart .list .items .item .info .description{
+    color: #666666;
+    font-size: 15px;
+}
+
+.list .items .item .form {
+    display: flex;
+    min-width: 150px;
+    align-items: center;
+}
+
+.list .items .item .form .qty{
+    font-size: 18px;
+    padding: 0px 15px;
+}
+
+.list .items .item .form .qty-btns{
+    display: flex;
+    flex-direction: column;    
+}
+
+.list .items .item .form .qty-btns button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s opacity;
+}
+
+.list .items .item .unit-price{
+    font-size: 18px;
+    padding: 0px 15px;
+}
+
+.list .items .item .unit-price i {
+    padding-left: 15px;
+}
+
+.list .items .item .subtotal {
+    min-width: 150px;
+    font-size: 18px;
+    padding: 0px 15px;
+}
+
+.list .items .item .remove-btn-wrapper{
+    padding: 0px 15px;
+}   
+
+.list .items .item .remove-btn-wrapper button{
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s opacity;
+}
+
+.list .items .item .form .qty-btns button:hover,
+.list .items .item .remove-btn-wrapper button:hover {
+    opacity: 0.5;
+}
+
+.list .items .checkout-btn-wrapper{
+    width: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 15px;
+    padding: 0px 0px 15px 15px;
+    border-top: 0.5px solid #d6d6d6;
+}
+
+.list .items .checkout-btn-wrapper .total {
+    font-size: 25px;
+    padding: 30px 15px 0px 15px;
+}
+
+.list .items .checkout-btn-wrapper a {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme);
+    color: white;
+    width: calc(100% - 45px);
+    border: none;
+    border-radius: 3px;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: opacity 0.3s;
+    flex-wrap: wrap;
+    text-decoration: none;
+    transition: 0.3s opacity;
+    margin-top: 30px;
+}
+
+.list .items .checkout-btn-wrapper a:hover{
+    opacity: 0.7;
+}

@@ -1,0 +1,72 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 50px 0px 25px 0px;
+    flex-wrap: wrap;
+    background-color: #f7f7f7;
+    flex-direction: column;
+}
+
+.footer .cols{
+    display: flex;
+    flex : 1;
+    height: 100%;
+    width: calc(100% - 30px);
+    max-width: 1100px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.footer .cols .col{
+    display: flex;
+    flex : 1;
+    flex-direction: column;
+    min-width: 200px;
+    padding: 30px 15px;
+    width: calc(100% - 30px);
+}
+
+.footer .cols .col .shop-title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.footer .cols .col .shop-desc {
+    font-size: 15px;
+}
+
+.footer .cols .col.shop {
+    justify-content: center;
+}
+
+
+.footer .cols .col.links a{
+    text-decoration: none;
+    color: #666;
+    transition: 0.3s opacity;
+    padding: 7px 0px;
+    font-size: 14px;
+}
+
+.footer .cols .col.links.social{
+    display: flex;
+    flex-direction: row;
+}
+
+.footer .cols .col.links.social a{
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.footer .cols .col.links a:hover{
+    opacity: 0.7;
+}
+
+.footer .copyright{
+    margin-top:15px;
+    font-size: 12px;
+    color: #666;
+
+}

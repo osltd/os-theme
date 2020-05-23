@@ -1,78 +1,48 @@
 {
-  "name": "os-theme",
+  "name": "oh-my-blog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.9.0",
-    "@material-ui/icons": "^2.0.0",
-    "@material-ui/styles": "^4.2.0",
-    "@sweetalert/with-react": "^0.1.1",
-    "@types/classnames": "^2.2.7",
-    "@types/history": "^4.7.2",
-    "@types/jest": "^23.3.12",
-    "@types/lodash": "^4.14.119",
-    "@types/node": "^10.12.18",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.0",
-    "@types/react-router": "^5.0.3",
-    "@types/react-router-dom": "^4.3.4",
-    "animate.css": "^3.7.2",
-    "animate.css-react": "^0.1.0",
-    "axios": "^0.18.0",
-    "classnames": "^2.2.6",
-    "dotenv": "^7.0.0",
-    "history": "^4.7.2",
-    "html2plaintext": "^2.1.2",
-    "http-proxy-middleware": "^0.19.1",
-    "lodash": "^4.17.10",
-    "moment": "^2.22.2",
-    "notistack": "^0.3.9",
-    "prop-types": "^15.5.10",
-    "react": "^16.8.6",
-    "react-color": "^2.14.1",
-    "react-cookie": "^4.0.1",
-    "react-dom": "^16.8.6",
-    "react-html-parser": "^2.0.2",
-    "react-jss": "^10.0.0",
-    "react-lazy-load": "^3.0.13",
-    "react-masonry-component": "^6.2.1",
-    "react-number-format": "^4.3.1",
-    "react-phone-number-input": "^2.4.1",
-    "react-redux": "^5.0.7",
-    "react-responsive-carousel": "^3.1.51",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "react-router-redux": "^4.0.8",
-    "react-scripts": "2.1.1",
-    "react-select": "^2.3.0",
-    "react-slick": "^0.23.2",
-    "react-text-mask": "^5.4.3",
-    "react-toastify": "^5.4.1",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.2",
-    "slick-carousel": "^1.8.1",
-    "sweetalert": "^2.1.2",
-    "typescript": "^3.2.2",
-    "wowjs": "^1.1.3"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "country-list": "^2.2.0",
+    "html-react-parser": "^0.10.3",
+    "oneshop.web": "^1.0.8",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-grid-carousel": "^1.0.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "react-select": "^3.1.0",
+    "react-slideshow-image": "^1.3.4",
+    "react-spinners": "^0.8.3",
+    "react-step-progress-bar": "^1.0.3",
+    "react-tooltip": "^4.2.6",
+    "redux": "^4.0.5",
+    "universal-cookie": "^4.0.3"
   },
   "scripts": {
-    "rebuild": "react-scripts build && git add . && git commit -m 'rebuild for update prod ver. ' && git push origin master ",
-    "start": "yarn && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "i18n": "tsc src/scripts/generateKeyOfI18n.ts && node src/scripts/generateKeyOfI18n.js && yarn start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "ts-node": "^8.0.3"
-  }
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "https://myshop.oneshop.host"
 }
