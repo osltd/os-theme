@@ -15,8 +15,11 @@
 }
 
 .products .list .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex : 1;
-    max-width: 325px;
+    /* max-width: 400px; */
 }
 
 .products .list .item a {
@@ -39,6 +42,7 @@
     max-width: 350px;
     padding: 15px;
     height: 100%;
+    transition: box-shadow 0.3s;
 }
 
 .products .list .item a .item-wrapper .thumbnail{
@@ -47,7 +51,6 @@
     background-color: white;
     border-radius: 5px;
     overflow: hidden;
-    transition: box-shadow 0.3s;
 }
 
 .products .list .item a .item-wrapper .thumbnail img {
@@ -56,8 +59,8 @@
     object-fit: contain;
 }
 
-.products .list .item a .item-wrapper .thumbnail:hover {
-    box-shadow: 3px 3px 15px #AAAAAA;
+.products .list .item a .item-wrapper:hover {
+    box-shadow: 3px 3px 15px #eeeeee;
 }
 
 .products .list .item a .item-wrapper .info {
