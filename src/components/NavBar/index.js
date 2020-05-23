@@ -84,7 +84,7 @@ function NarBar(props){
                         <h2>{shop.name}</h2>
                     </div>
                     <div className="fast-link">
-                        <Link to='/cart'>
+                        <Link to='/cart' onClick={() => setNavBarExpanded(false)}>
                             {
                                 cart.items.length > 0 ?
                                 <span className="count">
@@ -95,7 +95,7 @@ function NarBar(props){
                         </Link>
                     </div>
                     <div className="fast-link">
-                        <Link to='/users'>
+                        <Link to='/users' onClick={() => setNavBarExpanded(false)}>
                             <i className="fas fa-user"></i>
                         </Link>
                     </div>
@@ -103,13 +103,13 @@ function NarBar(props){
                 {/* ------------ Expandable list ------------ */}
                 <div className={`navBar-item-list ${navBarExpanded ? "expand" : ""}`}>
                     <div className="navBar-item">
-                        <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}}>Home</Link>
+                        <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Home</Link>
                     </div>
                     <div className="navBar-item">
-                        <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>Blog</Link>
+                        <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Blog</Link>
                     </div>
                     <div className="navBar-item">
-                        <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>Shop</Link>
+                        <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Shop</Link>
                     </div>
                 </div>
                 {/* ------------ Expandable list ------------ */}
