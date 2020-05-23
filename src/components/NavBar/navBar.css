@@ -10,9 +10,13 @@
     transition: 0.3s box-shadow;
 }
 
+
+
+
+/* --------------- Desktop --------------- */
 .navBar .navBar-wrapper {
     display: flex;
-    height: 100px;
+    height: 70px;
     align-items: center;
     max-width: 1300px;
     width: 100%;
@@ -58,4 +62,133 @@
 .navBar .navBar-wrapper .navBar-item a{
     text-decoration: none;
     color:black;
+}
+
+
+
+
+
+/* --------------- Mobile --------------- */
+.navBar .navBar-wrapper-mobile {
+    display: flex;
+    height: 70px;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1300px;
+    width: 100%;
+}
+
+.navBar .navBar-wrapper-mobile .top-body {
+    position: relative;
+    flex : 1;
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 30px);
+    padding: 0px 15px;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .expand-btn{
+    width: 50px;
+    background-color: white;
+    font-size: 17px;
+    border: none;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex : 1;
+    color: var(--theme);
+    font-size : 10px;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .title .logo {
+    width : 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .title h2 {
+    padding: 0;
+    margin : 0;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .fast-link {
+    height: 100%;
+}
+
+.navBar .navBar-wrapper-mobile .top-body .fast-link a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-decoration: none;
+    color: black;
+    width: 50px;
+}
+
+.navBar .navBar-wrapper-mobile .navBar-item-list {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    top:71px;
+    height: 0px;
+    overflow: hidden;
+    transition: 0.3s height;
+}
+
+.navBar .navBar-wrapper-mobile .navBar-item-list.expand{
+    height: calc(100vh - 71px);
+}
+
+.navBar .navBar-wrapper-mobile .navBar-item-list .navBar-item{
+    position: relative;
+    padding: 15px;
+}
+
+.navBar .navBar-wrapper-mobile .navBar-item-list .navBar-item .count{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    top : 5px;
+    right : 5px;
+    background-color: black;
+    min-width: 14px;
+    min-height: 14px;
+    color: white;
+    border: 1.5px solid white;
+    border-radius: 11px;
+}
+
+.navBar .navBar-wrapper-mobile .navBar-item-list .navBar-item a{
+    text-decoration: none;
+    color:black;
+}
+
+
+
+
+
+/* --------------- Responsive --------------- */
+@media screen and (min-width: 600px) {
+    .navBar .navBar-wrapper {
+        display: flex;
+    }
+    .navBar .navBar-wrapper-mobile {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 599px) {
+    .navBar .navBar-wrapper {
+        display: none;
+    }
+    .navBar .navBar-wrapper-mobile {
+        display: flex;
+    }
 }
