@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './login.css';
 import { connect } from 'react-redux';
+import { MoonLoader } from 'react-spinners';
+
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -17,6 +19,8 @@ function Login(props){
     let [email, setEmail] = useState("");
     // password state
     let [password, setPassword] = useState("");
+    // loading status
+    let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
     // get shop
@@ -26,17 +30,26 @@ function Login(props){
 
     // -------------------- HELPER --------------------
     function login(){
+        // start loading
+        setIsLoading(true);
+        // login
         OS.consumer.login({
-            email : email,
+            email  : email,
             passwd : password
         })
         // login success
         .then(() => {
+            // finish loading
+            setIsLoading(false);
+            // redirect to checking again
             window.location.href = "/users";
         })
         // error
         .catch(error => {
-            alert(error.message);
+            // finish loading
+            setIsLoading(false);
+            // show message
+            alert("Username or password invalid.");
         });
     }
     // -------------------- /HELPER --------------------
@@ -48,7 +61,7 @@ function Login(props){
                 <div className="form">
                     <div className="greeting">
                         {shop.logo ? <img src={shop.logo}/> : null}
-                        <h1>Welcome Back.</h1>
+                        <h1>Welcome Back</h1>
                     </div>
                     <div className="form-wrapper">
                         <div className="form-group">
@@ -70,7 +83,15 @@ function Login(props){
                             />
                         </div>
                         <button onClick={login}>
-                            Login
+                            {
+                                isLoading ? 
+                                <MoonLoader 
+                                    size={20}
+                                    color={"white"}
+                                    loading={true}
+                                /> :
+                                "Login"
+                            }
                         </button>
                         <div className="register">
                             <Link to="/users/new">Not a Member? Register Now!</Link>

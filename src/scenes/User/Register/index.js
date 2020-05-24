@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './register.css';
 import { connect } from 'react-redux';
+import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -19,6 +20,8 @@ function Register(props){
     let [confirmPassword, setConfirmPassword] = useState("");
     let [firstName, setFirstName] = useState("");
     let [lastName, setLastName] = useState("");
+    // loading status
+    let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     var OS = new Oneshop();
     // get shop
@@ -26,17 +29,28 @@ function Register(props){
 
     // -------------------- HELPER --------------------
     function register(){
+        // set loading
+        setIsLoading(true);
+        // sign up
         OS.consumer.signUp({
-            email : email,
-            passwd : password,
+            email      : email,
+            passwd     : password,
             confpasswd : confirmPassword,
             first_name : firstName,
-            last_name : lastName
+            last_name  : lastName
         })
         .then(() => {
+            // finished loading
+            setIsLoading(false);
+            // back to login page
             window.location.href = "/users/login";
         })
-        .catch(error => alert(error.message));
+        .catch(error => {
+            // finished loading
+            setIsLoading(false);
+            // error message
+            alert(error.message);
+        });
     }
     // -------------------- /HELPER --------------------
 
@@ -46,7 +60,7 @@ function Register(props){
                 <div className="form">
                     <div className="greeting">
                         {shop.logo ? <img src={shop.logo}/> : null}
-                        <h1>Get Your Account.</h1>
+                        <h1>Get Your Account</h1>
                     </div>
                     <div className="form-wrapper">
                         <div className="form-group">
@@ -95,7 +109,15 @@ function Register(props){
                             />
                         </div>
                         <button onClick={register}>
-                            Register
+                            {
+                                isLoading ? 
+                                <MoonLoader 
+                                    size={20}
+                                    color={"white"}
+                                    loading={true}
+                                /> :
+                                "Register"
+                            }
                         </button>
                         <div className="register">
                             <Link to="/users/login">Already a Member?</Link>

@@ -1,6 +1,8 @@
 import React from 'react';
 import Oneshop from 'oneshop.web';
 import './profile.css';
+import { connect } from 'react-redux';
+
 
 function UserProfile(props){
     console.log(props);
