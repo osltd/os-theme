@@ -3,15 +3,21 @@ import Oneshop from 'oneshop.web';
 import ProfilePage from './Profile';
 import { Redirect } from 'react-router-dom';
 import './user.css';
+import { MoonLoader } from 'react-spinners';
+
 
 function User(props){
     
-    var [profile, setProfile] = useState(null);
-    var [isLoading, setIsLoading] = useState(true);
-    var OS = new Oneshop();
+    let [profile, setProfile] = useState(null);
+    let [isLoading, setIsLoading] = useState(true);
+    let OS = new Oneshop();
 
+
+    // --------------- LIFECYCLE ---------------
     useEffect(() => {
+        // retreive profile eveyr time
         OS.consumer.profile.get()
+        // got 
         .then((rows) => {
             var user = rows[0];
             setProfile(user);
@@ -22,11 +28,24 @@ function User(props){
             setProfile(null);
         });
     },[]);
+    // --------------- /LIFECYCLE ---------------
 
     return (
         <div className="user">
             <div className="wrapper">
-                { isLoading ? loadingScreen() : (profile ? <ProfilePage profile={profile}/> : <Redirect to="/users/login"/>)}
+                { 
+                    isLoading ? 
+                    // show loading screen when loading
+                    loadingScreen() 
+                    : (
+                        // logged in already?
+                        profile ? 
+                        // show profile
+                        <ProfilePage profile={profile}/> 
+                        : 
+                        // redriect to loging page
+                        <Redirect to="/users/login"/>
+                    )}
             </div>
         </div>
     );
@@ -34,7 +53,11 @@ function User(props){
 
 function loadingScreen(){
     return (<div className="loading">
-        Loading...
+        <MoonLoader 
+            size={20}
+            color={"#000000"}
+            loading={true}
+        /> 
     </div>);
 }
 

@@ -1,49 +1,84 @@
 .user-login {
+    width: 100%;
+    min-height: calc(100vh - 250px);
+    position: relative;
     display: flex;
-    flex : 1;
-    width : 100%;
-    min-height: 100vh;
     justify-content: center;
 }
 
 .user-login .user-login-wrapper {
     display: flex;
-    flex : 1;
-    width : 100%;
-    min-height: 100vh;
-    max-width: 1200px;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 30px);
+    max-width: 1000px;
+    padding: 0px 15px 30px 15px;
+    margin-bottom: 50px;
+}
+
+.user-login .user-login-wrapper h1 {
+    font-weight: 300;
 }
 
 .user-login .user-login-wrapper .form {
     display: flex;
-    flex-direction: column;
-    width:350px;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    min-height: calc(100vh - 250px);
+    padding: 100px 0px;
+    flex-wrap: wrap;
 }
 
-.user-login .user-login-wrapper .form .form-group {
+.user-login .user-login-wrapper .form .greeting {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 250px;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper .form-group {
     padding: 10px 0px;
     display: flex;
     flex : 1;
     flex-direction: column;
+    width: 100%;
+    max-width:350px;
 }
 
-.user-login .user-login-wrapper .form .form-group label{
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 900;
-}
-
-.user-login .user-login-wrapper .form .form-group input {
-    border : none;
-    border-bottom: 1px solid #AAAAAA;
-    height: 35px;
-    font-size: 18px;
-}
-
-.user-login .user-login-wrapper .form button {
+.user-login .user-login-wrapper .form .form-wrapper .form-group label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #666666;
     margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper .form-group input {
+    border: 1px solid #dddddd;
+    width: calc(100% - 30px);
+    padding: 8px 15px;
+    height: 25px;
+    border-radius: 2px;
+    transition: 0.3s border;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper .form-group input:focus{
+    border:1px solid black;
+}
+
+
+.user-login .user-login-wrapper .form .form-wrapper button {
+    margin-top: 35px;
     display: flex;
     background-color: black;
     color: white;
@@ -55,16 +90,24 @@
     align-items: center;
     font-size: 17px;
     cursor: pointer;
+    transition: 0.3s opacity;
+    width: 100%;
+    max-width:350px;
 }
 
-.user-login .user-login-wrapper .form button:hover {
-    background-color: #AAAAAA;
+.user-login .user-login-wrapper .form .form-wrapper button:hover,
+.user-login .user-login-wrapper .form .form-wrapper .register:hover {
+    opacity: 0.6;
 }
 
-.user-login .user-login-wrapper .form .register{
+.user-login .user-login-wrapper .form .form-wrapper .register{
     padding: 20px 0px;
+    transition: 0.3s opacity;
+    width: 100%;
+    max-width:350px;
 }
 
-.user-login .user-login-wrapper .form .register a{
-    color: black;
+.user-login .user-login-wrapper .form .form-wrapper .register a{
+    color: #333333;
+    font-size: 15px;
 }

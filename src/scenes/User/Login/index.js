@@ -2,14 +2,29 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './login.css';
+import { connect } from 'react-redux';
 
-function Login(){
+// ------------------------ REDUX ------------------------
+const mapStateToProps = state => ({
+    shop : state.shop.session
+});
+// ------------------------ /REDUX ------------------------
 
-    var [email, setEmail] = useState("");
-    var [password, setPassword] = useState("");
+
+function Login(props){
+
+    // email state
+    let [email, setEmail] = useState("");
+    // password state
+    let [password, setPassword] = useState("");
     // get oneshop instance
-    var OS = new Oneshop();
+    const OS = new Oneshop();
+    // get shop
+    const { shop } = props;
 
+
+
+    // -------------------- HELPER --------------------
     function login(){
         OS.consumer.login({
             email : email,
@@ -24,25 +39,32 @@ function Login(){
             alert(error.message);
         });
     }
+    // -------------------- /HELPER --------------------
+
 
     return (
         <div className="user-login">
             <div className="user-login-wrapper">
+                {/* <h1>Login</h1> */}
                 <div className="form">
-                    <h1>Login</h1>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input type="text" value={email} onChange={(event) => { setEmail(event.target.value); }}/>
+                    <div className="greeting">
+                        <h1>Welcome Back.</h1>
                     </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" value={password}  onChange={(event) => { setPassword(event.target.value); }}/>
-                    </div>
-                    <button onClick={login}>
-                        Login
-                    </button>
-                    <div className="register">
-                        <Link to="/users/new">Not a Member? Register Now!</Link>
+                    <div className="form-wrapper">
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input type="text" value={email} onChange={(event) => { setEmail(event.target.value); }}/>
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input type="password" value={password}  onChange={(event) => { setPassword(event.target.value); }}/>
+                        </div>
+                        <button onClick={login}>
+                            Login
+                        </button>
+                        <div className="register">
+                            <Link to="/users/new">Not a Member? Register Now!</Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,4 +72,4 @@ function Login(){
     );
 }
 
-export default Login;
+export default connect(mapStateToProps)(Login);
