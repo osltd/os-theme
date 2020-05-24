@@ -14,6 +14,7 @@ module.exports = {
                     ordering : "",
                     numberToShow : 1,
                     ids : "",
+                    collections : "",
                     // silder settings
                     duration : 5000,
                     transitionDuration : 300,
@@ -35,6 +36,7 @@ module.exports = {
                     ids : "",
                     rows : 1,
                     cols : 4,
+                    collections : "",
                     // title
                     title : "Best Sellers",
                     type : "sale",
@@ -61,6 +63,7 @@ module.exports = {
                     ids : "",
                     rows : 1,
                     cols : 4,
+                    collections : "",
                     // title
                     title : "Latest",
                     type : "sale",

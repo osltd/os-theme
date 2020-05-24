@@ -44,6 +44,7 @@ function Article(props){
         if((props.tags || "").length > 0) filters.tags = props.tags;
         if((props.keywords || "").length > 0) filters.keywords = props.keywords;
         if((props.ids || "").length > 0) filters.ids = props.ids;
+        if((props.collections || "").length > 0) filters.collections = props.collections;
         // get 
         OS.article.get({...filters})
         // got articles
