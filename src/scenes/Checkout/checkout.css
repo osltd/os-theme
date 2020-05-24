@@ -222,6 +222,11 @@
     padding-bottom: 15px;
 }
 
+.steps .step-2 .shipping-methods .shipping-method-none{
+    padding: 15px;
+    font-size: 18px;
+}
+
 .steps .step-2 .shipping-methods .shipping-method{
     display: flex;
     flex-direction: row;

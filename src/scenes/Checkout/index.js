@@ -88,7 +88,7 @@ function Checkout(props){
                 }
             );
             // transform json
-            customShippings = (await customShippings.json()).data.rows[0].shipping_methods;
+            customShippings = (((((await customShippings.json()) || {}).data || {}).rows || [])[0] || {}).shipping_methods || [];
             // append to container
             shipping_methods = shipping_methods.concat(customShippings.map(s => ({
                 id               : s.code.replace(/\r?\n|\r/g, ""),
@@ -145,6 +145,8 @@ function Checkout(props){
             let previewForm = {...form};
             // remove coupon field if coupons field is empty
             if((previewForm.coupons || "").trim().length == 0) delete previewForm.coupons;
+            // remove shippings if not shipping method is selected
+            if(previewForm.shippings[shop.id] == null) delete previewForm.shippings[shop.id];
             // fetch order previews
             let preview = await fetch(
                 `/api/carts/${cart.id}/previews`, 
@@ -358,16 +360,20 @@ function Checkout(props){
             <h2>Select a Shipping Method</h2>
             <div className="row">
                 <div className="shipping-methods">
-                    {shippingMethods.map(s => (
-                        <div key={`shipping-method-${s.id}`} 
-                             className={`shipping-method ${form.shippings[shop.id] == s.id ? "selected" : ""}`}
-                             onClick={() => setFormValue(`shippings.${shop.id}`, s.id)}
-                        >
-                            {form.shippings[shop.id] == s.id ? <i className="fas fa-check-square"></i> : <i className="far fa-check-square"></i>}
-                            <div className="title">{s.title}</div> - 
-                            <div className="charge">{shop.currency.toUpperCase()} {s.charge}</div>
-                        </div>
-                    ))}
+                    {
+                        shippingMethods.length ? 
+                        shippingMethods.map(s => (
+                            <div key={`shipping-method-${s.id}`} 
+                                className={`shipping-method ${form.shippings[shop.id] == s.id ? "selected" : ""}`}
+                                onClick={() => setFormValue(`shippings.${shop.id}`, s.id)}
+                            >
+                                {form.shippings[shop.id] == s.id ? <i className="fas fa-check-square"></i> : <i className="far fa-check-square"></i>}
+                                <div className="title">{s.title}</div> - 
+                                <div className="charge">{shop.currency.toUpperCase()} {s.charge}</div>
+                            </div>
+                        )) :
+                        <div className="shipping-method-none">No shipping method is available at the moment.</div>
+                    }
                 </div>
             </div>
             <h2>Shipping Address</h2>
