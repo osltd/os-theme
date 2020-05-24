@@ -122,10 +122,10 @@ function Cart(props){
                             {item.variant}
                         </div>
                     </div>
-                    <div className="unit-price">
-                        {(shop.currency || "hkd").toUpperCase()} {item.price} <i className="fas fa-times"></i>
-                    </div>
                     <div className="form">
+                        <div className="unit-price">
+                            {(shop.currency || "hkd").toUpperCase()} {item.price.toFixed(2)} <i className="fas fa-times"></i>
+                        </div>
                         <div className="qty">
                             {item.qty}
                         </div>
