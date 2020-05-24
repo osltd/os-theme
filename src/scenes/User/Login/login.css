@@ -25,7 +25,7 @@
     flex: 1;
     flex-direction: row;
     align-items: center;
-    min-height: calc(100vh - 250px);
+    min-height: calc(100vh - 450px);
     padding: 100px 0px;
     flex-wrap: wrap;
 }
@@ -33,9 +33,15 @@
 .user-login .user-login-wrapper .form .greeting {
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-width: 250px;
+}
+
+.user-login .user-login-wrapper .form .greeting img {
+    width: 100px;
+
 }
 
 .user-login .user-login-wrapper .form .form-wrapper {

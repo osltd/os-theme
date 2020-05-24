@@ -45,19 +45,29 @@ function Login(props){
     return (
         <div className="user-login">
             <div className="user-login-wrapper">
-                {/* <h1>Login</h1> */}
                 <div className="form">
                     <div className="greeting">
+                        {shop.logo ? <img src={shop.logo}/> : null}
                         <h1>Welcome Back.</h1>
                     </div>
                     <div className="form-wrapper">
                         <div className="form-group">
                             <label>Email</label>
-                            <input type="text" value={email} onChange={(event) => { setEmail(event.target.value); }}/>
+                            <input 
+                                type="text" 
+                                value={email} 
+                                onChange={(event) => { setEmail(event.target.value); }}
+                                placeholder="peter.chan@abc.com"
+                            />
                         </div>
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" value={password}  onChange={(event) => { setPassword(event.target.value); }}/>
+                            <input 
+                                type="password" 
+                                value={password}  
+                                onChange={(event) => { setPassword(event.target.value); }}
+                                placeholder="・・・・・・・・"
+                            />
                         </div>
                         <button onClick={login}>
                             Login

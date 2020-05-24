@@ -2,19 +2,30 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './register.css';
+import { connect } from 'react-redux';
 
-function Register(){
+// ------------------------ REDUX ------------------------
+const mapStateToProps = state => ({
+    shop : state.shop.session
+});
+// ------------------------ /REDUX ------------------------
 
-    var [email, setEmail] = useState("");
-    var [password, setPassword] = useState("");
-    var [confirmPassword, setConfirmPassword] = useState("");
-    var [firstName, setFirstName] = useState("");
-    var [lastName, setLastName] = useState("");
+
+function Register(props){
+
+    // form data state
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
+    let [confirmPassword, setConfirmPassword] = useState("");
+    let [firstName, setFirstName] = useState("");
+    let [lastName, setLastName] = useState("");
     // get oneshop instance
     var OS = new Oneshop();
+    // get shop
+    const { shop } = props;
 
+    // -------------------- HELPER --------------------
     function register(){
-        
         OS.consumer.signUp({
             email : email,
             passwd : password,
@@ -27,37 +38,68 @@ function Register(){
         })
         .catch(error => alert(error.message));
     }
+    // -------------------- /HELPER --------------------
 
     return (
         <div className="user-register">
             <div className="user-register-wrapper">
                 <div className="form">
-                    <h1>Register</h1>
-                    <div className="form-group">
-                        <label>First Name</label>
-                        <input type="text" value={firstName} onChange={(event) => { setFirstName(event.target.value); }}/>
+                    <div className="greeting">
+                        {shop.logo ? <img src={shop.logo}/> : null}
+                        <h1>Get Your Account.</h1>
                     </div>
-                    <div className="form-group">
-                        <label>Last Name</label>
-                        <input type="text" value={lastName} onChange={(event) => { setLastName(event.target.value); }}/>
-                    </div>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input type="text" value={email} onChange={(event) => { setEmail(event.target.value); }}/>
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" value={password}  onChange={(event) => { setPassword(event.target.value); }}/>
-                    </div>
-                    <div className="form-group">
-                        <label>Confirm Password</label>
-                        <input type="password" value={confirmPassword}  onChange={(event) => { setConfirmPassword(event.target.value); }}/>
-                    </div>
-                    <button onClick={register}>
-                        Register
-                    </button>
-                    <div className="register">
-                        <Link to="/users/login">Already a Member?</Link>
+                    <div className="form-wrapper">
+                        <div className="form-group">
+                            <label>First Name</label>
+                            <input 
+                                type="text" 
+                                value={firstName} 
+                                onChange={(event) => { setFirstName(event.target.value); }}
+                                placeholder="Peter"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Last Name</label>
+                            <input 
+                                type="text" 
+                                value={lastName} 
+                                onChange={(event) => { setLastName(event.target.value); }}
+                                placeholder="Chan"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input 
+                                type="text" 
+                                value={email} 
+                                onChange={(event) => { setEmail(event.target.value); }}
+                                placeholder="peter.chan@abc.com"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input 
+                                type="password" 
+                                value={password}  
+                                onChange={(event) => { setPassword(event.target.value); }}
+                                placeholder="・・・・・・・・"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <input 
+                                type="password" 
+                                value={confirmPassword}  
+                                onChange={(event) => { setConfirmPassword(event.target.value); }}
+                                placeholder="・・・・・・・・"
+                            />
+                        </div>
+                        <button onClick={register}>
+                            Register
+                        </button>
+                        <div className="register">
+                            <Link to="/users/login">Already a Member?</Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,4 +107,4 @@ function Register(){
     );
 }
 
-export default Register;
+export default connect(mapStateToProps)(Register);
