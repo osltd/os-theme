@@ -114,6 +114,7 @@ function Blog(props){
                             <div className="info">
                                 <div className="title">{captionExtractor(a).title}</div>
                                 <div className="description">{`${(captionExtractor(a).description || "").replace(/<[^>]*>?/gm, '').substr(0, 100)}...`}</div>
+                                <div className="time">{new Date(a.time).toLocaleDateString()}</div>
                             </div>
                         </div>
                     </Link>
