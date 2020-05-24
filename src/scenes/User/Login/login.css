@@ -101,9 +101,15 @@
     max-width:350px;
 }
 
+
 .user-login .user-login-wrapper .form .form-wrapper button:hover,
-.user-login .user-login-wrapper .form .form-wrapper .register:hover {
+.user-login .user-login-wrapper .form .form-wrapper button:disabled,
+.user-login .user-login-wrapper .form .form-wrapper .register:hover{
     opacity: 0.6;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper button:disabled {
+    cursor: not-allowed;
 }
 
 .user-login .user-login-wrapper .form .form-wrapper .register{

@@ -82,7 +82,7 @@ function Login(props){
                                 placeholder="・・・・・・・・"
                             />
                         </div>
-                        <button onClick={login}>
+                        <button onClick={login} disabled={isLoading}>
                             {
                                 isLoading ? 
                                 <MoonLoader 
@@ -94,7 +94,7 @@ function Login(props){
                             }
                         </button>
                         <div className="register">
-                            <Link to="/users/new">Not a Member? Register Now!</Link>
+                            <Link to="/users/new">Not a member? Register now!</Link>
                         </div>
                     </div>
                 </div>

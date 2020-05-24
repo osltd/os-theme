@@ -108,7 +108,7 @@ function Register(props){
                                 placeholder="・・・・・・・・"
                             />
                         </div>
-                        <button onClick={register}>
+                        <button onClick={register} disabled={isLoading}>
                             {
                                 isLoading ? 
                                 <MoonLoader 
@@ -120,7 +120,7 @@ function Register(props){
                             }
                         </button>
                         <div className="register">
-                            <Link to="/users/login">Already a Member?</Link>
+                            <Link to="/users/login">Already a member?</Link>
                         </div>
                     </div>
                 </div>

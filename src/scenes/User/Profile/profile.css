@@ -1,38 +1,66 @@
 .profile {
+    width: 100%;
+    min-height: calc(100vh - 250px);
+    position: relative;
     display: flex;
-    flex : 1;
-    width : 100%;
-    min-height: 100vh;
     justify-content: center;
 }
 
 .profile .profile-wrapper {
     display: flex;
-    flex : 1;
-    width : 100%;
-    min-height: 100vh;
-    max-width: 1200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: calc(100% - 30px);
+    max-width: 1000px;
+    padding: 0px 15px 30px 15px;
+    margin-bottom: 50px;
+}
+
+.profile .profile-wrapper h1 {
+    font-weight: 300;
+}
+
+.profile .profile-wrapper .left-col {
+    display: flex;
     flex-direction: column;
+    flex : 1;
+    padding: 25px;
     min-width: 300px;
 }
 
-.profile .profile-wrapper .data-group {
+.profile .profile-wrapper .left-col .data-group {
     padding: 10px 0px;
-}
-
-.profile .profile-wrapper .data-group label {
-    font-weight: 900;
-}
-
-.profile .profile-wrapper .data-group :nth-child(2){
-    font-size: 18px;
-}
-
-
-
-.profile .profile-wrapper button {
-    margin-top: 15px;
     display: flex;
+    flex : 1;
+    flex-direction: column;
+    width: 100%;
+    max-width:350px;
+}
+
+.profile .profile-wrapper .left-col .data-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666666;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.profile .profile-wrapper .left-col .data-group input {
+    border: 1px solid #dddddd;
+    width: calc(100% - 30px);
+    padding: 8px 15px;
+    height: 25px;
+    border-radius: 2px;
+    transition: 0.3s border;
+}
+
+.profile .profile-wrapper .left-col .data-group input:focus{
+    border: 1px solid black;
+}
+
+.profile .profile-wrapper .left-col button {
+    display: flex;
+    margin-top: 20px;
     background-color: black;
     color: white;
     border: none;
@@ -43,4 +71,35 @@
     align-items: center;
     font-size: 17px;
     cursor: pointer;
+    transition: 0.3s opacity;
+    width: 100%;
+    max-width:350px;
+}
+
+.profile .profile-wrapper .left-col button:hover{
+    opacity: 0.6;
+}
+    
+.profile .profile-wrapper .left-col button.light {
+    background-color: white;
+    color: black;
+    transition: 0.3s opacity, 0.3s background-color;
+}
+
+.profile .profile-wrapper .left-col button.light:hover{
+    opacity: 0.6;
+    background-color: #fafafa;
+}
+
+.profile .profile-wrapper .right-col {
+    display: flex;
+    flex-direction: column;
+    flex : 2;
+    border-left: 1px solid #dddddd;
+    padding: 25px;
+    min-width: 300px;
+}
+
+.profile .profile-wrapper .right-col h1 {
+    font-weight: 300;
 }
