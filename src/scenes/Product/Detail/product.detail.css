@@ -113,7 +113,7 @@
 
 .product-detail .rows .lower-row .description {
     flex : 3;
-    min-width: 400px;
+    min-width: 300px;
 }
 
 .product-detail .rows .lower-row .description h1 {
@@ -155,7 +155,7 @@
 
 .product-detail .rows .lower-row .variants {
     flex : 2;
-    min-width: 400px;
+    min-width: 300px;
 } 
 
 .product-detail .rows .lower-row .variants h4 {
@@ -199,7 +199,7 @@
     align-items: center;
     background-color: var(--theme);
     color: white;
-    width: calc(100% - 45px);
+    width: 100%;
     border: none;
     border-radius: 3px;
     padding: 15px;
@@ -217,4 +217,10 @@
 
 .product-detail .rows .lower-row .add-to-cart:disabled{
     cursor:not-allowed;
+}
+
+@media screen and (max-width: 651px) {
+    .product-detail .rows .lower-row .gap{
+        display: none;
+    }
 }

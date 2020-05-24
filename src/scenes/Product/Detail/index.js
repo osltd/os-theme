@@ -297,7 +297,7 @@ function ProductDetail(props){
                                     {(product.tags || []).map(t => <div key={`product-tag-${t}`} className="tag">#{t}</div>)}
                                 </div>
                             </div>
-                            <div style={{width:"50px"}}></div>
+                            <div className="gap" style={{width:"50px"}}></div>
                             <div className="variants">
                                 {renderVariants()}
                                 <button className="add-to-cart" onClick={addToCart} disabled={selectedVariantObj.stock == 0 || status.addingToCart}>
