@@ -58,6 +58,12 @@
     "Get Your Account" : "Get Your Account",
     "Confirm Password" : "Confirm Password",
     "Register" : "Register",
-    "Already a member?" : "Already a member?"
+    "Already a member?" : "Already a member?",
+
+    "Profile" : "Profile",
+    "Cancel" : "Cancel",
+    "Save" : "Save",
+    "Logout" : "Logout",
+    "My Orders" : "My Orders"
 
 }

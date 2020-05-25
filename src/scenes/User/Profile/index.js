@@ -7,7 +7,8 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session
+    shop : state.shop.session,
+    i18n : state.i18n
 });
 // ------------------------ /REDUX ------------------------
 
@@ -22,6 +23,8 @@ function UserProfile(props){
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     var OS = new Oneshop();
+    // get translation method
+    const { __ } = props.i18n;
 
     // ------------------ HELPERS ------------------
     async function logout(){
@@ -93,13 +96,13 @@ function UserProfile(props){
         <div className="profile">
             <div className="profile-wrapper">
                 <div className="left-col">
-                    <h1>Profile</h1>
+                    <h1>{__("Profile")}</h1>
                     <div className="data-group">
-                        <label>First Name</label>
+                        <label>{__("First Name")}</label>
                         <input value={form.first_name} onChange={(e) => updateFormData('first_name', e.target.value)} />
                     </div>
                     <div className="data-group">
-                        <label>Last Name</label>
+                        <label>{__("Last Name")}</label>
                         <input value={form.last_name} onChange={(e) => updateFormData('last_name', e.target.value)} />
                     </div>
                     {
@@ -114,11 +117,11 @@ function UserProfile(props){
                                         color={"white"}
                                         loading={true}
                                     /> :
-                                    "Save"
+                                    __("Save")
                                 }
                             </button>
                             <button className="light" onClick={() => setForm({...profile})} disabled={isLoading}>
-                                Cancel
+                                {__("Cancel")}
                             </button>
                         </div> : 
                         // show logout button only if no changes
@@ -130,13 +133,13 @@ function UserProfile(props){
                                     color={"black"}
                                     loading={true}
                                 /> :
-                                "Logout"
+                                __("Logout")
                             }
                         </button>
                     }
                 </div>
                 <div className="right-col">
-                    <h1>My Orders</h1>
+                    <h1>{__("My Orders")}</h1>
                 </div>
             </div>
         </div>
