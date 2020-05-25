@@ -97,7 +97,7 @@ function NarBar(props){
                         {
                             cart.items.length > 0 ?
                             <span className="count">
-                                {cart.items.length}
+                                {cart.items.reduce((count, item) => count + parseInt(item.qty), 0)}
                             </span> : null
                         }
                         <i className="fas fa-shopping-cart"></i>
@@ -127,7 +127,7 @@ function NarBar(props){
                             {
                                 cart.items.length > 0 ?
                                 <span className="count">
-                                    {cart.items.length}
+                                    {cart.items.reduce((count, item) => count + parseInt(item.qty), 0)}
                                 </span> : null
                             }
                             <i className="fas fa-shopping-cart"></i>
