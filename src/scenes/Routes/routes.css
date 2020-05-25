@@ -1,15 +1,10 @@
 #root .wrapper {
     width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 #root .wrapper .scene {
-    position: relative;
-    /* padding-top:100px; */
     padding-top:71px;
     width: 100%;
     max-width: 1300px;
+    margin: 0 auto;
 }

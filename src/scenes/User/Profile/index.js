@@ -136,7 +136,7 @@ function UserProfile(props){
                     }
                 </div>
                 <div className="right-col">
-                    
+                    <h1>My Orders</h1>
                 </div>
             </div>
         </div>
