@@ -8,7 +8,8 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session
+    shop : state.shop.session,
+    i18n : state.i18n
 });
 // ------------------------ /REDUX ------------------------
 
@@ -25,6 +26,8 @@ function Login(props){
     const OS = new Oneshop();
     // get shop
     const { shop } = props;
+    // get i18n method
+    const { __ } = props.i18n;
 
 
 
@@ -61,11 +64,11 @@ function Login(props){
                 <div className="form">
                     <div className="greeting">
                         {shop.logo ? <img src={shop.logo}/> : null}
-                        <h1>Welcome Back</h1>
+                        <h1>{__("Welcome Back")}</h1>
                     </div>
                     <div className="form-wrapper">
                         <div className="form-group">
-                            <label>Email</label>
+                            <label>{__("Email")}</label>
                             <input 
                                 type="text" 
                                 value={email} 
@@ -74,7 +77,7 @@ function Login(props){
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>{__("Password")}</label>
                             <input 
                                 type="password" 
                                 value={password}  
@@ -90,11 +93,11 @@ function Login(props){
                                     color={"white"}
                                     loading={true}
                                 /> :
-                                "Login"
+                                __("Login")
                             }
                         </button>
                         <div className="register">
-                            <Link to="/users/new">Not a member? Register now!</Link>
+                            <Link to="/users/new">{__("Not a member? Register now!")}</Link>
                         </div>
                     </div>
                 </div>
