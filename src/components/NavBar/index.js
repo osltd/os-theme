@@ -81,7 +81,7 @@ function NarBar(props){
                     </button>
                     <div className={`locale-menu ${localeMenuExpanded ? "expanded" : ""}`}>
                         {locales.map(l => (
-                            <button className="locale-btn" onClick={() => {
+                            <button key={`lang-${l.code}`} className="locale-btn" onClick={() => {
                                 // set locale
                                 props.setLocale(l.code);
                                 // close menu
