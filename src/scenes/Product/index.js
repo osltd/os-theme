@@ -8,7 +8,8 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    products : state.product.products
+    products : state.product.products,
+    i18n     : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -26,6 +27,8 @@ function Product(props){
     const OS = new Oneshop();
     // get products
     let { products } = props;
+    // get translation method
+    let  { __ } = props.i18n;
     // statuses
     var [status, setStatus] = useState({
         loading : false
@@ -83,7 +86,7 @@ function Product(props){
 
     return (
         <div className="products">
-            <h1>Products - All</h1>
+            <h1>{__("Products")} - {__("All")}</h1>
             <div className="list">
                 {(products || []).map((p, idx) => (
                     <div key={`product-${idx}`} className="item">
@@ -105,7 +108,7 @@ function Product(props){
                 {
                     status.loading === false ? 
                     <button className="load-more-btn" onClick={fetchProducts}>
-                        Load more
+                        {__("Load more")}
                     </button> :
                     <MoonLoader 
                         size={20}

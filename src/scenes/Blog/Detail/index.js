@@ -5,6 +5,13 @@ import { Slide } from 'react-slideshow-image';
 import './blog.detail.css';
 import { MoonLoader } from 'react-spinners';
 import parseHTML from 'html-react-parser';
+import { connect } from 'react-redux';
+
+// ------------------------ REDUX ------------------------
+const mapStateToProps = state => ({
+    i18n : state.i18n
+});
+// ------------------------ /REDUX ------------------------
 
 function ArticleDetail(props){
 
@@ -19,8 +26,8 @@ function ArticleDetail(props){
     // setup redirect
     let [redirect, setRedirect] = useState(null);
 
-    // get shop
-    let { shop } = props;
+    // get i18n settings
+    let { __ } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -119,7 +126,7 @@ function ArticleDetail(props){
                         <div className="back-button-wrapper">
                             <Link to={"/blogs"}>
                                 <i className="fas fa-chevron-left"></i>
-                                Back to Blog
+                                {__("Back to blog")}
                             </Link>
                         </div>
                         <div className="content">
@@ -131,4 +138,4 @@ function ArticleDetail(props){
         )
 }
 
-export default ArticleDetail;
+export default connect(mapStateToProps)(ArticleDetail);

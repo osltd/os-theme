@@ -11,7 +11,8 @@ import actions from '../../../helpers/actions';
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
     cart : state.cart,
-    shop : state.shop.session
+    shop : state.shop.session,
+    i18n : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,6 +43,8 @@ function ProductDetail(props){
 
     // get cart
     let { cart, shop } = props;
+    // get translation method
+    let  { __ } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -279,7 +282,7 @@ function ProductDetail(props){
                         <div className="back-button-wrapper">
                             <Link to={"/products"}>
                                 <i className="fas fa-chevron-left"></i>
-                                Back to Products
+                                {__("Back to products")}
                             </Link>
                         </div>
                         <div className="upper-row">
@@ -308,7 +311,7 @@ function ProductDetail(props){
                                             color={"white"}
                                             loading={true}
                                         /> :
-                                        "Add to Cart"
+                                        __("Add to Cart")
                                     }
                                 </button>
                             </div>

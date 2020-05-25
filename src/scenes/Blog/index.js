@@ -9,7 +9,8 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    articles : state.article.articles
+    articles : state.article.articles,
+    i18n     : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,6 +33,8 @@ function Blog(props){
     var [status, setStatus] = useState({
         loading : false
     });
+    // load i18n settings
+    let { __ } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -102,9 +105,9 @@ function Blog(props){
 
     return (
         <div className="blogs">
-            <h1>Blog - All</h1>
+            <h1>{__("Blog")} - {__("All")}</h1>
             <div className="list">
-            {articles.map((a, idx) => (
+            {articles.map(a => (
                 <div key={`blog-${a.id}`} className="blog">
                     <Link to={`/blogs/${a.id}`}>
                         <div className="blog-wrapper">
@@ -125,7 +128,7 @@ function Blog(props){
                 {
                     status.loading === false ? 
                     <button className="load-more-btn" onClick={fetchArticles}>
-                        Load more
+                        {__("Load more")}
                     </button> :
                     <MoonLoader 
                         size={20}
