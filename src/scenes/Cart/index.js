@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
     cart : state.cart,
-    shop : state.shop.session
+    shop : state.shop.session,
+    i18n : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +32,8 @@ function Cart(props){
     let [isLoading, setIsLoading] = useState(false);
     // get cart items
     let { cart, shop } = props;
+    // get translation method
+    let { __ } = props.i18n;
 
     // ------------------------ HELPERS ------------------------
     function extractThumbnail(item){
@@ -150,12 +153,12 @@ function Cart(props){
             ))}
             <div className="checkout-btn-wrapper">
                 <div className="total">
-                    Total : {(shop.currency || "hkd").toUpperCase()} {(cart.items || []).reduce((total, item) => {
+                    {__("Total")} : {(shop.currency || "hkd").toUpperCase()} {(cart.items || []).reduce((total, item) => {
                         return (total + (item.qty * item.price));
                     }, 0).toFixed(2)}
                 </div>
                 <Link to="/checkout">
-                    Checkout
+                    {__("Checkout")}
                 </Link>
             </div>
         </div>
@@ -165,9 +168,9 @@ function Cart(props){
         return <div className="placeholder">
             <i className="fas fa-shopping-cart"></i>
             <div className="message">
-                Your shopping cart is empty.
+                {__("Your shopping cart is empty.")}
             </div>
-            <Link to="/products">Shop Now</Link>
+            <Link to="/products">{__("Shop Now")}</Link>
         </div>
     }
     // ------------------------ REDNERS ------------------------
@@ -175,7 +178,7 @@ function Cart(props){
 
     return (
         <div className="cart">
-            <h1>My Cart</h1>
+            <h1>{__("My Cart")}</h1>
             <div className="list">
                 {(cart.items || []).length ? renderList() : renderPlaceholder()}
             </div>

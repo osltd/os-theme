@@ -12,5 +12,10 @@
     "Back to blog" : "Back to blog",
     "Products" : "Products",
     "Back to products" : "Back to products",
-    "Add to Cart" : "Add to Cart"
+    "Add to Cart" : "Add to Cart",
+    "Your shopping cart is empty." : "Your shopping cart is empty.",
+    "Shop Now" : "Shop Now",
+    "My Cart" : "My Cart",
+    "Checkout" : "Checkout",
+    "Total" : "Total"
 }

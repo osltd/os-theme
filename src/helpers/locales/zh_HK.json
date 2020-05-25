@@ -12,5 +12,10 @@
     "Back to blog" : "回到上一頁",
     "Products" : "產品",
     "Back to products" : "回到上一頁",
-    "Add to Cart" : "加入購物車"
+    "Add to Cart" : "加入購物車",
+    "Your shopping cart is empty." : "購物車未有產品",
+    "Shop Now" : "去購物",
+    "My Cart" : "購物車",
+    "Checkout" : "結帳",
+    "Total" : "總計"
 }
