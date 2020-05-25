@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './login.css';
 import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
-
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -22,6 +21,8 @@ function Login(props){
     let [password, setPassword] = useState("");
     // loading status
     let [isLoading, setIsLoading] = useState(false);
+    // redirect path
+    let [redirect, setRedirect] = useState(null);
     // get oneshop instance
     const OS = new Oneshop();
     // get shop
@@ -29,7 +30,25 @@ function Login(props){
     // get i18n method
     const { __ } = props.i18n;
 
-
+    // ------------------ LIFECYCLE ------------------
+    useEffect(() => {
+        // retreive profile eveyr time
+        OS.consumer.profile.get()
+        // got 
+        .then((rows) => {
+            // get user
+            let user = rows[0];
+            // logged in already?
+            if(user != null){
+                // back to users page
+                setRedirect('/users');
+            }
+        })
+        .catch((error) => {
+            // ignore error    
+        });
+    }, []);
+    // ------------------ /LIFECYCLE ------------------
 
     // -------------------- HELPER --------------------
     function login(){
@@ -58,7 +77,7 @@ function Login(props){
     // -------------------- /HELPER --------------------
 
 
-    return (
+    return redirect != null ? <Redirect to={redirect} /> : (
         <div className="user-login">
             <div className="user-login-wrapper">
                 <div className="form">

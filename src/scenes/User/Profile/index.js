@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Oneshop from 'oneshop.web';
 import './profile.css';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
 
 
@@ -14,7 +14,6 @@ const mapStateToProps = state => ({
 
 
 function UserProfile(props){
-    console.log(props);
     // set profile
     let [profile, setProfile] = useState(props.profile);
     // form data for updating profile

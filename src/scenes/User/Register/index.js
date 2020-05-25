@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Oneshop from 'oneshop.web';
 import './register.css';
 import { connect } from 'react-redux';
@@ -23,12 +23,34 @@ function Register(props){
     let [lastName, setLastName] = useState("");
     // loading status
     let [isLoading, setIsLoading] = useState(false);
+    // redirect path
+    let [redirect, setRedirect] = useState(null);
     // get oneshop instance
     var OS = new Oneshop();
     // get shop
     const { shop } = props;
     // get translation method
     const { __ } = props.i18n;
+
+    // ------------------ LIFECYCLE ------------------
+    useEffect(() => {
+        // retreive profile eveyr time
+        OS.consumer.profile.get()
+        // got 
+        .then((rows) => {
+            // get user
+            let user = rows[0];
+            // logged in already?
+            if(user != null){
+                // back to users page
+                setRedirect('/users');
+            }
+        })
+        .catch((error) => {
+            // ignore error    
+        });
+    }, []);
+    // ------------------ /LIFECYCLE ------------------
 
     // -------------------- HELPER --------------------
     function register(){
@@ -57,7 +79,7 @@ function Register(props){
     }
     // -------------------- /HELPER --------------------
 
-    return (
+    return redirect != null ? <Redirect to={redirect} /> : (
         <div className="user-register">
             <div className="user-register-wrapper">
                 <div className="form">
