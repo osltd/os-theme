@@ -28,6 +28,8 @@ function Banner(props){
 
     // get cached
     const { setHomeContext, homeContext, id } = props;
+    // set status
+    let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
 
@@ -46,12 +48,22 @@ function Banner(props){
         if((props.keywords || "").length > 0) filters.keywords = props.keywords;
         if((props.ids || "").length > 0) filters.ids = props.ids;
         if((props.collections || "").length > 0) filters.collections = props.collections;
+        // start loading
+        setIsLoading(false);
         // get articles
         OS.article.get({...filters})
         // got articles
-        .then(rows => setHomeContext(id, rows))
-        // db error
+        .then(rows => {
+            // finished loading
+            setIsLoading(false);
+            // save context
+            if(rows.length) setHomeContext(id, rows);
+        })
+        // error
         .catch(error => {
+            // finished loading
+            setIsLoading(false);
+            // show error
             alert("Failed to get featured article");
         });
     }
@@ -91,16 +103,17 @@ function Banner(props){
     // ---------------- /RENDERING ----------------
 
     // banner data loaded?
-    return homeContext[id] ? <div className="widget-banner" style={{...props.styles}}>
+    return homeContext[id] && !isLoading ? <div className="widget-banner" style={{...props.styles}}>
         {renderSlider()}
     </div> : 
+    isLoading ?
     <div style={{ width : "100%", height : 500, display:"flex", alignItems : "center", justifyContent : "center" }}>
         <MoonLoader 
             size={20}
             color={"#000000"}
             loading={true}
         />
-    </div>;
+    </div> : null;
 
 }
 

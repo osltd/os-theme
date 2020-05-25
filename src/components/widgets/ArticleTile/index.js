@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import actions from '../../../helpers/actions';
@@ -25,10 +25,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Article(props){
 
-    // get cached
+    // get cache
     const { setHomeContext, homeContext, id } = props;
+    // set status
+    let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
+
+
 
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -45,12 +49,22 @@ function Article(props){
         if((props.keywords || "").length > 0) filters.keywords = props.keywords;
         if((props.ids || "").length > 0) filters.ids = props.ids;
         if((props.collections || "").length > 0) filters.collections = props.collections;
+        // start loading
+        setIsLoading(true);
         // get 
         OS.article.get({...filters})
         // got articles
-        .then(rows => setHomeContext(id, rows))
-        // db error
+        .then(rows => {
+            // finished loadling
+            setIsLoading(false);
+            // save context
+            if(rows.length > 0) setHomeContext(id, rows);
+        })
+        // error
         .catch(error => {
+            // finished loadling
+            setIsLoading(false);
+            // show alert
             alert("Failed to get articles");
         });
     }
@@ -86,17 +100,18 @@ function Article(props){
    // ---------------- /RENDERING ----------------
 
     // article data loaded?
-    return homeContext[id] ? <div className="widget-article" style={{...props.styles}}>
+    return homeContext[id] && !isLoading ? <div className="widget-article" style={{...props.styles}}>
         <h1>{props.title}</h1>
         {renderSlider()}
     </div> : 
+    isLoading ? 
     <div style={{ width:"100%", height:500, display:"flex", alignItems:"center", justifyContent:"center" }}>
         <MoonLoader 
             size={20}
             color={"#000000"}
             loading={true}
         />
-    </div>;
+    </div> : null;
 
 }
 
