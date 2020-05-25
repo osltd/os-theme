@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
     shop: state.shop.session,
-    settings : state.shop.settings
+    settings : state.shop.settings,
+    i18n : state.i18n
 });
 
 
@@ -14,6 +15,8 @@ function Footer(props){
 
     // get shop
     let { shop, settings } = props;
+    // get i18n settings
+    let { __ } = props.i18n;
     
     return <div className="footer">
         <div className="cols">
@@ -27,30 +30,30 @@ function Footer(props){
             </div>
             <div className="col links">
                 <Link to="/">
-                    Home
+                    {__("Home")}
                 </Link>
                 <Link to="/blogs">
-                    Blog
+                    {__("Blog")}
                 </Link>
                 <Link to="/products">
-                    Shop
+                    {__("Shop")}
                 </Link>
                 <Link to="/cart">
-                    Cart
+                    {__("Cart")}
                 </Link>
                 <Link to="/users">
-                    My Account
+                    {__("My Account")}
                 </Link>
             </div>
             <div className="col links">
                 <Link to="/pages/terms_and_conditions">
-                    Terms and Conditions
+                    {__("Terms and Conditions")}
                 </Link>
                 <Link to="/pages/privacy_policy">
-                    Privacy Policy
+                    {__("Privacy Policy")}
                 </Link>
                 <Link to="/pages/shipping_policy">
-                    Shipping Policy
+                    {__("Shipping Policy")}
                 </Link>
             </div>
             <div className="col links social">

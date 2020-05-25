@@ -1,5 +1,12 @@
 {
     "Home" : "Home",
     "Blog" : "Blog",
-    "Shop" : "Shop"
+    "Shop" : "Shop",
+    "Cart" : "Cart",
+    "My Account" : "My Account",
+    "Terms and Conditions" : "Terms and Conditions",
+    "Privacy Policy" : "Privacy Policy",
+    "Shipping Policy" : "Shipping Policy"
+
+
 }

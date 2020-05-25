@@ -5,8 +5,18 @@ const cookies = new Cookies();
 
 
 let initState = {
-    locale : cookies.get('locale') || 'en_US',
-    __     : function(key) {
+    locale  : cookies.get('locale') || 'en_US',
+    locales : [
+        {
+            name : "English",
+            code : "en_US"
+        },
+        {
+            name : "正體中文",
+            code : "zh_HK"
+        }
+    ],
+    __      : function(key) {
         // get locale
         let locale = cookies.get('locale') || 'en_US';
         // set wordings container
