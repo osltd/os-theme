@@ -53,6 +53,11 @@
     "Welcome Back" : "Welcome Back",
     "Password" : "Password",
     "Login" : "Login",
-    "Not a member? Register now!" : "Not a member? Register now!"
+    "Not a member? Register now!" : "Not a member? Register now!",
+
+    "Get Your Account" : "Get Your Account",
+    "Confirm Password" : "Confirm Password",
+    "Register" : "Register",
+    "Already a member?" : "Already a member?"
 
 }

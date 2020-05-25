@@ -7,7 +7,8 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session
+    shop : state.shop.session,
+    i18n : state.i18n
 });
 // ------------------------ /REDUX ------------------------
 
@@ -26,6 +27,8 @@ function Register(props){
     var OS = new Oneshop();
     // get shop
     const { shop } = props;
+    // get translation method
+    const { __ } = props.i18n;
 
     // -------------------- HELPER --------------------
     function register(){
@@ -60,29 +63,29 @@ function Register(props){
                 <div className="form">
                     <div className="greeting">
                         {shop.logo ? <img src={shop.logo}/> : null}
-                        <h1>Get Your Account</h1>
+                        <h1>{__("Get Your Account")}</h1>
                     </div>
                     <div className="form-wrapper">
                         <div className="form-group">
-                            <label>First Name</label>
+                            <label>{__("First Name")}</label>
                             <input 
                                 type="text" 
                                 value={firstName} 
                                 onChange={(event) => { setFirstName(event.target.value); }}
-                                placeholder="Peter"
+                                placeholder={__("Peter")}
                             />
                         </div>
                         <div className="form-group">
-                            <label>Last Name</label>
+                            <label>{__("Last Name")}</label>
                             <input 
                                 type="text" 
                                 value={lastName} 
                                 onChange={(event) => { setLastName(event.target.value); }}
-                                placeholder="Chan"
+                                placeholder={__("Chan")}
                             />
                         </div>
                         <div className="form-group">
-                            <label>Email</label>
+                            <label>{__("Email")}</label>
                             <input 
                                 type="text" 
                                 value={email} 
@@ -91,7 +94,7 @@ function Register(props){
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>{__("Password")}</label>
                             <input 
                                 type="password" 
                                 value={password}  
@@ -100,7 +103,7 @@ function Register(props){
                             />
                         </div>
                         <div className="form-group">
-                            <label>Confirm Password</label>
+                            <label>{__("Confirm Password")}</label>
                             <input 
                                 type="password" 
                                 value={confirmPassword}  
@@ -116,11 +119,11 @@ function Register(props){
                                     color={"white"}
                                     loading={true}
                                 /> :
-                                "Register"
+                                __("Register")
                             }
                         </button>
                         <div className="register">
-                            <Link to="/users/login">Already a member?</Link>
+                            <Link to="/users/login">{__("Already a member?")}</Link>
                         </div>
                     </div>
                 </div>

@@ -53,5 +53,10 @@
     "Welcome Back" : "歡迎回來",
     "Password" : "密碼",
     "Login" : "登入",
-    "Not a member? Register now!" : "没有帳號? 現在就去註冊"
+    "Not a member? Register now!" : "没有帳號? 現在就去註冊",
+
+    "Get Your Account" : "立即成為會員",
+    "Confirm Password" : "確認密碼",
+    "Register" : "註冊",
+    "Already a member?" : "已經是會員?"
 }
