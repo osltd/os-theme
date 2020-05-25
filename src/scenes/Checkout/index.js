@@ -15,7 +15,8 @@ import { Redirect } from 'react-router-dom';
 const mapStateToProps = state => ({
     cart : state.cart,
     shop : state.shop.session,
-    user : state.user.session
+    user : state.user.session,
+    i18n : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -70,7 +71,8 @@ function Checkout(props){
     let [formErrors, setFormErrors] = useState({});
     // country code list
     const countries = getCodeList();
-
+    // translation method
+    let { __ } = props.i18n;
     
     // -------------------- HELPERS --------------------
     async function loadShippingMethods(){
@@ -245,6 +247,8 @@ function Checkout(props){
     function validateField(field){
         // validate
         let error_msg = validate(field || "", form);
+        // not null? translate
+        if(error_msg != null) error_msg = `${__(error_msg.field)} ${__(error_msg.error)}`;
         // has error?
         setFormErrors(oldFormErrors => {
             let newFormErrors = {...oldFormErrors};
@@ -273,11 +277,11 @@ function Checkout(props){
     // -------------------- FORM RENDERING --------------------
     function renderStep1(){
         return <div className="step-1">
-            <h2>Your Information</h2>
+            <h2>{__("Your Information")}</h2>
             <div className="row">
                 <div className="form-group">
-                    <label>First Name</label>
-                    <input placeholder="Peter" 
+                    <label>{__("First Name")}</label>
+                    <input placeholder={__("Peter")} 
                             value={form.contact.first_name} 
                             onChange={(e) => setFormValue('contact.first_name', e.target.value)}
                             onBlur={() => validateField("contact.first_name")}
@@ -285,8 +289,8 @@ function Checkout(props){
                     {getFormErrorView("contact.first_name")}
                 </div>
                 <div className="form-group">
-                    <label>Last Name</label>
-                    <input placeholder="Chan" 
+                    <label>{__("Last Name")}</label>
+                    <input placeholder={__("Chan")}
                             value={form.contact.last_name} 
                             onChange={(e) => setFormValue('contact.last_name', e.target.value)}
                             onBlur={() => validateField("contact.last_name")}
@@ -296,7 +300,7 @@ function Checkout(props){
             </div>
             <div className="row">
                 <div className="form-group">
-                    <label>Email</label>
+                    <label>{__("Email")}</label>
                     <input placeholder="Peter.chan@abc.com" 
                             value={form.contact.email} 
                             onChange={(e) => setFormValue('contact.email', e.target.value)}
@@ -305,7 +309,7 @@ function Checkout(props){
                     {getFormErrorView("contact.email")}
                 </div>
                 <div className="form-group">
-                    <label>Phone</label>
+                    <label>{__("Phone")}</label>
                     <input placeholder="+85291234567" 
                             value={form.contact.phone} 
                             onChange={(e) => setFormValue('contact.phone', e.target.value)}
@@ -316,7 +320,7 @@ function Checkout(props){
             </div>
             <div className="row">
                 <div className="form-group">
-                    <label>Country</label>
+                    <label>{__("Country")}</label>
                     <Select value={{ value : (form.shipping.country || "hk").toLowerCase(), label: countries[(form.shipping.country || "hk").toLowerCase()]}}
                             onChange={option => setFormValue('shipping.country', option.value.toUpperCase())}
                             options={Object.keys(countries).map(key => ({ value : key, label : countries[key]}))}
@@ -336,7 +340,7 @@ function Checkout(props){
                                 !isFormValid()
                             }
                     >
-                        Shipping <i className="fas fa-chevron-right"></i>
+                        {__("Shipping")} <i className="fas fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
@@ -344,20 +348,8 @@ function Checkout(props){
     }
 
     function renderStep2(){
-        // // is show shipping address field
-        // let shippingAddressRequired = false;
-        // // ensure not null
-        // if(form.shippings[shop.id] != null){
-        //     // need shipping address
-        //     shippingMethods.forEach(s => {
-        //         if(s.id == form.shippings[shop.id] && s.address_required === true){
-        //             // needs shipping address
-        //             shippingAddressRequired = true;
-        //         }
-        //     });
-        // }
         return <div className="step-2">
-            <h2>Select a Shipping Method</h2>
+            <h2>{__("Select a Shipping Method")}</h2>
             <div className="row">
                 <div className="shipping-methods">
                     {
@@ -372,11 +364,11 @@ function Checkout(props){
                                 <div className="charge">{shop.currency.toUpperCase()} {s.charge}</div>
                             </div>
                         )) :
-                        <div className="shipping-method-none">No shipping method is available at the moment.</div>
+                        <div className="shipping-method-none">{__("No shipping method is available at the moment.")}</div>
                     }
                 </div>
             </div>
-            <h2>Shipping Address</h2>
+            <h2>{__("Shipping Address")}</h2>
             <div className="row">
                 <div className="form-group">
                     <input placeholder="1/F, ABC Building, 12 ABC Road, Hong Kong" value={form.shipping.address || ""} 
@@ -386,7 +378,7 @@ function Checkout(props){
                     {getFormErrorView("shipping.address")}
                 </div>
             </div>
-            <h2>Coupons</h2>
+            <h2>{__("Coupons")}</h2>
             <div className="row">
                 <div className="form-group">
                     <input placeholder="SUMMERSALE10" 
@@ -397,12 +389,12 @@ function Checkout(props){
                     {getFormErrorView("coupons")}
                 </div>
             </div>
-            <h2>Notes</h2>
+            <h2>{__("Notes")}</h2>
             <div className="row">
                 <div className="form-group">
                     <textarea 
                         value={form.notes || ""}
-                        placeholder="Notes to us"
+                        placeholder={__("Notes to us")}
                         maxLength={500}
                         onChange={(e) => setFormValue('notes', e.target.value)} 
                     />
@@ -415,14 +407,14 @@ function Checkout(props){
                                 setStep(1);
                             }}
                     >
-                        <i className="fas fa-chevron-left"></i> Information
+                        <i className="fas fa-chevron-left"></i> {__("Information")}
                     </button>
                 </div>
                 <div className="form-group">
                     <button onClick={() => previewOrder()}
                             disabled={!(form.shipping.address || "").length || !isFormValid()}
                     >
-                        Payment <i className="fas fa-chevron-right"></i>
+                        {__("Payment")} <i className="fas fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
@@ -431,10 +423,10 @@ function Checkout(props){
 
     function renderStep3(){
         return <div className="step-3">
-            <h2>Payment</h2>
+            <h2>{__("Payment")}</h2>
             <div className="row">
                 <div className="form-group">
-                    <label>Card Number</label>
+                    <label>{__("Card Number")}</label>
                     <input placeholder="4242-4242-4242-4242" 
                             value={((form.payment.card || "").match(new RegExp('[0-9]{1,4}', 'g')) || []).join("-")} 
                             onChange={(e) => setFormValue('payment.card', (e.target.value || "").split("-").join(""))} 
@@ -446,7 +438,7 @@ function Checkout(props){
             </div>
             <div className="row">
                 <div className="form-group">
-                    <label>Expiry Date</label>
+                    <label>{__("Expiry Date")}</label>
                     <input placeholder="10/20" 
                             value={((form.payment.exp_date || "").match(new RegExp('[0-9]{1,2}', 'g')) || []).join("/")} 
                             onChange={(e) => setFormValue('payment.exp_date', (e.target.value || "").split("/").join(""))} 
@@ -456,7 +448,7 @@ function Checkout(props){
                     {getFormErrorView("payment.exp_date")}
                 </div>
                 <div className="form-group">
-                    <label>CSC</label>
+                    <label>{__("CSC")}</label>
                     <input placeholder="123" 
                             type="password"
                             value={form.payment.csc || ""} 
@@ -474,7 +466,7 @@ function Checkout(props){
                         setFormErrors({});
                         setStep(2);
                     }}>
-                        <i className="fas fa-chevron-left"></i> Shipping
+                        <i className="fas fa-chevron-left"></i> {__("Shipping")}
                     </button>
                 </div>
                 <div className="form-group">
@@ -487,7 +479,7 @@ function Checkout(props){
                                 !isFormValid()
                             }
                     >
-                        Confirm & Pay <i className="fas fa-check-circle"></i>
+                        {__("Confirm & Pay")} <i className="fas fa-check-circle"></i>
                     </button>
                 </div>
             </div>
@@ -499,7 +491,7 @@ function Checkout(props){
     function renderOrderForm(){
         return (
             <div className="checkout">
-                <h1>Checkout</h1>
+                <h1>{__("Checkout")}</h1>
                 <div className="checkout-wrapper">
     
                     {/* ---------------- Loading mask ---------------- */}
@@ -522,7 +514,7 @@ function Checkout(props){
                         <div className="progress-bar">
                             {["Information", "Shipping", "Finish"].map((s, idx) => (
                                 <div key={`step-label-${idx}`} className={`step-label ${step >= idx+1 ? "active" : ""}`}>
-                                    {s}
+                                    {__(s)}
                                 </div>
                             ))}
                             <div className="bar">
@@ -541,7 +533,7 @@ function Checkout(props){
                         <div className="back-to-shopping-cart">
                             <Link to={"/cart"}>
                                 <i className="fas fa-chevron-left"></i>
-                                Back to Shopping Cart
+                                {__("Back to Shopping Cart")}
                             </Link>
                         </div>
                         {/* --------------- /Back to shoping cart button ------------- */}
@@ -554,10 +546,10 @@ function Checkout(props){
                     {/* ---------------------- SUMMARY ---------------------- */}
                     <div className="summary">
                         <div className="summary-wrapper">
-                            <h3>Summary</h3>
+                            <h3>{__("Summary")}</h3>
                             <div className="amounts">
                                 <div className="amt subtotal">
-                                    <label>Subtotal</label> 
+                                    <label>{__("Subtotal")}</label> 
                                     <div className="amount">
                                         {shop.currency.toUpperCase()} {(() => {
                                             return preview ? preview.sub_total : 
@@ -568,7 +560,7 @@ function Checkout(props){
                                     </div>
                                 </div>
                                 <div className="amt shipping-fee"> 
-                                    <label>Shipping fee</label>
+                                    <label>{__("Shipping fee")}</label>
                                     <div className="amount">
                                         {shop.currency.toUpperCase()} {(() => {
                                             // has preview?
@@ -586,7 +578,7 @@ function Checkout(props){
                                     preview && ((preview.breakdowns[0] || {}).discounts || []).length > 0 ?
                                     (
                                         <div className="amt discounts">
-                                            <label>Discounts</label>
+                                            <label>{__("Discounts")}</label>
                                             {preview.breakdowns[0].discounts.map(d => (<div key={`discount-${d.id}`} className="item">
                                                 <label data-tip={d.title || ""}>
                                                     {(d.title || "").length > 20 ? `${(d.title || "").substring(0, 20)}...` : d.title}
@@ -598,7 +590,7 @@ function Checkout(props){
                                     ) : null
                                 }
                                 <div className="amt total">
-                                    <label>TOTAL</label>
+                                    <label>{__("TOTAL")}</label>
                                     <div className="amount">
                                         {shop.currency.toUpperCase()} {(() => {
                                             return preview ? preview.gross_total : 

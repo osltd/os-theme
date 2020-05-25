@@ -132,11 +132,20 @@ const setValueAtObjectByPath = function(_obj, field, value){
 const getFieldError = function(rule, value){
     // has input
     if((value || "").length){
-        return (new RegExp(rule.regex, "ig")).test(value) ? null : `${rule.field_name} is invalid`;
+        return (new RegExp(rule.regex, "ig")).test(value) ? 
+            null : 
+            {
+                field : rule.field_name,
+                error : `is invalid`
+            };
     } else
     // not empty
     if(rule.required === true && !(value || "").length){
-        return `${rule.field_name} is required`
+        //return `${rule.field_name} is required`
+        return {
+            field : rule.field_name,
+            error : `is required`
+        };
     }
 }
 
