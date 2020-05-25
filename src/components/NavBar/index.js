@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 
 const mapStateToProps = state => ({
-    shop: state.shop.session,
-    cart: state.cart
+    shop : state.shop.session,
+    cart : state.cart,
+    i18n : state.i18n
 });
 
 
@@ -20,6 +21,8 @@ function NarBar(props){
     let [navBarExpanded, setNavBarExpanded] = useState(false);
     // get shop
     const { shop, cart } = props;
+    // get translation helpers
+    const { locale, __ } = props.i18n;
     
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -45,13 +48,13 @@ function NarBar(props){
                     <h2>{shop.name}</h2>
                 </div>
                 <div className="navBar-item">
-                    <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}}>Home</Link>
+                    <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}}>{__("Home")}</Link>
                 </div>
                 <div className="navBar-item">
-                    <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>Blog</Link>
+                    <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>{__("Blog")}</Link>
                 </div>
                 <div className="navBar-item">
-                    <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>Shop</Link>
+                    <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>{__("Shop")}</Link>
                 </div>
                 <div className="navBar-item">
                     <Link to='/cart'>
@@ -103,13 +106,19 @@ function NarBar(props){
                 {/* ------------ Expandable list ------------ */}
                 <div className={`navBar-item-list ${navBarExpanded ? "expand" : ""}`}>
                     <div className="navBar-item">
-                        <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Home</Link>
+                        <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
+                            {__("Home")}
+                        </Link>
                     </div>
                     <div className="navBar-item">
-                        <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Blog</Link>
+                        <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
+                            {__("Blog")}
+                        </Link>
                     </div>
                     <div className="navBar-item">
-                        <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>Shop</Link>
+                        <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
+                            {__("Shop")}
+                        </Link>
                     </div>
                 </div>
                 {/* ------------ Expandable list ------------ */}

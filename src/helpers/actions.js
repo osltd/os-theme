@@ -6,5 +6,6 @@ export default {
     SET_ARTICLES     : 'SET_ARTICLES'   ,
     INIT_CART        : 'INIT_CART',
     SET_CART_ITEMS   : 'SET_CART_ITEMS',
-    SET_HOME_CONTEXT : 'SET_HOME_CONTEXT'
+    SET_HOME_CONTEXT : 'SET_HOME_CONTEXT',
+    SET_LOCALE       : 'SET_LOCALE'
 }
