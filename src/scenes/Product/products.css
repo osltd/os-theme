@@ -3,7 +3,21 @@
     min-height: calc(100vh - 100px);
 }
 
-.products h1 {
+.products .header-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding-right: 25px;
+}
+
+.products .header-wrapper .collection-select{
+    padding-left:15px;
+    width: 250px;
+}
+
+.products .header-wrapper h1 {
     font-weight: 300;
     padding-left: 30px;
 }

@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session,
-    cart : state.cart,
-    i18n : state.i18n
+    shop     : state.shop.session,
+    settings : state.shop.settings,
+    cart     : state.cart,
+    i18n     : state.i18n
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,10 +32,19 @@ function NarBar(props){
     // local menu expanded
     let [localeMenuExpanded, setLocaleMenuExpanded] = useState(false);
     // get shop
-    const { shop, cart } = props;
+    const { shop, cart, settings } = props;
     // get translation helpers
     const { locale, __, locales } = props.i18n;
-    
+
+    // preset settings
+    let navBarSettings = ((settings || {}).layout || {}).navBar || {
+        display : {
+            blog : true,
+            shop : true,
+            user : true
+        }
+    };
+
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
         // scroll listener
@@ -65,16 +75,22 @@ function NarBar(props){
                         {__("Home")}
                     </Link>
                 </div>
-                <div className="navBar-item">
-                    <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>
-                        {__("Blog")}
-                    </Link>
-                </div>
-                <div className="navBar-item">
-                    <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>
-                        {__("Shop")}
-                    </Link>
-                </div>
+                {
+                    navBarSettings && (navBarSettings.display || {}).blog === true ?
+                    <div className="navBar-item">
+                        <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>
+                            {__("Blog")}
+                        </Link>
+                    </div> : null
+                }
+                {
+                    navBarSettings && (navBarSettings.display || {}).shop === true ?
+                    <div className="navBar-item">
+                        <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>
+                            {__("Shop")}
+                        </Link>
+                    </div> : null
+                }
                 <div className="navBar-item">
                     <button onClick={() => setLocaleMenuExpanded(!localeMenuExpanded)}>
                         <i className="fas fa-globe-asia"></i>
@@ -92,22 +108,28 @@ function NarBar(props){
                         ))}
                     </div>
                 </div>
-                <div className="navBar-item">
-                    <Link to='/cart'>
-                        {
-                            cart.items.length > 0 ?
-                            <span className="count">
-                                {cart.items.reduce((count, item) => count + parseInt(item.qty), 0)}
-                            </span> : null
-                        }
-                        <i className="fas fa-shopping-cart"></i>
-                    </Link>
-                </div>
-                <div className="navBar-item">
-                    <Link to='/users'>
-                        <i className="fas fa-user"></i>
-                    </Link>
-                </div>
+                {
+                    navBarSettings && (navBarSettings.display || {}).shop === true ?
+                    <div className="navBar-item">
+                        <Link to='/cart'>
+                            {
+                                cart.items.length > 0 ?
+                                <span className="count">
+                                    {cart.items.reduce((count, item) => count + parseInt(item.qty), 0)}
+                                </span> : null
+                            }
+                            <i className="fas fa-shopping-cart"></i>
+                        </Link>
+                    </div> : null
+                }
+                {
+                    navBarSettings && (navBarSettings.display || {}).user === true ?
+                    <div className="navBar-item">
+                        <Link to='/users'>
+                            <i className="fas fa-user"></i>
+                        </Link>
+                    </div> : null
+                }
             </div>
             {/* ------------------ /Desktop Nav Bar -----------------*/}
 

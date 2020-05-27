@@ -1,7 +1,9 @@
 import OS_Config from '../../config';
 
 let initState = {
-    session : null
+    session            : null,
+    collections        : [],
+    selectedCollection : null
 };
 
 export default (state = initState, action) => {
@@ -11,6 +13,18 @@ export default (state = initState, action) => {
                 session  : action.payload,
                 settings : OS_Config.settings
             };
+        case 'SET_COLLECTIONS' : {
+            return {
+                ...state,
+                collections : action.payload
+            }
+        }
+        case 'SET_SELECTED_COLLECTION' : {
+            return {
+                ...state,
+                selectedCollection : action.payload
+            }
+        }
         default:
             return state;
     }

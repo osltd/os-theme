@@ -2,6 +2,14 @@ module.exports = {
     // Shop settings goes here
     settings : {
         layout : {
+            // nav-bar settings
+            navBar : {
+                display : {
+                    blog : true,
+                    shop : true,
+                    user : true
+                }
+            },
             // Key - widget name
             content : [
                 /**

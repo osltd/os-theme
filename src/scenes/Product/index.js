@@ -5,18 +5,29 @@ import './products.css';
 import { connect } from 'react-redux';
 import actions from '../../helpers/actions';
 import { MoonLoader } from 'react-spinners';
+import Select from 'react-select';
+
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
     products : state.product.products,
-    i18n     : state.i18n
+    i18n     : state.i18n,
+    shop     : state.shop
 });
 
 const mapDispatchToProps = dispatch => ({
     setProducts : (products) => dispatch({
         type    : actions.SET_PRODUCTS,
         payload : products
-    })
+    }),
+    setCollections : (collections) => dispatch({
+        type    : actions.SET_COLLECTIONS,
+        payload : collections
+    }),
+    setSelectedCollection : (collectionId) => dispatch({
+        type    : actions.SET_SELECTED_COLLECTION,
+        payload : collectionId
+    }),
 });
 // ------------------------ /REDUX ------------------------
 
@@ -29,36 +40,79 @@ function Product(props){
     let { products } = props;
     // get translation method
     let  { __ } = props.i18n;
+    // get collections
+    let  { collections, selectedCollection } = props.shop;
+    // set end of page
+    let [endOfList, setEndOfList] = useState(false);
     // statuses
-    var [status, setStatus] = useState({
+    let [status, setStatus] = useState({
         loading : false
     });
-
+    // prev selected collection
+    let [prevSelectedCollection, setPrevSelectedCollection] = useState(null);
 
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
         // active fetch products if no product is loaded
-        if(!(products || []).length) fetchProducts();
-    }, []);
+        if(!(products || []).length && !endOfList) fetchProducts();
+        // no collections?
+        if(!(collections || [].length)) fetchCollections();
+        // collection changed?
+        if(products.length > 0 && !isNaN((selectedCollection || {}).value) && parseInt(prevSelectedCollection) != parseInt(selectedCollection.value)){
+            // start over
+            setEndOfList(false);
+            // clear product
+            props.setProducts([]);
+            // save selected collection
+            setPrevSelectedCollection(selectedCollection.value);
+        }    
+    }, [selectedCollection, products]);
+
+
+    async function fetchCollections(){
+        try {
+            // get shop collections
+            let collections = await fetch('/api/collections', { method : 'GET'});   
+            // parse json
+            collections = await collections.json();
+            // save collections
+            props.setCollections((collections.data || {}).rows || []);
+        } catch (error) {
+            // DO NOTHING
+            // if failed to fetch collection
+        }
+    }
 
 
     function fetchProducts(){
-        // start loading
-        toggleLoading();
-        // fetch products
-        OS.merchandise.get({
-            page : Math.ceil(products.length/15) + 1
-        })
-        // got products
-        .then((rows) => {
-            // set products
-            props.setProducts(products.concat(rows));
-            // has result
+        if(!endOfList){
+            // start loading
             toggleLoading();
-        })
-        // error
-        .catch(error => console.error(error));
+            // params
+            let params = {
+                page : Math.ceil(products.length/15) + 1
+            };
+            // filter by collection?
+            if(prevSelectedCollection != null) params.collections = prevSelectedCollection;
+            // fetch products
+            OS.merchandise.get(params)
+            // got products
+            .then((rows) => {
+                // end of list?
+                if(!rows.length) {
+                    // prevent further loading
+                    setEndOfList(true);
+                } else {
+                    // set products
+                    props.setProducts(products.concat(rows));
+                }
+                // has result
+                toggleLoading();
+            })
+            // error
+            .catch(error => console.error(error));
+        }
     }
     // ----------------------- /LIFECYCYLE -----------------------
 
@@ -86,7 +140,22 @@ function Product(props){
 
     return (
         <div className="products">
-            <h1>{__("Products")} - {__("All")}</h1>
+            <div className="header-wrapper">
+                {
+                    (collections || []).length ? 
+                    <div className="header-wrapper">
+                        <h1>{__("Products")} - </h1>
+                        <div className="collection-select">
+                            <Select placeholder={__("All")}
+                                    value={selectedCollection || null}
+                                    onChange={option => props.setSelectedCollection(option)}
+                                    options={(collections || []).map(c => ({ value : c.id, label : c.name.toUpperCase()}))}
+                            />
+                        </div>
+                    </div> : 
+                    <h1>{__("Products")}</h1>
+                }
+            </div>
             <div className="list">
                 {(products || []).map((p, idx) => (
                     <div key={`product-${idx}`} className="item">
