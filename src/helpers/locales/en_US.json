@@ -8,6 +8,7 @@
     "Privacy Policy" : "Privacy Policy",
     "Shipping Policy" : "Shipping Policy",
     "All" : "All",
+    "all" : "All",
     "Load more" : "Load more",
     "Back to blog" : "Back to blog",
     "Products" : "Products",
@@ -65,6 +66,14 @@
     "Cancel" : "Cancel",
     "Save" : "Save",
     "Logout" : "Logout",
-    "My Orders" : "My Orders"
+    "My Orders" : "My Orders",
+
+
+    "clothes" : "Clothes",
+    "accessories" : "Accessories",
+    "men" : "Men",
+    "women" : "Women",
+    "shoes" : "Shoes",
+    "watches" : "Watches"
 
 }

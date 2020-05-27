@@ -48,8 +48,6 @@ function Product(props){
     let [status, setStatus] = useState({
         loading : false
     });
-    // prev selected collection
-    let [prevSelectedCollection, setPrevSelectedCollection] = useState(null);
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -58,16 +56,7 @@ function Product(props){
         if(!(products || []).length && !endOfList) fetchProducts();
         // no collections?
         if(!(collections || [].length)) fetchCollections();
-        // collection changed?
-        if(products.length > 0 && !isNaN((selectedCollection || {}).value) && parseInt(prevSelectedCollection) != parseInt(selectedCollection.value)){
-            // start over
-            setEndOfList(false);
-            // clear product
-            props.setProducts([]);
-            // save selected collection
-            setPrevSelectedCollection(selectedCollection.value);
-        }    
-    }, [selectedCollection, products]);
+    }, [products]);
 
 
     async function fetchCollections(){
@@ -94,7 +83,7 @@ function Product(props){
                 page : Math.ceil(products.length/15) + 1
             };
             // filter by collection?
-            if(prevSelectedCollection != null) params.collections = prevSelectedCollection;
+            if(!isNaN((selectedCollection || {}).value)) params.collections = selectedCollection.value;
             // fetch products
             OS.merchandise.get(params)
             // got products
@@ -148,8 +137,15 @@ function Product(props){
                         <div className="collection-select">
                             <Select placeholder={__("All")}
                                     value={selectedCollection || null}
-                                    onChange={option => props.setSelectedCollection(option)}
-                                    options={(collections || []).map(c => ({ value : c.id, label : c.name.toUpperCase()}))}
+                                    onChange={option => {
+                                        // start over
+                                        setEndOfList(false);
+                                        // clear product
+                                        props.setProducts([]);
+                                        // save selected collection
+                                        props.setSelectedCollection(option);
+                                    }}
+                                    options={[{ id : null, name : "All"}].concat((collections || [])).map(c => ({ value : c.id, label : __(c.name.toLowerCase())}))}
                             />
                         </div>
                     </div> : 

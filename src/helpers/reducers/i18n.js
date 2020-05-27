@@ -5,7 +5,7 @@ const cookies = new Cookies();
 
 
 let initState = {
-    locale  : cookies.get('locale') || 'en_US',
+    locale  : cookies.get('os-locale') || 'en_US',
     locales : [
         {
             name : "English",
@@ -18,7 +18,7 @@ let initState = {
     ],
     __      : function(key) {
         // get locale
-        let locale = cookies.get('locale') || 'en_US';
+        let locale = cookies.get('os-locale') || 'en_US';
         // set wordings container
         let wordings = {};
         // try to process wordings json
@@ -38,7 +38,7 @@ export default (state = initState, action) => {
     switch(action.type) {
         case 'SET_LOCALE' : {
             // save locale
-            cookies.set('locale', action.payload);
+            cookies.set('os-locale', action.payload);
             return {
                 ...state,
                 locale : action.payload
