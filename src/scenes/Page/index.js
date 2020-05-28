@@ -12,10 +12,8 @@ const mapStateToProps = state => ({
 // ------------------------ /REDUX ------------------------
 
 
-function Page(props){
+function Page(){
 
-    // get shop
-    let { shop } = props;
     // get filename
     let fileName = useParams().file;
     // text

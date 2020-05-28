@@ -115,7 +115,7 @@ function Cart(props){
             {(cart.items || []).map((item, idx) => (
                 <div key={`item-${idx}`} className="item">
                     <div className="thumbnail">
-                        <img src={extractThumbnail(item)} alt={`image of ${item.name}`}/>
+                        <img src={extractThumbnail(item)} alt={item.name}/>
                     </div>
                     <div className="info">
                         <div className="name">

@@ -278,7 +278,7 @@ function ProductDetail(props){
             redirect ? <Redirect to={redirect} /> : 
             (
                 <div className="product-detail">
-                    <div className="rows">
+                    <div className="cols">
                         <div className="back-button-wrapper">
                             <Link to={"/products"}>
                                 <i className="fas fa-chevron-left"></i>
