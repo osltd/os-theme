@@ -1,4 +1,4 @@
-<img src="https://cdn.oneshop.cloud/autox480/EDC26E30-0190-4F3C-845B-9C92875835DC.png" width="80%"/>
+<img src="https://cdn.oneshop.cloud/autox480/EDC26E30-0190-4F3C-845B-9C92875835DC.png" width="50%"/>
 
 # Getting Start
 This is the default theme of Oneshop's Website Sales Channel. Powered by [The Oneshop API](https://doc.oneshop.dev), website with this theme allows visitors to read content and shop, admins/merchant can manage the shop with ease by using [The Oneshop Center](https://center.oneshop.host).
