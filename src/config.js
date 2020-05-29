@@ -35,23 +35,34 @@ module.exports = {
                     }
                 },
 
-                /** Products */
+                /** Best Seller */
                 {
-                    widget : "Product", // type is required
-                    // filters
-                    tags : "",
-                    ordering : "",
-                    ids : "",
+                    widget : "CollectionProduct", // type is required
+                    tags : "bestseller",
+                    // title
+                    title : "Best Seller",
+                    type : "sale",
                     rows : 1,
                     cols : 4,
-                    collections : "50",
-                    // title
-                    title : "Best Sellers",
-                    type : "sale",
                     // styles to override
                     styles : {
                     }
                 },
+
+                /** Featured */
+                {
+                    widget : "CollectionProduct", // type is required
+                    tags : "featured",
+                    // title
+                    title : "Featured",
+                    type : "sale",
+                    rows : 1,
+                    cols : 4,
+                    // styles to override
+                    styles : {
+                    }
+                },
+
 
                 /** */
                 {
@@ -73,7 +84,26 @@ module.exports = {
                     cols : 4,
                     collections : "",
                     // title
-                    title : "Latest",
+                    title : "Sharing",
+                    type : "sale",
+                    // styles to override
+                    styles : {
+                    }
+                },
+
+
+                /** Products */
+                {
+                    widget : "Product", // type is required
+                    // filters
+                    tags : "",
+                    ordering : "",
+                    ids : "",
+                    rows : 1,
+                    cols : 6,
+                    collection_tags : "50",
+                    // title
+                    title : "Latest Products",
                     type : "sale",
                     // styles to override
                     styles : {
