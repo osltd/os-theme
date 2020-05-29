@@ -10,6 +10,7 @@ import Carousel from 'react-grid-carousel';
 // ------------------------ REDUX ------------------------
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
+    i18n        : state.i18n,
     ...ownProps
 });
 
@@ -27,6 +28,8 @@ function Article(props){
 
     // get cache
     const { setHomeContext, homeContext, id } = props;
+    // get translation method
+    const { __ } = props.i18n;
     // set status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
@@ -101,7 +104,7 @@ function Article(props){
 
     // article data loaded?
     return homeContext[id] && !isLoading ? <div className="widget-article" style={{...props.styles}}>
-        <h1>{props.title}</h1>
+        <h1>{__(props.title)}</h1>
         {renderSlider()}
     </div> : 
     isLoading ? 
