@@ -44,7 +44,7 @@ module.exports = {
                     ids : "",
                     rows : 1,
                     cols : 4,
-                    collections : "",
+                    collections : "50",
                     // title
                     title : "Best Sellers",
                     type : "sale",
