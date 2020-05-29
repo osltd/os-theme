@@ -12,6 +12,7 @@ import Carousel from 'react-grid-carousel'
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
     shop        : state.shop.session,
+    i18n        : state.i18n,
     ...ownProps
 });
 
@@ -29,6 +30,8 @@ function Product(props){
 
     // get cached
     const { setHomeContext, homeContext, id, shop } = props;
+    // get translation method
+    const { __ } = props.i18n;
     // set loading status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
@@ -99,7 +102,7 @@ function Product(props){
 
     // product data loaded?
     return homeContext[id] && !isLoading ? <div className="widget-bestseller" style={{...props.styles}}>
-        <h1>{props.title}</h1>
+        <h1>{__(props.title)}</h1>
         {renderSlider()}
     </div> : 
     isLoading ? 

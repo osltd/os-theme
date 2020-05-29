@@ -58,7 +58,7 @@ function OrderSnapshot(props) {
             // setup cookies
             const cookies = new Cookies();
             // save cart id
-            cookies.set('cartId', cartId);
+            cookies.set('cartId', cartId, { samesite : 'none', secure : true });
             // save to state
             props.initCart(cartId);
             // reset cart items

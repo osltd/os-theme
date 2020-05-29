@@ -66,7 +66,7 @@ function App(props){
             // retrieve cart id
             let cartId = (await OS.cart.create()).rows[0].id;
             // save cart id
-            cookies.set('cartId', cartId);
+            cookies.set('cartId', cartId, { samesite : 'None', secure : true });
             // save to state
             props.initCart(cartId);
         } catch(error) {

@@ -74,6 +74,10 @@
     "men" : "Men",
     "women" : "Women",
     "shoes" : "Shoes",
-    "watches" : "Watches"
+    "watches" : "Watches",
+    "Best Seller" : "Best Seller",
+    "Featured" : "Featured",
+    "Sharing" : "Sharing",
+    "Latest Products" : "Latest Products"
 
 }
