@@ -21,6 +21,7 @@
 
 .footer .copyright{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     width: calc(100% - 30px);
@@ -28,10 +29,32 @@
     margin-top:15px;
     font-size: 12px;
     color: #666666;
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+.footer .copyright div{
+    margin-top: 5px;
 }
 .footer .copyright a{
     text-decoration: none;
     color: #666666;
+}
+.footer .copyright .powered-by,
+.footer .copyright .powered-by a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: text-shadow 0.3s;
+}
+.footer .copyright .powered-by{
+    margin-left: 5px;
+}
+.footer .copyright .powered-by img{
+    width: 25px;
+    height: 25px;
+}
+.footer .copyright .powered-by:hover{
+    text-shadow: 2px 2px 5px #666666;
 }
 
 .footer .cols .col{

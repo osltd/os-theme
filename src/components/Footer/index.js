@@ -76,7 +76,12 @@ function Footer(props){
             </div>
         </div>
         <div className="copyright">
-            <span>Copyright@{new Date().getFullYear()} {shop.name}. Powered by <a href="https://oneshop.cloud">Oneshop</a></span>.
+            <div>Copyright@{new Date().getFullYear()} {shop.name}.</div>
+            <div className="powered-by"> 
+                <a href="https://oneshop.cloud">
+                    <img src="/assets/images/oneshop_logo.png"/> Powered by Oneshop.
+                </a>
+            </div>
         </div>
     </div>
 
