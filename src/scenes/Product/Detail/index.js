@@ -6,7 +6,7 @@ import './product.detail.css';
 import { MoonLoader } from 'react-spinners';
 import { connect } from 'react-redux';
 import actions from '../../../helpers/actions';
-
+import HTMLParser from 'react-html-parser';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -295,7 +295,7 @@ function ProductDetail(props){
                                     {shop.currency.toUpperCase()} {(selectedVariantObj.price || 0).toFixed(2)}
                                     {selectedVariantObj.stock == 0 ? <span className="out-of-stock">Out of stock</span> : null}
                                 </div>
-                                <p>{product.description}</p>
+                                <p>{HTMLParser(product.description || "")}</p>
                                 <div className="tags">
                                     {(product.tags || []).map(t => <div key={`product-tag-${t}`} className="tag">#{t}</div>)}
                                 </div>
