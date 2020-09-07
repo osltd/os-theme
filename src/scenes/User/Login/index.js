@@ -5,6 +5,7 @@ import './login.css';
 import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
 import actions from '../../../helpers/actions';
+import ws from '../../../helpers/websocket';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -39,6 +40,7 @@ function Login(props){
     // get i18n method
     const { __ } = props.i18n;
 
+
     // ------------------ LIFECYCLE ------------------
     useEffect(() => {
         // retreive profile eveyr time
@@ -65,11 +67,26 @@ function Login(props){
     function login(){
         // start loading
         setIsLoading(true);
-        // login
-        OS.consumer.login({
-            email  : email,
-            passwd : password
-        })
+        // execute two task
+        Promise.all([
+            // http login
+            OS.consumer.login({
+                email  : email,
+                passwd : password
+            }),
+            // login to websocket as well
+            new Promise((resolve, reject) => {
+                // handler
+                const handler = (result) => {
+                    console.log('------> result: ',result);
+                    result.result ? resolve() : reject();
+                }
+                // get websocket client
+                ws.getClient(c => {
+                    c.setAction("/login").setArguments({ shopId : shop.id }).setForm({ email, passwd : password }).cmd(handler);
+                });
+            })
+        ])
         // login success
         .then(() => {
             // finish loading
