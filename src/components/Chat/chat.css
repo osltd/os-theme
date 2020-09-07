@@ -1,0 +1,46 @@
+.chat-wrapper {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+}
+
+
+/* -------------- Chat button -------------- */
+.chat-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid #fafafa;
+    box-shadow: 1px 1px 10px #dddddd;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: opacity 0.3s, color 0.3s, background-color 0.3s;
+}
+.chat-button:hover{
+    opacity: 0.8;
+    background-color: black;
+}
+.chat-button i{
+    font-size: 20px;
+    color: black;
+    transition: color 0.3s;
+}
+.chat-button:hover i{
+    color: white;
+}
+
+
+/* ------------------- Chat -------------------- */
+.chat-box {
+    position: absolute;
+    background-color: white;
+    border : 1px solid #dddddd;
+    border-radius: 3px;
+    bottom: 0px;
+    transition: width 0.3s, height 0.3s, border-radius 0.3s, top 0.3s, right 0.3s, border-color 0.5s;
+}
+/* ------------------- /Chat -------------------- */
+

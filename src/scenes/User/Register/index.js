@@ -7,8 +7,9 @@ import { MoonLoader } from 'react-spinners';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session,
-    i18n : state.i18n
+    shop    : state.shop.session,
+    i18n    : state.i18n,
+    profile : state.user.profile
 });
 // ------------------------ /REDUX ------------------------
 
@@ -28,27 +29,17 @@ function Register(props){
     // get oneshop instance
     var OS = new Oneshop();
     // get shop
-    const { shop } = props;
+    const { shop, profile } = props;
     // get translation method
     const { __ } = props.i18n;
 
     // ------------------ LIFECYCLE ------------------
     useEffect(() => {
-        // retreive profile eveyr time
-        OS.consumer.profile.get()
-        // got 
-        .then((rows) => {
-            // get user
-            let user = rows[0];
-            // logged in already?
-            if(user != null){
-                // back to users page
-                setRedirect('/users');
-            }
-        })
-        .catch((error) => {
-            // ignore error    
-        });
+        // logged in already?
+        if(profile != null){
+            // back to users page
+            setRedirect('/users');
+        }
     }, []);
     // ------------------ /LIFECYCLE ------------------
 

@@ -17,6 +17,7 @@ import Login from '../User/Login';
 import Cart from '../Cart';
 import OrderSnapshot from '../Checkout/OrderSnapshot';
 import Page from '../Page';
+import Chat from '../../components/Chat';
 
 function Routes(){
 
@@ -41,6 +42,7 @@ function Routes(){
                     <Route component={NotFound} />
                 </Switch>
             </div>
+            <Chat />
             <Footer/>
         </div>
     )

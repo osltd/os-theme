@@ -1,12 +1,12 @@
 let initState = {
-    user : null
+    profile : null
 };
 
 export default (state = initState, action) => {
     switch(action.type) {
         case 'SET_USER' :
             return {
-                user : action.payload
+                profile : action.payload
             };
         default:
             return state;

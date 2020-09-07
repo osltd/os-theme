@@ -4,14 +4,34 @@ import ProfilePage from './Profile';
 import { Redirect } from 'react-router-dom';
 import './user.css';
 import { MoonLoader } from 'react-spinners';
+import { connect } from 'react-redux';
+import actions from '../../helpers/actions';
+
+
+// --------------------- REDUX ---------------------
+const mapStateToProps = state => ({
+    shop     : state.shop.session,
+    settings : state.shop.settings,
+    i18n     : state.i18n,
+    profile  : state.user.profile
+});
+
+const mapDispatchToProps = dispatch => ({
+    setProfile : profile => dispatch({
+        type    : actions.SET_USER,
+        payload : profile
+    })
+});
+// --------------------- /REDUX ---------------------
+
+
 
 
 function User(props){
     
-    let [profile, setProfile] = useState(null);
     let [isLoading, setIsLoading] = useState(true);
     let OS = new Oneshop();
-
+    let { profile, setProfile } = props;
 
     // --------------- LIFECYCLE ---------------
     useEffect(() => {
@@ -61,5 +81,5 @@ function loadingScreen(){
     </div>);
 }
 
- export default User;
+ export default connect(mapStateToProps, mapDispatchToProps)(User);
 

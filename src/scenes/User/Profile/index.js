@@ -3,27 +3,36 @@ import Oneshop from 'oneshop.web';
 import './profile.css';
 import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
-
+import actions from '../../../helpers/actions';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session,
-    i18n : state.i18n
+    shop    : state.shop.session,
+    i18n    : state.i18n,
+    profile : state.user.profile
+});
+
+const mapDispatchToProps = dispatch => ({
+    setProfile : profile => dispatch({
+        type    : actions.SET_USER,
+        payload : profile
+    })
 });
 // ------------------------ /REDUX ------------------------
 
 
 function UserProfile(props){
-    // set profile
-    let [profile, setProfile] = useState(props.profile);
-    // form data for updating profile
-    let [form, setForm] = useState(props.profile);
-    // loading status
-    let [isLoading, setIsLoading] = useState(false);
+    
     // get oneshop instance
-    var OS = new Oneshop();
+    let OS = new Oneshop();
     // get translation method
     const { __ } = props.i18n;
+    // get profile and set profile method
+    const {profile, setProfile} = props;
+    // form data for updating profile
+    let [form, setForm] = useState(profile || {});
+    // loading status
+    let [isLoading, setIsLoading] = useState(false);
 
     // ------------------ HELPERS ------------------
     async function logout(){
@@ -34,6 +43,8 @@ function UserProfile(props){
         .then(() => {
             // loading finished
             setIsLoading(false);
+            // clear profile
+            setProfile(null);
             // redirect
             window.location.pathname = "/users";
         })
@@ -79,7 +90,7 @@ function UserProfile(props){
         // preset result to false
         let formChanged = false;
         // searh any changes in profile
-        Object.keys(profile).forEach(key => {
+        Object.keys(profile || {}).forEach(key => {
             // changes has been made
             if(form[key] != undefined && profile[key] != form[key]){
                 // set to true
@@ -145,4 +156,4 @@ function UserProfile(props){
     );
 }
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

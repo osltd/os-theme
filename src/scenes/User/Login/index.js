@@ -4,11 +4,20 @@ import Oneshop from 'oneshop.web';
 import './login.css';
 import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
+import actions from '../../../helpers/actions';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    shop : state.shop.session,
-    i18n : state.i18n
+    shop    : state.shop.session,
+    i18n    : state.i18n,
+    profile : state.user.profile
+});
+
+const mapDispatchToProps = dispatch => ({
+    setProfile : profile => dispatch({
+        type    : actions.SET_USER,
+        payload : profile
+    })
 });
 // ------------------------ /REDUX ------------------------
 
@@ -26,7 +35,7 @@ function Login(props){
     // get oneshop instance
     const OS = new Oneshop();
     // get shop
-    const { shop } = props;
+    const { shop, setProfile, profile } = props;
     // get i18n method
     const { __ } = props.i18n;
 
@@ -40,6 +49,8 @@ function Login(props){
             let user = rows[0];
             // logged in already?
             if(user != null){
+                // update user profile
+                setProfile(profile);
                 // back to users page
                 setRedirect('/users');
             }
@@ -125,4 +136,4 @@ function Login(props){
     );
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
