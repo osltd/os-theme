@@ -68,6 +68,11 @@
     "Logout" : "登出",
     "My Orders" : "我的訂單",
 
+    "Disconnected" : "已離線",
+    "please login again." : "請重新登入",
+    "Press Enter to send" : "按輸入鍵送出",
+    "SENDING" : "傳送中...",
+
     "clothes" : "服裝",
     "accessories" : "飾物",
     "men" : "男裝",

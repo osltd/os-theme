@@ -68,8 +68,10 @@
     "Logout" : "Logout",
     "My Orders" : "My Orders",
 
-    "Disconnected, please login again." : "Disconnected, please login again.",
-
+    "Disconnected" : "Disconnected",
+    "please login again." : "please login again.",
+    "Press Enter to send" : "Press Enter to send",
+    "SENDING" : "SENDING...",
 
     "clothes" : "Clothes",
     "accessories" : "Accessories",

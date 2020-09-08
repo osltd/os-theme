@@ -3,8 +3,8 @@ const cookies = new Cookies();
 
 
 /** @endpoint_wws */
-//const endPoint = "wss://enquiry.oneshop.cloud";
-const endpoint = "ws://localhost";
+const endpoint = "wss://enquiry.oneshop.cloud";
+//const endpoint = "ws://localhost";
 
 // setup ws
 let ws = null;
@@ -116,7 +116,7 @@ const getClient = async (cb) => {
             // has id callback?
             commands[ws.payload.id].idCallback != undefined && commands[ws.payload.id].idCallback(ws.payload.id);
             // send command
-            ws.send(JSON.stringify(ws.payload));
+            if(ws != undefined && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(ws.payload));
             // clear payload context
             ws.payload = { method : "get" };
         }

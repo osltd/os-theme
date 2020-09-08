@@ -20,7 +20,6 @@
     transition: opacity 0.3s, color 0.3s, background-color 0.3s;
 }
 .chat-button:hover{
-    opacity: 0.8;
     background-color: black;
 }
 .chat-button i{
@@ -41,7 +40,199 @@
     border-radius: 3px;
     bottom: 0px;
     overflow : hidden;
+    box-shadow: 1px 1px 10px #dddddd;
     transition: width 0.3s, height 0.3s, border-radius 0.3s, top 0.3s, right 0.3s, border-color 0.5s;
 }
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.chat-list .cl-header{
+    display: flex;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+    align-items: center;
+    padding: 0px 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+ /* ----- msgs ----- */
+.chat-list .cl-messages{
+    display: flex;
+    flex : 1;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding : 15px 0px;
+}
+
+.chat-list .cl-messages .cl-message-row{
+    display: flex;
+    padding: 0px 15px;
+}
+
+.chat-list .cl-messages .cl-message-row .cl-message-bubble {
+    display: block;
+    min-width: 80px;
+    max-width: 80%;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.chat-list .cl-messages .cl-message-row .cl-message-bubble .msg-media {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 3px 0px;
+    border-radius: 3px;
+    transition: opacity 0.3s;
+}
+
+.chat-list .cl-messages .cl-message-row .cl-message-bubble .msg-media:hover{
+    opacity: 0.8;
+}
+
+.chat-list .cl-messages .cl-message-row .cl-message-bubble .msg-body {
+    margin-bottom: 3px;
+    font-size: 15px;
+}
+
+.chat-list .cl-messages .cl-message-row .cl-message-bubble .msg-timestamp {
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+}
+ /* ----- msgs ----- */
+
+
+
+
+/* ----- attachment view ----- */
+.cl-attachment-view{
+    display: flex;
+    /* //height: 80px; */
+    width: 100%;
+    border-top: 1px solid #dddddd;
+    align-items: center;
+    padding: 15px;
+}
+
+.cl-attachment-view img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border: 0.5px solid #dddddd;
+    box-shadow: 1px 1px 5px #efefef;
+}
+
+.cl-attachment-view button {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    left : 15px;
+    border: none;
+    background-color: transparent;
+    opacity: 0;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.cl-attachment-view button i{
+    color: white;
+    font-size: 20px;
+}
+
+.cl-attachment-view button:hover{
+    opacity: 1;
+    background-color: rgba(0,0,0,0.6);
+}
+/* ----- attachment view ----- */
+
+
+
+
+
+
+
+/* ----- input wrapper ----- */
+.chat-list .cl-input-wrapper {
+    display: flex;
+    height: 50px;
+    border-top: 1px solid #dddddd;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 10px;
+}
+
+.chat-list .cl-input-wrapper input{
+    flex : 1;
+    height : 30px;
+    border-radius: 15px;
+    border: 1px solid #efefef;
+    background-color: #efefef;
+    padding: 0px 10px;
+    margin: 0px 5px;
+}
+
+.chat-list .cl-input-wrapper button {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.chat-list .cl-input-wrapper button:hover,
+.chat-list .cl-input-wrapper button:disabled {
+    opacity : 0.6;
+}
+
+
+.chat-list .cl-input-wrapper button i {
+    font-size: 18px;
+}
+/* ----- input wrapper ----- */
+
+
+
+
+
+
+
+/* ------ Placeholder ------ */
+.chat-box-placeholder {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chat-box-placeholder i {
+    font-size: 20px;
+    color: #dddddd;
+    margin-bottom: 5px;
+}
+
+.chat-box-placeholder span {
+    font-size: 0.8em;
+    font-weight: 500;
+}
+/* ------ /Placeholder ------ */
+
+
 /* ------------------- /Chat -------------------- */
 

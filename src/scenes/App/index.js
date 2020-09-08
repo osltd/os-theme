@@ -8,8 +8,9 @@ import { MoonLoader } from 'react-spinners';
 import Cookies from 'universal-cookie';
 
 const mapStateToProps = (state, ownProps) => ({
-    shop : state.shop.session,
-    cart : state.cart
+    shop    : state.shop.session,
+    cart    : state.cart,
+    profile : state.user.profile
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -24,6 +25,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     setCartItems : (items) => dispatch({
         type    : actions.SET_CART_ITEMS,
         payload : items
+    }),
+    setProfile : profile => dispatch({
+        type    : actions.SET_USER,
+        payload : profile
     })
 });
 
@@ -34,7 +39,7 @@ function App(props){
     // setup cookies
     const cookies = new Cookies();
     // get props
-    const { shop, cart } = props;
+    const { shop, cart, profile } = props;
     
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -56,6 +61,8 @@ function App(props){
         }
         // load cart items if cart exists
         !cart.id ? setupCart() : validateCart();
+        // profile not exists?
+        if(!profile) getProfile();
     }, []);
     // ---------------- /LIFECYCLE ----------------
 
@@ -85,6 +92,15 @@ function App(props){
             // cart not valid, setup
             setupCart();
         }
+    }
+
+    async function getProfile(){
+        try {
+            // try to get items
+            let profile = await OS.consumer.profile.get();
+            // save profile
+            props.setProfile(profile[0]);
+        } catch (error) {}
     }
     // ---------------- /HELPERS ----------------
 
