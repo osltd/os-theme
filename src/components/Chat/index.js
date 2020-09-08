@@ -209,6 +209,10 @@ const Chat = (props) => {
                         <div className="cl-header">{shop.name}</div>
                         <div id="messages" className="cl-messages">
                             {messages
+                            .filter((m, i, ms) => {
+                                let mids = ms.map(m => m.id);
+                                return mids.indexOf(m.id) === i;
+                            })
                             .sort((a, b) => new Date(a.created_time).getTime() > new Date(b.created_time).getTime())
                             .map((m, i) => <MessageRow 
                                                 {...m} 
