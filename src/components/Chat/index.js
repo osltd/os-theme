@@ -53,6 +53,12 @@ const Chat = (props) => {
         });
     }
 
+    const scrollToEnd = () => {
+        // get element
+        let msgsList = document.getElementById("messages");
+        msgsList.scrollTop = msgsList.scrollHeight;
+    }
+
 
     // -------------------- broadcast listener --------------------
     const onBroadcast = (broadcast) => {
@@ -66,6 +72,8 @@ const Chat = (props) => {
                 setMessages(oldMsgs => [...oldMsgs].concat({
                     id, message, sender, created_time, attachments, status : 'SENT'
                 }));
+                // scroll to the end
+                scrollToEnd();
             }
         }
     }
@@ -78,6 +86,8 @@ const Chat = (props) => {
             if(idx == index) m.status = status;
             return m;
         }));
+        // scroll to the end
+        scrollToEnd();
     }
     // ------------------ /Message did chnage listener ------------------
 
@@ -155,6 +165,8 @@ const Chat = (props) => {
                     return m;
                 })
             );
+            // scroll to the end
+            scrollToEnd();
         }
     }
     // ------------------- /Get Messages -------------------
@@ -195,7 +207,7 @@ const Chat = (props) => {
                     // ----------------- Logged in, chatlist -----------------
                     <div className="chat-list">
                         <div className="cl-header">{shop.name}</div>
-                        <div className="cl-messages">
+                        <div id="messages" className="cl-messages">
                             {messages
                             .sort((a, b) => new Date(a.created_time).getTime() > new Date(b.created_time).getTime())
                             .map((m, i) => <MessageRow 

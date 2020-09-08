@@ -25,7 +25,7 @@ const ChatRow = (props) => {
         "15px" 
         : "1px"
     );
-    let paddingBottom = nextItem == undefined ? "1px" :
+    let paddingBottom = nextItem == undefined ? "15px" :
     (
         /^enquirer$/i.test(sender.type) && /^replyer$/i.test(nextItem.sender.type) ? 
         "15px" 
