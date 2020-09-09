@@ -38,6 +38,7 @@
     background-color: white;
     border : 1px solid #dddddd;
     border-radius: 3px;
+    right: 0px;
     bottom: 0px;
     overflow : hidden;
     box-shadow: 1px 1px 10px #dddddd;
@@ -54,12 +55,32 @@
 .chat-list .cl-header{
     display: flex;
     height: 40px;
-    width: 100%;
+    width: calc(100% - 30px);
     border-bottom: 1px solid #dddddd;
     align-items: center;
     padding: 0px 15px;
     font-size: 13px;
     font-weight: 500;
+}
+
+.chat-list .cl-header button {
+    border : none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    border-radius: 50%;
+    padding: 5px;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.chat-list .cl-header button:hover {
+    background-color: black;
+    color: white;
 }
 
 
@@ -230,6 +251,23 @@
 .chat-box-placeholder span {
     font-size: 0.8em;
     font-weight: 500;
+}
+
+.chat-box-placeholder button {
+    border : none;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    border-radius: 25px;
+    padding: 5px 25px;
+    margin-top: 15px;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.chat-box-placeholder button:hover {
+    background-color: #efefef;
+    color: black;
 }
 /* ------ /Placeholder ------ */
 

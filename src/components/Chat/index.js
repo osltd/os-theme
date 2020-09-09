@@ -187,9 +187,9 @@ const Chat = (props) => {
                 className="chat-box" 
                 style={
                     // show chat box
-                    showChatBox ? { width : "300px", height : "400px", borderRadius : "10px", right: "65px", zIndex : 99999 } 
+                    showChatBox ? { width : "300px", height : "400px", borderRadius : "10px", zIndex : 99999 } 
                     :  // hide it
-                    { width : "48px", height : "48px", borderRadius : "24px", zIndex : -1, right: "0px", borderColor : 'white' }
+                    { width : "48px", height : "48px", borderRadius : "24px", zIndex : -1, borderColor : 'white' }
                 }
             >
                 {
@@ -203,10 +203,18 @@ const Chat = (props) => {
                         <span>
                             {__("Please login again.")}
                         </span>
+                        <button onClick={() => setShowChatBox(false)}>
+                            Close
+                        </button>
                     </div> :
                     // ----------------- Logged in, chatlist -----------------
                     <div className="chat-list">
-                        <div className="cl-header">{shop.name}</div>
+                        <div className="cl-header">
+                            <div style={{flex:1}}>{shop.name}</div>
+                            <button onClick={() => setShowChatBox(false)}>
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </div>
                         <div id="messages" className="cl-messages">
                             {messages
                             .filter((m, i, ms) => {
