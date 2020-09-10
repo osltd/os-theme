@@ -69,9 +69,10 @@
     "My Orders" : "我的訂單",
 
     "Disconnected" : "已離線",
-    "please login again." : "請重新登入",
+    "Please login again." : "請重新登入",
     "Press Enter to send" : "按輸入鍵送出",
     "SENDING" : "傳送中...",
+    "Close" : "關閉",
 
     "clothes" : "服裝",
     "accessories" : "飾物",
