@@ -3,6 +3,7 @@ import MessageRow from './chatRow';
 import './chat.css';
 import { connect } from 'react-redux';
 import ws from '../../helpers/websocket';
+import { isMobile } from 'react-device-detect';
 
 //  ------------ REDUX --------------
 const mapStateToProps = state => ({
@@ -249,38 +250,42 @@ const Chat = (props) => {
                         }
                         
                         <div className="cl-input-wrapper">
-                            <button 
-                                className="attachment-button"
-                                onClick={() => {
-                                    document.getElementById('fileButton').click();
-                                }}
-                                disabled={attachment != null}
-                            >
-                                <input 
-                                    id="fileButton" 
-                                    type="file" 
-                                    hidden 
-                                    accept=".png,.jpeg"
-                                    onChange={e => {
-                                    // get file
-                                    let file = e.target.files[0];
-                                    // file exists?
-                                    if(file) {
-                                        //create reader
-                                        let reader = new FileReader();
-                                        // on read
-                                        reader.onload = e => {
-                                            // save attachment file
-                                            setAttachment(file);    
-                                            // set thumbnail
-                                            setThumbnail(e.target.result)
+                            {
+                                // show attachment button only on desktop
+                                !isMobile ?
+                                <button 
+                                    className="attachment-button"
+                                    onClick={() => {
+                                        document.getElementById('fileButton').click();
+                                    }}
+                                    disabled={attachment != null}
+                                >
+                                    <input 
+                                        id="fileButton" 
+                                        type="file" 
+                                        hidden 
+                                        accept=".png,.jpeg"
+                                        onChange={e => {
+                                        // get file
+                                        let file = e.target.files[0];
+                                        // file exists?
+                                        if(file) {
+                                            //create reader
+                                            let reader = new FileReader();
+                                            // on read
+                                            reader.onload = e => {
+                                                // save attachment file
+                                                setAttachment(file);    
+                                                // set thumbnail
+                                                setThumbnail(e.target.result)
+                                            }
+                                            // start read file
+                                            reader.readAsDataURL(file);
                                         }
-                                        // start read file
-                                        reader.readAsDataURL(file);
-                                    }
-                                }}/>
-                                <i className="fas fa-image"></i>
-                            </button>
+                                    }}/>
+                                    <i className="fas fa-image"></i>
+                                </button> : null
+                            }
                             <input 
                                 type="text"
                                 value={inputVal}
