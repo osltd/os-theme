@@ -82,9 +82,14 @@ const Chat = (props) => {
 
 
     // ------------------ Message did chnage listener ------------------
-    const msgStatusDidChangeAtRowIndex = (index, status) => {
+    const msgStatusDidChangeAtRowIndex = (index, { id, status }) => {
+        // update message
         setMessages([...messages].map((m, idx) => {
-            if(idx == index) m.status = status;
+            // id exists?
+            if(idx == index && id != undefined) m.id = id;
+            // status exists?
+            if(idx == index && status != undefined) m.status = status;
+            // return manipulated message obj
             return m;
         }));
         // scroll to the end
@@ -120,6 +125,7 @@ const Chat = (props) => {
         setMessages(oldMsgs => {
             let newMsgs = [...oldMsgs];
             newMsgs.push({
+                id           : ws.uuid(),
                 message      : (inputVal || ""),
                 attachments  : thumbnail ? [`${thumbnail}`] : undefined,
                 file         : attachment || undefined,
@@ -131,6 +137,8 @@ const Chat = (props) => {
             });
             return newMsgs;
         });
+        // scroll to the end
+        scrollToEnd();
     }
     // ------------------- /Send Messages -------------------
 

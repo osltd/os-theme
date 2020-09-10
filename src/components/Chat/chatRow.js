@@ -78,7 +78,13 @@ const ChatRow = (props) => {
     const sendMessageHandler = result => {
         // got profile?
         if(result.result) {
-            msgStatusDidChangeAtRowIndex(index, 'SENT');
+            msgStatusDidChangeAtRowIndex(
+                index, 
+                { 
+                    id     : ((result.data || {}).rows || []).id || id,
+                    status : 'SENT' 
+                }
+            );
         }
     }
     // ------------------- /send Messages -------------------

@@ -187,12 +187,6 @@ const getClient = async (cb) => {
 
 }
 
-
-export default {
-    getClient, clearProtocol 
-};
-
-
 // ----------------- helper functions --------------------- //
 function uuid() {
     var d = Date.now();
@@ -206,3 +200,9 @@ function uuid() {
     });
 }
 // ----------------- /helper functions --------------------- //
+
+export default {
+    getClient, clearProtocol, uuid
+};
+
+
