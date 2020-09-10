@@ -204,8 +204,8 @@ const Chat = (props) => {
                             window.innerWidth : // full screen
                             // desktop
                             (
-                                window.innerWidth/4 < 300 ? // smaller than 300px?
-                                300 : // min-width : 300px OR
+                                window.innerWidth/4 < 350 ? // smaller than 350px?
+                                350 : // min-width : 350px OR
                                 window.innerWidth/4  // screen width/4
                             )
                         ) - 50, 
@@ -213,8 +213,8 @@ const Chat = (props) => {
                             isMobile ? 
                             window.innerHeight : 
                             (
-                                window.innerHeight*2/3 < 400 ?
-                                400 : 
+                                window.innerHeight*2/3 < 500 ?
+                                500 : 
                                 window.innerHeight*2/3
                             )
                         ) - 115, 
