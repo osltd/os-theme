@@ -21,7 +21,7 @@ const ChatRow = (props) => {
     let paddingTop = sender.type != (((previousItem || {}).sender || {}).type || "") ? "7.5px" : "1px";
     let paddingBottom = sender.type != (((nextItem || {}).sender || {}).type || "") ? "7.5px" : "1px";
     // set attachments
-    let [attachment, setAttachment] = useState((attachments || [])[0] || null);
+    let [attachment] = useState((attachments || [])[0] || null);
     // client alias
     let [client, setClient] = useState(props.client || null);
     // upload progress
@@ -158,8 +158,7 @@ const ChatRow = (props) => {
                 <div 
                     className="cl-message-bubble" 
                     style={{
-                        backgroundColor : placeToLeft ? '#f8f8f8' : '#0377fc',
-                        border : placeToLeft ? "1px solid #f1f1f1" : "none",
+                        backgroundImage : placeToLeft ? "linear-gradient(-270deg, #efefef, #f8f8f8)" : "linear-gradient(-270deg, #0377fc, #3b96ff)",
                         color : placeToLeft ? 'black' : 'white',
                     }}
                 >   
