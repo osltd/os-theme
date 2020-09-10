@@ -204,7 +204,7 @@ const Chat = (props) => {
                             {__("Please login again.")}
                         </span>
                         <button onClick={() => setShowChatBox(false)}>
-                            Close
+                            {__("Close")}
                         </button>
                     </div> :
                     // ----------------- Logged in, chatlist -----------------
@@ -221,13 +221,13 @@ const Chat = (props) => {
                                 let mids = ms.map(m => m.id);
                                 return mids.indexOf(m.id) === i;
                             })
-                            .sort((a, b) => new Date(a.created_time).getTime() > new Date(b.created_time).getTime())
-                            .map((m, i) => <MessageRow 
+                            .sort((a, b) => new Date(a.created_time).getTime() - new Date(b.created_time).getTime())
+                            .map((m, i, arr) => <MessageRow 
                                                 {...m} 
                                                 key={`msg_row_${i}`}
                                                 client={client} 
-                                                previousItem={messages[i-1]} 
-                                                nextItem={messages[i+1]}
+                                                previousItem={arr[i-1]} 
+                                                nextItem={arr[i+1]}
                                                 index={i}
                                                 msgStatusDidChangeAtRowIndex={msgStatusDidChangeAtRowIndex}
                                             />)}
