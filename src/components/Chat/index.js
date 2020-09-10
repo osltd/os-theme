@@ -188,7 +188,31 @@ const Chat = (props) => {
                 className="chat-box" 
                 style={
                     // show chat box
-                    showChatBox ? { width : "300px", height : "400px", borderRadius : "10px", zIndex : 99999 } 
+                    showChatBox ? 
+                    { 
+                        width : (
+                            isMobile ? 
+                            // mobile device
+                            window.innerWidth : // full screen
+                            // desktop
+                            (
+                                window.innerWidth/4 < 300 ? // smaller than 300px?
+                                300 : // min-width : 300px OR
+                                window.innerWidth/4  // screen width/4
+                            )
+                        ) - 50, 
+                        height : (
+                            isMobile ? 
+                            window.innerHeight : 
+                            (
+                                window.innerHeight*2/3 < 400 ?
+                                400 : 
+                                window.innerHeight*2/3
+                            )
+                        ) - 115, 
+                        borderRadius : "10px", 
+                        zIndex : 99999 
+                    } 
                     :  // hide it
                     { width : "48px", height : "48px", borderRadius : "24px", zIndex : -1, borderColor : 'white' }
                 }

@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    z-index: 9999;
+    z-index: 9998;
     background-color: white;
     transition: 0.3s box-shadow;
 }
