@@ -4,6 +4,7 @@ import './profile.css';
 import { connect } from 'react-redux';
 import { MoonLoader } from 'react-spinners';
 import actions from '../../../helpers/actions';
+import ws from '../../../helpers/websocket';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -38,6 +39,8 @@ function UserProfile(props){
     async function logout(){
         // set loading
         setIsLoading(true);
+        // clear websocket protocol as well
+        ws.clearProtocol();
         // logging out
         OS.consumer.logout()
         .then(() => {
