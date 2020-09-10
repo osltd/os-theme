@@ -1,5 +1,5 @@
 {
-  "name": "oh-my-blog",
+  "name": "os-starter-theme",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "html-react-parser": "^0.10.3",
     "oneshop.web": "^1.0.8",
     "react": "^16.12.0",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.12.0",
     "react-grid-carousel": "^1.0.1",
     "react-html-parser": "^2.0.2",
