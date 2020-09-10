@@ -18,19 +18,8 @@ const ChatRow = (props) => {
     // place to left?
     let placeToLeft = !/^enquirer$/i.test(sender.type);
     // padding top
-    let paddingTop = 
-    previousItem == undefined ? "1px" :
-    (
-        /^enquirer$/i.test(sender.type) && /^replyer$/i.test(previousItem.sender.type) ? 
-        "15px" 
-        : "1px"
-    );
-    let paddingBottom = nextItem == undefined ? "15px" :
-    (
-        /^enquirer$/i.test(sender.type) && /^replyer$/i.test(nextItem.sender.type) ? 
-        "15px" 
-        : "1px"
-    );
+    let paddingTop = sender.type != (((previousItem || {}).sender || {}).type || "") ? "7.5px" : "1px";
+    let paddingBottom = sender.type != (((nextItem || {}).sender || {}).type || "") ? "7.5px" : "1px";
     // set attachments
     let [attachment, setAttachment] = useState((attachments || [])[0] || null);
     // client alias
