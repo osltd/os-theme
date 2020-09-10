@@ -146,38 +146,40 @@ const ChatRow = (props) => {
 
 
     return (
-        <div 
-            className="cl-message-row"
-            style={{
-                justifyContent : placeToLeft ? 'flex-start' : 'flex-end',
-                paddingTop,
-                paddingBottom
-            }}
-        >
+        <div>
             <div 
-                className="cl-message-bubble" 
+                className="cl-message-row"
                 style={{
-                    backgroundColor : placeToLeft ? '#f8f8f8' : '#0377fc',
-                    border : placeToLeft ? "1px solid #f1f1f1" : "none",
-                    color : placeToLeft ? 'black' : 'white',
+                    justifyContent : placeToLeft ? 'flex-start' : 'flex-end',
+                    paddingTop,
+                    paddingBottom
                 }}
-            >   
-                {
-                    // -------------------------- ATTACHMENT --------------------------
-                    attachment != null && attachment != undefined ? 
-                    <a href={attachment} target="_blank">
-                        <img src={attachment} className="msg-media" alt={attachment}/>
-                    </a>
-                    :
-                    null
-                }
-                {
-                    // -------------------------- MESSAGE --------------------------
-                    (message || "").trim().length > 0 ?
-                    <div className="msg-body">{message}</div> : null
-                }
-                <div className="msg-timestamp">
-                    {/^PENDING$/i.test(status) ? __("SENDING") : toAmPm(created_time)}
+            >
+                <div 
+                    className="cl-message-bubble" 
+                    style={{
+                        backgroundColor : placeToLeft ? '#f8f8f8' : '#0377fc',
+                        border : placeToLeft ? "1px solid #f1f1f1" : "none",
+                        color : placeToLeft ? 'black' : 'white',
+                    }}
+                >   
+                    {
+                        // -------------------------- ATTACHMENT --------------------------
+                        attachment != null && attachment != undefined ? 
+                        <a href={attachment} target="_blank">
+                            <img src={attachment} className="msg-media" alt={attachment}/>
+                        </a>
+                        :
+                        null
+                    }
+                    {
+                        // -------------------------- MESSAGE --------------------------
+                        (message || "").trim().length > 0 ?
+                        <div className="msg-body">{message}</div> : null
+                    }
+                    <div className="msg-timestamp">
+                        {/^PENDING$/i.test(status) ? __("SENDING") : toAmPm(created_time)}
+                    </div>
                 </div>
             </div>
         </div>

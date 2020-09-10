@@ -95,11 +95,13 @@
 
 .chat-list .cl-messages .cl-message-row{
     display: flex;
+    height: fit-content;
     padding: 0px 15px;
 }
 
 .chat-list .cl-messages .cl-message-row .cl-message-bubble {
     display: block;
+    height: fit-content;
     min-width: 80px;
     max-width: 80%;
     padding: 5px 10px;
