@@ -12,7 +12,7 @@ let ws = null;
 const clearProtocol = (cb) => {
     try {
         // remove
-        cookies.set('protocol', null);
+        cookies.remove('protocol', { samesite : 'None', secure : false, path : "/" })
         // close connection
         if(ws != null && typeof ws.close == 'function') ws.close();
     } catch (error) {}
@@ -30,7 +30,7 @@ const getProtocol = () => {
         // generate a new one
         protocol = uuid();
         // save to storage
-        cookies.set('protocol', protocol, { samesite : 'None', secure : true });
+        cookies.set('protocol', protocol, { samesite : 'None', secure : false, path : "/" });
     }
     // ------------------------- /protocol -------------------------
     return protocol;
