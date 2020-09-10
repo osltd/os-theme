@@ -38,7 +38,15 @@ export default (state = initState, action) => {
     switch(action.type) {
         case 'SET_LOCALE' : {
             // save locale
-            cookies.set('os-locale', action.payload, { samesite : 'None', secure : true });
+            cookies.set(
+                'os-locale', 
+                action.payload, 
+                { 
+                    samesite : 'None', 
+                    secure   : false, 
+                    path     : "/" 
+                }
+            );
             return {
                 ...state,
                 locale : action.payload
