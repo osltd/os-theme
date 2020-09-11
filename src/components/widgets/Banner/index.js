@@ -96,8 +96,8 @@ function Banner(props){
     function articleInfoExtractor(article){
         // set thumbnail
         return {
-            title     : article.sections[0].title,
-            thumbnail : ((((article.sections || []).filter(s => s.media.length > 0) || [])[0] || {}).media || [])[0].url || ""
+            title     : ((article.sections || [])[0] || {}).title || "",
+            thumbnail : (((((article.sections || []).filter(s => s.media.length > 0) || [])[0] || {}).media || [])[0] || {}).url || ""
         }
     }
     // ---------------- /RENDERING ----------------

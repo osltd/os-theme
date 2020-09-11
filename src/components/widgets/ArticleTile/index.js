@@ -95,9 +95,9 @@ function Article(props){
    function articleInfoExtractor(article){
         // set thumbnail
         return {
-            title       : article.sections[0].title,
-            description : article.sections[0].description,
-            thumbnail   : ((((article.sections || []).filter(s => s.media.length > 0) || [])[0] || {}).media || [])[0].url || ""
+            title       : ((article.sections || [])[0] || {}).title || "",
+            description : ((article.sections || [])[0] || {}).description || "",
+            thumbnail   : (((((article.sections || []).filter(s => s.media.length > 0) || [])[0] || {}).media || [])[0] || {}).url || ""
         }
     }
    // ---------------- /RENDERING ----------------

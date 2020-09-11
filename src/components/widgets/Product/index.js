@@ -93,9 +93,9 @@ function Product(props){
    function productInfoExtractor(product){
         // set thumbnail
         return {
-            title     : product.name,
-            thumbnail : ((((product.variants || []).filter(v => v.media.length > 0) || [])[0] || {}).media || [])[0].url || "",
-            price     : product.price
+            title     : (product || {}).name || "",
+            thumbnail : (((((product.variants || []).filter(v => v.media.length > 0) || [])[0] || {}).media || [])[0] || {}).url || "",
+            price     : (product || {}).price || 0
         }
    }
    // ---------------- /RENDERING ----------------
