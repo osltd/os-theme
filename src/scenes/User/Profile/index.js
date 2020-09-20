@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Oneshop from 'oneshop.web';
 import './profile.css';
 import { connect } from 'react-redux';
@@ -34,6 +34,45 @@ function UserProfile(props){
     let [form, setForm] = useState(profile || {});
     // loading status
     let [isLoading, setIsLoading] = useState(false);
+    // my order history
+    let [orders, setOrders] = useState([]);
+    // end of list?
+    let [endOfList, setEndOfList] = useState(false);
+
+
+    // ------------------ LIFECYCLE -------------------
+    useEffect(() => {
+        // load orders
+        // if(!orders.length && !endOfList) fetchOrders();
+    }, []);
+    // ------------------ /LIFECYCLE -------------------    
+
+
+
+    // ------------------ ORDERS ---------------------
+    const fetchOrders = () => {
+        // start loading
+        setIsLoading(true);
+        // fetch orders
+        OS.order.history.get({ page : Math.ceil(orders.length/15 + 1)})
+        // gor orders
+        .then(rows => {
+            // loading finished
+            setIsLoading(false);
+            // has order retrieved?
+            if(rows.length){
+                // append orders
+                setOrders(orders.concat(rows));
+            } else {
+                // set end of list
+                setEndOfList(true);
+            }
+        })
+        // error
+        .catch(error => alert(error.messages.join("\n")));
+    }
+    // ------------------ /ORDERS --------------------
+
 
     // ------------------ HELPERS ------------------
     async function logout(){
@@ -153,6 +192,9 @@ function UserProfile(props){
                 </div>
                 <div className="right-col">
                     <h1>{__("My Orders")}</h1>
+                    <div>
+
+                    </div>
                 </div>
             </div>
         </div>
