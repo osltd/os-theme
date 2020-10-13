@@ -54,7 +54,7 @@ function ProductDetail(props){
             // start loading
             setLoading(true);
             // fetch product by id
-            OS.merchandise.get({page:status.page, ids: params.id})
+            OS.merchandise.get({ids: params.id})
             // got products
             .then(rows => {
                 // no product found
@@ -189,7 +189,7 @@ function ProductDetail(props){
             // add to cart
             try {
                 // success?
-                await OS.cart.item.add(
+                await OS.cart.item.put(
                     cart.id, 
                     {
                         id  : variant_id, 
