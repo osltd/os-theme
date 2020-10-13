@@ -68,7 +68,7 @@ function Cart(props){
         // success?
         try {
             // remove item
-            await OS.cart.item.add(cart.id, {
+            await OS.cart.item.put(cart.id, {
                 id  : itemId,
                 qty : qty
             });
