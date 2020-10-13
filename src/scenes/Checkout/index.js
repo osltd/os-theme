@@ -195,7 +195,7 @@ function Checkout(props){
         // trying to make payment
         try {
             // make payment
-            let payment = user != null ? (await OS.consumer.checkout(payload)) : (await OS.order.create(payload));
+            let payment = user != null ? (await OS.consumer.checkout(payload)) : (await OS.order.place(payload));
             // success?
             if(payment.rows && 
                 (payment.rows || []).length > 0){
