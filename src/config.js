@@ -5,9 +5,16 @@ module.exports = {
             // nav-bar settings
             navBar : {
                 display : {
-                    blog : true,
-                    shop : true,
-                    user : true
+                    blog : false,
+                    shop : false,
+                    user : false
+                }
+            },
+            footer: {
+                display: {
+                    blog : false,
+                    shop : false,
+                    user : false
                 }
             },
             // Key - widget name
