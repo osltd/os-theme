@@ -26,7 +26,7 @@ function Routes(){
             <NavBar/>
             <div className="scene">
                 <Switch>
-                    <Route path="/" component={Home} exact />
+                    <Route path="/" component={Product} exact />
                     <Route path="/products" component={Product} exact />
                     <Route path="/products/:id" component={ProductDetail} exact />
                     <Route path="/blogs" component={Blog} exact />

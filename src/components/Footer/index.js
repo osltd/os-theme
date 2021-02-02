@@ -55,9 +55,13 @@ function Footer(props) {
                         </Link>
                         : null
                 }
-                <Link to="/cart">
-                    {__("Cart")}
-                </Link>
+                {
+                    footerSettings && (footerSettings.display || {}).cart === true ?
+                        <Link to="/cart">
+                            {__("Cart")}
+                        </Link>
+                        : null
+                }
                 {
                     footerSettings && (footerSettings.display || {}).user === true ?
                         <Link to="/users">

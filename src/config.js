@@ -5,15 +5,26 @@ module.exports = {
             // nav-bar settings
             navBar : {
                 display : {
+                    home: false,
                     blog : false,
                     shop : false,
-                    user : false
+                    cart: true,
+                    user : false,
+                    language: false
+                },
+                mobileDisplay: {
+                    home: true,
+                    blog : false,
+                    shop : false,
+                    cart: true,
+                    user : false,
                 }
             },
             footer: {
                 display: {
                     blog : false,
                     shop : false,
+                    cart: true,
                     user : false
                 }
             },
