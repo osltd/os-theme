@@ -88,7 +88,8 @@ function Footer(props) {
                     };
                     const socialLinks = ((settings || {}).links || {}).social || {};
                     return Object.keys(socialLinks)
-                        .filter(s => socialLinks[s].length > 0 || socialLinks[s] != "#").map(s => (
+                        .filter(s => socialLinks[s])
+                        .map(s => (
                             <a key={`footer-social-link-${s}`} href={socialLinks[s]} target="_blank">
                                 <i className={fontawesomeMap[s]}></i>
                             </a>
