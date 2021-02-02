@@ -34,6 +34,7 @@ const countryEscape = (c) => {
     };
     return escapeCountries[c] || c;
 }
+const countriesNeedExtraInfo = ["tw"];
 
 
 function Checkout(props){
@@ -75,6 +76,7 @@ function Checkout(props){
         items : cart.id,
         notes : ""
     });
+    let [extraInfo, setExtraInfo] = useState("");
     let [formErrors, setFormErrors] = useState({});
     // country code list
     const countries = getCodeList();
@@ -194,9 +196,14 @@ function Checkout(props){
         let payload = {...form};
         // ----- manupulate form data
         // no coupon?
-        if(!(payload.coupons || "").trim().length) delete form.coupons;
+        if(!(payload.coupons || "").trim().length) delete payload.coupons;
         // no notes?
-        if(!(payload.notes || "").trim().length) delete form.notes;
+        if(!(payload.notes || "").trim().length) delete payload.notes;
+        // has extra information
+        if((extraInfo || "").trim().length || (payload.notes || "").trim().length) {
+            // append extra information
+            payload.notes = JSON.stringify({ [shop.id] : (extraInfo || "") + "\n" + (payload.notes || "") });
+        }
         // split expiry
         payload.payment.exp_date = `${payload.payment.exp_date.slice(0,2)}/${payload.payment.exp_date.slice(2)}`;
         // trying to make payment
@@ -341,7 +348,18 @@ function Checkout(props){
                             ))}
                     />
                 </div>
-                <div className="form-group"></div>
+                <div className="form-group">
+                {
+                    countriesNeedExtraInfo.indexOf((form.shipping.country || "hk").toLowerCase()) > -1 &&
+                    <>
+                        <label>{__("Extra information")}</label>
+                        <input placeholder={__("e.g. Your Taiwan ID card number")}
+                                value={extraInfo} 
+                                onChange={e => setExtraInfo(e.target.value)}
+                        />
+                    </>
+                }
+                </div>
             </div>
             <div className="row">
                 <div className="form-group"></div>

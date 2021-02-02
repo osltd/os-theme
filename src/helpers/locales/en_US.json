@@ -27,6 +27,8 @@
     "Email" : "Email",
     "Phone" : "Phone",
     "Country" : "Country",
+    "Extra information" : "Extra information",
+    "e.g. Your Taiwan ID card number" : "e.g. Your Taiwan ID card number",
     "Shipping" : "Shipping",
     "Select a Shipping Method" : "Select a Shipping Method",
     "No shipping method is available at the moment." : "No shipping method is available at the moment.",

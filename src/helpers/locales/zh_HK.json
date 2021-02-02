@@ -27,6 +27,8 @@
     "Email" : "電郵地址",
     "Phone" : "聯絡電話",
     "Country" : "國家",
+    "Extra information" : "其他所需資料",
+    "e.g. Your Taiwan ID card number" : "例：你的中華民國國民身分證ID",
     "Shipping" : "送貨資料",
     "Select a Shipping Method" : "選擇運送方式",
     "No shipping method is available at the moment." : "暫時未有其他運送方式可選",
