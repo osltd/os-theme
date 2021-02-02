@@ -28,6 +28,13 @@ const mapDispatchToProps = dispatch => ({
 // ------------------------ /REDUX ------------------------
 
 
+const countryEscape = (c) => {
+    const escapeCountries = {
+        'Taiwan, Province of China' : 'Taiwan'
+    };
+    return escapeCountries[c] || c;
+}
+
 
 function Checkout(props){
 
@@ -321,9 +328,17 @@ function Checkout(props){
             <div className="row">
                 <div className="form-group">
                     <label>{__("Country")}</label>
-                    <Select value={{ value : (form.shipping.country || "hk").toLowerCase(), label: __(countries[(form.shipping.country || "hk").toLowerCase()])}}
+                    <Select value={{ 
+                                value : (form.shipping.country || "hk").toLowerCase(), 
+                                label: __(countryEscape(countries[(form.shipping.country || "hk").toLowerCase()]))
+                            }}
                             onChange={option => setFormValue('shipping.country', option.value.toUpperCase())}
-                            options={Object.keys(countries).map(key => ({ value : key, label : __(countries[key])}))}
+                            options={Object.keys(countries).map(key => (
+                                { 
+                                    value : key, 
+                                    label : __(countryEscape(countries[key]))
+                                }
+                            ))}
                     />
                 </div>
                 <div className="form-group"></div>
