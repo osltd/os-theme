@@ -77,7 +77,6 @@ function NarBar(props){
                 <div className="navBar-item title">
                     <Link to='/'>
                         {shop.logo.length > 0 ? <img className="logo" src={shop.logo} /> : null}
-                        <h2>{shop.name}</h2>
                     </Link>
                 </div>
                 {
@@ -158,7 +157,6 @@ function NarBar(props){
                     </button>
                     <div className="navBar-item title">
                         {shop.logo.length > 0 ? <img className="logo" src={shop.logo} /> : null}
-                        <h2>{shop.name}</h2>
                     </div>
                     {
                         navBarSettings && (navBarSettings.mobileDisplay || {}).cart === true ?

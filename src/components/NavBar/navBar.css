@@ -37,8 +37,7 @@
 }
 
 .navBar .navBar-wrapper .title a .logo {
-    width : 30px;
-    height: 30px;
+    height: 50px;
     margin-right: 15px;
 }
 
@@ -150,8 +149,7 @@
 }
 
 .navBar .navBar-wrapper-mobile .top-body .title .logo {
-    width : 20px;
-    height: 20px;
+    height: 40px;
     margin-right: 5px;
 }
 
