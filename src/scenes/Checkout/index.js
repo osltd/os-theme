@@ -339,6 +339,14 @@ function Checkout(props){
                                 value : (form.shipping.country || "hk").toLowerCase(), 
                                 label: __(countryEscape(countries[(form.shipping.country || "hk").toLowerCase()]))
                             }}
+                            styles={{
+                                option: (provided, {value}) => {
+                                    return ({
+                                        ...provided,
+                                        ...(["tw", "hk", "sg", "my", "mo"].includes(value) ? {"font-weight": "900", "background-color": "yellow"} : {})
+                                    })
+                                }
+                            }}
                             onChange={option => setFormValue('shipping.country', option.value.toUpperCase())}
                             options={Object.keys(countries).map(key => (
                                 { 
