@@ -36,6 +36,8 @@ function ProductDetail(props){
     let [variants, setVariants] = useState({});
     // statuses
     let [status, setStatus] = useState({ loading : false, addingToCart : false });
+    // setup qty
+    let [qty, setQty] = useState(1);
     // setup redirect
     let [redirect, setRedirect] = useState(null);
     // setup selected variant
@@ -179,12 +181,12 @@ function ProductDetail(props){
         let variant_id = (getSelectedVariant() || {}).id || null;
         // get id?
         if(variant_id){
-            // pre set qty
-            let qty = 0;
+            // preset qty
+            let _qty = qty || 0;
             // existed in cart?
             cart.items.forEach(item => {
-                // clone qty is already exists
-                if(item.id == variant_id) qty = item.qty;
+                // append qty if already exists
+                if(item.id == variant_id) _qty += item.qty;
             });
             // add to cart
             try {
@@ -193,7 +195,7 @@ function ProductDetail(props){
                     cart.id, 
                     {
                         id  : variant_id, 
-                        qty : qty+1
+                        qty : _qty
                     }
                 );
                 // get cart items
@@ -210,6 +212,18 @@ function ProductDetail(props){
             }
         }
     }
+
+    // toggle qty
+    const qtyButtonOnClick = (increament = true) => {
+        // preset qty
+        let _qty = increament == true ? (qty+1) : (qty-1);
+        if(_qty < 1) _qty = 1;
+        // get selected variant
+        let v = getSelectedVariant() || { stock : 1 };
+        if(_qty >= v.stock) _qty = v.stock;
+        // set quantity
+        setQty(_qty);
+    };
     // ----------------------- /HELPERS -----------------------
 
 
@@ -259,6 +273,29 @@ function ProductDetail(props){
             </div>);   
         }
     }
+
+    function renderQtySelector() {
+        // should buttons disabled?
+        let shouldDisabled = (getSelectedVariant() || {}).stock <= 0;
+        // get select variant
+        let v = getSelectedVariant() || { stock : 1 };
+        return (
+            <div className="qty">
+                <button 
+                    onClick={() => qtyButtonOnClick(false)}
+                    disabled={shouldDisabled || qty == 1}
+                >
+                    <i class="fas fa-minus"></i>
+                </button>
+                <input value={qty} type="number" disabled={shouldDisabled}/>
+                <button 
+                    onClick={() => qtyButtonOnClick(true)}
+                    disabled={shouldDisabled || qty >= v.stock}>
+                        <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        )
+    }
     // ----------------------- /RENDERING -----------------------
 
     // get selected variant's object
@@ -303,6 +340,7 @@ function ProductDetail(props){
                             <div className="gap" style={{width:"50px"}}></div>
                             <div className="variants">
                                 {renderVariants()}
+                                {renderQtySelector()}
                                 <button className="add-to-cart" onClick={addToCart} disabled={selectedVariantObj.stock == 0 || status.addingToCart}>
                                     {
                                         status.addingToCart ? 
