@@ -23,7 +23,7 @@ const rules = {
         },
         email : {
             field_name : "Email",
-            regex : /^[a-zA-Z0-9\-\_]+\@([0-9a-zA-Z\-\_]+\.)+[a-zA-Z0-9\-\_]+$/,
+            regex : /^[a-zA-Z0-9\-\_\.]+\@([0-9a-zA-Z\-\_]+\.)+[a-zA-Z0-9\-\_]+$/,
             required : true
         },
         phone : {
