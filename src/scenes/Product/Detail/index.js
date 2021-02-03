@@ -287,13 +287,15 @@ function ProductDetail(props){
                 >
                     <i className="fas fa-minus"></i>
                 </button>
-                <input value={qty}
-                        min={1}
-                        max={v.stock}
-                        onChange={e => setQty(/^[0-9]+$/.test(e.target.value) ? parseInt(e.target.value) : parseInt(qty))} 
-                        type="number" 
-                        disabled={shouldDisabled}
-                />
+                <div className="input">
+                    <input value={qty}
+                            min={1}
+                            max={v.stock}
+                            onChange={e => setQty(/^[0-9]+$/.test(e.target.value) ? parseInt(e.target.value) : parseInt(qty))} 
+                            type="number" 
+                            disabled={shouldDisabled}
+                    />
+                </div>
                 <button 
                     onClick={() => qtyButtonOnClick(true)}
                     disabled={shouldDisabled || qty >= v.stock}>
