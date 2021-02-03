@@ -216,7 +216,7 @@ function ProductDetail(props){
     // toggle qty
     const qtyButtonOnClick = (increament = true) => {
         // preset qty
-        let _qty = increament == true ? (qty+1) : (qty-1);
+        let _qty = increament == true ? (parseInt(qty)+1) : (parseInt(qty)-1);
         if(_qty < 1) _qty = 1;
         // get selected variant
         let v = getSelectedVariant() || { stock : 1 };
@@ -285,13 +285,19 @@ function ProductDetail(props){
                     onClick={() => qtyButtonOnClick(false)}
                     disabled={shouldDisabled || qty == 1}
                 >
-                    <i class="fas fa-minus"></i>
+                    <i className="fas fa-minus"></i>
                 </button>
-                <input value={qty} type="number" disabled={shouldDisabled}/>
+                <input value={qty}
+                        min={1}
+                        max={v.stock}
+                        onChange={e => setQty(/^[0-9]+$/.test(e.target.value) ? parseInt(e.target.value) : parseInt(qty))} 
+                        type="number" 
+                        disabled={shouldDisabled}
+                />
                 <button 
                     onClick={() => qtyButtonOnClick(true)}
                     disabled={shouldDisabled || qty >= v.stock}>
-                        <i class="fas fa-plus"></i>
+                        <i className="fas fa-plus"></i>
                 </button>
             </div>
         )
