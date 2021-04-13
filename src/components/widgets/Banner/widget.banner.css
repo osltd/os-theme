@@ -12,6 +12,7 @@
     height: 600px;
     flex-wrap: wrap;
     position: relative;
+    background-size: contain;
 }
 
 .home .widget-banner  .each-slide > div span {
