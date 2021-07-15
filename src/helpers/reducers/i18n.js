@@ -12,7 +12,7 @@ let initState = {
             code : "en_US"
         },
         {
-            name : "正體中文",
+            name : "繁體中文",
             code : "zh_HK"
         }
     ],
