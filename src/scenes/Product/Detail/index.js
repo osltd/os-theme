@@ -46,7 +46,7 @@ function ProductDetail(props){
     // get cart
     let { cart, shop } = props;
     // get translation method
-    let  { __ } = props.i18n;
+    let  { __, locale } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -56,7 +56,10 @@ function ProductDetail(props){
             // start loading
             setLoading(true);
             // fetch product by id
-            OS.merchandise.get({ids: params.id})
+            OS.merchandise.get({
+                ids: params.id,
+                locale
+            })
             // got products
             .then(rows => {
                 // no product found
