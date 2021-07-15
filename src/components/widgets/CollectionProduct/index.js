@@ -31,7 +31,7 @@ function Product(props){
     // get cached
     const { setHomeContext, homeContext, id, shop } = props;
     // get translation method
-    const { __ } = props.i18n;
+    const { __, locale } = props.i18n;
     // set loading status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
@@ -53,7 +53,10 @@ function Product(props){
             // has collections?
             if(res.data.rows.length > 0) {
                 // get merchandise
-                OS.merchandise.get({ collections : res.data.rows.map(r => r.id).join(",") })
+                OS.merchandise.get({ 
+                    collections : res.data.rows.map(r => r.id).join(","),
+                    locale
+                })
                 // got products
                 .then(rows => {
                     // finished loading
