@@ -11,6 +11,7 @@ import { Slide } from 'react-slideshow-image';
 // ------------------------ REDUX ------------------------
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
+    i18n        : state.i18n,
     ...ownProps
 });
 
@@ -32,6 +33,8 @@ function Banner(props){
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
+    // get i18n settings
+    let { locale } = props.i18n;
 
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -51,7 +54,10 @@ function Banner(props){
         // start loading
         setIsLoading(false);
         // get articles
-        OS.article.get({...filters})
+        OS.article.get({
+            ...filters,
+            locale
+        })
         // got articles
         .then(rows => {
             // finished loading
