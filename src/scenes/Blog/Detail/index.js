@@ -27,7 +27,7 @@ function ArticleDetail(props){
     let [redirect, setRedirect] = useState(null);
 
     // get i18n settings
-    let { __ } = props.i18n;
+    let { __, locale } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -37,7 +37,10 @@ function ArticleDetail(props){
             // start loading
             setLoading(true);
             // fetch article by id
-            OS.article.get({ids: params.id})
+            OS.article.get({
+                ids: params.id,
+                locale
+            })
             // got articles
             .then(rows => {
                 // no article found
