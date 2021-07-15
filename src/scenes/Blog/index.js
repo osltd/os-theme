@@ -34,7 +34,7 @@ function Blog(props){
         loading : false
     });
     // load i18n settings
-    let { __ } = props.i18n;
+    let { __, locale } = props.i18n;
 
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -49,7 +49,8 @@ function Blog(props){
         toggleLoading();
         // fetch articles
         OS.article.get({
-            page : Math.ceil(articles.length/15) + 1
+            page : Math.ceil(articles.length/15) + 1,
+            locale
         })
         // got articles
         .then((rows) => {
