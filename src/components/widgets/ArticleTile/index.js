@@ -29,7 +29,7 @@ function Article(props){
     // get cache
     const { setHomeContext, homeContext, id } = props;
     // get translation method
-    const { __ } = props.i18n;
+    const { __, locale } = props.i18n;
     // set status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
@@ -55,7 +55,10 @@ function Article(props){
         // start loading
         setIsLoading(true);
         // get 
-        OS.article.get({...filters})
+        OS.article.get({
+            ...filters,
+            locale
+        })
         // got articles
         .then(rows => {
             // finished loadling
