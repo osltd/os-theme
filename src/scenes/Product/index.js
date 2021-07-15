@@ -39,7 +39,7 @@ function Product(props){
     // get products
     let { products } = props;
     // get translation method
-    let  { __ } = props.i18n;
+    let  { __, locale } = props.i18n;
     // get collections
     let  { collections, selectedCollection } = props.shop;
     // set end of page
@@ -48,7 +48,7 @@ function Product(props){
     let [status, setStatus] = useState({
         loading : false
     });
-
+console.log('---> locale', locale)
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
@@ -62,7 +62,7 @@ function Product(props){
     async function fetchCollections(){
         try {
             // get shop collections
-            let collections = await fetch('/api/collections', { method : 'GET'});   
+            let collections = await fetch(`/api/collections`, { method : 'GET'});   
             // parse json
             collections = await collections.json();
             // save collections
@@ -80,7 +80,8 @@ function Product(props){
             toggleLoading();
             // params
             let params = {
-                page : Math.ceil(products.length/15) + 1
+                page   : Math.ceil(products.length/15) + 1,
+                locale
             };
             // filter by collection?
             if(!isNaN((selectedCollection || {}).value)) params.collections = selectedCollection.value;
