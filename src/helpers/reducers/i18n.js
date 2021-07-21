@@ -47,10 +47,12 @@ export default (state = initState, action) => {
                     path     : "/" 
                 }
             );
-            return {
-                ...state,
-                locale : action.payload
-            };
+            // refresh
+            window.location.reload()
+            // return {
+            //     ...state,
+            //     locale : action.payload
+            // };
         }
         default:
             return state;
