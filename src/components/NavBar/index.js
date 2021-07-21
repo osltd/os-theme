@@ -178,6 +178,20 @@ function NarBar(props){
                             {__("Shop")}
                         </Link>
                     </div>
+                    <div className="navBar-item">
+                        <div className={`locale-menu expanded`}>
+                            {locales.map(l => (
+                                <button key={`lang-${l.code}`} className="locale-btn" onClick={() => {
+                                    // set locale
+                                    props.setLocale(l.code);
+                                    // close menu
+                                    setLocaleMenuExpanded(false);
+                                }}>
+                                    {locale == l.code ? <b>{l.name}</b> : l.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 {/* ------------ Expandable list ------------ */}
             </div>
