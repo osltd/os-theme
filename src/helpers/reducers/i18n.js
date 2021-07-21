@@ -18,7 +18,7 @@ let initState = {
     ],
     __      : function(key) {
         // get locale
-        let locale = cookies.get('os-locale') || 'en_US';
+        let locale = cookies.get('os-locale') || 'zh_HK';
         // set wordings container
         let wordings = {};
         // try to process wordings json
