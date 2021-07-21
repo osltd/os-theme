@@ -48,7 +48,6 @@ function Product(props){
     let [status, setStatus] = useState({
         loading : false
     });
-console.log('---> locale', locale)
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
