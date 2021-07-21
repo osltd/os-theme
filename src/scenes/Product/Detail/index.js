@@ -115,7 +115,6 @@ function ProductDetail(props){
                 });
             });
         }
-        console.log(JSON.stringify(variants, null, 2))
     }, [variants]);
     // ----------------------- /LIFECYCYLE -----------------------
 
