@@ -115,6 +115,7 @@ function ProductDetail(props){
                 });
             });
         }
+        console.log(JSON.stringify(variants, null, 2))
     }, [variants]);
     // ----------------------- /LIFECYCYLE -----------------------
 
@@ -262,8 +263,11 @@ function ProductDetail(props){
     }
 
     function renderVariants(){
+        // get keys of variants
+        const keys = Object.keys(variants)
+        const valuesOfFirstOption = Object.values(keys[0] || {})
         // only have one variant and one option, no need to choose
-        if(Object.keys(variants).length == 1 && Object.values(variants).length == 1){
+        if(keys.length == 1 && valuesOfFirstOption.length == 1){
             return null;
         } else {
             return Object.keys(variants).map(o => <div key={`variant-list-${o}`} className="list">
