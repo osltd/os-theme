@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import './navBar.css';
 import actions from '../../helpers/actions';
 import { connect } from 'react-redux';
+import { extractByLocaleCode } from '../../helpers/AttributesHelper';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
@@ -36,27 +37,11 @@ function NarBar(props){
     // get translation helpers
     const { locale, __, locales } = props.i18n;
 
-    // get shop attributes
-    const { attributes } = shop;
     // special nav bar title?
-    const customizeTitles = ['home', 'blog', 'shop'].reduce((cusTitles, key) => {
-        // get value of custom title
-        let value = attributes[`nav_${key}`]
-        // has value and fullfil the format
-        if(value !== undefined && /^zh_hk:([a-zA-Z0-9 \u4E00-\u9FFF\u3400-\u4DBF]+)\|en_us:([a-zA-Z0-9 \u4E00-\u9FFF\u3400-\u4DBF]+)$/){
-            // disassembly
-            let values = value.split('|')
-            values.forEach(v => {
-                // get locale
-                const [_locale, _text] = v.split(':')
-                // append value
-                cusTitles[_locale] = cusTitles[_locale] || {}
-                cusTitles[_locale][key] = _text
-            });
-        }
-        return cusTitles;
-    }, {})
-
+    const customizeTitles = extractByLocaleCode({
+        locale, shop
+    });
+ 
     // preset settings
     let navBarSettings = ((settings || {}).layout || {}).navBar || {
         display : {
@@ -93,14 +78,14 @@ function NarBar(props){
                 </div>
                 <div className="navBar-item">
                     <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}}>
-                        {(customizeTitles[locale.toLowerCase()] || {}).home || __("Home")}
+                        {customizeTitles.home || __("Home")}
                     </Link>
                 </div>
                 {
                     navBarSettings && (navBarSettings.display || {}).blog === true ?
                     <div className="navBar-item">
                         <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>
-                            {(customizeTitles[locale.toLowerCase()] || {}).blog || __("Blog")}
+                            {customizeTitles.blog || __("Blog")}
                         </Link>
                     </div> : null
                 }
@@ -108,7 +93,7 @@ function NarBar(props){
                     navBarSettings && (navBarSettings.display || {}).shop === true ?
                     <div className="navBar-item">
                         <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>
-                            {(customizeTitles[locale.toLowerCase()] || {}).shop || __("Shop")}
+                            {customizeTitles.shop || __("Shop")}
                         </Link>
                     </div> : null
                 }
