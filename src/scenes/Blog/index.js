@@ -5,11 +5,12 @@ import './blog.css';
 import { connect } from 'react-redux';
 import actions from '../../helpers/actions';
 import { MoonLoader } from 'react-spinners';
-// import parseHTML from 'html-react-parser';
+import { extractByLocaleCode } from '../../helpers/AttributesHelper'
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
     articles : state.article.articles,
+    shop     : state.shop.session,
     i18n     : state.i18n
 });
 
@@ -28,7 +29,7 @@ function Blog(props){
     // oneshop instance
     const OS = new Oneshop();
     // get articles
-    let { articles } = props;
+    let { articles, shop } = props;
     // statuses
     var [status, setStatus] = useState({
         loading : false
@@ -36,6 +37,10 @@ function Blog(props){
     // load i18n settings
     let { __, locale } = props.i18n;
 
+     // special nav bar title?
+     const customizeTitles = extractByLocaleCode({
+        locale, shop
+    });
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
@@ -106,7 +111,7 @@ function Blog(props){
 
     return (
         <div className="blogs">
-            <h1>{__("Blog")} - {__("All")}</h1>
+            <h1>{customizeTitles.blog || __("Blog")}</h1>
             <div className="list">
             {articles.map(a => (
                 <div key={`blog-${a.id}`} className="blog">

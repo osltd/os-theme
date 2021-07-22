@@ -5,7 +5,7 @@ This is the default theme of Oneshop's Website Sales Channel. Powered by [The On
 
 The design of os-theme is highly modulized and easy to maintain by yourself, this repository will keep update. 
 
-Please check regulary to make sure you won miss any updates in the future especially you have cloned/forked this to your GitHub account😁
+Please check regulary to make sure you don't miss any updates in the future especially you have cloned/forked this to your GitHub account😁
 
 
 
