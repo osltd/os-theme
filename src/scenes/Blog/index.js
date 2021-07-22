@@ -37,8 +37,8 @@ function Blog(props){
     // load i18n settings
     let { __, locale } = props.i18n;
 
-     // special nav bar title?
-     const customizeTitles = extractByLocaleCode({
+    // special nav bar title?
+    const customizeTitles = extractByLocaleCode({
         locale, shop
     });
 

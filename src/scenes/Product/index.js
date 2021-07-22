@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import actions from '../../helpers/actions';
 import { MoonLoader } from 'react-spinners';
 import Select from 'react-select';
+import { extractByLocaleCode } from '../../helpers/AttributesHelper'
 
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
     products : state.product.products,
     i18n     : state.i18n,
-    shop     : state.shop
+    shop     : state.shop.session
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,7 +38,7 @@ function Product(props){
     // oneshop instance
     const OS = new Oneshop();
     // get products
-    let { products } = props;
+    let { products, shop } = props;
     // get translation method
     let  { __, locale } = props.i18n;
     // get collections
@@ -47,6 +48,10 @@ function Product(props){
     // statuses
     let [status, setStatus] = useState({
         loading : false
+    });
+    // special nav bar title?
+    const customizeTitles = extractByLocaleCode({
+        locale, shop
     });
 
     // ----------------------- LIFECYCYLE -----------------------
@@ -133,7 +138,7 @@ function Product(props){
                 {
                     (collections || []).length ? 
                     <div className="header-wrapper">
-                        <h1>{__("Products")} - </h1>
+                        <h1>{customizeTitles.shop || __("Products")} - </h1>
                         <div className="collection-select">
                             <Select placeholder={__("All")}
                                     value={selectedCollection || null}
