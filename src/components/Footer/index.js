@@ -14,9 +14,11 @@ const mapStateToProps = state => ({
 function Footer(props){
 
     // get shop
-    let { shop, settings } = props;
+    const { shop, settings } = props;
     // get i18n settings
-    let { __ } = props.i18n;
+    const { __ } = props.i18n;
+    // get shop attributes
+    const { attributes } = shop;
     
     return <div className="footer">
         <div className="cols">
@@ -65,13 +67,13 @@ function Footer(props){
                         youtube   : "fab fa-youtube",
                         pinterest : "fab fa-pinterest"
                     };
-                    const socialLinks = ((settings || {}).links || {}).social || {};
-                    return Object.keys(socialLinks)
-                    .filter(s => socialLinks[s].length > 0 || socialLinks[s] != "#").map(s => (
-                        <a key={`footer-social-link-${s}`} href={socialLinks[s]} target="_blank">
-                            <i className={fontawesomeMap[s]}></i>
-                        </a>
-                    ));
+                    return Object.keys(fontawesomeMap)
+                            .filter(s => attributes[s] !== undefined && /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/i.test(attributes[s]))
+                            .map(s => (
+                                <a key={`footer-social-link-${s}`} href={attributes[s]} target="_blank">
+                                    <i className={fontawesomeMap[s]}></i>
+                                </a>
+                            ));
                 })()}
             </div>
         </div>

@@ -31,8 +31,28 @@ If you are good with the default settings and the theme style with the os-theme,
 6. The path of the build folder (For ReactJS, the path is /build typically)
 4. Bear in mind that run `yarn build` or `npm build` before you commit when you want changes you made reveals on the site immediately.
 
+# How to Use Attributes
 
-### `npm start`
+Sometimes you may want to make some changes such as content or links for your theme. <br>
+But that's not that convenient change it onthe coding level espically if you are a developer and you are developing a website for your customer, <br>
+updating those settings inside the Oneshop Center is the best way for your customer.
+
+
+1. Login to [Oneshop Center](https://center.oneshop.cloud)
+2. Click on your shop and click the ⚙ icon at the top menu
+3. Scroll down and navigate to the "Custom attributes" section
+4. Input attribute name and the value for customize partial of the theme
+
+## There are two parts can be customize by setting corresponding attributes.
+1. Social Media icons in footer
+Social media attribute names: `facebook`, `youtube`, `twitter`, `instagram`, `pinterest`<br>
+E.g Set `facebook` be the attribute name and your Facebook fan page link to the attribute value. Facebook icon with the link will be displayed in the footer.
+
+
+
+
+
+# npm start
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
