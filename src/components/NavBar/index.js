@@ -41,7 +41,7 @@ function NarBar(props){
     const customizeTitles = extractByLocaleCode({
         locale, shop
     });
- 
+
     // preset settings
     let navBarSettings = ((settings || {}).layout || {}).navBar || {
         display : {
@@ -78,14 +78,14 @@ function NarBar(props){
                 </div>
                 <div className="navBar-item">
                     <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}}>
-                        {customizeTitles.home || __("Home")}
+                        {customizeTitles.nav_home || __("Home")}
                     </Link>
                 </div>
                 {
                     navBarSettings && (navBarSettings.display || {}).blog === true ?
                     <div className="navBar-item">
                         <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}}>
-                            {customizeTitles.blog || __("Blog")}
+                            {customizeTitles.nav_blog || __("Blog")}
                         </Link>
                     </div> : null
                 }
@@ -93,7 +93,7 @@ function NarBar(props){
                     navBarSettings && (navBarSettings.display || {}).shop === true ?
                     <div className="navBar-item">
                         <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}}>
-                            {customizeTitles.shop || __("Shop")}
+                            {customizeTitles.nav_shop || __("Shop")}
                         </Link>
                     </div> : null
                 }
