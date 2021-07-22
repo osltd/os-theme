@@ -34,6 +34,7 @@ If you are good with the default settings and the theme style with the os-theme,
 # How to Use Attributes
 
 Sometimes you may want to make some changes such as content or links for your theme. <br>
+You can modify how the theme interpret the rules to define a attirbute value by editing `/src/helper/AttributesHelper.js`
 But that's not that convenient change it onthe coding level espically if you are a developer and you are developing a website for your customer, <br>
 updating those settings inside the Oneshop Center is the best way for your customer.
 
@@ -43,13 +44,14 @@ updating those settings inside the Oneshop Center is the best way for your custo
 3. Scroll down and navigate to the "Custom attributes" section
 4. Input attribute name and the value for customize partial of the theme
 
-## There are two parts can be customize by setting corresponding attributes.
+### Default settings of attributes
+By default, there are two parts can be customize by setting corresponding attributes.<br>
 1. Social Media icons in footer
 Social media attribute names: `facebook`, `youtube`, `twitter`, `instagram`, `pinterest`<br>
-E.g Set `facebook` be the attribute name and your Facebook fan page link to the attribute value. Facebook icon with the link will be displayed in the footer.
-
-
-
+E.g Set `facebook` be the attribute name and your Facebook fan page link to the attribute value. Facebook icon with the link will be displayed in the footer.<br><br>
+2. Nav bar titles
+To customer the text of `Home`, `Blog` and `shop` set attribute name to `nav_home`, `nav_blog`, `nav_shop` respectively <br>
+and the value to this format `zh_hk:YOUR_TEXT_IN_CHINESE|en_us:YOUR_TEXT_IN_ENGLISH`
 
 
 # npm start
