@@ -40,7 +40,7 @@ function NarBar(props){
     // special nav bar title?
     const customizeTitles = extractByLocaleCode({
         locale, shop
-    }) || {};
+    });
 
     // preset settings
     let navBarSettings = ((settings || {}).layout || {}).navBar || {

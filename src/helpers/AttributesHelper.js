@@ -19,5 +19,5 @@ export const extractByLocaleCode = ({ locale, shop, keys = ['nav_home', 'nav_blo
         }
         return cusTitles;
     }, {})
-    return customizeTitles[locale.toLowerCase()];
+    return customizeTitles[locale.toLowerCase()] || {};
 }
