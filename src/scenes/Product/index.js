@@ -154,7 +154,7 @@ function Product(props){
                             />
                         </div>
                     </div> : 
-                    <h1>{__("Products")}</h1>
+                    <h1>{customizeTitles.nav_shop || __("Products")}</h1>
                 }
             </div>
             <div className="list">
