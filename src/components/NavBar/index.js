@@ -171,17 +171,17 @@ function NarBar(props){
                 <div className={`navBar-item-list ${navBarExpanded ? "expand" : ""}`}>
                     <div className="navBar-item">
                         <Link to='/' style={{fontWeight:location.pathname === "/" ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
-                            {__("Home")}
+                            {customizeTitles.nav_home || __("Home")}
                         </Link>
                     </div>
                     <div className="navBar-item">
                         <Link to='/blogs' style={{fontWeight:location.pathname.startsWith("/blogs") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
-                            {__("Blog")}
+                            {customizeTitles.nav_blog || __("Blog")}
                         </Link>
                     </div>
                     <div className="navBar-item">
                         <Link to='/products' style={{fontWeight:location.pathname.startsWith("/products") ? 500 : 300}} onClick={() => setNavBarExpanded(false)}>
-                            {__("Shop")}
+                            {customizeTitles.nav_shop || __("Shop")}
                         </Link>
                     </div>
                     <div className="navBar-item">
