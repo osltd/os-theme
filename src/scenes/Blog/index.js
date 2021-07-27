@@ -111,7 +111,7 @@ function Blog(props){
 
     return (
         <div className="blogs">
-            <h1>{customizeTitles.blog || __("Blog")}</h1>
+            <h1>{customizeTitles.nav_blog || __("Blog")}</h1>
             <div className="list">
             {articles.map(a => (
                 <div key={`blog-${a.id}`} className="blog">
