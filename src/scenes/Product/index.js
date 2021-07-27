@@ -138,7 +138,7 @@ function Product(props){
                 {
                     (collections || []).length ? 
                     <div className="header-wrapper">
-                        <h1>{customizeTitles.shop || __("Products")} - </h1>
+                        <h1>{customizeTitles.nav_shop || __("Products")} - </h1>
                         <div className="collection-select">
                             <Select placeholder={__("All")}
                                     value={selectedCollection || null}
