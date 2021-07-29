@@ -6,11 +6,13 @@ import './widget.article.tile.css';
 import Oneshop from 'oneshop.web';
 import { MoonLoader } from 'react-spinners';
 import Carousel from 'react-grid-carousel';
-
+import { captureWithLocale } from '../../../helpers/AttributesHelper';
+ 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
     i18n        : state.i18n,
+    settings    : state.shop.settings,
     ...ownProps
 });
 
@@ -27,15 +29,20 @@ const mapDispatchToProps = (dispatch) => ({
 function Article(props){
 
     // get cache
-    const { setHomeContext, homeContext, id } = props;
+    const { setHomeContext, homeContext, id, settings : { layout_override }, index } = props;
     // get translation method
     const { __, locale } = props.i18n;
     // set status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
-
-
+    // get settings from attributes
+    const attribute_settings = layout_override[index] || {}
+    // special nav bar title?
+    const customizeTitle = captureWithLocale({
+        locale,
+        value : attribute_settings.title
+    })
 
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -44,14 +51,16 @@ function Article(props){
     }, []);
 
     function fetchArticles(){
+        // get settings from config.js
+        const { ordering, tags, keywords, ids, collections } = props;
         // set filters container
         let filters = {};
         // filters
-        if((props.ordering || "").length > 0) filters.ordering = props.ordering;
-        if((props.tags || "").length > 0) filters.tags = props.tags;
-        if((props.keywords || "").length > 0) filters.keywords = props.keywords;
-        if((props.ids || "").length > 0) filters.ids = props.ids;
-        if((props.collections || "").length > 0) filters.collections = props.collections;
+        if((ordering || "").length > 0) filters.ordering = ordering;
+        if((tags || "").length > 0) filters.tags = tags;
+        if((keywords || "").length > 0) filters.keywords = keywords;
+        if((ids || "").length > 0) filters.ids = ids;
+        if((collections || "").length > 0) filters.collections = collections;
         // start loading
         setIsLoading(true);
         // get 
@@ -107,7 +116,7 @@ function Article(props){
 
     // article data loaded?
     return homeContext[id] && !isLoading ? <div className="widget-article" style={{...props.styles}}>
-        <h1>{__(props.title)}</h1>
+        <h1>{customizeTitle || __(props.title)}</h1>
         {renderSlider()}
     </div> : 
     isLoading ? 
