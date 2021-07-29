@@ -2,6 +2,7 @@ import React from 'react';
 import {  Link } from 'react-router-dom';
 import './footer.css';
 import { connect } from 'react-redux';
+import { extractByLocaleCode } from '../../helpers/AttributesHelper';
 
 
 const mapStateToProps = state => ({
@@ -14,11 +15,15 @@ const mapStateToProps = state => ({
 function Footer(props){
 
     // get shop
-    const { shop, settings } = props;
+    const { shop } = props;
     // get i18n settings
-    const { __ } = props.i18n;
+    const { __, locale } = props.i18n;
     // get shop attributes
     const { attributes } = shop;
+    // special footer titles
+    const customizeTitles = extractByLocaleCode({
+        locale, shop
+    });
     
     return <div className="footer">
         <div className="cols">
@@ -32,13 +37,13 @@ function Footer(props){
             </div>
             <div className="col links">
                 <Link to="/">
-                    {__("Home")}
+                    {customizeTitles.nav_home || __("Home")}
                 </Link>
                 <Link to="/blogs">
-                    {__("Blog")}
+                    {customizeTitles.nav_blog ||__("Blog")}
                 </Link>
                 <Link to="/products">
-                    {__("Shop")}
+                    {customizeTitles.nav_shop ||__("Shop")}
                 </Link>
                 <Link to="/cart">
                     {__("Cart")}
