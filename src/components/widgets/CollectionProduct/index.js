@@ -6,12 +6,13 @@ import './widget.bestseller.css';
 import Oneshop from 'oneshop.web';
 import { MoonLoader } from 'react-spinners';
 import Carousel from 'react-grid-carousel'
-
+import { captureWithLocale } from '../../../helpers/AttributesHelper';
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = (state, ownProps) => ({
     homeContext : state.home,
     shop        : state.shop.session,
+    settings    : state.shop.settings,
     i18n        : state.i18n,
     ...ownProps
 });
@@ -29,13 +30,20 @@ const mapDispatchToProps = (dispatch) => ({
 function Product(props){
 
     // get cached
-    const { setHomeContext, homeContext, id, shop } = props;
+    const { setHomeContext, homeContext, id, shop, settings : { layout_override }, index } = props;
     // get translation method
     const { __, locale } = props.i18n;
     // set loading status
     let [isLoading, setIsLoading] = useState(false);
     // get oneshop instance
     const OS = new Oneshop();
+    // get settings from attributes
+    const attribute_settings = layout_override[index] || {}
+    // special nav bar title?
+    const customizeTitle = captureWithLocale({
+        locale,
+        value : attribute_settings.title
+    })
 
     // ---------------- LIFECYCLE ----------------
     useEffect(() => {
@@ -105,7 +113,7 @@ function Product(props){
 
     // product data loaded?
     return homeContext[id] && !isLoading ? <div className="widget-bestseller" style={{...props.styles}}>
-        <h1>{__(props.title)}</h1>
+        <h1>{customizeTitle || __(props.title)}</h1>
         {renderSlider()}
     </div> : 
     isLoading ? 
