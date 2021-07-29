@@ -31,6 +31,7 @@ function Home(props){
                 if(Widget != undefined) {
                     // return widget
                     return <Widget 
+                                index={idx}
                                 key={`widget-${widgetSettings.widget}-${idx}`} 
                                 id={`widget-${widgetSettings.widget}-${idx}`} 
                                 {...widgetSettings}
