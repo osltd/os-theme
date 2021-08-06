@@ -78,7 +78,6 @@ function Login(props){
             new Promise((resolve, reject) => {
                 // handler
                 const handler = (result) => {
-                    console.log('------> result: ',result);
                     result.result ? resolve() : reject();
                 }
                 // get websocket client
@@ -99,7 +98,7 @@ function Login(props){
             // finish loading
             setIsLoading(false);
             // show message
-            alert("Username or password invalid.");
+            alert(__("invalid_credential"));
         });
     }
     // -------------------- /HELPER --------------------
