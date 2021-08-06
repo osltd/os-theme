@@ -167,7 +167,22 @@ function Product(props){
                                 </div>
                                 <div className="info">
                                     <div className="name">{p.name}</div>
-                                    <div className="price">HKD {p.price}</div>
+                                    <div className="price">{function(){
+                                        // get price array
+                                        console.log(JSON.stringify(p.variants, null, 2))
+                                        // get all prices
+                                        let prices = [p.price, ...p.variants.map(v => (v.price || 0))]
+                                            // get value larger then 0 only
+                                            .filter(p => p > 0)
+                                            // filter duplicate
+                                            .filter((v, i, a) => a.indexOf(v) === i)
+                                        // only one value
+                                        if(prices.length < 2) {
+                                            return `HKD ${prices[0] || 0}`
+                                        } else {
+                                            return `HKD ${Math.min(...prices)} - HKD ${Math.max(...prices)}`
+                                        }
+                                    }()}</div>
                                 </div>
                             </div>
                         </Link>
