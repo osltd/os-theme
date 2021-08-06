@@ -168,8 +168,6 @@ function Product(props){
                                 <div className="info">
                                     <div className="name">{p.name}</div>
                                     <div className="price">{function(){
-                                        // get price array
-                                        console.log(JSON.stringify(p.variants, null, 2))
                                         // get all prices
                                         let prices = [p.price, ...p.variants.map(v => (v.price || 0))]
                                             // get value larger then 0 only
