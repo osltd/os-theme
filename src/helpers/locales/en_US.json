@@ -58,6 +58,7 @@
     "Password" : "Password",
     "Login" : "Login",
     "Not a member? Register now!" : "Not a member? Register now!",
+    "invalid_credential" : "Username or password invalid. For new users, please check your email and validate your account",
 
     "Get Your Account" : "Get Your Account",
     "Confirm Password" : "Confirm Password",
