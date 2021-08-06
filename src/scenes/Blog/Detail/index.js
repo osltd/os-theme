@@ -129,7 +129,7 @@ function ArticleDetail(props){
                         <div className="back-button-wrapper">
                             <Link to={"/blogs"}>
                                 <i className="fas fa-chevron-left"></i>
-                                {__("Back to blog")}
+                                {__("Back")}
                             </Link>
                         </div>
                         <div className="content">
