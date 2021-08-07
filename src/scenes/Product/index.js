@@ -11,9 +11,11 @@ import { extractByLocaleCode } from '../../helpers/AttributesHelper'
 
 // ------------------------ REDUX ------------------------
 const mapStateToProps = state => ({
-    products : state.product.products,
-    i18n     : state.i18n,
-    shop     : state.shop.session
+    products           : state.product.products,
+    i18n               : state.i18n,
+    shop               : state.shop.session,
+    collections        : state.shop.collections || [],
+    selectedCollection : state.shop.selectedCollection || null,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,11 +40,9 @@ function Product(props){
     // oneshop instance
     const OS = new Oneshop();
     // get products
-    let { products, shop } = props;
+    let { products, shop, collections, selectedCollection } = props;
     // get translation method
     let  { __, locale } = props.i18n;
-    // get collections
-    let  { collections, selectedCollection } = props.shop;
     // set end of page
     let [endOfList, setEndOfList] = useState(false);
     // statuses
@@ -53,6 +53,8 @@ function Product(props){
     const customizeTitles = extractByLocaleCode({
         locale, shop
     });
+
+    console.log('----> collections: ', collections, selectedCollection)
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
@@ -66,9 +68,11 @@ function Product(props){
     async function fetchCollections(){
         try {
             // get shop collections
-            let collections = await fetch(`/api/collections`, { method : 'GET'});   
+            let collections = await fetch(`/api/collections`, { method : 'GET'});  
+            console.log('----> set collection 1')
             // parse json
             collections = await collections.json();
+            console.log('----> set collection 2')
             // save collections
             props.setCollections((collections.data || {}).rows || []);
         } catch (error) {
@@ -169,13 +173,15 @@ function Product(props){
                                     <div className="name">{p.name}</div>
                                     <div className="price">{function(){
                                         // get all prices
-                                        let prices = [p.price, ...p.variants.map(v => (v.price || 0))]
+                                        let prices = p.variants.map(v => (v.price || 0))
                                             // get value larger then 0 only
                                             .filter(p => p > 0)
                                             // filter duplicate
                                             .filter((v, i, a) => a.indexOf(v) === i)
                                         // only one value
-                                        if(prices.length < 2) {
+                                        if(prices.length === 0) {
+                                            return `HKD ${p.price || 0}`
+                                        } else if(prices.length < 2) {
                                             return `HKD ${prices[0] || 0}`
                                         } else {
                                             return `HKD ${Math.min(...prices)} - HKD ${Math.max(...prices)}`
