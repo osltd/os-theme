@@ -113,7 +113,7 @@
 }
 
 .user-login .user-login-wrapper .form .form-wrapper .register{
-    padding: 20px 0px;
+    padding: 20px 0px 0px 0px;
     transition: 0.3s opacity;
     width: 100%;
     max-width:350px;
@@ -122,4 +122,16 @@
 .user-login .user-login-wrapper .form .form-wrapper .register a{
     color: #333333;
     font-size: 15px;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper .recovery {
+    padding: 0px 0px 0px 0px;
+    transition: 0.3s opacity;
+    width: 100%;
+    max-width:350px;
+}
+
+.user-login .user-login-wrapper .form .form-wrapper .recovery a{
+    color: #333333;
+    font-size: 12px;
 }
