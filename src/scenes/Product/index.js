@@ -61,7 +61,7 @@ function Product(props){
         // active fetch products if no product is loaded
         if(!(products || []).length && !endOfList) fetchProducts();
         // no collections?
-        if(!(collections || [].length)) fetchCollections();
+        if(!(collections || []).length) fetchCollections();
     }, [products]);
 
 
