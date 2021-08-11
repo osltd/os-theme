@@ -124,14 +124,14 @@
     font-size: 15px;
 }
 
-.user-login .user-login-wrapper .form .form-wrapper .recovery {
-    padding: 0px 0px 0px 0px;
+.user-login .user-login-wrapper .form .form-wrapper .recovery-btn {
+    padding: 0px;
     transition: 0.3s opacity;
     width: 100%;
     max-width:350px;
 }
 
-.user-login .user-login-wrapper .form .form-wrapper .recovery a{
+.user-login .user-login-wrapper .form .form-wrapper .recovery-btn a{
     color: #333333;
     font-size: 12px;
 }

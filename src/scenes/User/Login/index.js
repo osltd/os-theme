@@ -131,7 +131,7 @@ function Login(props){
                                 placeholder="・・・・・・・・"
                             />
                         </div>
-                        <div className="recovery">
+                        <div className="recovery-btn">
                             <Link to="/users/account_rescue">{__("Password Recovery/Account Activation?")}</Link>
                         </div>
                         <button onClick={login} disabled={isLoading}>
