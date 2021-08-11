@@ -1,0 +1,131 @@
+.recovery {
+    width: 100%;
+    min-height: calc(100vh - 250px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.recovery .recovery-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: calc(100% - 30px);
+    max-width: 1000px;
+    padding: 0px 15px 30px 15px;
+    margin-bottom: 50px;
+}
+
+.recovery .recovery-wrapper h1 {
+    font-weight: 300;
+}
+
+.recovery .recovery-wrapper .form {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    min-height: calc(100vh - 450px);
+    padding: 100px 0px;
+    flex-wrap: wrap;
+}
+
+.recovery .recovery-wrapper .form .greeting {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+}
+
+.recovery .recovery-wrapper .form .greeting img {
+    width: 100px;
+
+}
+
+.recovery .recovery-wrapper .form .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 250px;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .form-group {
+    padding: 10px 0px;
+    display: flex;
+    flex : 1;
+    flex-direction: column;
+    width: 100%;
+    max-width:350px;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .form-group label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #666666;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .form-group input {
+    border: 1px solid #dddddd;
+    width: calc(100% - 30px);
+    padding: 8px 15px;
+    height: 25px;
+    border-radius: 2px;
+    transition: 0.3s border;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .form-group input:focus{
+    border:1px solid black;
+}
+
+
+.recovery .recovery-wrapper .form .form-wrapper button {
+    margin-top: 35px;
+    display: flex;
+    background-color: black;
+    color: white;
+    border: none;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s opacity;
+    width: 100%;
+    max-width:350px;
+}
+
+
+.recovery .recovery-wrapper .form .form-wrapper button:hover,
+.recovery .recovery-wrapper .form .form-wrapper button:disabled,
+.recovery .recovery-wrapper .form .form-wrapper .register:hover{
+    opacity: 0.6;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .recovery-options {
+    display: flex;
+    flex-direction: column;
+    padding:  0;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .recovery-options button{
+    background-color: transparent;
+    color: black;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 15px;
+    padding: 0;
+    height: 20px;
+    margin-top: 15px;
+}
+
+.recovery .recovery-wrapper .form .form-wrapper .success-msg {
+    line-height: 29px;
+    font-size: 18px;
+}

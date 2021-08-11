@@ -14,6 +14,7 @@ import Checkout from '../Checkout';
 import User from '../User';
 import Register from '../User/Register';
 import Login from '../User/Login';
+import AccountRecovery from '../User/Recovery';
 import Cart from '../Cart';
 import OrderSnapshot from '../Checkout/OrderSnapshot';
 import Page from '../Page';
@@ -35,6 +36,7 @@ function Routes(){
                     <Route path="/users" component={User} exact/>
                     <Route path="/users/new" component={Register} exact/>
                     <Route path="/users/login" component={Login} exact/>
+                    <Route path="/users/account_rescue" component={AccountRecovery} exact/>
                     <Redirect from="/login" to="/users/login" exact/>
                     <Route path="/checkout" component={Checkout} exact />
                     <Route path="/checkout/success" component={OrderSnapshot} exact/>
