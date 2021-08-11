@@ -59,6 +59,7 @@
     "Login" : "登入",
     "Not a member? Register now!" : "没有帳號? 現在就去註冊",
     "invalid_credential" : "用戶名稱或密碼錯誤。\n如果你是新用戶，請檢查你的電子郵件並驗證你的帳戶。",
+    "Password Recovery/Account Activation?" : "重設密碼/激活帳號？",
 
     "Get Your Account" : "立即成為會員",
     "Confirm Password" : "確認密碼",
