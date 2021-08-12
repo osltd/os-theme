@@ -93,7 +93,7 @@ function Product(props){
                     <Link to={`/products/${p.id}`}>
                         <div className="product-grid">
                             <img src={productInfoExtractor(p).thumbnail} />
-                            <div className="title">{productInfoExtractor(p).title}</div>
+                            <div className="title">{productInfoExtractor(p).title.substr(0, 40)}{productInfoExtractor(p).title.length > 40 ? "..." : ""}</div>
                             <div className="price">
                                 {function(){
                                     // get currency
