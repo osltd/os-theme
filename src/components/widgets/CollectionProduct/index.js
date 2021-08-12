@@ -93,7 +93,26 @@ function Product(props){
                         <div className="product-grid">
                             <img src={productInfoExtractor(p).thumbnail} />
                             <div className="title">{productInfoExtractor(p).title}</div>
-                            <div className="price">{shop.currency.toUpperCase()} {productInfoExtractor(p).price.toFixed(2)}</div>
+                            <div className="price">
+                                {function(){
+                                        // get currency
+                                        const currency = shop.currency.toUpperCase();
+                                        // get all prices
+                                        let prices = p.variants.map(v => (v.price || 0))
+                                            // get value larger then 0 only
+                                            .filter(p => p > 0)
+                                            // filter duplicate
+                                            .filter((v, i, a) => a.indexOf(v) === i)
+                                        // only one value
+                                        if(prices.length === 0) {
+                                            return `${currency} ${p.price || 0}`
+                                        } else if(prices.length < 2) {
+                                            return `${currency} ${prices[0] || 0}`
+                                        } else {
+                                            return `${currency} ${Math.min(...prices)} - HKD ${Math.max(...prices)}`
+                                        }
+                                }()}
+                            </div>
                         </div>
                     </Link>
                 </Carousel.Item>
