@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './blog.css';
 import { connect } from 'react-redux';
 import actions from '../../helpers/actions';
+import parseHTML from 'html-react-parser';
 import { MoonLoader } from 'react-spinners';
 import { extractByLocaleCode } from '../../helpers/AttributesHelper'
 
@@ -122,7 +123,7 @@ function Blog(props){
                             </div>
                             <div className="info">
                                 <div className="title">{captionExtractor(a).title}</div>
-                                <div className="description">{`${(captionExtractor(a).description || "").replace(/<[^>]*>?/gm, '').substr(0, 100)}...`}</div>
+                                <div className="description">{`${(captionExtractor(a).description || "").replace(/<[^>]*>?/gm, '').replace(/&[a-z]+;/gm, '').substr(0, 300)}...`}</div>
                                 <div className="time">{new Date(a.time).toLocaleDateString()}</div>
                             </div>
                         </div>
