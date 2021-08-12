@@ -189,10 +189,24 @@ function Recovery(props){
             <div className="form-group">
                 <label>{__("1. Choose your action")}</label>
                 <div className="recovery-options">
-                    <button onClick={() => setType("recovery")} style={{ fontWeight : isResetPass ? "700" : "500" }} disabled={step > 1}>
+                    <button 
+                        onClick={() => setType("recovery")} 
+                        style={{ 
+                            fontWeight : isResetPass ? "700" : "500",
+                            textDecoration : isResetPass ? "underline" : "none"
+                        }} 
+                        disabled={step > 1}
+                    >
                         {__("Reset password")}
                     </button>
-                    <button onClick={() => setType("activate")} style={{ fontWeight : !isResetPass ? "700" : "500" }} disabled={step > 1}>
+                    <button 
+                        onClick={() => setType("activate")} 
+                        style={{ 
+                            fontWeight : !isResetPass ? "700" : "500",
+                            textDecoration : !isResetPass ? "underline" : "none"
+                        }}
+                        disabled={step > 1}
+                    >
                         {__("Resend activation email")}
                     </button>
                 </div>
