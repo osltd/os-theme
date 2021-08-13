@@ -26,8 +26,10 @@ function Register(props){
     let [isLoading, setIsLoading] = useState(false);
     // redirect path
     let [redirect, setRedirect] = useState(null);
+    // is registered flag
+    let [isRegistered, setIsRegistered] = useState(false)
     // get oneshop instance
-    var OS = new Oneshop();
+    let OS = new Oneshop();
     // get shop
     const { shop, profile } = props;
     // get translation method
@@ -58,8 +60,8 @@ function Register(props){
         .then(() => {
             // finished loading
             setIsLoading(false);
-            // back to login page
-            window.location.href = "/users/login";
+            // registered
+            setIsRegistered(true);
         })
         .catch(error => {
             // finished loading
@@ -68,7 +70,81 @@ function Register(props){
             alert(error.message);
         });
     }
+
+    const isValid = (() => {
+        return isRegistered === true || 
+            (
+                firstName.length > 0 &&
+                lastName.length > 0 &&
+                email.length > 0 &&
+                password.length > 0 &&
+                confirmPassword.length > 0
+            )
+    })()
     // -------------------- /HELPER --------------------
+
+    // -------------------- RENDER ------------------------
+    const renderRegistrationForm = () => (
+        <>
+            <div className="form-group">
+                <label>{__("First Name")}</label>
+                <input 
+                    type="text" 
+                    value={firstName} 
+                    onChange={(event) => { setFirstName(event.target.value); }}
+                    placeholder={__("Peter")}
+                    disabled={isLoading}
+                />
+            </div>
+            <div className="form-group">
+                <label>{__("Last Name")}</label>
+                <input 
+                    type="text" 
+                    value={lastName} 
+                    onChange={(event) => { setLastName(event.target.value); }}
+                    placeholder={__("Chan")}
+                    disabled={isLoading}
+                />
+            </div>
+            <div className="form-group">
+                <label>{__("Email")}</label>
+                <input 
+                    type="text" 
+                    value={email} 
+                    onChange={(event) => { setEmail(event.target.value); }}
+                    placeholder="peter.chan@abc.com"
+                    disabled={isLoading}
+                />
+            </div>
+            <div className="form-group">
+                <label>{__("Password")}</label>
+                <input 
+                    type="password" 
+                    value={password}  
+                    onChange={(event) => { setPassword(event.target.value); }}
+                    placeholder="・・・・・・・・"
+                    disabled={isLoading}
+                />
+            </div>
+            <div className="form-group">
+                <label>{__("Confirm Password")}</label>
+                <input 
+                    type="password" 
+                    value={confirmPassword}  
+                    onChange={(event) => { setConfirmPassword(event.target.value); }}
+                    placeholder="・・・・・・・・"
+                    disabled={isLoading}
+                />
+            </div>
+        </>
+    )
+
+    const renderSuccessMessage = () => (
+        <div className="">
+            {__("registered_successfully")}
+        </div>
+    )
+    // -------------------- /RENDER ------------------------
 
     return redirect != null ? <Redirect to={redirect} /> : (
         <div className="user-register">
@@ -79,52 +155,17 @@ function Register(props){
                         <h1>{__("Get Your Account")}</h1>
                     </div>
                     <div className="form-wrapper">
-                        <div className="form-group">
-                            <label>{__("First Name")}</label>
-                            <input 
-                                type="text" 
-                                value={firstName} 
-                                onChange={(event) => { setFirstName(event.target.value); }}
-                                placeholder={__("Peter")}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>{__("Last Name")}</label>
-                            <input 
-                                type="text" 
-                                value={lastName} 
-                                onChange={(event) => { setLastName(event.target.value); }}
-                                placeholder={__("Chan")}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>{__("Email")}</label>
-                            <input 
-                                type="text" 
-                                value={email} 
-                                onChange={(event) => { setEmail(event.target.value); }}
-                                placeholder="peter.chan@abc.com"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>{__("Password")}</label>
-                            <input 
-                                type="password" 
-                                value={password}  
-                                onChange={(event) => { setPassword(event.target.value); }}
-                                placeholder="・・・・・・・・"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>{__("Confirm Password")}</label>
-                            <input 
-                                type="password" 
-                                value={confirmPassword}  
-                                onChange={(event) => { setConfirmPassword(event.target.value); }}
-                                placeholder="・・・・・・・・"
-                            />
-                        </div>
-                        <button onClick={register} disabled={isLoading}>
+                        {
+                            isRegistered === true ? 
+                            renderSuccessMessage() :
+                            renderRegistrationForm()
+                        }
+                        <button 
+                            onClick={() => {
+                                isRegistered ? setRedirect("/users") : register()
+                            }} 
+                            disabled={isLoading || !isValid}
+                        >
                             {
                                 isLoading ? 
                                 <MoonLoader 
@@ -132,12 +173,12 @@ function Register(props){
                                     color={"white"}
                                     loading={true}
                                 /> :
-                                __("Register")
+                                __(isRegistered ? "Go Login" : "Register")
                             }
                         </button>
-                        <div className="register">
+                        {!isRegistered && <div className="register">
                             <Link to="/users/login">{__("Already a member?")}</Link>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
