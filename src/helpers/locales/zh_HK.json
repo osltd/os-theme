@@ -65,6 +65,7 @@
     "Confirm Password" : "確認密碼",
     "Register" : "註冊",
     "Already a member?" : "已經是會員?",
+    "registered_successfully" : "感謝你成為會員！驗證電郵經已傳送到你的收件箱，當驗證完成後就能夠登入。",
 
     "Recovery" : "回復帳號",
     "Find Your Account" : "找回你的帳號",

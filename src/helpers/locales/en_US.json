@@ -65,7 +65,7 @@
     "Confirm Password" : "Confirm Password",
     "Register" : "Register",
     "Already a member?" : "Already a member?",
-
+    "registered_successfully" : "Thank you for your registration! A verification email has been sent to your inbox, you may login after the verification is done.",
 
     "Recovery" : "Recovery",
     "Find Your Account" : "Find Your Account",
