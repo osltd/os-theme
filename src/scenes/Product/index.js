@@ -54,7 +54,6 @@ function Product(props){
         locale, shop
     });
 
-    console.log('----> collections: ', collections, selectedCollection)
 
     // ----------------------- LIFECYCYLE -----------------------
     useEffect(() => {
@@ -69,10 +68,8 @@ function Product(props){
         try {
             // get shop collections
             let collections = await fetch(`/api/collections`, { method : 'GET'});  
-            console.log('----> set collection 1')
             // parse json
             collections = await collections.json();
-            console.log('----> set collection 2')
             // save collections
             props.setCollections((collections.data || {}).rows || []);
         } catch (error) {
@@ -92,7 +89,11 @@ function Product(props){
                 locale
             };
             // filter by collection?
-            if(!isNaN((selectedCollection || {}).value)) params.collections = selectedCollection.value;
+            if(!isNaN((selectedCollection || {}).value)) {
+                params.collections = selectedCollection.value;
+            } else if(selectedCollection === null || selectedCollection === undefined) {
+                delete params.selectedCollection
+            }
             // fetch products
             OS.merchandise.get(params)
             // got products
@@ -152,7 +153,7 @@ function Product(props){
                                         // clear product
                                         props.setProducts([]);
                                         // save selected collection
-                                        props.setSelectedCollection(option);
+                                        props.setSelectedCollection(option.value !== null ? option : null);
                                     }}
                                     options={[{ id : null, name : "All"}].concat((collections || [])).map(c => ({ value : c.id, label : __(c.name.toLowerCase())}))}
                             />
