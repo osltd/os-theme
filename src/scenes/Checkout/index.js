@@ -101,7 +101,12 @@ function Checkout(props){
             // transform json
             customShippings = (((((await customShippings.json()) || {}).data || {}).rows || [])[0] || {}).shipping_methods || [];
             // append to container
-            shipping_methods = shipping_methods.concat(customShippings.map(s => ({
+            shipping_methods = shipping_methods.concat(customShippings.filter(s => {
+                // get selected destination country
+                const _country = form.shipping.country || "HK"
+                // check does it valid for the shipping method
+                return (s.exclude_countries || []).indexOf(_country) < 0
+            }).map(s => ({
                 id               : s.code.replace(/\r?\n|\r/g, ""),
                 charge           : s.charge,
                 title            : s.title,
